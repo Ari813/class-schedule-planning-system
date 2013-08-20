@@ -16,11 +16,15 @@ import javax.swing.JFrame;
 import common.ChatIF;
 import common.Perror;
 import controllers.*;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 public class mainGUI extends JFrame implements ActionListener, ChatIF {
+	public mainGUI() {
+	
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 	}
-
 }
