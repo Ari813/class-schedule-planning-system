@@ -41,6 +41,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JTextArea;
+import javax.swing.JTabbedPane;
 
 
 public class Edit_Course extends JPanel {
@@ -122,7 +123,7 @@ public class Edit_Course extends JPanel {
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(1, 1, 8, 1));
-		spinner.setBounds(178, 278, 29, 20);
+		spinner.setBounds(30, 301, 29, 20);
 		PNL_Main.add(spinner);
 		
 		JLabel lblAcademicHaurs = new JLabel("Academic  haurs:");
@@ -133,13 +134,44 @@ public class Edit_Course extends JPanel {
 		
 		JSpinner spinner_1 = new JSpinner();
 		spinner_1.setModel(new SpinnerNumberModel(0, 0, 8, 1));
-		spinner_1.setBounds(178, 336, 29, 20);
+		spinner_1.setBounds(30, 363, 29, 20);
 		PNL_Main.add(spinner_1);
 		
 		JLabel lblAvailableLecturers = new JLabel("Available lecturers:");
 		lblAvailableLecturers.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblAvailableLecturers.setBounds(222, 86, 97, 14);
+		lblAvailableLecturers.setBounds(151, 80, 154, 14);
 		PNL_Main.add(lblAvailableLecturers);
+		
+		JList lstlecturers = new JList();
+		lstlecturers.setBounds(146, 114, 115, 209);
+		PNL_Main.add(lstlecturers);
+		
+		JButton btnAdd = new JButton("Add -->");
+		btnAdd.setBounds(271, 148, 105, 23);
+		PNL_Main.add(btnAdd);
+		
+		JButton btnRemove = new JButton("Remove <--");
+		btnRemove.setBounds(271, 189, 105, 23);
+		PNL_Main.add(btnRemove);
+		
+		JList list = new JList();
+		list.setBounds(378, 114, 115, 209);
+		PNL_Main.add(list);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(557, 105, 207, 229);
+		PNL_Main.add(tabbedPane);
+		
+		JTabbedPane tabbedPaneLecture = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPaneLecture.setToolTipText("lecturer");
+		tabbedPane.addTab("lecture", null, tabbedPaneLecture, "");
+		tabbedPane.setEnabledAt(0, true);
+		
+		JTabbedPane tabbedPanePractice = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Practice", null, tabbedPanePractice, null);
+		
+		JTabbedPane tabbedPaneLab = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Lab", null, tabbedPaneLab, null);
 		
 	}
 }
