@@ -185,7 +185,7 @@ public class Edit_Class {
 		
 		JCheckBox chckbxAvailable = new JCheckBox("Available");
 		chckbxAvailable.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		chckbxAvailable.setBounds(5, 80, 135, 23);
+		chckbxAvailable.setBounds(10, 80, 135, 23);
 		PNL_Main.add(chckbxAvailable);
 		
 		JButton btnAdd = new JButton(" -->");
