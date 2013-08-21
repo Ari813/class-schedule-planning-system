@@ -213,22 +213,22 @@ public class Edit_Class {
 		
 		JButton btnNewClass = new JButton("New class");
 		btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewClass.setBounds(111, 440, 110, 23);
+		btnNewClass.setBounds(111, 440, 140, 23);
 		PNL_Main.add(btnNewClass);
 		
 		JButton btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnSaveChanges.setBounds(332, 440, 110, 23);
+		btnSaveChanges.setBounds(332, 440, 140, 23);
 		PNL_Main.add(btnSaveChanges);
 		
-		JButton btnBackToMainMenu = new JButton("Discard");
-		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnBackToMainMenu.addActionListener(new ActionListener() {
+		JButton btnDiscard = new JButton("Discard");
+		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnDiscard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnBackToMainMenu.setBounds(553, 440, 110, 23);
-		PNL_Main.add(btnBackToMainMenu);
+		btnDiscard.setBounds(553, 440, 140, 23);
+		PNL_Main.add(btnDiscard);
 		
 		txtClassEditor = new JTextField();
 		txtClassEditor.setText("Class editor");
