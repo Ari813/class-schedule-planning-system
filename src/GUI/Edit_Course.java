@@ -159,19 +159,125 @@ public class Edit_Course extends JPanel {
 		PNL_Main.add(list);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(557, 105, 207, 229);
+		tabbedPane.setBounds(557, 102, 207, 229);
 		PNL_Main.add(tabbedPane);
 		
-		JTabbedPane tabbedPaneLecture = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPaneLecture.setToolTipText("lecturer");
-		tabbedPane.addTab("lecture", null, tabbedPaneLecture, "");
-		tabbedPane.setEnabledAt(0, true);
+		JPanel panel_Lecturer = new JPanel();
+		tabbedPane.addTab("Lecturer", null, panel_Lecturer, null);
+		panel_Lecturer.setLayout(null);
 		
-		JTabbedPane tabbedPanePractice = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("Practice", null, tabbedPanePractice, null);
+		JCheckBox checkBox = new JCheckBox("Enable");
+		checkBox.setBounds(6, 7, 57, 23);
+		panel_Lecturer.add(checkBox);
 		
-		JTabbedPane tabbedPaneLab = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.addTab("Lab", null, tabbedPaneLab, null);
+		JLabel label = new JLabel("Academic hours:");
+		label.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label.setBounds(6, 33, 93, 14);
+		panel_Lecturer.add(label);
+		
+		JSpinner spinner_2 = new JSpinner();
+		spinner_2.setBounds(147, 33, 29, 14);
+		panel_Lecturer.add(spinner_2);
+		
+		JLabel label_1 = new JLabel("Max student per class:");
+		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_1.setBounds(6, 58, 142, 14);
+		panel_Lecturer.add(label_1);
+		
+		JSpinner spinner_3 = new JSpinner();
+		spinner_3.setBounds(147, 58, 29, 14);
+		panel_Lecturer.add(spinner_3);
+		
+		JLabel label_2 = new JLabel("study aids:");
+		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_2.setBounds(6, 83, 75, 14);
+		panel_Lecturer.add(label_2);
+		
+		JList list_2 = new JList();
+		list_2.setBounds(6, 108, 150, 69);
+		panel_Lecturer.add(list_2);
+		
+		JPanel panel_Practice = new JPanel();
+		tabbedPane.addTab("Practice", null, panel_Practice, null);
+		panel_Practice.setLayout(null);
+		
+		JCheckBox chckbxEnable = new JCheckBox("Enable");
+		chckbxEnable.setBounds(6, 7, 57, 23);
+		panel_Practice.add(chckbxEnable);
+		
+		JLabel lblAcademicHours = new JLabel("Academic hours:");
+		lblAcademicHours.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblAcademicHours.setBounds(6, 33, 93, 14);
+		panel_Practice.add(lblAcademicHours);
+		
+		JSpinner spinner_AH = new JSpinner();
+		spinner_AH.setBounds(147, 33, 29, 14);
+		panel_Practice.add(spinner_AH);
+		
+		JLabel lblMaxStudentPer = new JLabel("Max student per class:");
+		lblMaxStudentPer.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblMaxStudentPer.setBounds(6, 58, 142, 14);
+		panel_Practice.add(lblMaxStudentPer);
+		
+		JSpinner spinner_max_st = new JSpinner();
+		spinner_max_st.setBounds(147, 58, 29, 14);
+		panel_Practice.add(spinner_max_st);
+		
+		JLabel lblStudyAids = new JLabel("study aids:");
+		lblStudyAids.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblStudyAids.setBounds(6, 83, 75, 14);
+		panel_Practice.add(lblStudyAids);
+		
+		JList list_1 = new JList();
+		list_1.setBounds(6, 108, 150, 69);
+		panel_Practice.add(list_1);
+		
+		JPanel panel_Lab = new JPanel();
+		tabbedPane.addTab("Lab", null, panel_Lab, null);
+		panel_Lab.setLayout(null);
+		
+		JCheckBox checkBox_1 = new JCheckBox("Enable");
+		checkBox_1.setBounds(6, 7, 57, 23);
+		panel_Lab.add(checkBox_1);
+		
+		JLabel label_3 = new JLabel("Academic hours:");
+		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_3.setBounds(6, 33, 93, 14);
+		panel_Lab.add(label_3);
+		
+		JSpinner spinner_4 = new JSpinner();
+		spinner_4.setBounds(147, 33, 29, 14);
+		panel_Lab.add(spinner_4);
+		
+		JLabel label_4 = new JLabel("Max student per class:");
+		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_4.setBounds(6, 58, 142, 14);
+		panel_Lab.add(label_4);
+		
+		JSpinner spinner_5 = new JSpinner();
+		spinner_5.setBounds(147, 58, 29, 14);
+		panel_Lab.add(spinner_5);
+		
+		JLabel label_5 = new JLabel("study aids:");
+		label_5.setFont(new Font("Tahoma", Font.BOLD, 11));
+		label_5.setBounds(6, 83, 75, 14);
+		panel_Lab.add(label_5);
+		
+		JList list_3 = new JList();
+		list_3.setBounds(6, 108, 150, 69);
+		panel_Lab.add(list_3);
+		
+		JButton btnNewCourse = new JButton("New Course");
+		btnNewCourse.setBounds(237, 413, 115, 23);
+		PNL_Main.add(btnNewCourse);
+		
+		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnSave.setBounds(369, 413, 89, 23);
+		PNL_Main.add(btnSave);
 		
 	}
 }
