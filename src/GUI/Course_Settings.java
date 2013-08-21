@@ -121,7 +121,7 @@ public class Course_Settings extends JPanel {
 		PNL_Main.add(horizontalStrut_2);
 		
 		table = new JTable();
-		table.setBounds(47, 119, 591, 242);
+		table.setBounds(24, 112, 591, 242);
 		PNL_Main.add(table);
 	}
 }

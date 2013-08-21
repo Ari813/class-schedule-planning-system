@@ -118,19 +118,19 @@ public class Edit_Lecturer extends JPanel {
 		PNL_Main.add(txLecturerNameText);
 		txLecturerNameText.setColumns(10);
 		
-		JLabel lblClassAids = new JLabel("Class aids:");
-		lblClassAids.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblClassAids.setBounds(332, 100, 100, 14);
-		PNL_Main.add(lblClassAids);
+		JLabel lblAvailableCourses = new JLabel("Available courses");
+		lblAvailableCourses.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblAvailableCourses.setBounds(332, 100, 157, 14);
+		PNL_Main.add(lblAvailableCourses);
 		
-		JList lstClassAids = new JList();
-		lstClassAids.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lstClassAids.setForeground(new Color(0, 0, 0));
-		lstClassAids.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		lstClassAids.setValueIsAdjusting(true);
-		lstClassAids.setSelectedIndices(new int[] {2});
-		lstClassAids.setBackground(new Color(169, 169, 169));
-		lstClassAids.setModel(new AbstractListModel() {
+		JList lstAvailableCourses = new JList();
+		lstAvailableCourses.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lstAvailableCourses.setForeground(new Color(0, 0, 0));
+		lstAvailableCourses.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		lstAvailableCourses.setValueIsAdjusting(true);
+		lstAvailableCourses.setSelectedIndices(new int[] {2});
+		lstAvailableCourses.setBackground(new Color(169, 169, 169));
+		lstAvailableCourses.setModel(new AbstractListModel() {
 			String[] values = new String[] {"omri", "amit", "iris"};
 			public int getSize() {
 				return values.length;
@@ -139,8 +139,8 @@ public class Edit_Lecturer extends JPanel {
 				return values[index];
 			}
 		});
-		lstClassAids.setBounds(332, 130, 138, 220);
-		PNL_Main.add(lstClassAids);
+		lstAvailableCourses.setBounds(332, 130, 138, 220);
+		PNL_Main.add(lstAvailableCourses);
 		
 		JButton btnAdd = new JButton(" -->");
 		btnAdd.setToolTipText("Add item to class");
@@ -158,17 +158,21 @@ public class Edit_Lecturer extends JPanel {
 		btnRemove.setBounds(502, 216, 61, 38);
 		PNL_Main.add(btnRemove);
 		
-		JList lstClassaids2 = new JList();
-		lstClassaids2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lstClassaids2.setBackground(new Color(169, 169, 169));
-		lstClassaids2.setForeground(new Color(255, 255, 255));
-		lstClassaids2.setBounds(586, 130, 138, 220);
-		PNL_Main.add(lstClassaids2);
+		JList lstAvailableCourses2 = new JList();
+		lstAvailableCourses2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lstAvailableCourses2.setBackground(new Color(169, 169, 169));
+		lstAvailableCourses2.setForeground(new Color(255, 255, 255));
+		lstAvailableCourses2.setBounds(586, 130, 138, 220);
+		PNL_Main.add(lstAvailableCourses2);
 		
-		JButton btnNewClass = new JButton("New class");
-		btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewClass.setBounds(111, 440, 110, 23);
-		PNL_Main.add(btnNewClass);
+		JButton btnNewLecturer = new JButton("New Lecturer");
+		btnNewLecturer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewLecturer.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewLecturer.setBounds(111, 440, 125, 23);
+		PNL_Main.add(btnNewLecturer);
 		
 		JButton btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
