@@ -84,13 +84,13 @@ public class Edit_Lecturer extends JPanel {
 	;
 		PNL_Main.setLayout(null);
 		
-		JComboBox cmbxEditClass = new JComboBox();
-		cmbxEditClass.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
-		cmbxEditClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		cmbxEditClass.setToolTipText("Edit class list");
-		cmbxEditClass.setBounds(10, 53, 754, 20);
-		cmbxEditClass.setMaximumRowCount(52);
-		PNL_Main.add(cmbxEditClass);
+		JComboBox cmbxLecturerEditor = new JComboBox();
+		cmbxLecturerEditor.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
+		cmbxLecturerEditor.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		cmbxLecturerEditor.setToolTipText("Edit class list");
+		cmbxLecturerEditor.setBounds(10, 53, 754, 20);
+		cmbxLecturerEditor.setMaximumRowCount(52);
+		PNL_Main.add(cmbxLecturerEditor);
 		
 		JTextPane txtpnIDNumber = new JTextPane();
 		txtpnIDNumber.setEnabled(false);
