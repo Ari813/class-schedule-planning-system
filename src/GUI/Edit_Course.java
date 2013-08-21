@@ -136,5 +136,10 @@ public class Edit_Course extends JPanel {
 		spinner_1.setBounds(178, 336, 29, 20);
 		PNL_Main.add(spinner_1);
 		
+		JLabel lblAvailableLecturers = new JLabel("Available lecturers:");
+		lblAvailableLecturers.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblAvailableLecturers.setBounds(222, 86, 97, 14);
+		PNL_Main.add(lblAvailableLecturers);
+		
 	}
 }
