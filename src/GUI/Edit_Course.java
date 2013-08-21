@@ -42,6 +42,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JTextArea;
 import javax.swing.JTabbedPane;
+import javax.swing.Box;
 
 
 public class Edit_Course extends JPanel {
@@ -52,6 +53,8 @@ public class Edit_Course extends JPanel {
 	private JTextField txtCapacityNumber;
 	private JTextField txtIdNumber;
 	private JTextField txtCoursName;
+	private JTextField txtCourseEditor;
+	private JLabel lblMainAcademicHours;
 	/**
 	 * Create the panel.
 	 */
@@ -73,163 +76,172 @@ public class Edit_Course extends JPanel {
 	
 		PNL_Main.setLayout(null);
 		
-		JLabel lblEditCourse = new JLabel("Edit course:");
-		lblEditCourse.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEditCourse.setBounds(10, 11, 115, 14);
-		PNL_Main.add(lblEditCourse);
-		
 		JComboBox cmbBxEditCouse = new JComboBox();
-		cmbBxEditCouse.setBounds(58, 36, 506, 20);
+		cmbBxEditCouse.setBounds(10, 53, 754, 20);
 		PNL_Main.add(cmbBxEditCouse);
 		
 		JLabel lblId = new JLabel("ID:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblId.setBounds(10, 80, 50, 20);
+		lblId.setBounds(10, 114, 50, 20);
 		PNL_Main.add(lblId);
 		
 		JLabel lblFaculty = new JLabel("Faculty:");
 		lblFaculty.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblFaculty.setBounds(10, 192, 88, 22);
+		lblFaculty.setBounds(10, 244, 88, 22);
 		PNL_Main.add(lblFaculty);
 		
 		JLabel lblCoursName = new JLabel("Cours Name:");
 		lblCoursName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCoursName.setBounds(10, 130, 125, 20);
+		lblCoursName.setBounds(10, 179, 125, 20);
 		PNL_Main.add(lblCoursName);
 		
 		txtIdNumber = new JTextField();
 		txtIdNumber.setEnabled(false);
 		txtIdNumber.setEditable(false);
 		txtIdNumber.setText("ID Number");
-		txtIdNumber.setBounds(20, 105, 105, 20);
+		txtIdNumber.setBounds(10, 144, 105, 20);
 		PNL_Main.add(txtIdNumber);
 		txtIdNumber.setColumns(10);
 		
 		txtCoursName = new JTextField();
 		txtCoursName.setEnabled(false);
 		txtCoursName.setText("cours name");
-		txtCoursName.setBounds(20, 155, 105, 20);
+		txtCoursName.setBounds(10, 207, 105, 20);
 		PNL_Main.add(txtCoursName);
 		txtCoursName.setColumns(10);
 		
 		JComboBox cmBxFaculty = new JComboBox();
-		cmBxFaculty.setBounds(20, 225, 105, 21);
+		cmBxFaculty.setBounds(10, 272, 105, 21);
 		PNL_Main.add(cmBxFaculty);
 		
 		JLabel lblSemester = new JLabel("Semester:");
+		lblSemester.setHorizontalAlignment(SwingConstants.LEFT);
 		lblSemester.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblSemester.setBounds(10, 275, 105, 20);
+		lblSemester.setBounds(10, 354, 105, 29);
 		PNL_Main.add(lblSemester);
 		
 		JSpinner spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(1, 1, 8, 1));
-		spinner.setBounds(30, 301, 29, 20);
+		spinner.setBounds(20, 393, 50, 20);
 		PNL_Main.add(spinner);
 		
-		JLabel lblAcademicHaurs = new JLabel("Academic  haurs:");
-		lblAcademicHaurs.setVerticalAlignment(SwingConstants.TOP);
-		lblAcademicHaurs.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblAcademicHaurs.setBounds(10, 332, 154, 29);
-		PNL_Main.add(lblAcademicHaurs);
-		
-		JSpinner spinner_1 = new JSpinner();
-		spinner_1.setModel(new SpinnerNumberModel(0, 0, 8, 1));
-		spinner_1.setBounds(30, 363, 29, 20);
-		PNL_Main.add(spinner_1);
+		JLabel lblAcademicHours;
+		lblMainAcademicHours = new JLabel("Academic  hours:");
+		lblMainAcademicHours.setHorizontalAlignment(SwingConstants.LEFT);
+		lblMainAcademicHours.setVerticalAlignment(SwingConstants.TOP);
+		lblMainAcademicHours.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMainAcademicHours.setBounds(151, 357, 154, 29);
+		PNL_Main.add(lblMainAcademicHours);
 		
 		JLabel lblAvailableLecturers = new JLabel("Available lecturers:");
 		lblAvailableLecturers.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblAvailableLecturers.setBounds(151, 80, 154, 14);
+		lblAvailableLecturers.setBounds(151, 105, 154, 14);
 		PNL_Main.add(lblAvailableLecturers);
 		
 		JList lstlecturers = new JList();
-		lstlecturers.setBounds(146, 114, 115, 209);
+		lstlecturers.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lstlecturers.setBounds(145, 137, 115, 209);
 		PNL_Main.add(lstlecturers);
 		
-		JButton btnAdd = new JButton("Add -->");
-		btnAdd.setBounds(271, 148, 105, 23);
+		JButton btnAdd = new JButton("-->");
+		btnAdd.setToolTipText("Add lecturer to course");
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnAdd.setBounds(292, 171, 61, 38);
 		PNL_Main.add(btnAdd);
 		
-		JButton btnRemove = new JButton("Remove <--");
-		btnRemove.setBounds(271, 189, 105, 23);
+		JButton btnRemove = new JButton("<--");
+		btnRemove.setToolTipText("Remove lecturer from course");
+		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnRemove.setBounds(292, 237, 61, 38);
 		PNL_Main.add(btnRemove);
 		
 		JList list = new JList();
-		list.setBounds(378, 114, 115, 209);
+		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		list.setBounds(377, 137, 115, 209);
 		PNL_Main.add(list);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(557, 102, 207, 229);
+		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		tabbedPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tabbedPane.setBounds(557, 102, 207, 311);
 		PNL_Main.add(tabbedPane);
 		
-		JPanel panel_Lecturer = new JPanel();
-		tabbedPane.addTab("Lecturer", null, panel_Lecturer, null);
-		panel_Lecturer.setLayout(null);
+		JPanel panel_Lecture = new JPanel();
+		tabbedPane.addTab("Lecture", null, panel_Lecture, null);
+		panel_Lecture.setLayout(null);
 		
 		JCheckBox checkBox = new JCheckBox("Enable");
-		checkBox.setBounds(6, 7, 57, 23);
-		panel_Lecturer.add(checkBox);
+		checkBox.setFont(new Font("Dialog", Font.PLAIN, 16));
+		checkBox.setBounds(10, 7, 170, 23);
+		panel_Lecture.add(checkBox);
 		
 		JLabel label = new JLabel("Academic hours:");
-		label.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label.setBounds(6, 33, 93, 14);
-		panel_Lecturer.add(label);
+		label.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label.setBounds(10, 33, 170, 23);
+		panel_Lecture.add(label);
 		
 		JSpinner spinner_2 = new JSpinner();
-		spinner_2.setBounds(147, 33, 29, 14);
-		panel_Lecturer.add(spinner_2);
+		spinner_2.setFont(new Font("Dialog", Font.PLAIN, 16));
+		spinner_2.setBounds(123, 59, 57, 23);
+		panel_Lecture.add(spinner_2);
 		
 		JLabel label_1 = new JLabel("Max student per class:");
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_1.setBounds(6, 58, 142, 14);
-		panel_Lecturer.add(label_1);
+		label_1.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_1.setBounds(10, 85, 170, 23);
+		panel_Lecture.add(label_1);
 		
 		JSpinner spinner_3 = new JSpinner();
-		spinner_3.setBounds(147, 58, 29, 14);
-		panel_Lecturer.add(spinner_3);
+		spinner_3.setFont(new Font("Dialog", Font.PLAIN, 16));
+		spinner_3.setBounds(123, 111, 57, 23);
+		panel_Lecture.add(spinner_3);
 		
 		JLabel label_2 = new JLabel("study aids:");
-		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_2.setBounds(6, 83, 75, 14);
-		panel_Lecturer.add(label_2);
+		label_2.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_2.setBounds(10, 137, 170, 23);
+		panel_Lecture.add(label_2);
 		
 		JList list_2 = new JList();
-		list_2.setBounds(6, 108, 150, 69);
-		panel_Lecturer.add(list_2);
+		list_2.setFont(new Font("Dialog", Font.PLAIN, 16));
+		list_2.setBounds(10, 163, 186, 89);
+		panel_Lecture.add(list_2);
 		
 		JPanel panel_Practice = new JPanel();
 		tabbedPane.addTab("Practice", null, panel_Practice, null);
 		panel_Practice.setLayout(null);
 		
-		JCheckBox chckbxEnable = new JCheckBox("Enable");
-		chckbxEnable.setBounds(6, 7, 57, 23);
-		panel_Practice.add(chckbxEnable);
+		JCheckBox checkBox_2 = new JCheckBox("Enable");
+		checkBox_2.setFont(new Font("Dialog", Font.PLAIN, 16));
+		checkBox_2.setBounds(10, 7, 170, 23);
+		panel_Practice.add(checkBox_2);
 		
-		JLabel lblAcademicHours = new JLabel("Academic hours:");
-		lblAcademicHours.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblAcademicHours.setBounds(6, 33, 93, 14);
-		panel_Practice.add(lblAcademicHours);
+		JLabel label_6 = new JLabel("Academic hours:");
+		label_6.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_6.setBounds(10, 33, 170, 23);
+		panel_Practice.add(label_6);
 		
-		JSpinner spinner_AH = new JSpinner();
-		spinner_AH.setBounds(147, 33, 29, 14);
-		panel_Practice.add(spinner_AH);
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setFont(new Font("Dialog", Font.PLAIN, 16));
+		spinner_1.setBounds(123, 59, 57, 23);
+		panel_Practice.add(spinner_1);
 		
-		JLabel lblMaxStudentPer = new JLabel("Max student per class:");
-		lblMaxStudentPer.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblMaxStudentPer.setBounds(6, 58, 142, 14);
-		panel_Practice.add(lblMaxStudentPer);
+		JLabel label_7 = new JLabel("Max student per class:");
+		label_7.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_7.setBounds(10, 85, 170, 23);
+		panel_Practice.add(label_7);
 		
-		JSpinner spinner_max_st = new JSpinner();
-		spinner_max_st.setBounds(147, 58, 29, 14);
-		panel_Practice.add(spinner_max_st);
+		JSpinner spinner_6 = new JSpinner();
+		spinner_6.setFont(new Font("Dialog", Font.PLAIN, 16));
+		spinner_6.setBounds(123, 111, 57, 23);
+		panel_Practice.add(spinner_6);
 		
-		JLabel lblStudyAids = new JLabel("study aids:");
-		lblStudyAids.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblStudyAids.setBounds(6, 83, 75, 14);
-		panel_Practice.add(lblStudyAids);
+		JLabel label_8 = new JLabel("study aids:");
+		label_8.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_8.setBounds(10, 137, 170, 23);
+		panel_Practice.add(label_8);
 		
 		JList list_1 = new JList();
-		list_1.setBounds(6, 108, 150, 69);
+		list_1.setFont(new Font("Dialog", Font.PLAIN, 16));
+		list_1.setBounds(10, 163, 186, 89);
 		panel_Practice.add(list_1);
 		
 		JPanel panel_Lab = new JPanel();
@@ -237,47 +249,88 @@ public class Edit_Course extends JPanel {
 		panel_Lab.setLayout(null);
 		
 		JCheckBox checkBox_1 = new JCheckBox("Enable");
-		checkBox_1.setBounds(6, 7, 57, 23);
+		checkBox_1.setFont(new Font("Dialog", Font.PLAIN, 16));
+		checkBox_1.setBounds(10, 7, 170, 23);
 		panel_Lab.add(checkBox_1);
 		
 		JLabel label_3 = new JLabel("Academic hours:");
-		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_3.setBounds(6, 33, 93, 14);
+		label_3.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_3.setBounds(10, 33, 170, 23);
 		panel_Lab.add(label_3);
 		
 		JSpinner spinner_4 = new JSpinner();
-		spinner_4.setBounds(147, 33, 29, 14);
+		spinner_4.setFont(new Font("Dialog", Font.PLAIN, 16));
+		spinner_4.setBounds(123, 59, 57, 23);
 		panel_Lab.add(spinner_4);
 		
 		JLabel label_4 = new JLabel("Max student per class:");
-		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_4.setBounds(6, 58, 142, 14);
+		label_4.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_4.setBounds(10, 85, 170, 23);
 		panel_Lab.add(label_4);
 		
 		JSpinner spinner_5 = new JSpinner();
-		spinner_5.setBounds(147, 58, 29, 14);
+		spinner_5.setFont(new Font("Dialog", Font.PLAIN, 16));
+		spinner_5.setBounds(123, 111, 57, 23);
 		panel_Lab.add(spinner_5);
 		
 		JLabel label_5 = new JLabel("study aids:");
-		label_5.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_5.setBounds(6, 83, 75, 14);
+		label_5.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_5.setBounds(10, 137, 170, 23);
 		panel_Lab.add(label_5);
 		
 		JList list_3 = new JList();
-		list_3.setBounds(6, 108, 150, 69);
+		list_3.setFont(new Font("Dialog", Font.PLAIN, 16));
+		list_3.setBounds(10, 163, 186, 89);
 		panel_Lab.add(list_3);
 		
 		JButton btnNewCourse = new JButton("New Course");
-		btnNewCourse.setBounds(237, 413, 115, 23);
+		btnNewCourse.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewCourse.setBounds(111, 440, 140, 23);
 		PNL_Main.add(btnNewCourse);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnSave.setBounds(369, 413, 89, 23);
+		btnSave.setBounds(304, 440, 140, 23);
 		PNL_Main.add(btnSave);
+		
+		txtCourseEditor = new JTextField();
+		txtCourseEditor.setText("Course editor");
+		txtCourseEditor.setHorizontalAlignment(SwingConstants.CENTER);
+		txtCourseEditor.setFont(new Font("Tahoma", Font.BOLD, 20));
+		txtCourseEditor.setColumns(10);
+		txtCourseEditor.setBorder(UIManager.getBorder("DesktopIcon.border"));
+		txtCourseEditor.setBackground(new Color(176, 224, 230));
+		txtCourseEditor.setBounds(10, 11, 754, 31);
+		PNL_Main.add(txtCourseEditor);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		horizontalStrut.setBackground(Color.BLACK);
+		horizontalStrut.setBounds(0, 75, 774, 5);
+		PNL_Main.add(horizontalStrut);
+		
+		JButton btnDiscard = new JButton("Discard");
+		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnDiscard.setBounds(497, 440, 140, 23);
+		PNL_Main.add(btnDiscard);
+		
+		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		horizontalStrut_1.setBounds(5, 424, 759, 5);
+		PNL_Main.add(horizontalStrut_1);
+		
+		JTextPane textAcademicHours = new JTextPane();
+		textAcademicHours.setEditable(false);
+		textAcademicHours.setBackground(Color.LIGHT_GRAY);
+		textAcademicHours.setText("0");
+		textAcademicHours.setBounds(161, 393, 50, 20);
+		PNL_Main.add(textAcademicHours);
+		
+		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		horizontalStrut_2.setBounds(145, 122, 347, 14);
+		PNL_Main.add(horizontalStrut_2);
 		
 	}
 }
