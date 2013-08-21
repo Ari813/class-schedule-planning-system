@@ -105,7 +105,7 @@ public class Main_Menu extends JPanel {
 		JLabel lblSemesterManagment = new JLabel("Semester Managment");
 		lblSemesterManagment.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSemesterManagment.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblSemesterManagment.setBounds(10, 74, 350, 14);
+		lblSemesterManagment.setBounds(10, 70, 350, 14);
 		add(lblSemesterManagment);
 		
 		JButton btnQuit = new JButton("Quit");
