@@ -19,10 +19,17 @@ import java.util.Locale;
 import java.awt.SystemColor;
 import java.awt.Color;
 import javax.swing.UIManager;
+import java.awt.FlowLayout;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTextPane;
+import javax.swing.JTextField;
 
 public class Lectur_Preferences {
 
 	private JFrame frmLec;
+	private JTextField txtDescriptionText;
 
 	/**
 	 * Launch the application.
@@ -79,9 +86,62 @@ public class Lectur_Preferences {
 		frmLec.getContentPane().add(lblTimeTableSchedualing);
 		
 		JPanel PNL_Main = new JPanel();
+		PNL_Main.setToolTipText("Edit class list");
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
 		PNL_Main.setBounds(10, 86, 774, 474);
 		frmLec.getContentPane().add(PNL_Main);
+		PNL_Main.setLayout(null);
+		
+		JLabel lblEditClass = new JLabel("Edit Class:");
+		lblEditClass.setBounds(5, 5, 82, 22);
+		lblEditClass.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		PNL_Main.add(lblEditClass);
+		
+		JComboBox cmbxEditClass = new JComboBox();
+		cmbxEditClass.setToolTipText("Edit class list");
+		cmbxEditClass.setBounds(83, 38, 650, 20);
+		cmbxEditClass.setMaximumRowCount(52);
+		PNL_Main.add(cmbxEditClass);
+		
+		JRadioButton rdbtnAvailable = new JRadioButton("Available");
+		rdbtnAvailable.setHorizontalAlignment(SwingConstants.LEFT);
+		rdbtnAvailable.setVerticalAlignment(SwingConstants.TOP);
+		rdbtnAvailable.setForeground(Color.BLACK);
+		rdbtnAvailable.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		rdbtnAvailable.setBounds(6, 65, 109, 23);
+		PNL_Main.add(rdbtnAvailable);
+		
+		JTextPane txtpnCodeText = new JTextPane();
+		txtpnCodeText.setBackground(Color.WHITE);
+		txtpnCodeText.setText("code text");
+		txtpnCodeText.setBounds(35, 125, 135, 20);
+		PNL_Main.add(txtpnCodeText);
+		
+		JLabel lblCode = new JLabel("Code:");
+		lblCode.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblCode.setBounds(25, 100, 46, 21);
+		PNL_Main.add(lblCode);
+		
+		JLabel lblDescription = new JLabel("description:");
+		lblDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDescription.setBounds(25, 160, 123, 22);
+		PNL_Main.add(lblDescription);
+		
+		txtDescriptionText = new JTextField();
+		txtDescriptionText.setBackground(Color.WHITE);
+		txtDescriptionText.setText("description text");
+		txtDescriptionText.setBounds(37, 187, 135, 20);
+		PNL_Main.add(txtDescriptionText);
+		txtDescriptionText.setColumns(10);
+		
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.setBounds(172, 224, 90, 25);
+		PNL_Main.add(btnEdit);
+		
+		JComboBox cmbxcampus = new JComboBox();
+		cmbxcampus.setToolTipText("Campus");
+		cmbxcampus.setBounds(40, 296, 130, 20);
+		PNL_Main.add(cmbxcampus);
 	}
 }
