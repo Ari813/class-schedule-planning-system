@@ -83,37 +83,58 @@ public class Edit_Course extends JPanel {
 		
 		JLabel lblId = new JLabel("ID:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblId.setBounds(10, 81, 46, 14);
+		lblId.setBounds(10, 80, 50, 20);
 		PNL_Main.add(lblId);
 		
 		JLabel lblFaculty = new JLabel("Faculty:");
 		lblFaculty.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblFaculty.setBounds(10, 196, 88, 22);
+		lblFaculty.setBounds(10, 192, 88, 22);
 		PNL_Main.add(lblFaculty);
 		
 		JLabel lblCoursName = new JLabel("Cours Name:");
 		lblCoursName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCoursName.setBounds(10, 131, 125, 20);
+		lblCoursName.setBounds(10, 130, 125, 20);
 		PNL_Main.add(lblCoursName);
 		
 		txtIdNumber = new JTextField();
 		txtIdNumber.setEnabled(false);
 		txtIdNumber.setEditable(false);
 		txtIdNumber.setText("ID Number");
-		txtIdNumber.setBounds(20, 103, 86, 20);
+		txtIdNumber.setBounds(20, 105, 105, 20);
 		PNL_Main.add(txtIdNumber);
 		txtIdNumber.setColumns(10);
 		
 		txtCoursName = new JTextField();
 		txtCoursName.setEnabled(false);
 		txtCoursName.setText("cours name");
-		txtCoursName.setBounds(20, 164, 86, 20);
+		txtCoursName.setBounds(20, 155, 105, 20);
 		PNL_Main.add(txtCoursName);
 		txtCoursName.setColumns(10);
 		
 		JComboBox cmBxFaculty = new JComboBox();
-		cmBxFaculty.setBounds(14, 225, 193, 21);
+		cmBxFaculty.setBounds(20, 225, 105, 21);
 		PNL_Main.add(cmBxFaculty);
+		
+		JLabel lblSemester = new JLabel("Semester:");
+		lblSemester.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblSemester.setBounds(10, 275, 105, 20);
+		PNL_Main.add(lblSemester);
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(1, 1, 8, 1));
+		spinner.setBounds(178, 278, 29, 20);
+		PNL_Main.add(spinner);
+		
+		JLabel lblAcademicHaurs = new JLabel("Academic  haurs:");
+		lblAcademicHaurs.setVerticalAlignment(SwingConstants.TOP);
+		lblAcademicHaurs.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblAcademicHaurs.setBounds(10, 332, 154, 29);
+		PNL_Main.add(lblAcademicHaurs);
+		
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerNumberModel(0, 0, 8, 1));
+		spinner_1.setBounds(178, 336, 29, 20);
+		PNL_Main.add(spinner_1);
 		
 	}
 }
