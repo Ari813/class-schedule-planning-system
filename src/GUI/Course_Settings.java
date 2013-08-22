@@ -33,6 +33,7 @@ import java.awt.FlowLayout;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
 import javax.swing.DropMode;
@@ -53,6 +54,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
@@ -61,6 +63,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.JScrollBar;
+import net.miginfocom.swing.MigLayout;
 
 public class Course_Settings extends JPanel {
 	private JTextField txtCourseSttings;
@@ -89,100 +92,87 @@ public class Course_Settings extends JPanel {
 		PNL_Main.setBounds(10, 85, 774, 474);
 	;
 		PNL_Main.setLayout(null);
-		//PNL_Main.add(scrollBar);
-		
-		JComboBox cmbxCourseSttings = new JComboBox();
-		cmbxCourseSttings.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
-		cmbxCourseSttings.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		cmbxCourseSttings.setToolTipText("Edit class list");
-		cmbxCourseSttings.setBounds(10, 53, 754, 20);
-		cmbxCourseSttings.setMaximumRowCount(52);
-		PNL_Main.add(cmbxCourseSttings);
-		
-		JButton btnNewClass = new JButton("New class");
-		btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewClass.setBounds(111, 440, 110, 23);
-		PNL_Main.add(btnNewClass);
 		
 		JButton btnSaveChanges = new JButton("Save");
+		btnSaveChanges.setBounds(226, 434, 74, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnSaveChanges.setBounds(332, 440, 110, 23);
 		PNL_Main.add(btnSaveChanges);
 		
 		JButton btnBackToMainMenu = new JButton("Discard");
+		btnBackToMainMenu.setBounds(384, 434, 85, 29);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBackToMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnBackToMainMenu.setBounds(553, 440, 110, 23);
 		PNL_Main.add(btnBackToMainMenu);
 		
 		txtCourseSttings = new JTextField();
+		txtCourseSttings.setBounds(0, 4, 774, 31);
 		txtCourseSttings.setText("Course sttings");
 		txtCourseSttings.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCourseSttings.setFont(new Font("Tahoma", Font.BOLD, 20));
 		txtCourseSttings.setColumns(10);
 		txtCourseSttings.setBorder(UIManager.getBorder("DesktopIcon.border"));
 		txtCourseSttings.setBackground(new Color(176, 224, 230));
-		txtCourseSttings.setBounds(10, 11, 754, 31);
 		PNL_Main.add(txtCourseSttings);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		horizontalStrut_1.setBounds(5, 424, 759, 5);
+		horizontalStrut_1.setBounds(0, 80, 764, 12);
 		PNL_Main.add(horizontalStrut_1);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		horizontalStrut_2.setBounds(0, 416, 764, 12);
 		horizontalStrut_2.setBackground(Color.BLACK);
-		horizontalStrut_2.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut_2);
 		
 		Object data[][]={{new Integer(10),new Integer(10),false},{new Integer(10),new Integer(10),"barda"}
 		,{new Integer(10),new Integer(10),"barda"}};
 		String columns[]={"# of student","course ID","course description"};
-		/*//
-		DefaultTableModel model;
-		model = new DefaultTableModel(columns,20);
-		  table=new JTable(model){@Override
-		        public boolean isCellEditable(int arg0, int arg1) {
-		         
-		            return true;
-		        }};
-			
-		/*///
+	
 		table = new JTable(data,columns);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(SystemColor.info);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{new Integer(10), new Integer(10), null, null},
-				{new Integer(10), new Integer(10), null, null},
-				{new Integer(10), new Integer(10), null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
-				{null, null, null, null},
+				{new Integer(10), new Integer(10), null},
+				{new Integer(10), new Integer(10), null},
+				{new Integer(10), new Integer(10), null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
 			},
 			new String[] {
-				"# of student", "course ID", "course description", "New column"
+				"# of student", "course ID", "course description"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				Object.class, Object.class, String.class, Boolean.class
+				Object.class, Object.class, String.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -192,14 +182,33 @@ public class Course_Settings extends JPanel {
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(2).setResizable(false);
 		table.getColumnModel().getColumn(2).setPreferredWidth(140);
-		table.getColumnModel().getColumn(3).setResizable(false);
 		table.setSurrendersFocusOnKeystroke(true);
 		
 		table.setToolTipText("");
 		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
-		table.setBounds(24, 112, 622, 304);
+		table.setBounds(25, 110, 600, 300);
+		//JTableHeader header = table.getTableHeader();
+		  //header.setBackground(Color.BLUE);
+		  //	PNL_Main.setLayout(null);
+		  
+		  	//PNL_Main.add(scrollBar);
+		  	
+		  	JComboBox cmbxCourseSttings = new JComboBox();
+		  	cmbxCourseSttings.setBounds(10, 46, 651, 26);
+		  	cmbxCourseSttings.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
+		  	cmbxCourseSttings.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		  	cmbxCourseSttings.setToolTipText("Edit class list");
+		  	cmbxCourseSttings.setMaximumRowCount(52);
+		  	PNL_Main.add(cmbxCourseSttings);
+		  JScrollPane pane = new JScrollPane(table);
+		  pane.setBounds(45, 103, 616, 303);
+		 // table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		  PNL_Main.add(pane);
 	
-		PNL_Main.add(table);
+		
+		
+		
+	//	PNL_Main.add(table);
 	}
 }
