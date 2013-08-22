@@ -3,23 +3,33 @@ package GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import java.awt.Dimension;
+
 import javax.swing.JLabel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.border.BevelBorder;
+
 import java.awt.Rectangle;
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.Point;
+
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
 import java.awt.Window.Type;
 import java.util.Locale;
 import java.awt.SystemColor;
 import java.awt.Color;
+
 import javax.swing.UIManager;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
@@ -34,18 +44,23 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JProgressBar;
 import javax.swing.JSeparator;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLayeredPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.border.LineBorder;
+import javax.swing.JScrollBar;
 
 public class Course_Settings extends JPanel {
 	private JTextField txtCourseSttings;
@@ -67,12 +82,14 @@ public class Course_Settings extends JPanel {
 	
 		
 		JPanel PNL_Main = new JPanel();
+		PNL_Main.setBorder(new EmptyBorder(0, 0, 0, 0));
 		PNL_Main.setToolTipText("Edit class list");
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
 		PNL_Main.setBounds(10, 85, 774, 474);
 	;
 		PNL_Main.setLayout(null);
+		//PNL_Main.add(scrollBar);
 		
 		JComboBox cmbxCourseSttings = new JComboBox();
 		cmbxCourseSttings.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
@@ -120,8 +137,69 @@ public class Course_Settings extends JPanel {
 		horizontalStrut_2.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut_2);
 		
-		table = new JTable();
-		table.setBounds(24, 112, 591, 242);
+		Object data[][]={{new Integer(10),new Integer(10),false},{new Integer(10),new Integer(10),"barda"}
+		,{new Integer(10),new Integer(10),"barda"}};
+		String columns[]={"# of student","course ID","course description"};
+		/*//
+		DefaultTableModel model;
+		model = new DefaultTableModel(columns,20);
+		  table=new JTable(model){@Override
+		        public boolean isCellEditable(int arg0, int arg1) {
+		         
+		            return true;
+		        }};
+			
+		/*///
+		table = new JTable(data,columns);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setBackground(SystemColor.info);
+		table.setBorder(new LineBorder(new Color(0, 0, 0)));
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{new Integer(10), new Integer(10), null, null},
+				{new Integer(10), new Integer(10), null, null},
+				{new Integer(10), new Integer(10), null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"# of student", "course ID", "course description", "New column"
+			}
+		) {
+			Class[] columnTypes = new Class[] {
+				Object.class, Object.class, String.class, Boolean.class
+			};
+			public Class getColumnClass(int columnIndex) {
+				return columnTypes[columnIndex];
+			}
+		});
+		table.getColumnModel().getColumn(0).setResizable(false);
+		table.getColumnModel().getColumn(1).setResizable(false);
+		table.getColumnModel().getColumn(2).setResizable(false);
+		table.getColumnModel().getColumn(2).setPreferredWidth(140);
+		table.getColumnModel().getColumn(3).setResizable(false);
+		table.setSurrendersFocusOnKeystroke(true);
+		
+		table.setToolTipText("");
+		table.setColumnSelectionAllowed(true);
+		table.setCellSelectionEnabled(true);
+		table.setBounds(24, 112, 622, 304);
+	
 		PNL_Main.add(table);
 	}
 }
