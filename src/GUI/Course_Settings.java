@@ -50,6 +50,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JLayeredPane;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
@@ -63,7 +64,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.JScrollBar;
+
 import net.miginfocom.swing.MigLayout;
+import javax.swing.ScrollPaneConstants;
 
 public class Course_Settings extends JPanel {
 	private JTextField txtCourseSttings;
@@ -188,11 +191,7 @@ public class Course_Settings extends JPanel {
 		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
 		table.setBounds(25, 110, 600, 300);
-		//JTableHeader header = table.getTableHeader();
-		  //header.setBackground(Color.BLUE);
-		  //	PNL_Main.setLayout(null);
-		  
-		  	//PNL_Main.add(scrollBar);
+	
 		  	
 		  	JComboBox cmbxCourseSttings = new JComboBox();
 		  	cmbxCourseSttings.setBounds(10, 46, 651, 26);
@@ -201,11 +200,11 @@ public class Course_Settings extends JPanel {
 		  	cmbxCourseSttings.setToolTipText("Edit class list");
 		  	cmbxCourseSttings.setMaximumRowCount(52);
 		  	PNL_Main.add(cmbxCourseSttings);
-		  JScrollPane pane = new JScrollPane(table);
-		  pane.setBounds(45, 103, 616, 303);
-		 // table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		  PNL_Main.add(pane);
-	
+		  JScrollPane scroll = new JScrollPane(table);
+		  scroll.setBounds(45, 103, 616, 303);
+		  
+		  PNL_Main.add(scroll);
+		  
 		
 		
 		
