@@ -1,6 +1,7 @@
 package GUI;
 
 import javax.swing.JPanel;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -31,6 +32,7 @@ import javax.swing.UIManager;
 
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
@@ -57,6 +59,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
@@ -67,7 +70,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.JScrollBar;
 
 import net.miginfocom.swing.MigLayout;
+
 import javax.swing.ScrollPaneConstants;
+import javax.swing.JTabbedPane;
+import javax.swing.JSlider;
 
 public class Lecturer_Preferences extends JPanel {
 	private JTextField txtLecturerPreferences;
@@ -129,19 +135,21 @@ public class Lecturer_Preferences extends JPanel {
 		horizontalStrut_2.setBackground(Color.BLACK);
 		PNL_Main.add(horizontalStrut_2);
 		
-		Object data[][]={{new Integer(10),new Integer(10),false},{new Integer(10),new Integer(10),"barda"}
-		,{new Integer(10),new Integer(10),"barda"}};
-		String columns[]={"# of student","course ID","course description"};
+		Object data[][]={};
+		String columns[]={};
 	
 		tableLecturermanu = new JTable(data,columns);
+		tableLecturermanu.setToolTipText("table ");
+		tableLecturermanu.setFillsViewportHeight(true);
+		tableLecturermanu.setSurrendersFocusOnKeystroke(true);
 		tableLecturermanu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableLecturermanu.setBackground(SystemColor.inactiveCaptionText);
 		tableLecturermanu.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tableLecturermanu.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"8:00-9:00", "10", null, null, null, null, null},
-				{"9:00-10:00", "", null, null, null, null, null},
-				{"10:00-11:00", new Integer(10), null, null, null, null, null},
+				{"8:00-9:00", null, null, null, null, null, null},
+				{"9:00-10:00", null, null, null, null, null, null},
+				{"10:00-11:00", null, null, null, null, null, null},
 				{"11:00-12:00", null, null, null, null, null, null},
 				{"12:00-13:00", null, null, null, null, null, null},
 				{"13:00-14:00", null, null, null, null, null, null},
@@ -165,15 +173,38 @@ public class Lecturer_Preferences extends JPanel {
 				return columnTypes[columnIndex];
 			}
 		});
-		tableLecturermanu.getColumnModel().getColumn(0).setPreferredWidth(78);
-		tableLecturermanu.getColumnModel().getColumn(1).setResizable(false);
-		tableLecturermanu.setSurrendersFocusOnKeystroke(true);
 		
-		tableLecturermanu.setToolTipText("");
+		//tableLecturermanu.getColumnModel().getColumn(1).setPreferredWidth(78);
+
 		tableLecturermanu.setColumnSelectionAllowed(true);
 		tableLecturermanu.setCellSelectionEnabled(true);
-		tableLecturermanu.setBounds(25, 110, 600, 300);
+		tableLecturermanu.setBounds(35, 127, 600, 224);
 	
+		////////////to delete??/////////////////
+		final JComboBox comboBox = new JComboBox(new Object[]{"1 min","30 min","1 hr" , "2 hr","4 hr","6 hr", "12 hr"});
+		
+		TableColumn gradeColumn = tableLecturermanu.getColumnModel().getColumn(0);
+		
+		gradeColumn.setCellEditor (new DefaultCellEditor(comboBox));
+		
+		
+	////////////////////////////////////////////////
+		
+		ComboBoxTableEditor editor = new ComboBoxTableEditor(0);
+		tableLecturermanu.getColumnModel().getColumn(1).setCellEditor( editor );
+		String[] items1 = { "Red", "Blue", "Green" };
+		editor.addModel("color", items1);
+		
+		//////////////////////////
+				
+		
+		
+	  PNL_Main.add(tableLecturermanu);
+		
+		// TableColumn includeColumn = tableLecturermanu.getColumnModel().getColumn(2);
+       //  includeColumn.setCellEditor(new DefaultCellEditor(new JCheckBox()));
+		
+		
 		  	
 		  	JComboBox cmbxlecturer = new JComboBox();
 		  	cmbxlecturer.setBounds(10, 46, 651, 26);
@@ -181,14 +212,16 @@ public class Lecturer_Preferences extends JPanel {
 		  	cmbxlecturer.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		  	cmbxlecturer.setToolTipText("Edit class list");
 		  	cmbxlecturer.setMaximumRowCount(52);
-		  	PNL_Main.add(cmbxlecturer);
-		  JScrollPane scroll = new JScrollPane(tableLecturermanu);
-		  scroll.setEnabled(false);
-		  scroll.setBounds(45, 99, 616, 247);
 		  
-		  PNL_Main.add(scroll);
+		 PNL_Main.add(cmbxlecturer);
+		
+		  	
+		  	// JScrollPane scroll = new JScrollPane(tableLecturermanu);
+		//  scroll.setEnabled(false);
+		  //scroll.setBounds(31, 103, 616, 247);
 		  
+		  //PNL_Main.add(scroll);
+		
 		
 	}
-
 }
