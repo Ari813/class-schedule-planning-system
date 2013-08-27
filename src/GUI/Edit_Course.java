@@ -202,7 +202,7 @@ public class Edit_Course extends JPanel {
 		
 		JList list_2 = new JList();
 		list_2.setFont(new Font("Dialog", Font.PLAIN, 16));
-		list_2.setBounds(10, 163, 186, 89);
+		list_2.setBounds(10, 163, 178, 89);
 		panel_Lecture.add(list_2);
 		
 		JPanel panel_Practice = new JPanel();
@@ -241,7 +241,7 @@ public class Edit_Course extends JPanel {
 		
 		JList list_1 = new JList();
 		list_1.setFont(new Font("Dialog", Font.PLAIN, 16));
-		list_1.setBounds(10, 163, 186, 89);
+		list_1.setBounds(10, 163, 178, 89);
 		panel_Practice.add(list_1);
 		
 		JPanel panel_Lab = new JPanel();
@@ -280,7 +280,7 @@ public class Edit_Course extends JPanel {
 		
 		JList list_3 = new JList();
 		list_3.setFont(new Font("Dialog", Font.PLAIN, 16));
-		list_3.setBounds(10, 163, 186, 89);
+		list_3.setBounds(10, 163, 178, 89);
 		panel_Lab.add(list_3);
 		
 		JButton btnNewCourse = new JButton("New Course");

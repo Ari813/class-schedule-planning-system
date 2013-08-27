@@ -103,12 +103,12 @@ public class Lecturer_Preferences extends JPanel {
 		PNL_Main.setLayout(null);
 		
 		JButton btnSaveChanges = new JButton("Save");
-		btnSaveChanges.setBounds(226, 434, 74, 29);
+		btnSaveChanges.setBounds(205, 434, 74, 23);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		PNL_Main.add(btnSaveChanges);
 		
 		JButton btnBackToMainMenu = new JButton("Discard");
-		btnBackToMainMenu.setBounds(384, 434, 85, 29);
+		btnBackToMainMenu.setBounds(484, 434, 85, 23);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBackToMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,7 +117,7 @@ public class Lecturer_Preferences extends JPanel {
 		PNL_Main.add(btnBackToMainMenu);
 		
 		txtLecturerPreferences = new JTextField();
-		txtLecturerPreferences.setBounds(0, 4, 774, 31);
+		txtLecturerPreferences.setBounds(10, 11, 754, 31);
 		txtLecturerPreferences.setText("Lecturer Preferences");
 		txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLecturerPreferences.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -127,24 +127,26 @@ public class Lecturer_Preferences extends JPanel {
 		PNL_Main.add(txtLecturerPreferences);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		horizontalStrut_1.setBounds(0, 80, 764, 12);
+		horizontalStrut_1.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut_1);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		horizontalStrut_2.setBounds(0, 416, 764, 12);
+		horizontalStrut_2.setBounds(5, 424, 759, 5);
 		horizontalStrut_2.setBackground(Color.BLACK);
 		PNL_Main.add(horizontalStrut_2);
 		
 		Object data[][]={};
 		String columns[]={};
-	
+		
 		tableLecturermanu = new JTable(data,columns);
-		tableLecturermanu.setToolTipText("table ");
+		tableLecturermanu.setRowSelectionAllowed(false);
+		tableLecturermanu.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tableLecturermanu.setToolTipText("weekly Time Table");
 		tableLecturermanu.setFillsViewportHeight(true);
 		tableLecturermanu.setSurrendersFocusOnKeystroke(true);
 		tableLecturermanu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableLecturermanu.setBackground(SystemColor.inactiveCaptionText);
-		tableLecturermanu.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tableLecturermanu.setBackground(SystemColor.activeCaption);
+		tableLecturermanu.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tableLecturermanu.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"8:00-9:00", null, null, null, null, null, null},
@@ -163,51 +165,50 @@ public class Lecturer_Preferences extends JPanel {
 				{"21:00-22:00", null, null, null, null, null, null},
 			},
 			new String[] {
-				"time", "sunday", "monday", "tuesday", "wednesday", "thursday", "friday"
+				"Time", "Sunday", "Monday", "Tuesday", "wednesday", "Thursday", "Friday"
 			}
 		) {
 			Class[] columnTypes = new Class[] {
-				String.class, Object.class, String.class, Object.class, Object.class, Object.class, Object.class
+				String.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
 			}
+			boolean[] columnEditables = new boolean[] {
+				false, true, true, true, true, true, true
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
 		});
-		
-		//tableLecturermanu.getColumnModel().getColumn(1).setPreferredWidth(78);
-
-		tableLecturermanu.setColumnSelectionAllowed(true);
+		tableLecturermanu.getColumnModel().getColumn(0).setResizable(false);
+		tableLecturermanu.getColumnModel().getColumn(4).setMinWidth(19);
 		tableLecturermanu.setCellSelectionEnabled(true);
-		tableLecturermanu.setBounds(35, 127, 600, 224);
-	
-		////////////to delete??/////////////////
-		final JComboBox comboBox = new JComboBox(new Object[]{"1 min","30 min","1 hr" , "2 hr","4 hr","6 hr", "12 hr"});
+		tableLecturermanu.setBounds(10, 103, 724, 303);
 		
-		TableColumn gradeColumn = tableLecturermanu.getColumnModel().getColumn(0);
-		
-		gradeColumn.setCellEditor (new DefaultCellEditor(comboBox));
-		
-		
-	////////////////////////////////////////////////
-		
-		ComboBoxTableEditor editor = new ComboBoxTableEditor(0);
-		tableLecturermanu.getColumnModel().getColumn(1).setCellEditor( editor );
-		String[] items1 = { "Red", "Blue", "Green" };
-		editor.addModel("color", items1);
+		TableColumn gradeColumn = tableLecturermanu.getColumnModel().getColumn(1);
+		JComboBox CB_TimeTableOptions = new JComboBox ();
+		CB_TimeTableOptions.removeAllItems();
+		    try {
+		    	CB_TimeTableOptions.addItem("Evoid");
+		    	CB_TimeTableOptions.addItem("Prefered");
+		    	CB_TimeTableOptions.addItem("N\\A");
+		    } catch (NullPointerException e) {
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		gradeColumn.setCellEditor(new DefaultCellEditor(CB_TimeTableOptions));
 		
 		//////////////////////////
-				
-		
-		
-	  PNL_Main.add(tableLecturermanu);
+		//  PNL_Main.add(tableLecturermanu);
 		
 		// TableColumn includeColumn = tableLecturermanu.getColumnModel().getColumn(2);
-       //  includeColumn.setCellEditor(new DefaultCellEditor(new JCheckBox()));
+        // includeColumn.setCellEditor(new DefaultCellEditor(new JCheckBox()));
 		
 		
 		  	
 		  	JComboBox cmbxlecturer = new JComboBox();
-		  	cmbxlecturer.setBounds(10, 46, 651, 26);
+		  	cmbxlecturer.setBounds(10, 53, 754, 20);
 		  	cmbxlecturer.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
 		  	cmbxlecturer.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		  	cmbxlecturer.setToolTipText("Edit class list");
@@ -216,11 +217,11 @@ public class Lecturer_Preferences extends JPanel {
 		 PNL_Main.add(cmbxlecturer);
 		
 		  	
-		  	// JScrollPane scroll = new JScrollPane(tableLecturermanu);
-		//  scroll.setEnabled(false);
-		  //scroll.setBounds(31, 103, 616, 247);
+		  JScrollPane scroll = new JScrollPane(tableLecturermanu);
+		  scroll.setEnabled(false);
+		  scroll.setBounds(10, 103, 754, 253);
 		  
-		  //PNL_Main.add(scroll);
+		  PNL_Main.add(scroll);
 		
 		
 	}
