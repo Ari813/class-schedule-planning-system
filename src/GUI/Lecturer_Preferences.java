@@ -141,6 +141,7 @@ public class Lecturer_Preferences extends JPanel {
 		tableLecturermanu = new JTable(data,columns);
 		tableLecturermanu.setRowSelectionAllowed(false);
 		tableLecturermanu.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tableLecturermanu.setRowHeight(18);
 		tableLecturermanu.setToolTipText("weekly Time Table");
 		tableLecturermanu.setFillsViewportHeight(true);
 		tableLecturermanu.setSurrendersFocusOnKeystroke(true);
