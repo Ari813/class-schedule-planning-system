@@ -1,84 +1,44 @@
 package GUI;
 
-import javax.swing.JPanel;
-
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-
-import java.awt.Dimension;
-
-import javax.swing.JLabel;
-
-import java.awt.BorderLayout;
-
-import javax.swing.border.BevelBorder;
-
-import java.awt.Rectangle;
-import java.awt.Font;
-import java.awt.Component;
-import java.awt.Point;
-
-import javax.swing.SwingConstants;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-
-import java.awt.Window.Type;
-import java.util.Locale;
-import java.awt.SystemColor;
 import java.awt.Color;
-
-import javax.swing.UIManager;
-
-import java.awt.FlowLayout;
-
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
-import javax.swing.JTextField;
-import javax.swing.DropMode;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.JCheckBox;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.JProgressBar;
-import javax.swing.JSeparator;
-
-import java.awt.event.ActionListener;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JLayeredPane;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumn;
 import javax.swing.Box;
+import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
-
-
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.JScrollBar;
-
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JTabbedPane;
-import javax.swing.JSlider;
+import javax.swing.table.DefaultTableModel;
 
 public class Lecturer_Preferences extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txtLecturerPreferences;
 	private JTable tableLecturermanu;
-
+	public JPanel PNL_Main;
+	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
+	static String[] strings = {"Test1", "Test2", "Test3"};
+	
 	/**
 	 * Create the panel.
 	 */
@@ -93,7 +53,7 @@ public class Lecturer_Preferences extends JPanel {
 		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 	
 		
-		JPanel PNL_Main = new JPanel();
+		PNL_Main = new JPanel();
 		PNL_Main.setBorder(new EmptyBorder(0, 0, 0, 0));
 		PNL_Main.setToolTipText("Edit class list");
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
@@ -103,12 +63,12 @@ public class Lecturer_Preferences extends JPanel {
 		PNL_Main.setLayout(null);
 		
 		JButton btnSaveChanges = new JButton("Save");
-		btnSaveChanges.setBounds(205, 434, 74, 23);
+		btnSaveChanges.setBounds(205, 434, 74, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		PNL_Main.add(btnSaveChanges);
 		
 		JButton btnBackToMainMenu = new JButton("Discard");
-		btnBackToMainMenu.setBounds(484, 434, 85, 23);
+		btnBackToMainMenu.setBounds(484, 434, 85, 29);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBackToMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,7 +77,7 @@ public class Lecturer_Preferences extends JPanel {
 		PNL_Main.add(btnBackToMainMenu);
 		
 		txtLecturerPreferences = new JTextField();
-		txtLecturerPreferences.setBounds(10, 11, 754, 31);
+		txtLecturerPreferences.setBounds(0, 4, 774, 31);
 		txtLecturerPreferences.setText("Lecturer Preferences");
 		txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLecturerPreferences.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -127,27 +87,24 @@ public class Lecturer_Preferences extends JPanel {
 		PNL_Main.add(txtLecturerPreferences);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		horizontalStrut_1.setBounds(0, 75, 774, 5);
+		horizontalStrut_1.setBounds(0, 80, 764, 12);
 		PNL_Main.add(horizontalStrut_1);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		horizontalStrut_2.setBounds(5, 424, 759, 5);
+		horizontalStrut_2.setBounds(0, 416, 764, 12);
 		horizontalStrut_2.setBackground(Color.BLACK);
 		PNL_Main.add(horizontalStrut_2);
 		
 		Object data[][]={};
 		String columns[]={};
-		
+	
 		tableLecturermanu = new JTable(data,columns);
-		tableLecturermanu.setRowSelectionAllowed(false);
-		tableLecturermanu.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tableLecturermanu.setRowHeight(18);
-		tableLecturermanu.setToolTipText("weekly Time Table");
+		tableLecturermanu.setToolTipText("table ");
 		tableLecturermanu.setFillsViewportHeight(true);
 		tableLecturermanu.setSurrendersFocusOnKeystroke(true);
 		tableLecturermanu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableLecturermanu.setBackground(SystemColor.activeCaption);
-		tableLecturermanu.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tableLecturermanu.setBackground(SystemColor.inactiveCaptionText);
+		tableLecturermanu.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tableLecturermanu.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"8:00-9:00", null, null, null, null, null, null},
@@ -166,11 +123,15 @@ public class Lecturer_Preferences extends JPanel {
 				{"21:00-22:00", null, null, null, null, null, null},
 			},
 			new String[] {
-				"Time", "Sunday", "Monday", "Tuesday", "wednesday", "Thursday", "Friday"
+				"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			Class[] columnTypes = new Class[] {
-				String.class, Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
+				String.class, Object.class, String.class, Object.class, Object.class, Object.class, Object.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -183,33 +144,61 @@ public class Lecturer_Preferences extends JPanel {
 			}
 		});
 		tableLecturermanu.getColumnModel().getColumn(0).setResizable(false);
-		tableLecturermanu.getColumnModel().getColumn(4).setMinWidth(19);
+		tableLecturermanu.getColumnModel().getColumn(1).setResizable(false);
+		tableLecturermanu.getColumnModel().getColumn(2).setResizable(false);
+		tableLecturermanu.getColumnModel().getColumn(3).setResizable(false);
+		tableLecturermanu.getColumnModel().getColumn(4).setResizable(false);
+		tableLecturermanu.getColumnModel().getColumn(5).setResizable(false);
+		tableLecturermanu.getColumnModel().getColumn(6).setResizable(false);
+		
+		//tableLecturermanu.getColumnModel().getColumn(1).setPreferredWidth(78);
+
+		tableLecturermanu.setColumnSelectionAllowed(true);
 		tableLecturermanu.setCellSelectionEnabled(true);
-		tableLecturermanu.setBounds(10, 103, 724, 303);
+		tableLecturermanu.setBounds(35, 127, 600, 224);
+	
+	
+		javax.swing.JComboBox select = new javax.swing.JComboBox();
+		select.addItem("Avoid");
+		select.addItem("prefr");
+		select.addItem("N\\A");
+		select.setEnabled(true);
+		select.setVisible(true);
+		select.getEditor().getEditorComponent().setBackground(Color.yellow);
+		select.getEditor().getEditorComponent().setForeground(Color.PINK);
+	/*////////
+		 JComboBox cmb = new JComboBox();
+		 cmb.setSelectedIndex(0);
+		 cmb.setBackground(Color.BLUE);
+		 cmb.setEditable(true);
+		 cmb.setSize(-107, -347);
+		 cmb.setLocation(132, 397);
+		 ComboBoxRenderer renderer = new ComboBoxRenderer(cmb);
+		 renderer.setColors(colors);
+	     renderer.setStrings(strings);
+	     cmb.setRenderer(renderer);
+	     cmb.getEditor().getEditorComponent().setBackground(Color.BLACK);
+		/*////// 
+		tableLecturermanu.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(select));
+        tableLecturermanu.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(select));
+        tableLecturermanu.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(select));
+        tableLecturermanu.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(select));
+        tableLecturermanu.getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(select));
+        tableLecturermanu.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(select));
+        
+        
+        //////////////////////////
+				
 		
-		TableColumn gradeColumn = tableLecturermanu.getColumnModel().getColumn(1);
-		JComboBox CB_TimeTableOptions = new JComboBox ();
-		CB_TimeTableOptions.removeAllItems();
-		    try {
-		    	CB_TimeTableOptions.addItem("Evoid");
-		    	CB_TimeTableOptions.addItem("Prefered");
-		    	CB_TimeTableOptions.addItem("N\\A");
-		    } catch (NullPointerException e) {
-		    } catch (Exception e) {
-		        e.printStackTrace();
-		    }
-		gradeColumn.setCellEditor(new DefaultCellEditor(CB_TimeTableOptions));
 		
-		//////////////////////////
-		//  PNL_Main.add(tableLecturermanu);
+	 // PNL_Main.add(cmb);
 		
-		// TableColumn includeColumn = tableLecturermanu.getColumnModel().getColumn(2);
-        // includeColumn.setCellEditor(new DefaultCellEditor(new JCheckBox()));
+	
 		
 		
 		  	
 		  	JComboBox cmbxlecturer = new JComboBox();
-		  	cmbxlecturer.setBounds(10, 53, 754, 20);
+		  	cmbxlecturer.setBounds(10, 53, 724, 20);
 		  	cmbxlecturer.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
 		  	cmbxlecturer.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		  	cmbxlecturer.setToolTipText("Edit class list");
@@ -218,9 +207,9 @@ public class Lecturer_Preferences extends JPanel {
 		 PNL_Main.add(cmbxlecturer);
 		
 		  	
-		  JScrollPane scroll = new JScrollPane(tableLecturermanu);
+		  	 JScrollPane scroll = new JScrollPane(tableLecturermanu);
 		  scroll.setEnabled(false);
-		  scroll.setBounds(10, 103, 754, 253);
+		  scroll.setBounds(10, 103, 724, 252);
 		  
 		  PNL_Main.add(scroll);
 		
