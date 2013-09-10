@@ -87,11 +87,11 @@ public class Lecturer_Preferences extends JPanel {
 		PNL_Main.add(txtLecturerPreferences);
 		
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
-		horizontalStrut_1.setBounds(0, 80, 764, 12);
+		horizontalStrut_1.setBounds(0, 80, 774, 12);
 		PNL_Main.add(horizontalStrut_1);
 		
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		horizontalStrut_2.setBounds(0, 416, 764, 12);
+		horizontalStrut_2.setBounds(5, 424, 759, 5);
 		horizontalStrut_2.setBackground(Color.BLACK);
 		PNL_Main.add(horizontalStrut_2);
 		
@@ -99,11 +99,12 @@ public class Lecturer_Preferences extends JPanel {
 		String columns[]={};
 	
 		tableLecturermanu = new JTable(data,columns);
+		tableLecturermanu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tableLecturermanu.setToolTipText("table ");
 		tableLecturermanu.setFillsViewportHeight(true);
 		tableLecturermanu.setSurrendersFocusOnKeystroke(true);
 		tableLecturermanu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableLecturermanu.setBackground(SystemColor.inactiveCaptionText);
+		tableLecturermanu.setBackground(SystemColor.inactiveCaption);
 		tableLecturermanu.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tableLecturermanu.setModel(new DefaultTableModel(
 			new Object[][] {
