@@ -43,7 +43,7 @@ import javax.swing.border.EtchedBorder;
 
 public class Main_Frame {
 
-	private JFrame frmLec;
+	private JFrame mainFrm;
 
 	/**
 	 * Launch the application.
@@ -53,7 +53,7 @@ public class Main_Frame {
 			public void run() {
 				try {
 					Main_Frame window = new Main_Frame();
-					window.frmLec.setVisible(true);
+					window.mainFrm.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -72,22 +72,22 @@ public class Main_Frame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmLec = new JFrame();
-		frmLec.getContentPane().setBackground(SystemColor.menu);
-		frmLec.setBackground(SystemColor.inactiveCaptionBorder);
-		frmLec.setForeground(SystemColor.controlLtHighlight);
-		frmLec.setLocale(new Locale("en", "IL"));
-		frmLec.setType(Type.UTILITY);
-		frmLec.setResizable(false);
-		frmLec.setAlwaysOnTop(true);
-		frmLec.setPreferredSize(new Dimension(800, 600));
-		frmLec.setName("Main_Panel");
-		frmLec.setTitle("Time table schedualing system");
-		frmLec.setMinimumSize(new Dimension(800, 600));
-		frmLec.setMaximumSize(new Dimension(800, 600));
-		frmLec.setBounds(100, 100, 450, 300);
-		frmLec.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmLec.getContentPane().setLayout(null);
+		mainFrm = new JFrame();
+		mainFrm.getContentPane().setBackground(SystemColor.menu);
+		mainFrm.setBackground(SystemColor.inactiveCaptionBorder);
+		mainFrm.setForeground(SystemColor.controlLtHighlight);
+		mainFrm.setLocale(new Locale("en", "IL"));
+		mainFrm.setType(Type.UTILITY);
+		mainFrm.setResizable(false);
+		mainFrm.setAlwaysOnTop(true);
+		mainFrm.setPreferredSize(new Dimension(800, 600));
+		mainFrm.setName("Main_Panel");
+		mainFrm.setTitle("Time table schedualing system");
+		mainFrm.setMinimumSize(new Dimension(800, 600));
+		mainFrm.setMaximumSize(new Dimension(800, 600));
+		mainFrm.setBounds(100, 100, 450, 300);
+		mainFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainFrm.getContentPane().setLayout(null);
 		
 		JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
 		lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -97,23 +97,19 @@ public class Main_Frame {
 		lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
 		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
 		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		frmLec.getContentPane().add(lblTimeTableSchedualing);
+		mainFrm.getContentPane().add(lblTimeTableSchedualing);
 		
 		JPanel PNL_Main = new JPanel();
 		PNL_Main.setToolTipText("");
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
 		PNL_Main.setBounds(10, 86, 774, 474);
-		
-		
 		/*/
 		Lecturer_Preferences PNL =new Lecturer_Preferences();
 			frmLec.add( PNL.PNL_Main);
 		/*/
-		Main_Menu PNL=new  Main_Menu(frmLec);
+		Main_Menu PNL=new  Main_Menu(mainFrm);
 		//frmLec.add( PNL_Main);
-		
-		
 		PNL_Main.setLayout(null);
 	}
 }
