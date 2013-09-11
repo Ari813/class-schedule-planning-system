@@ -110,8 +110,8 @@ public class Main_Frame {
 		Lecturer_Preferences PNL =new Lecturer_Preferences();
 			frmLec.add( PNL.PNL_Main);
 		/*/
-		Main_Menu PNL=new  Main_Menu();
-		frmLec.add( PNL_Main);
+		Main_Menu PNL=new  Main_Menu(frmLec);
+		//frmLec.add( PNL_Main);
 		
 		
 		PNL_Main.setLayout(null);

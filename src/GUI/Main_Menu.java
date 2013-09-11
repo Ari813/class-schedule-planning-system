@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 import java.awt.Font;
 
+import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JButton;
@@ -49,12 +50,15 @@ public class Main_Menu extends JPanel {
 	private JButton btnEditCourses;
 	private JButton btnEditClasses;
 	private JButton btnEditLecturers;
+	private JFrame mainfrm;
 //	private JButton ;
 	
 	/**
 	 * Create the panel.
 	 */
-	public Main_Menu() {
+	public Main_Menu(JFrame frmLec) {
+		mainfrm=frmLec;
+		frmLec.add(this);
 		setPreferredSize(new Dimension(774, 474));
 		setName("PNL_MainMenu");
 		setMaximumSize(new Dimension(774, 474));
@@ -132,10 +136,11 @@ public class Main_Menu extends JPanel {
 		btnQuit.setBounds(593, 435, 171, 31);
 		add(btnQuit);
 		setVisible(true);
+	
 	}
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnLecturerPreferences) {
-				
+				mainfrm.remove(this);
 				
 			}
 			if (e.getSource() == btnQuit) {}
