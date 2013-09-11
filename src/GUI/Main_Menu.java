@@ -2,16 +2,23 @@ package GUI;
 
 import javax.swing.JPanel;
 import javax.swing.border.MatteBorder;
+
 import java.awt.Color;
 import java.awt.Dimension;
+
 import javax.swing.JTextField;
+
 import java.awt.Font;
+
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JButton;
 import javax.swing.JMenu;
+
 import java.awt.Canvas;
+
 import javax.swing.Box;
+
 import java.awt.Component;
 import java.awt.Label;
 import java.awt.Panel;
@@ -20,9 +27,12 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTabbedPane;
@@ -31,7 +41,16 @@ import javax.swing.JLabel;
 
 public class Main_Menu extends JPanel {
 	private JTextField txtMainMenu;
-
+	private JButton btnLecturerPreferences;
+	private JButton btnQuit;
+	private JButton btnCourseSettings; 
+	private JButton btnSettings;
+	private JButton btnStartSchdualing;
+	private JButton btnEditCourses;
+	private JButton btnEditClasses;
+	private JButton btnEditLecturers;
+//	private JButton ;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -53,37 +72,37 @@ public class Main_Menu extends JPanel {
 		add(txtMainMenu);
 		txtMainMenu.setColumns(10);
 		
-		JButton btnLecturerPreferences = new JButton("Lecturer Preferences");
+		btnLecturerPreferences = new JButton("Lecturer Preferences");
 		btnLecturerPreferences.setBounds(10, 99, 350, 31);
 		btnLecturerPreferences.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(btnLecturerPreferences);
 		
-		JButton btnCourseSettings = new JButton("Course Settings");
+		btnCourseSettings = new JButton("Course Settings");
 		btnCourseSettings.setBounds(10, 145, 350, 31);
 		btnCourseSettings.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(btnCourseSettings);
 		
-		JButton btnSettings = new JButton("Settings");
+		btnSettings = new JButton("Settings");
 		btnSettings.setBounds(10, 432, 350, 31);
 		btnSettings.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(btnSettings);
 		
-		JButton btnStartSchdualing = new JButton("Start Schdualing");
+		btnStartSchdualing = new JButton("Start Schdualing");
 		btnStartSchdualing.setBounds(10, 191, 350, 31);
 		btnStartSchdualing.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		add(btnStartSchdualing);
 		
-		JButton btnEditCourses = new JButton("Edit Courses");
+		btnEditCourses = new JButton("Edit Courses");
 		btnEditCourses.setBounds(414, 99, 350, 31);
 		add(btnEditCourses);
 		btnEditCourses.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
-		JButton btnEditClasses = new JButton("Edit Classes");
+		btnEditClasses = new JButton("Edit Classes");
 		btnEditClasses.setBounds(414, 145, 350, 31);
 		add(btnEditClasses);
 		btnEditClasses.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		
-		JButton btnEditLecturers = new JButton("Edit Lecturers");
+		btnEditLecturers = new JButton("Edit Lecturers");
 		btnEditLecturers.setBounds(414, 191, 350, 31);
 		add(btnEditLecturers);
 		btnEditLecturers.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -108,10 +127,20 @@ public class Main_Menu extends JPanel {
 		lblSemesterManagment.setBounds(10, 70, 350, 14);
 		add(lblSemesterManagment);
 		
-		JButton btnQuit = new JButton("Quit");
+		btnQuit = new JButton("Quit");
 		btnQuit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnQuit.setBounds(593, 435, 171, 31);
 		add(btnQuit);
-
+		setVisible(true);
 	}
+		public void actionPerformed(ActionEvent e) {
+			if (e.getSource() == btnQuit) {
+				
+				
+			}
+		}
+		
+		
+
+	
 }

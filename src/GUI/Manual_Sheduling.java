@@ -11,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.Box;
-import javax.swing.DefaultCellEditor;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,10 +27,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JToolBar;
-import javax.swing.JPopupMenu;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+
 
 public class Manual_Sheduling extends JPanel {
 
@@ -64,10 +61,7 @@ public class Manual_Sheduling extends JPanel {
 	;
 		PNL_Main.setLayout(null);
 		
-		JPopupMenu popupMenu = new JPopupMenu();
-		popupMenu.setPopupSize(new Dimension(22, 22));
-		popupMenu.setLabel("vcs");
-		addPopup(PNL_Main, popupMenu);
+		
 		
 		JButton btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setBounds(205, 434, 74, 29);
@@ -276,27 +270,15 @@ public class Manual_Sheduling extends JPanel {
 		  lblSemester.setBounds(534, 55, 71, 14);
 		  PNL_Main.add(lblSemester);
 		  
-		  JComboBox comboBox = new JComboBox();
-		  comboBox.setBounds(601, 55, 46, 20);
-		  PNL_Main.add(comboBox);
+		  JComboBox cmbBxSemster = new JComboBox();
+		  cmbBxSemster.setToolTipText("cmbBxSemster");
+		  cmbBxSemster.setBounds(601, 55, 46, 20);
+		  PNL_Main.add(cmbBxSemster);
 		
 		
 	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-		component.addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			public void mouseReleased(MouseEvent e) {
-				if (e.isPopupTrigger()) {
-					showMenu(e);
-				}
-			}
-			private void showMenu(MouseEvent e) {
-				popup.show(e.getComponent(), e.getX(), e.getY());
-			}
-		});
+	
+		
+	
 	}
-}
+

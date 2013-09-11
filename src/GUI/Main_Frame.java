@@ -104,8 +104,16 @@ public class Main_Frame {
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
 		PNL_Main.setBounds(10, 86, 774, 474);
+		
+		
+		/*/
 		Lecturer_Preferences PNL =new Lecturer_Preferences();
-				frmLec.add( PNL.PNL_Main);
+			frmLec.add( PNL.PNL_Main);
+		/*/
+		Main_Menu PNL=new  Main_Menu();
+		frmLec.add( PNL_Main);
+		
+		
 		PNL_Main.setLayout(null);
 	}
 }
