@@ -134,10 +134,22 @@ public class Main_Menu extends JPanel {
 		setVisible(true);
 	}
 		public void actionPerformed(ActionEvent e) {
-			if (e.getSource() == btnQuit) {
+			if (e.getSource() == btnLecturerPreferences) {
 				
 				
 			}
+			if (e.getSource() == btnQuit) {}
+			if (e.getSource() == btnCourseSettings) {}
+			if (e.getSource() == btnSettings) {}
+			if (e.getSource() == btnStartSchdualing) {}
+			
+			
+			if (e.getSource() == btnEditCourses) {}
+			if (e.getSource() == btnEditClasses) {}
+			if (e.getSource() == btnEditLecturers) {}
+				
+				
+			
 		}
 		
 		
