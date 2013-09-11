@@ -1,46 +1,26 @@
 package GUI;
 
-import javax.swing.JPanel;
-import javax.swing.border.MatteBorder;
-
 import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JTextField;
-
-import java.awt.Font;
-
-import javax.swing.JFrame;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.JButton;
-import javax.swing.JMenu;
-
-import java.awt.Canvas;
-
-import javax.swing.Box;
-
 import java.awt.Component;
-import java.awt.Label;
-import java.awt.Panel;
-import java.awt.BorderLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTabbedPane;
-import javax.swing.JToolBar;
+import javax.swing.Box;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.MatteBorder;
 
 public class Main_Menu extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField txtMainMenu;
 	private JButton btnLecturerPreferences;
 	private JButton btnQuit;
