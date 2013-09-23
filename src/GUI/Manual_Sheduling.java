@@ -34,6 +34,18 @@ public class Manual_Sheduling extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtLecturerPreferences;
 	private JTable tablemanual;
+	private JButton btnSaveChanges;
+	private JButton btnBackToMainMenu;
+	private JComboBox cmbxFaculty;
+	private JComboBox cmbBxCourse;
+	private JComboBox cmbBxType;
+	private JComboBox cmbBxLecturer;
+	private JComboBox cmbBxClass;
+	private JButton btnSet;
+	private JButton btnClear;
+	private JButton btnDelete;
+	private JComboBox cmbBxSemster;
+	
 	public JPanel PNL_Main;
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
@@ -63,12 +75,12 @@ public class Manual_Sheduling extends JPanel {
 		
 		
 		
-		JButton btnSaveChanges = new JButton("Save");
+		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setBounds(205, 434, 74, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		PNL_Main.add(btnSaveChanges);
 		
-		JButton btnBackToMainMenu = new JButton("Discard");
+		btnBackToMainMenu = new JButton("Discard");
 		btnBackToMainMenu.setBounds(484, 434, 85, 29);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBackToMainMenu.addActionListener(new ActionListener() {
@@ -184,9 +196,7 @@ public class Manual_Sheduling extends JPanel {
 		
 	
 		
-		
-		  	
-		  	JComboBox cmbxFaculty = new JComboBox();
+			cmbxFaculty = new JComboBox();
 		  	cmbxFaculty.setBounds(63, 55, 461, 20);
 		  	cmbxFaculty.setModel(new DefaultComboBoxModel(new String[] {"choose Faculty"}));
 		  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -207,7 +217,7 @@ public class Manual_Sheduling extends JPanel {
 		  COURSE.setBounds(540, 120, 65, 15);
 		  PNL_Main.add(COURSE);
 		  
-		  JComboBox cmbBxCourse = new JComboBox();
+		  cmbBxCourse = new JComboBox();
 		  cmbBxCourse.setForeground(SystemColor.info);
 		  cmbBxCourse.setToolTipText("cmbBxCourse");
 		  cmbBxCourse.setBounds(600, 120, 120, 20);
@@ -218,7 +228,7 @@ public class Manual_Sheduling extends JPanel {
 		  lblType.setBounds(540, 160, 45, 15);
 		  PNL_Main.add(lblType);
 		  
-		  JComboBox cmbBxType = new JComboBox();
+		  cmbBxType = new JComboBox();
 		  cmbBxType.setBounds(600, 160, 120, 22);
 		  PNL_Main.add(cmbBxType);
 		  
@@ -227,12 +237,12 @@ public class Manual_Sheduling extends JPanel {
 		  lblLecturer.setBounds(540, 200, 66, 14);
 		  PNL_Main.add(lblLecturer);
 		  
-		  JComboBox cmbBxLecturer = new JComboBox();
+		 cmbBxLecturer = new JComboBox();
 		  cmbBxLecturer.setToolTipText("cmbBxLecturer");
 		  cmbBxLecturer.setBounds(600, 200, 120, 22);
 		  PNL_Main.add(cmbBxLecturer);
-		  
-		  JComboBox cmbBxClass = new JComboBox();
+
+		  cmbBxClass = new JComboBox();
 		  cmbBxClass.setToolTipText("cmbBxLecturer");
 		  cmbBxClass.setBounds(600, 240, 120, 22);
 		  PNL_Main.add(cmbBxClass);
@@ -242,15 +252,15 @@ public class Manual_Sheduling extends JPanel {
 		  lblClass.setBounds(540, 240, 46, 14);
 		  PNL_Main.add(lblClass);
 		  
-		  JButton btnSet = new JButton("Set");
+		  btnSet = new JButton("Set");
 		  btnSet.setBounds(600, 270, 80, 23);
 		  PNL_Main.add(btnSet);
 		  
-		  JButton btnClear = new JButton("Clear");
+		   btnClear = new JButton("Clear");
 		  btnClear.setBounds(600, 300, 80, 23);
 		  PNL_Main.add(btnClear);
 		  
-		  JButton btnDelete = new JButton("delete");
+		   btnDelete = new JButton("delete");
 		  btnDelete.setBounds(600, 330, 80, 23);
 		  PNL_Main.add(btnDelete);
 		  
@@ -269,8 +279,8 @@ public class Manual_Sheduling extends JPanel {
 		  lblSemester.setFont(new Font("Tahoma", Font.BOLD, 12));
 		  lblSemester.setBounds(534, 55, 71, 14);
 		  PNL_Main.add(lblSemester);
-		  
-		  JComboBox cmbBxSemster = new JComboBox();
+		
+		  cmbBxSemster = new JComboBox();
 		  cmbBxSemster.setToolTipText("cmbBxSemster");
 		  cmbBxSemster.setBounds(601, 55, 46, 20);
 		  PNL_Main.add(cmbBxSemster);

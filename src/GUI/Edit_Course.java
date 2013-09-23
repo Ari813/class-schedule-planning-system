@@ -55,6 +55,32 @@ public class Edit_Course extends JPanel {
 	private JTextField txtCoursName;
 	private JTextField txtCourseEditor;
 	private JLabel lblMainAcademicHours;
+	
+	private JComboBox cmbBxEditCouse;
+	private JComboBox cmBxFaculty;
+	private JSpinner spinner;
+	private JList lstlecturers;
+	private JButton btnAdd ;
+	private JButton btnRemove;
+	private JList list;
+	private JTabbedPane tabbedPane;
+	private JCheckBox checkBox;
+	private JSpinner spinner_2;
+	private JSpinner spinner_3;
+	private JList list_2 ;
+	private JCheckBox checkBox_2;
+	private JSpinner spinner_1;
+	private JSpinner spinner_6;
+	private JLabel label_8;
+	private JList list_1;
+	private JCheckBox checkBox_1 ;
+	private JSpinner spinner_4;
+	private JSpinner spinner_5 ;
+	private JList list_3;
+	private JButton btnNewCourse;
+	private JButton btnSave;
+	private JButton btnDiscard;
+	
 	/**
 	 * Create the panel.
 	 */
@@ -76,7 +102,7 @@ public class Edit_Course extends JPanel {
 	
 		PNL_Main.setLayout(null);
 		
-		JComboBox cmbBxEditCouse = new JComboBox();
+		cmbBxEditCouse = new JComboBox();
 		cmbBxEditCouse.setBounds(10, 53, 754, 20);
 		PNL_Main.add(cmbBxEditCouse);
 		
@@ -110,7 +136,8 @@ public class Edit_Course extends JPanel {
 		PNL_Main.add(txtCoursName);
 		txtCoursName.setColumns(10);
 		
-		JComboBox cmBxFaculty = new JComboBox();
+		
+		 cmBxFaculty = new JComboBox();
 		cmBxFaculty.setBounds(10, 272, 105, 21);
 		PNL_Main.add(cmBxFaculty);
 		
@@ -120,7 +147,8 @@ public class Edit_Course extends JPanel {
 		lblSemester.setBounds(10, 354, 105, 29);
 		PNL_Main.add(lblSemester);
 		
-		JSpinner spinner = new JSpinner();
+		
+		 spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(1, 1, 8, 1));
 		spinner.setBounds(20, 393, 50, 20);
 		PNL_Main.add(spinner);
@@ -138,29 +166,31 @@ public class Edit_Course extends JPanel {
 		lblAvailableLecturers.setBounds(151, 105, 154, 14);
 		PNL_Main.add(lblAvailableLecturers);
 		
-		JList lstlecturers = new JList();
+		 lstlecturers = new JList();
 		lstlecturers.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstlecturers.setBounds(145, 137, 115, 209);
 		PNL_Main.add(lstlecturers);
 		
-		JButton btnAdd = new JButton("-->");
+		 btnAdd = new JButton("-->");
 		btnAdd.setToolTipText("Add lecturer to course");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnAdd.setBounds(292, 171, 61, 38);
 		PNL_Main.add(btnAdd);
 		
-		JButton btnRemove = new JButton("<--");
+		 
+		 btnRemove = new JButton("<--");
 		btnRemove.setToolTipText("Remove lecturer from course");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnRemove.setBounds(292, 237, 61, 38);
 		PNL_Main.add(btnRemove);
 		
-		JList list = new JList();
+		
+		 list = new JList();
 		list.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		list.setBounds(377, 137, 115, 209);
 		PNL_Main.add(list);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		 tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tabbedPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tabbedPane.setBounds(557, 102, 207, 311);
@@ -170,7 +200,7 @@ public class Edit_Course extends JPanel {
 		tabbedPane.addTab("Lecture", null, panel_Lecture, null);
 		panel_Lecture.setLayout(null);
 		
-		JCheckBox checkBox = new JCheckBox("Enable");
+		checkBox = new JCheckBox("Enable");
 		checkBox.setFont(new Font("Dialog", Font.PLAIN, 16));
 		checkBox.setBounds(10, 7, 170, 23);
 		panel_Lecture.add(checkBox);
@@ -180,7 +210,8 @@ public class Edit_Course extends JPanel {
 		label.setBounds(10, 33, 170, 23);
 		panel_Lecture.add(label);
 		
-		JSpinner spinner_2 = new JSpinner();
+		
+		 spinner_2 = new JSpinner();
 		spinner_2.setFont(new Font("Dialog", Font.PLAIN, 16));
 		spinner_2.setBounds(123, 59, 57, 23);
 		panel_Lecture.add(spinner_2);
@@ -190,7 +221,8 @@ public class Edit_Course extends JPanel {
 		label_1.setBounds(10, 85, 170, 23);
 		panel_Lecture.add(label_1);
 		
-		JSpinner spinner_3 = new JSpinner();
+		
+		 spinner_3 = new JSpinner();
 		spinner_3.setFont(new Font("Dialog", Font.PLAIN, 16));
 		spinner_3.setBounds(123, 111, 57, 23);
 		panel_Lecture.add(spinner_3);
@@ -200,7 +232,7 @@ public class Edit_Course extends JPanel {
 		label_2.setBounds(10, 137, 170, 23);
 		panel_Lecture.add(label_2);
 		
-		JList list_2 = new JList();
+		 list_2 = new JList();
 		list_2.setFont(new Font("Dialog", Font.PLAIN, 16));
 		list_2.setBounds(10, 163, 178, 89);
 		panel_Lecture.add(list_2);
@@ -209,7 +241,7 @@ public class Edit_Course extends JPanel {
 		tabbedPane.addTab("Practice", null, panel_Practice, null);
 		panel_Practice.setLayout(null);
 		
-		JCheckBox checkBox_2 = new JCheckBox("Enable");
+		 checkBox_2 = new JCheckBox("Enable");
 		checkBox_2.setFont(new Font("Dialog", Font.PLAIN, 16));
 		checkBox_2.setBounds(10, 7, 170, 23);
 		panel_Practice.add(checkBox_2);
@@ -219,7 +251,7 @@ public class Edit_Course extends JPanel {
 		label_6.setBounds(10, 33, 170, 23);
 		panel_Practice.add(label_6);
 		
-		JSpinner spinner_1 = new JSpinner();
+		 spinner_1 = new JSpinner();
 		spinner_1.setFont(new Font("Dialog", Font.PLAIN, 16));
 		spinner_1.setBounds(123, 59, 57, 23);
 		panel_Practice.add(spinner_1);
@@ -229,17 +261,19 @@ public class Edit_Course extends JPanel {
 		label_7.setBounds(10, 85, 170, 23);
 		panel_Practice.add(label_7);
 		
-		JSpinner spinner_6 = new JSpinner();
+		
+		spinner_6 = new JSpinner();
 		spinner_6.setFont(new Font("Dialog", Font.PLAIN, 16));
 		spinner_6.setBounds(123, 111, 57, 23);
 		panel_Practice.add(spinner_6);
 		
-		JLabel label_8 = new JLabel("study aids:");
+		 label_8 = new JLabel("study aids:");
 		label_8.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label_8.setBounds(10, 137, 170, 23);
 		panel_Practice.add(label_8);
 		
-		JList list_1 = new JList();
+		
+		list_1 = new JList();
 		list_1.setFont(new Font("Dialog", Font.PLAIN, 16));
 		list_1.setBounds(10, 163, 178, 89);
 		panel_Practice.add(list_1);
@@ -248,7 +282,7 @@ public class Edit_Course extends JPanel {
 		tabbedPane.addTab("Lab", null, panel_Lab, null);
 		panel_Lab.setLayout(null);
 		
-		JCheckBox checkBox_1 = new JCheckBox("Enable");
+		checkBox_1 = new JCheckBox("Enable");
 		checkBox_1.setFont(new Font("Dialog", Font.PLAIN, 16));
 		checkBox_1.setBounds(10, 7, 170, 23);
 		panel_Lab.add(checkBox_1);
@@ -258,7 +292,7 @@ public class Edit_Course extends JPanel {
 		label_3.setBounds(10, 33, 170, 23);
 		panel_Lab.add(label_3);
 		
-		JSpinner spinner_4 = new JSpinner();
+		 spinner_4 = new JSpinner();
 		spinner_4.setFont(new Font("Dialog", Font.PLAIN, 16));
 		spinner_4.setBounds(123, 59, 57, 23);
 		panel_Lab.add(spinner_4);
@@ -268,7 +302,7 @@ public class Edit_Course extends JPanel {
 		label_4.setBounds(10, 85, 170, 23);
 		panel_Lab.add(label_4);
 		
-		JSpinner spinner_5 = new JSpinner();
+		 spinner_5 = new JSpinner();
 		spinner_5.setFont(new Font("Dialog", Font.PLAIN, 16));
 		spinner_5.setBounds(123, 111, 57, 23);
 		panel_Lab.add(spinner_5);
@@ -278,17 +312,17 @@ public class Edit_Course extends JPanel {
 		label_5.setBounds(10, 137, 170, 23);
 		panel_Lab.add(label_5);
 		
-		JList list_3 = new JList();
+		 list_3 = new JList();
 		list_3.setFont(new Font("Dialog", Font.PLAIN, 16));
 		list_3.setBounds(10, 163, 178, 89);
 		panel_Lab.add(list_3);
 		
-		JButton btnNewCourse = new JButton("New Course");
+		btnNewCourse = new JButton("New Course");
 		btnNewCourse.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewCourse.setBounds(111, 440, 140, 23);
 		PNL_Main.add(btnNewCourse);
 		
-		JButton btnSave = new JButton("Save");
+		btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -312,7 +346,7 @@ public class Edit_Course extends JPanel {
 		horizontalStrut.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut);
 		
-		JButton btnDiscard = new JButton("Discard");
+		 btnDiscard = new JButton("Discard");
 		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnDiscard.setBounds(497, 440, 140, 23);
 		PNL_Main.add(btnDiscard);

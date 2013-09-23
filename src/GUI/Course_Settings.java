@@ -71,7 +71,11 @@ import javax.swing.ScrollPaneConstants;
 public class Course_Settings extends JPanel {
 	private JTextField txtCourseSttings;
 	private JTable table;
-
+	private JButton btnSaveChanges; 
+	private JButton btnBackToMainMenu;
+	private JComboBox cmbxFaculty ;
+	private  JScrollPane scroll;
+	
 	public Course_Settings() {
 
 	
@@ -96,12 +100,12 @@ public class Course_Settings extends JPanel {
 	;
 		PNL_Main.setLayout(null);
 		
-		JButton btnSaveChanges = new JButton("Save");
+		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setBounds(201, 434, 85, 23);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		PNL_Main.add(btnSaveChanges);
 		
-		JButton btnBackToMainMenu = new JButton("Discard");
+		btnBackToMainMenu = new JButton("Discard");
 		btnBackToMainMenu.setBounds(487, 434, 85, 23);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBackToMainMenu.addActionListener(new ActionListener() {
@@ -193,14 +197,14 @@ public class Course_Settings extends JPanel {
 		table.setBounds(25, 110, 600, 300);
 	
 		  	
-		  	JComboBox cmbxFaculty = new JComboBox();
+		  	cmbxFaculty = new JComboBox();
 		  	cmbxFaculty.setBounds(10, 53, 724, 20);
 		  	cmbxFaculty.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
 		  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		  	cmbxFaculty.setToolTipText("Edit class list");
 		  	cmbxFaculty.setMaximumRowCount(52);
 		  	PNL_Main.add(cmbxFaculty);
-		  JScrollPane scroll = new JScrollPane(table);
+		  scroll = new JScrollPane(table);
 		  scroll.setBounds(10, 103, 724, 303);
 		  
 		  PNL_Main.add(scroll);

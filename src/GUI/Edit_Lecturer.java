@@ -50,21 +50,19 @@ public class Edit_Lecturer extends JPanel {
 	 * Create the panel.
 	 */
 	
-	private JTextField txLecturerNameText;
+	private	JTextField txLecturerNameText;
 	private JTextField txtLecturerEditor;
-	
+	private JComboBox cmbxLecturerEditor;
+	private JList lstAvailableCourses ;
+	private JButton btnAdd;
+	private JButton btnRemove;
+	private JList lstAvailableCourses2;
+	private JButton btnNewLecturer;
+	private JButton btnSaveChanges;
+	private JButton btnBackToMainMenu;
 	
 	public Edit_Lecturer() {
 		
-	
-
-
-
-
-
-
-	
-	
 	
 		JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
 		lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -84,7 +82,7 @@ public class Edit_Lecturer extends JPanel {
 	;
 		PNL_Main.setLayout(null);
 		
-		JComboBox cmbxLecturerEditor = new JComboBox();
+		 cmbxLecturerEditor = new JComboBox();
 		cmbxLecturerEditor.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
 		cmbxLecturerEditor.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		cmbxLecturerEditor.setToolTipText("Edit class list");
@@ -123,7 +121,7 @@ public class Edit_Lecturer extends JPanel {
 		lblAvailableCourses.setBounds(332, 100, 157, 14);
 		PNL_Main.add(lblAvailableCourses);
 		
-		JList lstAvailableCourses = new JList();
+		 lstAvailableCourses = new JList();
 		lstAvailableCourses.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstAvailableCourses.setForeground(new Color(0, 0, 0));
 		lstAvailableCourses.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -142,7 +140,7 @@ public class Edit_Lecturer extends JPanel {
 		lstAvailableCourses.setBounds(332, 130, 138, 220);
 		PNL_Main.add(lstAvailableCourses);
 		
-		JButton btnAdd = new JButton(" -->");
+		 btnAdd = new JButton(" -->");
 		btnAdd.setToolTipText("Add item to class");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnAdd.addActionListener(new ActionListener() {
@@ -152,20 +150,20 @@ public class Edit_Lecturer extends JPanel {
 		btnAdd.setBounds(502, 163, 61, 38);
 		PNL_Main.add(btnAdd);
 		
-		JButton btnRemove = new JButton("<--");
+		 btnRemove = new JButton("<--");
 		btnRemove.setToolTipText("Remove item from class");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnRemove.setBounds(502, 216, 61, 38);
 		PNL_Main.add(btnRemove);
 		
-		JList lstAvailableCourses2 = new JList();
+	 lstAvailableCourses2 = new JList();
 		lstAvailableCourses2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstAvailableCourses2.setBackground(new Color(169, 169, 169));
 		lstAvailableCourses2.setForeground(new Color(255, 255, 255));
 		lstAvailableCourses2.setBounds(586, 130, 138, 220);
 		PNL_Main.add(lstAvailableCourses2);
 		
-		JButton btnNewLecturer = new JButton("New Lecturer");
+		 btnNewLecturer = new JButton("New Lecturer");
 		btnNewLecturer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -174,12 +172,12 @@ public class Edit_Lecturer extends JPanel {
 		btnNewLecturer.setBounds(111, 440, 125, 23);
 		PNL_Main.add(btnNewLecturer);
 		
-		JButton btnSaveChanges = new JButton("Save");
+		 btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.setBounds(332, 440, 110, 23);
 		PNL_Main.add(btnSaveChanges);
 		
-		JButton btnBackToMainMenu = new JButton("Discard");
+		 btnBackToMainMenu = new JButton("Discard");
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBackToMainMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -35,6 +35,9 @@ public class Lecturer_Preferences extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtLecturerPreferences;
 	private JTable tableLecturermanu;
+	private  JButton btnSaveChanges;
+	private JButton btnBackToMainMenu;
+  	private JComboBox cmbxlecturer;
 	public JPanel PNL_Main;
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
@@ -62,12 +65,12 @@ public class Lecturer_Preferences extends JPanel {
 	;
 		PNL_Main.setLayout(null);
 		
-		JButton btnSaveChanges = new JButton("Save");
+		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setBounds(205, 434, 74, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		PNL_Main.add(btnSaveChanges);
 		
-		JButton btnBackToMainMenu = new JButton("Discard");
+		 btnBackToMainMenu = new JButton("Discard");
 		btnBackToMainMenu.setBounds(484, 434, 85, 29);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBackToMainMenu.addActionListener(new ActionListener() {
@@ -197,8 +200,7 @@ public class Lecturer_Preferences extends JPanel {
 	
 		
 		
-		  	
-		  	JComboBox cmbxlecturer = new JComboBox();
+        	cmbxlecturer = new JComboBox();
 		  	cmbxlecturer.setBounds(10, 53, 724, 20);
 		  	cmbxlecturer.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
 		  	cmbxlecturer.setFont(new Font("Tahoma", Font.PLAIN, 16));

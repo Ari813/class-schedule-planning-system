@@ -49,23 +49,22 @@ public class Edit_Class {
 	private JTextField txtDescriptionText;
 	private JTextField txtCapacityNumber;
 	private JTextField txtClassEditor;
-
+	private JComboBox cmbxEditClass ;
+	private JComboBox cmbxcampus;
+	private JList lstClassAids;
+	private JTextPane txtpnCodeNumber;
+	private JComboBox cmbBxBlding;	
+	private JCheckBox chckbxAvailable;
+	private JButton btnAdd ;
+	private JButton btnRemove;
+	private JButton btnNewClass;
+	private JButton btnSaveChanges;
+	private JButton btnDiscard;
+	
 	/**
 	 * Launch the application.
 	 */
-	/*/
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Edit_Class window = new Edit_Class();
-					window.frmLec.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
@@ -91,7 +90,7 @@ public class Edit_Class {
 	;
 		PNL_Main.setLayout(null);
 		
-		JComboBox cmbxEditClass = new JComboBox();
+		cmbxEditClass = new JComboBox();
 		cmbxEditClass.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
 		cmbxEditClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		cmbxEditClass.setToolTipText("Edit class list");
@@ -99,7 +98,7 @@ public class Edit_Class {
 		cmbxEditClass.setMaximumRowCount(52);
 		PNL_Main.add(cmbxEditClass);
 		
-		JTextPane txtpnCodeNumber = new JTextPane();
+		txtpnCodeNumber = new JTextPane();
 		txtpnCodeNumber.setEnabled(false);
 		txtpnCodeNumber.setDropMode(DropMode.ON);
 		txtpnCodeNumber.setBackground(Color.WHITE);
@@ -125,7 +124,7 @@ public class Edit_Class {
 		PNL_Main.add(txtDescriptionText);
 		txtDescriptionText.setColumns(10);
 		
-		JComboBox cmbxcampus = new JComboBox();
+		cmbxcampus = new JComboBox();
 		cmbxcampus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		cmbxcampus.setToolTipText("Campus");
 		cmbxcampus.setBounds(10, 292, 130, 20);
@@ -141,7 +140,7 @@ public class Edit_Class {
 		lblBilding.setBounds(172, 267, 82, 22);
 		PNL_Main.add(lblBilding);
 		
-		JComboBox cmbBxBlding = new JComboBox();
+		cmbBxBlding = new JComboBox();
 		cmbBxBlding.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		cmbBxBlding.setBounds(172, 292, 130, 20);
 		PNL_Main.add(cmbBxBlding);
@@ -164,7 +163,7 @@ public class Edit_Class {
 		lblClassAids.setBounds(332, 100, 100, 14);
 		PNL_Main.add(lblClassAids);
 		
-		JList lstClassAids = new JList();
+		lstClassAids = new JList();
 		lstClassAids.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstClassAids.setForeground(new Color(0, 0, 0));
 		lstClassAids.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -183,12 +182,12 @@ public class Edit_Class {
 		lstClassAids.setBounds(332, 130, 138, 220);
 		PNL_Main.add(lstClassAids);
 		
-		JCheckBox chckbxAvailable = new JCheckBox("Available");
+		chckbxAvailable = new JCheckBox("Available");
 		chckbxAvailable.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		chckbxAvailable.setBounds(10, 80, 135, 23);
 		PNL_Main.add(chckbxAvailable);
 		
-		JButton btnAdd = new JButton(" -->");
+		btnAdd = new JButton(" -->");
 		btnAdd.setToolTipText("Add item to class");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnAdd.addActionListener(new ActionListener() {
@@ -198,7 +197,7 @@ public class Edit_Class {
 		btnAdd.setBounds(502, 163, 61, 38);
 		PNL_Main.add(btnAdd);
 		
-		JButton btnRemove = new JButton("<--");
+		 btnRemove = new JButton("<--");
 		btnRemove.setToolTipText("Remove item from class");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnRemove.setBounds(502, 216, 61, 38);
@@ -211,17 +210,24 @@ public class Edit_Class {
 		lstClassaids2.setBounds(586, 130, 138, 220);
 		PNL_Main.add(lstClassaids2);
 		
-		JButton btnNewClass = new JButton("New class");
+		
+		
+		 btnNewClass = new JButton("New class");
 		btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewClass.setBounds(111, 440, 140, 23);
 		PNL_Main.add(btnNewClass);
+	
 		
-		JButton btnSaveChanges = new JButton("Save");
+		
+		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.setBounds(332, 440, 140, 23);
 		PNL_Main.add(btnSaveChanges);
 		
-		JButton btnDiscard = new JButton("Discard");
+		
+
+		
+		 btnDiscard = new JButton("Discard");
 		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnDiscard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
