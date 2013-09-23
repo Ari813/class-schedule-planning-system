@@ -37,6 +37,16 @@ public class Automatic_Sheduling extends JPanel {
 	private JTextField txtLecturerPreferences;
 	private JTable tableAutonatic;
 	public JPanel PNL_Main;
+	private JButton btnSaveChanges;
+	private JButton btnBackToMainMenu ;
+	private JButton btnPreview;
+	private JScrollPane scroll;
+	private JComboBox cmbxFaculty;
+	private JComboBox cmbBxSemster;
+	private JList lstTimeTable ;
+	
+	
+	
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
 	
@@ -65,12 +75,12 @@ public class Automatic_Sheduling extends JPanel {
 		
 		
 		
-		JButton btnSaveChanges = new JButton("Save");
+		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setBounds(205, 434, 74, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		PNL_Main.add(btnSaveChanges);
 		
-		JButton btnBackToMainMenu = new JButton("Discard");
+		btnBackToMainMenu = new JButton("Discard");
 		btnBackToMainMenu.setBounds(484, 434, 85, 29);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBackToMainMenu.addActionListener(new ActionListener() {
@@ -186,7 +196,7 @@ public class Automatic_Sheduling extends JPanel {
 		
 		
 		  	
-		  	JComboBox cmbxFaculty = new JComboBox();
+		  	cmbxFaculty = new JComboBox();
 		  	cmbxFaculty.setBounds(63, 55, 461, 20);
 		  	cmbxFaculty.setModel(new DefaultComboBoxModel(new String[] {"choose Faculty"}));
 		  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -196,7 +206,7 @@ public class Automatic_Sheduling extends JPanel {
 		 PNL_Main.add(cmbxFaculty);
 		
 		  	
-		  	 JScrollPane scroll = new JScrollPane(tableAutonatic);
+		  scroll = new JScrollPane(tableAutonatic);
 		  scroll.setEnabled(false);
 		  scroll.setBounds(10, 100, 511, 249);
 		  
@@ -212,7 +222,7 @@ public class Automatic_Sheduling extends JPanel {
 		  lblSemester.setBounds(534, 55, 71, 14);
 		  PNL_Main.add(lblSemester);
 		  
-		  JComboBox cmbBxSemster = new JComboBox();
+		  cmbBxSemster = new JComboBox();
 		  cmbBxSemster.setToolTipText("cmbBxSemster");
 		  cmbBxSemster.setBounds(601, 55, 46, 20);
 		  PNL_Main.add(cmbBxSemster);
@@ -222,14 +232,14 @@ public class Automatic_Sheduling extends JPanel {
 		  lblOptionalTimeTables.setBounds(560, 123, 170, 14);
 		  PNL_Main.add(lblOptionalTimeTables);
 		  
-		  JList lstTimeTable = new JList();
+		  lstTimeTable = new JList();
 		  lstTimeTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		  lstTimeTable.setBackground(new Color(175, 238, 238));
 		  lstTimeTable.setFont(new Font("Tahoma", Font.BOLD, 12));
 		  lstTimeTable.setBounds(559, 149, 102, 142);
 		  PNL_Main.add(lstTimeTable);
 		  
-		  JButton btnPreview = new JButton("Preview");
+		  btnPreview = new JButton("Preview");
 		  btnPreview.addActionListener(new ActionListener() {
 		  	public void actionPerformed(ActionEvent arg0) {
 		  	}
