@@ -288,7 +288,8 @@ public class Manual_Sheduling extends JPanel {
 		
 	}
 	
-		
+	public void actionPerformed(ActionEvent e) {}
+	
 	
 	}
 

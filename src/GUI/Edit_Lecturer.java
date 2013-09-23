@@ -209,4 +209,6 @@ public class Edit_Lecturer extends JPanel {
 		horizontalStrut_2.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut_2);
 	}
+	public void actionPerformed(ActionEvent e) {}
+	
 }

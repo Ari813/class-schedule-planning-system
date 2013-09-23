@@ -367,4 +367,6 @@ public class Edit_Course extends JPanel {
 		PNL_Main.add(horizontalStrut_2);
 		
 	}
+	public void actionPerformed(ActionEvent e) {}
+	
 }

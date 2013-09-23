@@ -214,4 +214,6 @@ public class Course_Settings extends JPanel {
 		
 	//	PNL_Main.add(table);
 	}
+	public void actionPerformed(ActionEvent e) {}
+	
 }

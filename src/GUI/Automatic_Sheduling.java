@@ -255,6 +255,8 @@ public class Automatic_Sheduling extends JPanel {
 		
 		
 	}
+	public void actionPerformed(ActionEvent e) {}
+	
 	}
 
 

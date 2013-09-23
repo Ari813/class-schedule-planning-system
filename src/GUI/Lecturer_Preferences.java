@@ -218,4 +218,6 @@ public class Lecturer_Preferences extends JPanel {
 		
 		
 	}
+	public void actionPerformed(ActionEvent e) {}
+	
 }
