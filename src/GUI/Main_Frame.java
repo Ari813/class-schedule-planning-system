@@ -67,10 +67,10 @@ public class Main_Frame  extends JFrame  {
 		manger=new ManagerController(this );		
 	}else
 		if (admin==LECTURER){
-			//lecturer=LecturerController(mainFrm);
+			//lecturer=LecturerController(this);
 		}else
 			if (admin==MAGI){
-				//magi=magiController(mainFrm);
+				//magi=magiController(this);
 			}
 	}
 	private void initialize() {
