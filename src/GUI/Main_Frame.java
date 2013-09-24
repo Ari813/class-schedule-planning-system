@@ -16,10 +16,17 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
+import Controllers.ManagerController;
+
 public class Main_Frame {
 
 	private JFrame mainFrm;
-
+	private ManagerController manger;
+	//private LecturerController lecturer;
+	//private MagiController magi;
+	final public static int MANAGER = 1; // 
+	final public static int LECTURER = 2; // 
+	final public static int MAGI = 3; // 
 	/**
 	 * Launch the application.
 	 */
@@ -27,7 +34,7 @@ public class Main_Frame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main_Frame window = new Main_Frame();
+					Main_Frame window = new Main_Frame(1);
 					window.mainFrm.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,14 +46,28 @@ public class Main_Frame {
 	/**
 	 * Create the application.
 	 */
-	public Main_Frame() {
-		initialize();
+	public Main_Frame(int admin) {
+		initialize( admin);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void chosseAdmin(int admin){
+	if (admin==MANAGER){
+		manger=new ManagerController();		
+	}else
+		if (admin==LECTURER){
+			//lecturer=LecturerController();
+		}else
+			if (admin==MAGI){
+				//magi=magiController;
+			}
+	}
+	private void initialize(int admin) {
+		
+		
+		
 		mainFrm = new JFrame();
 		mainFrm.getContentPane().setBackground(SystemColor.menu);
 		mainFrm.setBackground(SystemColor.inactiveCaptionBorder);
@@ -73,6 +94,10 @@ public class Main_Frame {
 		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
 		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		mainFrm.getContentPane().add(lblTimeTableSchedualing);
+		chosseAdmin(admin);
+		
+		
+		
 		/*Main_Menu mnn = new Main_Menu(mainFrm);
 		pnl_mainFrm.setContentPane(mnn);
 		
