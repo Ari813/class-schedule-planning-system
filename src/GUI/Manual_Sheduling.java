@@ -34,17 +34,20 @@ public class Manual_Sheduling extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtLecturerPreferences;
 	private JTable tablemanual;
-	private JButton btnSaveChanges;
-	private JButton btnBackToMainMenu;
+	
 	private JComboBox cmbxFaculty;
 	private JComboBox cmbBxCourse;
 	private JComboBox cmbBxType;
 	private JComboBox cmbBxLecturer;
 	private JComboBox cmbBxClass;
+	private JComboBox cmbBxSemster;
+	
+	private JButton btnSaveChanges;
+	private JButton btnBackToMainMenu;
 	private JButton btnSet;
 	private JButton btnClear;
 	private JButton btnDelete;
-	private JComboBox cmbBxSemster;
+
 	
 	public JPanel PNL_Main;
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
@@ -288,7 +291,18 @@ public class Manual_Sheduling extends JPanel {
 		
 	}
 	
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent e) {
+
+		if (e.getSource() == btnSaveChanges) {}
+		if (e.getSource() == btnBackToMainMenu) {}
+		if (e.getSource() == btnSet) {}
+		if (e.getSource() == btnClear) {}
+		if (e.getSource() == btnDelete) {}
+		
+		
+
+	}
+	
 	
 	
 	}

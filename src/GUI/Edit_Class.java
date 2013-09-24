@@ -55,6 +55,9 @@ public class Edit_Class {
 	private JTextPane txtpnCodeNumber;
 	private JComboBox cmbBxBlding;	
 	private JCheckBox chckbxAvailable;
+	
+	JPanel PNL_Main ;
+	
 	private JButton btnAdd ;
 	private JButton btnRemove;
 	private JButton btnNewClass;
@@ -82,7 +85,7 @@ public class Edit_Class {
 		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 	
 		
-		JPanel PNL_Main = new JPanel();
+		PNL_Main = new JPanel();
 		PNL_Main.setToolTipText("Edit class list");
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
@@ -260,6 +263,15 @@ public class Edit_Class {
 		PNL_Main.add(horizontalStrut_2);
 	}
 	
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSaveChanges) {}	
+		if (e.getSource() == btnAdd) {}
+		if (e.getSource() == btnRemove) {}	
+		if (e.getSource() == btnNewClass) {}
+		if (e.getSource() == btnDiscard) {}
+	
+
+		
+	}
 	
 }

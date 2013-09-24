@@ -37,14 +37,17 @@ public class Automatic_Sheduling extends JPanel {
 	private JTextField txtLecturerPreferences;
 	private JTable tableAutonatic;
 	public JPanel PNL_Main;
+	
+	private JScrollPane scroll;
+
+	private JComboBox cmbxFaculty;
+	private JComboBox cmbBxSemster;
+	
+	private JList lstTimeTable ;
+	
 	private JButton btnSaveChanges;
 	private JButton btnBackToMainMenu ;
 	private JButton btnPreview;
-	private JScrollPane scroll;
-	private JComboBox cmbxFaculty;
-	private JComboBox cmbBxSemster;
-	private JList lstTimeTable ;
-	
 	
 	
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
@@ -54,6 +57,7 @@ public class Automatic_Sheduling extends JPanel {
 	 * Create the panel.
 	 */
 	public Automatic_Sheduling() {
+		
 		JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
 		lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
@@ -87,6 +91,7 @@ public class Automatic_Sheduling extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		PNL_Main.add(btnBackToMainMenu);
 		
 		txtLecturerPreferences = new JTextField();
@@ -138,6 +143,10 @@ public class Automatic_Sheduling extends JPanel {
 				"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
 			}
 		) {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
 				false, true, true, true, true, true, true
 			};
@@ -255,7 +264,16 @@ public class Automatic_Sheduling extends JPanel {
 		
 		
 	}
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSaveChanges) {}	
+		if (e.getSource() == btnBackToMainMenu) {}
+		if (e.getSource() == btnPreview) {}
+		
+		
+	
+		
+		
+	}
 	
 	}
 

@@ -218,6 +218,10 @@ public class Lecturer_Preferences extends JPanel {
 		
 		
 	}
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent e) {
+			
+		if (e.getSource() == btnSaveChanges) {}
+		if (e.getSource() == btnBackToMainMenu) {}
+	}
 	
 }

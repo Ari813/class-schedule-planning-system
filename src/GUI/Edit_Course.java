@@ -60,8 +60,7 @@ public class Edit_Course extends JPanel {
 	private JComboBox cmBxFaculty;
 	private JSpinner spinner;
 	private JList lstlecturers;
-	private JButton btnAdd ;
-	private JButton btnRemove;
+	
 	private JList list;
 	private JTabbedPane tabbedPane;
 	private JCheckBox checkBox;
@@ -80,6 +79,8 @@ public class Edit_Course extends JPanel {
 	private JButton btnNewCourse;
 	private JButton btnSave;
 	private JButton btnDiscard;
+	private JButton btnAdd ;
+	private JButton btnRemove;
 	
 	/**
 	 * Create the panel.
@@ -367,6 +368,16 @@ public class Edit_Course extends JPanel {
 		PNL_Main.add(horizontalStrut_2);
 		
 	}
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent e) {
+		
+		if (e.getSource() == btnNewCourse) {}	
+		if (e.getSource() == btnAdd) {}
+		if (e.getSource() == btnRemove) {}	
+		if (e.getSource() == btnSave) {}
+		if (e.getSource() == btnDiscard) {}
+		
+	
+		
+	}
 	
 }

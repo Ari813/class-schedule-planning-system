@@ -54,9 +54,10 @@ public class Edit_Lecturer extends JPanel {
 	private JTextField txtLecturerEditor;
 	private JComboBox cmbxLecturerEditor;
 	private JList lstAvailableCourses ;
+	private JList lstAvailableCourses2;
+	
 	private JButton btnAdd;
 	private JButton btnRemove;
-	private JList lstAvailableCourses2;
 	private JButton btnNewLecturer;
 	private JButton btnSaveChanges;
 	private JButton btnBackToMainMenu;
@@ -209,6 +210,13 @@ public class Edit_Lecturer extends JPanel {
 		horizontalStrut_2.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut_2);
 	}
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAdd) {}	
+		if (e.getSource() == btnRemove) {}
+		if (e.getSource() == btnNewLecturer) {}	
+		if (e.getSource() == btnSaveChanges) {}
+		if (e.getSource() == btnBackToMainMenu) {}
+		
+	}
 	
 }

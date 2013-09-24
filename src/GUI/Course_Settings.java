@@ -214,6 +214,12 @@ public class Course_Settings extends JPanel {
 		
 	//	PNL_Main.add(table);
 	}
-	public void actionPerformed(ActionEvent e) {}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnSaveChanges) {}	
+		if (e.getSource() == btnBackToMainMenu) {}
+		
+		
+		
+	}
 	
 }
