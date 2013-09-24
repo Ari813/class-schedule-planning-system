@@ -18,12 +18,20 @@ import javax.swing.border.BevelBorder;
 
 import Controllers.ManagerController;
 
-public class Main_Frame {
+public class Main_Frame  extends JFrame  {
 
-	private JFrame mainFrm;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	public static Main_Frame window;
+	//public JFrame mainFrm;
 	private ManagerController manger;
 	//private LecturerController lecturer;
 	//private MagiController magi;
+	
+	private int admin;
 	final public static int MANAGER = 1; // 
 	final public static int LECTURER = 2; // 
 	final public static int MAGI = 3; // 
@@ -34,8 +42,8 @@ public class Main_Frame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main_Frame window = new Main_Frame(1);
-					window.mainFrm.setVisible(true);
+					window = new Main_Frame(1);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -47,43 +55,44 @@ public class Main_Frame {
 	 * Create the application.
 	 */
 	public Main_Frame(int admin) {
-		initialize( admin);
+		this.admin=admin;
+		initialize( );
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void chosseAdmin(int admin){
+	private void chosseAdmin(){
 	if (admin==MANAGER){
-		manger=new ManagerController();		
+		manger=new ManagerController(this );		
 	}else
 		if (admin==LECTURER){
-			//lecturer=LecturerController();
+			//lecturer=LecturerController(mainFrm);
 		}else
 			if (admin==MAGI){
-				//magi=magiController;
+				//magi=magiController(mainFrm);
 			}
 	}
-	private void initialize(int admin) {
+	private void initialize() {
 		
 		
 		
-		mainFrm = new JFrame();
-		mainFrm.getContentPane().setBackground(SystemColor.menu);
-		mainFrm.setBackground(SystemColor.inactiveCaptionBorder);
-		mainFrm.setForeground(SystemColor.controlLtHighlight);
-		mainFrm.setLocale(new Locale("en", "IL"));
-		mainFrm.setType(Type.UTILITY);
-		mainFrm.setResizable(false);
-		mainFrm.setAlwaysOnTop(true);
-		mainFrm.setPreferredSize(new Dimension(800, 600));
-		mainFrm.setName("Main_Panel");
-		mainFrm.setTitle("Time table schedualing system");
-		mainFrm.setMinimumSize(new Dimension(800, 600));
-		mainFrm.setMaximumSize(new Dimension(800, 600));
-		mainFrm.setBounds(100, 100, 450, 300);
-		mainFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainFrm.getContentPane().setLayout(null);
+		//mainFrm = new JFrame();
+		 getContentPane().setBackground(SystemColor.menu);
+		 setBackground(SystemColor.inactiveCaptionBorder);
+		 setForeground(SystemColor.controlLtHighlight);
+		 setLocale(new Locale("en", "IL"));
+		 setType(Type.UTILITY);
+		 setResizable(false);
+		 setAlwaysOnTop(true);
+		 setPreferredSize(new Dimension(800, 600));
+		 setName("Main_Panel");
+		 setTitle("Time table schedualing system");
+		 setMinimumSize(new Dimension(800, 600));
+		 setMaximumSize(new Dimension(800, 600));
+		 setBounds(100, 100, 450, 300);
+		 setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 getContentPane().setLayout(null);
 		
 		JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
 		lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -93,8 +102,8 @@ public class Main_Frame {
 		lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
 		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
 		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-		mainFrm.getContentPane().add(lblTimeTableSchedualing);
-		chosseAdmin(admin);
+		 getContentPane().add(lblTimeTableSchedualing);
+		chosseAdmin();
 		
 		
 		
@@ -121,6 +130,11 @@ public class Main_Frame {
 		
 		/*Main_Menu PNL=new Main_Menu(mainFrm);
 		mainFrm.add(PNL);*/
+		
+	}
+
+	public void addfrm(Main_Menu main) {
+		this.add(main);
 		
 	}
 }

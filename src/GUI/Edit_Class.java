@@ -56,7 +56,7 @@ public class Edit_Class {
 	private JComboBox cmbBxBlding;	
 	private JCheckBox chckbxAvailable;
 	
-	JPanel PNL_Main ;
+	public JPanel PNL_Main ;
 	
 	private JButton btnAdd ;
 	private JButton btnRemove;

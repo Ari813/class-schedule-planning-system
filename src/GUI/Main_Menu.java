@@ -31,20 +31,21 @@ public class Main_Menu extends JPanel {
 	private JButton btnEditClasses;
 	private JButton btnEditLecturers;
 	private JFrame mainfrm;
-	private JPanel PNL_Main ;
+	public JPanel PNL_Main ;
 	
 	/**
 	 * Create the panel.
 	 */
-	public Main_Menu(JFrame frmLec) {
+	public Main_Menu()  {
 		 PNL_Main = new JPanel();
 		//mainfrm=frmLec;
 	
-		frmLec.add(this);
+		//frmLec.add(this);
 		PNL_Main.setPreferredSize(new Dimension(774, 474));
 		PNL_Main.setName("PNL_MainMenu");
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
+		PNL_Main.setBounds(10, 85, 774, 474);
 		PNL_Main.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		PNL_Main.setLayout(null);
 		
@@ -117,12 +118,12 @@ public class Main_Menu extends JPanel {
 		btnQuit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnQuit.setBounds(593, 435, 171, 31);
 		PNL_Main.add(btnQuit);
-		setVisible(true);
+		PNL_Main.setVisible(true);
 	
 	}
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnLecturerPreferences) {
-				mainfrm.remove(this);
+				//mainfrm.remove(this);
 				
 			}
 			if (e.getSource() == btnQuit) {}

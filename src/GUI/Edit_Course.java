@@ -81,7 +81,7 @@ public class Edit_Course extends JPanel {
 	private JButton btnDiscard;
 	private JButton btnAdd ;
 	private JButton btnRemove;
-	
+	public JPanel PNL_Main;
 	/**
 	 * Create the panel.
 	 */
@@ -95,7 +95,7 @@ public class Edit_Course extends JPanel {
 		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
 		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 	
-		JPanel PNL_Main = new JPanel();
+		PNL_Main = new JPanel();
 		PNL_Main.setToolTipText("Edit class list");
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
