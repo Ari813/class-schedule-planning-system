@@ -3,23 +3,33 @@ package GUI;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import java.awt.Dimension;
+
 import javax.swing.JLabel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.border.BevelBorder;
+
 import java.awt.Rectangle;
 import java.awt.Font;
 import java.awt.Component;
 import java.awt.Point;
+
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
 import java.awt.Window.Type;
 import java.util.Locale;
 import java.awt.SystemColor;
 import java.awt.Color;
+
 import javax.swing.UIManager;
+
 import java.awt.FlowLayout;
+
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
@@ -34,16 +44,23 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JProgressBar;
 import javax.swing.JSeparator;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JLayeredPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
-public class Edit_Class {
+public class Edit_Class extends JPanel implements ActionListener,
+ListSelectionListener, KeyListener {
 
 	//private JFrame frmLec;
 	private JTextField txtDescriptionText;
@@ -63,7 +80,18 @@ public class Edit_Class {
 	private JButton btnNewClass;
 	private JButton btnSaveChanges;
 	private JButton btnDiscard;
+	private JLabel lblCode ;
+	private JLabel lblDescription ;
+	private JLabel lblCampus;
+	private JLabel lblBilding;
+	private JLabel lblCapacity;
 	
+	private Component horizontalStrut_1;
+	private Component horizontalStrut_2;
+	private Component horizontalStrut;
+	private JLabel lblClassAids;
+	
+	private JList lstClassaids2 ;
 	/**
 	 * Launch the application.
 	 */
@@ -75,7 +103,7 @@ public class Edit_Class {
 	public Edit_Class() {
 	
 	
-		JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
+		/*/JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
 		lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTimeTableSchedualing.setLocation(new Point(50, 0));
@@ -84,88 +112,118 @@ public class Edit_Class {
 		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
 		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 	
-		
+		/*/
 		PNL_Main = new JPanel();
 		PNL_Main.setToolTipText("Edit class list");
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
 		PNL_Main.setBounds(10, 85, 774, 474);
-	;
 		PNL_Main.setLayout(null);
+					
+		PNL_Main.add(GETcmbxEditClass());
+		PNL_Main.add(GETcmbxcampus());
+		PNL_Main.add(GETcmbBxBlding());
 		
-		cmbxEditClass = new JComboBox();
-		cmbxEditClass.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
-		cmbxEditClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		cmbxEditClass.setToolTipText("Edit class list");
-		cmbxEditClass.setBounds(10, 53, 754, 20);
-		cmbxEditClass.setMaximumRowCount(52);
-		PNL_Main.add(cmbxEditClass);
+		PNL_Main.add(GETlblCapacity());
+		PNL_Main.add(GETlblBilding());
+		PNL_Main.add(GETlblCampus());
+		PNL_Main.add(GETlblDescription());
+		PNL_Main.add(GETlblCode());
+		PNL_Main.add(GETlblClassAids());
 		
-		txtpnCodeNumber = new JTextPane();
-		txtpnCodeNumber.setEnabled(false);
-		txtpnCodeNumber.setDropMode(DropMode.ON);
-		txtpnCodeNumber.setBackground(Color.WHITE);
-		txtpnCodeNumber.setText("Code Number");
-		txtpnCodeNumber.setBounds(10, 144, 100, 20);
-		PNL_Main.add(txtpnCodeNumber);
+		PNL_Main.add(GETtxtpnCodeNumber());
+		PNL_Main.add(GETtxtCapacityNumber());
+		PNL_Main.add(GETtxtDescriptionText());
+		PNL_Main.add(GETtxtClassEditor());
 		
-		JLabel lblCode = new JLabel("Code:");
-		lblCode.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCode.setBounds(10, 114, 90, 21);
-		PNL_Main.add(lblCode);
+		PNL_Main.add(GETlstClassAids());
 		
-		JLabel lblDescription = new JLabel("Description:");
-		lblDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblDescription.setBounds(10, 179, 123, 22);
-		PNL_Main.add(lblDescription);
 		
-		txtDescriptionText = new JTextField();
-		txtDescriptionText.setEnabled(false);
-		txtDescriptionText.setBackground(Color.WHITE);
-		txtDescriptionText.setText("description text");
-		txtDescriptionText.setBounds(10, 207, 100, 20);
-		PNL_Main.add(txtDescriptionText);
-		txtDescriptionText.setColumns(10);
+		PNL_Main.add(GETchckbxAvailable());
+				
+		PNL_Main.add(GETbtnAdd());
+		PNL_Main.add(GETbtnRemove());
+		PNL_Main.add(GETbtnNewClass());
+	    PNL_Main.add(GETbtnSaveChanges());
+	    PNL_Main.add(GETbtnDiscard());
+	    
+		PNL_Main.add(GETlstClassaids2());
 		
-		cmbxcampus = new JComboBox();
-		cmbxcampus.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cmbxcampus.setToolTipText("Campus");
-		cmbxcampus.setBounds(10, 292, 130, 20);
-		PNL_Main.add(cmbxcampus);
+		sethorizontalStrut();
 		
-		JLabel lblCampus = new JLabel("Campus:");
-		lblCampus.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCampus.setBounds(10, 267, 90, 14);
-		PNL_Main.add(lblCampus);
-		
-		JLabel lblBilding = new JLabel("Building:");
-		lblBilding.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblBilding.setBounds(172, 267, 82, 22);
-		PNL_Main.add(lblBilding);
-		
-		cmbBxBlding = new JComboBox();
-		cmbBxBlding.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cmbBxBlding.setBounds(172, 292, 130, 20);
-		PNL_Main.add(cmbBxBlding);
-		
-		JLabel lblCapacity = new JLabel("Capacity:");
-		lblCapacity.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCapacity.setVerticalAlignment(SwingConstants.TOP);
-		lblCapacity.setBounds(172, 114, 76, 22);
-		PNL_Main.add(lblCapacity);
-		
-		txtCapacityNumber = new JTextField();
-		txtCapacityNumber.setEnabled(false);
-		txtCapacityNumber.setText("Capacity number");
-		txtCapacityNumber.setBounds(172, 144, 100, 20);
-		PNL_Main.add(txtCapacityNumber);
-		txtCapacityNumber.setColumns(10);
-		
-		JLabel lblClassAids = new JLabel("Class aids:");
-		lblClassAids.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblClassAids.setBounds(332, 100, 100, 14);
-		PNL_Main.add(lblClassAids);
-		
+	}
+	
+	private JTextField GETtxtClassEditor() {
+		txtClassEditor = new JTextField();
+		txtClassEditor.setText("Class editor");
+		txtClassEditor.setHorizontalAlignment(SwingConstants.CENTER);
+		txtClassEditor.setFont(new Font("Tahoma", Font.BOLD, 20));
+		txtClassEditor.setColumns(10);
+		txtClassEditor.setBorder(UIManager.getBorder("DesktopIcon.border"));
+		txtClassEditor.setBackground(new Color(176, 224, 230));
+		txtClassEditor.setBounds(10, 11, 754, 31);
+		return txtClassEditor;
+	}
+
+	private JButton GETbtnDiscard() {
+		btnDiscard = new JButton("Discard");
+		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnDiscard.addActionListener(this);
+		btnDiscard.setBounds(553, 440, 140, 23);
+		return btnDiscard;
+	}
+
+	private JButton GETbtnSaveChanges() {
+		btnSaveChanges = new JButton("Save");
+		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnSaveChanges.setBounds(332, 440, 140, 23);
+		btnSaveChanges.addActionListener(this);
+		return btnSaveChanges;
+	}
+
+	private JButton GETbtnNewClass() {
+		 btnNewClass = new JButton("New class");
+			btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			btnNewClass.setBounds(111, 440, 140, 23);
+			btnNewClass.addActionListener(this);
+		return btnNewClass;
+	}
+
+	private JList GETlstClassaids2() {
+		lstClassaids2 = new JList();
+		lstClassaids2.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lstClassaids2.setBackground(new Color(169, 169, 169));
+		lstClassaids2.setForeground(new Color(255, 255, 255));
+		lstClassaids2.setBounds(586, 130, 138, 220);
+		return lstClassaids2;
+	}
+
+	private JButton GETbtnRemove() {
+		 btnRemove = new JButton("<--");
+			btnRemove.setToolTipText("Remove item from class");
+			btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			btnRemove.setBounds(502, 216, 61, 38);
+			btnRemove.addActionListener(this);
+		return btnRemove;
+	}
+
+	private JButton GETbtnAdd() {
+		btnAdd = new JButton(" -->");
+		btnAdd.setToolTipText("Add item to class");
+		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnAdd.addActionListener(this);
+		btnAdd.setBounds(502, 163, 61, 38);
+		return btnAdd;
+	}
+
+	private JCheckBox GETchckbxAvailable() {
+		chckbxAvailable = new JCheckBox("Available");
+		chckbxAvailable.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		chckbxAvailable.setBounds(10, 80, 135, 23);
+		return chckbxAvailable;
+	}
+
+	private JList GETlstClassAids() {
 		lstClassAids = new JList();
 		lstClassAids.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstClassAids.setForeground(new Color(0, 0, 0));
@@ -183,86 +241,123 @@ public class Edit_Class {
 			}
 		});
 		lstClassAids.setBounds(332, 130, 138, 220);
-		PNL_Main.add(lstClassAids);
-		
-		chckbxAvailable = new JCheckBox("Available");
-		chckbxAvailable.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		chckbxAvailable.setBounds(10, 80, 135, 23);
-		PNL_Main.add(chckbxAvailable);
-		
-		btnAdd = new JButton(" -->");
-		btnAdd.setToolTipText("Add item to class");
-		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnAdd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnAdd.setBounds(502, 163, 61, 38);
-		PNL_Main.add(btnAdd);
-		
-		 btnRemove = new JButton("<--");
-		btnRemove.setToolTipText("Remove item from class");
-		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnRemove.setBounds(502, 216, 61, 38);
-		PNL_Main.add(btnRemove);
-		
-		JList lstClassaids2 = new JList();
-		lstClassaids2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lstClassaids2.setBackground(new Color(169, 169, 169));
-		lstClassaids2.setForeground(new Color(255, 255, 255));
-		lstClassaids2.setBounds(586, 130, 138, 220);
-		PNL_Main.add(lstClassaids2);
-		
-		
-		
-		 btnNewClass = new JButton("New class");
-		btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewClass.setBounds(111, 440, 140, 23);
-		PNL_Main.add(btnNewClass);
-	
-		
-		
-		btnSaveChanges = new JButton("Save");
-		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnSaveChanges.setBounds(332, 440, 140, 23);
-		PNL_Main.add(btnSaveChanges);
-		
-		
+		return lstClassAids;
+	}
 
+	private JLabel GETlblClassAids() {
+		lblClassAids = new JLabel("Class aids:");
+		lblClassAids.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblClassAids.setBounds(332, 100, 100, 14);
+		return lblClassAids;
+	}
+
+	private JTextField GETtxtCapacityNumber() {
+		txtCapacityNumber = new JTextField();
+		txtCapacityNumber.setEnabled(false);
+		txtCapacityNumber.setText("Capacity number");
+		txtCapacityNumber.setBounds(172, 144, 100, 20);
+		return txtCapacityNumber;
+	}
+
+	private void sethorizontalStrut() {
 		
-		 btnDiscard = new JButton("Discard");
-		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnDiscard.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnDiscard.setBounds(553, 440, 140, 23);
-		PNL_Main.add(btnDiscard);
-		
-		txtClassEditor = new JTextField();
-		txtClassEditor.setText("Class editor");
-		txtClassEditor.setHorizontalAlignment(SwingConstants.CENTER);
-		txtClassEditor.setFont(new Font("Tahoma", Font.BOLD, 20));
-		txtClassEditor.setColumns(10);
-		txtClassEditor.setBorder(UIManager.getBorder("DesktopIcon.border"));
-		txtClassEditor.setBackground(new Color(176, 224, 230));
-		txtClassEditor.setBounds(10, 11, 754, 31);
-		PNL_Main.add(txtClassEditor);
-		
-		Component horizontalStrut = Box.createHorizontalStrut(20);
+		horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(332, 114, 392, 14);
 		PNL_Main.add(horizontalStrut);
 		
-		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
+		horizontalStrut_1 = Box.createHorizontalStrut(20);
 		horizontalStrut_1.setBounds(5, 424, 759, 5);
 		PNL_Main.add(horizontalStrut_1);
 		
-		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
+		horizontalStrut_2 = Box.createHorizontalStrut(20);
 		horizontalStrut_2.setBackground(Color.BLACK);
 		horizontalStrut_2.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut_2);
+		
 	}
-	
+
+	private JLabel GETlblCapacity() {
+		lblCapacity = new JLabel("Capacity:");
+		lblCapacity.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblCapacity.setVerticalAlignment(SwingConstants.TOP);
+		lblCapacity.setBounds(172, 114, 76, 22);
+		return lblCapacity;
+	}
+
+	private JComboBox GETcmbBxBlding() {
+		cmbBxBlding = new JComboBox();
+		cmbBxBlding.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		cmbBxBlding.setBounds(172, 292, 130, 20);
+		return cmbBxBlding;
+	}
+
+	private JLabel GETlblBilding() {
+		lblBilding = new JLabel("Building:");
+		lblBilding.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblBilding.setBounds(172, 267, 82, 22);
+		return lblBilding;
+	}
+
+	private JLabel GETlblCampus() {
+		lblCampus = new JLabel("Campus:");
+		lblCampus.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblCampus.setBounds(10, 267, 90, 14);
+		return lblCampus;
+	}
+
+	private JComboBox GETcmbxcampus() {
+		cmbxcampus = new JComboBox();
+		cmbxcampus.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		cmbxcampus.setToolTipText("Campus");
+		cmbxcampus.setBounds(10, 292, 130, 20);
+		return cmbxcampus;
+	}
+
+	private JTextField GETtxtDescriptionText() {
+		txtDescriptionText = new JTextField();
+		txtDescriptionText.setEnabled(false);
+		txtDescriptionText.setBackground(Color.WHITE);
+		txtDescriptionText.setText("description text");
+		txtDescriptionText.setBounds(10, 207, 100, 20);
+		return txtDescriptionText;
+	}
+
+	private JLabel GETlblDescription() {
+		lblDescription = new JLabel("Description:");
+		lblDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblDescription.setBounds(10, 179, 123, 22);
+		return lblDescription;
+	}
+
+	private JLabel GETlblCode() {
+		lblCode = new JLabel("Code:");
+		lblCode.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblCode.setBounds(10, 114, 90, 21);
+		return lblCode;
+	}
+
+	private JTextPane GETtxtpnCodeNumber() {
+		if (txtpnCodeNumber==null){
+		txtpnCodeNumber = new JTextPane();
+		txtpnCodeNumber.setEnabled(false);
+		txtpnCodeNumber.setDropMode(DropMode.ON);
+		txtpnCodeNumber.setBackground(Color.WHITE);
+		txtpnCodeNumber.setText("Code Number");
+		txtpnCodeNumber.setBounds(10, 144, 100, 20);}
+		return txtpnCodeNumber;
+	}
+
+	private JComboBox GETcmbxEditClass() {
+		if (cmbxEditClass==null){
+		cmbxEditClass = new JComboBox();
+		cmbxEditClass.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
+		cmbxEditClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		cmbxEditClass.setToolTipText("Edit class list");
+		cmbxEditClass.setBounds(10, 53, 754, 20);
+		cmbxEditClass.setMaximumRowCount(52);}
+		return cmbxEditClass;
+	}
+
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSaveChanges) {}	
 		if (e.getSource() == btnAdd) {}
@@ -271,6 +366,30 @@ public class Edit_Class {
 		if (e.getSource() == btnDiscard) {}
 	
 
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 	
