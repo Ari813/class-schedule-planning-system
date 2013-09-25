@@ -105,22 +105,44 @@ ListSelectionListener, KeyListener {
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
 		PNL_Main.setBounds(10, 85, 774, 474);
-	
 		PNL_Main.setLayout(null);
-		
-		
 		PNL_Main.add(GETbtnSaveChanges());
 		PNL_Main.add(GETbtnBackToMainMenu());
-		
-		
 		PNL_Main.add(GETtxtCourseSttings());
 		PNL_Main.add(horizontalStrut2());
 		PNL_Main.add(horizontalStrut1());
+		PNL_Main.add(GETscroll());
+	  	PNL_Main.add(GETcmbxFaculty());
+		 
+		  
+		  
+		  
 		
-		Object data[][]={{new Integer(10),new Integer(10),false},{new Integer(10),new Integer(10),"barda"}
-		,{new Integer(10),new Integer(10),"barda"}};
-		String columns[]={"# of student","course ID","course description"};
-	
+		
+		
+	//	PNL_Main.add(table);
+	}
+	private JComboBox GETcmbxFaculty() {
+		if (cmbxFaculty==null){
+		cmbxFaculty = new JComboBox();
+	  	cmbxFaculty.setBounds(10, 53, 724, 20);
+	  	cmbxFaculty.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
+	  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	  	cmbxFaculty.setToolTipText("Edit class list");
+	  	cmbxFaculty.setMaximumRowCount(52);}
+		return cmbxFaculty;
+	}
+	private JScrollPane GETscroll() {
+		if (scroll==null){
+		 scroll = new JScrollPane(GETtable());
+		  scroll.setBounds(10, 103, 724, 303);}
+		return scroll;
+	}
+	private JTable GETtable() {
+		if (table==null){
+			Object data[][]={{new Integer(10),new Integer(10),false},{new Integer(10),new Integer(10),"barda"}
+			,{new Integer(10),new Integer(10),"barda"}};
+			String columns[]={"# of student","course ID","course description"};
 		table = new JTable(data,columns);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(SystemColor.info);
@@ -179,30 +201,10 @@ ListSelectionListener, KeyListener {
 		table.setColumnSelectionAllowed(true);
 		table.setCellSelectionEnabled(true);
 		table.setBounds(25, 110, 600, 300);
-	
-		  	
-		  	cmbxFaculty = new JComboBox();
-		  	cmbxFaculty.setBounds(10, 53, 724, 20);
-		  	cmbxFaculty.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
-		  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		  	cmbxFaculty.setToolTipText("Edit class list");
-		  	cmbxFaculty.setMaximumRowCount(52);
-		  	PNL_Main.add(cmbxFaculty);
-		 
-		  
-		  PNL_Main.add(GETscroll());
-		  
-		
-		
-		
-	//	PNL_Main.add(table);
+		}
+		return table;
 	}
-	private Component GETscroll() {
-		 scroll = new JScrollPane(table);
-		  scroll.setBounds(10, 103, 724, 303);
-		return null;
-	}
-	private Component GETtxtCourseSttings() {
+	private JTextField GETtxtCourseSttings() {
 		if (txtCourseSttings==null){
 		txtCourseSttings = new JTextField();
 		txtCourseSttings.setBounds(10, 11, 754, 31);
@@ -226,7 +228,9 @@ ListSelectionListener, KeyListener {
 		if (btnSaveChanges==null){
 		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setBounds(201, 434, 85, 23);
-		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));}
+		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnSaveChanges.addActionListener(this);
+		}
 		return btnSaveChanges;
 	}
 	
