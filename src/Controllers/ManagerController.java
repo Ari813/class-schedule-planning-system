@@ -22,7 +22,7 @@ public class ManagerController {
 	public ManagerController(Main_Frame mainFrm){
 		
 		manegerMainFrm=mainFrm;
-		main=new Main_Menu();
+		main=new Main_Menu(null,this);
 		manegerMainFrm.add(main.PNL_Main);
 		
 		
