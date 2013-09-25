@@ -83,7 +83,7 @@ ListSelectionListener, KeyListener {
 	private  JScrollPane scroll;
 	private Component horizontalStrut_2;
 	private Component horizontalStrut_1;
-	
+	private JPanel PNL_Main ;
 	public Course_Settings() {
 
 	
@@ -98,14 +98,9 @@ ListSelectionListener, KeyListener {
 		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
 		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 	/*/
+		pnl();
 		
-		JPanel PNL_Main = new JPanel();
-		PNL_Main.setBorder(new EmptyBorder(0, 0, 0, 0));
-		PNL_Main.setToolTipText("Edit class list");
-		PNL_Main.setMinimumSize(new Dimension(774, 474));
-		PNL_Main.setMaximumSize(new Dimension(774, 474));
-		PNL_Main.setBounds(10, 85, 774, 474);
-		PNL_Main.setLayout(null);
+		
 		PNL_Main.add(GETbtnSaveChanges());
 		PNL_Main.add(GETbtnBackToMainMenu());
 		PNL_Main.add(GETtxtCourseSttings());
@@ -113,15 +108,21 @@ ListSelectionListener, KeyListener {
 		PNL_Main.add(horizontalStrut1());
 		PNL_Main.add(GETscroll());
 	  	PNL_Main.add(GETcmbxFaculty());
-		 
-		  
-		  
-		  
-		
-		
 		
 	//	PNL_Main.add(table);
 	}
+	
+	private void pnl() {
+		
+		PNL_Main = new JPanel();
+		PNL_Main.setBorder(new EmptyBorder(0, 0, 0, 0));
+	
+		PNL_Main.setMinimumSize(new Dimension(774, 474));
+		PNL_Main.setMaximumSize(new Dimension(774, 474));
+		PNL_Main.setBounds(10, 85, 774, 474);
+		PNL_Main.setLayout(null);
+			
+		}
 	private JComboBox GETcmbxFaculty() {
 		if (cmbxFaculty==null){
 		cmbxFaculty = new JComboBox();

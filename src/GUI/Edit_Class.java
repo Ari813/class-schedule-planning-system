@@ -113,12 +113,7 @@ ListSelectionListener, KeyListener {
 		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 	
 		/*/
-		PNL_Main = new JPanel();
-		PNL_Main.setToolTipText("Edit class list");
-		PNL_Main.setMinimumSize(new Dimension(774, 474));
-		PNL_Main.setMaximumSize(new Dimension(774, 474));
-		PNL_Main.setBounds(10, 85, 774, 474);
-		PNL_Main.setLayout(null);
+		pnl();
 					
 		PNL_Main.add(GETcmbxEditClass());
 		PNL_Main.add(GETcmbxcampus());
@@ -152,7 +147,16 @@ ListSelectionListener, KeyListener {
 		sethorizontalStrut();
 		
 	}
-	
+private void pnl() {
+		
+	PNL_Main = new JPanel();
+	PNL_Main.setToolTipText("Edit class list");
+	PNL_Main.setMinimumSize(new Dimension(774, 474));
+	PNL_Main.setMaximumSize(new Dimension(774, 474));
+	PNL_Main.setBounds(10, 85, 774, 474);
+	PNL_Main.setLayout(null);
+			
+		}
 	private JTextField GETtxtClassEditor() {
 		txtClassEditor = new JTextField();
 		txtClassEditor.setText("Class editor");
