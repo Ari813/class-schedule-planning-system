@@ -12,11 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 
-import server.*;
+import Server.*;
 
 import javax.swing.SwingConstants;
 
-import common.Perror;
+import common.*;
 
 import java.awt.Font;
 
@@ -257,7 +257,7 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 				passwordField.setEnabled(false);
 				btnLogout.setEnabled(true);
 			} catch (Exception ex) {
-				Perror.sError("Could not listen for clients!");
+				//Perror.sError("Could not listen for clients!");
 
 			}
 		}
@@ -276,7 +276,7 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 
 					es.close();
 				} catch (Exception ex) {
-					Perror.sError("Could not close connection.");
+					//Perror.sError("Could not close connection.");
 
 				}
 			}
