@@ -22,7 +22,8 @@ public class ManagerController {
 	public Edit_Course ed;
 	private Main_Menu main;
 	public Main_Frame manegerMainFrm;
-
+	public LecturerController lecturer_Ctrl;
+	
 	public ManagerController(Main_Frame mainFrm) {
 
 		manegerMainFrm = mainFrm;
@@ -42,5 +43,14 @@ public class ManagerController {
 	
 	public void BacktoMainMenu(JPanel Panel2Close)
 	{
+		manegerMainFrm.remove(Panel2Close);
+		manegerMainFrm.add(main);
+		manegerMainFrm.repaint();
+	}
+
+	public void Load_Lecturer_Preferences(JPanel Panel2Close) {
+		manegerMainFrm.remove(Panel2Close);
+		lecturer_Ctrl = new LecturerController(this);
+		manegerMainFrm.repaint();		
 	}
 }
