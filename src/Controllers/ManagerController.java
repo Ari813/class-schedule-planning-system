@@ -13,7 +13,14 @@ import GUI.Main_Menu;
 public class ManagerController {
 	final public static int EXIT = 1; 
 	final public static int MAIN = 2; 
-	 
+	final public static int AUTO = 3; 
+	final public static int MAMUAL = 4; 
+	final public static int LECTURERPREFER = 5; 
+	final public static int COURSSETTING = 6; 
+	final public static int EDITCOURESES = 7; 
+	final public static int EDITCLASS = 8; 
+	final public static int EDITLECTURER= 9; 
+	final public static int SETTING = 10; 
 	
 	public Edit_Course ed ;
 	private Main_Menu main;
@@ -25,10 +32,16 @@ public class ManagerController {
 		main=new Main_Menu(null,this);
 		manegerMainFrm.add(main.PNL_Main);
 		
+			
 		
+	}
+	public void handleManagerGUI(int operation) {
+		switch (operation) {	
+		case EXIT:// logout
+						
+			break;
 		
-		
-		
-	}	
+	}
 }
+	}
 

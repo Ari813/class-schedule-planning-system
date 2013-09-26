@@ -191,6 +191,7 @@ private void pnl() {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == btnLecturerPreferences) {
 				//mainfrm.remove(this);
+				//lecturer
 				
 			}
 			if (e.getSource() == btnQuit) {}
