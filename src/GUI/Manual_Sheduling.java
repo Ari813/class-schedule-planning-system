@@ -348,8 +348,8 @@ ListSelectionListener, KeyListener {
 	}
 
 	
-	public void AddFaculty(	){
-		ArrayList<String> FacultyList;
+	public void AddFaculty(ArrayList<String> FacultyList	){
+		
 	}
 	public void actionPerformed(ActionEvent e) {
 
