@@ -34,7 +34,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	final public static Integer DEFAULT_PORT = 5555;
 	final public static String DEFAULT_HOST = "localhost";
 	final public static String Amit_HOST = "79.181.196.152";
-	final public static String Gilad_HOST = "85.64.244.174";
 
 	private JTextField txtId;
 	private JPasswordField txtPassword;
@@ -250,8 +249,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	public String getHost() {
 		if (txtHostName.getText().equals("aj"))
 			return new String(Amit_HOST);
-		if (txtHostName.getText().equals("gs"))
-			return new String(Gilad_HOST);
 		return new String(txtHostName.getText());
 	}
 

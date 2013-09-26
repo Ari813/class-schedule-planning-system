@@ -3,9 +3,8 @@ package entities;
 /**
  * @author Omri Barda		039725890 
  * @author Amit Joseph		034608547
- * @author Gilad Shpigel  	300162393
- * @author Elad Elbaz		040539959
- * @version June 2012
+
+ * @version May 2014
  */
 
 import java.io.Serializable;

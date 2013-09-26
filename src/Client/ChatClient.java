@@ -21,8 +21,6 @@ import ocsf.client.AbstractClient;
  * 
  * @author Omri Barda 039725890
  * @author Amit Joseph 034608547
- * @author Gilad Shpigel 300162393
- * @author Elad Elbaz 040539959
  * @version May 2012
  */
 

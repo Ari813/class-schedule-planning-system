@@ -3,9 +3,7 @@ package MsgPackage;
 /**
  * @author Omri Barda		039725890 
  * @author Amit Joseph		034608547
- * @author Gilad Shpigel  	300162393
- * @author Elad Elbaz		040539959
- * @version June 2012
+ * @version June 2014
  */
 
 import entities.Login;
