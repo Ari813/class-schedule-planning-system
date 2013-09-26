@@ -348,8 +348,8 @@ ListSelectionListener, KeyListener {
 	}
 
 	
-	public void AddFaculty(	ArrayList<String> compExamsList){
-		
+	public void AddFaculty(	){
+		ArrayList<String> FacultyList;
 	}
 	public void actionPerformed(ActionEvent e) {
 
@@ -358,7 +358,7 @@ ListSelectionListener, KeyListener {
 		if (e.getSource() == btnSet) {}
 		if (e.getSource() == btnClear) {}
 		if (e.getSource() == btnDelete) {}
-		
+		if (e.getSource()== cmbxFaculty){}
 		
 
 	}

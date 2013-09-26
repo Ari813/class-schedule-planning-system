@@ -65,9 +65,6 @@ ListSelectionListener, KeyListener {
 		
 		PNL_Main.add(GETbtnCourseSettings());
 		
-		
-		
-	
 		PNL_Main.add(GETbtnEditCourses());
 		PNL_Main.add(GETbtnEditClasses());
 		
