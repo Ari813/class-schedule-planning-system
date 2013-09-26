@@ -5,16 +5,16 @@
  * Deprecated
  */
 
-package client;
+package Client;
 
 import java.io.IOException;
 
 import ocsf.client.AbstractClient;
 
 import common.ChatIF;
-import common.Perror;
+import common.*;
 
-import entities.Question;
+
 
 /**
  * This class overrides some of the methods defined in the abstract superclass
@@ -83,7 +83,7 @@ public class ChatClient extends AbstractClient {
 			sendToServer(message);
 		} catch (IOException e) {
 			e.printStackTrace();
-			Perror.pError("Could not send message to server.  Terminating client.");
+			//Perror.pError("Could not send message to server.  Terminating client.");
 			quit();
 		}
 		msg = null;

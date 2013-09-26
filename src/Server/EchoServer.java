@@ -1,4 +1,4 @@
-package server;
+package Server;
 
 // This file contains material supporting section 3.7 of the textbook:
 // "Object Oriented Software Engineering" and is issued under the open-source
@@ -17,9 +17,9 @@ import MsgPackage.*;
 
 import common.*;
 import entities.*;
-import files.Browse;
-import files.MyFile;
-import files.Save;
+//import files.Browse;
+//import files.MyFile;
+//import files.Save;
 
 import ocsf.server.*;
 
@@ -60,7 +60,7 @@ public class EchoServer extends AbstractServer {
 			db = new Database(hostName, sqlUser, sqlPassword);
 			studentsInExam = new HashMap<String, ArrayList<ConnectionToClient>>();
 		} catch (Exception e) {
-			Perror.sFatalError("Could not listen for clients!");
+			//Perror.sFatalError("Could not listen for clients!");
 		}
 
 	}

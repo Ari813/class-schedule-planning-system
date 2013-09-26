@@ -1,4 +1,4 @@
-package common;
+package Server;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import entities.Login;
 
 /**
  * Constructs a Database.
@@ -77,9 +79,9 @@ public class Database {
 			conn = DriverManager.getConnection(DEFAULT_database,
 					DEFAULT_username, DEFAULT_password);
 		} catch (SQLException ex) {
-			Perror.pError("SQLException: " + ex.getMessage());
-			Perror.pError("SQLState: " + ex.getSQLState());
-			Perror.pError("VendorError: " + ex.getErrorCode());
+		//	Perror.pError("SQLException: " + ex.getMessage());
+		//	Perror.pError("SQLState: " + ex.getSQLState());
+		//	Perror.pError("VendorError: " + ex.getErrorCode());
 			throw ex;
 		}
 	}
