@@ -137,4 +137,9 @@ public class Main_Frame  extends JFrame  {
 		this.add(main);
 		
 	}
+
+	public void handleLoginGUI() {
+		
+		
+	}
 }
