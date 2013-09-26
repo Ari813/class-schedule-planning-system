@@ -5,15 +5,14 @@
  * Deprecated
  */
 
+
 package Client;
 
 import java.io.IOException;
 
-import ocsf.client.AbstractClient;
-
 import common.ChatIF;
-import common.*;
 
+import ocsf.client.AbstractClient;
 
 
 /**

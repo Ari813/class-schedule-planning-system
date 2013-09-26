@@ -1,8 +1,7 @@
-package Server;
-
 // This file contains material supporting section 3.7 of the textbook:
 // "Object Oriented Software Engineering" and is issued under the open-source
 // license found at www.lloseng.com 
+package Server;
 
 import java.io.*;
 import java.sql.Date;
@@ -12,15 +11,9 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
-import GUI.ServerGUI;
+import GUI.*;
 import MsgPackage.*;
-
-import common.*;
 import entities.*;
-//import files.Browse;
-//import files.MyFile;
-//import files.Save;
-
 import ocsf.server.*;
 
 /**
