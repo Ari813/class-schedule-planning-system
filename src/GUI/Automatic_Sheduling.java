@@ -61,7 +61,7 @@ ListSelectionListener, KeyListener {
 	private JLabel lblTimeTableSchedualing;
 	private JLabel lblFaculty;
 	private LecturerController lec;
-	private ManagerController manger;
+	private ManagerController manager;
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
 	
