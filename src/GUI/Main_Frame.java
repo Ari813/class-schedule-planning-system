@@ -24,7 +24,7 @@ public class Main_Frame  extends JFrame  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	final public static int setX = 505, setY = 525;
 	public static Main_Frame window;
 	//public JFrame mainFrm;
 	private ManagerController manger;

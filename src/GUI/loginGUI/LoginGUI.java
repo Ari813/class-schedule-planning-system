@@ -70,7 +70,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		setBorder(new TitledBorder(null, "Welcome Screen",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setBackground(SystemColor.activeCaption);
-		setBounds(0, 0, MainGUI.setX, MainGUI.setY);
+		setBounds(0, 0, mainGUI.setX, mainGUI.setY);
 		setLayout(null);
 
 		add(getLblId());
@@ -259,8 +259,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		try {
 			return Integer.parseInt(txtPort.getText());
 		} catch (Exception exception) {
-			common.Perror
-					.pError("Invalid port number!\nconnecting with default port.");
+		//	common.Perror.pError("Invalid port number!\nconnecting with default port.");
 		}
 		return DEFAULT_PORT;
 	}
@@ -269,7 +268,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		try {
 			return Integer.parseInt(txtId.getText());
 		} catch (Exception exception) {
-			common.Perror.pError("Invalid ID number!");
+		//	common.Perror.pError("Invalid ID number!");
 		}
 		return -1;
 	}
