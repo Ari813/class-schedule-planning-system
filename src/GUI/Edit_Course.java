@@ -24,6 +24,8 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 
+import Controllers.ManagerController;
+
 public class Edit_Course extends JPanel {
 
 	/**
@@ -66,30 +68,35 @@ public class Edit_Course extends JPanel {
 	private JSpinner Lab_AcademicHours;
 	private JSpinner Lab_MaxStdntPerClass;
 	private JList<?> Lab_StudyAids;
+	private ManagerController manager;
 
 	/**
 	 * Create the panel.
 	 */
-	public Edit_Course() {
-		JLabel lblTimeTableSchedualing = new JLabel(
-				"Time Table Schedualing System");
-		lblTimeTableSchedualing
-				.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTimeTableSchedualing.setLocation(new Point(50, 0));
-		lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
-		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
-		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
-				null, null, null, null));
-
-		PNL_Main = new JPanel();
-		PNL_Main.setToolTipText("Edit class list");
-		PNL_Main.setMinimumSize(new Dimension(774, 474));
-		PNL_Main.setMaximumSize(new Dimension(774, 474));
-		PNL_Main.setBounds(10, 85, 774, 474);
-
-		PNL_Main.setLayout(null);
+	/*/JLabel lblTimeTableSchedualing = new JLabel(
+	"Time Table Schedualing System");
+lblTimeTableSchedualing
+	.setHorizontalTextPosition(SwingConstants.CENTER);
+lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
+lblTimeTableSchedualing.setLocation(new Point(50, 0));
+lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
+lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
+lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
+lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
+	null, null, null, null));
+/*/
+	public Edit_Course(ManagerController mng) {
+	
+		super();
+		this.manager=mng;
+		initialize();}
+	
+	
+		private void initialize() {
+	
+		
+	
+		pnl();
 
 		PNL_Main.add(getcmbBxEditCouse());
 
@@ -140,6 +147,18 @@ public class Edit_Course extends JPanel {
 		PNL_Main.add(gethorizontalStrut_2());
 
 	}
+
+	private void pnl() {
+		PNL_Main = new JPanel();
+		PNL_Main.setToolTipText("Edit class list");
+		PNL_Main.setMinimumSize(new Dimension(774, 474));
+		PNL_Main.setMaximumSize(new Dimension(774, 474));
+		PNL_Main.setBounds(10, 85, 774, 474);
+
+		PNL_Main.setLayout(null);
+			
+		}
+
 
 	private Component gethorizontalStrut_2() {
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
