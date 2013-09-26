@@ -348,9 +348,15 @@ private void pnl() {
 	
 	
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnSaveChanges) {}	
-		if (e.getSource() == btnBackToMainMenu) {}
-		if (e.getSource() == btnPreview) {}
+		if (e.getSource() == btnSaveChanges) {
+		//	manager.handleManagerGUI()
+		}	
+		if (e.getSource() == btnBackToMainMenu) {
+			manager.handleManagerGUI(1);
+		}
+		if (e.getSource() == btnPreview) {
+		//	manager.handleManagerGUI()
+		}
 		
 		
 	
