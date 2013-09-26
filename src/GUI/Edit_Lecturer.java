@@ -61,6 +61,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 
 import Controllers.LecturerController;
+import Controllers.ManagerController;
 
 public class Edit_Lecturer extends JPanel implements ActionListener,
 ListSelectionListener, KeyListener {
@@ -88,21 +89,21 @@ ListSelectionListener, KeyListener {
 	private JLabel lblLecturer_Name;
 	private JLabel lblAvailableCourses;
 	LecturerController lec;
-	
-	public Edit_Lecturer(LecturerController lec) {
-		
+	private ManagerController manager;
 	/*/
-		JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
-		lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTimeTableSchedualing.setLocation(new Point(50, 0));
-		lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
-		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
-		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-	/*/
+	JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
+	lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
+	lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
+	lblTimeTableSchedualing.setLocation(new Point(50, 0));
+	lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
+	lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
+	lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
+	lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+/*/
+	public Edit_Lecturer(ManagerController mng) {
+
 		super();
-		this.lec=lec;
+		this.manager=mng;
 		initialize();}
 	
 	

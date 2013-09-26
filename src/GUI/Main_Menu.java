@@ -45,17 +45,22 @@ ListSelectionListener, KeyListener {
 	private JLabel lblDatabaseManagment;
 	private JLabel lblSemesterManagment;
 	public JPanel PNL_Main ;
-	private LecturerController lecturer;
+	private LecturerController lec;
 	private ManagerController manager;
 	
 	/**
 	 * Create the panel.
 	 */
-	public Main_Menu(LecturerController lec,ManagerController man)  {
-		 
-		this.manager=man;
-		this.lecturer=lec;
+	public Main_Menu(LecturerController lec,ManagerController mng) {
 		
+	
+		super();
+		this.lec=lec;
+		this.manager=mng;
+		initialize();}
+	
+	
+		private void initialize() {
 		 pnl();
 		
 		

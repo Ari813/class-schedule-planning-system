@@ -33,6 +33,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import Controllers.LecturerController;
+import Controllers.ManagerController;
+
 
 public class Automatic_Sheduling extends JPanel implements ActionListener,
 ListSelectionListener, KeyListener {
@@ -57,24 +60,36 @@ ListSelectionListener, KeyListener {
 	private JPanel panel;
 	private JLabel lblTimeTableSchedualing;
 	private JLabel lblFaculty;
+	private LecturerController lec;
+	private ManagerController manger;
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
 	
 	/**
 	 * Create the panel.
 	 */
-	public Automatic_Sheduling() {
-	/*/	
-		lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
-		lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTimeTableSchedualing.setLocation(new Point(50, 0));
-		lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
-		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
-		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 	
 	/*/	
+	lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
+	lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
+	lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
+	lblTimeTableSchedualing.setLocation(new Point(50, 0));
+	lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
+	lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
+	lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
+	lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+
+/*/	
+	public Automatic_Sheduling(ManagerController mng) {
+	
+		super();
+		this.manager=mng;
+		initialize();}
+	
+	
+		private void initialize() {
+		// TODO Auto-generated method stub
+		
 		pnl();
 		PNL_Main.add(GETbtnSaveChanges());
 		PNL_Main.add(GETbtnBackToMainMenu());

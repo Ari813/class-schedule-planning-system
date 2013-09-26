@@ -32,6 +32,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import Controllers.ManagerController;
+
 
 public class Manual_Sheduling extends JPanel implements ActionListener,
 ListSelectionListener, KeyListener {
@@ -61,6 +63,7 @@ ListSelectionListener, KeyListener {
 	private   JLabel lblSemester;
 
 	public JPanel PNL_Main;
+	private ManagerController manager;
 	
 	
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
@@ -69,21 +72,17 @@ ListSelectionListener, KeyListener {
 	/**
 	 * Create the panel.
 	 */
-	public Manual_Sheduling() {
-		/*/
-		JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
-		lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTimeTableSchedualing.setLocation(new Point(50, 0));
-		lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
-		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
-		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-	/*/
+	public Manual_Sheduling(ManagerController mng) {
 		
-
+	
+		super();
 		
-		pnl();
+		this.manager=mng;
+		initialize();}
+	
+	
+		private void initialize() {
+pnl();
 		
 		
 		PNL_Main.add(GETbtnSaveChanges());
@@ -108,8 +107,9 @@ ListSelectionListener, KeyListener {
 		PNL_Main.add(GETcmbBxSemster());
 		
 		horizontalStrut();
+		
 	}
-	
+
 	private JLabel GETlblFaculty() {
 		 lblFaculty= new JLabel("Faculty:");
 		  lblFaculty.setFont(new Font("Tahoma", Font.BOLD, 12));

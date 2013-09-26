@@ -32,6 +32,9 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import Controllers.LecturerController;
+import Controllers.ManagerController;
+
 public class Lecturer_Preferences extends JPanel  implements ActionListener,
 ListSelectionListener, KeyListener {
 	/**
@@ -48,35 +51,46 @@ ListSelectionListener, KeyListener {
   	private Component horizontalStrut_2;
   	private Component horizontalStrut_1;
 	public JPanel PNL_Main;
+	private LecturerController lec;
+	private ManagerController manager;
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
 	
 	/**
 	 * Create the panel.
 	 */
-	public Lecturer_Preferences() {
+	public Lecturer_Preferences(LecturerController lec,ManagerController manger) {
+		
+	
+		super();
+		this.lec=lec;
+		this.manager=manger;
+		initialize();}
+	
 	/*/	JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
-		lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTimeTableSchedualing.setLocation(new Point(50, 0));
-		lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
-		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
-		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
-	/*/
+	lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
+	lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
+	lblTimeTableSchedualing.setLocation(new Point(50, 0));
+	lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
+	lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
+	lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
+	lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
+/*/
+		private void initialize() {
+
 		pnl();
 		
 		
 		
 		PNL_Main.add(GETbtnSaveChanges());
 		
-		
 		PNL_Main.add(GETbtnBackToMainMenu());
 		PNL_Main.add(GETtxtLecturerPreferences());
-		sethorizontalStrut();		
-		 PNL_Main.add(GETcmbxlecturer());
-		 PNL_Main.add(GETscroll());
+			
+		PNL_Main.add(GETcmbxlecturer());
+		PNL_Main.add(GETscroll());
 		
+		 sethorizontalStrut();
 		
 	}
 	private void pnl() {
