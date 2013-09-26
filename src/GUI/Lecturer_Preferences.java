@@ -44,7 +44,7 @@ ListSelectionListener, KeyListener {
 	private JComboBox select;
 	private JTextField txtLecturerPreferences;
 	private JTable tableLecturermanu;
-	private  JButton btnSaveChanges;
+	private JButton btnSaveChanges;
 	private JButton btnBackToMainMenu;
   	private JComboBox cmbxlecturer;
   	private JScrollPane scroll;
@@ -110,7 +110,7 @@ ListSelectionListener, KeyListener {
 		btnSaveChanges.setBounds(205, 434, 74, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.addActionListener(this);
-		return null;
+		return btnSaveChanges;
 	}
 	private JButton GETbtnBackToMainMenu() {
 		 btnBackToMainMenu = new JButton("Discard");

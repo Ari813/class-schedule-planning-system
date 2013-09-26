@@ -165,7 +165,7 @@ ListSelectionListener, KeyListener {
 			btnBackToMainMenu.addActionListener(this);
 			btnBackToMainMenu.setBounds(553, 440, 110, 23);
 			btnBackToMainMenu.addActionListener(this);
-		return null;
+		return btnBackToMainMenu;
 	}
 	private JButton GETbtnAdd() {
 		 btnAdd = new JButton(" -->");
