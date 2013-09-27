@@ -164,7 +164,7 @@ ListSelectionListener, KeyListener {
 		tableLecturermanu.setFillsViewportHeight(true);
 		tableLecturermanu.setSurrendersFocusOnKeystroke(true);
 		tableLecturermanu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableLecturermanu.setBackground(SystemColor.inactiveCaption);
+		tableLecturermanu.setBackground(Color.CYAN);
 		tableLecturermanu.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tableLecturermanu.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -247,8 +247,9 @@ ListSelectionListener, KeyListener {
 			if (lec==null){
 				manager.BacktoMainMenu(this.PNL_Main);
 			}
-				
-			else{}
+			else{
+				System.exit(1);
+			}
 		}
 	}
 	@Override

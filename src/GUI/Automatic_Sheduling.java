@@ -85,7 +85,9 @@ ListSelectionListener, KeyListener {
 		super();
 		this.manager=mng;
 		initialize();
-		//manager.startalgo()
+		//manager.loadOptionalTimeTables();
+		//manager.startalgo();
+		
 	
 	}
 	
@@ -257,12 +259,8 @@ private JComboBox GETcmbBxSemster() {
 				"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
 			}
 		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 			boolean[] columnEditables = new boolean[] {
-				false, true, true, true, true, true, true
+				false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
@@ -356,10 +354,11 @@ private JComboBox GETcmbBxSemster() {
 		//	manager.handleManagerGUI()
 		}	
 		if (e.getSource() == btnBackToMainMenu) {
+			//manger.stopalgo();
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == btnPreview) {
-		//	manager.handleManagerGUI()
+		//	manager.loadPreview();
 		}
 		
 		

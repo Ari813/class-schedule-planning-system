@@ -204,6 +204,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	private JTextField gettxtCourseEditor() {
 		txtCourseEditor = new JTextField();
+		txtCourseEditor.setEditable(false);
 		txtCourseEditor.setText("Course editor");
 		txtCourseEditor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCourseEditor.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -383,6 +384,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		tabbedPane.setBounds(557, 102, 207, 311);
 
 		JPanel panel_Practice = new JPanel();
+		panel_Practice.setBackground(UIManager.getColor("FormattedTextField.inactiveForeground"));
 		tabbedPane.addTab("Practice", null, panel_Practice, null);
 		panel_Practice.setLayout(null);
 
@@ -401,6 +403,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		panel_Practice.add(getPractice_StudyAids());
 
 		JPanel panel_Lecture = new JPanel();
+		panel_Lecture.setBackground(UIManager.getColor("CheckBox.background"));
 		tabbedPane.addTab("Lecture", null, panel_Lecture, null);
 		panel_Lecture.setLayout(null);
 
@@ -419,6 +422,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		panel_Lecture.add(getLec_StdyAids());
 
 		JPanel panel_Lab = new JPanel();
+		panel_Lab.setBackground(UIManager.getColor("CheckBox.light"));
 		tabbedPane.addTab("Lab", null, panel_Lab, null);
 		panel_Lab.setLayout(null);
 
