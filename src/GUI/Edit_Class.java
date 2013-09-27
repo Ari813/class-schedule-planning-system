@@ -173,6 +173,7 @@ private void pnl() {
 		}
 	private JTextField GETtxtClassEditor() {
 		txtClassEditor = new JTextField();
+		txtClassEditor.setEditable(false);
 		txtClassEditor.setText("Class editor");
 		txtClassEditor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtClassEditor.setFont(new Font("Tahoma", Font.BOLD, 20));

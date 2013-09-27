@@ -300,6 +300,7 @@ pnl();
 
 	private JTextField GETtxtLecturerPreferences() {
 		txtLecturerPreferences = new JTextField();
+		txtLecturerPreferences.setEnabled(false);
 		txtLecturerPreferences.setBounds(0, 4, 774, 31);
 		txtLecturerPreferences.setText("Manual sheduling");
 		txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);

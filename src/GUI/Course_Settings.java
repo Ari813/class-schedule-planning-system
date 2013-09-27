@@ -101,7 +101,10 @@ ListSelectionListener, KeyListener {
 
 		super();
 		this.manager=mng;
-		initialize();}
+		initialize();
+		
+	
+	}
 	
 	
 		private void initialize() {
@@ -155,6 +158,8 @@ ListSelectionListener, KeyListener {
 			,{new Integer(10),new Integer(10),"barda"}};
 			String columns[]={"# of student","course ID","course description"};
 		table = new JTable(data,columns);
+		table.setCellSelectionEnabled(true);
+		table.setColumnSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(SystemColor.info);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -209,8 +214,6 @@ ListSelectionListener, KeyListener {
 		table.setSurrendersFocusOnKeystroke(true);
 		
 		table.setToolTipText("");
-		table.setColumnSelectionAllowed(true);
-		table.setCellSelectionEnabled(true);
 		table.setBounds(25, 110, 600, 300);
 		}
 		return table;
@@ -218,6 +221,7 @@ ListSelectionListener, KeyListener {
 	private JTextField GETtxtCourseSttings() {
 		if (txtCourseSttings==null){
 		txtCourseSttings = new JTextField();
+		txtCourseSttings.setEditable(false);
 		txtCourseSttings.setBounds(10, 11, 754, 31);
 		txtCourseSttings.setText("Course sttings");
 		txtCourseSttings.setHorizontalAlignment(SwingConstants.CENTER);
@@ -258,10 +262,19 @@ ListSelectionListener, KeyListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnSaveChanges) {}	
+		if (e.getSource() == btnSaveChanges) {
+			
+			//manager.SaveCourse();
+		}	
 		if (e.getSource() == btnBackToMainMenu) {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
+		if (e.getSource() ==cmbxFaculty) {
+			
+			//manager.LoadFacultyCourse(cmbxFaculty.getSelectedIndex());
+			
+			
+		}	
 		
 		
 		

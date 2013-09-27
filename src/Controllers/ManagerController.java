@@ -24,6 +24,7 @@ public class ManagerController {
 	final public static int EDITCLASS = 8;
 	final public static int EDITLECTURER = 9;
 	final public static int SETTING = 10;
+	final public static int MAGI = 0;
 	
 	private Lecturer_Preferences LP;
 	private Automatic_Sheduling AS;
@@ -41,7 +42,7 @@ public class ManagerController {
 	public ManagerController(Main_Frame mainFrm) {
 
 		manegerMainFrm = mainFrm;
-		main = new Main_Menu(1, this);
+		main = new Main_Menu(MAGI, this);
 		manegerMainFrm.add(main.PNL_Main);
 
 	}

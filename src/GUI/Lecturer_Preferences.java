@@ -122,6 +122,7 @@ ListSelectionListener, KeyListener {
 	}
 	private JTextField GETtxtLecturerPreferences() {
 		txtLecturerPreferences = new JTextField();
+		txtLecturerPreferences.setEditable(false);
 		txtLecturerPreferences.setBounds(0, 4, 774, 31);
 		txtLecturerPreferences.setText("Lecturer Preferences");
 		txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);

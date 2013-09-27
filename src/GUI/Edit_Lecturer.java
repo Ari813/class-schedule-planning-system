@@ -197,6 +197,7 @@ ListSelectionListener, KeyListener {
 	}
 	private JTextField GETtxtLecturerEditor() {
 		txtLecturerEditor = new JTextField();
+		txtLecturerEditor.setEditable(false);
 		txtLecturerEditor.setText("Leturer editor");
 		txtLecturerEditor.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLecturerEditor.setFont(new Font("Tahoma", Font.BOLD, 20));

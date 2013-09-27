@@ -18,6 +18,7 @@ import javax.swing.border.BevelBorder;
 
 import Controllers.LecturerController;
 import Controllers.ManagerController;
+import GUI.loginGUI.LoginGUI;
 
 public class Main_Frame extends JFrame {
 
@@ -58,9 +59,15 @@ public class Main_Frame extends JFrame {
 	 */
 	public Main_Frame(int admin) {
 		this.admin = admin;
+		//start();
 		initialize();
 	}
 
+	public void start() {
+		LoginGUI loginUserGUI = new LoginGUI(this);
+		setContentPane(loginUserGUI);
+
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */

@@ -177,6 +177,7 @@ public class Main_Menu extends JPanel implements ActionListener {
 
 	private JTextField GETtxtMainMenu() {
 		txtMainMenu = new JTextField();
+		txtMainMenu.setEnabled(false);
 		txtMainMenu.setBounds(10, 11, 754, 31);
 		txtMainMenu.setBackground(new Color(176, 224, 230));
 		txtMainMenu.setBorder(UIManager.getBorder("DesktopIcon.border"));
@@ -206,6 +207,7 @@ public class Main_Menu extends JPanel implements ActionListener {
 			manager.Load_Lecturer_Preferences(PNL_Main);
 		}
 		if (e.getSource() == btnQuit) {
+			//manager.logout();
 			System.exit(0);
 		}
 		if (e.getSource() == btnCourseSettings) {
