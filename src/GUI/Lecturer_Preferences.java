@@ -30,6 +30,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 import javax.swing.table.DefaultTableModel;
 
 import Controllers.LecturerController;
@@ -91,7 +92,7 @@ ListSelectionListener, KeyListener {
 		PNL_Main.add(GETscroll());
 		
 		 sethorizontalStrut();
-		
+		PNL_Main.setVisible(true);
 	}
 	private void pnl() {
 		
@@ -239,8 +240,16 @@ ListSelectionListener, KeyListener {
 
 	public void actionPerformed(ActionEvent e) {
 			
-		if (e.getSource() == btnSaveChanges) {}
-		if (e.getSource() == btnBackToMainMenu) {}
+		if (e.getSource() == btnSaveChanges) {
+			
+		}
+		if (e.getSource() == btnBackToMainMenu) {
+			if (lec==null){
+				manager.BacktoMainMenu(this.PNL_Main);
+			}
+				
+			else{}
+		}
 	}
 	@Override
 	public void keyPressed(KeyEvent arg0) {

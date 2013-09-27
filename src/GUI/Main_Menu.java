@@ -38,24 +38,24 @@ public class Main_Menu extends JPanel implements ActionListener {
 	private JButton btnEditCourses;
 	private JButton btnEditClasses;
 	private JButton btnEditLecturers;
-	private JFrame mainfrm;
+//	private JFrame mainfrm;
 	private Component horizontalStrut;
 	private Component horizontalStrut_1;
 	private JLabel lblDatabaseManagment;
 	private JLabel lblSemesterManagment;
 	public JPanel PNL_Main;
-	private LecturerController lec;
+	private int magi;
 	private ManagerController manager;
 
 	/**
 	 * Create the panel.
 	 */
-	public Main_Menu(LecturerController lec, ManagerController mng) {
+	public Main_Menu(int magi, ManagerController mng) {
 
 		super();
-		this.lec = lec;
+		this.magi = magi;
 		this.manager = mng;
-		mainfrm = new JFrame();
+		//mainfrm = new JFrame();
 		initialize();
 	}
 
@@ -78,7 +78,7 @@ public class Main_Menu extends JPanel implements ActionListener {
 		PNL_Main.add(GETbtnQuit());
 
 		horizontalStrut();
-		if (manager != null) {
+		if (magi != 0) {
 			PNL_Main.add(GETbtnSettings());
 			PNL_Main.add(GETbtnStartSchdualing());
 		}
@@ -202,22 +202,30 @@ public class Main_Menu extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnLecturerPreferences)
 		{
+			
 			manager.Load_Lecturer_Preferences(PNL_Main);
 		}
 		if (e.getSource() == btnQuit) {
+			System.exit(0);
 		}
 		if (e.getSource() == btnCourseSettings) {
+			manager.Load_Course_Settings(PNL_Main);
 		}
 		if (e.getSource() == btnSettings) {
+			manager.Load_Manual_Sheduling(PNL_Main);
 		}
 		if (e.getSource() == btnStartSchdualing) {
+			manager.Load_Automatic_Sheduling(PNL_Main);
 		}
 
 		if (e.getSource() == btnEditCourses) {
+			manager.Load_Edit_Course(PNL_Main);
 		}
 		if (e.getSource() == btnEditClasses) {
+			manager.Load_Edit_Class(PNL_Main);
 		}
 		if (e.getSource() == btnEditLecturers) {
+			manager.Load_Edit_Lecturer(PNL_Main);
 		}
 
 	}

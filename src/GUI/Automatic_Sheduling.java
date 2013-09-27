@@ -84,7 +84,10 @@ ListSelectionListener, KeyListener {
 	
 		super();
 		this.manager=mng;
-		initialize();}
+		initialize();
+		//manager.startalgo()
+	
+	}
 	
 	
 		private void initialize() {
@@ -101,12 +104,12 @@ ListSelectionListener, KeyListener {
 		PNL_Main.add(GETscroll());
 		PNL_Main.add(GETlblFaculty());
 		PNL_Main.add(GETlblSemester());
-		PNL_Main.add(GETcmbBxSemster());
+		
 		PNL_Main.add(GETlblOptionalTimeTables());
 		PNL_Main.add(GETlstTimeTable());
 		PNL_Main.add(GETbtnPreview());
 		PNL_Main.add(GETpanel());
-		
+		//PNL_Main.add(GETcmbBxSemster());
 		
 	}
 private void pnl() {
@@ -167,19 +170,11 @@ private void pnl() {
 
 
 
-	private JComboBox GETcmbBxSemster() {
-		
-		if (lblSemester == null){
-			cmbBxSemster = new JComboBox();
-		
-		  cmbBxSemster.setToolTipText("cmbBxSemster");
-		  cmbBxSemster.setBounds(601, 55, 46, 20);}
-		return cmbBxSemster;
-	}
+	
 
 
 
-	private Component GETlblSemester() {
+	private JLabel GETlblSemester() {
 		if (lblSemester == null){
 		lblSemester = new JLabel("semester:");
 		  lblSemester.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -210,6 +205,15 @@ private void pnl() {
 	  	cmbxFaculty.setToolTipText("Faculty list");
 	  	cmbxFaculty.setMaximumRowCount(52);}
 		return cmbxFaculty;
+	}
+private JComboBox GETcmbBxSemster() {
+		
+		if (lblSemester == null){
+			cmbBxSemster = new JComboBox();
+		
+		  cmbBxSemster.setToolTipText("cmbBxSemster");
+		  cmbBxSemster.setBounds(601, 55, 46, 20);}
+		return cmbBxSemster;
 	}
 
 
@@ -352,7 +356,7 @@ private void pnl() {
 		//	manager.handleManagerGUI()
 		}	
 		if (e.getSource() == btnBackToMainMenu) {
-			manager.handleManagerGUI(1);
+			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == btnPreview) {
 		//	manager.handleManagerGUI()

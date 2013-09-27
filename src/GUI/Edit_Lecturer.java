@@ -81,7 +81,7 @@ ListSelectionListener, KeyListener {
 	private JButton btnNewLecturer;
 	private JButton btnSaveChanges;
 	private JButton btnBackToMainMenu;
-	private JPanel PNL_Main;
+	public JPanel PNL_Main;
 	private Component horizontalStrut;
 	private Component horizontalStrut_1;
 	private Component horizontalStrut_2;
@@ -251,7 +251,7 @@ ListSelectionListener, KeyListener {
 	private JTextPane GETtxtpnIDNumber() {
 		txtpnIDNumber= new JTextPane();
 		txtpnIDNumber.setEnabled(false);
-		txtpnIDNumber.setDropMode(DropMode.ON);
+		//txtpnIDNumber.setDropMode(DropMode.ON);
 		txtpnIDNumber.setBackground(Color.WHITE);
 		txtpnIDNumber.setText("ID Number");
 		txtpnIDNumber.setBounds(10, 144, 100, 20);
@@ -281,7 +281,9 @@ ListSelectionListener, KeyListener {
 		if (e.getSource() == btnRemove) {}
 		if (e.getSource() == btnNewLecturer) {}	
 		if (e.getSource() == btnSaveChanges) {}
-		if (e.getSource() == btnBackToMainMenu) {}
+		if (e.getSource() == btnBackToMainMenu) {
+			manager.BacktoMainMenu(this.PNL_Main);
+		}
 		
 	}
 	@Override

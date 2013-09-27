@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
+import Controllers.LecturerController;
 import Controllers.ManagerController;
 
 public class Main_Frame extends JFrame {
@@ -28,7 +29,7 @@ public class Main_Frame extends JFrame {
 	public static Main_Frame window;
 	// public JFrame mainFrm;
 	private ManagerController manger;
-	// private LecturerController lecturer;
+	 private LecturerController lecturer;
 	// private MagiController magi;
 
 	private int admin;
@@ -67,9 +68,8 @@ public class Main_Frame extends JFrame {
 		if (admin == MANAGER) {
 			manger = new ManagerController(this);
 		} else if (admin == LECTURER) {
-			// lecturer=LecturerController(this);
-		} else if (admin == MAGI) {
-			// magi=magiController(this);
+			 lecturer=new LecturerController(this);
+		
 		}
 	}
 
@@ -129,10 +129,7 @@ public class Main_Frame extends JFrame {
 
 	}
 
-	public void addfrm(Main_Menu main) {
-		this.add(main);
 
-	}
 
 	public void handleLoginGUI() {
 

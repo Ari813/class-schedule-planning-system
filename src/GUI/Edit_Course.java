@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -23,10 +26,13 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import Controllers.ManagerController;
 
-public class Edit_Course extends JPanel {
+public class Edit_Course extends JPanel implements ActionListener,
+ListSelectionListener, KeyListener {
 
 	/**
 	 * 
@@ -185,6 +191,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		btnDiscard = new JButton("Discard");
 		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnDiscard.setBounds(497, 440, 140, 23);
+		btnDiscard.addActionListener(this);
 		return btnDiscard;
 	}
 
@@ -557,8 +564,37 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		if (e.getSource() == btnSave) {
 		}
 		if (e.getSource() == btnDiscard) {
+			manager.BacktoMainMenu(this.PNL_Main);
 		}
 
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

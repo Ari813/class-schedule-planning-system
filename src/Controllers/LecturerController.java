@@ -1,18 +1,19 @@
 package Controllers;
 
 import GUI.Lecturer_Preferences;
+import GUI.Main_Frame;
 
 
 
 public class LecturerController {
 
-	ManagerController managerController;
+	//ManagerController managerController;
 	private Lecturer_Preferences lec_Pref_panel;	
-	public LecturerController(ManagerController managerController) {
+	public LecturerController(Main_Frame mainFrm) {
 	
-		this.managerController = managerController;
-		lec_Pref_panel = new Lecturer_Preferences(null, managerController);
-		managerController.manegerMainFrm.add(lec_Pref_panel.PNL_Main);
+		//this.LecturerController = managerController;
+		lec_Pref_panel = new Lecturer_Preferences(this, null);
+		mainFrm.add(lec_Pref_panel.PNL_Main);
 	}
 
 }

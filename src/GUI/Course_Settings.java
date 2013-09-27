@@ -94,7 +94,7 @@ ListSelectionListener, KeyListener {
 	private  JScrollPane scroll;
 	private Component horizontalStrut_2;
 	private Component horizontalStrut_1;
-	private JPanel PNL_Main ;
+	public JPanel PNL_Main ;
 	private LecturerController lec;
 	private ManagerController manager;
 	public Course_Settings(ManagerController mng) {
@@ -259,7 +259,9 @@ ListSelectionListener, KeyListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSaveChanges) {}	
-		if (e.getSource() == btnBackToMainMenu) {}
+		if (e.getSource() == btnBackToMainMenu) {
+			manager.BacktoMainMenu(this.PNL_Main);
+		}
 		
 		
 		

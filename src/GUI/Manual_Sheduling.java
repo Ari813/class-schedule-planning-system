@@ -134,7 +134,7 @@ pnl();
 	private JPanel GETpanel() {
 		  panel = new JPanel();
 		  panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		  panel.setBackground(UIManager.getColor("inactiveCaptionText"));
+		  panel.setBackground(Color.CYAN);
 		  panel.setBounds(531, 103, 203, 260);
 		return panel;
 	}
@@ -195,11 +195,11 @@ pnl();
 		return cmbBxType;
 	}
 
-	private Component GETlblType() {
+	private JLabel GETlblType() {
 		lblType= new JLabel("Type: ");
 		  lblType.setFont(new Font("Tahoma", Font.BOLD, 12));
 		  lblType.setBounds(540, 160, 45, 15);
-		return null;
+		return lblType;
 	}
 
 	private JComboBox GETcmbBxCourse() {
@@ -354,7 +354,9 @@ pnl();
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == btnSaveChanges) {}
-		if (e.getSource() == btnBackToMainMenu) {}
+		if (e.getSource() == btnBackToMainMenu) {
+			manager.BacktoMainMenu(this.PNL_Main);
+		}
 		if (e.getSource() == btnSet) {}
 		if (e.getSource() == btnClear) {}
 		if (e.getSource() == btnDelete) {}

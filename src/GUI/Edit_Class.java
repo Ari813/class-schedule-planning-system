@@ -358,7 +358,7 @@ private void pnl() {
 		if (txtpnCodeNumber==null){
 		txtpnCodeNumber = new JTextPane();
 		txtpnCodeNumber.setEnabled(false);
-		txtpnCodeNumber.setDropMode(DropMode.ON);
+		//txtpnCodeNumber.setDropMode(DropMode.ON);
 		txtpnCodeNumber.setBackground(Color.WHITE);
 		txtpnCodeNumber.setText("Code Number");
 		txtpnCodeNumber.setBounds(10, 144, 100, 20);}
@@ -381,7 +381,9 @@ private void pnl() {
 		if (e.getSource() == btnAdd) {}
 		if (e.getSource() == btnRemove) {}	
 		if (e.getSource() == btnNewClass) {}
-		if (e.getSource() == btnDiscard) {}
+		if (e.getSource() == btnDiscard) {
+			manager.BacktoMainMenu(this.PNL_Main);
+		}
 	
 
 		
