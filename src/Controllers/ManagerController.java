@@ -14,7 +14,7 @@ import GUI.Main_Menu;
 import GUI.Manual_Sheduling;
 
 public class ManagerController {
-	final public static int EXIT = 1;
+	final public static int EXIT = 11;
 	final public static int MAIN = 2;
 	final public static int AUTO = 3;
 	final public static int MAMUAL = 4;
@@ -25,6 +25,7 @@ public class ManagerController {
 	final public static int EDITLECTURER = 9;
 	final public static int SETTING = 10;
 	final public static int MAGI = 0;
+	final public static int NOT_MAGI = 1;
 	
 	private Lecturer_Preferences LP;
 	private Automatic_Sheduling AS;
@@ -42,7 +43,7 @@ public class ManagerController {
 	public ManagerController(Main_Frame mainFrm) {
 
 		manegerMainFrm = mainFrm;
-		main = new Main_Menu(MAGI, this);
+		main = new Main_Menu(NOT_MAGI, this);
 		manegerMainFrm.add(main.PNL_Main);
 
 	}
