@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 import java.awt.Window.Type;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.awt.SystemColor;
 import java.awt.Color;
@@ -410,6 +411,12 @@ private void pnl() {
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void addClassAids(ArrayList<String> arry) {
 		// TODO Auto-generated method stub
 		
 	}

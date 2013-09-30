@@ -1,7 +1,10 @@
 package Controllers;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 
 import Client.ChatClient;
 import GUI.Automatic_Sheduling;
@@ -13,6 +16,8 @@ import GUI.Lecturer_Preferences;
 import GUI.Main_Frame;
 import GUI.Main_Menu;
 import GUI.Manual_Sheduling;
+import MsgPackage.ClassAidsPack;
+import MsgPackage.*;
 
 public class ManagerController {
 	final public static int EXIT = 11;
@@ -28,6 +33,9 @@ public class ManagerController {
 	final public static int MAGI = 0;
 	final public static int NOT_MAGI = 1;
 	
+	final public static int EDITCLASSGUI=20;
+	final public static int EDITCOURSGUI=21;
+	
 	private Lecturer_Preferences LP;
 	private Automatic_Sheduling AS;
 	private Course_Settings CS;
@@ -41,8 +49,13 @@ public class ManagerController {
 	public Main_Frame manegerMainFrm;
 	public LecturerController lecturer_Ctrl;
 	
+	private ChatClient client;
+	
+	private Edit_Class Edit_ClassGUI;
+	private Edit_Course Edit_CourseGUI;
+	
 	public ManagerController(Main_Frame mainFrm,ChatClient client) {
-
+		this.client=client;
 		manegerMainFrm = mainFrm;
 		main = new Main_Menu(NOT_MAGI, this);
 		manegerMainFrm.add(main.PNL_Main);
@@ -80,6 +93,37 @@ public class ManagerController {
 		manegerMainFrm.repaint();		
 	}
 
+
+public void GetClassAids(int type) {
+	
+	
+		
+	ArrayList<String> arry = new ArrayList<String>();
+		ClassAidsPack ClassAidsMsg = new ClassAidsPack();
+		client.handleMessageFromClientUI(ClassAidsMsg);
+		ClassAidsMsg = (ClassAidsPack) client.getMessage();
+		// LecturerReportsGUI
+		arry = ClassAidsMsg.GetClassAids();
+		
+		switch (type){
+		case(EDITCLASSGUI):
+			if (Edit_ClassGUI==null)
+				Edit_ClassGUI=new Edit_Class(this);
+				Edit_ClassGUI.addClassAids(arry);
+		
+		break;
+		case(EDITCOURSGUI):
+			if (Edit_ClassGUI==null)
+				Edit_CourseGUI=new Edit_Course(this);
+				Edit_ClassGUI.addClassAids(arry);
+		
+		break;
+		}
+		
+	}
+	
+	
+	
 
 public void Load_Course_Settings(JPanel Panel2Close) {
 		
