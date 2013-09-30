@@ -8,6 +8,9 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.Window.Type;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Locale;
 
 import javax.swing.JFrame;
@@ -16,10 +19,16 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
+import common.ChatIF;
+import common.*;
+
+import Client.*;
+import entities.Login;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
+import MsgPackage.LoginPack;
 
-public class Main_Frame extends JFrame {
+public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 
 	/**
 	 * 
@@ -31,6 +40,8 @@ public class Main_Frame extends JFrame {
 	// public JFrame mainFrm;
 	private ManagerController manger;
 	 private LecturerController lecturer;
+	 private Login lgnUsr;
+	 private ChatClient client;
 	// private MagiController magi;
 
 	private int admin;
@@ -137,12 +148,63 @@ public class Main_Frame extends JFrame {
 		 */
 
 	}
+	public void handleLoginGUI() {
+
+		lgnUsr = new Login(loginUserGUI.getHost(), loginUserGUI.getPort(),
+				loginUserGUI.getId(), loginUserGUI.getPass());
+		LoginPack lgnmsg = new LoginPack(lgnUsr);
+		try {
+			ChatClient client = new ChatClient(lgnUsr.getHost(), lgnUsr.getPort(), this);
+			client.handleMessageFromClientUI(lgnmsg);
+			lgnmsg = (LoginPack) client.getMessage();
+			lgnUsr = lgnmsg.getUsr();
+			handleLogin(lgnUsr.getLoginPermissionLevel());
+		} catch (IOException exception) {
+			//Perror.pError("Can't setup connection!");
+		}
+
+	}
 
 
+	private void handleLogin(int operation) {
+		switch (operation) {
+		case Login.ERROR:
+		//	Perror.pError("User and/or Password is incorrect!");
+			// loginUserGUI.cleanLoginGUI();
+			break;
+		case Login.UserAlreadyLogged:
+		//	Perror.pError("User is already logged in to the system.\n Please contact your system administrator.");
+			break;
+		case Login.PRINCIPAL_PRMSSN:
+			// principalGUI = new PrincipalWindow(this);
+			loginUserGUI.cleanLoginGUI();
 
-	public void handleLoginGUI() 
+			break;
+		case Login.LECTURER_PRMSSN:
+			loginUserGUI.cleanLoginGUI();
+			//lecturerCtrl = new LecturerController(client, mainframe);
+
+			break;
+		
+		}
+		
+	}
+
+	public void handleLoginGUI(int PermissionLevel) 
 	{
 		getContentPane().remove(loginUserGUI);
 		initialize();
+	}
+
+	@Override
+	public void display(Object message) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
