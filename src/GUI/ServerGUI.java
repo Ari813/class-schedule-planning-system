@@ -144,7 +144,7 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		if (passwordField == null) {
 			passwordField = new JPasswordField();
 			passwordField.setBounds(225, 209, 86, 20);
-			passwordField.setText("123123");
+			passwordField.setText("Password");
 			passwordField.addKeyListener(this);
 		}
 		return passwordField;
@@ -154,7 +154,7 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		if (txtDBName == null) {
 
 			txtDBName = new JTextField();
-			txtDBName.setText("aes");
+			txtDBName.setText("csps-db");
 			txtDBName.setBounds(225, 124, 86, 20);
 			txtDBName.setColumns(10);
 			txtDBName.addKeyListener(this);
