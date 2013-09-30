@@ -79,9 +79,9 @@ public class Database {
 			conn = DriverManager.getConnection(DEFAULT_database,
 					DEFAULT_username, DEFAULT_password);
 		} catch (SQLException ex) {
-		//	Perror.pError("SQLException: " + ex.getMessage());
-		//	Perror.pError("SQLState: " + ex.getSQLState());
-		//	Perror.pError("VendorError: " + ex.getErrorCode());
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
 			throw ex;
 		}
 	}
@@ -103,6 +103,7 @@ public class Database {
 		String query = new String(
 				"SELECT * FROM `csps-db`.`Login` L WHERE L.UserID = " + userID
 						+ " AND L.Password = '" + userPass + "' ;");
+		
 		st = conn.createStatement();
 		int ans = Login.ERROR;
 		qrs = st.executeQuery(query);
@@ -119,6 +120,7 @@ public class Database {
 				ans = Login.UserAlreadyLogged;
 		}
 		qrs.close();
+		System.out.println(ans);
 		return ans;
 
 	}

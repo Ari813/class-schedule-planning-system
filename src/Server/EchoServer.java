@@ -11,7 +11,6 @@ import java.util.HashMap;
 
 import javax.swing.JOptionPane;
 
-
 import GUI.*;
 
 import MsgPackage.*;
@@ -34,7 +33,7 @@ public class EchoServer extends AbstractServer {
 	 */
 	final public static int DEFAULT_PORT = 5555;
 	Database db;
-	HashMap<String,ArrayList<ConnectionToClient>> studentsInExam;
+	HashMap<String, ArrayList<ConnectionToClient>> studentsInExam;
 
 	// Constructors ****************************************************
 
@@ -53,7 +52,7 @@ public class EchoServer extends AbstractServer {
 			db = new Database(hostName, sqlUser, sqlPassword);
 			studentsInExam = new HashMap<String, ArrayList<ConnectionToClient>>();
 		} catch (Exception e) {
-			//Perror.sFatalError("Could not listen for clients!");
+			// Perror.sFatalError("Could not listen for clients!");
 		}
 
 	}
@@ -70,17 +69,17 @@ public class EchoServer extends AbstractServer {
 	 */
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		MessagePack msgpck = (MessagePack) msg;
+		
 		switch (msgpck.getOp()) {
 		/*
 		 * case exp to handle client request.
-		 *  case Login:
+		 */
+		case Login:
 			login(msgpck, client);
 			break;
-			
-		*/
+
 		}
 	}
-
 
 	private synchronized void login(MessagePack msg, ConnectionToClient client) {
 		LoginPack lgn = (LoginPack) msg;
@@ -95,13 +94,13 @@ public class EchoServer extends AbstractServer {
 		}
 		lgn.getUsr().setLoginPermissionLevel(dblgn);
 		try {
+			
 			client.sendToClient(lgn);
 		} catch (IOException e) {
-			
+			System.out.println("ooppss");
 			e.printStackTrace();
 		}
 	}
-
 
 	/**
 	 * This method overrides the one in the superclass. Called when the server
