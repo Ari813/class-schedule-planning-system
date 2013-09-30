@@ -27,6 +27,7 @@ public class Main_Frame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	final public static int setX = 505, setY = 525;
 	public static Main_Frame window;
+	public static LoginGUI loginUserGUI;
 	// public JFrame mainFrm;
 	private ManagerController manger;
 	 private LecturerController lecturer;
@@ -59,12 +60,14 @@ public class Main_Frame extends JFrame {
 	public Main_Frame(int admin) {
 		this.admin = admin;
 		start();
-		initialize();
+		
 	}
 
 	public void start() {
-		LoginGUI loginUserGUI = new LoginGUI(this);
-		setContentPane(loginUserGUI);
+		loginUserGUI = new LoginGUI(this);
+		setType(Type.UTILITY);
+		setBounds(100, 100, 550, 550);
+		getContentPane().add(loginUserGUI);
 
 	}
 	/**
@@ -85,8 +88,7 @@ public class Main_Frame extends JFrame {
 		getContentPane().setBackground(SystemColor.menu);
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setForeground(SystemColor.controlLtHighlight);
-		setLocale(new Locale("en", "IL"));
-		setType(Type.UTILITY);
+		setLocale(new Locale("en", "IL"));		
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setPreferredSize(new Dimension(800, 600));
@@ -111,6 +113,7 @@ public class Main_Frame extends JFrame {
 				null, null, null, null));
 		getContentPane().add(lblTimeTableSchedualing);
 		ChooseAdmin();
+		getContentPane().repaint();
 
 		/*
 		 * Main_Menu mnn = new Main_Menu(mainFrm);
@@ -137,7 +140,9 @@ public class Main_Frame extends JFrame {
 
 
 
-	public void handleLoginGUI() {
-
+	public void handleLoginGUI() 
+	{
+		getContentPane().remove(loginUserGUI);
+		initialize();
 	}
 }

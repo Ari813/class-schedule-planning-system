@@ -45,7 +45,6 @@ public class ManagerController {
 		manegerMainFrm = mainFrm;
 		main = new Main_Menu(NOT_MAGI, this);
 		manegerMainFrm.add(main.PNL_Main);
-
 	}
 
 	public void handleManagerGUI(int operation) {
