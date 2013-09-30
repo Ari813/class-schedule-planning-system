@@ -158,7 +158,8 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 			client.handleMessageFromClientUI(lgnmsg);
 			lgnmsg = (LoginPack) client.getMessage();
 			lgnUsr = lgnmsg.getUsr();
-			handleLogin(lgnUsr.getLoginPermissionLevel());
+			admin=lgnUsr.getLoginPermissionLevel();
+			handleLogin();
 		} catch (IOException exception) {
 			//Perror.pError("Can't setup connection!");
 		}
@@ -166,35 +167,16 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 	}
 
 
-	private void handleLogin(int operation) {
-		switch (operation) {
-		case Login.ERROR:
-		//	Perror.pError("User and/or Password is incorrect!");
-			// loginUserGUI.cleanLoginGUI();
-			break;
-		case Login.UserAlreadyLogged:
-		//	Perror.pError("User is already logged in to the system.\n Please contact your system administrator.");
-			break;
-		case Login.PRINCIPAL_PRMSSN:
-			// principalGUI = new PrincipalWindow(this);
-			loginUserGUI.cleanLoginGUI();
-
-			break;
-		case Login.LECTURER_PRMSSN:
-			loginUserGUI.cleanLoginGUI();
-			//lecturerCtrl = new LecturerController(client, mainframe);
-
-			break;
+	private void handleLogin() {
+		getContentPane().remove(loginUserGUI);
+		initialize();
+		
 		
 		}
 		
-	}
+	
 
-	public void handleLoginGUI(int PermissionLevel) 
-	{
-		getContentPane().remove(loginUserGUI);
-		initialize();
-	}
+	
 
 	@Override
 	public void display(Object message) {
