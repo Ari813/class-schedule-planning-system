@@ -134,7 +134,7 @@ pnl();
 	private JPanel GETpanel() {
 		  panel = new JPanel();
 		  panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		  panel.setBackground(Color.CYAN);
+		  panel.setBackground(SystemColor.activeCaption);
 		  panel.setBounds(531, 103, 203, 260);
 		return panel;
 	}
@@ -231,7 +231,7 @@ pnl();
 		tablemanual.setFillsViewportHeight(true);
 		tablemanual.setSurrendersFocusOnKeystroke(true);
 		tablemanual.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tablemanual.setBackground(SystemColor.activeCaptionText);
+		tablemanual.setBackground(SystemColor.inactiveCaption);
 		tablemanual.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tablemanual.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -300,8 +300,9 @@ pnl();
 
 	private JTextField GETtxtLecturerPreferences() {
 		txtLecturerPreferences = new JTextField();
+		txtLecturerPreferences.setDisabledTextColor(SystemColor.desktop);
 		txtLecturerPreferences.setEnabled(false);
-		txtLecturerPreferences.setBounds(0, 4, 774, 31);
+		txtLecturerPreferences.setBounds(0, 4, 774, 39);
 		txtLecturerPreferences.setText("Manual sheduling");
 		txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLecturerPreferences.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -313,7 +314,7 @@ pnl();
 
 	private JButton GETbtnBackToMainMenu() {
 		btnBackToMainMenu = new JButton("Discard");
-		btnBackToMainMenu.setBounds(484, 434, 85, 29);
+		btnBackToMainMenu.setBounds(462, 434, 160, 29);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBackToMainMenu.addActionListener(this);
 		return btnBackToMainMenu;
@@ -321,7 +322,7 @@ pnl();
 
 	private JButton GETbtnSaveChanges() {
 		btnSaveChanges = new JButton("Save");
-		btnSaveChanges.setBounds(205, 434, 74, 29);
+		btnSaveChanges.setBounds(151, 434, 160, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.addActionListener(this);
 		return btnSaveChanges;

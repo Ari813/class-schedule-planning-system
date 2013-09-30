@@ -30,6 +30,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import Controllers.ManagerController;
+import java.awt.SystemColor;
 
 public class Edit_Course extends JPanel implements ActionListener,
 ListSelectionListener, KeyListener {
@@ -190,7 +191,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	private JButton getbtnDiscard() {
 		btnDiscard = new JButton("Discard");
 		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnDiscard.setBounds(497, 440, 140, 23);
+		btnDiscard.setBounds(539, 440, 160, 29);
 		btnDiscard.addActionListener(this);
 		return btnDiscard;
 	}
@@ -211,26 +212,27 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		txtCourseEditor.setColumns(10);
 		txtCourseEditor.setBorder(UIManager.getBorder("DesktopIcon.border"));
 		txtCourseEditor.setBackground(new Color(176, 224, 230));
-		txtCourseEditor.setBounds(10, 11, 754, 31);
+		txtCourseEditor.setBounds(0, 4, 774, 40);
 		return txtCourseEditor;
 	}
 
 	private JButton getbtnSave() {
 		btnSave = new JButton("Save");
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnSave.setBounds(304, 440, 140, 23);
+		btnSave.setBounds(306, 440, 160, 29);
 		return btnSave;
 	}
 
 	private JButton getbtnNewCourse() {
 		btnNewCourse = new JButton("New Course");
 		btnNewCourse.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnNewCourse.setBounds(111, 440, 140, 23);
+		btnNewCourse.setBounds(73, 440, 160, 29);
 		return btnNewCourse;
 	}
 
 	private JList getLab_StudyAids() {
 		Lab_StudyAids = new JList<Object>();
+		Lab_StudyAids.setBackground(SystemColor.inactiveCaption);
 		Lab_StudyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
 		Lab_StudyAids.setBounds(10, 163, 178, 89);
 		return Lab_StudyAids;
@@ -273,6 +275,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	private JCheckBox getChkEnableLab() {
 		ChkEnableLab = new JCheckBox("Enable");
+		ChkEnableLab.setBackground(SystemColor.scrollbar);
 		ChkEnableLab.setFont(new Font("Dialog", Font.PLAIN, 16));
 		ChkEnableLab.setBounds(10, 7, 170, 23);
 		return ChkEnableLab;
@@ -280,6 +283,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	private JList getPractice_StudyAids() {
 		Practice_StudyAids = new JList<Object>();
+		Practice_StudyAids.setBackground(SystemColor.inactiveCaption);
 		Practice_StudyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
 		Practice_StudyAids.setBounds(10, 163, 178, 89);
 		return Practice_StudyAids;
@@ -322,6 +326,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	private JCheckBox getChkEnablePractice() {
 		ChkEnablePractice = new JCheckBox("Enable");
+		ChkEnablePractice.setBackground(SystemColor.scrollbar);
 		ChkEnablePractice.setFont(new Font("Dialog", Font.PLAIN, 16));
 		ChkEnablePractice.setBounds(10, 7, 170, 23);
 		return ChkEnablePractice;
@@ -329,6 +334,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	private JList getLec_StdyAids() {
 		Lec_StdyAids = new JList<Object>();
+		Lec_StdyAids.setBackground(SystemColor.inactiveCaption);
 		Lec_StdyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
 		Lec_StdyAids.setBounds(10, 163, 178, 89);
 		return Lec_StdyAids;
@@ -364,6 +370,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	private JLabel getlabel() {
 		JLabel label = new JLabel("Academic hours:");
+		label.setBackground(SystemColor.scrollbar);
 		label.setFont(new Font("Dialog", Font.PLAIN, 16));
 		label.setBounds(10, 33, 170, 23);
 		return label;
@@ -371,6 +378,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	private JCheckBox getChkEnableLecture() {
 		ChkEnableLecture = new JCheckBox("Enable");
+		ChkEnableLecture.setBackground(SystemColor.scrollbar);
 		ChkEnableLecture.setFont(new Font("Dialog", Font.PLAIN, 16));
 		ChkEnableLecture.setBounds(10, 7, 170, 23);
 		return ChkEnableLecture;
@@ -384,7 +392,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		tabbedPane.setBounds(557, 102, 207, 311);
 
 		JPanel panel_Practice = new JPanel();
-		panel_Practice.setBackground(UIManager.getColor("FormattedTextField.inactiveForeground"));
+		panel_Practice.setBackground(SystemColor.scrollbar);
 		tabbedPane.addTab("Practice", null, panel_Practice, null);
 		panel_Practice.setLayout(null);
 
@@ -403,7 +411,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		panel_Practice.add(getPractice_StudyAids());
 
 		JPanel panel_Lecture = new JPanel();
-		panel_Lecture.setBackground(UIManager.getColor("CheckBox.background"));
+		panel_Lecture.setBackground(SystemColor.scrollbar);
 		tabbedPane.addTab("Lecture", null, panel_Lecture, null);
 		panel_Lecture.setLayout(null);
 
@@ -422,7 +430,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		panel_Lecture.add(getLec_StdyAids());
 
 		JPanel panel_Lab = new JPanel();
-		panel_Lab.setBackground(UIManager.getColor("CheckBox.light"));
+		panel_Lab.setBackground(SystemColor.scrollbar);
 		tabbedPane.addTab("Lab", null, panel_Lab, null);
 		panel_Lab.setLayout(null);
 
@@ -453,7 +461,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		btnRemove = new JButton("<--");
 		btnRemove.setToolTipText("Remove lecturer from course");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnRemove.setBounds(292, 237, 61, 38);
+		btnRemove.setBounds(292, 237, 65, 38);
 		return btnRemove;
 	}
 
@@ -461,7 +469,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		btnAdd = new JButton("-->");
 		btnAdd.setToolTipText("Add lecturer to course");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnAdd.setBounds(292, 171, 61, 38);
+		btnAdd.setBounds(292, 171, 65, 38);
 		return btnAdd;
 	}
 

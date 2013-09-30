@@ -106,10 +106,7 @@ ListSelectionListener, KeyListener {
 		PNL_Main.add(GETscroll());
 		PNL_Main.add(GETlblFaculty());
 		PNL_Main.add(GETlblSemester());
-		
-		PNL_Main.add(GETlblOptionalTimeTables());
 		PNL_Main.add(GETlstTimeTable());
-		PNL_Main.add(GETbtnPreview());
 		PNL_Main.add(GETpanel());
 		//PNL_Main.add(GETcmbBxSemster());
 		
@@ -131,8 +128,11 @@ private void pnl() {
 		if (panel == null){
 		 panel = new JPanel();
 		  panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		  panel.setBackground(new Color(135, 206, 235));
-		  panel.setBounds(540, 103, 201, 249);}
+		  panel.setBackground(SystemColor.inactiveCaption);
+		  panel.setBounds(540, 103, 201, 249);
+		  panel.setLayout(null);
+		  panel.add(GETlblOptionalTimeTables());
+		  panel.add(GETbtnPreview());}
 		return panel;
 	}
 
@@ -141,8 +141,8 @@ private void pnl() {
 	private JButton GETbtnPreview() {
 		if (btnPreview == null){
 			btnPreview = new JButton("Preview");
-			btnPreview.addActionListener(this);
-			btnPreview.setBounds(560, 313, 89, 23);}
+			btnPreview.setBounds(102, 215, 89, 23);
+			btnPreview.addActionListener(this);}
 		return btnPreview;
 	}
 
@@ -151,8 +151,8 @@ private void pnl() {
 	private JLabel GETlblOptionalTimeTables() {
 		if (lblOptionalTimeTables == null){
 			lblOptionalTimeTables = new JLabel("Optional time tables :");
+			lblOptionalTimeTables.setBounds(10, 11, 132, 15);
 			 lblOptionalTimeTables.setFont(new Font("Tahoma", Font.BOLD, 12));
-			 lblOptionalTimeTables.setBounds(560, 123, 170, 14);
 		  }
 		return lblOptionalTimeTables;
 	}
@@ -163,9 +163,9 @@ private void pnl() {
 		if (lstTimeTable == null){
 			lstTimeTable = new JList();
 		  lstTimeTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		  lstTimeTable.setBackground(new Color(175, 238, 238));
+		  lstTimeTable.setBackground(SystemColor.activeCaption);
 		  lstTimeTable.setFont(new Font("Tahoma", Font.BOLD, 12));
-		  lstTimeTable.setBounds(559, 149, 102, 142);
+		  lstTimeTable.setBounds(560, 149, 165, 159);
 		  }
 		return lstTimeTable;
 	}
@@ -231,12 +231,13 @@ private JComboBox GETcmbBxSemster() {
 	private JTable GETtableAutonatic() {
 		if (tableAutonatic==null){
 		tableAutonatic = new JTable();
+		tableAutonatic.setForeground(Color.BLACK);
 		tableAutonatic.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		tableAutonatic.setToolTipText("Manual auto sheduling table ");
 		tableAutonatic.setFillsViewportHeight(true);
 		tableAutonatic.setSurrendersFocusOnKeystroke(true);
 		tableAutonatic.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableAutonatic.setBackground(SystemColor.activeCaptionText);
+		tableAutonatic.setBackground(SystemColor.inactiveCaption);
 		tableAutonatic.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tableAutonatic.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -309,7 +310,7 @@ private JComboBox GETcmbBxSemster() {
 	private JTextField GETtxtLecturerPreferences() {
 		if (txtLecturerPreferences == null) {
 		txtLecturerPreferences = new JTextField();
-		txtLecturerPreferences.setBounds(0, 4, 774, 31);
+		txtLecturerPreferences.setBounds(0, 4, 774, 40);
 		txtLecturerPreferences.setText("Automatic Sheduling is running");
 		txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLecturerPreferences.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -324,7 +325,7 @@ private JComboBox GETcmbBxSemster() {
 	private JButton GETbtnBackToMainMenu() {
 		if (btnBackToMainMenu == null) {
 			btnBackToMainMenu = new JButton("Discard");
-			btnBackToMainMenu.setBounds(484, 434, 85, 29);
+			btnBackToMainMenu.setBounds(475, 434, 121, 29);
 			btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			btnBackToMainMenu.addActionListener(this) ;
 		}
@@ -338,7 +339,7 @@ private JComboBox GETcmbBxSemster() {
 		// TODO Auto-generated method stub
 		if (btnSaveChanges == null) {
 			btnSaveChanges = new JButton("Save");
-			btnSaveChanges.setBounds(205, 434, 74, 29);
+			btnSaveChanges.setBounds(177, 434, 121, 29);
 			btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			btnSaveChanges.addActionListener(this);
 		}

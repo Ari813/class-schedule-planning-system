@@ -180,7 +180,7 @@ private void pnl() {
 		txtClassEditor.setColumns(10);
 		txtClassEditor.setBorder(UIManager.getBorder("DesktopIcon.border"));
 		txtClassEditor.setBackground(new Color(176, 224, 230));
-		txtClassEditor.setBounds(10, 11, 754, 31);
+		txtClassEditor.setBounds(0, 4, 774, 40);
 		return txtClassEditor;
 	}
 
@@ -188,14 +188,14 @@ private void pnl() {
 		btnDiscard = new JButton("Discard");
 		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnDiscard.addActionListener(this);
-		btnDiscard.setBounds(553, 440, 140, 23);
+		btnDiscard.setBounds(539, 434, 160, 29);
 		return btnDiscard;
 	}
 
 	private JButton GETbtnSaveChanges() {
 		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnSaveChanges.setBounds(332, 440, 140, 23);
+		btnSaveChanges.setBounds(306, 434, 160, 29);
 		btnSaveChanges.addActionListener(this);
 		return btnSaveChanges;
 	}
@@ -203,7 +203,7 @@ private void pnl() {
 	private JButton GETbtnNewClass() {
 		 btnNewClass = new JButton("New class");
 			btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			btnNewClass.setBounds(111, 440, 140, 23);
+			btnNewClass.setBounds(73, 434, 160, 29);
 			btnNewClass.addActionListener(this);
 		return btnNewClass;
 	}
@@ -221,7 +221,7 @@ private void pnl() {
 		 btnRemove = new JButton("<--");
 			btnRemove.setToolTipText("Remove item from class");
 			btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			btnRemove.setBounds(502, 216, 61, 38);
+			btnRemove.setBounds(502, 216, 65, 38);
 			btnRemove.addActionListener(this);
 		return btnRemove;
 	}
@@ -231,7 +231,7 @@ private void pnl() {
 		btnAdd.setToolTipText("Add item to class");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnAdd.addActionListener(this);
-		btnAdd.setBounds(502, 163, 61, 38);
+		btnAdd.setBounds(502, 163, 65, 38);
 		return btnAdd;
 	}
 

@@ -23,6 +23,7 @@ import javax.swing.event.ListSelectionListener;
 
 import Controllers.LecturerController;
 import Controllers.ManagerController;
+import java.awt.SystemColor;
 
 public class Main_Menu extends JPanel implements ActionListener {
 	/**
@@ -177,8 +178,10 @@ public class Main_Menu extends JPanel implements ActionListener {
 
 	private JTextField GETtxtMainMenu() {
 		txtMainMenu = new JTextField();
+		txtMainMenu.setDisabledTextColor(SystemColor.desktop);
+		txtMainMenu.setForeground(SystemColor.desktop);
 		txtMainMenu.setEnabled(false);
-		txtMainMenu.setBounds(10, 11, 754, 31);
+		txtMainMenu.setBounds(0, 4, 774, 40);
 		txtMainMenu.setBackground(new Color(176, 224, 230));
 		txtMainMenu.setBorder(UIManager.getBorder("DesktopIcon.border"));
 		txtMainMenu.setHorizontalAlignment(SwingConstants.CENTER);

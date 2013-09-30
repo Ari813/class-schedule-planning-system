@@ -108,14 +108,14 @@ ListSelectionListener, KeyListener {
 	}
 	private Component GETbtnSaveChanges() {
 		btnSaveChanges = new JButton("Save");
-		btnSaveChanges.setBounds(205, 434, 74, 29);
+		btnSaveChanges.setBounds(151, 434, 160, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.addActionListener(this);
 		return btnSaveChanges;
 	}
 	private JButton GETbtnBackToMainMenu() {
 		 btnBackToMainMenu = new JButton("Discard");
-			btnBackToMainMenu.setBounds(484, 434, 85, 29);
+			btnBackToMainMenu.setBounds(462, 434, 160, 29);
 			btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			btnBackToMainMenu.addActionListener(this);
 		return btnBackToMainMenu;
@@ -123,7 +123,7 @@ ListSelectionListener, KeyListener {
 	private JTextField GETtxtLecturerPreferences() {
 		txtLecturerPreferences = new JTextField();
 		txtLecturerPreferences.setEditable(false);
-		txtLecturerPreferences.setBounds(0, 4, 774, 31);
+		txtLecturerPreferences.setBounds(0, 4, 774, 40);
 		txtLecturerPreferences.setText("Lecturer Preferences");
 		txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLecturerPreferences.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -165,7 +165,7 @@ ListSelectionListener, KeyListener {
 		tableLecturermanu.setFillsViewportHeight(true);
 		tableLecturermanu.setSurrendersFocusOnKeystroke(true);
 		tableLecturermanu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableLecturermanu.setBackground(Color.CYAN);
+		tableLecturermanu.setBackground(SystemColor.inactiveCaption);
 		tableLecturermanu.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tableLecturermanu.setModel(new DefaultTableModel(
 			new Object[][] {

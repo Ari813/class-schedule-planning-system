@@ -132,7 +132,7 @@ ListSelectionListener, KeyListener {
 			btnRemove = new JButton("<--");
 			btnRemove.setToolTipText("Remove item from class");
 			btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			btnRemove.setBounds(502, 216, 61, 38);
+			btnRemove.setBounds(502, 216, 65, 38);
 			btnRemove.addActionListener(this);
 		return btnRemove;
 	}
@@ -141,21 +141,21 @@ ListSelectionListener, KeyListener {
 		lstAvailableCourses2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstAvailableCourses2.setBackground(new Color(169, 169, 169));
 		lstAvailableCourses2.setForeground(new Color(255, 255, 255));
-		lstAvailableCourses2.setBounds(586, 130, 138, 220);
+		lstAvailableCourses2.setBounds(586, 130, 138, 283);
 		return lstAvailableCourses2;
 	}
 	private JButton GETbtnNewLecturer() {
 		 btnNewLecturer = new JButton("New Lecturer");
 			btnNewLecturer.addActionListener(this);
 			btnNewLecturer.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			btnNewLecturer.setBounds(111, 440, 125, 23);
+			btnNewLecturer.setBounds(73, 434, 160, 29);
 			btnNewLecturer.addActionListener(this);
 		return btnNewLecturer;
 	}
 	private JButton GETbtnSaveChanges() {
 		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnSaveChanges.setBounds(332, 440, 110, 23);
+		btnSaveChanges.setBounds(306, 434, 160, 29);
 		btnSaveChanges.addActionListener(this);
 		return btnSaveChanges;
 	}
@@ -163,7 +163,7 @@ ListSelectionListener, KeyListener {
 		 btnBackToMainMenu = new JButton("Discard");
 			btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			btnBackToMainMenu.addActionListener(this);
-			btnBackToMainMenu.setBounds(553, 440, 110, 23);
+			btnBackToMainMenu.setBounds(539, 434, 160, 29);
 			btnBackToMainMenu.addActionListener(this);
 		return btnBackToMainMenu;
 	}
@@ -172,7 +172,7 @@ ListSelectionListener, KeyListener {
 			btnAdd.setToolTipText("Add item to class");
 			btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			btnAdd.addActionListener(this);
-			btnAdd.setBounds(502, 163, 61, 38);
+			btnAdd.setBounds(502, 163, 65, 38);
 		return btnAdd;
 	}
 	private JList GETlstAvailableCourses() {
@@ -192,7 +192,7 @@ ListSelectionListener, KeyListener {
 					return values[index];
 				}
 			});
-			lstAvailableCourses.setBounds(332, 130, 138, 220);
+			lstAvailableCourses.setBounds(332, 130, 138, 283);
 		return lstAvailableCourses;
 	}
 	private JTextField GETtxtLecturerEditor() {
@@ -204,7 +204,7 @@ ListSelectionListener, KeyListener {
 		txtLecturerEditor.setColumns(10);
 		txtLecturerEditor.setBorder(UIManager.getBorder("DesktopIcon.border"));
 		txtLecturerEditor.setBackground(new Color(176, 224, 230));
-		txtLecturerEditor.setBounds(10, 11, 754, 31);
+		txtLecturerEditor.setBounds(0, 4, 774, 40);
 		return txtLecturerEditor;
 	}
 	private JLabel GETlblAvailableCourses() {

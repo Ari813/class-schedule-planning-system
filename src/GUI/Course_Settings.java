@@ -161,7 +161,7 @@ ListSelectionListener, KeyListener {
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		table.setBackground(SystemColor.info);
+		table.setBackground(SystemColor.inactiveCaption);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -222,7 +222,7 @@ ListSelectionListener, KeyListener {
 		if (txtCourseSttings==null){
 		txtCourseSttings = new JTextField();
 		txtCourseSttings.setEditable(false);
-		txtCourseSttings.setBounds(10, 11, 754, 31);
+		txtCourseSttings.setBounds(0, 4, 774, 40);
 		txtCourseSttings.setText("Course sttings");
 		txtCourseSttings.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCourseSttings.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -234,7 +234,7 @@ ListSelectionListener, KeyListener {
 	private JButton GETbtnBackToMainMenu() {
 		if (btnBackToMainMenu==null){
 		btnBackToMainMenu = new JButton("Discard");
-		btnBackToMainMenu.setBounds(487, 434, 85, 23);
+		btnBackToMainMenu.setBounds(462, 434, 160, 29);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnBackToMainMenu.addActionListener(this);}
 		return btnBackToMainMenu;
@@ -242,7 +242,7 @@ ListSelectionListener, KeyListener {
 	private JButton GETbtnSaveChanges() {
 		if (btnSaveChanges==null){
 		btnSaveChanges = new JButton("Save");
-		btnSaveChanges.setBounds(201, 434, 85, 23);
+		btnSaveChanges.setBounds(151, 434, 160, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.addActionListener(this);
 		}
