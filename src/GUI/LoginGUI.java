@@ -1,4 +1,4 @@
-package GUI.loginGUI;
+package GUI;
 
 import java.awt.SystemColor;
 
@@ -12,7 +12,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 
-import GUI.Main_Frame;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -33,7 +32,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private static final long serialVersionUID = 1L;
 	final public static Integer DEFAULT_PORT = 5555;
 	final public static String DEFAULT_HOST = "localhost";
-	final public static String Amit_HOST = "79.181.196.152";
+	final public static String Amit_HOST = "5.29.162.248";
 
 	private JTextField txtId;
 	private JPasswordField txtPassword;

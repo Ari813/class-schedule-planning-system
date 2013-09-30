@@ -18,7 +18,6 @@ import javax.swing.border.BevelBorder;
 
 import Controllers.LecturerController;
 import Controllers.ManagerController;
-import GUI.loginGUI.LoginGUI;
 
 public class Main_Frame extends JFrame {
 
@@ -59,7 +58,7 @@ public class Main_Frame extends JFrame {
 	 */
 	public Main_Frame(int admin) {
 		this.admin = admin;
-		//start();
+		start();
 		initialize();
 	}
 

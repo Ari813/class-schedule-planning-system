@@ -19,10 +19,10 @@ import entities.Login;
 public class Database {
 
 	private final Connection conn;
-	private static final String DEFAULT_database = "JDBC:mysql://localhost:3309/aes";
+	private static final String DEFAULT_database = "JDBC:mysql://localhost:3306/csps-db";
 	private static final String driver = "com.mysql.jdbc.Driver";
 	private static final String DEFAULT_username = "root";
-	private static final String DEFAULT_password = "123123";
+	private static final String DEFAULT_password = "Password";
 
 	private String database;
 	private String username;
