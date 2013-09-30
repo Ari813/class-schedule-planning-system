@@ -101,7 +101,7 @@ public class Database {
 			throws NumberFormatException, SQLException {
 		ResultSet qrs = null;
 		String query = new String(
-				"SELECT * FROM `aes`.`Login` L WHERE L.UserID = " + userID
+				"SELECT * FROM `csps-db`.`Login` L WHERE L.UserID = " + userID
 						+ " AND L.Password = '" + userPass + "' ;");
 		st = conn.createStatement();
 		int ans = Login.ERROR;
@@ -109,7 +109,7 @@ public class Database {
 		if (qrs.next()) {
 			if (qrs.getString(4).equals("0")) {
 				query = new String(
-						"UPDATE `aes`.`Login` L SET `LoggedIn` = 1 WHERE L.UserID = "
+						"UPDATE `csps-db`.`Login` L SET `LoggedIn` = 1 WHERE L.UserID = "
 								+ userID + ";");
 				st = conn.createStatement();
 				st.executeUpdate(query);
@@ -132,7 +132,7 @@ public class Database {
 	 */
 	public void exitUser(int userID) throws SQLException {
 		String query = new String(
-				"UPDATE `aes`.`Login` L SET `LoggedIn` = 0 WHERE L.UserID = "
+				"UPDATE `csps-db`.`Login` L SET `LoggedIn` = 0 WHERE L.UserID = "
 						+ userID + ";");
 		st = conn.createStatement();
 		st.executeUpdate(query);
