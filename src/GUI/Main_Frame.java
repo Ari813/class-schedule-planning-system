@@ -86,9 +86,9 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 	 */
 	private void ChooseAdmin() {
 		if (admin == MANAGER) {
-			manger = new ManagerController(this);
+			manger = new ManagerController(this,client);
 		} else if (admin == LECTURER) {
-			 lecturer=new LecturerController(this);
+			 lecturer=new LecturerController(this,client);
 		
 		}
 	}
@@ -154,7 +154,7 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 				loginUserGUI.getId(), loginUserGUI.getPass());
 		LoginPack lgnmsg = new LoginPack(lgnUsr);
 		try {
-			ChatClient client = new ChatClient(lgnUsr.getHost(), lgnUsr.getPort(), this);
+			client = new ChatClient(lgnUsr.getHost(), lgnUsr.getPort(), this);
 			client.handleMessageFromClientUI(lgnmsg);
 			lgnmsg = (LoginPack) client.getMessage();
 			lgnUsr = lgnmsg.getUsr();

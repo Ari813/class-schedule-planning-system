@@ -3,6 +3,7 @@ package Controllers;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Client.ChatClient;
 import GUI.Automatic_Sheduling;
 import GUI.Course_Settings;
 import GUI.Edit_Class;
@@ -40,7 +41,7 @@ public class ManagerController {
 	public Main_Frame manegerMainFrm;
 	public LecturerController lecturer_Ctrl;
 	
-	public ManagerController(Main_Frame mainFrm) {
+	public ManagerController(Main_Frame mainFrm,ChatClient client) {
 
 		manegerMainFrm = mainFrm;
 		main = new Main_Menu(NOT_MAGI, this);
