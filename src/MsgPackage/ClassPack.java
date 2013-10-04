@@ -9,7 +9,7 @@ public class ClassPack {
 
 	private OpType op;
 	
-	private ArrayList<String> aids;
+	private entities.Class allclass;
 	
 	public ClassPack() {
 		super();
@@ -17,6 +17,7 @@ public class ClassPack {
 		
 		
 	}
+
 	public OpType getOp() {
 		return op;
 	}
@@ -25,13 +26,14 @@ public class ClassPack {
 		this.op = op;
 	}
 
-	public ArrayList<String> getAids() {
-		return aids;
+	public entities.Class getAllclass() {
+		return allclass;
 	}
 
-	public void setAids(ArrayList<String> aids) {
-		this.aids = aids;
+	public void setAllclass(entities.Class allclass) {
+		this.allclass = allclass;
 	}
+
 
 	
 

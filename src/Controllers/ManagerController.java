@@ -104,7 +104,7 @@ public void GetClasses() {
 		ClassMsg = new ClassPack();
 		client.handleMessageFromClientUI(ClassMsg);
 		ClassMsg = (ClassPack) client.getMessage();
-		// LecturerReportsGUI
+		
 		
 	/*/	
 		switch (type){
