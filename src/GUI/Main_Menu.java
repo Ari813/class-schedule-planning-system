@@ -218,6 +218,7 @@ public class Main_Menu extends JPanel implements ActionListener {
 		}
 		if (e.getSource() == btnSettings) {
 			manager.Load_Manual_Sheduling(PNL_Main);
+			
 		}
 		if (e.getSource() == btnStartSchdualing) {
 			manager.Load_Automatic_Sheduling(PNL_Main);
@@ -225,6 +226,10 @@ public class Main_Menu extends JPanel implements ActionListener {
 
 		if (e.getSource() == btnEditCourses) {
 			manager.Load_Edit_Course(PNL_Main);
+			
+			
+			
+			
 		}
 		if (e.getSource() == btnEditClasses) {
 			manager.Load_Edit_Class(PNL_Main);

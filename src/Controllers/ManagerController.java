@@ -6,6 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
+import javax.swing.text.html.parser.Entity;
+
 import Client.ChatClient;
 import GUI.Automatic_Sheduling;
 import GUI.Course_Settings;
@@ -16,8 +18,8 @@ import GUI.Lecturer_Preferences;
 import GUI.Main_Frame;
 import GUI.Main_Menu;
 import GUI.Manual_Sheduling;
-import MsgPackage.ClassPack;
 import MsgPackage.*;
+
 
 public class ManagerController {
 	final public static int EXIT = 11;
@@ -51,8 +53,10 @@ public class ManagerController {
 	
 	private ChatClient client;
 	
-	private Edit_Class Edit_ClassGUI;
-	private Edit_Course Edit_CourseGUI;
+	private ClassPack ClassMsg;
+	
+	
+	
 	
 	public ManagerController(Main_Frame mainFrm,ChatClient client) {
 		this.client=client;
@@ -94,17 +98,15 @@ public class ManagerController {
 	}
 
 
-public void GetClassAids(int type) {
-	
-	
-		
-	ArrayList<String> arry = new ArrayList<String>();
-		ClassPack ClassMsg = new ClassPack();
+public void GetClasses() {
+			
+	ArrayList<entities.Class> arry = new ArrayList<entities.Class>();
+		ClassMsg = new ClassPack();
 		client.handleMessageFromClientUI(ClassMsg);
 		ClassMsg = (ClassPack) client.getMessage();
 		// LecturerReportsGUI
-		arry = ClassMsg.getAids();
 		
+	/*/	
 		switch (type){
 		case(EDITCLASSGUI):
 			if (Edit_ClassGUI==null)
@@ -119,7 +121,7 @@ public void GetClassAids(int type) {
 		
 		break;
 		}
-		
+		/*/
 	}
 	
 	
@@ -140,6 +142,8 @@ public void Load_Edit_Class(JPanel Panel2Close) {
 	
 	manegerMainFrm.remove(Panel2Close);
 	ECLSS = new  Edit_Class( this);
+	GetClasses();
+	
 	 manegerMainFrm.add(ECLSS.PNL_Main);
 	manegerMainFrm.repaint();		
 }
@@ -148,7 +152,9 @@ public void Load_Edit_Course(JPanel Panel2Close) {
 	
 	manegerMainFrm.remove(Panel2Close);
 	ECRS = new  Edit_Course( this);
-	 manegerMainFrm.add(ECRS.PNL_Main);
+	 
+	
+	manegerMainFrm.add(ECRS.PNL_Main);
 	manegerMainFrm.repaint();		
 }
 
