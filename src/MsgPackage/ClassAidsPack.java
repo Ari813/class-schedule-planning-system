@@ -2,15 +2,41 @@ package MsgPackage;
 
 import java.util.ArrayList;
 
+import MsgPackage.MessagePack.OpType;
+
+
 public class ClassAidsPack {
 
+	private OpType op;
+	
+	private ArrayList<String> aids;
+	
 	public ClassAidsPack() {
-		// TODO Auto-generated constructor stub
+		super();
+		this.op = OpType.GetClassAids;
+		
+		
+	}
+	public OpType getOp() {
+		return op;
 	}
 
-	public ArrayList<String> GetClassAids() {
-		// TODO Auto-generated method stub
-		return null;
+	public void setOp(OpType op) {
+		this.op = op;
 	}
+
+	public ArrayList<String> getAids() {
+		return aids;
+	}
+
+	public void setAids(ArrayList<String> aids) {
+		this.aids = aids;
+	}
+
+	
+
+	
+
+
 
 }

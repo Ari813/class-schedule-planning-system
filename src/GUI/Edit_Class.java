@@ -60,6 +60,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
+import entities.Subject;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 
@@ -72,7 +73,7 @@ ListSelectionListener, KeyListener {
 	private JTextField txtClassEditor;
 	private JComboBox cmbxEditClass ;
 	private JComboBox cmbxcampus;
-	private JList lstClassAids;
+	private JList<String> lstClassAids;
 	private JTextPane txtpnCodeNumber;
 	private JComboBox cmbBxBlding;	
 	private JCheckBox chckbxAvailable;
@@ -112,6 +113,7 @@ ListSelectionListener, KeyListener {
 	/*/
 	private LecturerController lec;
 	private ManagerController manager;
+	private ArrayList<String> aids;
 	
 
 	/**
@@ -244,7 +246,7 @@ private void pnl() {
 	}
 
 	private JList GETlstClassAids() {
-		lstClassAids = new JList();
+		lstClassAids = new JList<String>();
 		lstClassAids.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstClassAids.setForeground(new Color(0, 0, 0));
 		lstClassAids.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -418,7 +420,14 @@ private void pnl() {
 
 	public void addClassAids(ArrayList<String> arry) {
 		// TODO Auto-generated method stub
+		this.aids=new ArrayList<String>();
+		lstClassAids.removeAll();
+		this.aids.addAll(0, arry);
+		for (int i=0 ; i < (arry.size()); i++){
+			//lstClassAids.add(arry.get(i),i );
+			
 		
+	}
 	}
 	
 }

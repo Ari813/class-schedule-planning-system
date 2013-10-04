@@ -25,7 +25,8 @@ public class MessagePack implements Serializable {
 		Login, 
 		Logout, 
 		
-		StopExam
+		StopExam,
+		GetClassAids
 		
 
 	};
