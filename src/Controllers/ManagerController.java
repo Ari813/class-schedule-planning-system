@@ -16,7 +16,7 @@ import GUI.Lecturer_Preferences;
 import GUI.Main_Frame;
 import GUI.Main_Menu;
 import GUI.Manual_Sheduling;
-import MsgPackage.ClassAidsPack;
+import MsgPackage.ClassPack;
 import MsgPackage.*;
 
 public class ManagerController {
@@ -99,11 +99,11 @@ public void GetClassAids(int type) {
 	
 		
 	ArrayList<String> arry = new ArrayList<String>();
-		ClassAidsPack ClassAidsMsg = new ClassAidsPack();
-		client.handleMessageFromClientUI(ClassAidsMsg);
-		ClassAidsMsg = (ClassAidsPack) client.getMessage();
+		ClassPack ClassMsg = new ClassPack();
+		client.handleMessageFromClientUI(ClassMsg);
+		ClassMsg = (ClassPack) client.getMessage();
 		// LecturerReportsGUI
-		arry = ClassAidsMsg.getAids();
+		arry = ClassMsg.getAids();
 		
 		switch (type){
 		case(EDITCLASSGUI):
