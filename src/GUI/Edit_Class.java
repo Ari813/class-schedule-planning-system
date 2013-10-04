@@ -61,125 +61,123 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
-
-
-
-
 import entities.Class;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 
 public class Edit_Class extends JPanel implements ActionListener,
-ListSelectionListener, KeyListener {
+		ListSelectionListener, KeyListener {
 
-	//private JFrame frmLec;
+	// private JFrame frmLec;
 	private JTextField txtDescriptionText;
 	private JTextField txtCapacityNumber;
 	private JTextField txtClassEditor;
-	private JComboBox cmbxEditClass ;
+	private JComboBox cmbxEditClass;
 	private JComboBox cmbxcampus;
 	private JList<String> lstClassAids;
 	DefaultListModel lstClassAidsModel;
 	private JTextPane txtpnCodeNumber;
-	private JComboBox cmbBxBlding;	
+	private JComboBox cmbBxBlding;
 	private JCheckBox chckbxAvailable;
-	
-	public JPanel PNL_Main ;
-	
-	private JButton btnAdd ;
+
+	public JPanel PNL_Main;
+
+	private JButton btnAdd;
 	private JButton btnRemove;
 	private JButton btnNewClass;
 	private JButton btnSaveChanges;
 	private JButton btnDiscard;
-	private JLabel lblCode ;
-	private JLabel lblDescription ;
+	private JLabel lblCode;
+	private JLabel lblDescription;
 	private JLabel lblCampus;
 	private JLabel lblBilding;
 	private JLabel lblCapacity;
-	
+
 	private Component horizontalStrut_1;
 	private Component horizontalStrut_2;
 	private Component horizontalStrut;
 	private JLabel lblClassAids;
-	
-	private JList lstClassaids2 ;
+
+	private JList lstSelectedClassaids;
 	/**
 	 * Launch the application.
 	 */
-	
-	/*/JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
-	lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
-	lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
-	lblTimeTableSchedualing.setLocation(new Point(50, 0));
-	lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
-	lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
-	lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
-	lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 
-	/*/
+	/*
+	 * /JLabel lblTimeTableSchedualing = new
+	 * JLabel("Time Table Schedualing System");
+	 * lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
+	 * lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
+	 * lblTimeTableSchedualing.setLocation(new Point(50, 0));
+	 * lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
+	 * lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
+	 * lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
+	 * lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
+	 * null, null, null, null));
+	 * 
+	 * /
+	 */
 	private LecturerController lec;
 	private ManagerController manager;
 	private ArrayList<String> aids;
-	
 
 	/**
 	 * Create the application.
 	 */
-	public Edit_Class (ManagerController mng) {
+	public Edit_Class(ManagerController mng) {
 
 		super();
-		this.manager=mng;
-		initialize();}
-	
-	
-		private void initialize() {
-	
-	
-	
+		this.manager = mng;
+		initialize();
+	}
+
+	private void initialize() {
+
 		pnl();
-					
+
 		PNL_Main.add(GETcmbxEditClass());
 		PNL_Main.add(GETcmbxcampus());
 		PNL_Main.add(GETcmbBxBlding());
-		
+
 		PNL_Main.add(GETlblCapacity());
 		PNL_Main.add(GETlblBilding());
 		PNL_Main.add(GETlblCampus());
 		PNL_Main.add(GETlblDescription());
 		PNL_Main.add(GETlblCode());
 		PNL_Main.add(GETlblClassAids());
-		
+
 		PNL_Main.add(GETtxtpnCodeNumber());
 		PNL_Main.add(GETtxtCapacityNumber());
 		PNL_Main.add(GETtxtDescriptionText());
 		PNL_Main.add(GETtxtClassEditor());
-		
+
 		PNL_Main.add(GETlstClassAids());
-		
-		
+
 		PNL_Main.add(GETchckbxAvailable());
-				
+
 		PNL_Main.add(GETbtnAdd());
 		PNL_Main.add(GETbtnRemove());
 		PNL_Main.add(GETbtnNewClass());
-	    PNL_Main.add(GETbtnSaveChanges());
-	    PNL_Main.add(GETbtnDiscard());
-	    
-		PNL_Main.add(GETlstClassaids2());
-		
+		PNL_Main.add(GETbtnSaveChanges());
+		PNL_Main.add(GETbtnDiscard());
+
+		PNL_Main.add(GETSelectedClassAids());
+
 		sethorizontalStrut();
-		
+
 	}
-private void pnl() {
-		
-	PNL_Main = new JPanel();
-	PNL_Main.setToolTipText("Edit class list");
-	PNL_Main.setMinimumSize(new Dimension(774, 474));
-	PNL_Main.setMaximumSize(new Dimension(774, 474));
-	PNL_Main.setBounds(10, 85, 774, 474);
-	PNL_Main.setLayout(null);
-			
-		}
+
+	private void pnl() {
+
+		PNL_Main = new JPanel();
+		PNL_Main.setToolTipText("Edit class list");
+		PNL_Main.setMinimumSize(new Dimension(774, 474));
+		PNL_Main.setMaximumSize(new Dimension(774, 474));
+		PNL_Main.setBounds(10, 85, 774, 474);
+		PNL_Main.setLayout(null);
+
+	}
+
 	private JTextField GETtxtClassEditor() {
 		txtClassEditor = new JTextField();
 		txtClassEditor.setEditable(false);
@@ -210,28 +208,28 @@ private void pnl() {
 	}
 
 	private JButton GETbtnNewClass() {
-		 btnNewClass = new JButton("New class");
-			btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			btnNewClass.setBounds(73, 434, 160, 29);
-			btnNewClass.addActionListener(this);
+		btnNewClass = new JButton("New class");
+		btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewClass.setBounds(73, 434, 160, 29);
+		btnNewClass.addActionListener(this);
 		return btnNewClass;
 	}
 
-	private JList GETlstClassaids2() {
-		lstClassaids2 = new JList();
-		lstClassaids2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lstClassaids2.setBackground(new Color(169, 169, 169));
-		lstClassaids2.setForeground(new Color(255, 255, 255));
-		lstClassaids2.setBounds(586, 130, 138, 220);
-		return lstClassaids2;
+	private JList GETSelectedClassAids() {
+		lstSelectedClassaids = new JList();
+		lstSelectedClassaids.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lstSelectedClassaids.setBackground(new Color(169, 169, 169));
+		lstSelectedClassaids.setForeground(new Color(255, 255, 255));
+		lstSelectedClassaids.setBounds(586, 130, 138, 220);
+		return lstSelectedClassaids;
 	}
 
 	private JButton GETbtnRemove() {
-		 btnRemove = new JButton("<--");
-			btnRemove.setToolTipText("Remove item from class");
-			btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			btnRemove.setBounds(502, 216, 65, 38);
-			btnRemove.addActionListener(this);
+		btnRemove = new JButton("<--");
+		btnRemove.setToolTipText("Remove item from class");
+		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnRemove.setBounds(502, 216, 65, 38);
+		btnRemove.addActionListener(this);
 		return btnRemove;
 	}
 
@@ -253,13 +251,13 @@ private void pnl() {
 
 	private JList GETlstClassAids() {
 		lstClassAids = new JList<>();
-		lstClassAidsModel= new DefaultListModel();
+		lstClassAidsModel = new DefaultListModel();
 		lstClassAids.setModel(lstClassAidsModel);
 		lstClassAids.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstClassAids.setForeground(new Color(0, 0, 0));
 		lstClassAids.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		lstClassAids.setValueIsAdjusting(true);
-		lstClassAids.setSelectedIndices(new int[] {2});
+		lstClassAids.setSelectedIndices(new int[] { 2 });
 		lstClassAids.setBackground(new Color(169, 169, 169));
 		lstClassAids.setBounds(332, 130, 138, 220);
 		lstClassAidsModel.addElement("omri");
@@ -282,20 +280,20 @@ private void pnl() {
 	}
 
 	private void sethorizontalStrut() {
-		
+
 		horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(332, 114, 392, 14);
 		PNL_Main.add(horizontalStrut);
-		
+
 		horizontalStrut_1 = Box.createHorizontalStrut(20);
 		horizontalStrut_1.setBounds(5, 424, 759, 5);
 		PNL_Main.add(horizontalStrut_1);
-		
+
 		horizontalStrut_2 = Box.createHorizontalStrut(20);
 		horizontalStrut_2.setBackground(Color.BLACK);
 		horizontalStrut_2.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut_2);
-		
+
 	}
 
 	private JLabel GETlblCapacity() {
@@ -359,86 +357,85 @@ private void pnl() {
 	}
 
 	private JTextPane GETtxtpnCodeNumber() {
-		if (txtpnCodeNumber==null){
-		txtpnCodeNumber = new JTextPane();
-		txtpnCodeNumber.setEnabled(false);
-		//txtpnCodeNumber.setDropMode(DropMode.ON);
-		txtpnCodeNumber.setBackground(Color.WHITE);
-		txtpnCodeNumber.setText("Code Number");
-		txtpnCodeNumber.setBounds(10, 144, 100, 20);}
+		if (txtpnCodeNumber == null) {
+			txtpnCodeNumber = new JTextPane();
+			txtpnCodeNumber.setEnabled(false);
+			// txtpnCodeNumber.setDropMode(DropMode.ON);
+			txtpnCodeNumber.setBackground(Color.WHITE);
+			txtpnCodeNumber.setText("Code Number");
+			txtpnCodeNumber.setBounds(10, 144, 100, 20);
+		}
 		return txtpnCodeNumber;
 	}
 
 	private JComboBox GETcmbxEditClass() {
-		if (cmbxEditClass==null){
-		cmbxEditClass = new JComboBox();
-		cmbxEditClass.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
-		cmbxEditClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		cmbxEditClass.setToolTipText("Edit class list");
-		cmbxEditClass.setBounds(10, 53, 754, 20);
-		cmbxEditClass.setMaximumRowCount(52);}
+		if (cmbxEditClass == null) {
+			cmbxEditClass = new JComboBox();
+			cmbxEditClass.setModel(new DefaultComboBoxModel(
+					new String[] { "Empty" }));
+			cmbxEditClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			cmbxEditClass.setToolTipText("Edit class list");
+			cmbxEditClass.setBounds(10, 53, 754, 20);
+			cmbxEditClass.setMaximumRowCount(52);
+		}
 		return cmbxEditClass;
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnSaveChanges) {}	
-		if (e.getSource() == btnAdd) {}
-		if (e.getSource() == btnRemove) {}	
-		if (e.getSource() == btnNewClass) {}
+		if (e.getSource() == btnSaveChanges) {
+		}
+		if (e.getSource() == btnAdd) {
+		}
+		if (e.getSource() == btnRemove) {
+		}
+		if (e.getSource() == btnNewClass) {
+		}
 		if (e.getSource() == btnDiscard) {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
-	
 
-		
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO Auto-generated method stub
-		
-	}
 
+	}
 
 	public void addClassAids(ArrayList<String> arry) {
 		// TODO Auto-generated method stub
-		this.aids=new ArrayList<String>();
+		this.aids = new ArrayList<String>();
 		lstClassAids.removeAll();
 		this.aids.addAll(0, arry);
-		for (int i=0 ; i < (arry.size()); i++){
-			//lstClassAids.add(arry.get(i) );
-			
-		
-	}
-	}
+		for (int i = 0; i < (arry.size()); i++) {
+			// lstClassAids.add(arry.get(i) );
 
+		}
+	}
 
 	public void setClassStudyAids(ArrayList<Class> arrayClass) {
 		// TODO Auto-generated method stub
-		for (int i=0; i<arrayClass.size();i++){
+		for (int i = 0; i < arrayClass.size(); i++) {
 			lstClassAidsModel.addElement(arrayClass.get(i).getStudyAids());
-			}
+		}
 	}
 
-
-	
-	
 }
