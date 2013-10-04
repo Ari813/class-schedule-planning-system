@@ -60,7 +60,6 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
-import entities.Subject;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 

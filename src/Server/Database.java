@@ -120,7 +120,6 @@ public class Database {
 				ans = Login.UserAlreadyLogged;
 		}
 		qrs.close();
-		System.out.println(ans);
 		return ans;
 
 	}
