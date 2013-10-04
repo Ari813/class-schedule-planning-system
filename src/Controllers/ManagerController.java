@@ -102,7 +102,7 @@ public class ManagerController {
 
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);
-		GetClasses();
+	//	GetClasses();
 		ECLSS.setClassStudyAids(arrayClass);
 		
 		
