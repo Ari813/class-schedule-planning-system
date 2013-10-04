@@ -1,8 +1,8 @@
 package entities;
 
-public class StadyAids {
+public class StudyAids {
 	private int aidsID;
-	public StadyAids(int aidsID, String aidsName) {
+	public StudyAids(int aidsID, String aidsName) {
 		super();
 		this.aidsID = aidsID;
 		this.aidsName = aidsName;
@@ -23,7 +23,7 @@ public class StadyAids {
 		this.aidsName = aidsName;
 	}
 	
-	public StadyAids() {
+	public StudyAids() {
 	
 	}
 

@@ -4,22 +4,34 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Class implements Serializable {
-	public ArrayList<StadyAids> stadyAids;
+	
+
+	public ArrayList<StudyAids> studyAids;
 	public int classID;
 	public String building;
-	public Boolean Occupied;
+	
 	public int capcity;
+	public int available;
 	
 	public Class() {
 		
 	}
+	
 
-	public ArrayList<StadyAids> getSA() {
-		return stadyAids;
+
+	public int getAvailable() {
+		return available;
 	}
 
-	public void setSA(ArrayList<StadyAids> sA) {
-		stadyAids = sA;
+	public void setAvailable(int available) {
+		this.available = available;
+	}
+	public ArrayList<StudyAids> getStudyAids() {
+		return studyAids;
+	}
+
+	public void setStudyAids(ArrayList<StudyAids> sA) {
+		studyAids = sA;
 	}
 
 	public int getClassID() {
@@ -38,13 +50,8 @@ public class Class implements Serializable {
 		this.building = building;
 	}
 
-	public Boolean getOccupied() {
-		return Occupied;
-	}
+	
 
-	public void setOccupied(Boolean occupied) {
-		Occupied = occupied;
-	}
 
 	public int getCapcity() {
 		return capcity;
