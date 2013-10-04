@@ -103,7 +103,7 @@ public void GetClassAids(int type) {
 		client.handleMessageFromClientUI(ClassAidsMsg);
 		ClassAidsMsg = (ClassAidsPack) client.getMessage();
 		// LecturerReportsGUI
-		arry = ClassAidsMsg.GetClassAids();
+		arry = ClassAidsMsg.getAids();
 		
 		switch (type){
 		case(EDITCLASSGUI):
@@ -128,6 +128,8 @@ public void GetClassAids(int type) {
 public void Load_Course_Settings(JPanel Panel2Close) {
 		
 		manegerMainFrm.remove(Panel2Close);
+		///load all we need
+		
 		CS = new  Course_Settings( this);
 		 manegerMainFrm.add(CS.PNL_Main);
 		manegerMainFrm.repaint();		
