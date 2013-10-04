@@ -105,23 +105,6 @@ public void GetClasses() {
 		client.handleMessageFromClientUI(ClassMsg);
 		ClassMsg = (ClassPack) client.getMessage();
 		
-		
-	/*/	
-		switch (type){
-		case(EDITCLASSGUI):
-			if (Edit_ClassGUI==null)
-				Edit_ClassGUI=new Edit_Class(this);
-				Edit_ClassGUI.addClassAids(arry);
-		
-		break;
-		case(EDITCOURSGUI):
-			if (Edit_ClassGUI==null)
-				Edit_CourseGUI=new Edit_Course(this);
-				Edit_ClassGUI.addClassAids(arry);
-		
-		break;
-		}
-		/*/
 	}
 	
 	
