@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import MsgPackage.MessagePack.OpType;
 
 
-public class ClassAidsPack {
+public class ClassPack {
 
 	private OpType op;
 	
 	private ArrayList<String> aids;
 	
-	public ClassAidsPack() {
+	public ClassPack() {
 		super();
 		this.op = OpType.GetClassAids;
 		
