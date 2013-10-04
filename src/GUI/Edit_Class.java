@@ -434,7 +434,7 @@ private void pnl() {
 	public void setClassStudyAids(ArrayList<Class> arrayClass) {
 		// TODO Auto-generated method stub
 		for (int i=0; i<arrayClass.size();i++){
-			lstClassAidsModel.addElement(arrayClass.)
+			lstClassAidsModel.addElement(arrayClass.get(i).getStudyAids());
 			
 		}
 	}
