@@ -60,6 +60,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
+
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 
@@ -423,7 +424,7 @@ private void pnl() {
 		lstClassAids.removeAll();
 		this.aids.addAll(0, arry);
 		for (int i=0 ; i < (arry.size()); i++){
-			//lstClassAids.add(arry.get(i),i );
+			//lstClassAids.add(arry.get(i) );
 			
 		
 	}
