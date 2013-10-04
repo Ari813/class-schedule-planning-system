@@ -45,6 +45,7 @@ public class ManagerController {
 	private Main_Menu main;
 	public Main_Frame manegerMainFrm;
 	public LecturerController lecturer_Ctrl;
+	private ArrayList<entities.Class> arrayClass;
 
 	private ChatClient client;
 
@@ -90,10 +91,11 @@ public class ManagerController {
 
 	public void GetClasses() {
 
-		ArrayList<entities.Class> arry = new ArrayList<entities.Class>();
+		 arrayClass = new ArrayList<entities.Class>();
 		ClassMsg = new ClassPack();
 		client.handleMessageFromClientUI(ClassMsg);
 		ClassMsg = (ClassPack) client.getMessage();
+		arrayClass=ClassMsg.getAllclass();
 	}
 
 	public void Load_Edit_Class(JPanel Panel2Close) {
@@ -101,7 +103,9 @@ public class ManagerController {
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);
 		GetClasses();
-
+		
+		
+		
 		manegerMainFrm.add(ECLSS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
@@ -121,6 +125,7 @@ public class ManagerController {
 		// /load all we need
 
 		CS = new Course_Settings(this);
+		
 		manegerMainFrm.add(CS.PNL_Main);
 		manegerMainFrm.repaint();
 	}

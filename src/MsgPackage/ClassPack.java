@@ -9,8 +9,16 @@ public class ClassPack {
 
 	private OpType op;
 	
-	private entities.Class allclass;
+	private ArrayList<entities.Class> allclass;
 	
+	public ArrayList<entities.Class> getAllclass() {
+		return allclass;
+	}
+
+	public void setAllclass(ArrayList<entities.Class> allclass) {
+		this.allclass = allclass;
+	}
+
 	public ClassPack() {
 		super();
 		this.op = OpType.GetClassAids;
@@ -26,13 +34,7 @@ public class ClassPack {
 		this.op = op;
 	}
 
-	public entities.Class getAllclass() {
-		return allclass;
-	}
-
-	public void setAllclass(entities.Class allclass) {
-		this.allclass = allclass;
-	}
+	
 
 
 	
