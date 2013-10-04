@@ -12,7 +12,10 @@ public class Class implements Serializable {
 	
 	public int capcity;
 	public int available;
+	public int campus;
 	
+
+
 	public Class() {
 		
 	}
@@ -51,14 +54,22 @@ public class Class implements Serializable {
 	}
 
 	
-
-
 	public int getCapcity() {
 		return capcity;
 	}
 
 	public void setCapcity(int capcity) {
 		this.capcity = capcity;
+	}
+	
+	public int getCampus() {
+		return campus;
+	}
+
+
+
+	public void setCampus(int campus) {
+		this.campus = campus;
 	}
 
 }
