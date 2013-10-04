@@ -31,6 +31,7 @@ import javax.swing.UIManager;
 
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
@@ -61,6 +62,8 @@ import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
 
+
+
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 
@@ -74,6 +77,7 @@ ListSelectionListener, KeyListener {
 	private JComboBox cmbxEditClass ;
 	private JComboBox cmbxcampus;
 	private JList<String> lstClassAids;
+	DefaultListModel lstClassAidsModel;
 	private JTextPane txtpnCodeNumber;
 	private JComboBox cmbBxBlding;	
 	private JCheckBox chckbxAvailable;
@@ -246,23 +250,17 @@ private void pnl() {
 	}
 
 	private JList GETlstClassAids() {
-		lstClassAids = new JList<String>();
+		lstClassAids = new JList<>();
+		lstClassAidsModel= new DefaultListModel();
+		lstClassAids.setModel(lstClassAidsModel);
 		lstClassAids.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstClassAids.setForeground(new Color(0, 0, 0));
 		lstClassAids.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		lstClassAids.setValueIsAdjusting(true);
 		lstClassAids.setSelectedIndices(new int[] {2});
 		lstClassAids.setBackground(new Color(169, 169, 169));
-		lstClassAids.setModel(new AbstractListModel() {
-			String[] values = new String[] {"omri", "amit", "iris"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
 		lstClassAids.setBounds(332, 130, 138, 220);
+		lstClassAidsModel.addElement("omri");
 		return lstClassAids;
 	}
 
