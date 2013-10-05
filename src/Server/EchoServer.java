@@ -68,7 +68,7 @@ public class EchoServer extends AbstractServer {
 	 */
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		MessagePack msgpck = (MessagePack) msg;
-		
+
 		switch (msgpck.getOp()) {
 		/*
 		 * case exp to handle client request.
@@ -87,54 +87,50 @@ public class EchoServer extends AbstractServer {
 		case GetClassAids:
 			break;
 		case GetStudyAidsInfo:
-		break;
+			break;
 
 		}
 	}
 
-	
-
 	private void AllCampus(MessagePack msg, ConnectionToClient client) {
-	
-				GetCampusPack cmps =(GetCampusPack) msg;
-				 
-				try {
-					cmps.setAllCampuses(db.getAllCampuses());
-				} catch (NumberFormatException e) {
-					e.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				
-				}try {
-					client.sendToClient(cmps);
-				} catch (IOException e) {
-					
-					e.printStackTrace();
-				}
-				
-			
+
+		GetCampusPack cmps = (GetCampusPack) msg;
+
+		try {
+			cmps.setAllCampuses(db.getAllCampuses());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		try {
+			client.sendToClient(cmps);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
 	}
 
-	private void AllBuildings(MessagePack msg,ConnectionToClient client) {
-		
-		GetBuildingsPack bldng =(GetBuildingsPack) msg;
-	
+	private void AllBuildings(MessagePack msg, ConnectionToClient client) {
+		GetBuildingsPack bldng = (GetBuildingsPack) msg;
 		try {
 			bldng.setAllBuildings(db.getAllBuildings());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		
-		}try {
+
+		}
+		try {
 			client.sendToClient(bldng);
 		} catch (IOException e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 	}
-	
 
 	private synchronized void login(MessagePack msg, ConnectionToClient client) {
 		LoginPack lgn = (LoginPack) msg;
@@ -149,10 +145,10 @@ public class EchoServer extends AbstractServer {
 		}
 		lgn.getUsr().setLoginPermissionLevel(dblgn);
 		try {
-			
+
 			client.sendToClient(lgn);
 		} catch (IOException e) {
-		
+
 			e.printStackTrace();
 		}
 	}

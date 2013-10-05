@@ -199,4 +199,39 @@ public class Database {
 		return campusessArray;
 	}
 
+	public ArrayList<Class> getAllClasses() throws SQLException {
+		ResultSet qrs = null;
+		ResultSet classAidsQrs = null;
+		ArrayList<Class> ClassesArray = new ArrayList<Class>();
+		StudyAids stdyAds;
+		Class cls;
+
+		String query = new String("SELECT * FROM `csps-db`.class;");
+		st = conn.createStatement();
+		qrs = st.executeQuery(query);
+		if (qrs.next()) {
+			cls = new Class();
+			cls.setBuilding(qrs.getInt("ClassBuilding"));
+			cls.setClassID(qrs.getInt("ClassID"));
+			cls.setCapcity(qrs.getInt("Capacity"));
+			cls.setCampus(qrs.getInt("Campus"));
+			cls.setDescription(qrs.getString("Desciption"));
+			query = new String(
+					"SELECT * FROM `csps-db`.classaids ca where ca.ClassBuilding = "
+							+ cls.getBuilding() + " AND ca.ClassID = "
+							+ cls.getClassID() + ";");
+			st = conn.createStatement();
+			classAidsQrs = st.executeQuery(query);
+			if (classAidsQrs.next()) {
+				stdyAds = new StudyAids();
+				stdyAds.setAidsID(classAidsQrs.getInt("ClassAidID"));
+				cls.addStudyAid(stdyAds);
+			}
+		}
+		qrs.close();
+		classAidsQrs.close();
+
+		return ClassesArray;
+	}
+
 }

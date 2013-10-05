@@ -6,23 +6,24 @@ import java.util.ArrayList;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
 public class Class implements Serializable {
-	
 
-	public ArrayList<StudyAids> studyAids;
-	public int classID;
-	public String building;
-	
-	public int capcity;
-	public Boolean available;
-	public int campus;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private ArrayList<StudyAids> studyAids;
+	private int classID;
+	private int building;
+	private String description;
 
+	private int capcity;
+	private Boolean available;
+	private int campus;
 
 	public Class() {
-		
-	}
-	
+		studyAids = new ArrayList<StudyAids>();
 
+	}
 
 	public Boolean getAvailable() {
 		return available;
@@ -31,12 +32,17 @@ public class Class implements Serializable {
 	public void setAvailable(Boolean available) {
 		this.available = available;
 	}
+
 	public ArrayList<StudyAids> getStudyAids() {
 		return studyAids;
 	}
 
-	public void setStudyAids(ArrayList<StudyAids> sA) {
-		studyAids = sA;
+	public void setStudyAids(ArrayList<StudyAids> studyAids) {
+		this.studyAids = studyAids;
+	}
+
+	public void addStudyAid(StudyAids studyAid) {
+		this.studyAids.add(studyAid);
 	}
 
 	public int getClassID() {
@@ -47,15 +53,14 @@ public class Class implements Serializable {
 		this.classID = classID;
 	}
 
-	public String getBuilding() {
+	public int getBuilding() {
 		return building;
 	}
 
-	public void setBuilding(String building) {
+	public void setBuilding(int building) {
 		this.building = building;
 	}
 
-	
 	public int getCapcity() {
 		return capcity;
 	}
@@ -63,15 +68,28 @@ public class Class implements Serializable {
 	public void setCapcity(int capcity) {
 		this.capcity = capcity;
 	}
-	
+
 	public int getCampus() {
 		return campus;
 	}
 
-
-
 	public void setCampus(int campus) {
 		this.campus = campus;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description
+	 *            the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = new String(description);
 	}
 
 }
