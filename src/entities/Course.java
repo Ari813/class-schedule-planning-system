@@ -1,7 +1,13 @@
 package entities;
 
-public class Course {
+import java.io.Serializable;
 
+public class Course implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int studentNumber;
 	private int courseID;
 	private String description;

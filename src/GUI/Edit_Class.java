@@ -235,7 +235,6 @@ public class Edit_Class extends JPanel implements ActionListener,
 		lstClassAids.setSelectedIndices(new int[] { 2 });
 		lstClassAids.setBackground(new Color(169, 169, 169));
 		lstClassAids.setBounds(332, 130, 138, 220);
-		lstClassAidsModel.addElement("omri");
 		return lstClassAids;
 	}
 

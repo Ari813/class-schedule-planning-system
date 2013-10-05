@@ -1,6 +1,12 @@
 package entities;
 
-public class Campus {
+import java.io.Serializable;
+
+public class Campus implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int campusId;
 	private String campusName;
 	public Campus() {

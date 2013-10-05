@@ -1,7 +1,13 @@
 package entities;
 
-public class Building {
-  private int buildingID;
+import java.io.Serializable;
+
+public class Building implements Serializable{
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+private int buildingID;
   private String buildingName;
   
 	public Building() {

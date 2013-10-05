@@ -1,6 +1,12 @@
 package entities;
 
-public class StudyAids {
+import java.io.Serializable;
+
+public class StudyAids implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int aidsID;
 
 	public StudyAids(int aidsID, String aidsName) {
