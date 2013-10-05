@@ -79,7 +79,7 @@ public class EchoServer extends AbstractServer {
 		case Logout:
 			break;
 		case GetBuildingsInfo:
-			AllBuildings(msgpck);
+			AllBuildings(msgpck, client);
 			break;
 		case GetCampusInfo:
 			break;
