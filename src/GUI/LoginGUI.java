@@ -23,6 +23,8 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
+import java.awt.Rectangle;
+import java.awt.Dimension;
 
 public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		FocusListener, ChangeListener {
@@ -56,6 +58,12 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 
 	public LoginGUI(Main_Frame mainGUI) {
 		super();
+		setPreferredSize(new Dimension(800, 600));
+		setSize(new Dimension(774, 600));
+		setMinimumSize(new Dimension(800, 600));
+		setMaximumSize(new Dimension(800, 600));
+		setBounds(new Rectangle(100, 100, 880, 600));
+		
 		this.mainGUI = mainGUI;
 		rememberLogin = false;
 		rememberServer = false;
@@ -65,10 +73,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 
 	private void initialize() {
 
-		setBorder(new TitledBorder(null, "Welcome Screen",
+		setBorder(new TitledBorder(null, "Login",
 				TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setBackground(SystemColor.activeCaption);
-		setBounds(0, 0, mainGUI.setX, mainGUI.setY);
+		setBounds(0, 0, 774, 474);
 		setLayout(null);
 
 		add(getLblId());
@@ -97,8 +105,9 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JCheckBox getChkBoxSaveSrvr() {
 		if (chkBoxSaveSrvr == null) {
 			chkBoxSaveSrvr = new JCheckBox("Save");
+			chkBoxSaveSrvr.setFont(new Font("Dialog", Font.PLAIN, 16));
 			chkBoxSaveSrvr.setToolTipText("Remember server connection details");
-			chkBoxSaveSrvr.setBounds(272, 321, 170, 23);
+			chkBoxSaveSrvr.setBounds(464, 354, 170, 23);
 			chkBoxSaveSrvr.addChangeListener(this);
 		}
 		return chkBoxSaveSrvr;
@@ -110,7 +119,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 			lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 			lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 30));
 			lblWelcome.setBackground(SystemColor.inactiveCaptionBorder);
-			lblWelcome.setBounds(10, 35, 480, 89);
+			lblWelcome.setBounds(10, 35, 780, 89);
 		}
 		return lblWelcome;
 	}
@@ -118,8 +127,9 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JCheckBox getChkBoxRememberMe() {
 		if (chkBoxRememberMe == null) {
 			chkBoxRememberMe = new JCheckBox("Remember me");
+			chkBoxRememberMe.setFont(new Font("Dialog", Font.PLAIN, 16));
 			chkBoxRememberMe.setToolTipText("Remember me");
-			chkBoxRememberMe.setBounds(272, 212, 170, 23);
+			chkBoxRememberMe.setBounds(464, 242, 170, 23);
 			chkBoxRememberMe.addChangeListener(this);
 		}
 		return chkBoxRememberMe;
@@ -131,7 +141,8 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JLabel getLblId() {
 		if (lblId == null) {
 			lblId = new JLabel("ID:");
-			lblId.setBounds(128, 162, 145, 14);
+			lblId.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lblId.setBounds(165, 190, 145, 14);
 		}
 		return lblId;
 	}
@@ -139,7 +150,8 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JLabel getLblPassword() {
 		if (lblPassword == null) {
 			lblPassword = new JLabel("Password:");
-			lblPassword.setBounds(128, 187, 145, 14);
+			lblPassword.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lblPassword.setBounds(165, 215, 145, 14);
 		}
 		return lblPassword;
 	}
@@ -147,7 +159,8 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JLabel getLblHostNameaddress() {
 		if (lblHostNameaddress == null) {
 			lblHostNameaddress = new JLabel("Host Name/Address:");
-			lblHostNameaddress.setBounds(128, 275, 145, 14);
+			lblHostNameaddress.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lblHostNameaddress.setBounds(165, 303, 227, 14);
 		}
 		return lblHostNameaddress;
 	}
@@ -155,7 +168,8 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JLabel getLblPortNumber() {
 		if (lblPortNumber == null) {
 			lblPortNumber = new JLabel("Port Number:");
-			lblPortNumber.setBounds(128, 300, 145, 14);
+			lblPortNumber.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lblPortNumber.setBounds(165, 328, 145, 14);
 		}
 		return lblPortNumber;
 	}
@@ -163,8 +177,8 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JLabel getLblUser() {
 		if (lblUser == null) {
 			lblUser = new JLabel("User:");
-			lblUser.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-			lblUser.setBounds(69, 135, 46, 14);
+			lblUser.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lblUser.setBounds(76, 163, 95, 14);
 		}
 		return lblUser;
 	}
@@ -172,8 +186,8 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JLabel getLblServer() {
 		if (lblServer == null) {
 			lblServer = new JLabel("Server:");
-			lblServer.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 11));
-			lblServer.setBounds(69, 243, 46, 14);
+			lblServer.setFont(new Font("Dialog", Font.PLAIN, 16));
+			lblServer.setBounds(76, 271, 95, 14);
 		}
 		return lblServer;
 	}
@@ -181,8 +195,9 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JTextField getTxtId() {
 		if (txtId == null) {
 			txtId = new JTextField();
+			txtId.setFont(new Font("Dialog", Font.PLAIN, 16));
 			txtId.setText("ID");
-			txtId.setBounds(272, 162, 170, 20);
+			txtId.setBounds(464, 190, 170, 20);
 			txtId.setColumns(10);
 			txtId.addKeyListener(this);
 			txtId.addFocusListener(this);
@@ -193,8 +208,9 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JPasswordField getTxtPassword() {
 		if (txtPassword == null) {
 			txtPassword = new JPasswordField();
+			txtPassword.setFont(new Font("Dialog", Font.PLAIN, 16));
 			txtPassword.setText("password");
-			txtPassword.setBounds(272, 187, 170, 20);
+			txtPassword.setBounds(464, 215, 170, 20);
 			txtPassword.setColumns(10);
 			txtPassword.addKeyListener(this);
 			txtPassword.addFocusListener(this);
@@ -205,8 +221,9 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JTextField getTxtHostName() {
 		if (txtHostName == null) {
 			txtHostName = new JTextField();
+			txtHostName.setFont(new Font("Dialog", Font.PLAIN, 16));
 			txtHostName.setText(DEFAULT_HOST);
-			txtHostName.setBounds(272, 272, 170, 20);
+			txtHostName.setBounds(464, 300, 170, 20);
 			txtHostName.setColumns(10);
 			txtHostName.addKeyListener(this);
 		}
@@ -216,8 +233,9 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JTextField getTxtPort() {
 		if (txtPort == null) {
 			txtPort = new JTextField();
+			txtPort.setFont(new Font("Dialog", Font.PLAIN, 16));
 			txtPort.setText(DEFAULT_PORT.toString());
-			txtPort.setBounds(272, 297, 170, 20);
+			txtPort.setBounds(464, 325, 170, 20);
 			txtPort.setColumns(10);
 			txtPort.addKeyListener(this);
 		}
@@ -227,7 +245,9 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JButton getBtnLogin() {
 		if (btnLogin == null) {
 			btnLogin = new JButton("Login");
-			btnLogin.setBounds(10, 446, 89, 43);
+			btnLogin.setBounds(new Rectangle(0, 0, 160, 29));
+			btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			btnLogin.setBounds(165, 514, 160, 29);
 			btnLogin.addActionListener(this);
 		}
 		return btnLogin;
@@ -236,7 +256,9 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	private JButton getBtnExit() {
 		if (btnExit == null) {
 			btnExit = new JButton("Exit");
-			btnExit.setBounds(404, 446, 86, 43);
+			btnExit.setBounds(new Rectangle(0, 0, 160, 29));
+			btnExit.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			btnExit.setBounds(485, 514, 160, 29);
 			btnExit.addActionListener(this);
 		}
 		return btnExit;

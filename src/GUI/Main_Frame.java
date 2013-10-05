@@ -30,7 +30,7 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	final public static int setX = 505, setY = 525;
+	final public static int setX = 774, setY = 474;
 	public static Main_Frame window;
 	public static LoginGUI loginUserGUI;
 	// public JFrame mainFrm;
@@ -73,7 +73,7 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 	public void start() {
 		loginUserGUI = new LoginGUI(this);
 		setType(Type.UTILITY);
-		setBounds(100, 100, 550, 550);
+		setBounds(100, 100, 800, 600);
 		getContentPane().add(loginUserGUI);
 
 	}
@@ -166,10 +166,9 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 		LogoutPack lgotmsg = new LogoutPack(lgnUsr);
 		client.handleMessageFromClientUI(lgotmsg);
 		getContentPane().removeAll();
-		setBounds(100, 100, 550, 550);
-		setPreferredSize(new Dimension(550,550));
+		setBounds(100, 100, 800, 600);
 		getContentPane().add(loginUserGUI);
-		getContentPane().repaint();
+		repaint();
 		
 	}
 
