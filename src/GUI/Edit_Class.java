@@ -433,7 +433,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	public void setBuilding(ArrayList<Building> arrayList) {
 		arrayBuilding=arrayList;
 		for (int i = 0; i < arrayBuilding.size(); i++) {
-			cmbBxBlding.addItem( arrayBuilding.get(i).getBuildingID()+ ":" + arrayBuilding.get(i).getBuildingName());
+			cmbBxBlding.addItem(arrayBuilding.get(i).getBuildingID()+ ":" + arrayBuilding.get(i).getBuildingName());
 		}
 	}
 

@@ -246,7 +246,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	// Getters
 	// ------------------
 	public String getHost() {
-		if (txtHostName.getText().equals("aj"))
+		if (txtHostName.getText().equals("localhost"))
 			return new String(Amit_HOST);
 		return new String(txtHostName.getText());
 	}
