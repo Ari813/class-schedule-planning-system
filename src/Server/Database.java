@@ -211,11 +211,11 @@ public class Database {
 		qrs = st.executeQuery(query);
 		if (qrs.next()) {
 			cls = new Class();
-			cls.setBuilding(qrs.getInt("ClassBuilding"));
-			cls.setClassID(qrs.getInt("ClassID"));
-			cls.setCapcity(qrs.getInt("Capacity"));
-			cls.setCampus(qrs.getInt("Campus"));
-			cls.setDescription(qrs.getString("Desciption"));
+			cls.setBuilding(Integer.parseInt(qrs.getString(1)));
+			cls.setClassID(Integer.parseInt(qrs.getString(2)));
+			cls.setCapcity(Integer.parseInt(qrs.getString(3)));
+			cls.setCampus(Integer.parseInt(qrs.getString(4)));
+			cls.setDescription(qrs.getString(5));
 			query = new String(
 					"SELECT * FROM `csps-db`.classaids ca where ca.ClassBuilding = "
 							+ cls.getBuilding() + " AND ca.ClassID = "
@@ -224,13 +224,13 @@ public class Database {
 			classAidsQrs = st.executeQuery(query);
 			if (classAidsQrs.next()) {
 				stdyAds = new StudyAids();
-				stdyAds.setAidsID(classAidsQrs.getInt("ClassAidID"));
+				stdyAds.setAidsID(Integer.parseInt(classAidsQrs.getString(3)));
 				cls.addStudyAid(stdyAds);
 			}
+			ClassesArray.add(cls);
+			classAidsQrs.close();
 		}
 		qrs.close();
-		classAidsQrs.close();
-
 		return ClassesArray;
 	}
 

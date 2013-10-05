@@ -73,6 +73,7 @@ public class EchoServer extends AbstractServer {
 		/*
 		 * case exp to handle client request.
 		 */
+
 		case Login:
 			login(msgpck, client);
 			break;
@@ -90,6 +91,10 @@ public class EchoServer extends AbstractServer {
 		case GetStudyAidsInfo:
 			allAids(msgpck, client);
 			break;
+		case GetClassAids:
+			break;
+		default:
+			break;
 
 		}
 	}
@@ -98,6 +103,7 @@ public class EchoServer extends AbstractServer {
 		GetStudyAidsPack aids = (GetStudyAidsPack) msg;
 
 		try {
+
 			aids.setAllStudyAids(db.getAllStudyAids());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -105,6 +111,7 @@ public class EchoServer extends AbstractServer {
 			e.printStackTrace();
 		}
 		try {
+
 			client.sendToClient(aids);
 		} catch (IOException e) {
 
@@ -118,6 +125,7 @@ public class EchoServer extends AbstractServer {
 		GetAllClassesPack clss = (GetAllClassesPack) msg;
 
 		try {
+
 			clss.setAllclass(db.getAllClasses());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -126,6 +134,7 @@ public class EchoServer extends AbstractServer {
 
 		}
 		try {
+
 			client.sendToClient(clss);
 		} catch (IOException e) {
 
@@ -139,6 +148,7 @@ public class EchoServer extends AbstractServer {
 		GetCampusPack cmps = (GetCampusPack) msg;
 
 		try {
+
 			cmps.setAllCampuses(db.getAllCampuses());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -147,6 +157,7 @@ public class EchoServer extends AbstractServer {
 
 		}
 		try {
+
 			client.sendToClient(cmps);
 		} catch (IOException e) {
 
@@ -158,6 +169,7 @@ public class EchoServer extends AbstractServer {
 	private void AllBuildings(MessagePack msg, ConnectionToClient client) {
 		GetBuildingsPack bldng = (GetBuildingsPack) msg;
 		try {
+
 			bldng.setAllBuildings(db.getAllBuildings());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -166,6 +178,7 @@ public class EchoServer extends AbstractServer {
 
 		}
 		try {
+
 			client.sendToClient(bldng);
 		} catch (IOException e) {
 
