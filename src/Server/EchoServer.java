@@ -103,7 +103,6 @@ public class EchoServer extends AbstractServer {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-
 		}
 		try {
 			client.sendToClient(aids);
