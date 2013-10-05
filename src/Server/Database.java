@@ -152,8 +152,8 @@ public class Database {
 		qrs = st.executeQuery(query);
 		if (qrs.next()) {
 			bld = new Building();
-			bld.setBuildingID(Integer.parseInt(qrs.getString(1)));
-			bld.setBuildingName(qrs.getString(2));
+			bld.setBuildingID(qrs.getInt("BuildingID")));
+			bld.setBuildingName("BuildingName");
 			buildingsArray.add(bld);
 		}
 		qrs.close();
@@ -171,8 +171,8 @@ public class Database {
 		qrs = st.executeQuery(query);
 		if (qrs.next()) {
 			sAid = new StudyAids();
-			sAid.setAidsID(Integer.parseInt(qrs.getString(1)));
-			sAid.setAidsName(qrs.getString(2));
+			sAid.setAidsID(qrs.getInt("ClassAidID"));
+			sAid.setAidsName(qrs.getString("ClassAidName"));
 			studyAidsArray.add(sAid);
 		}
 		qrs.close();
