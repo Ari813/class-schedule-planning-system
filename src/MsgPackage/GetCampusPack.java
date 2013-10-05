@@ -31,7 +31,7 @@ public class GetCampusPack extends MessagePack {
 	 *            the allCampuses to set
 	 */
 	public void setAllCampuses(ArrayList<Campus> allCampuses) {
-		this.allCampuses = allCampuses;
+		this.allCampuses = new ArrayList<Campus>(allCampuses);
 	}
 
 }

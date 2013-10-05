@@ -150,7 +150,7 @@ public class Database {
 		String query = new String("SELECT * FROM `csps-db`.building;");
 		st = conn.createStatement();
 		qrs = st.executeQuery(query);
-		if (qrs.next()) {
+		while (qrs.next()) {
 			bld = new Building();
 			bld.setBuildingID(qrs.getInt("BuildingID"));
 			bld.setBuildingName("BuildingName");
@@ -169,7 +169,7 @@ public class Database {
 		String query = new String("SELECT * FROM `csps-db`.Aidsinfo;");
 		st = conn.createStatement();
 		qrs = st.executeQuery(query);
-		if (qrs.next()) {
+		while (qrs.next()) {
 			sAid = new StudyAids();
 			sAid.setAidsID(qrs.getInt("ClassAidID"));
 			sAid.setAidsName(qrs.getString("ClassAidName"));
@@ -188,7 +188,7 @@ public class Database {
 		String query = new String("SELECT * FROM `csps-db`.campus;");
 		st = conn.createStatement();
 		qrs = st.executeQuery(query);
-		if (qrs.next()) {
+		while (qrs.next()) {
 			cmps = new Campus();
 			cmps.setCampusId(Integer.parseInt(qrs.getString(1)));
 			cmps.setCampusName(qrs.getString(2));
@@ -209,7 +209,7 @@ public class Database {
 		String query = new String("SELECT * FROM `csps-db`.class;");
 		st = conn.createStatement();
 		qrs = st.executeQuery(query);
-		if (qrs.next()) {
+		while (qrs.next()) {
 			cls = new Class();
 			cls.setBuilding(Integer.parseInt(qrs.getString(1)));
 			cls.setClassID(Integer.parseInt(qrs.getString(2)));
@@ -222,7 +222,7 @@ public class Database {
 							+ cls.getClassID() + ";");
 			st = conn.createStatement();
 			classAidsQrs = st.executeQuery(query);
-			if (classAidsQrs.next()) {
+			while (classAidsQrs.next()) {
 				stdyAds = new StudyAids();
 				stdyAds.setAidsID(Integer.parseInt(classAidsQrs.getString(3)));
 				cls.addStudyAid(stdyAds);

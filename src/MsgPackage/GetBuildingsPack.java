@@ -32,10 +32,11 @@ public class GetBuildingsPack extends MessagePack {
 	}
 
 	/**
-	 * @param allBuildings the allBuildings to set
+	 * @param allBuildings
+	 *            the allBuildings to set
 	 */
 	public void setAllBuildings(ArrayList<Building> allBuildings) {
-		this.allBuildings = allBuildings;
+		this.allBuildings = new ArrayList<Building>(allBuildings);
 	}
 
 }

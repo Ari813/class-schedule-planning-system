@@ -16,7 +16,7 @@ public class GetAllClassesPack extends MessagePack {
 	}
 
 	public void setAllclass(ArrayList<entities.Class> allclass) {
-		this.allclass = allclass;
+		this.allclass = new ArrayList<entities.Class>(allclass);
 	}
 
 	public GetAllClassesPack() {
