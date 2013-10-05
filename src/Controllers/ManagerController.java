@@ -18,7 +18,7 @@ import GUI.Lecturer_Preferences;
 import GUI.Main_Frame;
 import GUI.Main_Menu;
 import GUI.Manual_Sheduling;
-import MsgPackage.ClassPack;
+import MsgPackage.GetAllClassesPack;
 import MsgPackage.GetBuildingsPack;
 import MsgPackage.GetCampusPack;
 import MsgPackage.GetStudyAidsPack;
@@ -55,7 +55,7 @@ public class ManagerController {
 
 	private ChatClient client;
 
-	private ClassPack ClassMsg;
+	private GetAllClassesPack ClassMsg;
 
 	public ManagerController(Main_Frame mainFrm, ChatClient client) {
 		this.client = client;
@@ -96,9 +96,9 @@ public class ManagerController {
 	}
 
 	public ArrayList<Class> GetClasses() {
-		ClassMsg = new ClassPack();
+		ClassMsg = new GetAllClassesPack();
 		client.handleMessageFromClientUI(ClassMsg);
-		ClassMsg = (ClassPack) client.getMessage();
+		ClassMsg = (GetAllClassesPack) client.getMessage();
 		return (ClassMsg.getAllclass());
 	}
 

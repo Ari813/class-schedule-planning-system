@@ -2,7 +2,7 @@ package MsgPackage;
 
 import java.util.ArrayList;
 
-public class ClassPack extends MessagePack {
+public class GetAllClassesPack extends MessagePack {
 
 	/**
 	 * 
@@ -19,9 +19,9 @@ public class ClassPack extends MessagePack {
 		this.allclass = allclass;
 	}
 
-	public ClassPack() {
+	public GetAllClassesPack() {
 		super();
-		this.op = OpType.GetClassAids;
+		this.op = OpType.GetAllClasses;
 
 	}
 
