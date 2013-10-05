@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 
 import entities.Building;
 import entities.Campus;
+import entities.Class;
+import entities.StudyAids;
 import Client.ChatClient;
 import GUI.Automatic_Sheduling;
 import GUI.Course_Settings;
@@ -19,6 +21,7 @@ import GUI.Manual_Sheduling;
 import MsgPackage.ClassPack;
 import MsgPackage.GetBuildingsPack;
 import MsgPackage.GetCampusPack;
+import MsgPackage.GetStudyAidsPack;
 
 public class ManagerController {
 	final public static int EXIT = 11;
@@ -49,9 +52,7 @@ public class ManagerController {
 	private Main_Menu main;
 	public Main_Frame manegerMainFrm;
 	public LecturerController lecturer_Ctrl;
-	private ArrayList<entities.Class> arrayClass;
-	private ArrayList<Campus> arrayCampus ;
-	private ArrayList<Building> arrayBuilding;
+
 	private ChatClient client;
 
 	private ClassPack ClassMsg;
@@ -94,47 +95,46 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
-	public void GetClasses() {
-
-		 arrayClass = new ArrayList<entities.Class>();
+	public ArrayList<Class> GetClasses() {
 		ClassMsg = new ClassPack();
 		client.handleMessageFromClientUI(ClassMsg);
 		ClassMsg = (ClassPack) client.getMessage();
-		arrayClass=ClassMsg.getAllclass();
+		return (ClassMsg.getAllclass());
 	}
 
 	public void Load_Edit_Class(JPanel Panel2Close) {
-
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);
-		GetClasses();
-		
-		ECLSS.setClassStudyAids(arrayClass);
-		getCampus();
-		ECLSS.setCampus(arrayCampus);
-		getBuilding();
-		ECLSS.setBuilding(arrayBuilding);
+
+		ECLSS.setClasses(GetClasses());
+		ECLSS.setClassStudyAids(GetClassAids());
+		ECLSS.setCampus(getCampuses());
+		ECLSS.setBuilding(getBuildings());
 		manegerMainFrm.add(ECLSS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
 
-	private void getCampus() {
-		arrayCampus =new ArrayList<Campus>();
-		GetCampusPack CampusMsg =new GetCampusPack();
+	private ArrayList<StudyAids> GetClassAids() {
+		GetStudyAidsPack studyAidsMessage = new GetStudyAidsPack();
+		client.handleMessageFromClientUI(studyAidsMessage);
+		studyAidsMessage = (GetStudyAidsPack) client.getMessage();
+		return (studyAidsMessage.getAllStudyAids());
+	}
+
+	private ArrayList<Campus> getCampuses() {
+		GetCampusPack CampusMsg = new GetCampusPack();
 		client.handleMessageFromClientUI(CampusMsg);
 		CampusMsg = (GetCampusPack) client.getMessage();
-		arrayCampus=CampusMsg.getAllCampuses();
+		return (CampusMsg.getAllCampuses());
 	}
-	
-	private void getBuilding() {
-		arrayBuilding =new ArrayList<Building>();
-		GetBuildingsPack BuildingMsg =new GetBuildingsPack();
+
+	private ArrayList<Building> getBuildings() {
+		GetBuildingsPack BuildingMsg = new GetBuildingsPack();
 		client.handleMessageFromClientUI(BuildingMsg);
 		BuildingMsg = (GetBuildingsPack) client.getMessage();
-		arrayBuilding=BuildingMsg.getAllBuildings();
+		return (BuildingMsg.getAllBuildings());
 	}
-	
-	
+
 	public void Load_Edit_Course(JPanel Panel2Close) {
 
 		manegerMainFrm.remove(Panel2Close);
@@ -150,7 +150,7 @@ public class ManagerController {
 		// /load all we need
 
 		CS = new Course_Settings(this);
-		
+
 		manegerMainFrm.add(CS.PNL_Main);
 		manegerMainFrm.repaint();
 	}

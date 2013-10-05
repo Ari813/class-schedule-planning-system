@@ -15,6 +15,7 @@ public class GetCampusPack extends MessagePack {
 	private ArrayList<Campus> allCampuses;
 
 	public GetCampusPack() {
+		super();
 		this.op = OpType.GetCampusInfo;
 	}
 
