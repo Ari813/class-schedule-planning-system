@@ -74,6 +74,14 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private JLabel lblClassAids;
 
 	private JList lstSelectedClassaids;
+	
+	
+	private ArrayList<StudyAids> arrayStudyAids;
+	private ArrayList<Campus> arrayCampus;
+	private ArrayList<Building> arrayBuilding;
+	private ArrayList<Class> getClasses;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -404,29 +412,33 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 		}
 	}
-
+	
+	
 	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
 		// TODO Auto-generated method stub
-		for (int i = 0; i < arrayList.size(); i++) {
+		arrayStudyAids=arrayList;
+		for (int i = 0; i < arrayStudyAids.size(); i++) {
 			lstClassAidsModel.addElement( arrayList.get(i).getAidsID()+ ":" +arrayList.get(i).getAidsName());
 		}
 	}
 
-	public void setCampus(ArrayList<Campus> arrayCampus) {
+	public void setCampus(ArrayList<Campus> arrayList) {
 		// TODO Auto-generated method stub
+		arrayCampus=arrayList;
 		for (int i = 0; i < arrayCampus.size(); i++) {
 			cmbxcampus.addItem(arrayCampus.get(i).getCampusId()+ ":" + arrayCampus.get(i).getCampusName());
 		}
 	}
 
-	public void setBuilding(ArrayList<Building> arrayBuilding) {
-		// TODO Auto-generated method stub
+	public void setBuilding(ArrayList<Building> arrayList) {
+		arrayBuilding=arrayList;
 		for (int i = 0; i < arrayBuilding.size(); i++) {
 			cmbBxBlding.addItem( arrayBuilding.get(i).getBuildingID()+ ":" + arrayBuilding.get(i).getBuildingName());
 		}
 	}
 
-	public void setClasses(ArrayList<Class> getClasses) {
+	public void setClasses(ArrayList<Class> arrayList) {
+		getClasses=arrayList;
 		for (int i = 0; i < getClasses.size(); i++) {
 			cmbxEditClass.addItem( getClasses.get(i).getClassID()+ ":" +getClasses.get(i).getDescription());
 		}
