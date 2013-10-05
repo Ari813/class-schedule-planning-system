@@ -104,7 +104,7 @@ public class ManagerController {
 		ECLSS = new Edit_Class(this);
 		//GetClasses();
 		//ECLSS.setClassStudyAids(arrayClass);
-		getcampus();
+		getCampus();
 		ECLSS.setCampus();
 		
 		
@@ -112,7 +112,7 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
-	private void getcampus() {
+	private void getCampus() {
 		
 		
 	}
