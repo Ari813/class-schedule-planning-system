@@ -7,7 +7,6 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
-import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -15,18 +14,15 @@ import java.util.Locale;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
 import common.ChatIF;
-import common.*;
-
 import Client.*;
-import entities.Login;
+import entities.*;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
-import MsgPackage.LoginPack;
+import MsgPackage.*;
 
 public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 
@@ -166,6 +162,16 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 
 	}
 
+	public void handleLogoutGUI() {
+		LogoutPack lgotmsg = new LogoutPack(lgnUsr);
+		client.handleMessageFromClientUI(lgotmsg);
+		getContentPane().removeAll();
+		setBounds(100, 100, 550, 550);
+		setPreferredSize(new Dimension(550,550));
+		getContentPane().add(loginUserGUI);
+		getContentPane().repaint();
+		
+	}
 
 	private void handleLogin() {
 		getContentPane().remove(loginUserGUI);
@@ -173,11 +179,6 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 		
 		
 		}
-		
-	
-
-	
-
 	@Override
 	public void display(Object message) {
 		// TODO Auto-generated method stub

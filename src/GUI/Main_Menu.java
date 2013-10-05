@@ -210,8 +210,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 			manager.Load_Lecturer_Preferences(PNL_Main);
 		}
 		if (e.getSource() == btnQuit) {
-			//manager.logout();
-			System.exit(0);
+			manager.logout();
+			//System.exit(0);
 		}
 		if (e.getSource() == btnCourseSettings) {
 			manager.Load_Course_Settings(PNL_Main);

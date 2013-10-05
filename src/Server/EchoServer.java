@@ -78,6 +78,7 @@ public class EchoServer extends AbstractServer {
 			login(msgpck, client);
 			break;
 		case Logout:
+			logout(msgpck, client);
 			break;
 		case GetBuildingsInfo:
 			AllBuildings(msgpck, client);
@@ -96,6 +97,15 @@ public class EchoServer extends AbstractServer {
 		default:
 			break;
 
+		}
+	}
+
+	private void logout(MessagePack msg, ConnectionToClient client) {
+		LogoutPack lgt = (LogoutPack) msg;
+		try {
+			db.exitUser(lgt.getUsr().getUserID());
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 

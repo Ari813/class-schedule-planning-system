@@ -172,4 +172,10 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
+	public void logout() {
+		// TODO Auto-generated method stub
+		manegerMainFrm.handleLogoutGUI();
+		
+	}
+
 }

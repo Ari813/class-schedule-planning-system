@@ -215,6 +215,7 @@ public class Database {
 			cls.setClassID(qrs.getInt("ClassID"));
 			cls.setCapcity(qrs.getInt("Capacity"));
 			cls.setCampus(qrs.getInt("Campus"));
+			cls.setAvailable(qrs.getBoolean("Available"));
 			cls.setDescription(qrs.getString("Desciption"));
 			query = new String(
 					"SELECT * FROM `csps-db`.classaids ca where ca.ClassBuilding = "
