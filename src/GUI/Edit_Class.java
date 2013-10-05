@@ -443,7 +443,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	public void setCampus(ArrayList<Class> arrayClass) {
 		int i;	
-		Set<Integer> campusSet=new TreeSet<>();	
+		Set<Integer> campusSet=new TreeSet<Integer>();	
 		for (i = 0; i < arrayClass.size(); i++) {
 			campusSet.add(arrayClass.get(i).getCampus());
 		}

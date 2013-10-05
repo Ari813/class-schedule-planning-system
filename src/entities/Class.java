@@ -3,6 +3,8 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 public class Class implements Serializable {
 	
 
@@ -11,7 +13,7 @@ public class Class implements Serializable {
 	public String building;
 	
 	public int capcity;
-	public int available;
+	public Boolean available;
 	public int campus;
 	
 
@@ -22,11 +24,11 @@ public class Class implements Serializable {
 	
 
 
-	public int getAvailable() {
+	public Boolean getAvailable() {
 		return available;
 	}
 
-	public void setAvailable(int available) {
+	public void setAvailable(Boolean available) {
 		this.available = available;
 	}
 	public ArrayList<StudyAids> getStudyAids() {
