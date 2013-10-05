@@ -2,15 +2,17 @@ package MsgPackage;
 
 import java.util.ArrayList;
 
-import MsgPackage.MessagePack.OpType;
+public class ClassPack extends MessagePack {
 
-
-public class ClassPack {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private OpType op;
-	
+
 	private ArrayList<entities.Class> allclass;
-	
+
 	public ArrayList<entities.Class> getAllclass() {
 		return allclass;
 	}
@@ -22,8 +24,7 @@ public class ClassPack {
 	public ClassPack() {
 		super();
 		this.op = OpType.GetClassAids;
-		
-		
+
 	}
 
 	public OpType getOp() {
@@ -33,14 +34,5 @@ public class ClassPack {
 	public void setOp(OpType op) {
 		this.op = op;
 	}
-
-	
-
-
-	
-
-	
-
-
 
 }

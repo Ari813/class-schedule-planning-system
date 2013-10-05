@@ -17,6 +17,7 @@ public class MessagePack implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	protected OpType op;
+
 	/**
 	 * the operations enums sent between the client and the server
 	 */
@@ -24,12 +25,10 @@ public class MessagePack implements Serializable {
 
 		Login, 
 		Logout, 
-		
-		StopExam,
-		GetClassAids
-		
-
+		GetClassAids, 
+		GetCampusInfo
 	};
+
 	/**
 	 * 
 	 * @return the type of the operation
