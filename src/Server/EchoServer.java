@@ -12,7 +12,6 @@ import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 import GUI.*;
-
 import MsgPackage.*;
 import entities.*;
 import ocsf.server.*;
@@ -80,6 +79,7 @@ public class EchoServer extends AbstractServer {
 		case Logout:
 			break;
 		case GetBuildingsInfo:
+			AllBuildings(msgpck);
 			break;
 		case GetCampusInfo:
 			break;
@@ -90,6 +90,30 @@ public class EchoServer extends AbstractServer {
 
 		}
 	}
+
+	
+
+	private void AllBuildings(MessagePack msg,ConnectionToClient client) {
+		// TODO Auto-generated method stub
+		GetBuildingsPack bldng =(GetBuildingsPack) msg;
+		 //ArrayList<Building>  bl;
+		try {
+			bldng.setAllBuildings(db.getAllBuildings());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		
+		}try {
+			
+			client.sendToClient(bldng);
+		} catch (IOException e) {
+			System.out.println("ooppss");
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 	private synchronized void login(MessagePack msg, ConnectionToClient client) {
 		LoginPack lgn = (LoginPack) msg;
