@@ -64,6 +64,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
+import entities.Building;
+import entities.Campus;
 import entities.Class;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
@@ -441,7 +443,21 @@ public class Edit_Class extends JPanel implements ActionListener,
 		}
 	}
 
-	public void setCampus() {
+	public void setCampus(ArrayList<Campus> arrayCampus) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < arrayCampus.size(); i++) {
+			cmbxcampus.addItem(i+ ":" +arrayCampus.get(i));
+		}
+	}
+
+	public void setBuilding(ArrayList<Building> arrayBuilding) {
+		// TODO Auto-generated method stub
+		for (int i = 0; i < arrayBuilding.size(); i++) {
+			cmbBxBlding.addItem(i+ ":" +arrayBuilding.get(i));
+		}
+	}
+
+	
 		
 		
 		
@@ -464,7 +480,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 			
 		
 		
-	}	
+	
+
 		
 
 }
