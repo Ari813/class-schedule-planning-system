@@ -88,9 +88,30 @@ public class EchoServer extends AbstractServer {
 			allClasses(msgpck, client);
 			break;
 		case GetStudyAidsInfo:
+			allAids(msgpck, client);
 			break;
 
 		}
+	}
+
+	private void allAids(MessagePack msg, ConnectionToClient client) {
+		GetStudyAidsPack aids = (GetStudyAidsPack) msg;
+
+		try {
+			aids.setAllStudyAids(db.getAllStudyAids());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		try {
+			client.sendToClient(aids);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
 	}
 
 	private void allClasses(MessagePack msg, ConnectionToClient client) {
