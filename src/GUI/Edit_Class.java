@@ -442,7 +442,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	public void setCampus(ArrayList<Class> arrayClass) {
-		int i;	
+		/*/
+		 * 	int i;	
 		Set<Integer> campusSet=new TreeSet<Integer>();	
 		for (i = 0; i < arrayClass.size(); i++) {
 			campusSet.add(arrayClass.get(i).getCampus());
@@ -452,6 +453,10 @@ public class Edit_Class extends JPanel implements ActionListener,
 		 while (itr.hasNext()) {
 			 cmbxcampus.addItem(i + ":" +itr.toString());
 		 }
+		 * 
+		 * 
+		 */
+	
 			
 		
 		

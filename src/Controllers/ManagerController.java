@@ -102,13 +102,19 @@ public class ManagerController {
 
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);
-	//	GetClasses();
+		//GetClasses();
 		//ECLSS.setClassStudyAids(arrayClass);
+		getampus();
 		ECLSS.setCampus(arrayClass);
 		
 		
 		manegerMainFrm.add(ECLSS.PNL_Main);
 		manegerMainFrm.repaint();
+	}
+
+	private void getampus() {
+		
+		
 	}
 
 	public void Load_Edit_Course(JPanel Panel2Close) {
