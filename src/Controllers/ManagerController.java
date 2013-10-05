@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
+import entities.Campus;
 import Client.ChatClient;
 import GUI.Automatic_Sheduling;
 import GUI.Course_Settings;
@@ -15,6 +16,7 @@ import GUI.Main_Frame;
 import GUI.Main_Menu;
 import GUI.Manual_Sheduling;
 import MsgPackage.ClassPack;
+import MsgPackage.GetCampusPack;
 
 public class ManagerController {
 	final public static int EXIT = 11;
@@ -46,6 +48,7 @@ public class ManagerController {
 	public Main_Frame manegerMainFrm;
 	public LecturerController lecturer_Ctrl;
 	private ArrayList<entities.Class> arrayClass;
+	private ArrayList<Campus> arrayCampus ;
 
 	private ChatClient client;
 
@@ -113,8 +116,11 @@ public class ManagerController {
 	}
 
 	private void getCampus() {
-		
-		
+		arrayCampus =new ArrayList<Campus>();
+		GetCampusPack CampusMsg =new GetCampusPack();
+		client.handleMessageFromClientUI(CampusMsg);
+		CampusMsg = (GetCampusPack) client.getMessage();
+		arrayCampus=CampusMsg.getAllCampuses();
 	}
 
 	public void Load_Edit_Course(JPanel Panel2Close) {
