@@ -10,13 +10,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import entities.Building;
+import entities.Campus;
 import entities.Class;
 import entities.Login;
+import entities.StudyAids;
 
 /**
  * Constructs a Database.
  */
-
 
 public class Database {
 
@@ -105,7 +106,7 @@ public class Database {
 		String query = new String(
 				"SELECT * FROM `csps-db`.`Login` L WHERE L.UserID = " + userID
 						+ " AND L.Password = '" + userPass + "' ;");
-		
+
 		st = conn.createStatement();
 		int ans = Login.ERROR;
 		qrs = st.executeQuery(query);
@@ -140,26 +141,62 @@ public class Database {
 		st = conn.createStatement();
 		st.executeUpdate(query);
 	}
-	
-	
+
 	public ArrayList<Building> getAllBuildings() throws SQLException {
 		ResultSet qrs = null;
 		ArrayList<Building> buildingsArray = new ArrayList<Building>();
 		Building bld;
-		
-		String query = new String(
-				"SELECT * FROM `csps-db`.building;");
-				st = conn.createStatement();
+
+		String query = new String("SELECT * FROM `csps-db`.building;");
+		st = conn.createStatement();
 		qrs = st.executeQuery(query);
 		if (qrs.next()) {
 			bld = new Building();
 			bld.setBuildingID(Integer.parseInt(qrs.getString(1)));
-			bld.setBuildingName(qrs.getString(2)); 
+			bld.setBuildingName(qrs.getString(2));
 			buildingsArray.add(bld);
 		}
 		qrs.close();
-		
-		return buildingsArray;	
+
+		return buildingsArray;
+	}
+
+	public ArrayList<StudyAids> getAllStudyAids() throws SQLException {
+		ResultSet qrs = null;
+		ArrayList<StudyAids> studyAidsArray = new ArrayList<StudyAids>();
+		StudyAids sAid;
+
+		String query = new String("SELECT * FROM `csps-db`.Aidsinfo;");
+		st = conn.createStatement();
+		qrs = st.executeQuery(query);
+		if (qrs.next()) {
+			sAid = new StudyAids();
+			sAid.setAidsID(Integer.parseInt(qrs.getString(1)));
+			sAid.setAidsName(qrs.getString(2));
+			studyAidsArray.add(sAid);
+		}
+		qrs.close();
+
+		return studyAidsArray;
+	}
+
+	public ArrayList<Campus> getAllCampuses() throws SQLException {
+		ResultSet qrs = null;
+		ArrayList<Campus> campusessArray = new ArrayList<Campus>();
+		Campus cmps;
+
+		String query = new String("SELECT * FROM `csps-db`.campus;");
+		st = conn.createStatement();
+		qrs = st.executeQuery(query);
+		if (qrs.next()) {
+			cmps = new Campus();
+			cmps.setCampusId(Integer.parseInt(qrs.getString(1)));
+			cmps.setCampusName(qrs.getString(2));
+			campusessArray.add(cmps);
+		}
+		qrs.close();
+
+		return campusessArray;
 	}
 
 }
