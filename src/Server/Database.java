@@ -152,7 +152,7 @@ public class Database {
 		qrs = st.executeQuery(query);
 		if (qrs.next()) {
 			bld = new Building();
-			bld.setBuildingID(qrs.getInt("BuildingID")));
+			bld.setBuildingID(qrs.getInt("BuildingID"));
 			bld.setBuildingName("BuildingName");
 			buildingsArray.add(bld);
 		}
