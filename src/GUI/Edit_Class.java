@@ -441,7 +441,11 @@ public class Edit_Class extends JPanel implements ActionListener,
 		}
 	}
 
-	public void setCampus(ArrayList<Class> arrayClass) {
+	public void setCampus() {
+		
+		
+		
+		
 		/*/
 		 * 	int i;	
 		Set<Integer> campusSet=new TreeSet<Integer>();	
