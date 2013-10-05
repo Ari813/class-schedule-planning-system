@@ -23,7 +23,10 @@ import javax.swing.JButton;
 
 import java.awt.Window.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Set;
+import java.util.TreeSet;
 import java.awt.SystemColor;
 import java.awt.Color;
 
@@ -437,5 +440,22 @@ public class Edit_Class extends JPanel implements ActionListener,
 			lstClassAidsModel.addElement(arrayClass.get(i).getStudyAids());
 		}
 	}
+
+	public void setCampus(ArrayList<Class> arrayClass) {
+		int i;	
+		Set<Integer> campusSet=new TreeSet<>();	
+		for (i = 0; i < arrayClass.size(); i++) {
+			campusSet.add(arrayClass.get(i).getCampus());
+		}
+		
+		Iterator<Integer> itr = campusSet.iterator();
+		 while (itr.hasNext()) {
+			 cmbxcampus.addItem(i + ":" +itr.toString());
+		 }
+			
+		
+		
+	}	
+		
 
 }
