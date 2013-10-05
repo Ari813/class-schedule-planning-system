@@ -77,6 +77,16 @@ public class EchoServer extends AbstractServer {
 		case Login:
 			login(msgpck, client);
 			break;
+		case Logout:
+			break;
+		case GetBuildingsInfo:
+			break;
+		case GetCampusInfo:
+			break;
+		case GetClassAids:
+			break;
+		case GetStudyAidsInfo:
+		break;
 
 		}
 	}
