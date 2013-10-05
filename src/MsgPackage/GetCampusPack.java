@@ -12,7 +12,6 @@ public class GetCampusPack extends MessagePack {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private OpType op;
 	private ArrayList<Campus> allCampuses;
 
 	public GetCampusPack() {
@@ -32,21 +31,6 @@ public class GetCampusPack extends MessagePack {
 	 */
 	public void setAllCampuses(ArrayList<Campus> allCampuses) {
 		this.allCampuses = allCampuses;
-	}
-
-	/**
-	 * @return the op
-	 */
-	public OpType getOp() {
-		return op;
-	}
-
-	/**
-	 * @param op
-	 *            the op to set
-	 */
-	public void setOp(OpType op) {
-		this.op = op;
 	}
 
 }

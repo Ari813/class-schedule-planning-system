@@ -9,8 +9,6 @@ public class ClassPack extends MessagePack {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private OpType op;
-
 	private ArrayList<entities.Class> allclass;
 
 	public ArrayList<entities.Class> getAllclass() {
@@ -25,14 +23,6 @@ public class ClassPack extends MessagePack {
 		super();
 		this.op = OpType.GetClassAids;
 
-	}
-
-	public OpType getOp() {
-		return op;
-	}
-
-	public void setOp(OpType op) {
-		this.op = op;
 	}
 
 }
