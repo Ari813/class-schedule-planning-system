@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import entities.Building;
+import entities.Class;
 import entities.Login;
 
 /**
@@ -43,7 +45,7 @@ public class Database {
 	public Database(String database, String username, String password)
 			throws Exception {
 		try {
-			Class.forName(driver).newInstance();
+			java.lang.Class.forName(driver).newInstance();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -70,7 +72,7 @@ public class Database {
 	 */
 	public Database() throws Exception {
 		try {
-			Class.forName(driver).newInstance();
+			java.lang.Class.forName(driver).newInstance();
 		} catch (Exception ex) {
 			throw ex;
 		}
@@ -138,6 +140,26 @@ public class Database {
 		st = conn.createStatement();
 		st.executeUpdate(query);
 	}
-
+	
+	
+	public ArrayList<Building> getAllBuildings() throws SQLException {
+		ResultSet qrs = null;
+		ArrayList<Building> buildingsArray = new ArrayList<Building>();
+		Building bld;
+		
+		String query = new String(
+				"SELECT * FROM `csps-db`.building;");
+				st = conn.createStatement();
+		qrs = st.executeQuery(query);
+		if (qrs.next()) {
+			bld = new Building();
+			bld.setBuildingID(Integer.parseInt(qrs.getString(1)));
+			bld.setBuildingName(qrs.getString(2)); 
+			buildingsArray.add(bld);
+		}
+		qrs.close();
+		
+		return buildingsArray;	
+	}
 
 }
