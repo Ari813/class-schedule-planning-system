@@ -408,27 +408,28 @@ public class Edit_Class extends JPanel implements ActionListener,
 	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < arrayList.size(); i++) {
-			lstClassAidsModel.addElement(arrayList.get(i).getAidsName());
+			lstClassAidsModel.addElement( arrayList.get(i).getAidsID()+ ":" +arrayList.get(i).getAidsName());
 		}
 	}
 
 	public void setCampus(ArrayList<Campus> arrayCampus) {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < arrayCampus.size(); i++) {
-			cmbxcampus.addItem(i + ":" + arrayCampus.get(i));
+			cmbxcampus.addItem(arrayCampus.get(i).getCampusId()+ ":" + arrayCampus.get(i).getCampusName());
 		}
 	}
 
 	public void setBuilding(ArrayList<Building> arrayBuilding) {
 		// TODO Auto-generated method stub
 		for (int i = 0; i < arrayBuilding.size(); i++) {
-			cmbBxBlding.addItem(i + ":" + arrayBuilding.get(i));
+			cmbBxBlding.addItem( arrayBuilding.get(i).getBuildingID()+ ":" + arrayBuilding.get(i).getBuildingName());
 		}
 	}
 
 	public void setClasses(ArrayList<Class> getClasses) {
-		// TODO Auto-generated method stub
-
+		for (int i = 0; i < getClasses.size(); i++) {
+			cmbxEditClass.addItem( getClasses.get(i).getClassID()+ ":" +getClasses.get(i).getDescription());
+		}
 	}
 
 	/*
