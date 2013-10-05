@@ -111,7 +111,7 @@ public class Database {
 		int ans = Login.ERROR;
 		qrs = st.executeQuery(query);
 		if (qrs.next()) {
-			if (qrs.getString(4).equals("0")) {
+			if (qrs.getInt("LoggedIn")==0) {
 				query = new String(
 						"UPDATE `csps-db`.`Login` L SET `LoggedIn` = 1 WHERE L.UserID = "
 								+ userID + ";");
@@ -153,7 +153,7 @@ public class Database {
 		while (qrs.next()) {
 			bld = new Building();
 			bld.setBuildingID(qrs.getInt("BuildingID"));
-			bld.setBuildingName("BuildingName");
+			bld.setBuildingName(qrs.getString("BuildingName"));
 			buildingsArray.add(bld);
 		}
 		qrs.close();
@@ -190,8 +190,8 @@ public class Database {
 		qrs = st.executeQuery(query);
 		while (qrs.next()) {
 			cmps = new Campus();
-			cmps.setCampusId(Integer.parseInt(qrs.getString(1)));
-			cmps.setCampusName(qrs.getString(2));
+			cmps.setCampusId(qrs.getInt("CampusID"));
+			cmps.setCampusName(qrs.getString("CampusName"));
 			campusessArray.add(cmps);
 		}
 		qrs.close();
@@ -211,11 +211,11 @@ public class Database {
 		qrs = st.executeQuery(query);
 		while (qrs.next()) {
 			cls = new Class();
-			cls.setBuilding(Integer.parseInt(qrs.getString(1)));
-			cls.setClassID(Integer.parseInt(qrs.getString(2)));
-			cls.setCapcity(Integer.parseInt(qrs.getString(3)));
-			cls.setCampus(Integer.parseInt(qrs.getString(4)));
-			cls.setDescription(qrs.getString(5));
+			cls.setBuilding(qrs.getInt("ClassBuilding"));
+			cls.setClassID(qrs.getInt("ClassID"));
+			cls.setCapcity(qrs.getInt("Capacity"));
+			cls.setCampus(qrs.getInt("Campus"));
+			cls.setDescription(qrs.getString("Desciption"));
 			query = new String(
 					"SELECT * FROM `csps-db`.classaids ca where ca.ClassBuilding = "
 							+ cls.getBuilding() + " AND ca.ClassID = "
@@ -224,7 +224,7 @@ public class Database {
 			classAidsQrs = st.executeQuery(query);
 			while (classAidsQrs.next()) {
 				stdyAds = new StudyAids();
-				stdyAds.setAidsID(Integer.parseInt(classAidsQrs.getString(3)));
+				stdyAds.setAidsID(classAidsQrs.getInt("ClassAidID"));
 				cls.addStudyAid(stdyAds);
 			}
 			ClassesArray.add(cls);
