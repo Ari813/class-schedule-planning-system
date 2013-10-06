@@ -50,7 +50,11 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private JComboBox cmbxEditClass;
 	private JComboBox cmbxcampus;
 	private JList<String> lstClassAids;
+	private JList lstSelectedClassaids;
+
 	DefaultListModel lstClassAidsModel;
+	DefaultListModel lstSelectedClassAidsModel;
+
 	private JTextPane txtpnCodeNumber;
 	private JComboBox cmbBxBlding;
 	private JCheckBox chckbxAvailable;
@@ -72,16 +76,14 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private Component horizontalStrut_2;
 	private Component horizontalStrut;
 	private JLabel lblClassAids;
+	// private static int aidsIndex=0;
 
-	private JList lstSelectedClassaids;
-	
-	
 	private ArrayList<StudyAids> arrayStudyAids;
+	private ArrayList<StudyAids> arraySelectedStudyAids;
 	private ArrayList<Campus> arrayCampus;
 	private ArrayList<Building> arrayBuilding;
 	private ArrayList<Class> getClasses;
-	
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -198,15 +200,6 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return btnNewClass;
 	}
 
-	private JList GETSelectedClassAids() {
-		lstSelectedClassaids = new JList();
-		lstSelectedClassaids.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lstSelectedClassaids.setBackground(new Color(169, 169, 169));
-		lstSelectedClassaids.setForeground(new Color(255, 255, 255));
-		lstSelectedClassaids.setBounds(586, 130, 138, 220);
-		return lstSelectedClassaids;
-	}
-
 	private JButton GETbtnRemove() {
 		btnRemove = new JButton("<--");
 		btnRemove.setToolTipText("Remove item from class");
@@ -230,6 +223,18 @@ public class Edit_Class extends JPanel implements ActionListener,
 		chckbxAvailable.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		chckbxAvailable.setBounds(10, 80, 135, 23);
 		return chckbxAvailable;
+	}
+
+	private JList GETSelectedClassAids() {
+		lstSelectedClassAidsModel = new DefaultListModel();
+
+		lstSelectedClassaids = new JList();
+		lstSelectedClassaids.setModel(lstSelectedClassAidsModel);
+		lstSelectedClassaids.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lstSelectedClassaids.setBackground(new Color(169, 169, 169));
+		lstSelectedClassaids.setForeground(new Color(255, 255, 255));
+		lstSelectedClassaids.setBounds(586, 130, 138, 220);
+		return lstSelectedClassaids;
 	}
 
 	private JList GETlstClassAids() {
@@ -367,13 +372,49 @@ public class Edit_Class extends JPanel implements ActionListener,
 		if (e.getSource() == btnSaveChanges) {
 		}
 		if (e.getSource() == btnAdd) {
+			int index;
+			if ((arrayStudyAids != null) && (!arrayStudyAids.isEmpty())) {
+				index = lstClassAids.getSelectedIndex();
+				
+				
+				
+				if (arraySelectedStudyAids == null)
+					arraySelectedStudyAids = new ArrayList<StudyAids>();
+				
+				arraySelectedStudyAids.add(arrayStudyAids.get(index));
+				lstSelectedClassAidsModel.addElement(arrayStudyAids
+						.get(index).getAidsID()
+						+ ":"
+						+ arrayStudyAids.get(index).getAidsName());
+				
+				arrayStudyAids.remove(index);
+				lstClassAidsModel.remove(index);
+
+			}
 		}
 		if (e.getSource() == btnRemove) {
+			int index;
+			if ((arraySelectedStudyAids != null)
+					&& (!arraySelectedStudyAids.isEmpty())) {
+				index = lstSelectedClassaids.getSelectedIndex();
+				
+				arrayStudyAids.add(arraySelectedStudyAids.get(index));
+				 lstClassAidsModel.addElement(arraySelectedStudyAids
+							.get(index).getAidsID()
+							+ ":"
+							+ arraySelectedStudyAids.get(index).getAidsName());
+				 lstSelectedClassAidsModel.remove(index);
+					arraySelectedStudyAids.remove(index);
+			}
 		}
 		if (e.getSource() == btnNewClass) {
+
 		}
 		if (e.getSource() == btnDiscard) {
 			manager.BacktoMainMenu(this.PNL_Main);
+		}
+		if (e.getSource() == cmbxEditClass) {
+			manager.setSelectedClass(cmbxEditClass.getSelectedItem());
 		}
 
 	}
@@ -412,35 +453,38 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 		}
 	}
-	
-	
+
 	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
 		// TODO Auto-generated method stub
-		arrayStudyAids=arrayList;
+		arrayStudyAids = arrayList;
 		for (int i = 0; i < arrayStudyAids.size(); i++) {
-			lstClassAidsModel.addElement( arrayList.get(i).getAidsID()+ ":" +arrayList.get(i).getAidsName());
+			lstClassAidsModel.addElement(arrayList.get(i).getAidsID() + ":"
+					+ arrayList.get(i).getAidsName());
 		}
 	}
 
 	public void setCampus(ArrayList<Campus> arrayList) {
 		// TODO Auto-generated method stub
-		arrayCampus=arrayList;
+		arrayCampus = arrayList;
 		for (int i = 0; i < arrayCampus.size(); i++) {
-			cmbxcampus.addItem(arrayCampus.get(i).getCampusId()+ ":" + arrayCampus.get(i).getCampusName());
+			cmbxcampus.addItem(arrayCampus.get(i).getCampusId() + ":"
+					+ arrayCampus.get(i).getCampusName());
 		}
 	}
 
 	public void setBuilding(ArrayList<Building> arrayList) {
-		arrayBuilding=arrayList;
+		arrayBuilding = arrayList;
 		for (int i = 0; i < arrayBuilding.size(); i++) {
-			cmbBxBlding.addItem(arrayBuilding.get(i).getBuildingID()+ ":" + arrayBuilding.get(i).getBuildingName());
+			cmbBxBlding.addItem(arrayBuilding.get(i).getBuildingID() + ":"
+					+ arrayBuilding.get(i).getBuildingName());
 		}
 	}
 
 	public void setClasses(ArrayList<Class> arrayList) {
-		getClasses=arrayList;
+		getClasses = arrayList;
 		for (int i = 0; i < getClasses.size(); i++) {
-			cmbxEditClass.addItem( getClasses.get(i).getClassID()+ ":" +getClasses.get(i).getDescription());
+			cmbxEditClass.addItem(getClasses.get(i).getClassID() + ":"
+					+ getClasses.get(i).getDescription());
 		}
 	}
 
