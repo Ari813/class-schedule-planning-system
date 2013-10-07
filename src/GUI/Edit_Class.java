@@ -37,9 +37,11 @@ import javax.swing.DefaultComboBoxModel;
 import entities.Building;
 import entities.Campus;
 import entities.Class;
+import entities.ClassesAids;
 import entities.StudyAids;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
+
 import java.awt.SystemColor;
 
 public class Edit_Class extends JPanel implements ActionListener,
@@ -87,6 +89,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private ArrayList<Campus> arrayCampus;
 	private ArrayList<Building> arrayBuilding;
 	private ArrayList<Class> arrayClasses;
+	private ArrayList<ClassesAids> arrayAidsForExistingClasses;
 	public String txtSelectedCampus;
 	
 
@@ -267,7 +270,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	private JTextField GETtxtCapacityNumber() {
 		txtCapacityNumber = new JTextField();
-		txtCapacityNumber.setEnabled(false);
+		txtCapacityNumber.setEditable(false);
 		txtCapacityNumber.setText("Capacity number");
 		txtCapacityNumber.setBounds(172, 144, 100, 20);
 		return txtCapacityNumber;
@@ -376,6 +379,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		if (txtpnCodeNumber == null) {
 			txtpnCodeNumber = new JTextPane();
 			txtpnCodeNumber.setEnabled(false);
+			txtpnCodeNumber.setEditable(false);
 			// txtpnCodeNumber.setDropMode(DropMode.ON);
 			txtpnCodeNumber.setBackground(Color.WHITE);
 			txtpnCodeNumber.setText("Code Number");
@@ -455,21 +459,33 @@ public class Edit_Class extends JPanel implements ActionListener,
 		int index = cmbxEditClass.getSelectedIndex() - 1;
 		if ((arrayClasses != null) && (!arrayClasses.isEmpty()) && (index >= 0)) {
 
-			txtClassSelectedCampus.setText(Integer.toString(arrayClasses.get(
-					index).getCampus()));
-			txtClassSelectedBuildig.setText(Integer.toString(arrayClasses.get(
-					index).getBuilding()));
+			
+			txtClassSelectedCampus.setText(
+			arrayCampus.get(arrayClasses.get(
+					index).getCampus()).getCampusId() + ":"
+			+ arrayCampus.get(arrayClasses.get(
+					index).getCampus()).getCampusName());
+			txtClassSelectedBuildig.setText(arrayBuilding.get(arrayClasses.get(
+					index).getBuilding()).getBuildingID() + ":"
+			+ arrayBuilding.get(arrayClasses.get(
+					index).getBuilding()).getBuildingName());
 			txtCapacityNumber.setText(Integer.toString(arrayClasses.get(index)
 					.getCapcity()));
 			txtDescriptionText.setText((arrayClasses.get(index)
 					.getDescription()));
 			chckbxAvailable.setSelected(arrayClasses.get(index)
 					.getAvailable());
+			setClassAids();
 		}
 		if (index<0)
 			setdefault();
 			
 			
+	}
+
+	private void setClassAids() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private void setdefault() {
@@ -502,11 +518,12 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
-		//if (arg0.getSource() == cmbxEditClass) {
-		//	setSelectedClass();		}
+		
 
 	}
-
+/*
+ * 
+ 
 	public void addClassAids(ArrayList<String> arry) {
 		// TODO Auto-generated method stub
 		this.aids = new ArrayList<String>();
@@ -517,7 +534,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 		}
 	}
-
+*/
 	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
 		// TODO Auto-generated method stub
 		arrayStudyAids = arrayList;
@@ -553,5 +570,11 @@ public class Edit_Class extends JPanel implements ActionListener,
 			cmbxEditClass.addItem(arrayClasses.get(i).getClassID() + ":"
 					+ arrayClasses.get(i).getDescription());
 		}
+	}
+
+	public void setAidsForExistingClasses(
+			ArrayList<ClassesAids> getAidsForExistingClasses) {
+		arrayAidsForExistingClasses=getAidsForExistingClasses;
+			
 	}
 }

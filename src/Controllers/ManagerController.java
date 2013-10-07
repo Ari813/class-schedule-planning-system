@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import entities.Building;
 import entities.Campus;
 import entities.Class;
+import entities.ClassesAids;
 import entities.StudyAids;
 import Client.ChatClient;
 import GUI.Automatic_Sheduling;
@@ -21,6 +22,7 @@ import GUI.Manual_Sheduling;
 import MsgPackage.GetAllClassesPack;
 import MsgPackage.GetBuildingsPack;
 import MsgPackage.GetCampusPack;
+import MsgPackage.GetClassAidsPack;
 import MsgPackage.GetStudyAidsPack;
 
 public class ManagerController {
@@ -95,13 +97,8 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
-	public ArrayList<Class> GetClasses() {
-		ClassMsg = new GetAllClassesPack();
-		client.handleMessageFromClientUI(ClassMsg);
-		ClassMsg = (GetAllClassesPack) client.getMessage();
-		return (ClassMsg.getAllclass());
-	}
-
+	
+///////
 	public void Load_Edit_Class(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);
@@ -110,18 +107,31 @@ public class ManagerController {
 		ECLSS.setClassStudyAids(GetClassAids());
 		ECLSS.setCampus(getCampuses());
 		ECLSS.setBuilding(getBuildings());
-
+		ECLSS.setAidsForExistingClasses(GetAidsForExistingClasses());
 		manegerMainFrm.add(ECLSS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
+private ArrayList<ClassesAids> GetAidsForExistingClasses() {
+	GetClassAidsPack ClassAidsMessage = new GetClassAidsPack();
+	client.handleMessageFromClientUI(ClassAidsMessage);
+	ClassAidsMessage = (GetClassAidsPack) client.getMessage();
+	return (ClassAidsMessage.getAllclassAids());
+	}
 
+	//////
 	private ArrayList<StudyAids> GetClassAids() {
 		GetStudyAidsPack studyAidsMessage = new GetStudyAidsPack();
 		client.handleMessageFromClientUI(studyAidsMessage);
 		studyAidsMessage = (GetStudyAidsPack) client.getMessage();
 		return (studyAidsMessage.getAllStudyAids());
 	}
-
+	
+	public ArrayList<Class> GetClasses() {
+		ClassMsg = new GetAllClassesPack();
+		client.handleMessageFromClientUI(ClassMsg);
+		ClassMsg = (GetAllClassesPack) client.getMessage();
+		return (ClassMsg.getAllclass());
+	}
 	private ArrayList<Campus> getCampuses() {
 		GetCampusPack CampusMsg = new GetCampusPack();
 		client.handleMessageFromClientUI(CampusMsg);
