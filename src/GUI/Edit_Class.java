@@ -394,6 +394,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		}
 		if (e.getSource() == btnRemove) {
 			int index;
+			
 			if ((arraySelectedStudyAids != null)
 					&& (!arraySelectedStudyAids.isEmpty())) {
 				index = lstSelectedClassaids.getSelectedIndex();
