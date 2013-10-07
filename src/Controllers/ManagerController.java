@@ -178,9 +178,6 @@ public class ManagerController {
 		
 	}
 
-	public void setSelectedClass(Object selectedItem) {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

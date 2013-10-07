@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import java.util.ArrayList;
 import java.awt.Color;
 
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -39,6 +40,7 @@ import entities.Class;
 import entities.StudyAids;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
+import java.awt.SystemColor;
 
 public class Edit_Class extends JPanel implements ActionListener,
 		ListSelectionListener, KeyListener {
@@ -71,7 +73,9 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private JLabel lblCampus;
 	private JLabel lblBilding;
 	private JLabel lblCapacity;
-
+	private JTextPane txtClassSelectedCampus;
+	private JTextPane txtClassSelectedBuildig ;
+	
 	private Component horizontalStrut_1;
 	private Component horizontalStrut_2;
 	private Component horizontalStrut;
@@ -82,7 +86,9 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private ArrayList<StudyAids> arraySelectedStudyAids;
 	private ArrayList<Campus> arrayCampus;
 	private ArrayList<Building> arrayBuilding;
-	private ArrayList<Class> getClasses;
+	private ArrayList<Class> arrayClasses;
+	public String txtSelectedCampus;
+	
 
 	/**
 	 * Launch the application.
@@ -239,6 +245,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	private JList GETlstClassAids() {
 		lstClassAids = new JList<>();
+		lstClassAids.setToolTipText("class aids options ");
 		lstClassAidsModel = new DefaultListModel();
 		lstClassAids.setModel(lstClassAidsModel);
 		lstClassAids.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -280,6 +287,27 @@ public class Edit_Class extends JPanel implements ActionListener,
 		horizontalStrut_2.setBackground(Color.BLACK);
 		horizontalStrut_2.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut_2);
+		
+		txtClassSelectedCampus = new JTextPane();
+		txtClassSelectedCampus.setFont(new Font("Tahoma", Font.BOLD, 11));
+		txtSelectedCampus="class selected campus";
+		txtClassSelectedCampus.setText(txtSelectedCampus);
+		txtClassSelectedCampus.setToolTipText("class campus");
+		txtClassSelectedCampus.setBackground(SystemColor.info);
+		txtClassSelectedCampus.setEnabled(false);
+		txtClassSelectedCampus.setEditable(false);
+		txtClassSelectedCampus.setBounds(10, 323, 130, 20);
+		PNL_Main.add(txtClassSelectedCampus);
+		
+		txtClassSelectedBuildig = new JTextPane();
+		txtClassSelectedBuildig.setFont(new Font("Tahoma", Font.BOLD, 11));
+		txtClassSelectedBuildig.setEditable(false);
+		txtClassSelectedBuildig.setToolTipText("class building");
+		txtClassSelectedBuildig.setText("class selected buildig");
+		txtClassSelectedBuildig.setEnabled(false);
+		txtClassSelectedBuildig.setBackground(SystemColor.info);
+		txtClassSelectedBuildig.setBounds(172, 323, 130, 20);
+		PNL_Main.add(txtClassSelectedBuildig);
 
 	}
 
@@ -322,6 +350,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	private JTextField GETtxtDescriptionText() {
 		txtDescriptionText = new JTextField();
+		txtDescriptionText.setToolTipText("class description");
 		txtDescriptionText.setEnabled(false);
 		txtDescriptionText.setBackground(Color.WHITE);
 		txtDescriptionText.setText("description text");
@@ -364,6 +393,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 			cmbxEditClass.setToolTipText("Edit class list");
 			cmbxEditClass.setBounds(10, 53, 754, 20);
 			cmbxEditClass.setMaximumRowCount(52);
+			cmbxEditClass.addActionListener(this);
 		}
 		return cmbxEditClass;
 	}
@@ -415,9 +445,41 @@ public class Edit_Class extends JPanel implements ActionListener,
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == cmbxEditClass) {
-			manager.setSelectedClass(cmbxEditClass.getSelectedItem());
+			setSelectedClass();
 		}
 
+	}
+
+	private void setSelectedClass() {
+		System.out.print("setSelectedClass in");
+		int index = cmbxEditClass.getSelectedIndex() - 1;
+		if ((arrayClasses != null) && (!arrayClasses.isEmpty()) && (index >= 0)) {
+
+			txtClassSelectedCampus.setText(Integer.toString(arrayClasses.get(
+					index).getCampus()));
+			txtClassSelectedBuildig.setText(Integer.toString(arrayClasses.get(
+					index).getBuilding()));
+			txtCapacityNumber.setText(Integer.toString(arrayClasses.get(index)
+					.getCapcity()));
+			txtDescriptionText.setText((arrayClasses.get(index)
+					.getDescription()));
+			chckbxAvailable.setSelected(arrayClasses.get(index)
+					.getAvailable());
+		}
+		if (index<0)
+			setdefault();
+			
+			
+	}
+
+	private void setdefault() {
+		
+		txtpnCodeNumber.setText("Code Number");
+		txtCapacityNumber.setText("Capacity number");
+		txtDescriptionText.setText("description text");
+		txtClassSelectedCampus.setText(txtSelectedCampus);
+		txtClassSelectedBuildig.setText("class selected buildig");
+		chckbxAvailable.setSelected(false);
 	}
 
 	@Override
@@ -440,7 +502,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
-		// TODO Auto-generated method stub
+		//if (arg0.getSource() == cmbxEditClass) {
+		//	setSelectedClass();		}
 
 	}
 
@@ -461,6 +524,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		for (int i = 0; i < arrayStudyAids.size(); i++) {
 			lstClassAidsModel.addElement(arrayList.get(i).getAidsID() + ":"
 					+ arrayList.get(i).getAidsName());
+			System.out.println("setClassStudyAids in");
 		}
 	}
 
@@ -482,19 +546,12 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	public void setClasses(ArrayList<Class> arrayList) {
-		getClasses = arrayList;
-		for (int i = 0; i < getClasses.size(); i++) {
-			cmbxEditClass.addItem(getClasses.get(i).getClassID() + ":"
-					+ getClasses.get(i).getDescription());
+		arrayClasses = arrayList;
+		cmbxEditClass.removeAll();
+		System.out.println("setClasses");
+		for (int i = 0; i < arrayClasses.size(); i++) {
+			cmbxEditClass.addItem(arrayClasses.get(i).getClassID() + ":"
+					+ arrayClasses.get(i).getDescription());
 		}
 	}
-
-	/*
-	 * / int i; Set<Integer> campusSet=new TreeSet<Integer>(); for (i = 0; i <
-	 * arrayClass.size(); i++) { campusSet.add(arrayClass.get(i).getCampus()); }
-	 * 
-	 * Iterator<Integer> itr = campusSet.iterator(); while (itr.hasNext()) {
-	 * cmbxcampus.addItem(i + ":" +itr.toString()); }
-	 */
-
 }
