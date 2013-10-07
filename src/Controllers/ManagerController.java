@@ -107,7 +107,7 @@ public class ManagerController {
 		ECLSS.setClassStudyAids(GetClassAids());
 		ECLSS.setCampus(getCampuses());
 		ECLSS.setBuilding(getBuildings());
-		//ECLSS.setAidsForExistingClasses(GetAidsForExistingClasses());
+		ECLSS.setAidsForExistingClasses(GetAidsForExistingClasses());
 		manegerMainFrm.add(ECLSS.PNL_Main);
 		manegerMainFrm.repaint();
 	}

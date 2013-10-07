@@ -482,10 +482,13 @@ public class Edit_Class extends JPanel implements ActionListener,
 			
 			
 	}
-
+/**
+ *@see 
+ *  need to do: maybe make a set(or map)
+ */
 	private void setClassAids() {
 		// TODO Auto-generated method stub
-		
+		//for 
 	}
 
 	private void setdefault() {
