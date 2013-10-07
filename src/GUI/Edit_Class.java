@@ -475,7 +475,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 					.getDescription()));
 			chckbxAvailable.setSelected(arrayClasses.get(index)
 					.getAvailable());
-			setClassAids();
+			setClassAids(arrayClasses.get(index).getClassID());
 		}
 		if (index<0)
 			setdefault();
@@ -485,11 +485,32 @@ public class Edit_Class extends JPanel implements ActionListener,
 /**
  *@see 
  *  need to do: maybe make a set(or map)
+ *  i didn't finish 
  */
-	private void setClassAids() {
+	private void setClassAids(int clss) {
 		// TODO Auto-generated method stub
-		//for 
+		lstClassAidsModel.removeAllElements();
+		lstSelectedClassAidsModel.removeAllElements();
+		restoreaids();
+		for (int i=0 ;i<(arrayAidsForExistingClasses.size());i++)
+		{
+			int tmp=arrayAidsForExistingClasses.get(i).getClss().getClassID();
+			if (tmp==clss){
+				
+			}
+		}
+			
+			
 	}
+
+	private void restoreaids() {
+	for(int i=0;i<arraySelectedStudyAids.size();i++){
+		arrayStudyAids.add(arraySelectedStudyAids.get(i));
+		arraySelectedStudyAids.remove(i);
+	}
+	
+	
+}
 
 	private void setdefault() {
 		
@@ -499,6 +520,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		txtClassSelectedCampus.setText(txtSelectedCampus);
 		txtClassSelectedBuildig.setText("class selected buildig");
 		chckbxAvailable.setSelected(false);
+		setClasses(arrayClasses);
 	}
 
 	@Override
@@ -541,6 +563,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
 		// TODO Auto-generated method stub
 		arrayStudyAids = arrayList;
+		lstClassAidsModel.removeAllElements();
+		lstSelectedClassAidsModel.removeAllElements();
 		for (int i = 0; i < arrayStudyAids.size(); i++) {
 			lstClassAidsModel.addElement(arrayList.get(i).getAidsID() + ":"
 					+ arrayList.get(i).getAidsName());
