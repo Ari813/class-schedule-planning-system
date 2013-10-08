@@ -475,7 +475,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 					.getDescription()));
 			chckbxAvailable.setSelected(arrayClasses.get(index)
 					.getAvailable());
-			setClassAids(arrayClasses.get(index).getClassID());
+			//setClassAids(arrayClasses.get(index).getClassID());
 		}
 		if (index<0)
 			setdefault();
@@ -489,8 +489,8 @@ public class Edit_Class extends JPanel implements ActionListener,
  */
 	private void setClassAids(int clss) {
 		// TODO Auto-generated method stub
-		lstClassAidsModel.removeAllElements();
-		lstSelectedClassAidsModel.removeAllElements();
+		//lstClassAidsModel.removeAllElements();
+		//lstSelectedClassAidsModel.removeAllElements();
 		restoreaids();
 		for (int i=0 ;i<(arrayAidsForExistingClasses.size());i++)
 		{
