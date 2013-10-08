@@ -3,51 +3,50 @@ package entities;
 import java.io.Serializable;
 
 public class ClassesAids implements Serializable {
-	private Building classBuilding;
-	private entities.Class clss;
-	private StudyAids aids;
+	private int classBuildingid;
+	private int clssid;
+	private int aidsid;
 	
 	
 	public ClassesAids() {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+	
 
-	public ClassesAids(Building classBuilding, Class clss, StudyAids aids) {
+
+	public ClassesAids(int classBuildingid, int clssid, int aidsid) {
 		super();
-		this.classBuilding = classBuilding;
-		this.clss = clss;
-		this.aids = aids;
+		this.classBuildingid = classBuildingid;
+		this.clssid = clssid;
+		this.aidsid = aidsid;
 	}
 
 
-	public Building getClassBuilding() {
-		return classBuilding;
+	public void setClassBuildingid(int classBuildingid) {
+		this.classBuildingid = classBuildingid;
 	}
 
 
-	public void setClassBuilding(Building classBuilding) {
-		this.classBuilding = classBuilding;
+	public int getClssid() {
+		return clssid;
 	}
 
 
-	public entities.Class getClss() {
-		return clss;
+	public void setClssid(int clssid) {
+		this.clssid = clssid;
 	}
 
 
-	public void setClss(entities.Class clss) {
-		this.clss = clss;
+	public int getAidsid() {
+		return aidsid;
 	}
 
 
-	public StudyAids getAids() {
-		return aids;
+	public void setAidsid(int aidsid) {
+		this.aidsid = aidsid;
 	}
 
-
-	public void setAids(StudyAids aids) {
-		this.aids = aids;
-	}
 
 }

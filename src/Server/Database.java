@@ -12,6 +12,7 @@ import java.util.Calendar;
 import entities.Building;
 import entities.Campus;
 import entities.Class;
+import entities.ClassesAids;
 import entities.Login;
 import entities.StudyAids;
 
@@ -233,6 +234,27 @@ public class Database {
 		}
 		qrs.close();
 		return ClassesArray;
+	}
+
+	public ArrayList<ClassesAids> getAllclassAids() throws SQLException {
+		ResultSet qrs = null;
+		ArrayList<ClassesAids> clssAids = new ArrayList<ClassesAids>();
+		ClassesAids claids;
+
+		String query = new String("SELECT * FROM `csps-db`.classaids;");
+		st = conn.createStatement();
+		qrs = st.executeQuery(query);
+		while (qrs.next()) {
+			claids = new ClassesAids();
+			claids.setAidsid(qrs.getInt("ClassaidID"));
+			claids.setClassBuildingid(qrs.getInt("ClassBuilding"));
+			claids.setClssid(qrs.getInt("ClssID"));
+			
+			clssAids.add(claids);
+		}
+		qrs.close();
+
+		return clssAids;
 	}
 
 }

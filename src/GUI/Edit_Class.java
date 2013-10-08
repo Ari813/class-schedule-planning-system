@@ -494,7 +494,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		restoreaids();
 		for (int i=0 ;i<(arrayAidsForExistingClasses.size());i++)
 		{
-			int tmp=arrayAidsForExistingClasses.get(i).getClss().getClassID();
+			int tmp=arrayAidsForExistingClasses.get(i).getClssid();
 			if (tmp==clss){
 				
 			}
