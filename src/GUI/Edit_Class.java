@@ -76,8 +76,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private JLabel lblBilding;
 	private JLabel lblCapacity;
 	private JTextPane txtClassSelectedCampus;
-	private JTextPane txtClassSelectedBuildig ;
-	
+	private JTextPane txtClassSelectedBuildig;
+
 	private Component horizontalStrut_1;
 	private Component horizontalStrut_2;
 	private Component horizontalStrut;
@@ -91,7 +91,6 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private ArrayList<Class> arrayClasses;
 	private ArrayList<ClassesAids> arrayAidsForExistingClasses;
 	public String txtSelectedCampus;
-	
 
 	/**
 	 * Launch the application.
@@ -290,10 +289,10 @@ public class Edit_Class extends JPanel implements ActionListener,
 		horizontalStrut_2.setBackground(Color.BLACK);
 		horizontalStrut_2.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut_2);
-		
+
 		txtClassSelectedCampus = new JTextPane();
 		txtClassSelectedCampus.setFont(new Font("Tahoma", Font.BOLD, 11));
-		txtSelectedCampus="class selected campus";
+		txtSelectedCampus = "class selected campus";
 		txtClassSelectedCampus.setText(txtSelectedCampus);
 		txtClassSelectedCampus.setToolTipText("class campus");
 		txtClassSelectedCampus.setBackground(SystemColor.info);
@@ -301,7 +300,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		txtClassSelectedCampus.setEditable(false);
 		txtClassSelectedCampus.setBounds(10, 323, 130, 20);
 		PNL_Main.add(txtClassSelectedCampus);
-		
+
 		txtClassSelectedBuildig = new JTextPane();
 		txtClassSelectedBuildig.setFont(new Font("Tahoma", Font.BOLD, 11));
 		txtClassSelectedBuildig.setEditable(false);
@@ -409,37 +408,17 @@ public class Edit_Class extends JPanel implements ActionListener,
 			int index;
 			if ((arrayStudyAids != null) && (!arrayStudyAids.isEmpty())) {
 				index = lstClassAids.getSelectedIndex();
-				
-				
-				
-				if (arraySelectedStudyAids == null)
-					arraySelectedStudyAids = new ArrayList<StudyAids>();
-				
-				arraySelectedStudyAids.add(arrayStudyAids.get(index));
-				lstSelectedClassAidsModel.addElement(arrayStudyAids
-						.get(index).getAidsID()
-						+ ":"
-						+ arrayStudyAids.get(index).getAidsName());
-				
-				arrayStudyAids.remove(index);
-				lstClassAidsModel.remove(index);
+				addAids(index);
 
 			}
 		}
 		if (e.getSource() == btnRemove) {
 			int index;
-			
+
 			if ((arraySelectedStudyAids != null)
 					&& (!arraySelectedStudyAids.isEmpty())) {
 				index = lstSelectedClassaids.getSelectedIndex();
-				
-				arrayStudyAids.add(arraySelectedStudyAids.get(index));
-				 lstClassAidsModel.addElement(arraySelectedStudyAids
-							.get(index).getAidsID()
-							+ ":"
-							+ arraySelectedStudyAids.get(index).getAidsName());
-				 lstSelectedClassAidsModel.remove(index);
-					arraySelectedStudyAids.remove(index);
+				removeAids(index);
 			}
 		}
 		if (e.getSource() == btnNewClass) {
@@ -454,73 +433,106 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	}
 
+	private void removeAids(int index) {
+		arrayStudyAids.add(arraySelectedStudyAids.get(index));
+		lstClassAidsModel.addElement(arraySelectedStudyAids.get(index)
+				.getAidsID()
+				+ ":"
+				+ arraySelectedStudyAids.get(index).getAidsName());
+		lstSelectedClassAidsModel.remove(index);
+		arraySelectedStudyAids.remove(index);
+
+	}
+
+	private void addAids(int index) {
+		if (arraySelectedStudyAids == null)
+			arraySelectedStudyAids = new ArrayList<StudyAids>();
+		arraySelectedStudyAids.add(arrayStudyAids.get(index));
+		lstSelectedClassAidsModel.addElement(arrayStudyAids.get(index)
+				.getAidsID() + ":" + arrayStudyAids.get(index).getAidsName());
+
+		arrayStudyAids.remove(index);
+		lstClassAidsModel.remove(index);
+
+	}
+
 	private void setSelectedClass() {
-		System.out.print("setSelectedClass in");
+		
+
 		int index = cmbxEditClass.getSelectedIndex() - 1;
 		if ((arrayClasses != null) && (!arrayClasses.isEmpty()) && (index >= 0)) {
 
-			
-			txtClassSelectedCampus.setText(
-			arrayCampus.get(arrayClasses.get(
-					index).getCampus()).getCampusId() + ":"
-			+ arrayCampus.get(arrayClasses.get(
-					index).getCampus()).getCampusName());
-			txtClassSelectedBuildig.setText(arrayBuilding.get(arrayClasses.get(
-					index).getBuilding()).getBuildingID() + ":"
-			+ arrayBuilding.get(arrayClasses.get(
-					index).getBuilding()).getBuildingName());
+			txtClassSelectedCampus.setText(arrayCampus.get(
+					arrayClasses.get(index).getCampus()).getCampusId()
+					+ ":"
+					+ arrayCampus.get(arrayClasses.get(index).getCampus())
+							.getCampusName());
+			txtClassSelectedBuildig.setText(arrayBuilding.get(
+					arrayClasses.get(index).getBuilding()).getBuildingID()
+					+ ":"
+					+ arrayBuilding.get(arrayClasses.get(index).getBuilding())
+							.getBuildingName());
 			txtCapacityNumber.setText(Integer.toString(arrayClasses.get(index)
 					.getCapcity()));
 			txtDescriptionText.setText((arrayClasses.get(index)
 					.getDescription()));
-			chckbxAvailable.setSelected(arrayClasses.get(index)
-					.getAvailable());
-			//setClassAids(arrayClasses.get(index).getClassID());
+			chckbxAvailable.setSelected(arrayClasses.get(index).getAvailable());
+			 setClassAids(arrayClasses.get(index).getClassID());
 		}
-		if (index<0)
+		if (index < 0)
 			setdefault();
-			
-			
+
 	}
-/**
- *@see 
- *  need to do: maybe make a set(or map)
- *  i didn't finish 
- */
+
+	/**
+	 * @see need to do: maybe make a set(or map) i didn't finish
+	 */
 	private void setClassAids(int clss) {
-		// TODO Auto-generated method stub
-		//lstClassAidsModel.removeAllElements();
-		//lstSelectedClassAidsModel.removeAllElements();
+		if (arraySelectedStudyAids == null)
+			arraySelectedStudyAids = new ArrayList<StudyAids>();
+		
 		restoreaids();
-		for (int i=0 ;i<(arrayAidsForExistingClasses.size());i++)
-		{
-			int tmp=arrayAidsForExistingClasses.get(i).getClssid();
-			if (tmp==clss){
+		/*for (int i = 0; i < (arrayAidsForExistingClasses.size()); i++) {
+			int tmp = arrayAidsForExistingClasses.get(i).getClssid();
+			if (tmp == clss){
+			//	if (arrayAidsForExistingClasses.get(i).getAidsid()==)
 				
-			}
-		}
-			
-			
+				}
+			}*/
+
 	}
 
 	private void restoreaids() {
-	for(int i=0;i<arraySelectedStudyAids.size();i++){
+		int i;
+		if (arraySelectedStudyAids!=null){
+			 //lstClassAidsModel.removeAllElements();
+			 lstSelectedClassAidsModel.removeAllElements();
+			 int size=arraySelectedStudyAids.size();
+			 System.out.println("size="+ size);
+	for(i=0;i<size-1;i++){
+		System.out.println("i="+i);
 		arrayStudyAids.add(arraySelectedStudyAids.get(i));
+		lstClassAidsModel.addElement(arraySelectedStudyAids.get(i).getAidsID()+ ":" + arraySelectedStudyAids.get(i).getAidsName() );
+		System.out.println("id="+ arraySelectedStudyAids.get(i).getAidsID());
 		arraySelectedStudyAids.remove(i);
+		
 	}
+			 System.out.println("i="+i);
+	System.out.println("id="+ arraySelectedStudyAids.get(i).getAidsID());
 	
+		}
 	
 }
 
 	private void setdefault() {
-		
+
 		txtpnCodeNumber.setText("Code Number");
 		txtCapacityNumber.setText("Capacity number");
 		txtDescriptionText.setText("description text");
 		txtClassSelectedCampus.setText(txtSelectedCampus);
 		txtClassSelectedBuildig.setText("class selected buildig");
 		chckbxAvailable.setSelected(false);
-		setClasses(arrayClasses);
+
 	}
 
 	@Override
@@ -543,23 +555,19 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
-		
 
 	}
-/*
- * 
- 
-	public void addClassAids(ArrayList<String> arry) {
-		// TODO Auto-generated method stub
-		this.aids = new ArrayList<String>();
-		lstClassAids.removeAll();
-		this.aids.addAll(0, arry);
-		for (int i = 0; i < (arry.size()); i++) {
-			// lstClassAids.add(arry.get(i) );
 
-		}
-	}
-*/
+	/*
+	 * 
+	 * 
+	 * public void addClassAids(ArrayList<String> arry) { // TODO Auto-generated
+	 * method stub this.aids = new ArrayList<String>();
+	 * lstClassAids.removeAll(); this.aids.addAll(0, arry); for (int i = 0; i <
+	 * (arry.size()); i++) { // lstClassAids.add(arry.get(i) );
+	 * 
+	 * } }
+	 */
 	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
 		// TODO Auto-generated method stub
 		arrayStudyAids = arrayList;
@@ -568,7 +576,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		for (int i = 0; i < arrayStudyAids.size(); i++) {
 			lstClassAidsModel.addElement(arrayList.get(i).getAidsID() + ":"
 					+ arrayList.get(i).getAidsName());
-			System.out.println("setClassStudyAids in");
+			
 		}
 	}
 
@@ -601,7 +609,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	public void setAidsForExistingClasses(
 			ArrayList<ClassesAids> getAidsForExistingClasses) {
-		arrayAidsForExistingClasses=getAidsForExistingClasses;
-			
+		arrayAidsForExistingClasses = getAidsForExistingClasses;
+
 	}
 }
