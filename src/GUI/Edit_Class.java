@@ -12,6 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
@@ -47,6 +50,10 @@ import java.awt.SystemColor;
 public class Edit_Class extends JPanel implements ActionListener,
 		ListSelectionListener, KeyListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// private JFrame frmLec;
 	private JTextField txtDescriptionText;
 	private JTextField txtCapacityNumber;
@@ -84,12 +91,12 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private JLabel lblClassAids;
 	// private static int aidsIndex=0;
 
-	private ArrayList<StudyAids> arrayStudyAids;
-	private ArrayList<StudyAids> arraySelectedStudyAids;
+	private Map<Integer, StudyAids> arrayStudyAids;
+	private Map<Integer, Integer> arrayAvailableStudyAids;
+	private Map<Integer, Integer> arraySelectedStudyAids;
 	private ArrayList<Campus> arrayCampus;
 	private ArrayList<Building> arrayBuilding;
 	private ArrayList<Class> arrayClasses;
-	private ArrayList<ClassesAids> arrayAidsForExistingClasses;
 	public String txtSelectedCampus;
 
 	/**
@@ -404,20 +411,26 @@ public class Edit_Class extends JPanel implements ActionListener,
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSaveChanges) {
 		}
+
 		if (e.getSource() == btnAdd) {
 			int index;
 			if ((arrayStudyAids != null) && (!arrayStudyAids.isEmpty())) {
-				index = lstClassAids.getSelectedIndex();
+				index = Integer.parseInt(lstClassAidsModel
+						.getElementAt(lstClassAids.getSelectedIndex())
+						.toString().split(":")[0]);
 				addAids(index);
 
 			}
+
 		}
 		if (e.getSource() == btnRemove) {
 			int index;
 
 			if ((arraySelectedStudyAids != null)
 					&& (!arraySelectedStudyAids.isEmpty())) {
-				index = lstSelectedClassaids.getSelectedIndex();
+				index = Integer.parseInt(lstSelectedClassAidsModel
+						.getElementAt(lstSelectedClassaids.getSelectedIndex())
+						.toString().split(":")[0]);
 				removeAids(index);
 			}
 		}
@@ -434,50 +447,44 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	private void removeAids(int index) {
-		arrayStudyAids.add(arraySelectedStudyAids.get(index));
-		lstClassAidsModel.addElement(arraySelectedStudyAids.get(index)
-				.getAidsID()
-				+ ":"
-				+ arraySelectedStudyAids.get(index).getAidsName());
-		lstSelectedClassAidsModel.remove(index);
-		arraySelectedStudyAids.remove(index);
 
+		arrayAvailableStudyAids.put(arraySelectedStudyAids.get(index),
+				arraySelectedStudyAids.get(index));
+		arraySelectedStudyAids.remove(index);
+		lstClassAidsModel.addElement(lstSelectedClassAidsModel
+				.getElementAt(lstSelectedClassaids.getSelectedIndex()));
+		lstSelectedClassAidsModel.remove(lstSelectedClassaids.getSelectedIndex());
 	}
 
 	private void addAids(int index) {
-		if (arraySelectedStudyAids == null)
-			arraySelectedStudyAids = new ArrayList<StudyAids>();
-		arraySelectedStudyAids.add(arrayStudyAids.get(index));
-		lstSelectedClassAidsModel.addElement(arrayStudyAids.get(index)
-				.getAidsID() + ":" + arrayStudyAids.get(index).getAidsName());
-
-		arrayStudyAids.remove(index);
-		lstClassAidsModel.remove(index);
+		arraySelectedStudyAids.put(arrayAvailableStudyAids.get(index),
+				arrayAvailableStudyAids.get(index));
+		arrayAvailableStudyAids.remove(index);
+		lstSelectedClassAidsModel.addElement(lstClassAidsModel
+				.getElementAt(lstClassAids.getSelectedIndex()));
+		lstClassAidsModel.remove(lstClassAids.getSelectedIndex());
 
 	}
 
 	private void setSelectedClass() {
-		
 
 		int index = cmbxEditClass.getSelectedIndex() - 1;
 		if ((arrayClasses != null) && (!arrayClasses.isEmpty()) && (index >= 0)) {
-
-			txtClassSelectedCampus.setText(arrayCampus.get(
-					arrayClasses.get(index).getCampus()).getCampusId()
-					+ ":"
-					+ arrayCampus.get(arrayClasses.get(index).getCampus())
-							.getCampusName());
-			txtClassSelectedBuildig.setText(arrayBuilding.get(
-					arrayClasses.get(index).getBuilding()).getBuildingID()
-					+ ":"
-					+ arrayBuilding.get(arrayClasses.get(index).getBuilding())
-							.getBuildingName());
+			cmbxcampus.setSelectedIndex(arrayClasses.get(index).getCampus());
+			cmbBxBlding.setSelectedIndex(arrayClasses.get(index).getBuilding());
+			txtClassSelectedCampus.setText(cmbxcampus.getSelectedItem()
+					.toString());
+			txtClassSelectedBuildig.setText(cmbBxBlding.getSelectedItem()
+					.toString());
 			txtCapacityNumber.setText(Integer.toString(arrayClasses.get(index)
 					.getCapcity()));
 			txtDescriptionText.setText((arrayClasses.get(index)
 					.getDescription()));
 			chckbxAvailable.setSelected(arrayClasses.get(index).getAvailable());
-			 setClassAids(arrayClasses.get(index).getClassID());
+			setClassAids(index);
+			txtpnCodeNumber.setText(arrayBuilding.get(
+					arrayClasses.get(index).getBuilding()).getBuildingName()
+					+ arrayClasses.get(index).getClassID());
 		}
 		if (index < 0)
 			setdefault();
@@ -487,42 +494,40 @@ public class Edit_Class extends JPanel implements ActionListener,
 	/**
 	 * @see need to do: maybe make a set(or map) i didn't finish
 	 */
-	private void setClassAids(int clss) {
-		if (arraySelectedStudyAids == null)
-			arraySelectedStudyAids = new ArrayList<StudyAids>();
-		
-		restoreaids();
-		/*for (int i = 0; i < (arrayAidsForExistingClasses.size()); i++) {
-			int tmp = arrayAidsForExistingClasses.get(i).getClssid();
-			if (tmp == clss){
-			//	if (arrayAidsForExistingClasses.get(i).getAidsid()==)
-				
-				}
-			}*/
+	private void setClassAids(int clssIndex) {
+		resetLists();
 
-	}
-
-	private void restoreaids() {
-		int i;
-		if (arraySelectedStudyAids!=null){
-			 //lstClassAidsModel.removeAllElements();
-			 lstSelectedClassAidsModel.removeAllElements();
-			 int size=arraySelectedStudyAids.size();
-			 System.out.println("size="+ size);
-	for(i=0;i<size-1;i++){
-		System.out.println("i="+i);
-		arrayStudyAids.add(arraySelectedStudyAids.get(i));
-		lstClassAidsModel.addElement(arraySelectedStudyAids.get(i).getAidsID()+ ":" + arraySelectedStudyAids.get(i).getAidsName() );
-		System.out.println("id="+ arraySelectedStudyAids.get(i).getAidsID());
-		arraySelectedStudyAids.remove(i);
-		
-	}
-			 System.out.println("i="+i);
-	System.out.println("id="+ arraySelectedStudyAids.get(i).getAidsID());
-	
+		for (int i = 0; i < arrayClasses.get(clssIndex).getStudyAids().size(); i++) {
+			arraySelectedStudyAids.put(arrayClasses.get(clssIndex)
+					.getStudyAids().get(i).getAidsID(),
+					arrayClasses.get(clssIndex).getStudyAids().get(i)
+							.getAidsID());
+			lstSelectedClassAidsModel.addElement(arrayClasses.get(clssIndex)
+					.getStudyAids().get(i).getAidsID()
+					+ ":"
+					+ arrayStudyAids.get(
+							arrayClasses.get(clssIndex).getStudyAids().get(i)
+									.getAidsID()).getAidsName());
 		}
-	
-}
+		Iterator<StudyAids> itr = arrayStudyAids.values().iterator();
+		while (itr.hasNext()) {
+			int tempID = itr.next().getAidsID();
+			if (!arraySelectedStudyAids.containsKey(tempID)) {
+				arrayAvailableStudyAids.put(tempID, tempID);
+				lstClassAidsModel.addElement(tempID + ":"
+						+ arrayStudyAids.get(tempID).getAidsName());
+			}
+
+		}
+	}
+
+	private void resetLists() {
+		arraySelectedStudyAids.clear();
+		arrayAvailableStudyAids.clear();
+		lstClassAidsModel.removeAllElements();
+		lstSelectedClassAidsModel.removeAllElements();
+
+	}
 
 	private void setdefault() {
 
@@ -570,13 +575,17 @@ public class Edit_Class extends JPanel implements ActionListener,
 	 */
 	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
 		// TODO Auto-generated method stub
-		arrayStudyAids = arrayList;
+		arrayStudyAids = new HashMap<Integer, StudyAids>();
+		arrayAvailableStudyAids = new HashMap<Integer, Integer>();
+		arraySelectedStudyAids = new HashMap<Integer, Integer>();
 		lstClassAidsModel.removeAllElements();
 		lstSelectedClassAidsModel.removeAllElements();
-		for (int i = 0; i < arrayStudyAids.size(); i++) {
+		for (int i = 0; i < arrayList.size(); i++) {
+			arrayStudyAids.put(arrayList.get(i).getAidsID(), arrayList.get(i));
 			lstClassAidsModel.addElement(arrayList.get(i).getAidsID() + ":"
 					+ arrayList.get(i).getAidsName());
-			
+			arrayAvailableStudyAids.put(arrayList.get(i).getAidsID(), arrayList
+					.get(i).getAidsID());
 		}
 	}
 
@@ -607,9 +616,4 @@ public class Edit_Class extends JPanel implements ActionListener,
 		}
 	}
 
-	public void setAidsForExistingClasses(
-			ArrayList<ClassesAids> getAidsForExistingClasses) {
-		arrayAidsForExistingClasses = getAidsForExistingClasses;
-
-	}
 }
