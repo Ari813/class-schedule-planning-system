@@ -107,7 +107,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 			chkBoxSaveSrvr = new JCheckBox("Save");
 			chkBoxSaveSrvr.setFont(new Font("Dialog", Font.PLAIN, 16));
 			chkBoxSaveSrvr.setToolTipText("Remember server connection details");
-			chkBoxSaveSrvr.setBounds(464, 354, 170, 23);
+			chkBoxSaveSrvr.setBounds(464, 402, 170, 23);
 			chkBoxSaveSrvr.addChangeListener(this);
 		}
 		return chkBoxSaveSrvr;
@@ -160,7 +160,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		if (lblHostNameaddress == null) {
 			lblHostNameaddress = new JLabel("Host Name/Address:");
 			lblHostNameaddress.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lblHostNameaddress.setBounds(165, 303, 227, 14);
+			lblHostNameaddress.setBounds(165, 351, 227, 14);
 		}
 		return lblHostNameaddress;
 	}
@@ -169,7 +169,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		if (lblPortNumber == null) {
 			lblPortNumber = new JLabel("Port Number:");
 			lblPortNumber.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lblPortNumber.setBounds(165, 328, 145, 14);
+			lblPortNumber.setBounds(165, 376, 145, 14);
 		}
 		return lblPortNumber;
 	}
@@ -187,7 +187,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		if (lblServer == null) {
 			lblServer = new JLabel("Server:");
 			lblServer.setFont(new Font("Dialog", Font.PLAIN, 16));
-			lblServer.setBounds(76, 271, 95, 14);
+			lblServer.setBounds(76, 319, 95, 14);
 		}
 		return lblServer;
 	}
@@ -223,7 +223,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 			txtHostName = new JTextField();
 			txtHostName.setFont(new Font("Dialog", Font.PLAIN, 16));
 			txtHostName.setText(DEFAULT_HOST);
-			txtHostName.setBounds(464, 300, 170, 20);
+			txtHostName.setBounds(464, 348, 170, 20);
 			txtHostName.setColumns(10);
 			txtHostName.addKeyListener(this);
 		}
@@ -235,7 +235,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 			txtPort = new JTextField();
 			txtPort.setFont(new Font("Dialog", Font.PLAIN, 16));
 			txtPort.setText(DEFAULT_PORT.toString());
-			txtPort.setBounds(464, 325, 170, 20);
+			txtPort.setBounds(464, 373, 170, 20);
 			txtPort.setColumns(10);
 			txtPort.addKeyListener(this);
 		}
