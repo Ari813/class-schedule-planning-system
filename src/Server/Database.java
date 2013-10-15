@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import entities.Building;
 import entities.Campus;
@@ -235,7 +237,8 @@ public class Database {
 		qrs.close();
 		return ClassesArray;
 	}
-
+	
+	
 	public ArrayList<ClassesAids> getAllclassAids() throws SQLException {
 		ResultSet qrs = null;
 		ArrayList<ClassesAids> clssAids = new ArrayList<ClassesAids>();
@@ -257,4 +260,34 @@ public class Database {
 		return clssAids;
 	}
 
+
+
+
+
+
+
+public HashMap<String, HashSet<ClassesAids>> getAllclassAids2() throws SQLException {
+		ResultSet qrs = null;
+		HashMap<String, HashSet<ClassesAids>> clssAids = new HashMap<String, HashSet<ClassesAids>>();
+		ClassesAids claids;
+		
+		String query = new String("SELECT * FROM `csps-db`.classaids;");
+		st = conn.createStatement();
+		qrs = st.executeQuery(query);
+		HashSet<ClassesAids> clasSet=new HashSet<>();
+		while (qrs.next()) {
+			claids = new ClassesAids();
+			claids.setAidsid(qrs.getInt("ClassaidID"));
+			claids.setClassBuildingid(qrs.getInt("ClassBuilding"));
+			claids.setClssid(qrs.getInt("ClssID"));
+			
+			clssAids.put(claids.getClssid()+""+claids.getClssid(), clasSet);
+		
+		}
+		qrs.close();
+
+		return clssAids;
+	}
 }
+/*/
+/*/
