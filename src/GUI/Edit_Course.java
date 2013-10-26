@@ -29,8 +29,11 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import entities.Lecturer;
 import Controllers.ManagerController;
+
 import java.awt.SystemColor;
+import java.util.Map;
 
 public class Edit_Course extends JPanel implements ActionListener,
 ListSelectionListener, KeyListener {
@@ -76,6 +79,8 @@ ListSelectionListener, KeyListener {
 	private JSpinner Lab_MaxStdntPerClass;
 	private JList<?> Lab_StudyAids;
 	private ManagerController manager;
+	
+	private Map<Integer, Lecturer> ArrayAvailableLecturers;
 
 	/**
 	 * Create the panel.
@@ -569,8 +574,14 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 		if (e.getSource() == btnNewCourse) {
 		}
+		
 		if (e.getSource() == btnAdd) {
-		}
+			int index;
+			
+			
+				}
+
+		
 		if (e.getSource() == btnRemove) {
 		}
 		if (e.getSource() == btnSave) {
@@ -579,6 +590,12 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 
+	}
+
+
+	private void addAids(int index) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

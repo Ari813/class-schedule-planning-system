@@ -93,14 +93,14 @@ public class EchoServer extends AbstractServer {
 			allAids(msgpck, client);
 			break;
 		case GetClassAids:
-			classAids(msgpck, client);
+			//classAids(msgpck, client);
 			break;
 		default:
 			break;
 
 		}
 	}
-
+/*/
 	private void classAids(MessagePack msg, ConnectionToClient client) {
 		GetClassAidsPack clssaids = (GetClassAidsPack) msg;
 
@@ -123,7 +123,7 @@ public class EchoServer extends AbstractServer {
 	}
 		
 	
-
+/*/
 	private void logout(MessagePack msg, ConnectionToClient client) {
 		LogoutPack lgt = (LogoutPack) msg;
 		try {
