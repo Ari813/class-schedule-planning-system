@@ -38,7 +38,11 @@ public class GetAllCoursePack extends MessagePack {
 	/**
 	 * @param bringLecturers the bringLecturers to set
 	 */
-	public void setAdditionalInfo(boolean additionalInfo) {
-		this.additionalInfo = additionalInfo;
+	public void setAdditionalInfo() {
+		this.additionalInfo = true;
+	}
+	
+	public void clrAdditionalInfo() {
+		this.additionalInfo = false;
 	}
 }
