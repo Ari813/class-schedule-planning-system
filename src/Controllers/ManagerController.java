@@ -107,7 +107,7 @@ public class ManagerController {
 		System.out.print("0");
 		ECRS.setFaculty(getFaculty());
 		System.out.print("a");
-		//ECRS.setAvailableLecturers(getAvailableLecturers());
+		ECRS.setAvailableLecturers(getAvailableLecturers());
 		manegerMainFrm.add(ECRS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
