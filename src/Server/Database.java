@@ -258,7 +258,7 @@ public class Database {
 		while (qrs.next()) {
 			crs = new Course(qrs.getInt("Capacity"), qrs.getInt("CourseID"),
 					qrs.getString("Description"), qrs.getInt("Faculty"),
-					qrs.getInt("Semester"));
+					qrs.getInt("Semester"),qrs.getInt("AcademicHours"));
 			if (additionalInfo) {
 				/* Add study aids */
 				query = new String(

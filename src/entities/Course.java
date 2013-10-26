@@ -18,15 +18,17 @@ public class Course implements Serializable {
 	private String description;
 	private int faculty;
 	private int semester;
+	private int academicHours;
 	private boolean hasadditionalInfo;
 
 	public Course(int studentNumber, int courseID, String description,
-			int faculty, int semester) {
+			int faculty, int semester, int academicHours) {
 		this.studentNumber = studentNumber;
 		this.courseID = courseID;
 		this.description = description;
 		this.faculty = faculty;
 		this.semester = semester;
+		this.setAcademicHours(academicHours);
 
 		setStudyAids(new ArrayList<StudyAids>());
 		CourseLecturers = new ArrayList<Lecturer>();
@@ -139,6 +141,20 @@ public class Course implements Serializable {
 	
 	public void clrHasadditionalInfo() {
 		this.hasadditionalInfo = false;
+	}
+
+	/**
+	 * @return the academicHours
+	 */
+	public int getAcademicHours() {
+		return academicHours;
+	}
+
+	/**
+	 * @param academicHours the academicHours to set
+	 */
+	public void setAcademicHours(int academicHours) {
+		this.academicHours = academicHours;
 	}
 
 }

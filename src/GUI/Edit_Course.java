@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.Point;
@@ -105,7 +106,10 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 		super();
 		this.manager = mng;
+
 		initialize();
+		
+
 	}
 
 	private JButton getBtnRemveStudyAids() {
@@ -578,13 +582,13 @@ public class Edit_Course extends JPanel implements ActionListener,
 	// private DefaultListModel lstLecturersClassAidsModel;
 	// private DefaultListModel lstLecturersSelectedClassAidsModel
 	public void setStudyAids(ArrayList<StudyAids> arrayList) {
-
+		int i;
 		LecStudyAids = new HashMap<Integer, StudyAids>();
 		LecAvailableStudyAids = new HashMap<Integer, Integer>();
 		LecSelectedStudyAids = new HashMap<Integer, Integer>();
 		lstLecturersClassAidsModel.removeAllElements();
 		lstLecturersSelectedClassAidsModel.removeAllElements();
-		for (int i = 0; i < arrayList.size(); i++) {
+		for (i = 0; i < arrayList.size(); i++) {
 			LecStudyAids.put(arrayList.get(i).getAidsID(), arrayList.get(i));
 			lstLecturersClassAidsModel.addElement(arrayList.get(i).getAidsID()
 					+ ":" + arrayList.get(i).getAidsName());
