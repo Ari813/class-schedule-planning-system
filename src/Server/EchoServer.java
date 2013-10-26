@@ -151,7 +151,7 @@ public class EchoServer extends AbstractServer {
 	private void allCourses(MessagePack msg, ConnectionToClient client) {
 		GetAllCoursePack crss = (GetAllCoursePack) msg;
 		try {
-			crss.setAllclass(db.getAllCourses());
+			crss.setAllclass(db.getAllCourses(crss.isBringAdditionalInfo()));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

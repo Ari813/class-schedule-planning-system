@@ -241,7 +241,8 @@ public class Database {
 		return ClassesArray;
 	}
 
-	public ArrayList<Course> getAllCourses() throws SQLException {
+	public ArrayList<Course> getAllCourses(boolean additionalInfo)
+			throws SQLException {
 		ResultSet qrs = null;
 		ResultSet AidsQrs = null;
 		ResultSet LecturersQrs = null;
@@ -258,39 +259,45 @@ public class Database {
 			crs = new Course(qrs.getInt("Capacity"), qrs.getInt("CourseID"),
 					qrs.getString("Description"), qrs.getInt("Faculty"),
 					qrs.getInt("Semester"));
-			/* Add study aids */
-			query = new String(
-					"SELECT * FROM `csps-db`.CourseAids ca where ca.CourseID = "
-							+ crs.getCourseID() + ";");
-			st = conn.createStatement();
-			AidsQrs = st.executeQuery(query);
-			while (AidsQrs.next()) 
-			{
-				stdyAds = new StudyAids();
-				stdyAds.setAidsID(AidsQrs.getInt("ClassAidID"));
-				crs.addStudyAids(stdyAds);
-			}
+			if (additionalInfo) {
+				/* Add study aids */
+				query = new String(
+						"SELECT * FROM `csps-db`.CourseAids ca where ca.CourseID = "
+								+ crs.getCourseID() + ";");
+				st = conn.createStatement();
+				AidsQrs = st.executeQuery(query);
+				while (AidsQrs.next()) {
+					stdyAds = new StudyAids();
+					stdyAds.setAidsID(AidsQrs.getInt("ClassAidID"));
+					crs.addStudyAids(stdyAds);
+				}
 
-			/* Add Lecturer */
-			query = new String(
-					"SELECT * FROM `csps-db`.courselecturers cl where cl.CourseID = "
-							+ crs.getCourseID() + ";");
-			st = conn.createStatement();
+				/* Add Lecturer */
 
-			LecturersQrs = st.executeQuery(query);
-			while (LecturersQrs.next()) {
-				lec = new Lecturer();
-				lec.setID(LecturersQrs.getInt("LecturerID"));
-				crs.addLecturer(lec);
+				query = new String(
+						"SELECT * FROM `csps-db`.courselecturers cl where cl.CourseID = "
+								+ crs.getCourseID() + ";");
+				st = conn.createStatement();
+
+				LecturersQrs = st.executeQuery(query);
+				while (LecturersQrs.next()) {
+					lec = new Lecturer();
+					lec.setID(LecturersQrs.getInt("LecturerID"));
+					crs.addLecturer(lec);
+				}
+				LecturersQrs.close();
+				AidsQrs.close();
+				
+				crs.setHasadditionalInfo(true);
 			}
 
 			CourseArray.add(crs);
-			AidsQrs.close();
-			LecturersQrs.close();
+			
+
 		}
 		qrs.close();
 		return CourseArray;
-		
+
 	}
 
 	public ArrayList<Faculty> getAllFaculty() throws SQLException {
