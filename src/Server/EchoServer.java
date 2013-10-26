@@ -151,7 +151,6 @@ public class EchoServer extends AbstractServer {
 
 	private void allCourses(MessagePack msg, ConnectionToClient client) {
 		GetAllCoursePack crss = (GetAllCoursePack) msg;
-
 		try {
 			crss.setAllclass(db.getAllCourses());
 		} catch (NumberFormatException e) {
@@ -161,7 +160,6 @@ public class EchoServer extends AbstractServer {
 
 		}
 		try {
-
 			client.sendToClient(crss);
 		} catch (IOException e) {
 

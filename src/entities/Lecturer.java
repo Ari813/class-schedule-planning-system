@@ -29,10 +29,10 @@ public class Lecturer extends User implements Serializable {
 	 * @param position
 	
 	 */
-	public Lecturer(int lecturerID, String password, String firstName,
+	public Lecturer(int lecturerID, String password, String LecturerName,
 			String surName, String authorizationLevel, String position,
 			String assignmentYear) {
-		super(lecturerID, password, firstName, surName, authorizationLevel);
+		super(lecturerID, password, LecturerName, authorizationLevel);
 		this.position = position;
 		this.assignmentYear = assignmentYear;
 		LecturerCourses= new ArrayList<Course>();

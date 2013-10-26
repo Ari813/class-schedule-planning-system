@@ -19,8 +19,7 @@ public class User implements Serializable {
 
 	private Integer ID;
 	private String password;
-	private String firstName;
-	private String surName;
+	private String Name;
 	private String authorizationLevel;
 	
 
@@ -36,13 +35,12 @@ public class User implements Serializable {
 	 * @param dateOfBirth
 	 * @param phoneNumber
 	 */
-	public User(Integer ID, String password, String firstName, String surName,
+	public User(Integer ID, String password, String Name,
 			String authorizationLevel) {
 		super();
 		this.ID = new Integer(ID);
 		this.password = password;
-		this.firstName = firstName;
-		this.surName = surName;
+		this.Name = Name;
 		this.authorizationLevel = authorizationLevel;
 		
 	}
@@ -95,34 +93,18 @@ public class User implements Serializable {
 	 * 
 	 * @return user first name
 	 */
-	public String getFirstName() {
-		return firstName;
+	public String getName() {
+		return Name;
 	}
 
-	/**
-	 * 
-	 * @param firstName
-	 *            of user
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	/**
-	 * 
-	 * @return user sur name
-	 */
-	public String getSurName() {
-		return surName;
-	}
 
 	/**
 	 * 
 	 * @param surName
 	 *            of user
 	 */
-	public void setSurName(String surName) {
-		this.surName = surName;
+	public void setName(String name) {
+		this.Name = name;
 	}
 
 	/**

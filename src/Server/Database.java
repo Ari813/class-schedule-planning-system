@@ -11,7 +11,6 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import common.CourseTypes;
 import entities.Building;
 import entities.Campus;
 import entities.Class;
@@ -257,17 +256,16 @@ public class Database {
 		qrs = st.executeQuery(query);
 		while (qrs.next()) {
 			crs = new Course(qrs.getInt("Capacity"), qrs.getInt("CourseID"),
-					qrs.getString("Desciption"), qrs.getInt("Faculty"),
+					qrs.getString("Description"), qrs.getInt("Faculty"),
 					qrs.getInt("Semester"));
 			/* Add study aids */
 			query = new String(
-					"SELECT * FROM `csps-db`.CourseAids ca where ca.CourseType = "
-							+ CourseTypes.Lecture + " AND ca.CourseID = "
+					"SELECT * FROM `csps-db`.CourseAids ca where ca.CourseID = "
 							+ crs.getCourseID() + ";");
 			st = conn.createStatement();
-
 			AidsQrs = st.executeQuery(query);
-			while (AidsQrs.next()) {
+			while (AidsQrs.next()) 
+			{
 				stdyAds = new StudyAids();
 				stdyAds.setAidsID(AidsQrs.getInt("ClassAidID"));
 				crs.addStudyAids(stdyAds);
@@ -282,7 +280,7 @@ public class Database {
 			LecturersQrs = st.executeQuery(query);
 			while (LecturersQrs.next()) {
 				lec = new Lecturer();
-				lec.setID(LecturersQrs.getInt("ClassAidID"));
+				lec.setID(LecturersQrs.getInt("LecturerID"));
 				crs.addLecturer(lec);
 			}
 
@@ -292,6 +290,7 @@ public class Database {
 		}
 		qrs.close();
 		return CourseArray;
+		
 	}
 
 	public ArrayList<Faculty> getAllFaculty() throws SQLException {
@@ -324,7 +323,7 @@ public class Database {
 		while (qrs.next()) {
 			lec = new Lecturer();
 			lec.setID(qrs.getInt("LecturerID"));
-			lec.setSurName(qrs.getString("LecturerName"));
+			lec.setName(qrs.getString("LecturerName"));
 			LecturerArray.add(lec);
 		}
 		qrs.close();
