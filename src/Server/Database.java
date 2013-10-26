@@ -377,8 +377,26 @@ public class Database {
 			st.executeUpdate(query);
 		} catch (SQLException e) {
 			newClass.setClassID(-1);
+			return newClass;
 		}
 
+		for (int i = 0; i < newClass.getStudyAids().size(); i++) {
+			query = new String(
+					"INSERT INTO `csps-db`.`classaids` (`ClassBuilding`, `ClassID`, `ClassAidID`) VALUES ('"
+							+ newClass.getBuilding()
+							+ "', '"
+							+ newClass.getClassID()
+							+ "', '"
+							+ newClass.getStudyAids().get(i).getAidsID()
+							+ "');");
+			try {
+				st = conn.createStatement();
+				st.executeUpdate(query);
+			} catch (SQLException e) {
+				newClass.setClassID(-1);
+				return newClass;
+			}
+		}
 		return newClass;
 	}
 
@@ -396,8 +414,39 @@ public class Database {
 			st.executeUpdate(query);
 		} catch (SQLException e) {
 			newClass.setClassID(-1);
+			return newClass;
+		}
+		
+		query = new String(
+				"DELETE FROM `csps-db`.`classaids` WHERE `ClassBuilding`='"
+						+ newClass.getBuilding() + "' and`ClassID`='"
+						+ newClass.getClassID() + "';");
+		try {
+			st = conn.createStatement();
+			st.executeUpdate(query);
+		} catch (SQLException e1) {
+			newClass.setClassID(-1);
+			return newClass;
 		}
 
+
+		for (int i = 0; i < newClass.getStudyAids().size(); i++) {
+			query = new String(
+					"INSERT INTO `csps-db`.`classaids` (`ClassBuilding`, `ClassID`, `ClassAidID`) VALUES ('"
+							+ newClass.getBuilding()
+							+ "', '"
+							+ newClass.getClassID()
+							+ "', '"
+							+ newClass.getStudyAids().get(i).getAidsID()
+							+ "');");
+			try {
+				st = conn.createStatement();
+				st.executeUpdate(query);
+			} catch (SQLException e) {
+				newClass.setClassID(-1);
+				return newClass;
+			}
+		}
 		return newClass;
 	}
 }
