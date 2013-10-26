@@ -111,7 +111,6 @@ public class EchoServer extends AbstractServer {
 		GetAllLecturersPack lecpck = (GetAllLecturersPack) msg;
 
 		try {
-			System.out.println("magiaa");
 			lecpck.setAllLecturers(db.getAllLecturers());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -120,7 +119,6 @@ public class EchoServer extends AbstractServer {
 
 		}
 		try {
-			System.out.println("Yotzhe");
 			client.sendToClient(lecpck);
 		} catch (IOException e) {
 
