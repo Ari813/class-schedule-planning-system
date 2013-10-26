@@ -258,7 +258,7 @@ public class Database {
 		while (qrs.next()) {
 			crs = new Course(qrs.getInt("Capacity"), qrs.getInt("CourseID"),
 					qrs.getString("Description"), qrs.getInt("Faculty"),
-					qrs.getInt("Semester"),qrs.getInt("AcademicHours"));
+					qrs.getInt("Semester"), qrs.getInt("AcademicHours"));
 			if (additionalInfo) {
 				/* Add study aids */
 				query = new String(
@@ -355,5 +355,49 @@ public class Database {
 		qrs.close();
 
 		return LecturerArray;
+	}
+
+	public Class newClass(Class newClass) {
+		String query;
+		query = new String(
+				"INSERT INTO `csps-db`.`class` (`ClassBuilding`, `ClassID`, `Capacity`, `Campus`, `Description`, `Available`) VALUES ('"
+						+ newClass.getBuilding()
+						+ "', '"
+						+ newClass.getClassID()
+						+ "', '"
+						+ newClass.getCapcity()
+						+ "', '"
+						+ newClass.getCampus()
+						+ "', '"
+						+ newClass.getDescription()
+						+ "', '"
+						+ newClass.getAvailable() + "');");
+		try {
+			st = conn.createStatement();
+			st.executeUpdate(query);
+		} catch (SQLException e) {
+			newClass.setClassID(-1);
+		}
+
+		return newClass;
+	}
+
+	public Class updateClass(Class newClass) {
+		String query;
+		query = new String("UPDATE `csps-db`.`class` SET `Capacity`='"
+				+ newClass.getCapcity() + "', `Campus`='"
+				+ newClass.getCampus() + "', `Description`='"
+				+ newClass.getDescription() + "', `Available`='"
+				+ newClass.getAvailable() + "' WHERE `ClassBuilding`='"
+				+ newClass.getBuilding() + "' and`ClassID`='"
+				+ newClass.getClassID() + "';");
+		try {
+			st = conn.createStatement();
+			st.executeUpdate(query);
+		} catch (SQLException e) {
+			newClass.setClassID(-1);
+		}
+
+		return newClass;
 	}
 }

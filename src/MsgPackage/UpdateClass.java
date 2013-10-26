@@ -1,25 +1,25 @@
 package MsgPackage;
 
-public class NewClassPack extends MessagePack {
+public class UpdateClass extends MessagePack {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private entities.Class newClass;
+	private entities.Class updateClass;
 
 	public entities.Class getNewClass() {
-		return newClass;
+		return updateClass;
 	}
 
 	public void setNewClass(entities.Class newClass) {
-		this.newClass = newClass;
+		this.updateClass = newClass;
 	}
 
-	public NewClassPack() {
+	public UpdateClass() {
 		super();
-		this.op = OpType.NewClass;
+		this.op = OpType.UpadteClass;
 
 	}
 }

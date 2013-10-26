@@ -101,10 +101,41 @@ public class EchoServer extends AbstractServer {
 		case GetLecturersInfo:
 			AllLecturers(msgpck, client);
 			break;
+		case NewClass:
+			NewClass(msgpck, client);
+			break;
+		case UpadteClass:
+			updateClass(msgpck, client);
+			break;
+			
 		default:
 			break;
 
 		}
+	}
+
+	private void updateClass(MessagePack msg, ConnectionToClient client) {
+		UpdateClass newcls = (UpdateClass) msg;
+			newcls.setNewClass(db.updateClass(newcls.getNewClass()));
+		try {
+			client.sendToClient(newcls);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
+	private void NewClass(MessagePack msg, ConnectionToClient client) {
+		NewClassPack newcls = (NewClassPack) msg;
+			newcls.setNewClass(db.newClass(newcls.getNewClass()));
+		try {
+			client.sendToClient(newcls);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
 	}
 
 	private void AllLecturers(MessagePack msg, ConnectionToClient client) {
