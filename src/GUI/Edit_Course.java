@@ -482,7 +482,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		for (int i = 0; i < arrayList.size(); i++) {
 			ArrayLecturers.put(arrayList.get(i).getID(), arrayList.get(i));
 			lstCLecturersModel.addElement(arrayList.get(i).getID() + ":"
-					+ arrayList.get(i).);
+					+ arrayList.get(i).getName());
 			ArrayAvailableLecturers.put(arrayList.get(i).getID(), arrayList
 					.get(i).getID());
 		}
