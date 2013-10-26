@@ -9,7 +9,7 @@ public class Course implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private int studentNumber;
-	private String courseID;
+	private int courseID;
 	private String description;
 	private Faculty faculty;
 	private int semester;
@@ -18,7 +18,7 @@ public class Course implements Serializable{
 
 
 
-	public Course(int studentNumber, String courseID, String description,
+	public Course(int studentNumber, int courseID, String description,
 			Faculty faculty, int semester) {
 		super();
 		this.studentNumber = studentNumber;
@@ -60,11 +60,11 @@ public class Course implements Serializable{
 		this.studentNumber = studentNumber;
 	}
 
-	public String getCourseID() {
+	public int getCourseID() {
 		return courseID;
 	}
 
-	public void setCourseID(String courseID) {
+	public void setCourseID(int courseID) {
 		this.courseID = courseID;
 	}
 
