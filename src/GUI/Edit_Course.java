@@ -287,6 +287,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	private JList getlstChoosenLecturers() {
 		lstSelectedLecturersModel=new DefaultListModel();
 		lstChoosenLecturers = new JList<Object>();
+		lstChoosenLecturers.setModel(lstSelectedLecturersModel);
 		lstChoosenLecturers.setToolTipText("Selectedlecturers");
 		lstChoosenLecturers.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstChoosenLecturers.setBounds(345, 141, 115, 217);
@@ -313,6 +314,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		lstCLecturersModel=new DefaultListModel();
 		
 		lstAvailableLecturers = new JList<Object>();
+		lstAvailableLecturers.setModel(lstCLecturersModel);
 		lstAvailableLecturers.setToolTipText("Available lecturers");
 		lstAvailableLecturers.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstAvailableLecturers.setBounds(145, 137, 115, 221);

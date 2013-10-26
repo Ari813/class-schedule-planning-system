@@ -132,7 +132,9 @@ public class ManagerController {
 	}
 
 	private ArrayList<Course> getCourse() {
+		
 		CourseMsg = new GetAllCoursePack();
+		CourseMsg.setAdditionalInfo();
 		client.handleMessageFromClientUI(CourseMsg);
 		CourseMsg = (GetAllCoursePack) client.getMessage();
 		return (CourseMsg.getAllclass());
@@ -147,7 +149,7 @@ public class ManagerController {
 		ECLSS.setClassStudyAids(GetClassAids());
 		ECLSS.setCampus(getCampuses());
 		ECLSS.setBuilding(getBuildings());
-		// ECLSS.setAidsForExistingClasses(GetAidsForExistingClasses());
+		 //ECLSS.setAidsForExistingClasses(GetAidsForExistingClasses());
 		manegerMainFrm.add(ECLSS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
