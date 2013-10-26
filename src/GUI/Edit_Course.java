@@ -55,30 +55,17 @@ ListSelectionListener, KeyListener {
 	private JSpinner Course_Semester;
 	private JList lstAvailableLecturers;
 	private JList lstChoosenLecturers;
-	private JTabbedPane tabbedPane;
 	private JButton btnNewCourse;
 	private JButton btnSave;
 	private JButton btnDiscard;
 	private JButton btnAdd;
 	private JButton btnRemove;
 	public JPanel PNL_Main;
-
-	private JCheckBox ChkEnableLecture;
-	private JSpinner Lec_AcademicHours;
-	private JSpinner Lec_MaxStdntPerClass;
-	private JList Lec_StdyAids;
-
-	private JCheckBox ChkEnablePractice;
 	private JSpinner Practice_AcademicHours;
 	private JSpinner Practice_MaxStdntPerClass;
 	private JList<?> Practice_StudyAids;
 
 	private JLabel label_8;
-
-	private JCheckBox ChkEnableLab;
-	private JSpinner Lab_AcademicHours;
-	private JSpinner Lab_MaxStdntPerClass;
-	private JList Lab_StudyAids;
 	private ManagerController manager;
 
 	/*		Lecturers Data		*/
@@ -124,7 +111,51 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	
 		super();
 		this.manager=mng;
-		initialize();}
+		initialize();
+		Practice_AcademicHours = new JSpinner();
+		Practice_AcademicHours.setBounds(151, 385, 50, 20);
+		PNL_Main.add(Practice_AcademicHours);
+		Practice_AcademicHours.setFont(new Font("Dialog", Font.PLAIN, 16));
+		JLabel label_7 = new JLabel("Max student per class:");
+		label_7.setBounds(292, 358, 200, 23);
+		PNL_Main.add(label_7);
+		label_7.setFont(new Font("Dialog", Font.PLAIN, 18));
+		Practice_MaxStdntPerClass = new JSpinner();
+		Practice_MaxStdntPerClass.setBounds(306, 385, 50, 20);
+		PNL_Main.add(Practice_MaxStdntPerClass);
+		Practice_MaxStdntPerClass.setFont(new Font("Dialog", Font.PLAIN, 16));
+		label_8 = new JLabel("study aids:");
+		label_8.setBounds(523, 102, 170, 23);
+		PNL_Main.add(label_8);
+		label_8.setFont(new Font("Dialog", Font.PLAIN, 16));
+		Practice_StudyAids = new JList<Object>();
+		Practice_StudyAids.setBounds(510, 268, 243, 90);
+		PNL_Main.add(Practice_StudyAids);
+		Practice_StudyAids.setBackground(SystemColor.inactiveCaption);
+		Practice_StudyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
+		
+		JList<Object> list = new JList<Object>();
+		list.setFont(new Font("Dialog", Font.PLAIN, 16));
+		list.setBackground(SystemColor.inactiveCaption);
+		list.setBounds(510, 142, 243, 85);
+		PNL_Main.add(list);
+		
+		Component horizontalStrut = Box.createHorizontalStrut(20);
+		horizontalStrut.setBounds(506, 122, 258, 14);
+		PNL_Main.add(horizontalStrut);
+		
+		JButton btnAddStudyAids = new JButton("Add");
+		btnAddStudyAids.setBounds(520, 237, 94, 23);
+		PNL_Main.add(btnAddStudyAids);
+		
+		JButton btnRemveStudyAids = new JButton("Remove");
+		btnRemveStudyAids.setBounds(651, 237, 89, 23);
+		PNL_Main.add(btnRemveStudyAids);
+		return Practice_StudyAids;
+		return label_8;
+		return Practice_MaxStdntPerClass;
+		return label_7;
+		return Practice_AcademicHours;}
 	
 	
 		private void initialize() {
@@ -151,8 +182,6 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 		PNL_Main.add(getCourse_Semester());
 
-		PNL_Main.add(getlblMainAcademicHours());
-
 		PNL_Main.add(getlblAvailableLecturers());
 
 		PNL_Main.add(getlstAvailableLecturers());
@@ -162,8 +191,6 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		PNL_Main.add(getbtnRemove());
 
 		PNL_Main.add(getlstChoosenLecturers());
-
-		PNL_Main.add(gettabbedPane());
 
 		PNL_Main.add(getbtnNewCourse());
 
@@ -177,9 +204,12 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 		PNL_Main.add(gethorizontalStrut_1());
 
-		PNL_Main.add(gettextAcademicHours());
-
 		PNL_Main.add(gethorizontalStrut_2());
+		JLabel label_6 = new JLabel("Academic hours:");
+		label_6.setBounds(135, 358, 141, 23);
+		PNL_Main.add(label_6);
+		label_6.setFont(new Font("Dialog", Font.PLAIN, 18));
+		return label_6;
 
 	}
 
@@ -197,17 +227,11 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	private Component gethorizontalStrut_2() {
 		Component horizontalStrut_2 = Box.createHorizontalStrut(20);
-		horizontalStrut_2.setBounds(145, 122, 347, 14);
+		horizontalStrut_2.setBounds(145, 122, 327, 14);
 		return horizontalStrut_2;
 	}
 
 	private JTextPane gettextAcademicHours() {
-		JTextPane textAcademicHours = new JTextPane();
-		textAcademicHours.setEditable(false);
-		textAcademicHours.setBackground(Color.LIGHT_GRAY);
-		textAcademicHours.setText("0");
-		textAcademicHours.setBounds(161, 393, 50, 20);
-		return textAcademicHours;
 	}
 
 	private Component gethorizontalStrut_1() {
@@ -259,229 +283,75 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	}
 
 	private JList getLab_StudyAids() {
-		Lab_StudyAids = new JList<Object>();
-		Lab_StudyAids.setBackground(SystemColor.inactiveCaption);
-		Lab_StudyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
-		Lab_StudyAids.setBounds(10, 163, 178, 89);
-		return Lab_StudyAids;
 	}
 
 	private JLabel getlabel_5() {
-		JLabel label_5 = new JLabel("study aids:");
-		label_5.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_5.setBounds(10, 137, 170, 23);
-		return label_5;
 	}
 
 	private JSpinner getLab_MaxStdntPerClass() {
-		Lab_MaxStdntPerClass = new JSpinner();
-		Lab_MaxStdntPerClass.setFont(new Font("Dialog", Font.PLAIN, 16));
-		Lab_MaxStdntPerClass.setBounds(123, 111, 57, 23);
-		return Lab_MaxStdntPerClass;
 	}
 
-	private JLabel getlabel_4() {	
-		JLabel label_4 = new JLabel("Max student per class:");
-		label_4.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_4.setBounds(10, 85, 170, 23);
-		return label_4;
+	private JLabel getlabel_4() {
 	}
 
 	private JSpinner getLab_AcademicHours() {
-		Lab_AcademicHours = new JSpinner();
-		Lab_AcademicHours.setFont(new Font("Dialog", Font.PLAIN, 16));
-		Lab_AcademicHours.setBounds(123, 59, 57, 23);
-		return Lab_AcademicHours;
 	}
 
 	private JLabel getlabel_3() {
-		JLabel label_3 = new JLabel("Academic hours:");
-		label_3.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_3.setBounds(10, 33, 170, 23);
-		return label_3;
 	}
 
 	private JCheckBox getChkEnableLab() {
-		ChkEnableLab = new JCheckBox("Enable");
-		ChkEnableLab.setBackground(SystemColor.scrollbar);
-		ChkEnableLab.setFont(new Font("Dialog", Font.PLAIN, 16));
-		ChkEnableLab.setBounds(10, 7, 170, 23);
-		return ChkEnableLab;
 	}
 
 	private JList getPractice_StudyAids() {
-		Practice_StudyAids = new JList<Object>();
-		Practice_StudyAids.setBackground(SystemColor.inactiveCaption);
-		Practice_StudyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
-		Practice_StudyAids.setBounds(10, 163, 178, 89);
-		return Practice_StudyAids;
 	}
 
 	private JLabel getlabel_8() {
-		label_8 = new JLabel("study aids:");
-		label_8.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_8.setBounds(10, 137, 170, 23);
-		return label_8;
 	}
 
 	private JSpinner getPractice_MaxStdntPerClass() {
-		Practice_MaxStdntPerClass = new JSpinner();
-		Practice_MaxStdntPerClass.setFont(new Font("Dialog", Font.PLAIN, 16));
-		Practice_MaxStdntPerClass.setBounds(123, 111, 57, 23);
-		return Practice_MaxStdntPerClass;
 	}
 
 	private JLabel getlabel_7() {
-		JLabel label_7 = new JLabel("Max student per class:");
-		label_7.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_7.setBounds(10, 85, 170, 23);
-		return label_7;
 	}
 
 	private JSpinner getPractice_AcademicHours() {
-		Practice_AcademicHours = new JSpinner();
-		Practice_AcademicHours.setFont(new Font("Dialog", Font.PLAIN, 16));
-		Practice_AcademicHours.setBounds(123, 59, 57, 23);
-		return Practice_AcademicHours;
 	}
 
 	private JLabel getlabel_6() {
-		JLabel label_6 = new JLabel("Academic hours:");
-		label_6.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_6.setBounds(10, 33, 170, 23);
-		return label_6;
 	}
 
 	private JCheckBox getChkEnablePractice() {
-		ChkEnablePractice = new JCheckBox("Enable");
-		ChkEnablePractice.setBackground(SystemColor.scrollbar);
-		ChkEnablePractice.setFont(new Font("Dialog", Font.PLAIN, 16));
-		ChkEnablePractice.setBounds(10, 7, 170, 23);
-		return ChkEnablePractice;
 	}
 
 	private JList getLec_StdyAids() {
-		Lec_StdyAids = new JList<Object>();
-		Lec_StdyAids.setBackground(SystemColor.inactiveCaption);
-		Lec_StdyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
-		Lec_StdyAids.setBounds(10, 163, 178, 89);
-		return Lec_StdyAids;
 	}
 
 	private JLabel getlabel_2() {
-		JLabel label_2 = new JLabel("study aids:");
-		label_2.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_2.setBounds(10, 137, 170, 23);
-		return label_2;
 	}
 
 	private JSpinner getLec_MaxStdntPerClass() {
-		Lec_MaxStdntPerClass = new JSpinner();
-		Lec_MaxStdntPerClass.setFont(new Font("Dialog", Font.PLAIN, 16));
-		Lec_MaxStdntPerClass.setBounds(123, 111, 57, 23);
-		return Lec_MaxStdntPerClass;
 	}
 
 	private JLabel getlabel_1() {
-		JLabel label_1 = new JLabel("Max student per class:");
-		label_1.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label_1.setBounds(10, 85, 170, 23);
-		return label_1;
 	}
 
 	private JSpinner getLec_AcademicHours() {
-		Lec_AcademicHours = new JSpinner();
-		Lec_AcademicHours.setFont(new Font("Dialog", Font.PLAIN, 16));
-		Lec_AcademicHours.setBounds(123, 59, 57, 23);
-		return Lec_AcademicHours;
 	}
 
 	private JLabel getlabel() {
-		JLabel label = new JLabel("Academic hours:");
-		label.setBackground(SystemColor.scrollbar);
-		label.setFont(new Font("Dialog", Font.PLAIN, 16));
-		label.setBounds(10, 33, 170, 23);
-		return label;
 	}
 
 	private JCheckBox getChkEnableLecture() {
-		ChkEnableLecture = new JCheckBox("Enable");
-		ChkEnableLecture.setBackground(SystemColor.scrollbar);
-		ChkEnableLecture.setFont(new Font("Dialog", Font.PLAIN, 16));
-		ChkEnableLecture.setBounds(10, 7, 170, 23);
-		return ChkEnableLecture;
 	}
 
 	private JTabbedPane gettabbedPane() {
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		tabbedPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null,
-				null, null));
-		tabbedPane.setBounds(557, 102, 207, 311);
-
-		JPanel panel_Practice = new JPanel();
-		panel_Practice.setBackground(SystemColor.scrollbar);
-		tabbedPane.addTab("Practice", null, panel_Practice, null);
-		panel_Practice.setLayout(null);
-
-		panel_Practice.add(getChkEnablePractice());
-
-		panel_Practice.add(getlabel_6());
-
-		panel_Practice.add(getPractice_AcademicHours());
-
-		panel_Practice.add(getlabel_7());
-
-		panel_Practice.add(getPractice_MaxStdntPerClass());
-
-		panel_Practice.add(getlabel_8());
-
-		panel_Practice.add(getPractice_StudyAids());
-
-		JPanel panel_Lecture = new JPanel();
-		panel_Lecture.setBackground(SystemColor.scrollbar);
-		tabbedPane.addTab("Lecture", null, panel_Lecture, null);
-		panel_Lecture.setLayout(null);
-
-		panel_Lecture.add(getChkEnableLecture());
-
-		panel_Lecture.add(getlabel());
-
-		panel_Lecture.add(getLec_AcademicHours());
-
-		panel_Lecture.add(getlabel_1());
-
-		panel_Lecture.add(getLec_MaxStdntPerClass());
-
-		panel_Lecture.add(getlabel_2());
-
-		panel_Lecture.add(getLec_StdyAids());
-
-		JPanel panel_Lab = new JPanel();
-		panel_Lab.setBackground(SystemColor.scrollbar);
-		tabbedPane.addTab("Lab", null, panel_Lab, null);
-		panel_Lab.setLayout(null);
-
-		panel_Lab.add(getChkEnableLab());
-
-		panel_Lab.add(getlabel_3());
-
-		panel_Lab.add(getLab_AcademicHours());
-
-		panel_Lab.add(getlabel_4());
-
-		panel_Lab.add(getLab_MaxStdntPerClass());
-
-		panel_Lab.add(getlabel_5());
-
-		panel_Lab.add(getLab_StudyAids());
-		return tabbedPane;
 	}
 
 	private JList getlstChoosenLecturers() {
 		lstChoosenLecturers = new JList<Object>();
 		lstChoosenLecturers.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lstChoosenLecturers.setBounds(377, 137, 115, 209);
+		lstChoosenLecturers.setBounds(345, 141, 115, 209);
 		return lstChoosenLecturers;
 	}
 
@@ -489,7 +359,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		btnRemove = new JButton("<--");
 		btnRemove.setToolTipText("Remove lecturer from course");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnRemove.setBounds(292, 237, 65, 38);
+		btnRemove.setBounds(270, 237, 65, 38);
 		return btnRemove;
 	}
 
@@ -497,7 +367,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		btnAdd = new JButton("-->");
 		btnAdd.setToolTipText("Add lecturer to course");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnAdd.setBounds(292, 171, 65, 38);
+		btnAdd.setBounds(270, 171, 65, 38);
 		return btnAdd;
 	}
 
@@ -516,19 +386,12 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	}
 
 	private JLabel getlblMainAcademicHours() {
-		JLabel lblMainAcademicHours;
-		lblMainAcademicHours = new JLabel("Academic  hours:");
-		lblMainAcademicHours.setHorizontalAlignment(SwingConstants.LEFT);
-		lblMainAcademicHours.setVerticalAlignment(SwingConstants.TOP);
-		lblMainAcademicHours.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMainAcademicHours.setBounds(151, 357, 154, 29);
-		return lblMainAcademicHours;
 	}
 
 	private JSpinner getCourse_Semester() {
 		Course_Semester = new JSpinner();
 		Course_Semester.setModel(new SpinnerNumberModel(1, 1, 8, 1));
-		Course_Semester.setBounds(20, 393, 50, 20);
+		Course_Semester.setBounds(20, 385, 50, 20);
 		return Course_Semester;
 	}
 
@@ -679,5 +542,4 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		
 		
 	}
-
 }
