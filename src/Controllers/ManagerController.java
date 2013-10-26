@@ -113,13 +113,13 @@ public class ManagerController {
 	}
 
 	private ArrayList<Lecturer> getAvailableLecturers() {
-		GetAvailableLecturersPack studyAvailableLecturers = new GetAvailableLecturersPack();
+		GetAllLecturersPack studyAvailableLecturers = new GetAllLecturersPack();
 		System.out.print("b");
 		client.handleMessageFromClientUI(studyAvailableLecturers);
 		System.out.print("c");
-		studyAvailableLecturers = (GetAvailableLecturersPack) client.getMessage();
+		studyAvailableLecturers = (GetAllLecturersPack) client.getMessage();
 		System.out.print("d");
-		return (studyAvailableLecturers.getAllLecturer());
+		return (studyAvailableLecturers.getAllLecturers());
 		
 	}
 
