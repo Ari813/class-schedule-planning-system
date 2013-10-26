@@ -474,9 +474,20 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	public void setAvailableLecturers(ArrayList<Lecturer> ArrayList) {
 		ArrayAvailableLecturers = new HashMap<Integer,Lecturer>();
+		Arry
 		
-		
-		
+		arrayAvailableStudyAids = new HashMap<Integer, Integer>();
+		arraySelectedStudyAids = new HashMap<Integer, Integer>();
+		lstClassAidsModel.removeAllElements();
+		lstSelectedClassAidsModel.removeAllElements();
+		for (int i = 0; i < arrayList.size(); i++) {
+			arrayStudyAids.put(arrayList.get(i).getAidsID(), arrayList.get(i));
+			lstClassAidsModel.addElement(arrayList.get(i).getAidsID() + ":"
+					+ arrayList.get(i).getAidsName());
+			arrayAvailableStudyAids.put(arrayList.get(i).getAidsID(), arrayList
+					.get(i).getAidsID());
+		}
+	}
 		
 		
 	}
