@@ -30,6 +30,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import entities.Lecturer;
+import entities.StudyAids;
 import Controllers.ManagerController;
 
 import java.awt.SystemColor;
@@ -79,8 +80,28 @@ ListSelectionListener, KeyListener {
 	private JSpinner Lab_MaxStdntPerClass;
 	private JList<?> Lab_StudyAids;
 	private ManagerController manager;
-	
+
+	/*		Lecturers Data		*/
 	private Map<Integer, Lecturer> ArrayAvailableLecturers;
+	private Map<Integer, Integer> arraySelectedLecturers;
+	private Map<Integer, StudyAids> ArrayLecturers;
+	
+	/*		general StudyAids	*/
+	private Map<Integer, StudyAids> LecStudyAids;
+	/*		Lecture	StudyAids	*/
+	private Map<Integer, Integer> LecAvailableStudyAids;
+	private Map<Integer, Integer> LecSelectedStudyAids;
+	
+	/*		Practice StudyAids	*/
+	private Map<Integer, Integer> PracticeAvailableStudyAids;
+	private Map<Integer, Integer> PracticeSelectedStudyAids;
+	
+	/*		Lab StudyAids		*/
+	private Map<Integer, Integer> LabAvailableStudyAids;
+	private Map<Integer, Integer> LabSelectedStudyAids;
+	
+	
+	
 
 	/**
 	 * Create the panel.
