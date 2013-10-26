@@ -112,13 +112,7 @@ public class ManagerController {
 		return (CourseMsg.getAllclass());
 	}
 
-	/*
-	 * public ArrayList<Class> GetClasses() { ClassMsg = new
-	 * GetAllClassesPack(); client.handleMessageFromClientUI(ClassMsg); ClassMsg
-	 * = (GetAllClassesPack) client.getMessage(); return
-	 * (ClassMsg.getAllclass()); }
-	 */
-	// /////
+
 	public void Load_Edit_Class(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);

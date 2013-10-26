@@ -101,7 +101,7 @@ ListSelectionListener, KeyListener {
 	private Map<Integer, Integer> LabSelectedStudyAids;
 	
 	private ArrayList<Campus> arrayCampus;
-	
+	private ArrayList<Course> arrayCourse;
 	
 	
 
@@ -650,8 +650,13 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	}
 
 
-	public void setCourses(Object course) {
-		// TODO Auto-generated method stub
+	public void setCourses(ArrayList<Course> ArrayList) {
+		arrayCourse =ArrayList;
+		cmbBxEditCouse.removeAll();
+		for (int i = 0; i < arrayCourse.size(); i++) {
+			cmbBxEditCouse.addItem(arrayCourse.get(i).getCourseID() + ":"
+					+ arrayCourse.get(i).getDescription());
+		}
 		
 	}
 
