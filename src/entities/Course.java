@@ -10,8 +10,8 @@ public class Course implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private ArrayList<StudyAids> 	StudyAids;
-	private ArrayList<Lecturer> 	CourseLecturers;
+	private ArrayList<StudyAids> StudyAids;
+	private ArrayList<Lecturer> CourseLecturers;
 
 	private int studentNumber;
 	private int courseID;
@@ -19,8 +19,6 @@ public class Course implements Serializable {
 	private int faculty;
 	private int semester;
 
-
-	
 	public Course(int studentNumber, int courseID, String description,
 			int faculty, int semester) {
 		this.studentNumber = studentNumber;
@@ -28,15 +26,15 @@ public class Course implements Serializable {
 		this.description = description;
 		this.faculty = faculty;
 		this.semester = semester;
-		
+
 		setStudyAids(new ArrayList<StudyAids>());
 		CourseLecturers = new ArrayList<Lecturer>();
 	}
-	
-	public Course(){
-	
+
+	public Course() {
+
 		setStudyAids(new ArrayList<StudyAids>());
-		CourseLecturers = new ArrayList<Lecturer>();		
+		CourseLecturers = new ArrayList<Lecturer>();
 	}
 
 	public int getFaculty() {
@@ -79,7 +77,6 @@ public class Course implements Serializable {
 		this.description = description;
 	}
 
-
 	/**
 	 * @return the CourseLecturers
 	 */
@@ -88,12 +85,13 @@ public class Course implements Serializable {
 	}
 
 	/**
-	 * @param courselecturers the CourseLecturers to set
+	 * @param courselecturers
+	 *            the CourseLecturers to set
 	 */
 	public void setCourseLecturers(ArrayList<Lecturer> courselecturers) {
 		CourseLecturers = courselecturers;
 	}
-	
+
 	public void addLecturer(Lecturer lec) {
 		this.CourseLecturers.add(lec);
 	}
@@ -106,7 +104,8 @@ public class Course implements Serializable {
 	}
 
 	/**
-	 * @param studyAids the studyAids to set
+	 * @param studyAids
+	 *            the studyAids to set
 	 */
 	public void setStudyAids(ArrayList<StudyAids> studyAids) {
 		StudyAids = studyAids;

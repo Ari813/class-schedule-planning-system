@@ -23,7 +23,7 @@ public Faculty() {
 		return faculty;
 	}
 	public void setFaculty(String faculty) {
-		this.faculty = faculty;
+		this.faculty = new String(faculty);
 	}
 	
 	

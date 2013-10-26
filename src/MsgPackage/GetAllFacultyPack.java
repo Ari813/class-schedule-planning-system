@@ -26,7 +26,7 @@ public class GetAllFacultyPack  extends MessagePack {
 
 	public GetAllFacultyPack() {
 		super();
-		this.op = OpType.GetAllFaculty;
+		this.op = OpType.GetFacultyInfo;
 	}
 
 }

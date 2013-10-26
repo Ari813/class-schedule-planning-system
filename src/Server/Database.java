@@ -17,6 +17,7 @@ import entities.Campus;
 import entities.Class;
 import entities.ClassesAids;
 import entities.Course;
+import entities.Faculty;
 import entities.Lecturer;
 import entities.Login;
 import entities.StudyAids;
@@ -272,7 +273,7 @@ public class Database {
 				crs.addStudyAids(stdyAds);
 			}
 
-			/* Add Lecturer	*/
+			/* Add Lecturer */
 			query = new String(
 					"SELECT * FROM `csps-db`.courselecturers cl where cl.CourseID = "
 							+ crs.getCourseID() + ";");
@@ -284,12 +285,50 @@ public class Database {
 				lec.setID(LecturersQrs.getInt("ClassAidID"));
 				crs.addLecturer(lec);
 			}
-			
+
 			CourseArray.add(crs);
 			AidsQrs.close();
 			LecturersQrs.close();
 		}
 		qrs.close();
 		return CourseArray;
+	}
+
+	public ArrayList<Faculty> getAllFaculty() throws SQLException {
+		ResultSet qrs = null;
+		ArrayList<Faculty> FacultyArray = new ArrayList<Faculty>();
+		Faculty fclty;
+
+		String query = new String("SELECT * FROM `csps-db`.Faculty;");
+		st = conn.createStatement();
+		qrs = st.executeQuery(query);
+		while (qrs.next()) {
+			fclty = new Faculty();
+			fclty.setFacultyNum(qrs.getInt("FacultyID"));
+			fclty.setFaculty(qrs.getString("FacultyName"));
+			FacultyArray.add(fclty);
+		}
+		qrs.close();
+
+		return FacultyArray;
+	}
+
+	public ArrayList<Lecturer> getAllLecturers() throws SQLException {
+		ResultSet qrs = null;
+		ArrayList<Lecturer> LecturerArray = new ArrayList<Lecturer>();
+		Lecturer lec;
+
+		String query = new String("SELECT * FROM `csps-db`.lecturer;");
+		st = conn.createStatement();
+		qrs = st.executeQuery(query);
+		while (qrs.next()) {
+			lec = new Lecturer();
+			lec.setID(qrs.getInt("LecturerID"));
+			lec.setSurName(qrs.getString("LecturerName"));
+			LecturerArray.add(lec);
+		}
+		qrs.close();
+
+		return LecturerArray;
 	}
 }

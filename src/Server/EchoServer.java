@@ -95,11 +95,58 @@ public class EchoServer extends AbstractServer {
 		case GetAllCourses:
 			allCourses(msgpck, client);
 			break;
-		
+		case GetFacultyInfo:
+			AllFaculty(msgpck, client);
+			break;
+		case GetLecturersInfo:
+			AllLecturers(msgpck, client);
+			break;
 		default:
 			break;
 
 		}
+	}
+
+	private void AllLecturers(MessagePack msg, ConnectionToClient client) {
+		GetAllLecturersPack lec = (GetAllLecturersPack) msg;
+
+		try {
+			lec.setAllLecturers(db.getAllLecturers());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		try {
+
+			client.sendToClient(lec);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
+	private void AllFaculty(MessagePack msg, ConnectionToClient client) {
+		GetAllFacultyPack fclty = (GetAllFacultyPack) msg;
+
+		try {
+			fclty.setAllFaculty(db.getAllFaculty());
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		try {
+
+			client.sendToClient(fclty);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
 	}
 
 	private void allCourses(MessagePack msg, ConnectionToClient client) {
@@ -107,7 +154,7 @@ public class EchoServer extends AbstractServer {
 
 		try {
 			crss.setAllclass(db.getAllCourses());
-			} catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
