@@ -14,7 +14,7 @@ public class Lecturer extends User implements Serializable {
 
 	private String position;
 	private String assignmentYear;
-	private Boolean hasCoursesInfo;
+	private boolean hasCoursesInfo;
 	private ArrayList<Course> LecturerCourses;
 	/**
 	 * constructor

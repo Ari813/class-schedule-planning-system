@@ -12,6 +12,7 @@ public class GetAllCoursePack extends MessagePack {
 	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Course> allcourses;
+	private boolean bringLecturers;
 
 	public ArrayList<Course> getAllclass() {
 		return allcourses;

@@ -108,10 +108,11 @@ public class EchoServer extends AbstractServer {
 	}
 
 	private void AllLecturers(MessagePack msg, ConnectionToClient client) {
-		GetAllLecturersPack lec = (GetAllLecturersPack) msg;
+		GetAllLecturersPack lecpck = (GetAllLecturersPack) msg;
 
 		try {
-			lec.setAllLecturers(db.getAllLecturers());
+			System.out.println("magiaa");
+			lecpck.setAllLecturers(db.getAllLecturers());
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -119,8 +120,8 @@ public class EchoServer extends AbstractServer {
 
 		}
 		try {
-
-			client.sendToClient(lec);
+			System.out.println("Yotzhe");
+			client.sendToClient(lecpck);
 		} catch (IOException e) {
 
 			e.printStackTrace();

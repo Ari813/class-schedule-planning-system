@@ -18,7 +18,7 @@ public class Course implements Serializable {
 	private String description;
 	private int faculty;
 	private int semester;
-	private Boolean hasLecturersInfo;
+	private boolean hasLecturersInfo;
 
 	public Course(int studentNumber, int courseID, String description,
 			int faculty, int semester) {
