@@ -36,7 +36,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.text.html.HTMLDocument.Iterator;
+
 
 import entities.*;
 import Controllers.ManagerController;
@@ -497,16 +497,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		}
 
 	}
-	/*
-	  general StudyAids 
-	private Map<Integer, StudyAids> LecStudyAids;
-	Lecture StudyAids 
-
-	private Map<Integer, Integer> LecAvailableStudyAids;
-	private Map<Integer, Integer> LecSelectedStudyAids;
-	private DefaultListModel lstLecturersClassAidsModel;
-	private DefaultListModel lstLecturersSelectedClassAidsModel;
-	 */
+	
 
 	private void setSelectedCouse() {
 		int index = cmbBxEditCouse.getSelectedIndex() - 1;
@@ -522,14 +513,19 @@ public class Edit_Course extends JPanel implements ActionListener,
 			setCouseAids(index);
 			
 		}
-		//if (index < 0)
-			//setdefault();
+		if (index < 0)
+			setdefault();
 
 	}
 		
 	
 	
 	
+	private void setdefault() {
+		
+		
+	}
+
 	private void setCouseAids(int index) {
 		resetLists();
 

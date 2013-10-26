@@ -315,6 +315,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	private JComboBox GETcmbBxBlding() {
 		cmbBxBlding = new JComboBox();
+		cmbBxBlding.setEnabled(false);
 		cmbBxBlding.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		cmbBxBlding.setBounds(172, 292, 130, 20);
 		return cmbBxBlding;
@@ -336,6 +337,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	private JComboBox GETcmbxcampus() {
 		cmbxcampus = new JComboBox();
+		cmbxcampus.setEnabled(false);
 		cmbxcampus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		cmbxcampus.setToolTipText("Campus");
 		cmbxcampus.setBounds(10, 292, 130, 20);
