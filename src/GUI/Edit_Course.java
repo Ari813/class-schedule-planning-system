@@ -228,8 +228,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		return horizontalStrut_2;
 	}
 
-	private JTextPane gettextAcademicHours() {
-	}
+	
 
 	private Component gethorizontalStrut_1() {
 		Component horizontalStrut_1 = Box.createHorizontalStrut(20);
