@@ -112,7 +112,7 @@ private ArrayList<Course> getCourse() {
 	CourseMsg = new GetAllCoursePack();
 	client.handleMessageFromClientUI(CourseMsg);
 	ClassMsg = (GetAllClassesPack) client.getMessage();
-	return (ClassMsg.getAllclass());
+	return (CourseMsg.getAllclass());
 	
 	return null;
 }
