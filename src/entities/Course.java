@@ -18,6 +18,7 @@ public class Course implements Serializable {
 	private String description;
 	private int faculty;
 	private int semester;
+	private Boolean hasLecturersInfo;
 
 	public Course(int studentNumber, int courseID, String description,
 			int faculty, int semester) {
@@ -29,12 +30,14 @@ public class Course implements Serializable {
 
 		setStudyAids(new ArrayList<StudyAids>());
 		CourseLecturers = new ArrayList<Lecturer>();
+		hasLecturersInfo = false;
 	}
 
 	public Course() {
 
 		setStudyAids(new ArrayList<StudyAids>());
 		CourseLecturers = new ArrayList<Lecturer>();
+		hasLecturersInfo = false;
 	}
 
 	public int getFaculty() {
@@ -90,10 +93,12 @@ public class Course implements Serializable {
 	 */
 	public void setCourseLecturers(ArrayList<Lecturer> courselecturers) {
 		CourseLecturers = courselecturers;
+		hasLecturersInfo = !courselecturers.isEmpty();
 	}
 
 	public void addLecturer(Lecturer lec) {
 		this.CourseLecturers.add(lec);
+		hasLecturersInfo = true;
 	}
 
 	/**
@@ -113,6 +118,21 @@ public class Course implements Serializable {
 
 	public void addStudyAids(StudyAids studyAids) {
 		StudyAids.add(studyAids);
+		
+	}
+
+	/**
+	 * @return the hasLecturersInfo
+	 */
+	public Boolean getHasLecturersInfo() {
+		return hasLecturersInfo;
+	}
+
+	/**
+	 * @param hasLecturersInfo the hasLecturersInfo to set
+	 */
+	public void setHasLecturersInfo(Boolean hasLecturersInfo) {
+		this.hasLecturersInfo = hasLecturersInfo;
 	}
 
 }

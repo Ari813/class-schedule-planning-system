@@ -3,20 +3,19 @@ package entities;
 /**
  * @author Omri Barda		039725890 
  * @author Amit Joseph		034608547
- * @author Gilad Shpigel  	300162393
- * @author Elad Elbaz		040539959
- * @version June 2012
+ * @version Oct 2013
  */
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.ArrayList;
 
 public class Lecturer extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String position;
 	private String assignmentYear;
-
+	private Boolean hasCoursesInfo;
+	private ArrayList<Course> LecturerCourses;
 	/**
 	 * constructor
 	 * 
@@ -36,13 +35,16 @@ public class Lecturer extends User implements Serializable {
 		super(lecturerID, password, firstName, surName, authorizationLevel);
 		this.position = position;
 		this.assignmentYear = assignmentYear;
+		LecturerCourses= new ArrayList<Course>();
+		hasCoursesInfo = false;
 	}
 
 	/**
 	 * empty constructor
 	 */
 	public Lecturer() {
-
+		LecturerCourses= new ArrayList<Course>();
+		hasCoursesInfo = false;
 	}
 
 	
@@ -87,4 +89,40 @@ public class Lecturer extends User implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+
+	/**
+	 * @return the lecturerCourses
+	 */
+	public ArrayList<Course> getLecturerCourses() {
+		return LecturerCourses;
+	}
+
+	/**
+	 * @param lecturerCourses the lecturerCourses to set
+	 */
+	public void setLecturerCourses(ArrayList<Course> lecturerCourses) {
+		LecturerCourses = lecturerCourses;
+		hasCoursesInfo = !LecturerCourses.isEmpty();
+	}
+	
+	public void addCourse(Course Crs) {
+		LecturerCourses.add(Crs);
+		hasCoursesInfo = true;
+	}
+
+	/**
+	 * @return the hasCoursesInfo
+	 */
+	public Boolean getHasCoursesInfo() {
+		return hasCoursesInfo;
+	}
+
+	/**
+	 * @param hasCoursesInfo the hasCoursesInfo to set
+	 */
+	public void setHasCoursesInfo(Boolean hasCoursesInfo) {
+		this.hasCoursesInfo = hasCoursesInfo;
+	}
+	
+	
 }
