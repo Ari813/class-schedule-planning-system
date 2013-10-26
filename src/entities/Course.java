@@ -133,8 +133,12 @@ public class Course implements Serializable {
 	/**
 	 * @param hasLecturersInfo the hasLecturersInfo to set
 	 */
-	public void setHasadditionalInfo(Boolean additionalInfo) {
-		this.hasadditionalInfo = additionalInfo;
+	public void setHasadditionalInfo() {
+		this.hasadditionalInfo = true;
+	}
+	
+	public void clrHasadditionalInfo() {
+		this.hasadditionalInfo = false;
 	}
 
 }

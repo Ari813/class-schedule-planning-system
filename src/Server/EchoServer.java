@@ -111,7 +111,8 @@ public class EchoServer extends AbstractServer {
 		GetAllLecturersPack lecpck = (GetAllLecturersPack) msg;
 
 		try {
-			lecpck.setAllLecturers(db.getAllLecturers());
+			lecpck.setAllLecturers(db.getAllLecturers(lecpck
+					.isBringAdditionalInfo()));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

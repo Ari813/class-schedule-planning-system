@@ -120,8 +120,11 @@ public class Lecturer extends User implements Serializable {
 	/**
 	 * @param hasCoursesInfo the hasCoursesInfo to set
 	 */
-	public void setHasCoursesInfo(Boolean hasCoursesInfo) {
-		this.hasCoursesInfo = hasCoursesInfo;
+	public void setHasCoursesInfo( ) {
+		this.hasCoursesInfo = true;
+	}
+	public void clrHasCoursesInfo( ) {
+		this.hasCoursesInfo = false;
 	}
 	
 	

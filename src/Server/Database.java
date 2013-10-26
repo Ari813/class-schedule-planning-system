@@ -222,7 +222,7 @@ public class Database {
 			cls.setCapcity(qrs.getInt("Capacity"));
 			cls.setCampus(qrs.getInt("Campus"));
 			cls.setAvailable(qrs.getBoolean("Available"));
-			cls.setDescription(qrs.getString("Desciption"));
+			cls.setDescription(qrs.getString("Description"));
 			query = new String(
 					"SELECT * FROM `csps-db`.classaids ca where ca.ClassBuilding = "
 							+ cls.getBuilding() + " AND ca.ClassID = "
@@ -287,12 +287,11 @@ public class Database {
 				}
 				LecturersQrs.close();
 				AidsQrs.close();
-				
-				crs.setHasadditionalInfo(true);
+
+				crs.setHasadditionalInfo();
 			}
 
 			CourseArray.add(crs);
-			
 
 		}
 		qrs.close();
@@ -319,10 +318,13 @@ public class Database {
 		return FacultyArray;
 	}
 
-	public ArrayList<Lecturer> getAllLecturers() throws SQLException {
+	public ArrayList<Lecturer> getAllLecturers(boolean additionalInfo)
+			throws SQLException {
 		ResultSet qrs = null;
+		ResultSet CoursesQrs = null;
 		ArrayList<Lecturer> LecturerArray = new ArrayList<Lecturer>();
 		Lecturer lec;
+		Course crs;
 
 		String query = new String("SELECT * FROM `csps-db`.lecturer;");
 		st = conn.createStatement();
@@ -331,8 +333,25 @@ public class Database {
 			lec = new Lecturer();
 			lec.setID(qrs.getInt("LecturerID"));
 			lec.setName(qrs.getString("LecturerName"));
+
+			if (additionalInfo) {
+				query = new String(
+						"SELECT * FROM `csps-db`.courselecturers cl where cl.LecturerID = "
+								+ lec.getID() + ";");
+				st = conn.createStatement();
+
+				CoursesQrs = st.executeQuery(query);
+				while (CoursesQrs.next()) {
+					crs = new Course();
+					crs.setCourseID(CoursesQrs.getInt("CourseID"));
+					lec.addCourse(crs);
+					lec.setHasCoursesInfo();
+				}
+			}
+
 			LecturerArray.add(lec);
 		}
+
 		qrs.close();
 
 		return LecturerArray;
