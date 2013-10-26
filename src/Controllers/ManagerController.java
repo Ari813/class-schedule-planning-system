@@ -121,14 +121,14 @@ public class ManagerController {
 		
 		FacultyMsg = new GetAllFacultyPack();
 		client.handleMessageFromClientUI(FacultyMsg);
-		ClassMsg = (GetAllClassesPack) client.getMessage();
+		FacultyMsg = (GetAllFacultyPack) client.getMessage();
 		return (FacultyMsg.getAllFaculty());
 	}
 
 	private ArrayList<Course> getCourse() {
 		CourseMsg = new GetAllCoursePack();
 		client.handleMessageFromClientUI(CourseMsg);
-		ClassMsg = (GetAllClassesPack) client.getMessage();
+		CourseMsg = (GetAllCoursePack) client.getMessage();
 		return (CourseMsg.getAllclass());
 	}
 

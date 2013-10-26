@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.Box;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -70,23 +71,22 @@ ListSelectionListener, KeyListener {
 	private ManagerController manager;
 
 	/*		Lecturers Data		*/
-	private Map<Integer, Lecturer> ArrayAvailableLecturers;
+	private Map<Integer, Integer> ArrayAvailableLecturers;
 	private Map<Integer, Integer> arraySelectedLecturers;
-	private Map<Integer, StudyAids> ArrayLecturers;
+	private Map<Integer, Lecturer> ArrayLecturers;
+	private DefaultListModel lstCLecturersModel;
+	private DefaultListModel lstSelectedLecturersModel;
+	
 	
 	/*		general StudyAids	*/
 	private Map<Integer, StudyAids> LecStudyAids;
 	/*		Lecture	StudyAids	*/
 	private Map<Integer, Integer> LecAvailableStudyAids;
 	private Map<Integer, Integer> LecSelectedStudyAids;
+	private DefaultListModel lstLecturersClassAidsModel;
+	private DefaultListModel lstLecturersSelectedClassAidsModel;
 	
-	/*		Practice StudyAids	*/
-	private Map<Integer, Integer> PracticeAvailableStudyAids;
-	private Map<Integer, Integer> PracticeSelectedStudyAids;
 	
-	/*		Lab StudyAids		*/
-	private Map<Integer, Integer> LabAvailableStudyAids;
-	private Map<Integer, Integer> LabSelectedStudyAids;
 	
 	private ArrayList<Faculty> arrayFaculty;
 	private ArrayList<Course> arrayCourse;
@@ -472,23 +472,22 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	}
 
 
-	public void setAvailableLecturers(ArrayList<Lecturer> ArrayList) {
-		ArrayAvailableLecturers = new HashMap<Integer,Lecturer>();
-		Arry
-		
-		arrayAvailableStudyAids = new HashMap<Integer, Integer>();
-		arraySelectedStudyAids = new HashMap<Integer, Integer>();
-		lstClassAidsModel.removeAllElements();
-		lstSelectedClassAidsModel.removeAllElements();
+	public void setAvailableLecturers(ArrayList<Lecturer> arrayList) {
+		ArrayLecturers = new HashMap<Integer,Lecturer>();
+		ArrayAvailableLecturers= new HashMap<Integer, Integer>();
+		arraySelectedLecturers = new HashMap<Integer, Integer>();
+					
+		lstCLecturersModel.removeAllElements();
+		lstSelectedLecturersModel.removeAllElements();
 		for (int i = 0; i < arrayList.size(); i++) {
-			arrayStudyAids.put(arrayList.get(i).getAidsID(), arrayList.get(i));
-			lstClassAidsModel.addElement(arrayList.get(i).getAidsID() + ":"
-					+ arrayList.get(i).getAidsName());
-			arrayAvailableStudyAids.put(arrayList.get(i).getAidsID(), arrayList
-					.get(i).getAidsID());
+			ArrayLecturers.put(arrayList.get(i).getID(), arrayList.get(i));
+			lstCLecturersModel.addElement(arrayList.get(i).getID() + ":"
+					+ arrayList.get(i).getFirstName()+ ":" + arrayList.get(i).getSurName());
+			ArrayAvailableLecturers.put(arrayList.get(i).getID(), arrayList
+					.get(i).getID());
 		}
 	}
 		
 		
 	}
-}
+
