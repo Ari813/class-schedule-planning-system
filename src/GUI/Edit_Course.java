@@ -117,7 +117,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		PNL_Main.add(Practice_AcademicHours);
 		Practice_AcademicHours.setFont(new Font("Dialog", Font.PLAIN, 16));
 		JLabel label_7 = new JLabel("Max student per class:");
-		label_7.setBounds(292, 358, 170, 23);
+		label_7.setBounds(292, 358, 180, 23);
 		PNL_Main.add(label_7);
 		label_7.setFont(new Font("Dialog", Font.PLAIN, 18));
 		Practice_MaxStdntPerClass = new JSpinner();
