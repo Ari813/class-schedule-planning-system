@@ -11,10 +11,13 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import common.CourseTypes;
 import entities.Building;
 import entities.Campus;
 import entities.Class;
 import entities.ClassesAids;
+import entities.Course;
+import entities.Lecturer;
 import entities.Login;
 import entities.StudyAids;
 
@@ -114,7 +117,7 @@ public class Database {
 		int ans = Login.ERROR;
 		qrs = st.executeQuery(query);
 		if (qrs.next()) {
-			if (qrs.getInt("LoggedIn")==0) {
+			if (qrs.getInt("LoggedIn") == 0) {
 				query = new String(
 						"UPDATE `csps-db`.`Login` L SET `LoggedIn` = 1 WHERE L.UserID = "
 								+ userID + ";");
@@ -237,32 +240,56 @@ public class Database {
 		qrs.close();
 		return ClassesArray;
 	}
-	
-/*
-	public ArrayList<ClassesAids> getAllclassAids() throws SQLException {
-		ResultSet qrs = null;
-			ArrayList<ClassesAids> clssAids = new ArrayList<ClassesAids>();
-		ClassesAids claids;
 
-		String query = new String("SELECT * FROM `csps-db`.classaids;");
+	public ArrayList<Course> getAllCourses() throws SQLException {
+		ResultSet qrs = null;
+		ResultSet AidsQrs = null;
+		ResultSet LecturersQrs = null;
+
+		ArrayList<Course> CourseArray = new ArrayList<Course>();
+		Lecturer lec;
+		StudyAids stdyAds;
+		Course crs;
+
+		String query = new String("SELECT * FROM `csps-db`.course;");
 		st = conn.createStatement();
 		qrs = st.executeQuery(query);
 		while (qrs.next()) {
-			claids = new ClassesAids();
-			claids.setAidsid(qrs.getInt("ClassaidID"));
-			claids.setClassBuildingid(qrs.getInt("ClassBuilding"));
-			claids.setClssid(qrs.getInt("ClssID"));
+			crs = new Course(qrs.getInt("Capacity"), qrs.getInt("CourseID"),
+					qrs.getString("Desciption"), qrs.getInt("Faculty"),
+					qrs.getInt("Semester"));
+			/* Add study aids */
+			query = new String(
+					"SELECT * FROM `csps-db`.CourseAids ca where ca.CourseType = "
+							+ CourseTypes.Lecture + " AND ca.CourseID = "
+							+ crs.getCourseID() + ";");
+			st = conn.createStatement();
+
+			AidsQrs = st.executeQuery(query);
+			while (AidsQrs.next()) {
+				stdyAds = new StudyAids();
+				stdyAds.setAidsID(AidsQrs.getInt("ClassAidID"));
+				crs.addStudyAids(stdyAds);
+			}
+
+			/* Add Lecturer	*/
+			query = new String(
+					"SELECT * FROM `csps-db`.courselecturers cl where cl.CourseID = "
+							+ crs.getCourseID() + ";");
+			st = conn.createStatement();
+
+			LecturersQrs = st.executeQuery(query);
+			while (LecturersQrs.next()) {
+				lec = new Lecturer();
+				lec.setID(LecturersQrs.getInt("ClassAidID"));
+				crs.addLecturer(lec);
+			}
 			
-			clssAids.add(claids);
+			CourseArray.add(crs);
+			AidsQrs.close();
+			LecturersQrs.close();
 		}
 		qrs.close();
-
-		return clssAids;
+		return CourseArray;
 	}
-	*/
-	}
-
-
-
-
-
+}
