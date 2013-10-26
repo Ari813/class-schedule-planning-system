@@ -155,7 +155,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		return label_8;
 		return Practice_MaxStdntPerClass;
 		return label_7;
-		return Practice_AcademicHours;}
+		return Practice_AcademicHours;
 	
 	
 		private void initialize() {
