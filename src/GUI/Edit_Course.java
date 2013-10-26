@@ -63,9 +63,9 @@ ListSelectionListener, KeyListener {
 	private JButton btnAdd;
 	private JButton btnRemove;
 	public JPanel PNL_Main;
-	private JSpinner Practice_AcademicHours;
-	private JSpinner Practice_MaxStdntPerClass;
-	private JList<?> Practice_StudyAids;
+	private JSpinner AcademicHours;
+	private JSpinner MaxStdntPerClass;
+	private JList<?> SelectedStudyAids;
 
 	private JLabel lblStudyAids;
 	private ManagerController manager;
@@ -113,35 +113,35 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		super();
 		this.manager=mng;
 		initialize();
-		Practice_AcademicHours = new JSpinner();
-		Practice_AcademicHours.setBounds(265, 400, 79, 20);
-		PNL_Main.add(Practice_AcademicHours);
-		Practice_AcademicHours.setFont(new Font("Dialog", Font.PLAIN, 16));
+		AcademicHours = new JSpinner();
+		AcademicHours.setBounds(265, 400, 79, 20);
+		PNL_Main.add(AcademicHours);
+		AcademicHours.setFont(new Font("Dialog", Font.PLAIN, 16));
 		JLabel label_7 = new JLabel("Max student per class:");
 		label_7.setBounds(519, 373, 243, 23);
 		PNL_Main.add(label_7);
 		label_7.setFont(new Font("Dialog", Font.PLAIN, 18));
-		Practice_MaxStdntPerClass = new JSpinner();
-		Practice_MaxStdntPerClass.setBounds(519, 400, 79, 20);
-		PNL_Main.add(Practice_MaxStdntPerClass);
-		Practice_MaxStdntPerClass.setFont(new Font("Dialog", Font.PLAIN, 16));
+		MaxStdntPerClass = new JSpinner();
+		MaxStdntPerClass.setBounds(519, 400, 79, 20);
+		PNL_Main.add(MaxStdntPerClass);
+		MaxStdntPerClass.setFont(new Font("Dialog", Font.PLAIN, 16));
 		lblStudyAids = new JLabel("Study aids:");
 		lblStudyAids.setBounds(506, 102, 170, 23);
 		PNL_Main.add(lblStudyAids);
 		lblStudyAids.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		Practice_StudyAids = new JList<Object>();
-		Practice_StudyAids.setToolTipText("Selected study aids");
-		Practice_StudyAids.setBounds(510, 268, 243, 90);
-		PNL_Main.add(Practice_StudyAids);
-		Practice_StudyAids.setBackground(SystemColor.inactiveCaption);
-		Practice_StudyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
+		SelectedStudyAids = new JList<Object>();
+		SelectedStudyAids.setToolTipText("Selected study aids");
+		SelectedStudyAids.setBounds(510, 268, 243, 90);
+		PNL_Main.add(SelectedStudyAids);
+		SelectedStudyAids.setBackground(SystemColor.inactiveCaption);
+		SelectedStudyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
 		
-		JList<Object> list = new JList<Object>();
-		list.setToolTipText("Available study aids");
-		list.setFont(new Font("Dialog", Font.PLAIN, 16));
-		list.setBackground(SystemColor.inactiveCaption);
-		list.setBounds(510, 142, 243, 85);
-		PNL_Main.add(list);
+		JList<Object> AvailableStudyAids = new JList<Object>();
+		AvailableStudyAids.setToolTipText("Available study aids");
+		AvailableStudyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
+		AvailableStudyAids.setBackground(SystemColor.inactiveCaption);
+		AvailableStudyAids.setBounds(510, 142, 243, 85);
+		PNL_Main.add(AvailableStudyAids);
 		
 		Component horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(506, 122, 258, 14);
@@ -288,7 +288,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		lstSelectedLecturersModel=new DefaultListModel();
 		lstChoosenLecturers = new JList<Object>();
 		lstChoosenLecturers.setModel(lstSelectedLecturersModel);
-		lstChoosenLecturers.setToolTipText("Selectedlecturers");
+		lstChoosenLecturers.setToolTipText("Selected Lecturers");
 		lstChoosenLecturers.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstChoosenLecturers.setBounds(345, 141, 115, 217);
 		return lstChoosenLecturers;
@@ -333,7 +333,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	private JSpinner getCourse_Semester() {
 		Course_Semester = new JSpinner();
 		Course_Semester.setModel(new SpinnerNumberModel(1, 1, 8, 1));
-		Course_Semester.setBounds(11, 402, 79, 20);
+		Course_Semester.setBounds(11, 400, 79, 20);
 		return Course_Semester;
 	}
 
