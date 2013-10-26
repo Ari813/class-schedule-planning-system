@@ -67,13 +67,15 @@ ListSelectionListener, KeyListener {
 	private JButton btnDiscard;
 	private JButton btnAdd;
 	private JButton btnRemove;
+	private JButton btnRemveStudyAids;
 	public JPanel PNL_Main;
 	private JSpinner AcademicHours;
 	private JSpinner MaxStdntPerClass;
 	private JList<?> SelectedStudyAids;
-
+	private JButton btnAddStudyAids;
 	private JLabel lblStudyAids;
 	private ManagerController manager;
+	private JList AvailableStudyAids;
 
 	/*		Lecturers Data		*/
 	private Map<Integer, Integer> ArrayAvailableLecturers;
@@ -150,7 +152,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		
 		lstLecturersClassAidsModel= new  DefaultListModel();
 		lstLecturersSelectedClassAidsModel=new  DefaultListModel();
-		JList AvailableStudyAids = new JList();
+		AvailableStudyAids = new JList();
 		SelectedStudyAids.setModel(lstLecturersSelectedClassAidsModel);
 		AvailableStudyAids.setModel(lstLecturersClassAidsModel );
 		AvailableStudyAids.setToolTipText("Available study aids");
@@ -163,14 +165,16 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		horizontalStrut.setBounds(506, 122, 258, 14);
 		PNL_Main.add(horizontalStrut);
 		
-		JButton btnAddStudyAids = new JButton("Add");
+		btnAddStudyAids = new JButton("Add");
 		btnAddStudyAids.setToolTipText("Add Study aid to course");
 		btnAddStudyAids.setBounds(520, 237, 94, 23);
+		btnAddStudyAids.addActionListener(this);
 		PNL_Main.add(btnAddStudyAids);
 		
-		JButton btnRemveStudyAids = new JButton("Remove");
+		btnRemveStudyAids = new JButton("Remove");
 		btnRemveStudyAids.setToolTipText("Remove Study aid to course");
 		btnRemveStudyAids.setBounds(651, 237, 89, 23);
+		btnRemveStudyAids.addActionListener(this);
 		PNL_Main.add(btnRemveStudyAids);
 		
 		}
@@ -309,7 +313,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	
 	private JList getlstChoosenLecturers() {
 		lstSelectedLecturersModel=new DefaultListModel();
-		lstChoosenLecturers = new JList<Object>();
+		lstChoosenLecturers = new JList();
 		lstChoosenLecturers.setModel(lstSelectedLecturersModel);
 		lstChoosenLecturers.setToolTipText("Selected Lecturers");
 		lstChoosenLecturers.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -354,8 +358,15 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	
 
 	private JSpinner getCourse_Semester() {
-		Course_Semester = new JSpinner();
-		f
+		SpinnerNumberModel snm = new SpinnerNumberModel(
+                new Integer(0),
+                new Integer(0),
+                new Integer(100),
+                new Integer(5)
+        );
+				
+		Course_Semester = new JSpinner(snm);
+		
 		Course_Semester.setModel(new SpinnerNumberModel(1, 1, 8, 1));
 		Course_Semester.setBounds(11, 400, 79, 20);
 		return Course_Semester;
@@ -425,7 +436,32 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	}
 
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnAddStudyAids) {
+			int index;
+			if ((LecStudyAids != null) && (!LecStudyAids.isEmpty())) {
+				if (AvailableStudyAids. getSelectedIndex() >= 0) {
+					index = Integer.parseInt(lstLecturersClassAidsModel
+							.getElementAt(AvailableStudyAids.getSelectedIndex())
+							.toString().split(":")[0]);
+					addAids(index);
+				}
+			}
+		}
+		if (e.getSource() == btnRemveStudyAids) {
+			int index;
 
+			if ((LecSelectedStudyAids != null)
+					&& (!LecSelectedStudyAids.isEmpty())) {
+				if (SelectedStudyAids.getSelectedIndex() >= 0) {
+					index = Integer.parseInt(lstLecturersSelectedClassAidsModel
+							.getElementAt(
+									SelectedStudyAids.getSelectedIndex())
+							.toString().split(":")[0]);
+					removeAids(index);
+				}
+			}
+		}
+		
 		if (e.getSource() == btnNewCourse) {
 		}
 		
@@ -446,9 +482,35 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	}
 
+	
+//	private Map<Integer, StudyAids> LecStudyAids;
+	/*		Lecture	StudyAids	*/
+
+//	private Map<Integer, Integer> LecAvailableStudyAids; arrayAvailableStudyAids
+//	private Map<Integer, Integer> LecSelectedStudyAids; arraySelectedStudyAids
+//	private DefaultListModel lstLecturersClassAidsModel;
+//	private DefaultListModel lstLecturersSelectedClassAidsModel;
+	
+
+	private void removeAids(int index) {
+		LecAvailableStudyAids.put(LecSelectedStudyAids.get(index),
+				LecSelectedStudyAids.get(index));
+		LecSelectedStudyAids.remove(index);
+		lstClassAidsModel.addElement(lstSelectedClassAidsModel
+				.getElementAt(lstSelectedClassaids.getSelectedIndex()));
+		lstSelectedClassAidsModel.remove(lstSelectedClassaids
+				.getSelectedIndex());
+		
+	}
+
 
 	private void addAids(int index) {
-		// TODO Auto-generated method stub
+		LecSelectedStudyAids.put(LecAvailableStudyAids.get(index),
+				LecAvailableStudyAids.get(index));
+		LecAvailableStudyAids.remove(index);
+		lstLecturersSelectedClassAidsModel.addElement(lstLecturersClassAidsModel.
+				getElementAt(AvailableStudyAids.getSelectedIndex()));
+		lstLecturersClassAidsModel.remove(AvailableStudyAids.getSelectedIndex());
 		
 	}
 
@@ -518,7 +580,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 					.get(i).getID());
 		}
 	}
-<<<<<<< .mine
+
 
 	//private Map<Integer, Integer> LecStudyAids;
 	//private Map<Integer, Integer> LecAvailableStudyAids;
@@ -541,8 +603,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	}
 		
 		
-=======
->>>>>>> .r222
+
 	}
 	}
 
