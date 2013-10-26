@@ -496,9 +496,9 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		LecAvailableStudyAids.put(LecSelectedStudyAids.get(index),
 				LecSelectedStudyAids.get(index));
 		LecSelectedStudyAids.remove(index);
-		lstClassAidsModel.addElement(lstSelectedClassAidsModel
-				.getElementAt(lstSelectedClassaids.getSelectedIndex()));
-		lstSelectedClassAidsModel.remove(lstSelectedClassaids
+		lstLecturersClassAidsModel.addElement(lstLecturersSelectedClassAidsModel
+				.getElementAt(SelectedStudyAids.getSelectedIndex()));
+		lstLecturersSelectedClassAidsModel.remove(SelectedStudyAids
 				.getSelectedIndex());
 		
 	}
