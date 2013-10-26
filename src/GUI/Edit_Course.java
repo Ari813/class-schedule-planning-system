@@ -46,15 +46,15 @@ ListSelectionListener, KeyListener {
 	private JTextField txtDescriptionText;
 	private JTextField txtCapacityNumber;
 	private JTextField txtIdNumber;
-	private JTextField txtCoursName;
+	private JTextField txtCourseName;
 	private JTextField txtCourseEditor;
 	private JLabel lblMainAcademicHours;
 
 	private JComboBox cmbBxEditCouse;
-	private JComboBox<?> CB_Faculty;
+	private JComboBox CB_Faculty;
 	private JSpinner Course_Semester;
-	private JList<?> lstAvailableLecturers;
-	private JList<?> lstChoosenLecturers;
+	private JList lstAvailableLecturers;
+	private JList lstChoosenLecturers;
 	private JTabbedPane tabbedPane;
 	private JButton btnNewCourse;
 	private JButton btnSave;
@@ -66,7 +66,7 @@ ListSelectionListener, KeyListener {
 	private JCheckBox ChkEnableLecture;
 	private JSpinner Lec_AcademicHours;
 	private JSpinner Lec_MaxStdntPerClass;
-	private JList<?> Lec_StdyAids;
+	private JList Lec_StdyAids;
 
 	private JCheckBox ChkEnablePractice;
 	private JSpinner Practice_AcademicHours;
@@ -78,7 +78,7 @@ ListSelectionListener, KeyListener {
 	private JCheckBox ChkEnableLab;
 	private JSpinner Lab_AcademicHours;
 	private JSpinner Lab_MaxStdntPerClass;
-	private JList<?> Lab_StudyAids;
+	private JList Lab_StudyAids;
 	private ManagerController manager;
 
 	/*		Lecturers Data		*/
@@ -100,7 +100,7 @@ ListSelectionListener, KeyListener {
 	private Map<Integer, Integer> LabAvailableStudyAids;
 	private Map<Integer, Integer> LabSelectedStudyAids;
 	
-	private ArrayList<Campus> arrayCampus;
+	private ArrayList<Faculty> arrayFaculty;
 	private ArrayList<Course> arrayCourse;
 	
 	
@@ -541,18 +541,18 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	}
 
 	private JComboBox getCB_Faculty() {
-		CB_Faculty = new JComboBox<Object>();
+		CB_Faculty = new JComboBox();
 		CB_Faculty.setBounds(10, 272, 105, 21);
 		return CB_Faculty;
 	}
 
 	private JTextField gettxtCoursName() {
-		txtCoursName = new JTextField();
-		txtCoursName.setEnabled(false);
-		txtCoursName.setText("cours name");
-		txtCoursName.setBounds(10, 207, 105, 20);
-		txtCoursName.setColumns(10);
-		return txtCoursName;
+		txtCourseName = new JTextField();
+		txtCourseName.setEnabled(false);
+		txtCourseName.setText("cours name");
+		txtCourseName.setBounds(10, 207, 105, 20);
+		txtCourseName.setColumns(10);
+		return txtCourseName;
 	}
 
 	private JTextField gettxtIdNumber() {
@@ -657,6 +657,26 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 			cmbBxEditCouse.addItem(arrayCourse.get(i).getCourseID() + ":"
 					+ arrayCourse.get(i).getDescription());
 		}
+		
+	}
+
+
+	public void setFaculty(ArrayList<Faculty> ArrayList) {
+		arrayFaculty =ArrayList;
+		cmbBxEditCouse.removeAll();
+		for (int i = 0; i < arrayFaculty.size(); i++) {
+			CB_Faculty.addItem(arrayFaculty.get(i).getFacultyNum() + ":"
+					+ arrayFaculty.get(i).getFaculty());
+		}
+		
+	}
+
+
+	public void setAvailableLecturers(ArrayList<Lecturer> ArrayList) {
+		ArrayAvailableLecturers = new HashMap<Integer, >();
+		
+		
+		
 		
 	}
 

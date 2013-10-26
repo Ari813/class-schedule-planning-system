@@ -9,6 +9,8 @@ import entities.Campus;
 import entities.Class;
 import entities.ClassesAids;
 import entities.Course;
+import entities.Faculty;
+import entities.Lecturer;
 import entities.StudyAids;
 import Client.ChatClient;
 import GUI.Automatic_Sheduling;
@@ -56,7 +58,7 @@ public class ManagerController {
 
 	private GetAllClassesPack ClassMsg;
 	private GetAllCoursePack CourseMsg;
-
+	private GetAllFacultyPack FacultyMsg;
 	public ManagerController(Main_Frame mainFrm, ChatClient client) {
 		this.client = client;
 		manegerMainFrm = mainFrm;
@@ -101,8 +103,26 @@ public class ManagerController {
 		manegerMainFrm.remove(Panel2Close);
 		ECRS = new Edit_Course(this);
 		ECRS.setCourses(getCourse());
+		ECRS.setFaculty(getFaculty());
+		ECRS.setAvailableLecturers(getAvailableLecturers());
 		manegerMainFrm.add(ECRS.PNL_Main);
 		manegerMainFrm.repaint();
+	}
+
+	private ArrayList<Lecturer> getAvailableLecturers() {
+		GetAvailableLecturersPack studyAvailableLecturers = new GetAvailableLecturersPack();
+		client.handleMessageFromClientUI(studyAvailableLecturers);
+		studyAvailableLecturers = (GetAvailableLecturersPack) client.getMessage();
+		return (studyAvailableLecturers.getAllLecturer());
+		
+	}
+
+	private ArrayList<Faculty> getFaculty() {
+		
+		FacultyMsg = new GetAllFacultyPack();
+		client.handleMessageFromClientUI(FacultyMsg);
+		ClassMsg = (GetAllClassesPack) client.getMessage();
+		return (FacultyMsg.getAllFaculty());
 	}
 
 	private ArrayList<Course> getCourse() {
