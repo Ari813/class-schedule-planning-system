@@ -8,6 +8,7 @@ import entities.Building;
 import entities.Campus;
 import entities.Class;
 import entities.ClassesAids;
+import entities.Course;
 import entities.StudyAids;
 import Client.ChatClient;
 import GUI.Automatic_Sheduling;
@@ -58,6 +59,7 @@ public class ManagerController {
 	private ChatClient client;
 
 	private GetAllClassesPack ClassMsg;
+	private GetAllCoursePack CourseMsg;  
 
 	public ManagerController(Main_Frame mainFrm, ChatClient client) {
 		this.client = client;
@@ -102,15 +104,26 @@ public void Load_Edit_Course(JPanel Panel2Close) {
 
 manegerMainFrm.remove(Panel2Close);
 ECRS = new Edit_Course(this);
-ECRS.setCourse(getCourse());
+ECRS.setCourses(getCourse());
 manegerMainFrm.add(ECRS.PNL_Main);
 manegerMainFrm.repaint();
 }	
-private Object getCourse() {
-	// TODO Auto-generated method stub
+private ArrayList<Course> getCourse() {
+	CourseMsg = new GetAllCoursePack();
+	client.handleMessageFromClientUI(CourseMsg);
+	ClassMsg = (GetAllClassesPack) client.getMessage();
+	return (ClassMsg.getAllclass());
+	
 	return null;
 }
-
+/*
+ * public ArrayList<Class> GetClasses() {
+		ClassMsg = new GetAllClassesPack();
+		client.handleMessageFromClientUI(ClassMsg);
+		ClassMsg = (GetAllClassesPack) client.getMessage();
+		return (ClassMsg.getAllclass());
+	}
+ */
 	///////
 	public void Load_Edit_Class(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
