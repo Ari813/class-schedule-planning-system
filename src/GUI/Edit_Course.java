@@ -521,19 +521,12 @@ public class Edit_Course extends JPanel implements ActionListener,
 			setCouseAids(index);
 			
 		}
-		if (index < 0)
-			setdefault();
+		//if (index < 0)
+			//setdefault();
 
 	}
 		
 	
-	//private Map<Integer, StudyAids> LecStudyAids;
-	/* Lecture StudyAids */
-
-	//private Map<Integer, Integer> LecAvailableStudyAids;
-	//private Map<Integer, Integer> LecSelectedStudyAids;
-	//private DefaultListModel lstLecturersClassAidsModel;
-	//private DefaultListModel lstLecturersSelectedClassAidsModel;
 	
 	
 	private void setCouseAids(int index) {
