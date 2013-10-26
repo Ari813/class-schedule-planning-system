@@ -29,11 +29,11 @@ import javax.swing.border.BevelBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import entities.Lecturer;
-import entities.StudyAids;
+import entities.*;
 import Controllers.ManagerController;
 
 import java.awt.SystemColor;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class Edit_Course extends JPanel implements ActionListener,
@@ -99,6 +99,8 @@ ListSelectionListener, KeyListener {
 	/*		Lab StudyAids		*/
 	private Map<Integer, Integer> LabAvailableStudyAids;
 	private Map<Integer, Integer> LabSelectedStudyAids;
+	
+	private ArrayList<Campus> arrayCampus;
 	
 	
 	
