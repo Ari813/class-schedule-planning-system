@@ -355,6 +355,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	private JSpinner getCourse_Semester() {
 		Course_Semester = new JSpinner();
+		f
 		Course_Semester.setModel(new SpinnerNumberModel(1, 1, 8, 1));
 		Course_Semester.setBounds(11, 400, 79, 20);
 		return Course_Semester;
