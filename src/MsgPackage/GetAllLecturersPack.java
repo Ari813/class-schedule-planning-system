@@ -14,7 +14,7 @@ public class GetAllLecturersPack extends MessagePack {
 	
 	private ArrayList<Lecturer> allLecturers;
 	
-	public ArrayList<Lecturer> getAllFaculty() {
+	public ArrayList<Lecturer> getAllLecturers() {
 		return allLecturers;
 	}
 
