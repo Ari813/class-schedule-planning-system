@@ -34,6 +34,7 @@ import Controllers.ManagerController;
 
 import java.awt.SystemColor;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Edit_Course extends JPanel implements ActionListener,
@@ -472,7 +473,8 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 
 	public void setAvailableLecturers(ArrayList<Lecturer> ArrayList) {
-		ArrayAvailableLecturers = new HashMap<Integer, >();
+		ArrayAvailableLecturers = new HashMap<Integer,Lecturer>();
+		
 		
 		
 		
