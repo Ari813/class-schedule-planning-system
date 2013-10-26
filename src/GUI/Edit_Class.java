@@ -17,7 +17,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.awt.Color;
 
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -40,7 +39,7 @@ import javax.swing.DefaultComboBoxModel;
 import entities.Building;
 import entities.Campus;
 import entities.Class;
-import entities.ClassesAids;
+
 import entities.StudyAids;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
@@ -103,20 +102,6 @@ public class Edit_Class extends JPanel implements ActionListener,
 	 * Launch the application.
 	 */
 
-	/*
-	 * /JLabel lblTimeTableSchedualing = new
-	 * JLabel("Time Table Schedualing System");
-	 * lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
-	 * lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
-	 * lblTimeTableSchedualing.setLocation(new Point(50, 0));
-	 * lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
-	 * lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
-	 * lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
-	 * lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
-	 * null, null, null, null));
-	 * 
-	 * /
-	 */
 	private LecturerController lec;
 	private ManagerController manager;
 	private ArrayList<String> aids;
@@ -415,11 +400,12 @@ public class Edit_Class extends JPanel implements ActionListener,
 		if (e.getSource() == btnAdd) {
 			int index;
 			if ((arrayStudyAids != null) && (!arrayStudyAids.isEmpty())) {
-				index = Integer.parseInt(lstClassAidsModel
-						.getElementAt(lstClassAids.getSelectedIndex())
-						.toString().split(":")[0]);
-				addAids(index);
-
+				if (lstClassAids.getSelectedIndex() >= 0) {
+					index = Integer.parseInt(lstClassAidsModel
+							.getElementAt(lstClassAids.getSelectedIndex())
+							.toString().split(":")[0]);
+					addAids(index);
+				}
 			}
 
 		}
@@ -428,10 +414,13 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 			if ((arraySelectedStudyAids != null)
 					&& (!arraySelectedStudyAids.isEmpty())) {
-				index = Integer.parseInt(lstSelectedClassAidsModel
-						.getElementAt(lstSelectedClassaids.getSelectedIndex())
-						.toString().split(":")[0]);
-				removeAids(index);
+				if (lstSelectedClassaids.getSelectedIndex() >= 0) {
+					index = Integer.parseInt(lstSelectedClassAidsModel
+							.getElementAt(
+									lstSelectedClassaids.getSelectedIndex())
+							.toString().split(":")[0]);
+					removeAids(index);
+				}
 			}
 		}
 		if (e.getSource() == btnNewClass) {
@@ -453,7 +442,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		arraySelectedStudyAids.remove(index);
 		lstClassAidsModel.addElement(lstSelectedClassAidsModel
 				.getElementAt(lstSelectedClassaids.getSelectedIndex()));
-		lstSelectedClassAidsModel.remove(lstSelectedClassaids.getSelectedIndex());
+		lstSelectedClassAidsModel.remove(lstSelectedClassaids
+				.getSelectedIndex());
 	}
 
 	private void addAids(int index) {
@@ -563,16 +553,6 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	}
 
-	/*
-	 * 
-	 * 
-	 * public void addClassAids(ArrayList<String> arry) { // TODO Auto-generated
-	 * method stub this.aids = new ArrayList<String>();
-	 * lstClassAids.removeAll(); this.aids.addAll(0, arry); for (int i = 0; i <
-	 * (arry.size()); i++) { // lstClassAids.add(arry.get(i) );
-	 * 
-	 * } }
-	 */
 	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
 		// TODO Auto-generated method stub
 		arrayStudyAids = new HashMap<Integer, StudyAids>();
@@ -609,7 +589,6 @@ public class Edit_Class extends JPanel implements ActionListener,
 	public void setClasses(ArrayList<Class> arrayList) {
 		arrayClasses = arrayList;
 		cmbxEditClass.removeAll();
-		System.out.println("setClasses");
 		for (int i = 0; i < arrayClasses.size(); i++) {
 			cmbxEditClass.addItem(arrayClasses.get(i).getClassID() + ":"
 					+ arrayClasses.get(i).getDescription());
