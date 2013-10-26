@@ -99,7 +99,7 @@ public class ManagerController {
 
 	// //////////////
 	public void Load_Edit_Course(JPanel Panel2Close) {
-
+		
 		manegerMainFrm.remove(Panel2Close);
 		ECRS = new Edit_Course(this);
 		System.out.print("-1");
