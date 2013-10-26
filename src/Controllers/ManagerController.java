@@ -102,23 +102,21 @@ public class ManagerController {
 		
 		manegerMainFrm.remove(Panel2Close);
 		ECRS = new Edit_Course(this);
-		System.out.print("-1");
 		ECRS.setCourses(getCourse());
-		System.out.print("0");
 		ECRS.setFaculty(getFaculty());
-		System.out.print("a");
 		ECRS.setAvailableLecturers(getAvailableLecturers());
+		ECRS.setStudyAids(GetClassAids());
 		manegerMainFrm.add(ECRS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
 
+
+
 	private ArrayList<Lecturer> getAvailableLecturers() {
 		GetAllLecturersPack studyAvailableLecturers = new GetAllLecturersPack();
-		System.out.print("b");
 		client.handleMessageFromClientUI(studyAvailableLecturers);
-		System.out.print("c");
 		studyAvailableLecturers = (GetAllLecturersPack) client.getMessage();
-		System.out.print("d");
+	
 		return (studyAvailableLecturers.getAllLecturers());
 		
 	}

@@ -14,6 +14,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.Box;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -85,6 +86,7 @@ ListSelectionListener, KeyListener {
 	/*		general StudyAids	*/
 	private Map<Integer, StudyAids> LecStudyAids;
 	/*		Lecture	StudyAids	*/
+
 	private Map<Integer, Integer> LecAvailableStudyAids;
 	private Map<Integer, Integer> LecSelectedStudyAids;
 	private DefaultListModel lstLecturersClassAidsModel;
@@ -135,14 +137,22 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		lblStudyAids.setBounds(506, 102, 170, 23);
 		PNL_Main.add(lblStudyAids);
 		lblStudyAids.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		SelectedStudyAids = new JList<Object>();
+		SelectedStudyAids = new JList();
+		
+		
 		SelectedStudyAids.setToolTipText("Selected study aids");
 		SelectedStudyAids.setBounds(510, 268, 243, 90);
 		PNL_Main.add(SelectedStudyAids);
+		
 		SelectedStudyAids.setBackground(SystemColor.inactiveCaption);
 		SelectedStudyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
 		
-		JList<Object> AvailableStudyAids = new JList<Object>();
+		
+		lstLecturersClassAidsModel= new  DefaultListModel();
+		lstLecturersSelectedClassAidsModel=new  DefaultListModel();
+		JList AvailableStudyAids = new JList();
+		SelectedStudyAids.setModel(lstLecturersSelectedClassAidsModel);
+		AvailableStudyAids.setModel(lstLecturersClassAidsModel );
 		AvailableStudyAids.setToolTipText("Available study aids");
 		AvailableStudyAids.setFont(new Font("Dialog", Font.PLAIN, 16));
 		AvailableStudyAids.setBackground(SystemColor.inactiveCaption);
@@ -407,6 +417,8 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 
 	private JComboBox getcmbBxEditCouse() {
 		cmbBxEditCouse = new JComboBox();
+		cmbBxEditCouse.setModel(new DefaultComboBoxModel(
+				new String[] { "Empty" }));
 		cmbBxEditCouse.setBounds(10, 53, 754, 20);
 		return cmbBxEditCouse;
 	}
@@ -504,6 +516,32 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 			ArrayAvailableLecturers.put(arrayList.get(i).getID(), arrayList
 					.get(i).getID());
 		}
+	}
+<<<<<<< .mine
+
+	//private Map<Integer, Integer> LecStudyAids;
+	//private Map<Integer, Integer> LecAvailableStudyAids;
+	//private Map<Integer, Integer> LecSelectedStudyAids;
+	//private DefaultListModel lstLecturersClassAidsModel;
+	//private DefaultListModel lstLecturersSelectedClassAidsModel
+	public void setStudyAids(ArrayList<StudyAids> arrayList) {
+		
+		LecStudyAids = new HashMap<Integer, StudyAids>();
+		LecAvailableStudyAids = new HashMap<Integer, Integer>();
+		LecSelectedStudyAids = new HashMap<Integer, Integer>();
+		lstLecturersClassAidsModel.removeAllElements();
+		lstLecturersSelectedClassAidsModel.removeAllElements();
+		for (int i = 0; i < arrayList.size(); i++) {
+			LecStudyAids.put(arrayList.get(i).getAidsID(), arrayList.get(i));
+			lstLecturersClassAidsModel.addElement(arrayList.get(i).getAidsID() + ":"
+					+ arrayList.get(i).getAidsName());
+			LecAvailableStudyAids.put(arrayList.get(i).getAidsID(), arrayList
+					.get(i).getAidsID());	
+	}
+		
+		
+=======
+>>>>>>> .r222
 	}
 	}
 
