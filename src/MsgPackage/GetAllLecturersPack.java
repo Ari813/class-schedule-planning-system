@@ -30,15 +30,19 @@ public class GetAllLecturersPack extends MessagePack {
 	/**
 	 * @return the bringCourses
 	 */
-	public boolean isBringCourses() {
+	public boolean isBringAdditionalInfo() {
 		return additionalInfo;
 	}
 
 	/**
-	 * @param bringCourses the bringCourses to set
+	 * @param bringLecturers the bringLecturers to set
 	 */
-	public void setBringCourses(boolean additionalInfo) {
-		this.additionalInfo = additionalInfo;
+	public void setAdditionalInfo() {
+		this.additionalInfo = true;
+	}
+	
+	public void clrAdditionalInfo() {
+		this.additionalInfo = false;
 	}
 
 }
