@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.util.Iterator;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -544,7 +545,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 							arrayCourse.get(index).getStudyAids().get(i)
 									.getAidsID()).getAidsName());
 		}
-		Iterator <StudyAids> itr = LecStudyAids.values().iterator();
+		Iterator<StudyAids>  itr = LecStudyAids.values().iterator();
 		while (itr.hasNext()) {
 			int tempID = itr.next().getAidsID();
 			if (!LecSelectedStudyAids.containsKey(tempID)) {
@@ -644,11 +645,6 @@ public class Edit_Course extends JPanel implements ActionListener,
 		}
 	}
 
-	// private Map<Integer, Integer> LecStudyAids;
-	// private Map<Integer, Integer> LecAvailableStudyAids;
-	// private Map<Integer, Integer> LecSelectedStudyAids;
-	// private DefaultListModel lstLecturersClassAidsModel;
-	// private DefaultListModel lstLecturersSelectedClassAidsModel
 	public void setStudyAids(ArrayList<StudyAids> arrayList) {
 		int i;
 		LecStudyAids = new HashMap<Integer, StudyAids>();
