@@ -50,7 +50,7 @@ ListSelectionListener, KeyListener {
 	private JTextField txtCourseEditor;
 	private JLabel lblMainAcademicHours;
 
-	private JComboBox<?> cmbBxEditCouse;
+	private JComboBox cmbBxEditCouse;
 	private JComboBox<?> CB_Faculty;
 	private JSpinner Course_Semester;
 	private JList<?> lstAvailableLecturers;
@@ -588,7 +588,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 	}
 
 	private JComboBox getcmbBxEditCouse() {
-		cmbBxEditCouse = new JComboBox<Object>();
+		cmbBxEditCouse = new JComboBox();
 		cmbBxEditCouse.setBounds(10, 53, 754, 20);
 		return cmbBxEditCouse;
 	}
