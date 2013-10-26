@@ -2,8 +2,10 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
@@ -23,10 +25,12 @@ import javax.swing.JSpinner;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
+import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -51,7 +55,7 @@ ListSelectionListener, KeyListener {
 	private JTextField txtCourseName;
 	private JTextField txtCourseEditor;
 	private JLabel lblMainAcademicHours;
-
+	private JLabel lblAcademichours ;
 	private JComboBox cmbBxEditCouse;
 	private JComboBox CB_Faculty;
 	private JSpinner Course_Semester;
@@ -114,14 +118,16 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		this.manager=mng;
 		initialize();
 		AcademicHours = new JSpinner();
+		AcademicHours.setModel(new SpinnerNumberModel(0, 0, 8, 1));
 		AcademicHours.setBounds(265, 400, 79, 20);
 		PNL_Main.add(AcademicHours);
 		AcademicHours.setFont(new Font("Dialog", Font.PLAIN, 16));
 		JLabel label_7 = new JLabel("Max student per class:");
-		label_7.setBounds(519, 373, 243, 23);
+		label_7.setBounds(518, 369, 243, 29);
 		PNL_Main.add(label_7);
 		label_7.setFont(new Font("Dialog", Font.PLAIN, 18));
 		MaxStdntPerClass = new JSpinner();
+		MaxStdntPerClass.setModel(new SpinnerNumberModel(0, 0, 120, 1));
 		MaxStdntPerClass.setBounds(519, 400, 79, 20);
 		PNL_Main.add(MaxStdntPerClass);
 		MaxStdntPerClass.setFont(new Font("Dialog", Font.PLAIN, 16));
@@ -207,17 +213,24 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		PNL_Main.add(gethorizontalStrut_1());
 
 		PNL_Main.add(gethorizontalStrut_2());
-		JLabel label_6 = new JLabel("Academic hours:");
-		label_6.setBounds(265, 373, 243, 23);
-		PNL_Main.add(label_6);
-		label_6.setFont(new Font("Dialog", Font.PLAIN, 18));
 		
+		PNL_Main.add(getlabel_6());
+
+		PNL_Main.repaint();
 
 	}
 
+	private JLabel getlabel_6() {
+		lblAcademichours = new JLabel("Academic hours:");
+		lblAcademichours.setBounds(264, 369, 243, 29);
+		lblAcademichours.setFont(new Font("Dialog", Font.PLAIN, 18));
+		return lblAcademichours;
+		}
+
+
 	private void pnl() {
 		PNL_Main = new JPanel();
-		PNL_Main.setToolTipText("Edit class list");
+		PNL_Main.setToolTipText("");
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
 		PNL_Main.setBounds(10, 85, 774, 474);
@@ -341,7 +354,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		JLabel lblSemester = new JLabel("Semester:");
 		lblSemester.setHorizontalAlignment(SwingConstants.LEFT);
 		lblSemester.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblSemester.setBounds(11, 369, 243, 29);
+		lblSemester.setBounds(10, 369, 243, 29);
 		return lblSemester;
 	}
 
@@ -492,7 +505,5 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 					.get(i).getID());
 		}
 	}
-		
-		
 	}
 
