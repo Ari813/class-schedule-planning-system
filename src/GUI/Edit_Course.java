@@ -626,4 +626,10 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 		
 	}
 
+
+	public void setCourse(Object course) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

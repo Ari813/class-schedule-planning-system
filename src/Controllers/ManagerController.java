@@ -97,8 +97,21 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
-	
-///////
+////////////////
+public void Load_Edit_Course(JPanel Panel2Close) {
+
+manegerMainFrm.remove(Panel2Close);
+ECRS = new Edit_Course(this);
+ECRS.setCourse(getCourse());
+manegerMainFrm.add(ECRS.PNL_Main);
+manegerMainFrm.repaint();
+}	
+private Object getCourse() {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+	///////
 	public void Load_Edit_Class(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);
@@ -149,14 +162,6 @@ private ArrayList<ClassesAids> GetAidsForExistingClasses() {
 		return (BuildingMsg.getAllBuildings());
 	}
 
-	public void Load_Edit_Course(JPanel Panel2Close) {
-
-		manegerMainFrm.remove(Panel2Close);
-		ECRS = new Edit_Course(this);
-
-		manegerMainFrm.add(ECRS.PNL_Main);
-		manegerMainFrm.repaint();
-	}
 
 	public void Load_Course_Settings(JPanel Panel2Close) {
 
