@@ -82,12 +82,15 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private JList AvailableStudyAids;
 
 	/* Lecturers Data */
-	private Map<Integer, Integer> ArrayAvailableLecturers;
-	private Map<Integer, Integer> arraySelectedLecturers;
-	private Map<Integer, Lecturer> ArrayLecturers;
-	private DefaultListModel lstCLecturersModel;
-	private DefaultListModel lstSelectedLecturersModel;
-
+	private Map<Integer, Lecturer> ArrayLecturers;	// arrayStudyAids;
+	private Map<Integer, Integer> ArrayAvailableLecturers; //arrayAvailableStudyAids;
+	private Map<Integer, Integer> arraySelectedLecturers;	// arraySelectedStudyAids;
+	private DefaultListModel lstCLecturersModel;//lstClassAidsModel;
+	private DefaultListModel lstSelectedLecturersModel;	// lstSelectedClassAidsModel;
+	
+	
+	
+	
 	/* general StudyAids */
 	private Map<Integer, StudyAids> LecStudyAids;
 	/* Lecture StudyAids */
@@ -344,6 +347,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnRemove.setToolTipText("Remove lecturer from course");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnRemove.setBounds(270, 237, 65, 38);
+		btnRemove.addActionListener(this);
 		return btnRemove;
 	}
 
@@ -352,6 +356,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnAdd.setToolTipText("Add lecturer to course");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnAdd.setBounds(270, 171, 65, 38);
+		btnAdd.addActionListener(this);
 		return btnAdd;
 	}
 
@@ -485,11 +490,31 @@ public class Edit_Course extends JPanel implements ActionListener,
 		}
 
 		if (e.getSource() == btnAdd) {
-			int index;
+			
+			int index=0;
+			System.out.print(index);
+			if ((ArrayLecturers != null) && (!ArrayLecturers.isEmpty())) {
+				if (lstAvailableLecturers.getSelectedIndex() >= 0) {//lstAvailableLecturers  <--lstClassAids
+					index = Integer.parseInt(lstCLecturersModel
+							.getElementAt(lstAvailableLecturers.getSelectedIndex())
+							.toString().split(":")[0]);
+					addLEC(index);
 
-		}
+		}}}
 
 		if (e.getSource() == btnRemove) {
+			int index;
+
+			if ((arraySelectedLecturers != null)
+					&& (!arraySelectedLecturers.isEmpty())) {
+				if (lstChoosenLecturers.getSelectedIndex() >= 0) {//lstChoosenLecturers <-- lstSelectedClassaids
+					index = Integer.parseInt(lstSelectedLecturersModel
+							.getElementAt(
+									lstChoosenLecturers.getSelectedIndex())
+							.toString().split(":")[0]);
+					removeLEC(index);
+				}
+			}
 		}
 		if (e.getSource() == btnSave) {
 		}
@@ -499,6 +524,28 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	}
 	
+
+	private void removeLEC(int index) {
+		ArrayAvailableLecturers.put(arraySelectedLecturers.get(index),
+				arraySelectedLecturers.get(index));
+		arraySelectedLecturers.remove(index);
+		lstCLecturersModel.addElement(lstSelectedLecturersModel
+				.getElementAt(lstChoosenLecturers.getSelectedIndex()));
+		lstSelectedLecturersModel.remove(lstChoosenLecturers
+				.getSelectedIndex());
+		
+	}
+
+	private void addLEC(int index) {
+		System.out.print(index);
+		arraySelectedLecturers.put(ArrayAvailableLecturers.get(index),
+				ArrayAvailableLecturers.get(index));
+		ArrayAvailableLecturers.remove(index);
+		lstSelectedLecturersModel.addElement(lstCLecturersModel
+				.getElementAt(lstAvailableLecturers.getSelectedIndex()));
+		lstCLecturersModel.remove(lstAvailableLecturers.getSelectedIndex());
+		
+	}
 
 	private void setSelectedCouse() {
 		CB_Faculty.setVisible(true);
@@ -512,7 +559,9 @@ public class Edit_Course extends JPanel implements ActionListener,
 			Course_Semester.setValue(arrayCourse.get(index).getSemester());
 			AcademicHours.setValue(arrayCourse.get(index).getAcademicHours());
 			MaxStdntPerClass.setValue(arrayCourse.get(index).getStudentNumber());
+			resetLists();
 			setCouseAids(index);
+			setCoursLec(index);
 			
 		}
 		if (index < 0)
@@ -523,6 +572,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 	
 	
 	
+	
+
 	private void setdefault() {
 		txtIdNumber.setText("ID Number");
 		txtCourseName.setText("course name");
@@ -532,8 +583,45 @@ public class Edit_Course extends JPanel implements ActionListener,
 		MaxStdntPerClass.setValue(0);
 	}
 
+	
+	private void setCoursLec(int index) {
+		{
+			resetListslec();
+
+			for (int i = 0; i < arrayCourse .get(index).getCourseLecturers().size(); i++) {
+				arraySelectedLecturers.put(arrayCourse.get(index).getCourseLecturers().get(i).getID(),
+						arrayCourse.get(index).getCourseLecturers().get(i)
+								.getID());
+				lstSelectedLecturersModel.addElement(arrayCourse.get(index)
+						.getCourseLecturers().get(i).getID()
+						+ ":"
+						+ ArrayLecturers.get(
+								arrayCourse.get(index).getCourseLecturers().get(i)
+										.getID()).getName());
+			}
+			Iterator<Lecturer> itr = ArrayLecturers.values().iterator();
+			while (itr.hasNext()) {
+				int tempID = itr.next().getID();
+				if (!arraySelectedLecturers.containsKey(tempID)) {
+					ArrayAvailableLecturers.put(tempID, tempID);
+					lstCLecturersModel.addElement(tempID + ":"
+							+ ArrayLecturers.get(tempID).getName());
+				}
+
+			}
+		}
+		
+	}
+	private void resetListslec() {
+		arraySelectedLecturers.clear();
+		ArrayAvailableLecturers.clear();
+		lstCLecturersModel.removeAllElements();
+		lstSelectedLecturersModel.removeAllElements();
+		
+	}
+
 	private void setCouseAids(int index) {
-		resetLists();
+		//resetLists();
 		System.out.print(arrayCourse.get(index).getStudyAids().size());
 		for (int i = 0; i < arrayCourse.get(index).getStudyAids().size(); i++) {
 			LecSelectedStudyAids.put(arrayCourse.get(index)

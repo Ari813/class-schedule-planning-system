@@ -62,8 +62,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private JList<String> lstClassAids;
 	private JList lstSelectedClassaids;
 
-	DefaultListModel lstClassAidsModel;
-	DefaultListModel lstSelectedClassAidsModel;
+	private DefaultListModel lstClassAidsModel;
+	private DefaultListModel lstSelectedClassAidsModel;
 
 	private JTextPane txtpnCodeNumber;
 	private JComboBox cmbBxBlding;
@@ -93,6 +93,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private Map<Integer, StudyAids> arrayStudyAids;
 	private Map<Integer, Integer> arrayAvailableStudyAids;
 	private Map<Integer, Integer> arraySelectedStudyAids;
+
 	private ArrayList<Campus> arrayCampus;
 	private ArrayList<Building> arrayBuilding;
 	private ArrayList<Class> arrayClasses;
