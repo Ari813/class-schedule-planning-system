@@ -548,9 +548,16 @@ public class Edit_Course extends JPanel implements ActionListener,
 				LecAvailableStudyAids.put(tempID, tempID);
 				lstLecturersClassAidsModel.addElement(tempID + ":"
 						+ LecStudyAids.get(tempID).getAidsName());
-			}}}	private void resetLists() {
+			}}}	
+	
+	
+	
+	private void resetLists() {
 		// TODO Auto-generated method stub
-		
+		LecSelectedStudyAids.clear();
+		LecAvailableStudyAids.clear();
+		lstLecturersClassAidsModel.removeAllElements();
+		lstLecturersSelectedClassAidsModel.removeAllElements();
 	}
 
 			
