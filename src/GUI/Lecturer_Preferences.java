@@ -32,6 +32,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 
 import Controllers.LecturerController;
 import Controllers.ManagerController;
@@ -90,10 +91,11 @@ ListSelectionListener, KeyListener {
 			
 		PNL_Main.add(GETcmbxlecturer());
 		PNL_Main.add(GETscroll());
-		
 		 sethorizontalStrut();
 		PNL_Main.setVisible(true);
 	}
+	
+
 	private void pnl() {
 		
 		PNL_Main = new JPanel();
@@ -152,12 +154,20 @@ ListSelectionListener, KeyListener {
 	  	cmbxlecturer.setMaximumRowCount(52);
 		return cmbxlecturer;
 	}
-	private Component GETscroll() {
+	private JScrollPane GETscroll() {
 			scroll = new JScrollPane(GETtableLecturermanu());
 			scroll.setEnabled(false);
 			scroll.setBounds(10, 103, 724, 252);
 		return scroll;
 	}
+	
+
+		
+		
+		
+		
+	
+	
 	private JTable GETtableLecturermanu() {
 		tableLecturermanu = new JTable();
 		tableLecturermanu.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -205,14 +215,10 @@ ListSelectionListener, KeyListener {
 				return columnEditables[column];
 			}
 		});
-		tableLecturermanu.getColumnModel().getColumn(0).setResizable(false);
-		tableLecturermanu.getColumnModel().getColumn(1).setResizable(false);
-		tableLecturermanu.getColumnModel().getColumn(2).setResizable(false);
-		tableLecturermanu.getColumnModel().getColumn(3).setResizable(false);
-		tableLecturermanu.getColumnModel().getColumn(4).setResizable(false);
-		tableLecturermanu.getColumnModel().getColumn(5).setResizable(false);
-		tableLecturermanu.getColumnModel().getColumn(6).setResizable(false);
+		for (int x = 0;x<6;x++) {
+		tableLecturermanu.getColumnModel().getColumn(x).setResizable(false);
 		
+		}
 		//tableLecturermanu.getColumnModel().getColumn(1).setPreferredWidth(78);
 
 		tableLecturermanu.setColumnSelectionAllowed(true);
@@ -228,20 +234,28 @@ ListSelectionListener, KeyListener {
 		select.setVisible(true);
 		select.getEditor().getEditorComponent().setBackground(Color.yellow);
 		select.getEditor().getEditorComponent().setForeground(Color.PINK);
-	
-		tableLecturermanu.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(select));
-        tableLecturermanu.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(select));
-        tableLecturermanu.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(select));
-        tableLecturermanu.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(select));
-        tableLecturermanu.getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(select));
-        tableLecturermanu.getColumnModel().getColumn(6).setCellEditor(new DefaultCellEditor(select));
-        
+		for (int x = 1;x<6;x++) {
+			select.setSelectedIndex(1);
+		tableLecturermanu.getColumnModel().getColumn(x).setCellEditor(new DefaultCellEditor(select));
+        		}
 		return tableLecturermanu;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 			
 		if (e.getSource() == btnSaveChanges) {
+			int rows = tableLecturermanu.getRowCount();
+			int columns = tableLecturermanu.getColumnCount();
+			for(int i = 1 ; i < rows ; i++)
+			{
+			    for(int j = 1 ; j < columns ; j++)
+			    {
+			    	TableCellEditor tce = tableLecturermanu.getCellEditor(i, j);
+			    	//tableLecturermanu.getSelectedRow(1);
+			    	System.out.println("Default " + i + "-" + j + " Selection: " + tce.getCellEditorValue());
+			    	System.out.println(tableLecturermanu.getModel().getValueAt(i, j));
+			    }
+			}
 			
 		}
 		if (e.getSource() == btnBackToMainMenu) {
@@ -273,5 +287,7 @@ ListSelectionListener, KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	//int[]because every entry will store {cellX,cellY}	public void something(){
 	
 }
