@@ -382,6 +382,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		Course_Semester.setModel(new SpinnerNumberModel(1, 1, 8, 1));
 		Course_Semester.setBounds(11, 400, 79, 20);
 		return Course_Semester;
+		
 	}
 
 	private JLabel getlblSemester() {
@@ -500,6 +501,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	
 
 	private void setSelectedCouse() {
+		CB_Faculty.setVisible(true);
 		int index = cmbBxEditCouse.getSelectedIndex() - 1;
 		if ((arrayCourse != null) && (!arrayCourse.isEmpty()) && (index >= 0)) {
 			CB_Faculty.setSelectedIndex(arrayCourse.get(index).getFaculty());
@@ -522,13 +524,17 @@ public class Edit_Course extends JPanel implements ActionListener,
 	
 	
 	private void setdefault() {
-		
-		
+		txtIdNumber.setText("ID Number");
+		txtCourseName.setText("course name");
+		CB_Faculty.setVisible(false);
+		Course_Semester.setValue(0);
+		AcademicHours.setValue(0);
+		MaxStdntPerClass.setValue(0);
 	}
 
 	private void setCouseAids(int index) {
 		resetLists();
-
+		System.out.print(arrayCourse.get(index).getStudyAids().size());
 		for (int i = 0; i < arrayCourse.get(index).getStudyAids().size(); i++) {
 			LecSelectedStudyAids.put(arrayCourse.get(index)
 					.getStudyAids().get(i).getAidsID(),

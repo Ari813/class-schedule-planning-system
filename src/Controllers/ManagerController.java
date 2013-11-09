@@ -105,6 +105,7 @@ public class ManagerController {
 		ECRS.setCourses(getCourse());
 		ECRS.setFaculty(getFaculty());
 		ECRS.setAvailableLecturers(getAvailableLecturers());
+		
 		ECRS.setStudyAids(GetClassAids());
 		manegerMainFrm.add(ECRS.PNL_Main);
 		manegerMainFrm.repaint();
@@ -144,10 +145,11 @@ public class ManagerController {
 		ECLSS = new Edit_Class(this);
 
 		ECLSS.setClasses(GetClasses());
+		
 		ECLSS.setClassStudyAids(GetClassAids());
 		ECLSS.setCampus(getCampuses());
 		ECLSS.setBuilding(getBuildings());
-		 //ECLSS.setAidsForExistingClasses(GetAidsForExistingClasses());
+	//	ECLSS.setAidsForExistingClasses(GetAidsForExistingClasses());
 		manegerMainFrm.add(ECLSS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
