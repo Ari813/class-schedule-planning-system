@@ -232,10 +232,11 @@ ListSelectionListener, KeyListener {
 		select.addItem("N\\A");
 		select.setEnabled(true);
 		select.setVisible(true);
+		select.setBackground(Color.RED);
 		select.getEditor().getEditorComponent().setBackground(Color.yellow);
 		select.getEditor().getEditorComponent().setForeground(Color.PINK);
 		for (int x = 1;x<6;x++) {
-			select.setSelectedIndex(1);
+			//tableLecturermanu.getColumnModel().s
 		tableLecturermanu.getColumnModel().getColumn(x).setCellEditor(new DefaultCellEditor(select));
         		}
 		return tableLecturermanu;
