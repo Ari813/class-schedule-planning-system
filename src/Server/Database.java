@@ -1,20 +1,14 @@
 package Server;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.HashSet;
-
 import entities.Building;
 import entities.Campus;
 import entities.Class;
-import entities.ClassesAids;
 import entities.Course;
 import entities.Faculty;
 import entities.Lecturer;
@@ -357,7 +351,121 @@ public class Database {
 		return LecturerArray;
 	}
 
-	public Class newClass(Class newClass) {
+	public Lecturer newLecturer(Lecturer newLecturer) throws SQLException {
+		String query;
+		query = new String(
+				"INSERT INTO `csps-db`.`lecturer` (`LecturerID`, `LecturerName`) VALUES ('"
+						+ newLecturer.getID() + "', '" + newLecturer.getName()
+						+ "');");
+		st = conn.createStatement();
+		st.executeUpdate(query);
+
+		newLecturer = updateLecturer(newLecturer);
+
+		return newLecturer;
+	}
+
+	public Course updateCourse(Course newCourse) throws SQLException {
+		String query;
+		query = new String("UPDATE `csps-db`.`course` SET `Capacity`='"
+				+ newCourse.getStudentNumber() + "', `Faculty`='"
+				+ newCourse.getFaculty() + "', `Semester`='"
+				+ newCourse.getSemester() + "', `Description`='"
+				+ newCourse.getDescription() + "', `AcademicHours`='"
+				+ newCourse.getAcademicHours() + "' WHERE `CourseID`='"
+				+ newCourse.getCourseID() + "';");
+
+		st = conn.createStatement();
+		st.executeUpdate(query);
+		newCourse = updateCourseInfoCourse(newCourse);
+		return newCourse;
+	}
+
+	public Course newCourse(Course newCourse) throws SQLException {
+		String query;
+		query = new String(
+				"INSERT INTO `csps-db`.`course` (`CourseID`, `Capacity`, `Faculty`, `Semester`, `Description`, `AcademicHours`) VALUES ('"
+						+ newCourse.getCourseID()
+						+ "', '"
+						+ newCourse.getStudentNumber()
+						+ "', '"
+						+ newCourse.getFaculty()
+						+ "', '"
+						+ newCourse.getSemester()
+						+ "', '"
+						+ newCourse.getDescription()
+						+ "', '"
+						+ newCourse.getSemester() + "');");
+
+		st = conn.createStatement();
+		st.executeUpdate(query);
+
+		newCourse = updateCourseInfoCourse(newCourse);
+		return newCourse;
+	}
+
+	public Course updateCourseInfoCourse(Course newCourse) throws SQLException {
+		String query;
+		query = new String(
+				"DELETE FROM `csps-db`.`courseaids` WHERE `CourseID`='"
+						+ newCourse.getCourseID() + "';");
+
+		st = conn.createStatement();
+		st.executeUpdate(query);
+
+		for (int i = 0; i < newCourse.getStudyAids().size(); i++) {
+			query = new String(
+					"INSERT INTO `csps-db`.`courseaids` (`CourseID`, `ClassAidID`) VALUES ('"
+							+ newCourse.getCourseID() + "', '"
+							+ newCourse.getStudyAids().get(i) + "');");
+
+			st = conn.createStatement();
+			st.executeUpdate(query);
+
+		}
+
+		query = new String(
+				"DELETE FROM `csps-db`.`courselecturers` WHERE `CourseID`='"
+						+ newCourse.getCourseID() + "';");
+
+		st = conn.createStatement();
+		st.executeUpdate(query);
+
+		for (int i = 0; i < newCourse.getCourseLecturers().size(); i++) {
+			query = new String(
+					"INSERT INTO `csps-db`.`courselecturers` (`CourseID`, `LecturerID`) VALUES ('"
+							+ newCourse.getCourseID() + "', '"
+							+ newCourse.getCourseLecturers().get(i) + "');");
+			st = conn.createStatement();
+			st.executeUpdate(query);
+		}
+
+		return newCourse;
+	}
+
+	public Lecturer updateLecturer(Lecturer newLecturer) throws SQLException {
+		String query;
+		query = new String(
+				"DELETE FROM `csps-db`.`courselecturers` WHERE `LecturerID`='"
+						+ newLecturer.getID() + "';");
+
+		st = conn.createStatement();
+		st.executeUpdate(query);
+
+		for (int i = 0; i < newLecturer.getLecturerCourses().size(); i++) {
+			query = new String(
+					"INSERT INTO `csps-db`.`courselecturers` (`CourseID`, `LecturerID`) VALUES ('"
+							+ newLecturer.getLecturerCourses().get(i) + "', '"
+							+ newLecturer.getID() + "');");
+
+			st = conn.createStatement();
+			st.executeUpdate(query);
+
+		}
+		return newLecturer;
+	}
+
+	public Class newClass(Class newClass) throws SQLException {
 		String query;
 		query = new String(
 				"INSERT INTO `csps-db`.`class` (`ClassBuilding`, `ClassID`, `Capacity`, `Campus`, `Description`, `Available`) VALUES ('"
@@ -372,35 +480,14 @@ public class Database {
 						+ newClass.getDescription()
 						+ "', '"
 						+ newClass.getAvailable() + "');");
-		try {
-			st = conn.createStatement();
-			st.executeUpdate(query);
-		} catch (SQLException e) {
-			newClass.setClassID(-1);
-			return newClass;
-		}
 
-		for (int i = 0; i < newClass.getStudyAids().size(); i++) {
-			query = new String(
-					"INSERT INTO `csps-db`.`classaids` (`ClassBuilding`, `ClassID`, `ClassAidID`) VALUES ('"
-							+ newClass.getBuilding()
-							+ "', '"
-							+ newClass.getClassID()
-							+ "', '"
-							+ newClass.getStudyAids().get(i).getAidsID()
-							+ "');");
-			try {
-				st = conn.createStatement();
-				st.executeUpdate(query);
-			} catch (SQLException e) {
-				newClass.setClassID(-1);
-				return newClass;
-			}
-		}
+		st = conn.createStatement();
+		st.executeUpdate(query);
+		newClass = updateClassInfo(newClass);
 		return newClass;
 	}
 
-	public Class updateClass(Class newClass) {
+	public Class updateClass(Class newClass) throws SQLException {
 		String query;
 		query = new String("UPDATE `csps-db`.`class` SET `Capacity`='"
 				+ newClass.getCapcity() + "', `Campus`='"
@@ -409,26 +496,22 @@ public class Database {
 				+ newClass.getAvailable() + "' WHERE `ClassBuilding`='"
 				+ newClass.getBuilding() + "' and`ClassID`='"
 				+ newClass.getClassID() + "';");
-		try {
-			st = conn.createStatement();
-			st.executeUpdate(query);
-		} catch (SQLException e) {
-			newClass.setClassID(-1);
-			return newClass;
-		}
-		
+
+		st = conn.createStatement();
+		st.executeUpdate(query);
+		newClass = updateClassInfo(newClass);
+		return newClass;
+	}
+
+	public Class updateClassInfo(Class newClass) throws SQLException {
+		String query;
 		query = new String(
 				"DELETE FROM `csps-db`.`classaids` WHERE `ClassBuilding`='"
 						+ newClass.getBuilding() + "' and`ClassID`='"
 						+ newClass.getClassID() + "';");
-		try {
-			st = conn.createStatement();
-			st.executeUpdate(query);
-		} catch (SQLException e1) {
-			newClass.setClassID(-1);
-			return newClass;
-		}
 
+		st = conn.createStatement();
+		st.executeUpdate(query);
 
 		for (int i = 0; i < newClass.getStudyAids().size(); i++) {
 			query = new String(
@@ -439,13 +522,10 @@ public class Database {
 							+ "', '"
 							+ newClass.getStudyAids().get(i).getAidsID()
 							+ "');");
-			try {
-				st = conn.createStatement();
-				st.executeUpdate(query);
-			} catch (SQLException e) {
-				newClass.setClassID(-1);
-				return newClass;
-			}
+
+			st = conn.createStatement();
+			st.executeUpdate(query);
+
 		}
 		return newClass;
 	}

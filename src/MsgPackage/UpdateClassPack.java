@@ -1,6 +1,6 @@
 package MsgPackage;
 
-public class UpdateClass extends MessagePack {
+public class UpdateClassPack extends MessagePack {
 
 	/**
 	 * 
@@ -17,7 +17,7 @@ public class UpdateClass extends MessagePack {
 		this.updateClass = newClass;
 	}
 
-	public UpdateClass() {
+	public UpdateClassPack() {
 		super();
 		this.op = OpType.UpadteClass;
 

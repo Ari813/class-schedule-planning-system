@@ -107,16 +107,100 @@ public class EchoServer extends AbstractServer {
 		case UpadteClass:
 			updateClass(msgpck, client);
 			break;
+		case newLectuer:
+			newLecturer(msgpck, client);
+			break;
+		case updateLectuer:
+			updateLecturer(msgpck, client);
+			break;
 			
+		case updateCourse:
+			updateCourse(msgpck, client);
+			break;
+			
+		case newCourse:
+			newCourse(msgpck, client);
+			break;
 		default:
 			break;
 
 		}
 	}
 
+	private void newCourse(MessagePack msg, ConnectionToClient client) {
+		UpdateCoursePack newCourse = (UpdateCoursePack) msg;
+		try {
+			newCourse.setNewCourse((db.newCourse(newCourse.getNewCourse())));
+		} catch (SQLException e1) {
+			newCourse.getNewCourse().setCourseID(-1);
+		}
+
+		try {
+			client.sendToClient(newCourse);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
+	private void updateCourse(MessagePack msg, ConnectionToClient client) {
+		UpdateCoursePack newCourse = (UpdateCoursePack) msg;
+		try {
+			newCourse.setNewCourse((db.updateCourse(newCourse.getNewCourse())));
+		} catch (SQLException e1) {
+			newCourse.getNewCourse().setCourseID(-1);
+		}
+
+		try {
+			client.sendToClient(newCourse);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
+	private void updateLecturer(MessagePack msg, ConnectionToClient client) {
+		UpdateLecturerPack newLec = (UpdateLecturerPack) msg;
+		try {
+			newLec.setNewLecturer(db.updateLecturer(newLec.getNewLecturer()));
+		} catch (SQLException e1) {
+			newLec.getNewLecturer().setID(-1);
+		}
+
+		try {
+			client.sendToClient(newLec);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
+	private void newLecturer(MessagePack msg, ConnectionToClient client) {
+		NewLecturerPack newLec = (NewLecturerPack) msg;
+		try {
+			newLec.setNewLecturer(db.newLecturer(newLec.getNewLecturer()));
+		} catch (SQLException e1) {
+			newLec.getNewLecturer().setID(-1);
+		}
+		try {
+			client.sendToClient(newLec);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
 	private void updateClass(MessagePack msg, ConnectionToClient client) {
-		UpdateClass newcls = (UpdateClass) msg;
+		UpdateClassPack newcls = (UpdateClassPack) msg;
+		try {
 			newcls.setNewClass(db.updateClass(newcls.getNewClass()));
+		} catch (SQLException e1) {
+			newcls.getNewClass().setClassID(-1);
+		}
 		try {
 			client.sendToClient(newcls);
 		} catch (IOException e) {
@@ -128,7 +212,11 @@ public class EchoServer extends AbstractServer {
 
 	private void NewClass(MessagePack msg, ConnectionToClient client) {
 		NewClassPack newcls = (NewClassPack) msg;
+		try {
 			newcls.setNewClass(db.newClass(newcls.getNewClass()));
+		} catch (SQLException e1) {
+			newcls.getNewClass().setClassID(-1);
+		}
 		try {
 			client.sendToClient(newcls);
 		} catch (IOException e) {
