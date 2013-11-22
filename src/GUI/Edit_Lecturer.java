@@ -207,15 +207,7 @@ ListSelectionListener, KeyListener {
 			lstAvailableCourses.setValueIsAdjusting(true);
 			lstAvailableCourses.setSelectedIndices(new int[] {2});
 			lstAvailableCourses.setBackground(new Color(169, 169, 169));
-			lstAvailableCourses.setModel(new AbstractListModel() {
-				String[] values = new String[] {};
-				public int getSize() {
-					return values.length;
-				}
-				public Object getElementAt(int index) {
-					return values[index];
-				}
-			});
+		
 			lstAvailableCourses.setBounds(332, 130, 138, 283);
 		return lstAvailableCourses;
 	}
@@ -361,6 +353,7 @@ ListSelectionListener, KeyListener {
 
 	//arrayCourse 
 	public void setcourse(ArrayList<Course> arrayList) {
+		System.out.print(arrayList.size());
 		arrayCourse = new HashMap<Integer, Course>();
 		ArrayAvailableCourse = new HashMap<Integer, Integer>();
 		arraySelectedCourse = new HashMap<Integer, Integer>();
@@ -371,6 +364,7 @@ ListSelectionListener, KeyListener {
 			arrayCourse.put(arrayList.get(i).getCourseID(), arrayList.get(i));
 			lstCourseModel.addElement(arrayList.get(i).getCourseID() + ":"
 					+ arrayList.get(i).getDescription());
+			//System.out.println(lstCourseModel.getElementAt(i));
 			ArrayAvailableCourse.put(arrayList.get(i).getCourseID(), arrayList
 					.get(i).getCourseID());
 		}
