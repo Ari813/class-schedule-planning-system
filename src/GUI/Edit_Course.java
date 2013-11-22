@@ -37,7 +37,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-
 import entities.*;
 import Controllers.ManagerController;
 
@@ -82,15 +81,12 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private JList AvailableStudyAids;
 
 	/* Lecturers Data */
-	private Map<Integer, Lecturer> ArrayLecturers;	// arrayStudyAids;
-	private Map<Integer, Integer> ArrayAvailableLecturers; //arrayAvailableStudyAids;
-	private Map<Integer, Integer> arraySelectedLecturers;	// arraySelectedStudyAids;
-	private DefaultListModel lstCLecturersModel;//lstClassAidsModel;
-	private DefaultListModel lstSelectedLecturersModel;	// lstSelectedClassAidsModel;
-	
-	
-	
-	
+	private Map<Integer, Lecturer> ArrayLecturers; // arrayStudyAids;
+	private Map<Integer, Integer> ArrayAvailableLecturers; // arrayAvailableStudyAids;
+	private Map<Integer, Integer> arraySelectedLecturers; // arraySelectedStudyAids;
+	private DefaultListModel lstCLecturersModel;// lstClassAidsModel;
+	private DefaultListModel lstSelectedLecturersModel; // lstSelectedClassAidsModel;
+
 	/* general StudyAids */
 	private Map<Integer, StudyAids> LecStudyAids;
 	/* Lecture StudyAids */
@@ -113,7 +109,6 @@ public class Edit_Course extends JPanel implements ActionListener,
 		this.manager = mng;
 
 		initialize();
-		
 
 	}
 
@@ -327,6 +322,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	private JButton getbtnNewCourse() {
 		btnNewCourse = new JButton("New Course");
+		btnNewCourse.addActionListener(this);
 		btnNewCourse.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewCourse.setBounds(73, 440, 160, 29);
 		return btnNewCourse;
@@ -387,7 +383,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		Course_Semester.setModel(new SpinnerNumberModel(1, 1, 8, 1));
 		Course_Semester.setBounds(11, 400, 79, 20);
 		return Course_Semester;
-		
+
 	}
 
 	private JLabel getlblSemester() {
@@ -490,24 +486,30 @@ public class Edit_Course extends JPanel implements ActionListener,
 		}
 
 		if (e.getSource() == btnAdd) {
-			
-			int index=0;
+
+			int index = 0;
 			
 			if ((ArrayLecturers != null) && (!ArrayLecturers.isEmpty())) {
-				if (lstAvailableLecturers.getSelectedIndex() >= 0) {//lstAvailableLecturers  <--lstClassAids
+				if (lstAvailableLecturers.getSelectedIndex() >= 0) {// lstAvailableLecturers
+																	// <--lstClassAids
 					index = Integer.parseInt(lstCLecturersModel
-							.getElementAt(lstAvailableLecturers.getSelectedIndex())
+							.getElementAt(
+									lstAvailableLecturers.getSelectedIndex())
 							.toString().split(":")[0]);
 					addLEC(index);
 
-		}}}
+				}
+			}
+		}
 
 		if (e.getSource() == btnRemove) {
 			int index;
 
 			if ((arraySelectedLecturers != null)
 					&& (!arraySelectedLecturers.isEmpty())) {
-				if (lstChoosenLecturers.getSelectedIndex() >= 0) {//lstChoosenLecturers <-- lstSelectedClassaids
+				if (lstChoosenLecturers.getSelectedIndex() >= 0) {// lstChoosenLecturers
+																	// <--
+																	// lstSelectedClassaids
 					index = Integer.parseInt(lstSelectedLecturersModel
 							.getElementAt(
 									lstChoosenLecturers.getSelectedIndex())
@@ -522,8 +524,11 @@ public class Edit_Course extends JPanel implements ActionListener,
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 
+		if (e.getSource() == btnNewCourse) {
+			
+		}
+
 	}
-	
 
 	private void removeLEC(int index) {
 		ArrayAvailableLecturers.put(arraySelectedLecturers.get(index),
@@ -531,9 +536,9 @@ public class Edit_Course extends JPanel implements ActionListener,
 		arraySelectedLecturers.remove(index);
 		lstCLecturersModel.addElement(lstSelectedLecturersModel
 				.getElementAt(lstChoosenLecturers.getSelectedIndex()));
-		lstSelectedLecturersModel.remove(lstChoosenLecturers
-				.getSelectedIndex());
-		
+		lstSelectedLecturersModel
+				.remove(lstChoosenLecturers.getSelectedIndex());
+
 	}
 
 	private void addLEC(int index) {
@@ -544,36 +549,31 @@ public class Edit_Course extends JPanel implements ActionListener,
 		lstSelectedLecturersModel.addElement(lstCLecturersModel
 				.getElementAt(lstAvailableLecturers.getSelectedIndex()));
 		lstCLecturersModel.remove(lstAvailableLecturers.getSelectedIndex());
-		
+
 	}
 
 	private void setSelectedCourse() {
 		CB_Faculty.setVisible(true);
-		
+
 		int index = cmbBxEditCouse.getSelectedIndex() - 1;
 		if ((arrayCourse != null) && (!arrayCourse.isEmpty()) && (index >= 0)) {
 			CB_Faculty.setSelectedIndex(arrayCourse.get(index).getFaculty());
 			txtIdNumber.setText(Integer.toString(arrayCourse.get(index)
 					.getCourseID()));
-			txtCourseName.setText((arrayCourse.get(index)
-					.getDescription()));
+			txtCourseName.setText((arrayCourse.get(index).getDescription()));
 			Course_Semester.setValue(arrayCourse.get(index).getSemester());
 			AcademicHours.setValue(arrayCourse.get(index).getAcademicHours());
-			MaxStdntPerClass.setValue(arrayCourse.get(index).getStudentNumber());
+			MaxStdntPerClass
+					.setValue(arrayCourse.get(index).getStudentNumber());
 			resetLists();
 			setCouseAids(index);
 			setCoursLec(index);
-			
+
 		}
 		if (index < 0)
 			setdefault();
 
 	}
-		
-	
-	
-	
-	
 
 	private void setdefault() {
 		txtIdNumber.setText("ID Number");
@@ -584,21 +584,22 @@ public class Edit_Course extends JPanel implements ActionListener,
 		MaxStdntPerClass.setValue(0);
 	}
 
-	
 	private void setCoursLec(int index) {
 		{
 			resetListslec();
 
-			for (int i = 0; i < arrayCourse .get(index).getCourseLecturers().size(); i++) {
-				arraySelectedLecturers.put(arrayCourse.get(index).getCourseLecturers().get(i).getID(),
+			for (int i = 0; i < arrayCourse.get(index).getCourseLecturers()
+					.size(); i++) {
+				arraySelectedLecturers.put(arrayCourse.get(index)
+						.getCourseLecturers().get(i).getID(),
 						arrayCourse.get(index).getCourseLecturers().get(i)
 								.getID());
 				lstSelectedLecturersModel.addElement(arrayCourse.get(index)
 						.getCourseLecturers().get(i).getID()
 						+ ":"
 						+ ArrayLecturers.get(
-								arrayCourse.get(index).getCourseLecturers().get(i)
-										.getID()).getName());
+								arrayCourse.get(index).getCourseLecturers()
+										.get(i).getID()).getName());
 			}
 			Iterator<Lecturer> itr = ArrayLecturers.values().iterator();
 			while (itr.hasNext()) {
@@ -611,42 +612,42 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 			}
 		}
-		
+
 	}
+
 	private void resetListslec() {
 		arraySelectedLecturers.clear();
 		ArrayAvailableLecturers.clear();
 		lstCLecturersModel.removeAllElements();
 		lstSelectedLecturersModel.removeAllElements();
-		
+
 	}
 
 	private void setCouseAids(int index) {
-		//resetLists();
+		// resetLists();
 		System.out.print(arrayCourse.get(index).getStudyAids().size());
 		for (int i = 0; i < arrayCourse.get(index).getStudyAids().size(); i++) {
-			LecSelectedStudyAids.put(arrayCourse.get(index)
-					.getStudyAids().get(i).getAidsID(),
-					arrayCourse.get(index).getStudyAids().get(i)
-							.getAidsID());
-			lstLecturersSelectedClassAidsModel.addElement(arrayCourse.get(index)
-					.getStudyAids().get(i).getAidsID()
+			LecSelectedStudyAids.put(
+					arrayCourse.get(index).getStudyAids().get(i).getAidsID(),
+					arrayCourse.get(index).getStudyAids().get(i).getAidsID());
+			lstLecturersSelectedClassAidsModel.addElement(arrayCourse
+					.get(index).getStudyAids().get(i).getAidsID()
 					+ ":"
 					+ LecStudyAids.get(
 							arrayCourse.get(index).getStudyAids().get(i)
 									.getAidsID()).getAidsName());
 		}
-		Iterator<StudyAids>  itr = LecStudyAids.values().iterator();
+		Iterator<StudyAids> itr = LecStudyAids.values().iterator();
 		while (itr.hasNext()) {
 			int tempID = itr.next().getAidsID();
 			if (!LecSelectedStudyAids.containsKey(tempID)) {
 				LecAvailableStudyAids.put(tempID, tempID);
 				lstLecturersClassAidsModel.addElement(tempID + ":"
 						+ LecStudyAids.get(tempID).getAidsName());
-			}}}	
-	
-	
-	
+			}
+		}
+	}
+
 	private void resetLists() {
 		// TODO Auto-generated method stub
 		LecSelectedStudyAids.clear();
@@ -654,10 +655,6 @@ public class Edit_Course extends JPanel implements ActionListener,
 		lstLecturersClassAidsModel.removeAllElements();
 		lstLecturersSelectedClassAidsModel.removeAllElements();
 	}
-
-			
-
-	
 
 	private void removeAids(int index) {
 		LecAvailableStudyAids.put(LecSelectedStudyAids.get(index),
