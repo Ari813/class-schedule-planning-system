@@ -31,6 +31,7 @@ import javax.swing.UIManager;
 
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
@@ -59,6 +60,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
@@ -86,6 +88,9 @@ lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
 lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
 lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 /*/
+
+
+
 public class Course_Settings extends JPanel implements ActionListener,
 ListSelectionListener, KeyListener {
 	private JTextField txtCourseSttings;
@@ -99,6 +104,10 @@ ListSelectionListener, KeyListener {
 	public JPanel PNL_Main ;
 	private LecturerController lec;
 	private ManagerController manager;
+	private Object[][] tableData;
+	private TableModel lstModel;
+	
+	
 	public Course_Settings(ManagerController mng) {
 
 		super();
@@ -151,58 +160,43 @@ ListSelectionListener, KeyListener {
 	private JScrollPane GETscroll() {
 		if (scroll==null){
 		 scroll = new JScrollPane(GETtable());
-		  scroll.setBounds(10, 103, 724, 303);}
+		  scroll.setBounds(10, 103, 724, 168);}
 		return scroll;
 	}
 	private JTable GETtable() {
 		if (table==null){
-			//A
-			Object data[][]={{new Integer(10),new Integer(10),false},{new Integer(10),new Integer(10),"barda"}
-			,{new Integer(10),new Integer(10),"barda"}};
+			
+			Object[][] tableData={{new Integer(10), new Integer(10), null},
+					{new Integer(10), new Integer(10), null},
+					{new Integer(10), new Integer(10), null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null},
+					{null, null, null}};
+			
 			String columns[]={"# of student","course ID","course description"};
-		table = new JTable(data,columns);
+		table = new JTable();
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(SystemColor.inactiveCaption);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
+		//table.setModel( lstModel);
+		
+		
+		
+		
 		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{new Integer(10), new Integer(10), null},
-				{new Integer(10), new Integer(10), null},
-				{new Integer(10), new Integer(10), null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"# of student", "course ID", "course description"
-			}
+			tableData,
+			columns
 		) {
+			 @Override
+			   public boolean isCellEditable(int row, int column) {
+			       //Only the third column
+			       return column == 0;}
+			
 			Class[] columnTypes = new Class[] {
 				Object.class, Object.class, String.class
 			};
@@ -213,6 +207,7 @@ ListSelectionListener, KeyListener {
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(2).setResizable(false);
+		
 		table.getColumnModel().getColumn(2).setPreferredWidth(140);
 		table.setSurrendersFocusOnKeystroke(true);
 		
@@ -302,8 +297,4 @@ ListSelectionListener, KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
-
-
-	
-	
 }
