@@ -215,7 +215,7 @@ public class ManagerController {
 
 	
 
-public Course CreateNewCorse(){
+public Course CreateNewCourse(){
 	
 	NewCoursePack NewCourseMsg = new NewCoursePack();
 	client.handleMessageFromClientUI(NewCourseMsg);
