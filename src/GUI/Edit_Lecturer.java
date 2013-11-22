@@ -424,7 +424,7 @@ ListSelectionListener, KeyListener {
 	
 }
 	private void addCourse(int index) {
-		System.out.print(index);
+		
 		arraySelectedCourse.put(ArrayAvailableCourse.get(index),
 				ArrayAvailableCourse.get(index));
 		ArrayAvailableCourse.remove(index);

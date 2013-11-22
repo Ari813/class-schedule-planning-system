@@ -145,6 +145,8 @@ public class ManagerController {
 		// /load all we need
 		
 		CS = new Course_Settings(this);
+		CS.setFaculty(getFaculty());
+		CS.setCourse(getCourse());
 		manegerMainFrm.add(CS.PNL_Main);
 		manegerMainFrm.repaint();
 	}

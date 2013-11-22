@@ -1,7 +1,7 @@
 package GUI;
 
 import java.awt.EventQueue;
-
+import java.util.Iterator;
 import javax.swing.JFrame;
 
 import java.awt.Dimension;
@@ -24,6 +24,7 @@ import javax.swing.JButton;
 import java.awt.Window.Type;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Map;
 import java.awt.SystemColor;
 import java.awt.Color;
 
@@ -76,6 +77,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.ScrollPaneConstants;
 
+import entities.Course;
+import entities.Faculty;
 import entities.Lecturer;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
@@ -106,6 +109,9 @@ ListSelectionListener, KeyListener {
 	private ManagerController manager;
 	private Object[][] tableData;
 	private TableModel lstModel;
+	private ArrayList<Faculty> arrayFaculty;
+	private ArrayList<Faculty> arrayCourseFaculty;
+	private Map<Integer, Course> CoursePerFuculty ;
 	
 	
 	public Course_Settings(ManagerController mng) {
@@ -166,9 +172,7 @@ ListSelectionListener, KeyListener {
 	private JTable GETtable() {
 		if (table==null){
 			
-			Object[][] tableData={{new Integer(10), new Integer(10), null},
-					{new Integer(10), new Integer(10), null},
-					{new Integer(10), new Integer(10), null},
+			Object[][] tableData={
 					{null, null, null},
 					{null, null, null},
 					{null, null, null},
@@ -189,16 +193,20 @@ ListSelectionListener, KeyListener {
 		
 		
 		table.setModel(new DefaultTableModel(
-			tableData,
-			columns
+			new Object[][] {
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+				{null, null, null},
+			},
+			new String[] {
+				"# of student", "course ID", "course description"
+			}
 		) {
-			 @Override
-			   public boolean isCellEditable(int row, int column) {
-			       //Only the third column
-			       return column == 0;}
-			
 			Class[] columnTypes = new Class[] {
-				Object.class, Object.class, String.class
+				Integer.class, Object.class, Object.class
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
@@ -207,7 +215,6 @@ ListSelectionListener, KeyListener {
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(2).setResizable(false);
-		
 		table.getColumnModel().getColumn(2).setPreferredWidth(140);
 		table.setSurrendersFocusOnKeystroke(true);
 		
@@ -268,7 +275,7 @@ ListSelectionListener, KeyListener {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() ==cmbxFaculty) {
-			
+			GetCourseTable(cmbxFaculty.getSelectedIndex());
 			//manager.LoadFacultyCourse(cmbxFaculty.getSelectedIndex());
 			
 			
@@ -277,6 +284,30 @@ ListSelectionListener, KeyListener {
 		
 		
 	}
+	private void GetCourseTable(int index) {
+		
+		//for (int i=0;i<CoursePerFuculty.size();i++){
+		
+		Iterator<Course> itr = CoursePerFuculty.values().iterator();
+		while (itr.hasNext()) {
+			
+			
+			
+		}
+		
+		
+	}
+/*
+Iterator<Lecturer> itr = ArrayLecturers.values().iterator();
+while (itr.hasNext()) {
+	int tempID = itr.next().getID();
+	if (!arraySelectedLecturers.containsKey(tempID)) {
+		ArrayAvailableLecturers.put(tempID, tempID);
+		lstCLecturersModel.addElement(tempID + ":"
+				+ ArrayLecturers.get(tempID).getName());
+	}
+*/
+
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
@@ -297,4 +328,23 @@ ListSelectionListener, KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	public void setFaculty(ArrayList<Faculty> arrayList) {
+		arrayFaculty = arrayList;
+		cmbxFaculty.removeAll();
+		for (int i = 0; i < arrayFaculty.size(); i++) {
+			cmbxFaculty.addItem(arrayFaculty.get(i).getFacultyNum() + ":"
+					+ arrayFaculty.get(i).getFaculty());
+		}
+
 }
+
+
+	public void setCourse(ArrayList<Course> course) {
+		for(int i=0;i<course.size();i++){
+			CoursePerFuculty.put(course.get(i).getFaculty(), course.get(i));
+			
+			
+		}
+	}}
