@@ -39,6 +39,7 @@ import javax.swing.event.ListSelectionListener;
 
 import entities.*;
 import Controllers.ManagerController;
+import MsgPackage.NewCoursePack;
 
 import java.awt.SystemColor;
 import java.util.ArrayList;
@@ -52,6 +53,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private boolean isNewCourse;
 	private JTextField txtDescriptionText;
 	private JTextField txtCapacityNumber;
 	private JTextField txtIdNumber;
@@ -59,7 +61,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private JTextField txtCourseEditor;
 	private JLabel lblMainAcademicHours;
 	private JLabel lblAcademichours;
-	private JComboBox cmbBxEditCouse;
+	private JComboBox cmbBxEditCourse;
 	private JComboBox CB_Faculty;
 	private JSpinner Course_Semester;
 	private JList lstAvailableLecturers;
@@ -88,11 +90,11 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private DefaultListModel lstSelectedLecturersModel; // lstSelectedClassAidsModel;
 
 	/* general StudyAids */
-	private Map<Integer, StudyAids> LecStudyAids;
+	private Map<Integer, StudyAids> crsStudyAids;
 	/* Lecture StudyAids */
 
-	private Map<Integer, Integer> LecAvailableStudyAids;
-	private Map<Integer, Integer> LecSelectedStudyAids;
+	private Map<Integer, Integer> CrsAvailableStudyAids;
+	private Map<Integer, Integer> CrsSelectedStudyAids;
 	private DefaultListModel lstLecturersClassAidsModel;
 	private DefaultListModel lstLecturersSelectedClassAidsModel;
 
@@ -189,6 +191,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private void initialize() {
 
 		pnl();
+
+		isNewCourse = false;
 
 		PNL_Main.add(getcmbBxEditCouse());
 
@@ -442,21 +446,22 @@ public class Edit_Course extends JPanel implements ActionListener,
 	}
 
 	private JComboBox getcmbBxEditCouse() {
-		cmbBxEditCouse = new JComboBox();
-		cmbBxEditCouse.setModel(new DefaultComboBoxModel(
+		cmbBxEditCourse = new JComboBox();
+		cmbBxEditCourse.setModel(new DefaultComboBoxModel(
 				new String[] { "Empty" }));
-		cmbBxEditCouse.setBounds(10, 53, 754, 20);
-		cmbBxEditCouse.addActionListener(this);
-		return cmbBxEditCouse;
+		cmbBxEditCourse.setBounds(10, 53, 754, 20);
+		cmbBxEditCourse.addActionListener(this);
+		return cmbBxEditCourse;
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == cmbBxEditCouse) {
+		if (e.getSource() == cmbBxEditCourse) {
+			isNewCourse = false;
 			setSelectedCourse();
 		}
 		if (e.getSource() == btnAddStudyAids) {
 			int index;
-			if ((LecStudyAids != null) && (!LecStudyAids.isEmpty())) {
+			if ((crsStudyAids != null) && (!crsStudyAids.isEmpty())) {
 				if (AvailableStudyAids.getSelectedIndex() >= 0) {
 					index = Integer
 							.parseInt(lstLecturersClassAidsModel
@@ -471,8 +476,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 		if (e.getSource() == btnRemveStudyAids) {
 			int index;
 
-			if ((LecSelectedStudyAids != null)
-					&& (!LecSelectedStudyAids.isEmpty())) {
+			if ((CrsSelectedStudyAids != null)
+					&& (!CrsSelectedStudyAids.isEmpty())) {
 				if (SelectedStudyAids.getSelectedIndex() >= 0) {
 					index = Integer.parseInt(lstLecturersSelectedClassAidsModel
 							.getElementAt(SelectedStudyAids.getSelectedIndex())
@@ -483,12 +488,30 @@ public class Edit_Course extends JPanel implements ActionListener,
 		}
 
 		if (e.getSource() == btnNewCourse) {
+			resetLists();
+			resetListslec();
+			createNewCourse(true);
+			Iterator<StudyAids> aidsItr = crsStudyAids.values().iterator();
+			while (aidsItr.hasNext()) {
+				int tempID = aidsItr.next().getAidsID();
+				CrsAvailableStudyAids.put(tempID, tempID);
+				lstLecturersClassAidsModel.addElement(tempID + ":"
+						+ crsStudyAids.get(tempID).getAidsName());
+			}
+
+			Iterator<Lecturer> LecItr = ArrayLecturers.values().iterator();
+			while (LecItr.hasNext()) {
+				int tempID = LecItr.next().getID();
+				ArrayAvailableLecturers.put(tempID, tempID);
+				lstCLecturersModel.addElement(tempID + ":"
+						+ ArrayLecturers.get(tempID).getName());
+			}
 		}
 
 		if (e.getSource() == btnAdd) {
 
 			int index = 0;
-			
+
 			if ((ArrayLecturers != null) && (!ArrayLecturers.isEmpty())) {
 				if (lstAvailableLecturers.getSelectedIndex() >= 0) {// lstAvailableLecturers
 																	// <--lstClassAids
@@ -519,15 +542,45 @@ public class Edit_Course extends JPanel implements ActionListener,
 			}
 		}
 		if (e.getSource() == btnSave) {
+			Course newCourse = new Course();
+			newCourse.setCourseID(Integer.parseInt(txtIdNumber.getText()));
+			newCourse.setDescription(txtCourseName.getText());
+			newCourse.setFaculty(arrayFaculty
+					.get(CB_Faculty.getSelectedIndex()).getFacultyNum());
+			newCourse.setSemester((int) Course_Semester.getValue());
+			newCourse.setAcademicHours((int) AcademicHours.getValue());
+			newCourse.setStudentNumber((int) MaxStdntPerClass.getValue());
+
+			Iterator<Integer> itr = arraySelectedLecturers.values().iterator();
+			while (itr.hasNext())
+				newCourse.addLecturer(ArrayLecturers.get(itr.next()));
+
+			itr = CrsSelectedStudyAids.values().iterator();
+			while (itr.hasNext())
+				newCourse.addStudyAids(crsStudyAids.get(itr.next()));
+			
+			createNewCourse(false);
+			manager.CreateNewCourse(newCourse);
 		}
 		if (e.getSource() == btnDiscard) {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
+	}
 
-		if (e.getSource() == btnNewCourse) {
-			
-		}
+	private void createNewCourse(boolean bool) {
+		txtIdNumber.setEditable(bool);
+		txtIdNumber.setEnabled(bool);
+		txtIdNumber.setText("");
+		txtCourseName.setEditable(bool);
+		txtCourseName.setEnabled(bool);
+		txtCourseName.setText("");
 
+		CB_Faculty.getModel().setSelectedItem(1);
+		Course_Semester.setValue(1);
+		AcademicHours.setValue(1);
+		MaxStdntPerClass.setValue(1);
+
+		isNewCourse = bool;
 	}
 
 	private void removeLEC(int index) {
@@ -555,7 +608,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private void setSelectedCourse() {
 		CB_Faculty.setVisible(true);
 
-		int index = cmbBxEditCouse.getSelectedIndex() - 1;
+		int index = cmbBxEditCourse.getSelectedIndex() - 1;
 		if ((arrayCourse != null) && (!arrayCourse.isEmpty()) && (index >= 0)) {
 			CB_Faculty.setSelectedIndex(arrayCourse.get(index).getFaculty());
 			txtIdNumber.setText(Integer.toString(arrayCourse.get(index)
@@ -625,41 +678,40 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	private void setCouseAids(int index) {
 		// resetLists();
-		System.out.print(arrayCourse.get(index).getStudyAids().size());
 		for (int i = 0; i < arrayCourse.get(index).getStudyAids().size(); i++) {
-			LecSelectedStudyAids.put(
+			CrsSelectedStudyAids.put(
 					arrayCourse.get(index).getStudyAids().get(i).getAidsID(),
 					arrayCourse.get(index).getStudyAids().get(i).getAidsID());
 			lstLecturersSelectedClassAidsModel.addElement(arrayCourse
 					.get(index).getStudyAids().get(i).getAidsID()
 					+ ":"
-					+ LecStudyAids.get(
+					+ crsStudyAids.get(
 							arrayCourse.get(index).getStudyAids().get(i)
 									.getAidsID()).getAidsName());
 		}
-		Iterator<StudyAids> itr = LecStudyAids.values().iterator();
+		Iterator<StudyAids> itr = crsStudyAids.values().iterator();
 		while (itr.hasNext()) {
 			int tempID = itr.next().getAidsID();
-			if (!LecSelectedStudyAids.containsKey(tempID)) {
-				LecAvailableStudyAids.put(tempID, tempID);
+			if (!CrsSelectedStudyAids.containsKey(tempID)) {
+				CrsAvailableStudyAids.put(tempID, tempID);
 				lstLecturersClassAidsModel.addElement(tempID + ":"
-						+ LecStudyAids.get(tempID).getAidsName());
+						+ crsStudyAids.get(tempID).getAidsName());
 			}
 		}
 	}
 
 	private void resetLists() {
 		// TODO Auto-generated method stub
-		LecSelectedStudyAids.clear();
-		LecAvailableStudyAids.clear();
+		CrsSelectedStudyAids.clear();
+		CrsAvailableStudyAids.clear();
 		lstLecturersClassAidsModel.removeAllElements();
 		lstLecturersSelectedClassAidsModel.removeAllElements();
 	}
 
 	private void removeAids(int index) {
-		LecAvailableStudyAids.put(LecSelectedStudyAids.get(index),
-				LecSelectedStudyAids.get(index));
-		LecSelectedStudyAids.remove(index);
+		CrsAvailableStudyAids.put(CrsSelectedStudyAids.get(index),
+				CrsSelectedStudyAids.get(index));
+		CrsSelectedStudyAids.remove(index);
 		lstLecturersClassAidsModel
 				.addElement(lstLecturersSelectedClassAidsModel
 						.getElementAt(SelectedStudyAids.getSelectedIndex()));
@@ -669,9 +721,9 @@ public class Edit_Course extends JPanel implements ActionListener,
 	}
 
 	private void addAids(int index) {
-		LecSelectedStudyAids.put(LecAvailableStudyAids.get(index),
-				LecAvailableStudyAids.get(index));
-		LecAvailableStudyAids.remove(index);
+		CrsSelectedStudyAids.put(CrsAvailableStudyAids.get(index),
+				CrsAvailableStudyAids.get(index));
+		CrsAvailableStudyAids.remove(index);
 		lstLecturersSelectedClassAidsModel
 				.addElement(lstLecturersClassAidsModel
 						.getElementAt(AvailableStudyAids.getSelectedIndex()));
@@ -706,9 +758,9 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void setCourses(ArrayList<Course> arrayList) {
 		arrayCourse = arrayList;
-		cmbBxEditCouse.removeAll();
+		cmbBxEditCourse.removeAll();
 		for (int i = 0; i < arrayCourse.size(); i++) {
-			cmbBxEditCouse.addItem(arrayCourse.get(i).getCourseID() + ":"
+			cmbBxEditCourse.addItem(arrayCourse.get(i).getCourseID() + ":"
 					+ arrayCourse.get(i).getDescription());
 		}
 
@@ -716,7 +768,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void setFaculty(ArrayList<Faculty> arrayList) {
 		arrayFaculty = arrayList;
-		cmbBxEditCouse.removeAll();
+		CB_Faculty.removeAll();
 		for (int i = 0; i < arrayFaculty.size(); i++) {
 			CB_Faculty.addItem(arrayFaculty.get(i).getFacultyNum() + ":"
 					+ arrayFaculty.get(i).getFaculty());
@@ -742,16 +794,16 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void setStudyAids(ArrayList<StudyAids> arrayList) {
 		int i;
-		LecStudyAids = new HashMap<Integer, StudyAids>();
-		LecAvailableStudyAids = new HashMap<Integer, Integer>();
-		LecSelectedStudyAids = new HashMap<Integer, Integer>();
+		crsStudyAids = new HashMap<Integer, StudyAids>();
+		CrsAvailableStudyAids = new HashMap<Integer, Integer>();
+		CrsSelectedStudyAids = new HashMap<Integer, Integer>();
 		lstLecturersClassAidsModel.removeAllElements();
 		lstLecturersSelectedClassAidsModel.removeAllElements();
 		for (i = 0; i < arrayList.size(); i++) {
-			LecStudyAids.put(arrayList.get(i).getAidsID(), arrayList.get(i));
+			crsStudyAids.put(arrayList.get(i).getAidsID(), arrayList.get(i));
 			lstLecturersClassAidsModel.addElement(arrayList.get(i).getAidsID()
 					+ ":" + arrayList.get(i).getAidsName());
-			LecAvailableStudyAids.put(arrayList.get(i).getAidsID(), arrayList
+			CrsAvailableStudyAids.put(arrayList.get(i).getAidsID(), arrayList
 					.get(i).getAidsID());
 		}
 
