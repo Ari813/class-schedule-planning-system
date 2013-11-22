@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 import java.awt.Window.Type;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.awt.SystemColor;
 import java.awt.Color;
@@ -73,6 +74,7 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.ScrollPaneConstants;
 
+import entities.Lecturer;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 /*/JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
@@ -299,5 +301,8 @@ ListSelectionListener, KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	
 	
 }

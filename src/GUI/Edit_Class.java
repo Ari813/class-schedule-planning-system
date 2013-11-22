@@ -557,7 +557,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
-		// TODO Auto-generated method stub
+		
 		arrayStudyAids = new HashMap<Integer, StudyAids>();
 		arrayAvailableStudyAids = new HashMap<Integer, Integer>();
 		arraySelectedStudyAids = new HashMap<Integer, Integer>();
@@ -573,7 +573,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	public void setCampus(ArrayList<Campus> arrayList) {
-		// TODO Auto-generated method stub
+		
 		arrayCampus = arrayList;
 		for (int i = 0; i < arrayCampus.size(); i++) {
 			cmbxcampus.addItem(arrayCampus.get(i).getCampusId() + ":"

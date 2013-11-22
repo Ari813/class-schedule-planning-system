@@ -22,7 +22,10 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 import java.awt.Window.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.awt.SystemColor;
 import java.awt.Color;
 
@@ -30,6 +33,7 @@ import javax.swing.UIManager;
 
 import java.awt.FlowLayout;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
@@ -60,6 +64,8 @@ import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 
+import entities.Course;
+import entities.Lecturer;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 
@@ -89,6 +95,19 @@ ListSelectionListener, KeyListener {
 	private JLabel lblLecturer_Name;
 	private JLabel lblAvailableCourses;
 	LecturerController lec;
+	
+	
+	private ArrayList<Lecturer> ArrayLecturer;
+	
+	
+	private Map<Integer, Course>   arrayCourse;//   ArrayLecturers;	
+	private Map<Integer, Integer>    ArrayAvailableCourse      ;//  ArrayAvailableLecturers; 
+	private Map<Integer, Integer>      arraySelectedCourse   ;//      arraySelectedLecturers;	
+	private DefaultListModel           lstCourseModel  ;//    lstCLecturersModel;;
+	private DefaultListModel          lstSelectedCourseModel  ;//    lstSelectedLecturersModel;	
+	
+	
+	
 	private ManagerController manager;
 	/*/
 	JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
@@ -138,12 +157,15 @@ ListSelectionListener, KeyListener {
 	}
 	private JList GETlstAvailableCourses2() {
 		lstAvailableCourses2 = new JList();
+		 lstSelectedCourseModel= new DefaultListModel();
+		lstAvailableCourses2.setModel(lstSelectedCourseModel);
 		lstAvailableCourses2.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstAvailableCourses2.setBackground(new Color(169, 169, 169));
 		lstAvailableCourses2.setForeground(new Color(255, 255, 255));
 		lstAvailableCourses2.setBounds(586, 130, 138, 283);
 		return lstAvailableCourses2;
 	}
+	
 	private JButton GETbtnNewLecturer() {
 		 btnNewLecturer = new JButton("New Lecturer");
 			btnNewLecturer.addActionListener(this);
@@ -176,7 +198,9 @@ ListSelectionListener, KeyListener {
 		return btnAdd;
 	}
 	private JList GETlstAvailableCourses() {
-		 lstAvailableCourses = new JList();
+		 	lstAvailableCourses = new JList();
+		 	lstCourseModel= new DefaultListModel();
+		 	lstAvailableCourses.setModel(lstCourseModel);
 			lstAvailableCourses.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			lstAvailableCourses.setForeground(new Color(0, 0, 0));
 			lstAvailableCourses.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -184,7 +208,7 @@ ListSelectionListener, KeyListener {
 			lstAvailableCourses.setSelectedIndices(new int[] {2});
 			lstAvailableCourses.setBackground(new Color(169, 169, 169));
 			lstAvailableCourses.setModel(new AbstractListModel() {
-				String[] values = new String[] {"omri", "amit", "iris"};
+				String[] values = new String[] {};
 				public int getSize() {
 					return values.length;
 				}
@@ -278,9 +302,20 @@ ListSelectionListener, KeyListener {
 		
 	}
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnAdd) {}	
-		if (e.getSource() == btnRemove) {}
-		if (e.getSource() == btnNewLecturer) {}	
+		if (e.getSource() == btnAdd) {
+			
+			
+		}	
+		if (e.getSource() == btnRemove) {
+			
+			
+			
+		}
+		if (e.getSource() == btnNewLecturer) {
+			
+			
+			
+		}	
 		if (e.getSource() == btnSaveChanges) {}
 		if (e.getSource() == btnBackToMainMenu) {
 			manager.BacktoMainMenu(this.PNL_Main);
@@ -307,5 +342,37 @@ ListSelectionListener, KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+//d
+	public void setLec(ArrayList<Lecturer> arrayList) {
+		
+		 {
+				 ArrayLecturer=arrayList;
+			 
+				for (int i = 0; i < arrayList.size(); i++) {
+					cmbxLecturerEditor .addItem(ArrayLecturer.get(i).getID() + ":"+ ArrayLecturer.get(i).getName());
+					
+				
+				}
+		
+	}
 	
+}
+
+	//arrayCourse 
+	public void setcourse(ArrayList<Course> arrayList) {
+		arrayCourse = new HashMap<Integer, Course>();
+		ArrayAvailableCourse = new HashMap<Integer, Integer>();
+		arraySelectedCourse = new HashMap<Integer, Integer>();
+		
+		lstCourseModel.removeAllElements();
+		lstSelectedCourseModel.removeAllElements();
+		for (int i = 0; i < arrayList.size(); i++) {
+			arrayCourse.put(arrayList.get(i).getCourseID(), arrayList.get(i));
+			lstCourseModel.addElement(arrayList.get(i).getCourseID() + ":"
+					+ arrayList.get(i).getDescription());
+			ArrayAvailableCourse.put(arrayList.get(i).getCourseID(), arrayList
+					.get(i).getCourseID());
+		}
+	}
 }

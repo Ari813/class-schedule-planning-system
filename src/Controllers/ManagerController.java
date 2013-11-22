@@ -55,7 +55,7 @@ public class ManagerController {
 	public LecturerController lecturer_Ctrl;
 
 	private ChatClient client;
-
+	private GetAllLecturersPack LecMsg;
 	private GetAllClassesPack ClassMsg;
 	private GetAllCoursePack CourseMsg;
 	private GetAllFacultyPack FacultyMsg;
@@ -65,7 +65,7 @@ public class ManagerController {
 		main = new Main_Menu(NOT_MAGI, this);
 		manegerMainFrm.add(main.PNL_Main);
 	}
-
+/*
 	public void handleManagerGUI(int operation) {
 		switch (operation) {
 		case EXIT:// logout
@@ -74,7 +74,7 @@ public class ManagerController {
 
 		}
 	}
-
+*/
 	public void BacktoMainMenu(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
 		manegerMainFrm.add(main.PNL_Main);
@@ -139,7 +139,35 @@ public class ManagerController {
 		return (CourseMsg.getAllclass());
 	}
 
+	public void Load_Course_Settings(JPanel Panel2Close) {
 
+		manegerMainFrm.remove(Panel2Close);
+		// /load all we need
+		
+		CS = new Course_Settings(this);
+		manegerMainFrm.add(CS.PNL_Main);
+		manegerMainFrm.repaint();
+	}
+	/*
+	private ArrayList<Lecturer> Getlec() {
+		LecMsg = new GetAllLecturersPack();
+		client.handleMessageFromClientUI(ClassMsg);
+		LecMsg = (GetAllLecturersPack) client.getMessage();
+		return (LecMsg.getAllLecturers());
+	
+	}
+	*/
+	
+	public void Load_Edit_Lecturer(JPanel Panel2Close) {
+
+		manegerMainFrm.remove(Panel2Close);
+		EL = new Edit_Lecturer(this);
+		EL.setLec(getAvailableLecturers());
+		EL.setcourse(getCourse());
+		manegerMainFrm.add(EL.PNL_Main);
+		manegerMainFrm.repaint();
+	}
+	
 	public void Load_Edit_Class(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);
@@ -191,24 +219,9 @@ public class ManagerController {
 		return (BuildingMsg.getAllBuildings());
 	}
 
-	public void Load_Course_Settings(JPanel Panel2Close) {
+	
 
-		manegerMainFrm.remove(Panel2Close);
-		// /load all we need
 
-		CS = new Course_Settings(this);
-
-		manegerMainFrm.add(CS.PNL_Main);
-		manegerMainFrm.repaint();
-	}
-
-	public void Load_Edit_Lecturer(JPanel Panel2Close) {
-
-		manegerMainFrm.remove(Panel2Close);
-		EL = new Edit_Lecturer(this);
-		manegerMainFrm.add(EL.PNL_Main);
-		manegerMainFrm.repaint();
-	}
 
 	public void Load_Manual_Sheduling(JPanel Panel2Close) {
 

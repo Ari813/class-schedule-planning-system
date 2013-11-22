@@ -549,6 +549,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	private void setSelectedCouse() {
 		CB_Faculty.setVisible(true);
+		
 		int index = cmbBxEditCouse.getSelectedIndex() - 1;
 		if ((arrayCourse != null) && (!arrayCourse.isEmpty()) && (index >= 0)) {
 			CB_Faculty.setSelectedIndex(arrayCourse.get(index).getFaculty());
@@ -706,8 +707,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	}
 
-	public void setCourses(ArrayList<Course> ArrayList) {
-		arrayCourse = ArrayList;
+	public void setCourses(ArrayList<Course> arrayList) {
+		arrayCourse = arrayList;
 		cmbBxEditCouse.removeAll();
 		for (int i = 0; i < arrayCourse.size(); i++) {
 			cmbBxEditCouse.addItem(arrayCourse.get(i).getCourseID() + ":"
@@ -716,8 +717,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	}
 
-	public void setFaculty(ArrayList<Faculty> ArrayList) {
-		arrayFaculty = ArrayList;
+	public void setFaculty(ArrayList<Faculty> arrayList) {
+		arrayFaculty = arrayList;
 		cmbBxEditCouse.removeAll();
 		for (int i = 0; i < arrayFaculty.size(); i++) {
 			CB_Faculty.addItem(arrayFaculty.get(i).getFacultyNum() + ":"
