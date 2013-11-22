@@ -215,6 +215,14 @@ public class ManagerController {
 
 	
 
+public Course CreateNewCorse(){
+	
+	NewCoursePack NewCourseMsg = new NewCoursePack();
+	client.handleMessageFromClientUI(NewCourseMsg);
+	NewCourseMsg = (NewCoursePack) client.getMessage();
+	
+	return NewCourseMsg.getNewCourse();
+}
 
 
 	public void Load_Manual_Sheduling(JPanel Panel2Close) {

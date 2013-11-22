@@ -290,7 +290,7 @@ ListSelectionListener, KeyListener {
 		
 		Iterator<Course> itr = CoursePerFuculty.values().iterator();
 		while (itr.hasNext()) {
-			
+			int tempID = itr.next().getFaculty();
 			
 			
 		}
