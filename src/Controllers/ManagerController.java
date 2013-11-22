@@ -215,9 +215,10 @@ public class ManagerController {
 
 	
 
-public Course CreateNewCourse(){
+public Course CreateNewCourse(Course newCourse){
 	
 	NewCoursePack NewCourseMsg = new NewCoursePack();
+	NewCourseMsg.setNewCourse(newCourse);
 	client.handleMessageFromClientUI(NewCourseMsg);
 	NewCourseMsg = (NewCoursePack) client.getMessage();
 	

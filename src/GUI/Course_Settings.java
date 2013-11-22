@@ -113,6 +113,7 @@ ListSelectionListener, KeyListener {
 	private ArrayList<Faculty> arrayCourseFaculty;
 	private Map<Integer, Course> CoursePerFuculty ;
 	
+	private Map<Integer, ArrayList<Course>> CoursePerFuculty2 ;
 	
 	public Course_Settings(ManagerController mng) {
 
@@ -344,7 +345,7 @@ while (itr.hasNext()) {
 	public void setCourse(ArrayList<Course> course) {
 		for(int i=0;i<course.size();i++){
 			CoursePerFuculty.put(course.get(i).getFaculty(), course.get(i));
-			
+			CoursePerFuculty2.put()
 			
 		}
 	}}
