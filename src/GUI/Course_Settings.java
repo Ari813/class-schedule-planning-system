@@ -156,6 +156,7 @@ ListSelectionListener, KeyListener {
 	}
 	private JTable GETtable() {
 		if (table==null){
+			//A
 			Object data[][]={{new Integer(10),new Integer(10),false},{new Integer(10),new Integer(10),"barda"}
 			,{new Integer(10),new Integer(10),"barda"}};
 			String columns[]={"# of student","course ID","course description"};

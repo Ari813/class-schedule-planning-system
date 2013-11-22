@@ -148,15 +148,7 @@ public class ManagerController {
 		manegerMainFrm.add(CS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
-	/*
-	private ArrayList<Lecturer> Getlec() {
-		LecMsg = new GetAllLecturersPack();
-		client.handleMessageFromClientUI(ClassMsg);
-		LecMsg = (GetAllLecturersPack) client.getMessage();
-		return (LecMsg.getAllLecturers());
 	
-	}
-	*/
 	
 	public void Load_Edit_Lecturer(JPanel Panel2Close) {
 
