@@ -68,7 +68,7 @@ import entities.Course;
 import entities.Lecturer;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
-
+import java.util.Iterator;
 public class Edit_Lecturer extends JPanel implements ActionListener,
 ListSelectionListener, KeyListener {
 
@@ -79,8 +79,8 @@ ListSelectionListener, KeyListener {
 	private	JTextField txLecturerNameText;
 	private JTextField txtLecturerEditor;
 	private JComboBox cmbxLecturerEditor;
-	private JList lstAvailableCourses ;
-	private JList lstAvailableCourses2;
+	private JList lstAvailableCourses ;//lstAvailableLecturers
+	private JList lstAvailableCourses2;//lstChoosenLecturers
 	private JTextPane txtpnIDNumber;
 	private JButton btnAdd;
 	private JButton btnRemove;
@@ -281,6 +281,7 @@ ListSelectionListener, KeyListener {
 			cmbxLecturerEditor.setToolTipText("Edit class list");
 			cmbxLecturerEditor.setBounds(10, 53, 754, 20);
 			cmbxLecturerEditor.setMaximumRowCount(52);
+			cmbxLecturerEditor.addActionListener(this);
 		return cmbxLecturerEditor;
 	}
 	private void pnl() {
@@ -295,22 +296,94 @@ ListSelectionListener, KeyListener {
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnAdd) {
+			int index=0;
+			if ((arrayCourse != null) && (!arrayCourse.isEmpty())) {
+				if (lstAvailableCourses.getSelectedIndex() >= 0) {
+					index = Integer.parseInt(lstCourseModel
+							.getElementAt(lstAvailableCourses.getSelectedIndex())
+							.toString().split(":")[0]);
+					addCourse(index);
 			
-			
-		}	
+		}	}}
 		if (e.getSource() == btnRemove) {
+			int index=0;
+
+			if ((arraySelectedCourse != null)
+					&& (!arraySelectedCourse.isEmpty())) {
+				if (lstAvailableCourses2.getSelectedIndex() >= 0) {//lstChoosenLecturers <-- lstSelectedClassaids
+					index = Integer.parseInt(lstSelectedCourseModel
+							.getElementAt(
+									lstAvailableCourses2.getSelectedIndex())
+							.toString().split(":")[0]);
+					removeCourse(index);
 			
-			
-			
-		}
+				}
+		}}
 		if (e.getSource() == btnNewLecturer) {
 			
 			
 			
 		}	
-		if (e.getSource() == btnSaveChanges) {}
+		if (e.getSource() == btnSaveChanges) {
+			
+			
+		}
 		if (e.getSource() == btnBackToMainMenu) {
 			manager.BacktoMainMenu(this.PNL_Main);
+		}
+		if (e.getSource()==cmbxLecturerEditor){
+			setSelectedLec();
+		}
+			
+		
+	}
+	private void setSelectedLec() {
+		int index = cmbxLecturerEditor.getSelectedIndex() ;
+		if ((ArrayLecturer != null) && (!ArrayLecturer.isEmpty()) && (index >= 0)) {
+			txtpnIDNumber.setText(Integer.toString(ArrayLecturer.get(index).getID()));
+			txLecturerNameText.setText(ArrayLecturer.get(index).getName());
+					
+			
+		
+			setCoursLec(index);
+			
+		}
+		if (index < 0)
+			setdefault();
+		
+	}
+
+	private void setdefault() {
+		txtpnIDNumber.setText("ID Number");
+		txLecturerNameText.setText("lecturer name");
+		
+	}
+	
+	private void setCoursLec(int index) {
+		{
+			resetListslec();
+
+			for (int i = 0; i < ArrayLecturer .get(index). getLecturerCourses().size() ; i++) {
+				arraySelectedCourse.put(ArrayLecturer.get(index).getLecturerCourses().get(i).getCourseID(),
+						ArrayLecturer.get(index).getLecturerCourses().get(i)
+								.getCourseID());
+				lstSelectedCourseModel.addElement(ArrayLecturer.get(index)
+						.getLecturerCourses().get(i).getCourseID()
+						+ ":"
+						+ arrayCourse.get(
+								ArrayLecturer.get(index).getLecturerCourses().get(i)
+										.getCourseID()).getDescription());
+			}
+			Iterator<Course> itr = arrayCourse.values().iterator();
+			while (itr.hasNext()) {
+				int tempID = itr.next().getCourseID();
+				if (!arraySelectedCourse.containsKey(tempID)) {
+					ArrayAvailableCourse.put(tempID, tempID);
+					lstCourseModel.addElement(tempID + ":"
+							+ arrayCourse.get(tempID).getDescription());
+				}
+
+			}
 		}
 		
 	}
@@ -350,7 +423,28 @@ ListSelectionListener, KeyListener {
 	}
 	
 }
-
+	private void addCourse(int index) {
+		System.out.print(index);
+		arraySelectedCourse.put(ArrayAvailableCourse.get(index),
+				ArrayAvailableCourse.get(index));
+		ArrayAvailableCourse.remove(index);
+		lstSelectedCourseModel.addElement(lstCourseModel
+				.getElementAt(lstAvailableCourses.getSelectedIndex()));
+		lstCourseModel.remove(lstAvailableCourses.getSelectedIndex());
+		
+	}
+	private void removeCourse(int index) {
+		ArrayAvailableCourse.put(arraySelectedCourse.get(index),
+				arraySelectedCourse.get(index));
+		arraySelectedCourse.remove(index);
+		lstCourseModel.addElement(lstSelectedCourseModel
+				.getElementAt(lstAvailableCourses2.getSelectedIndex()));
+		lstSelectedCourseModel.remove(lstAvailableCourses2
+				.getSelectedIndex());
+		
+	}
+	
+	
 	//arrayCourse 
 	public void setcourse(ArrayList<Course> arrayList) {
 		System.out.print(arrayList.size());
@@ -369,4 +463,12 @@ ListSelectionListener, KeyListener {
 					.get(i).getCourseID());
 		}
 	}
+	private void resetListslec() {
+		arraySelectedCourse .clear();
+		ArrayAvailableCourse.clear();
+		lstCourseModel.removeAllElements();
+		lstSelectedCourseModel.removeAllElements();
+		
+	}
+
 }

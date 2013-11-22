@@ -456,7 +456,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cmbBxEditCouse) {
-			setSelectedCouse();
+			setSelectedCourse();
 		}
 		if (e.getSource() == btnAddStudyAids) {
 			int index;
@@ -492,7 +492,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		if (e.getSource() == btnAdd) {
 			
 			int index=0;
-			System.out.print(index);
+			
 			if ((ArrayLecturers != null) && (!ArrayLecturers.isEmpty())) {
 				if (lstAvailableLecturers.getSelectedIndex() >= 0) {//lstAvailableLecturers  <--lstClassAids
 					index = Integer.parseInt(lstCLecturersModel
@@ -547,7 +547,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		
 	}
 
-	private void setSelectedCouse() {
+	private void setSelectedCourse() {
 		CB_Faculty.setVisible(true);
 		
 		int index = cmbBxEditCouse.getSelectedIndex() - 1;
