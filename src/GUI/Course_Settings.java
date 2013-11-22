@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.EventQueue;
 import java.util.Iterator;
+
 import javax.swing.JFrame;
 
 import java.awt.Dimension;
@@ -23,6 +24,7 @@ import javax.swing.JButton;
 
 import java.awt.Window.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.awt.SystemColor;
@@ -111,8 +113,8 @@ ListSelectionListener, KeyListener {
 	private TableModel lstModel;
 	private ArrayList<Faculty> arrayFaculty;
 	private ArrayList<Faculty> arrayCourseFaculty;
-	private Map<Integer, Course> CoursePerFuculty ;
-	
+	//private Map<Integer, Course> CoursePerFuculty ;
+	private ArrayList<Course> arrayCourse;
 	private Map<Integer, ArrayList<Course>> CoursePerFuculty2 ;
 	
 	public Course_Settings(ManagerController mng) {
@@ -161,7 +163,10 @@ ListSelectionListener, KeyListener {
 	  	cmbxFaculty.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
 	  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	  	cmbxFaculty.setToolTipText("Edit class list");
-	  	cmbxFaculty.setMaximumRowCount(52);}
+	  	cmbxFaculty.setMaximumRowCount(52);
+	  	cmbxFaculty.addActionListener(this);
+		
+		}
 		return cmbxFaculty;
 	}
 	private JScrollPane GETscroll() {
@@ -287,27 +292,62 @@ ListSelectionListener, KeyListener {
 	}
 	private void GetCourseTable(int index) {
 		
-		//for (int i=0;i<CoursePerFuculty.size();i++){
+		Object[][] tmp=new Object[100][3];
+		//arrayCourse.r;
+		if (CoursePerFuculty2.get(index)!=null){
+		arrayCourse=CoursePerFuculty2.get(index);
+		//tmp[1][0]=arrayCourse.get(1).getCourseID();
+		System.out.println(arrayCourse.size());
+		for(int i=0; i<arrayCourse.size();i++){
+			tmp[i][0]=arrayCourse.get(i).getCapacity();
+			tmp[i][1]=arrayCourse.get(i).getCourseID();
+			tmp[i][2]=arrayCourse.get(i).getDescription();
+		//	System.out.println(course.size());
+		}
 		
-		Iterator<Course> itr = CoursePerFuculty.values().iterator();
-		while (itr.hasNext()) {
-			int tempID = itr.next().getFaculty();
+		table.setModel(new DefaultTableModel(
+				tmp,
+				new String[] {
+					"# of student", "course ID", "course description"
+				}
+			) {
+				Class[] columnTypes = new Class[] {
+					Integer.class, Object.class, Object.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
+			
+		}else{table.setModel(new DefaultTableModel(
+				
+						new Object[][] {
+							{null, null, null},
+							{null, null, null},
+							{null, null, null},
+							{null, null, null},
+							{null, null, null},
+							{null, null, null},
+						},
+				new String[] {
+					"# of student", "course ID", "course description"
+				}
+			) {
+				Class[] columnTypes = new Class[] {
+					Integer.class, Object.class, Object.class
+				};
+				public Class getColumnClass(int columnIndex) {
+					return columnTypes[columnIndex];
+				}
+			});
 			
 			
 		}
 		
+		}
 		
-	}
-/*
-Iterator<Lecturer> itr = ArrayLecturers.values().iterator();
-while (itr.hasNext()) {
-	int tempID = itr.next().getID();
-	if (!arraySelectedLecturers.containsKey(tempID)) {
-		ArrayAvailableLecturers.put(tempID, tempID);
-		lstCLecturersModel.addElement(tempID + ":"
-				+ ArrayLecturers.get(tempID).getName());
-	}
-*/
+		
+	
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -343,9 +383,15 @@ while (itr.hasNext()) {
 
 
 	public void setCourse(ArrayList<Course> course) {
+		ArrayList<Course>  tmp=null;
+		System.out.println(course.size());
+		CoursePerFuculty2=new HashMap<Integer, ArrayList<Course>>();
 		for(int i=0;i<course.size();i++){
-			CoursePerFuculty.put(course.get(i).getFaculty(), course.get(i));
-			CoursePerFuculty2.put()
-			
-		}
+			if(!( CoursePerFuculty2.containsKey(course.get(i).getFaculty()))){
+				 tmp = new ArrayList<Course>();
+			}
+			CoursePerFuculty2.put(course.get(i).getFaculty(),tmp);
+			CoursePerFuculty2.get(course.get(i).getFaculty()).add(course.get(i));
+		
 	}}
+	}

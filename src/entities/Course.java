@@ -20,7 +20,7 @@ public class Course implements Serializable {
 	private int semester;
 	private int academicHours;
 	private boolean hasadditionalInfo;
-
+	private int capacity;
 	public Course(int studentNumber, int courseID, String description,
 			int faculty, int semester, int academicHours) {
 		this.studentNumber = studentNumber;
@@ -155,6 +155,14 @@ public class Course implements Serializable {
 	 */
 	public void setAcademicHours(int academicHours) {
 		this.academicHours = academicHours;
+	}
+
+	public int getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(int capacity) {
+		this.capacity = capacity;
 	}
 
 }
