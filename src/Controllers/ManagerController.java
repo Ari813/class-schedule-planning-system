@@ -13,15 +13,7 @@ import entities.Faculty;
 import entities.Lecturer;
 import entities.StudyAids;
 import Client.ChatClient;
-import GUI.Automatic_Sheduling;
-import GUI.Course_Settings;
-import GUI.Edit_Class;
-import GUI.Edit_Course;
-import GUI.Edit_Lecturer;
-import GUI.Lecturer_Preferences;
-import GUI.Main_Frame;
-import GUI.Main_Menu;
-import GUI.Manual_Sheduling;
+import GUI.*;
 import MsgPackage.*;
 
 public class ManagerController {
@@ -225,6 +217,15 @@ public Course CreateNewCourse(Course newCourse){
 	return NewCourseMsg.getNewCourse();
 }
 
+public Course UpdateNewCourse(Course newCourse){
+	
+	UpdateCoursePack updateCourseMsg = new UpdateCoursePack();
+	updateCourseMsg.setNewCourse(newCourse);
+	client.handleMessageFromClientUI(updateCourseMsg);
+	updateCourseMsg = (UpdateCoursePack) client.getMessage();
+	
+	return updateCourseMsg.getNewCourse();
+}
 
 	public void Load_Manual_Sheduling(JPanel Panel2Close) {
 

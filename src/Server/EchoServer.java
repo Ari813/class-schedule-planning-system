@@ -128,7 +128,7 @@ public class EchoServer extends AbstractServer {
 	}
 
 	private void newCourse(MessagePack msg, ConnectionToClient client) {
-		UpdateCoursePack newCourse = (UpdateCoursePack) msg;
+		NewCoursePack newCourse = (NewCoursePack) msg;
 		try {
 			newCourse.setNewCourse((db.newCourse(newCourse.getNewCourse())));
 		} catch (SQLException e1) {

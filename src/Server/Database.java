@@ -43,7 +43,7 @@ public class Database {
 	 * @throws Exception
 	 *             -SQL Exception
 	 */
-	
+
 	public Database(String database, String username, String password)
 			throws Exception {
 		try {
@@ -410,7 +410,6 @@ public class Database {
 		query = new String(
 				"DELETE FROM `csps-db`.`courseaids` WHERE `CourseID`='"
 						+ newCourse.getCourseID() + "';");
-
 		st = conn.createStatement();
 		st.executeUpdate(query);
 
@@ -418,8 +417,7 @@ public class Database {
 			query = new String(
 					"INSERT INTO `csps-db`.`courseaids` (`CourseID`, `ClassAidID`) VALUES ('"
 							+ newCourse.getCourseID() + "', '"
-							+ newCourse.getStudyAids().get(i) + "');");
-
+							+ newCourse.getStudyAids().get(i).getAidsID() + "');");
 			st = conn.createStatement();
 			st.executeUpdate(query);
 
@@ -428,7 +426,6 @@ public class Database {
 		query = new String(
 				"DELETE FROM `csps-db`.`courselecturers` WHERE `CourseID`='"
 						+ newCourse.getCourseID() + "';");
-
 		st = conn.createStatement();
 		st.executeUpdate(query);
 
@@ -436,7 +433,7 @@ public class Database {
 			query = new String(
 					"INSERT INTO `csps-db`.`courselecturers` (`CourseID`, `LecturerID`) VALUES ('"
 							+ newCourse.getCourseID() + "', '"
-							+ newCourse.getCourseLecturers().get(i) + "');");
+							+ newCourse.getCourseLecturers().get(i).getID() + "');");
 			st = conn.createStatement();
 			st.executeUpdate(query);
 		}

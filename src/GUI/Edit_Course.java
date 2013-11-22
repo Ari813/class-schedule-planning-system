@@ -3,13 +3,8 @@ package GUI;
 import java.awt.Color;
 import java.util.Iterator;
 import java.awt.Component;
-import java.awt.Container;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.LayoutManager;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -19,27 +14,20 @@ import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.SpinnerModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.border.BevelBorder;
-import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import entities.*;
 import Controllers.ManagerController;
-import MsgPackage.NewCoursePack;
 
 import java.awt.SystemColor;
 import java.util.ArrayList;
@@ -319,6 +307,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	private JButton getbtnSave() {
 		btnSave = new JButton("Save");
+		btnSave.addActionListener(this);
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSave.setBounds(306, 440, 160, 29);
 		return btnSave;
@@ -488,6 +477,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		}
 
 		if (e.getSource() == btnNewCourse) {
+			isNewCourse = true;
 			resetLists();
 			resetListslec();
 			createNewCourse(true);
@@ -541,7 +531,9 @@ public class Edit_Course extends JPanel implements ActionListener,
 				}
 			}
 		}
+
 		if (e.getSource() == btnSave) {
+
 			Course newCourse = new Course();
 			newCourse.setCourseID(Integer.parseInt(txtIdNumber.getText()));
 			newCourse.setDescription(txtCourseName.getText());
@@ -554,13 +546,29 @@ public class Edit_Course extends JPanel implements ActionListener,
 			Iterator<Integer> itr = arraySelectedLecturers.values().iterator();
 			while (itr.hasNext())
 				newCourse.addLecturer(ArrayLecturers.get(itr.next()));
+			System.out.println("total lecs = " + newCourse.getCourseLecturers().size());
+			
 
 			itr = CrsSelectedStudyAids.values().iterator();
 			while (itr.hasNext())
 				newCourse.addStudyAids(crsStudyAids.get(itr.next()));
+
+			System.out.println("total aids = " + newCourse.getStudyAids().size());
 			
+			
+			Course serverAnsCourse;
+			if (isNewCourse) {
+				serverAnsCourse = manager.CreateNewCourse(newCourse);
+			} else {
+				serverAnsCourse = manager.UpdateNewCourse(newCourse);
+			}
+
+			if (serverAnsCourse.getCourseID() == newCourse.getCourseID())
+				System.out.println("Success!!!");
+			else {
+				System.out.println("Fail!!!!");
+			}
 			createNewCourse(false);
-			manager.CreateNewCourse(newCourse);
 		}
 		if (e.getSource() == btnDiscard) {
 			manager.BacktoMainMenu(this.PNL_Main);
