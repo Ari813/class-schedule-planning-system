@@ -43,6 +43,7 @@ public class Database {
 	 * @throws Exception
 	 *             -SQL Exception
 	 */
+	
 	public Database(String database, String username, String password)
 			throws Exception {
 		try {
