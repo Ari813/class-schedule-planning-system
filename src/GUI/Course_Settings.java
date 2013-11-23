@@ -116,8 +116,19 @@ ListSelectionListener, KeyListener {
 	private LecturerController lec;
 	private ManagerController manager;
 	private Object[][] tableData={
-		
-		{null, null, null}};;
+			{null, null, null},
+			{null, null, null},
+			{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},};;
 	private TableModel lstModel;
 	private JTableHeader head;
 	private ArrayList<Faculty> arrayFaculty;
@@ -130,8 +141,10 @@ ListSelectionListener, KeyListener {
 	private TableRowSorter	sorter;
 	private int FacultyIndex;
 	private boolean clickflag;
+	
+	public static int maxrow=1;
 	public Course_Settings(ManagerController mng) {
-
+	
 		super();
 		this.manager=mng;
 		initialize();
@@ -203,10 +216,13 @@ ListSelectionListener, KeyListener {
 			        return tableData[row][col];
 			    }
 			    public boolean isCellEditable(int row, int col)
-			        {  if (col >= 1) {
+			        {  if ((col >= 1 )) 
 			            return false;
-			        } else {
+			          if (row>=maxrow)
+			        	  return false;
+			         else {
 			            return true;
+			         		        
 			        } }
 			    public void setValueAt(Object value, int row, int col) {
 			    	tableData[row][col] = value;
@@ -321,10 +337,11 @@ ListSelectionListener, KeyListener {
 	}
 		
 		private void GetCourseTable(int index) {
-			
+			maxrow=0;
 			if (CoursePerFuculty2.get(index)!=null){
 				if (CoursePerFuculty2.get(index)!=null){
 					arrayCourse=CoursePerFuculty2.get(index);
+					maxrow=arrayCourse.size();
 			for(int i=0; i<arrayCourse.size();i++){
 				lstModel.setValueAt(arrayCourse.get(i).getCapacity(), i,0);
 				lstModel.setValueAt(arrayCourse.get(i).getCourseID(), i,1);
