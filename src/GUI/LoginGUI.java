@@ -345,11 +345,14 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void keyReleased(KeyEvent e) {
+		if ((!Character.isDigit(e.getKeyChar())) && (e.getSource()==txtId))
+			txtId.setText("");
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
+	public void keyTyped(KeyEvent e) {
+
 	}
 
 	@Override

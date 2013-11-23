@@ -97,8 +97,9 @@ public class ManagerController {
 		ECRS.setCourses(getCourse());
 		ECRS.setFaculty(getFaculty());
 		ECRS.setAvailableLecturers(getAvailableLecturers());
-		
 		ECRS.setStudyAids(GetClassAids());
+		ECRS.setdefault();
+		
 		manegerMainFrm.add(ECRS.PNL_Main);
 		manegerMainFrm.repaint();
 	}

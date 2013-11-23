@@ -410,6 +410,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		txtIdNumber.setText("ID Number");
 		txtIdNumber.setBounds(10, 144, 105, 20);
 		txtIdNumber.setColumns(10);
+		txtIdNumber.addKeyListener(this);
 		return txtIdNumber;
 	}
 
@@ -546,16 +547,16 @@ public class Edit_Course extends JPanel implements ActionListener,
 			Iterator<Integer> itr = arraySelectedLecturers.values().iterator();
 			while (itr.hasNext())
 				newCourse.addLecturer(ArrayLecturers.get(itr.next()));
-			System.out.println("total lecs = " + newCourse.getCourseLecturers().size());
-			
+			System.out.println("total lecs = "
+					+ newCourse.getCourseLecturers().size());
 
 			itr = CrsSelectedStudyAids.values().iterator();
 			while (itr.hasNext())
 				newCourse.addStudyAids(crsStudyAids.get(itr.next()));
 
-			System.out.println("total aids = " + newCourse.getStudyAids().size());
-			
-			
+			System.out.println("total aids = "
+					+ newCourse.getStudyAids().size());
+
 			Course serverAnsCourse;
 			if (isNewCourse) {
 				serverAnsCourse = manager.CreateNewCourse(newCourse);
@@ -569,6 +570,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 				System.out.println("Fail!!!!");
 			}
 			createNewCourse(false);
+			setdefault();
 		}
 		if (e.getSource() == btnDiscard) {
 			manager.BacktoMainMenu(this.PNL_Main);
@@ -614,11 +616,19 @@ public class Edit_Course extends JPanel implements ActionListener,
 	}
 
 	private void setSelectedCourse() {
+		int i = 0;
 		CB_Faculty.setVisible(true);
 
 		int index = cmbBxEditCourse.getSelectedIndex() - 1;
+
 		if ((arrayCourse != null) && (!arrayCourse.isEmpty()) && (index >= 0)) {
-			CB_Faculty.setSelectedIndex(arrayCourse.get(index).getFaculty());
+			for (i = 0; i < arrayFaculty.size(); i++) {
+				if (arrayCourse.get(index).getFaculty() == arrayFaculty.get(i)
+						.getFacultyNum())
+					break;
+			}
+
+			CB_Faculty.setSelectedIndex(i);
 			txtIdNumber.setText(Integer.toString(arrayCourse.get(index)
 					.getCourseID()));
 			txtCourseName.setText((arrayCourse.get(index).getDescription()));
@@ -629,6 +639,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 			resetLists();
 			setCouseAids(index);
 			setCoursLec(index);
+			btnSave.setEnabled(true);
 
 		}
 		if (index < 0)
@@ -636,13 +647,14 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	}
 
-	private void setdefault() {
+	public void setdefault() {
 		txtIdNumber.setText("ID Number");
-		txtCourseName.setText("course name");
+		txtCourseName.setText("Course name");
 		CB_Faculty.setVisible(false);
 		Course_Semester.setValue(0);
 		AcademicHours.setValue(0);
 		MaxStdntPerClass.setValue(0);
+		btnSave.setEnabled(false);
 	}
 
 	private void setCoursLec(int index) {
@@ -747,9 +759,16 @@ public class Edit_Course extends JPanel implements ActionListener,
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-
+	public void keyReleased(KeyEvent e) {
+		if (!Character.isDigit(e.getKeyChar()))
+		{
+			if (e.getSource() == txtIdNumber) {
+				txtIdNumber.setText("");
+			}		
+		}
+		else {
+			btnSave.setEnabled(true);
+		}
 	}
 
 	@Override
