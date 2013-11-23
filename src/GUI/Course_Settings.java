@@ -61,6 +61,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EtchedBorder;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
@@ -73,6 +74,7 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelListener;
 import javax.swing.JScrollBar;
 
 import net.miginfocom.swing.MigLayout;
@@ -123,7 +125,7 @@ ListSelectionListener, KeyListener {
 	//private Map<Integer, Course> CoursePerFuculty ;
 	private ArrayList<Course> arrayCourse;
 	private Map<Integer, ArrayList<Course>> CoursePerFuculty2 ;
-	private	String columns[]={"# of student","course ID","course description"};
+	private	String columnNames[]={"# of student","course ID","course description"};
 	
 	
 	
@@ -190,21 +192,42 @@ ListSelectionListener, KeyListener {
 			
 			
 			
-		
-		table = new JTable(tableData,columns);
+			lstModel= new AbstractTableModel() {
+				public String getColumnName(int col) {
+			        return columnNames[col].toString();
+			    }
+			    public int getRowCount() { return tableData.length; }
+			    public int getColumnCount() { return columnNames.length; }
+			    public Object getValueAt(int row, int col) {
+			        return tableData[row][col];
+			    }
+			    public boolean isCellEditable(int row, int col)
+			        {  if (col >= 1) {
+			            return false;
+			        } else {
+			            return true;
+			        } }
+			    public void setValueAt(Object value, int row, int col) {
+			    	tableData[row][col] = value;
+			        fireTableCellUpdated(row, col);
+			    }
+			};
+				
+			
+		table = new JTable(tableData,columnNames);
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(SystemColor.inactiveCaption);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
-		//table.setModel( lstModel);
+		table.setModel( lstModel);
 			
-	//	table.set
-		//lstModel.setValueAt(null, 0,0);
-		//lstModel.setValueAt(null, 0,1);
-		//lstModel.setValueAt(null, 0,2);
-		//lstModel.isCellEditable(1, 1);
+	
+		lstModel.setValueAt(null, 0,0);
+		lstModel.setValueAt(null, 0,1);
+		lstModel.setValueAt(null, 0,2);
 		
+		/*
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 				{null, null, null},
@@ -231,6 +254,7 @@ ListSelectionListener, KeyListener {
 				return columnEditables[column];
 			}
 		});
+		*/
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(2).setResizable(false);
@@ -299,10 +323,34 @@ ListSelectionListener, KeyListener {
 			
 			
 		}	
-		
-		
-		
 	}
+		
+		private void GetCourseTable(int index) {
+			
+			if (CoursePerFuculty2.get(index)!=null){
+				if (CoursePerFuculty2.get(index)!=null){
+					arrayCourse=CoursePerFuculty2.get(index);
+			for(int i=0; i<arrayCourse.size();i++){
+				lstModel.setValueAt(arrayCourse.get(i).getCapacity(), i,0);
+				lstModel.setValueAt(arrayCourse.get(i).getCourseID(), i,1);
+				lstModel.setValueAt(arrayCourse.get(i).getDescription(), i,2);
+			}	
+			for(int i=arrayCourse.size(); i<lstModel.getRowCount();i++){
+					lstModel.setValueAt(null, i, 0);
+					lstModel.setValueAt(null, i, 0);
+					lstModel.setValueAt(null, i, 0);
+				}
+				
+			}
+				else{
+					for(int i=0; i<lstModel.getRowCount();i++){
+					lstModel.setValueAt(null, i, 0);
+					lstModel.setValueAt(null, i, 0);
+					lstModel.setValueAt(null, i, 0);
+				}
+		}}}
+	
+	/*
 	private void GetCourseTable(int index) {
 		
 		Object[][] tmp=new Object[100][3];
@@ -321,7 +369,7 @@ ListSelectionListener, KeyListener {
 		
 		table.setModel(new DefaultTableModel(
 				tmp,
-				columns
+				columnNames
 			) {
 				Class[] columnTypes = new Class[] {
 					Integer.class, Object.class, Object.class
@@ -336,7 +384,7 @@ ListSelectionListener, KeyListener {
 				
 						tableData
 						,
-						columns
+						columnNames
 				
 			) {
 				Class[] columnTypes = new Class[] {
@@ -351,7 +399,7 @@ ListSelectionListener, KeyListener {
 		}
 		
 		}
-		
+		*/
 		
 	
 
