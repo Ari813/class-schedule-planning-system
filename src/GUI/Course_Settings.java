@@ -109,13 +109,23 @@ ListSelectionListener, KeyListener {
 	public JPanel PNL_Main ;
 	private LecturerController lec;
 	private ManagerController manager;
-	private Object[][] tableData;
+	private Object[][] tableData={
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null}};;
 	private TableModel lstModel;
+	private JTableHeader head;
 	private ArrayList<Faculty> arrayFaculty;
 	private ArrayList<Faculty> arrayCourseFaculty;
 	//private Map<Integer, Course> CoursePerFuculty ;
 	private ArrayList<Course> arrayCourse;
 	private Map<Integer, ArrayList<Course>> CoursePerFuculty2 ;
+	private	String columns[]={"# of student","course ID","course description"};
+	
+	
 	
 	public Course_Settings(ManagerController mng) {
 
@@ -178,25 +188,22 @@ ListSelectionListener, KeyListener {
 	private JTable GETtable() {
 		if (table==null){
 			
-			Object[][] tableData={
-					{null, null, null},
-					{null, null, null},
-					{null, null, null},
-					{null, null, null},
-					{null, null, null},
-					{null, null, null}};
 			
-			String columns[]={"# of student","course ID","course description"};
-		table = new JTable();
+			
+		
+		table = new JTable(tableData,columns);
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(SystemColor.inactiveCaption);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
 		//table.setModel( lstModel);
-		
-		
-		
+			
+	//	table.set
+		//lstModel.setValueAt(null, 0,0);
+		//lstModel.setValueAt(null, 0,1);
+		//lstModel.setValueAt(null, 0,2);
+		//lstModel.isCellEditable(1, 1);
 		
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
@@ -216,6 +223,12 @@ ListSelectionListener, KeyListener {
 			};
 			public Class getColumnClass(int columnIndex) {
 				return columnTypes[columnIndex];
+			}
+			boolean[] columnEditables = new boolean[] {
+				true, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
 			}
 		});
 		table.getColumnModel().getColumn(0).setResizable(false);
@@ -308,9 +321,7 @@ ListSelectionListener, KeyListener {
 		
 		table.setModel(new DefaultTableModel(
 				tmp,
-				new String[] {
-					"# of student", "course ID", "course description"
-				}
+				columns
 			) {
 				Class[] columnTypes = new Class[] {
 					Integer.class, Object.class, Object.class
@@ -318,21 +329,15 @@ ListSelectionListener, KeyListener {
 				public Class getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
 				}
+				
 			});
 			
 		}else{table.setModel(new DefaultTableModel(
 				
-						new Object[][] {
-							{null, null, null},
-							{null, null, null},
-							{null, null, null},
-							{null, null, null},
-							{null, null, null},
-							{null, null, null},
-						},
-				new String[] {
-					"# of student", "course ID", "course description"
-				}
+						tableData
+						,
+						columns
+				
 			) {
 				Class[] columnTypes = new Class[] {
 					Integer.class, Object.class, Object.class
