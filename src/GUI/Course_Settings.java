@@ -116,14 +116,7 @@ ListSelectionListener, KeyListener {
 	private LecturerController lec;
 	private ManagerController manager;
 	private Object[][] tableData={
-		{null, null, null},
-		{null, null, null},
-		{null, null, null},
-		{null, null, null},
-		{null, null, null},
-		{null, null, null},
-		{null, null, null},
-		{null, null, null},
+		
 		{null, null, null}};;
 	private TableModel lstModel;
 	private JTableHeader head;
@@ -225,6 +218,7 @@ ListSelectionListener, KeyListener {
 			            return Integer.class;  
 			        else return Object.class;  //other columns accept String values  
 			    }  
+			  
 			};
 				
 			
