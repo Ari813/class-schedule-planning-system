@@ -65,6 +65,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 
@@ -74,12 +75,15 @@ import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.JScrollBar;
 
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.ScrollPaneConstants;
+
+import com.jgoodies.forms.layout.ColumnSpec;
 
 import entities.Course;
 import entities.Faculty;
@@ -98,7 +102,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null
 
 
 
-public class Course_Settings extends JPanel implements ActionListener,
+public class Course_Settings extends JPanel implements ActionListener,TableModelListener ,
 ListSelectionListener, KeyListener {
 	private JTextField txtCourseSttings;
 	private JTable table;
@@ -117,6 +121,9 @@ ListSelectionListener, KeyListener {
 		{null, null, null},
 		{null, null, null},
 		{null, null, null},
+		{null, null, null},
+		{null, null, null},
+		{null, null, null},
 		{null, null, null}};;
 	private TableModel lstModel;
 	private JTableHeader head;
@@ -126,9 +133,10 @@ ListSelectionListener, KeyListener {
 	private ArrayList<Course> arrayCourse;
 	private Map<Integer, ArrayList<Course>> CoursePerFuculty2 ;
 	private	String columnNames[]={"# of student","course ID","course description"};
-	
-	
-	
+	private ArrayList<Course>  courseSET;
+	private TableRowSorter	sorter;
+	private int FacultyIndex;
+	private boolean clickflag;
 	public Course_Settings(ManagerController mng) {
 
 		super();
@@ -211,6 +219,12 @@ ListSelectionListener, KeyListener {
 			    	tableData[row][col] = value;
 			        fireTableCellUpdated(row, col);
 			    }
+			    @Override  
+			      public Class getColumnClass(int col) {  
+			        if (col == 1)       //second column accepts only Integer values  
+			            return Integer.class;  
+			        else return Object.class;  //other columns accept String values  
+			    }  
 			};
 				
 			
@@ -220,41 +234,22 @@ ListSelectionListener, KeyListener {
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setBackground(SystemColor.inactiveCaption);
 		table.setBorder(new LineBorder(new Color(0, 0, 0)));
+		
+		
+		
+		
+		sorter = new TableRowSorter<TableModel>(lstModel);
 		table.setModel( lstModel);
-			
-	
+		//table.setAutoCreateRowSorter(true);	
+		table.setRowSorter(sorter);
+		
+		
+		
 		lstModel.setValueAt(null, 0,0);
 		lstModel.setValueAt(null, 0,1);
 		lstModel.setValueAt(null, 0,2);
+		table.getModel().addTableModelListener(this);
 		
-		/*
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"# of student", "course ID", "course description"
-			}
-		) {
-			Class[] columnTypes = new Class[] {
-				Integer.class, Object.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				true, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		*/
 		table.getColumnModel().getColumn(0).setResizable(false);
 		table.getColumnModel().getColumn(1).setResizable(false);
 		table.getColumnModel().getColumn(2).setResizable(false);
@@ -266,6 +261,10 @@ ListSelectionListener, KeyListener {
 		}
 		return table;
 	}
+	
+	
+	
+	
 	private JTextField GETtxtCourseSttings() {
 		if (txtCourseSttings==null){
 		txtCourseSttings = new JTextField();
@@ -318,6 +317,8 @@ ListSelectionListener, KeyListener {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() ==cmbxFaculty) {
+			clickflag=false;
+			FacultyIndex =cmbxFaculty.getSelectedIndex();
 			GetCourseTable(cmbxFaculty.getSelectedIndex());
 			//manager.LoadFacultyCourse(cmbxFaculty.getSelectedIndex());
 			
@@ -335,73 +336,26 @@ ListSelectionListener, KeyListener {
 				lstModel.setValueAt(arrayCourse.get(i).getCourseID(), i,1);
 				lstModel.setValueAt(arrayCourse.get(i).getDescription(), i,2);
 			}	
+			
 			for(int i=arrayCourse.size(); i<lstModel.getRowCount();i++){
 					lstModel.setValueAt(null, i, 0);
-					lstModel.setValueAt(null, i, 0);
-					lstModel.setValueAt(null, i, 0);
+					lstModel.setValueAt(null, i, 1);
+					lstModel.setValueAt(null, i, 2);
 				}
 				
-			}
+			}}
 				else{
 					for(int i=0; i<lstModel.getRowCount();i++){
 					lstModel.setValueAt(null, i, 0);
-					lstModel.setValueAt(null, i, 0);
-					lstModel.setValueAt(null, i, 0);
+					lstModel.setValueAt(null, i, 1);
+					lstModel.setValueAt(null, i, 2);
 				}
-		}}}
+					
+		}
+			clickflag=true;	
+		}
 	
-	/*
-	private void GetCourseTable(int index) {
 		
-		Object[][] tmp=new Object[100][3];
-		//arrayCourse.r;
-		if (CoursePerFuculty2.get(index)!=null){
-		arrayCourse=CoursePerFuculty2.get(index);
-		//tmp[1][0]=arrayCourse.get(1).getCourseID();
-		System.out.println(arrayCourse.size());
-		for(int i=0; i<arrayCourse.size();i++){
-			tmp[i][0]=arrayCourse.get(i).getCapacity();
-			tmp[i][1]=arrayCourse.get(i).getCourseID();
-			tmp[i][2]=arrayCourse.get(i).getDescription();
-			
-		//	System.out.println(course.size());
-		}
-		
-		table.setModel(new DefaultTableModel(
-				tmp,
-				columnNames
-			) {
-				Class[] columnTypes = new Class[] {
-					Integer.class, Object.class, Object.class
-				};
-				public Class getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-				
-			});
-			
-		}else{table.setModel(new DefaultTableModel(
-				
-						tableData
-						,
-						columnNames
-				
-			) {
-				Class[] columnTypes = new Class[] {
-					Integer.class, Object.class, Object.class
-				};
-				public Class getColumnClass(int columnIndex) {
-					return columnTypes[columnIndex];
-				}
-			});
-			
-			
-		}
-		
-		}
-		*/
-		
-	
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -437,15 +391,36 @@ ListSelectionListener, KeyListener {
 
 
 	public void setCourse(ArrayList<Course> course) {
-		ArrayList<Course>  tmp=null;
+		courseSET=course;
+		ArrayList<Course> tmp=null;
 		System.out.println(course.size());
 		CoursePerFuculty2=new HashMap<Integer, ArrayList<Course>>();
 		for(int i=0;i<course.size();i++){
 			if(!( CoursePerFuculty2.containsKey(course.get(i).getFaculty()))){
 				 tmp = new ArrayList<Course>();
-			}
+			
 			CoursePerFuculty2.put(course.get(i).getFaculty(),tmp);
+			}
 			CoursePerFuculty2.get(course.get(i).getFaculty()).add(course.get(i));
 		
 	}}
-	}
+
+
+	@Override
+	public void tableChanged(TableModelEvent e) {
+		if(clickflag){
+		ArrayList<Course> tmp2=null;
+        int row = e.getFirstRow();
+        int column = e.getColumn();
+        TableModel model = (TableModel)e.getSource();
+        String columnName = model.getColumnName(column);
+        int data = Integer.parseInt( model.getValueAt(row, column).toString());
+        
+        System.out.println(data);
+      // tmp2= 
+    	 CoursePerFuculty2.get(FacultyIndex).get(row).setCapacity(data);
+      // tmp2.get(row).setCapacity(data);
+        // Do something with the data...
+    }	
+		
+	}}
