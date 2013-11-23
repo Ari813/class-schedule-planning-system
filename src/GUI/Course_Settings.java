@@ -302,6 +302,7 @@ ListSelectionListener, KeyListener {
 			tmp[i][0]=arrayCourse.get(i).getCapacity();
 			tmp[i][1]=arrayCourse.get(i).getCourseID();
 			tmp[i][2]=arrayCourse.get(i).getDescription();
+			
 		//	System.out.println(course.size());
 		}
 		
