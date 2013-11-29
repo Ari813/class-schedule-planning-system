@@ -245,10 +245,13 @@ public Course UpdateNewCourse(Course newCourse){
 	}
 	public boolean saveCoureSet(Map<Integer, ArrayList<Course>> coursePerFuculty) {
 		//UpdateEstimatedStudentsNumPerClassPack 
+		System.out.print("aaaaaaaaaaaa");
 		UpdateEstimatedStudentsNumPerClassPack updateMsg = new UpdateEstimatedStudentsNumPerClassPack();
-		updateMsg.setCoursePerFucultyMap(coursePerFuculty);;
+		updateMsg.setCoursePerFucultyMap(coursePerFuculty);
 		client.handleMessageFromClientUI(updateMsg);
+		System.out.print("bbbbbbbbbbbb");
 		updateMsg = (UpdateEstimatedStudentsNumPerClassPack) client.getMessage();
+		System.out.print("ccccccccccccc");
 		return(updateMsg.isSucceed()) ;
 		
 		
