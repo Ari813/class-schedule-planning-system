@@ -2,7 +2,9 @@ package MsgPackage;
 
 import java.util.ArrayList;
 
-import entities.Lecturer;;
+import entities.Lecturer;
+
+;
 
 public class GetAllLecturersPack extends MessagePack {
 
@@ -11,9 +13,14 @@ public class GetAllLecturersPack extends MessagePack {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private boolean additionalInfo;
+	public enum getInformation {
+
+		all, courses, schedual, nothing
+	};
+
+	private getInformation additionalInfo;
 	private ArrayList<Lecturer> allLecturers;
-	
+
 	public ArrayList<Lecturer> getAllLecturers() {
 		return allLecturers;
 	}
@@ -25,24 +32,26 @@ public class GetAllLecturersPack extends MessagePack {
 	public GetAllLecturersPack() {
 		super();
 		this.op = OpType.GetLecturersInfo;
+		additionalInfo = getInformation.nothing;
 	}
 
 	/**
 	 * @return the bringCourses
 	 */
-	public boolean isBringAdditionalInfo() {
+	public getInformation isBringAdditionalInfo() {
 		return additionalInfo;
 	}
 
 	/**
-	 * @param bringLecturers the bringLecturers to set
+	 * @param bringLecturers
+	 *            the bringLecturers to set
 	 */
-	public void setAdditionalInfo() {
-		this.additionalInfo = true;
+	public void setAdditionalInfo(getInformation additionalInfo) {
+		this.additionalInfo = additionalInfo;
 	}
-	
+
 	public void clrAdditionalInfo() {
-		this.additionalInfo = false;
+		this.additionalInfo = getInformation.nothing;
 	}
 
 }

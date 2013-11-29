@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
+import MsgPackage.GetAllLecturersPack.getInformation;
 import entities.Building;
 import entities.Campus;
 import entities.Class;
@@ -317,13 +318,13 @@ public class Database {
 		return FacultyArray;
 	}
 
-	public ArrayList<Lecturer> getAllLecturers(boolean additionalInfo)
+	public ArrayList<Lecturer> getAllLecturers(getInformation additionalInfo)
 			throws SQLException {
 		ResultSet qrs = null;
-		ResultSet CoursesQrs = null;
+	
 		ArrayList<Lecturer> LecturerArray = new ArrayList<Lecturer>();
 		Lecturer lec;
-		Course crs;
+		
 
 		String query = new String("SELECT * FROM `csps-db`.lecturer;");
 		st = conn.createStatement();
@@ -332,20 +333,19 @@ public class Database {
 			lec = new Lecturer();
 			lec.setID(qrs.getInt("LecturerID"));
 			lec.setName(qrs.getString("LecturerName"));
-
-			if (additionalInfo) {
-				query = new String(
-						"SELECT * FROM `csps-db`.courselecturers cl where cl.LecturerID = "
-								+ lec.getID() + ";");
-				st = conn.createStatement();
-
-				CoursesQrs = st.executeQuery(query);
-				while (CoursesQrs.next()) {
-					crs = new Course();
-					crs.setCourseID(CoursesQrs.getInt("CourseID"));
-					lec.addCourse(crs);
-					lec.setHasCoursesInfo();
-				}
+			switch (additionalInfo) {
+			case courses:
+				lec = getLecturersCourses(lec);
+				break;
+			case schedual:
+				lec = getLecturersSchedual(lec);
+				break;
+			case all:
+				lec = getLecturersCourses(lec);
+				lec = getLecturersSchedual(lec);
+				break;
+			case nothing:
+				break;
 			}
 
 			LecturerArray.add(lec);
@@ -356,6 +356,40 @@ public class Database {
 		return LecturerArray;
 	}
 
+	private Lecturer getLecturersSchedual(Lecturer lec) throws SQLException {
+		ResultSet SchedualQrs = null;
+		int schedualArray[] = new int[72];
+		String query = new String(
+				"SELECT * FROM `csps-db`.LecturerPref where LecturerID="
+						+ lec.getID() + ";");
+		st = conn.createStatement();
+
+		SchedualQrs = st.executeQuery(query);
+		while (SchedualQrs.next()) 
+			schedualArray[SchedualQrs.getInt("TimeArrayIndex")]=SchedualQrs.getInt("Pref");
+		lec.setPreferedSchedualArray(schedualArray);
+		return lec;
+	}
+
+	private Lecturer getLecturersCourses(Lecturer lec) throws SQLException
+	{
+		ResultSet CoursesQrs = null;
+		Course crs;
+		String query = new String(
+				"SELECT * FROM `csps-db`.courselecturers cl where cl.LecturerID = "
+						+ lec.getID() + ";");
+		st = conn.createStatement();
+
+		CoursesQrs = st.executeQuery(query);
+		while (CoursesQrs.next()) {
+			crs = new Course();
+			crs.setCourseID(CoursesQrs.getInt("CourseID"));
+			lec.addCourse(crs);
+			lec.setHasCoursesInfo();
+		}
+		return lec;
+	}
+	
 	public Lecturer newLecturer(Lecturer newLecturer) throws SQLException {
 		String query;
 		query = new String(
@@ -366,7 +400,21 @@ public class Database {
 		st.executeUpdate(query);
 
 		newLecturer = updateLecturer(newLecturer);
+		newLecturer = createNewLecturerPreferences(newLecturer);
 
+		return newLecturer;
+	}
+
+	private Lecturer createNewLecturerPreferences(Lecturer newLecturer)
+			throws SQLException {
+		String query;
+		for (int i = 0; i < 72; i++) {
+			query = new String(
+					"INSERT INTO `csps-db`.`LecturerPref` (`LecturerID`, `TimeArrayIndex`, `Pref`) VALUES ('"
+							+ newLecturer.getID() + "', '" + i + "', '0');");
+			st = conn.createStatement();
+			st.executeUpdate(query);
+		}
 		return newLecturer;
 	}
 

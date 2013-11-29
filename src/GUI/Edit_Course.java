@@ -446,7 +446,6 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cmbBxEditCourse) {
-			isNewCourse = false;
 			createNewCourse(false);
 			setSelectedCourse();
 		}

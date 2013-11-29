@@ -15,7 +15,12 @@ public class Lecturer extends User implements Serializable {
 	private String position;
 	private String assignmentYear;
 	private boolean hasCoursesInfo;
+	private boolean hasSchedualInfo;
 	private ArrayList<Course> LecturerCourses;
+	private int[]	preferedSchedualArray;
+	static public final int selection_prefered = 0;
+	static public final int selection_available = 1;
+	static public final int selection_not_available = 2;
 	/**
 	 * constructor
 	 * 
@@ -36,6 +41,8 @@ public class Lecturer extends User implements Serializable {
 		this.position = position;
 		this.assignmentYear = assignmentYear;
 		LecturerCourses= new ArrayList<Course>();
+		preferedSchedualArray = new int[72];
+		hasSchedualInfo = false;
 		hasCoursesInfo = false;
 	}
 
@@ -44,7 +51,9 @@ public class Lecturer extends User implements Serializable {
 	 */
 	public Lecturer() {
 		LecturerCourses= new ArrayList<Course>();
+		preferedSchedualArray = new int[72];
 		hasCoursesInfo = false;
+		hasSchedualInfo = false;
 	}
 
 	
@@ -125,6 +134,38 @@ public class Lecturer extends User implements Serializable {
 	}
 	public void clrHasCoursesInfo( ) {
 		this.hasCoursesInfo = false;
+	}
+
+	/**
+	 * @return the preferedSchedualArray
+	 */
+	public int[] getPreferedSchedualArray() {
+		return preferedSchedualArray;
+	}
+
+	/**
+	 * @param preferedSchedualArray the preferedSchedualArray to set
+	 */
+	public void setPreferedSchedualArray(int[] preferedSchedualArray) {
+		this.preferedSchedualArray = preferedSchedualArray;
+	}
+
+	/**
+	 * @return the hasSchedualInfo
+	 */
+	public boolean isHasSchedualInfo() {
+		return hasSchedualInfo;
+	}
+
+	/**
+	 * @param hasSchedualInfo the hasSchedualInfo to set
+	 */
+	public void setHasSchedualInfo() {
+		this.hasSchedualInfo = true;
+	}
+	
+	public void clrHasSchedualInfo() {
+		this.hasSchedualInfo = false;
 	}
 	
 	
