@@ -3,6 +3,7 @@ package Controllers;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import entities.Building;
@@ -242,12 +243,13 @@ public Course UpdateNewCourse(Course newCourse){
 		manegerMainFrm.handleLogoutGUI();
 
 	}
-	public void saveCoureSet(Map<Integer, ArrayList<Course>> coursePerFuculty) {
+	public boolean saveCoureSet(Map<Integer, ArrayList<Course>> coursePerFuculty) {
 		//UpdateEstimatedStudentsNumPerClassPack 
 		UpdateEstimatedStudentsNumPerClassPack updateMsg = new UpdateEstimatedStudentsNumPerClassPack();
-		updateMsg.setNewCourse();
+		updateMsg.setCoursePerFucultyMap(coursePerFuculty);;
 		client.handleMessageFromClientUI(updateMsg);
-	//	updateMsg = (UpdateEstimatedStudentsNumPerClassPack) client.getMessage();
+		updateMsg = (UpdateEstimatedStudentsNumPerClassPack) client.getMessage();
+		return(updateMsg.isSucceed()) ;
 		
 		
 	}

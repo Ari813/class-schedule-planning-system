@@ -343,7 +343,15 @@ ListSelectionListener,FocusListener, KeyListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSaveChanges) {
-			manager.saveCoureSet(CoursePerFuculty2);
+			boolean tmp= manager.saveCoureSet(CoursePerFuculty2);
+			if (tmp){
+				JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
+				manager.BacktoMainMenu(this.PNL_Main);
+			}else{
+				JOptionPane.showMessageDialog(manager.manegerMainFrm, "update failed please try again");
+			}
+				
+				
 			//manager.SaveCourse();
 		}	
 		if (e.getSource() == btnBackToMainMenu) {
@@ -353,8 +361,7 @@ ListSelectionListener,FocusListener, KeyListener {
 			clickflag=false;
 			FacultyIndex =cmbxFaculty.getSelectedIndex();
 			 if (table.isEditing()){
-				 System.out.println("c");	
-				    table.getCellEditor().stopCellEditing();}
+					  table.getCellEditor().stopCellEditing();}
 			GetCourseTable(cmbxFaculty.getSelectedIndex());
 			//manager.LoadFacultyCourse(cmbxFaculty.getSelectedIndex());
 			
@@ -430,7 +437,7 @@ ListSelectionListener,FocusListener, KeyListener {
 	public void setCourse(ArrayList<Course> course) {
 		courseSET=course;
 		ArrayList<Course> tmp=null;
-		System.out.println(course.size());
+		//System.out.println(course.size());
 		CoursePerFuculty2=new HashMap<Integer, ArrayList<Course>>();
 		for(int i=0;i<course.size();i++){
 			if(!( CoursePerFuculty2.containsKey(course.get(i).getFaculty()))){
