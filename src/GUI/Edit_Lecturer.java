@@ -1,72 +1,39 @@
 package GUI;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
 
-import java.awt.BorderLayout;
-
-import javax.swing.border.BevelBorder;
-
-import java.awt.Rectangle;
 import java.awt.Font;
 import java.awt.Component;
-import java.awt.Point;
-
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
-import java.awt.Window.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
-import java.awt.SystemColor;
 import java.awt.Color;
 
 import javax.swing.UIManager;
 
-import java.awt.FlowLayout;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextPane;
 import javax.swing.JTextField;
-import javax.swing.DropMode;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
-import javax.swing.JCheckBox;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.JProgressBar;
-import javax.swing.JSeparator;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.swing.JLayeredPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EtchedBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JPanel;
-
 import entities.Course;
 import entities.Lecturer;
-import entities.StudyAids;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 
@@ -76,6 +43,10 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		ListSelectionListener, KeyListener {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
 	 * Create the panel.
 	 */
 
@@ -84,7 +55,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 	private JComboBox cmbxLecturerEditor;
 	private JList lstAvailableCourses;// lstAvailableLecturers
 	private JList lstSelectedCourses;// lstChoosenLecturers
-	private JTextPane txtpnIDNumber;
+	private JTextField txtpnIDNumber;
 	private JButton btnAdd;
 	private JButton btnRemove;
 	private JButton btnNewLecturer;
@@ -282,13 +253,14 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 
 	}
 
-	private JTextPane GETtxtpnIDNumber() {
-		txtpnIDNumber = new JTextPane();
+	private JTextField GETtxtpnIDNumber() {
+		txtpnIDNumber = new JTextField();
 		txtpnIDNumber.setEnabled(false);
 		// txtpnIDNumber.setDropMode(DropMode.ON);
 		txtpnIDNumber.setBackground(Color.WHITE);
 		txtpnIDNumber.setText("ID Number");
 		txtpnIDNumber.setBounds(10, 144, 100, 20);
+		txtpnIDNumber.addKeyListener(this);
 		return txtpnIDNumber;
 	}
 
@@ -379,10 +351,11 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 			} else {
 				serverAns = manager.UpdateNewLecturer(newLecturer);
 			}
-			if (serverAns.getID() == newLecturer.getID())
-				System.out.println("Success!!!");
+
+			if (serverAns.getID().equals(newLecturer.getID()))
+				System.out.println(" Success!!!");
 			else {
-				System.out.println("Fail!!!!");
+				System.out.println(" Fail!!!!");
 			}
 			createNewLecturer(false);
 			setdefault();
@@ -392,6 +365,8 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == cmbxLecturerEditor) {
+			createNewLecturer(false);
+
 			setSelectedLec();
 		}
 
@@ -404,7 +379,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 			txtpnIDNumber.setText(Integer.toString(ArrayLecturer.get(index)
 					.getID()));
 			txtLecturerNameText.setText(ArrayLecturer.get(index).getName());
-
+			btnSaveChanges.setEnabled(true);
 			setCoursLec(index);
 
 		}
@@ -416,6 +391,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 	private void setdefault() {
 		txtpnIDNumber.setText("ID Number");
 		txtLecturerNameText.setText("lecturer name");
+		btnSaveChanges.setEnabled(false);
 
 	}
 
@@ -471,14 +447,17 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	public void keyReleased(KeyEvent e) {
+		if (e.getSource() == txtpnIDNumber)
+			if (!Character.isDigit(e.getKeyChar()))
+				txtpnIDNumber.setText("");
+			else
+				btnSaveChanges.setEnabled(true);
 
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	public void keyTyped(KeyEvent e) {
 
 	}
 

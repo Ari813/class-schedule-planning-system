@@ -507,8 +507,9 @@ public class Database {
 		for (int i = 0; i < newLecturer.getLecturerCourses().size(); i++) {
 			query = new String(
 					"INSERT INTO `csps-db`.`courselecturers` (`CourseID`, `LecturerID`) VALUES ('"
-							+ newLecturer.getLecturerCourses().get(i) + "', '"
+							+ newLecturer.getLecturerCourses().get(i).getCourseID() + "', '"
 							+ newLecturer.getID() + "');");
+			System.out.println(query);
 
 			st = conn.createStatement();
 			st.executeUpdate(query);
