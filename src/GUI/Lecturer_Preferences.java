@@ -226,8 +226,11 @@ ListSelectionListener, KeyListener {
 		         		        
 		        } }
 		    public void setValueAt(Object value, int row, int col) {
+		    	
+		    	
+		    	dfs
 		    	tableData[row][col] = value;
-		        fireTableCellUpdated(row, col);
+		       // fireTableCellUpdated(row, col);
 		    }
 		    @Override  
 		      public Class getColumnClass(int col) {  
@@ -330,8 +333,8 @@ ListSelectionListener, KeyListener {
 			ArrayLecturer.put(arrayList.get(i).getID(), arrayList.get(i));
 			cmbxlecturer.addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());
 			for (int j=0;j<72;j++){
-				
-				
+				tableLecturermanu.getModel().setValueAt("n/a" , j/12, j %12);
+				//tableLecturermanu.getModel().setValueAt(aValue, rowIndex, columnIndex);
 			}
 		}
 		
