@@ -113,26 +113,30 @@ public class EchoServer extends AbstractServer {
 		case updateLectuer:
 			updateLecturer(msgpck, client);
 			break;
-			
+
 		case updateCourse:
 			updateCourse(msgpck, client);
 			break;
-			
+
 		case newCourse:
 			newCourse(msgpck, client);
 			break;
 		case UpdateEstimatedStudentsNumPerClass:
 			updateEstimatedStudentsNumPerClass(msgpck, client);
+			break;
 		default:
 			break;
 
 		}
 	}
 
-	private void updateEstimatedStudentsNumPerClass(MessagePack msg,ConnectionToClient client) {
+	private void updateEstimatedStudentsNumPerClass(MessagePack msg,
+			ConnectionToClient client) {
 		UpdateEstimatedStudentsNumPerClassPack CoursePerFuculty = (UpdateEstimatedStudentsNumPerClassPack) msg;
+
 		try {
-			if(db.UpdateEstimatedStudentsNumPerClass(CoursePerFuculty.getCoursePerFucultyMap()))
+			if (db.UpdateEstimatedStudentsNumPerClass(CoursePerFuculty
+					.getCoursePerFucultyMap()))
 				CoursePerFuculty.setSucceed();
 			else
 				CoursePerFuculty.setFailed();
@@ -146,7 +150,7 @@ public class EchoServer extends AbstractServer {
 
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	private void newCourse(MessagePack msg, ConnectionToClient client) {

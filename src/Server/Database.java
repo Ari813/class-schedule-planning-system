@@ -256,7 +256,8 @@ public class Database {
 		while (qrs.next()) {
 			crs = new Course(qrs.getInt("Capacity"), qrs.getInt("CourseID"),
 					qrs.getString("Description"), qrs.getInt("Faculty"),
-					qrs.getInt("Semester"), qrs.getInt("AcademicHours"), qrs.getInt("EstimationOfStudentsNum"));
+					qrs.getInt("Semester"), qrs.getInt("AcademicHours"),
+					qrs.getInt("EstimationOfStudentsNum"));
 			if (additionalInfo) {
 				/* Add study aids */
 				query = new String(
@@ -420,7 +421,8 @@ public class Database {
 			query = new String(
 					"INSERT INTO `csps-db`.`courseaids` (`CourseID`, `ClassAidID`) VALUES ('"
 							+ newCourse.getCourseID() + "', '"
-							+ newCourse.getStudyAids().get(i).getAidsID() + "');");
+							+ newCourse.getStudyAids().get(i).getAidsID()
+							+ "');");
 			st = conn.createStatement();
 			st.executeUpdate(query);
 
@@ -436,7 +438,8 @@ public class Database {
 			query = new String(
 					"INSERT INTO `csps-db`.`courselecturers` (`CourseID`, `LecturerID`) VALUES ('"
 							+ newCourse.getCourseID() + "', '"
-							+ newCourse.getCourseLecturers().get(i).getID() + "');");
+							+ newCourse.getCourseLecturers().get(i).getID()
+							+ "');");
 			st = conn.createStatement();
 			st.executeUpdate(query);
 		}
@@ -531,18 +534,23 @@ public class Database {
 		return newClass;
 	}
 
-	public boolean UpdateEstimatedStudentsNumPerClass(Map<Integer, ArrayList<Course>> coursePerFucultyMap) throws SQLException {
+	public boolean UpdateEstimatedStudentsNumPerClass(
+			Map<Integer, ArrayList<Course>> coursePerFucultyMap)
+			throws SQLException {
 		String query;
 		Iterator<Integer> keyItr = coursePerFucultyMap.keySet().iterator();
 		Iterator<Course> CourseArrItr;
 		Course TmpCrs;
-		while(keyItr.hasNext())
-		{
-			CourseArrItr = coursePerFucultyMap.get(keyItr).iterator();
-			while(CourseArrItr.hasNext())
-			{
-				TmpCrs=CourseArrItr.next();
-				query = new String("UPDATE `csps-db`.`course` SET `EstimationOfStudentsNum`='"+TmpCrs.getCourseID()+"' WHERE `CourseID`='"+TmpCrs.getCapacity()+"';");
+
+		while (keyItr.hasNext()) {
+
+			CourseArrItr = coursePerFucultyMap.get(keyItr.next()).iterator();
+			while (CourseArrItr.hasNext()) {
+				TmpCrs = CourseArrItr.next();
+				query = new String(
+						"UPDATE `csps-db`.`course` SET `EstimationOfStudentsNum`='"
+								+ TmpCrs.getCapacity() + "' WHERE `CourseID`='"
+								+ TmpCrs.getCourseID() + "';");
 				st = conn.createStatement();
 				st.executeUpdate(query);
 			}

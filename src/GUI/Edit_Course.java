@@ -447,6 +447,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cmbBxEditCourse) {
 			isNewCourse = false;
+			createNewCourse(false);
 			setSelectedCourse();
 		}
 		if (e.getSource() == btnAddStudyAids) {
@@ -760,13 +761,11 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (!Character.isDigit(e.getKeyChar()))
-		{
+		if (!Character.isDigit(e.getKeyChar())) {
 			if (e.getSource() == txtIdNumber) {
 				txtIdNumber.setText("");
-			}		
-		}
-		else {
+			}
+		} else {
 			btnSave.setEnabled(true);
 		}
 	}
