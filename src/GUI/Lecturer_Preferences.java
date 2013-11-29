@@ -66,7 +66,7 @@ ListSelectionListener, KeyListener {
 	
 	
 	private DefaultCellEditor CmbTableModel;
-	private Map<Integer, Lecturer>  ArrayLecturer;
+	private ArrayList<Lecturer>  ArrayLecturer;
 	private TableModel lstModel;
 	private Object[][] tableData={
 			{"8:00-9:00", null, null, null, null, null, null},
@@ -328,17 +328,20 @@ ListSelectionListener, KeyListener {
 	}
 
 	public void setLecturers(ArrayList<Lecturer> arrayList) {
-		//ArrayLecturer=arrayList;
-		ArrayLecturer=new HashMap<Integer, Lecturer>();
+		ArrayLecturer=arrayList;
+		
+	//	ArrayLecturer=new HashMap<Integer, Lecturer>();
 		for (int i = 0; i < arrayList.size(); i++) {
-			ArrayLecturer.put(arrayList.get(i).getID(), arrayList.get(i));
+	//		ArrayLecturer.put(arrayList.get(i).getID(), arrayList.get(i));
 			cmbxlecturer.addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());
-			for (int j=0;j<14;j++){
-				for (int k=1;k<7;k++){
-					tableLecturermanu.getModel().setValueAt("n/a" , j, k);
+			for (int hour=0;hour<14;hour++){
+				for (int day=1;day<7;day++){
+					int tmp=(day-1)*14+hour;
+					//tableLecturermanu.getModel().setValueAt(arrayList.get(i).getPreferedSchedualArray()[tmp], hour, day);
+					tableLecturermanu.getModel().setValueAt("n/a" , hour, day);
 				}
 				
-				//tableLecturermanu.getModel().setValueAt(aValue, rowIndex, columnIndex);
+				
 			}
 		}
 		
