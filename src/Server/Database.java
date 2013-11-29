@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 
 import entities.Building;
@@ -530,9 +531,22 @@ public class Database {
 		return newClass;
 	}
 
-	public boolean UpdateEstimatedStudentsNumPerClass(Map<Integer, ArrayList<Course>> coursePerFucultyMap) {
+	public boolean UpdateEstimatedStudentsNumPerClass(Map<Integer, ArrayList<Course>> coursePerFucultyMap) throws SQLException {
 		String query;
-		
-		return false;
+		Iterator<Integer> keyItr = coursePerFucultyMap.keySet().iterator();
+		Iterator<Course> CourseArrItr;
+		Course TmpCrs;
+		while(keyItr.hasNext())
+		{
+			CourseArrItr = coursePerFucultyMap.get(keyItr).iterator();
+			while(CourseArrItr.hasNext())
+			{
+				TmpCrs=CourseArrItr.next();
+				query = new String("UPDATE `csps-db`.`course` SET `EstimationOfStudentsNum`='"+TmpCrs.getCourseID()+"' WHERE `CourseID`='"+TmpCrs.getCapacity()+"';");
+				st = conn.createStatement();
+				st.executeUpdate(query);
+			}
+		}
+		return true;
 	}
 }
