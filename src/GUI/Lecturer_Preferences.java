@@ -199,7 +199,7 @@ ListSelectionListener, KeyListener {
 	
 	
 	private JTable GETtableLecturermanu() {
-		tableLecturermanu = new JTable();
+		tableLecturermanu = new JTable(tableData,columnNames);
 		tableLecturermanu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		tableLecturermanu.setToolTipText("table ");
 		tableLecturermanu.setFillsViewportHeight(true);
@@ -227,9 +227,11 @@ ListSelectionListener, KeyListener {
 		        } }
 		    public void setValueAt(Object value, int row, int col) {
 		    	
-		
+
+		    	
+
 		    	tableData[row][col] = value;
-		       // fireTableCellUpdated(row, col);
+		        fireTableCellUpdated(row, col);
 		    }
 		    @Override  
 		      public Class getColumnClass(int col) {  
@@ -331,8 +333,11 @@ ListSelectionListener, KeyListener {
 		for (int i = 0; i < arrayList.size(); i++) {
 			ArrayLecturer.put(arrayList.get(i).getID(), arrayList.get(i));
 			cmbxlecturer.addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());
-			for (int j=0;j<72;j++){
-				tableLecturermanu.getModel().setValueAt("n/a" , j/12, j %12);
+			for (int j=0;j<14;j++){
+				for (int k=1;k<7;k++){
+					tableLecturermanu.getModel().setValueAt("n/a" , j, k);
+				}
+				
 				//tableLecturermanu.getModel().setValueAt(aValue, rowIndex, columnIndex);
 			}
 		}
