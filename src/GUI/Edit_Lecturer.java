@@ -338,7 +338,7 @@ ListSelectionListener, KeyListener {
 		
 	}
 	private void setSelectedLec() {
-		int index = cmbxLecturerEditor.getSelectedIndex() ;
+		int index = cmbxLecturerEditor.getSelectedIndex()-1 ;
 		if ((ArrayLecturer != null) && (!ArrayLecturer.isEmpty()) && (index >= 0)) {
 			txtpnIDNumber.setText(Integer.toString(ArrayLecturer.get(index).getID()));
 			txLecturerNameText.setText(ArrayLecturer.get(index).getName());

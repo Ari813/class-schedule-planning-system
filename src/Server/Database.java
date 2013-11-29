@@ -368,6 +368,7 @@ public class Database {
 		while (SchedualQrs.next()) 
 			schedualArray[SchedualQrs.getInt("TimeArrayIndex")]=SchedualQrs.getInt("Pref");
 		lec.setPreferedSchedualArray(schedualArray);
+		lec.setHasSchedualInfo();
 		return lec;
 	}
 
