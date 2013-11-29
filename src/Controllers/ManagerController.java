@@ -19,6 +19,7 @@ import entities.StudyAids;
 import Client.ChatClient;
 import GUI.*;
 import MsgPackage.*;
+import MsgPackage.GetAllLecturersPack.getInformation;
 
 public class ManagerController {
 	final public static int EXIT = 11;
@@ -93,7 +94,7 @@ public class ManagerController {
 	private ArrayList<Lecturer> getAvailableLecturers2() {
 		{
 			GetAllLecturersPack studyAvailableLecturers = new GetAllLecturersPack();
-			studyAvailableLecturers.setAdditionalInfo();
+			studyAvailableLecturers.setAdditionalInfo(getInformation.schedual);
 			client.handleMessageFromClientUI(studyAvailableLecturers);
 			studyAvailableLecturers = (GetAllLecturersPack) client.getMessage();
 		

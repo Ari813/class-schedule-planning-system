@@ -65,7 +65,7 @@ ListSelectionListener, KeyListener {
 	static String[] strings = {"Test1", "Test2", "Test3"};
 	
 	
-	
+	private DefaultCellEditor CmbTableModel;
 	private Map<Integer, Lecturer>  ArrayLecturer;
 	private TableModel lstModel;
 	private Object[][] tableData={
@@ -265,7 +265,7 @@ ListSelectionListener, KeyListener {
 		select.getEditor().getEditorComponent().setForeground(Color.PINK);
 		
 		
-		DefaultCellEditor CmbTableModel=new DefaultCellEditor(select) ;
+		CmbTableModel=new DefaultCellEditor(select) ;
 		
 		for (int x = 1;x<6;x++) {
 			//tableLecturermanu.getColumnModel().s
@@ -328,7 +328,7 @@ ListSelectionListener, KeyListener {
 		ArrayLecturer=new HashMap<Integer, Lecturer>();
 		for (int i = 0; i < arrayList.size(); i++) {
 			ArrayLecturer.put(arrayList.get(i).getID(), arrayList.get(i));
-			cmbxlecturer .addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());
+			cmbxlecturer.addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());
 			for (int j=0;j<72;j++){
 				
 				
