@@ -13,10 +13,11 @@ public class UpdateEstimatedStudentsNumPerClassPack extends MessagePack {
 	private static final long serialVersionUID = 1L;
 
 	private Map<Integer, ArrayList<Course>> CoursePerFuculty ;
-	private boolean Success; 
+	private Boolean Success; 
 
 	public UpdateEstimatedStudentsNumPerClassPack() {
 		super();
+		Success=false;
 		this.op = OpType.UpdateEstimatedStudentsNumPerClass;
 
 	}
@@ -46,9 +47,9 @@ public class UpdateEstimatedStudentsNumPerClassPack extends MessagePack {
 	 * @param success the success to set
 	 */
 	public void setSucceed() {
-		Success = true;
+		Success = new Boolean (true);
 	}
 	public void setFailed() {
-		Success = true;
+		Success = new Boolean (false);
 	}
 }
