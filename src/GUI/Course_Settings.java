@@ -343,7 +343,7 @@ ListSelectionListener,FocusListener, KeyListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSaveChanges) {
-			
+			manager.saveCoureSet(CoursePerFuculty2);
 			//manager.SaveCourse();
 		}	
 		if (e.getSource() == btnBackToMainMenu) {

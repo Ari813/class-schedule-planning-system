@@ -1,6 +1,7 @@
 package Controllers;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
@@ -240,6 +241,15 @@ public Course UpdateNewCourse(Course newCourse){
 		// TODO Auto-generated method stub
 		manegerMainFrm.handleLogoutGUI();
 
+	}
+	public void saveCoureSet(Map<Integer, ArrayList<Course>> coursePerFuculty) {
+		//UpdateEstimatedStudentsNumPerClassPack 
+		UpdateEstimatedStudentsNumPerClassPack updateMsg = new UpdateEstimatedStudentsNumPerClassPack();
+		updateMsg.setNewCourse();
+		client.handleMessageFromClientUI(updateMsg);
+	//	updateMsg = (UpdateEstimatedStudentsNumPerClassPack) client.getMessage();
+		
+		
 	}
 
 }
