@@ -34,8 +34,10 @@ import javax.swing.UIManager;
 
 import java.awt.FlowLayout;
 
+import javax.swing.CellEditor;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JScrollPane;
@@ -53,6 +55,7 @@ import javax.swing.JSeparator;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -83,6 +86,8 @@ import net.miginfocom.swing.MigLayout;
 
 import javax.swing.ScrollPaneConstants;
 
+import org.omg.CosNaming.IstringHelper;
+
 import com.jgoodies.forms.layout.ColumnSpec;
 
 import entities.Course;
@@ -90,7 +95,10 @@ import entities.Faculty;
 import entities.Lecturer;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
+
 import java.awt.event.KeyAdapter;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 /*/JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
 lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
 lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
@@ -104,7 +112,7 @@ lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null
 
 
 public class Course_Settings extends JPanel implements ActionListener,TableModelListener ,
-ListSelectionListener, KeyListener {
+ListSelectionListener,FocusListener, KeyListener {
 	private JTextField txtCourseSttings;
 	private JTable table;
 	private JButton btnSaveChanges; 
@@ -239,8 +247,20 @@ ListSelectionListener, KeyListener {
 			  
 			};
 				
+			lstModel.addTableModelListener(this);
+			
 			
 		table = new JTable(tableData,columnNames);
+		table.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				System.out.print("ss");
+					table.clearSelection();
+					
+				
+			}
+		});
+		
 	
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
@@ -332,6 +352,9 @@ ListSelectionListener, KeyListener {
 		if (e.getSource() ==cmbxFaculty) {
 			clickflag=false;
 			FacultyIndex =cmbxFaculty.getSelectedIndex();
+			 if (table.isEditing()){
+				 System.out.println("c");	
+				    table.getCellEditor().stopCellEditing();}
 			GetCourseTable(cmbxFaculty.getSelectedIndex());
 			//manager.LoadFacultyCourse(cmbxFaculty.getSelectedIndex());
 			
@@ -369,7 +392,7 @@ ListSelectionListener, KeyListener {
 			clickflag=true;	
 		}
 	
-		
+	      
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -422,19 +445,55 @@ ListSelectionListener, KeyListener {
 
 	@Override
 	public void tableChanged(TableModelEvent e) {
+		try{
+			
 		if(clickflag){
 		ArrayList<Course> tmp2=null;
         int row = e.getFirstRow();
         int column = e.getColumn();
         TableModel model = (TableModel)e.getSource();
-        String columnName = model.getColumnName(column);
+       
+      //  String columnName = model.getColumnName(column);
         int data = Integer.parseInt( model.getValueAt(row, column).toString());
-        
+        if (data<0){
+        	throw new java.lang.NumberFormatException();
+        }
         System.out.println(data);
       // tmp2= 
     	 CoursePerFuculty2.get(FacultyIndex).get(row).setCapacity(data);
       // tmp2.get(row).setCapacity(data);
         // Do something with the data...
     }	
+		}
+		catch(java.lang.NumberFormatException ell){
+			
+			
+			int row = e.getFirstRow();
+	        int column = e.getColumn();
+	        TableModel model = (TableModel)e.getSource();
+	        String columnName = model.getColumnName(column);
+	          model.setValueAt( CoursePerFuculty2.get(FacultyIndex).get(row).getCapacity(), row, column);
+	        CoursePerFuculty2.get(FacultyIndex).get(row).getCapacity();
+			//CoursePerFuculty2.get(FacultyIndex).get(row).setCapacity(CoursePerFuculty2.get(FacultyIndex).get(row).getCapacity());
+			
+			JOptionPane.showMessageDialog(manager.manegerMainFrm, "enter a positive number");
+			//JOptionPane.show
+		}
+	}
+
+
+	@Override
+	public void focusGained(FocusEvent e) {
+		// TODO Auto-generated method stub
 		
-	}}
+	}
+
+
+	@Override
+	public void focusLost(FocusEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+		
+	}
