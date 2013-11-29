@@ -79,6 +79,7 @@ public class ManagerController {
 	public void Load_Lecturer_Preferences(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
 		LP = new Lecturer_Preferences(null, this);
+		LP.setLecturers(getAvailableLecturers(getInformation.schedual));
 		manegerMainFrm.add(LP.PNL_Main);
 		// lecturer_Ctrl = new LecturerController(this);
 		manegerMainFrm.repaint();
