@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.Box;
@@ -33,8 +34,10 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableModel;
 
 import entities.Lecturer;
 import Controllers.LecturerController;
@@ -60,7 +63,30 @@ ListSelectionListener, KeyListener {
 	private ManagerController manager;
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
+	
+	
+	
 	private Map<Integer, Lecturer>  ArrayLecturer;
+	private TableModel lstModel;
+	private Object[][] tableData={
+			{"8:00-9:00", null, null, null, null, null, null},
+			{"9:00-10:00", null, null, null, null, null, null},
+			{"10:00-11:00", null, null, null, null, null, null},
+			{"11:00-12:00", null, null, null, null, null, null},
+			{"12:00-13:00", null, null, null, null, null, null},
+			{"13:00-14:00", null, null, null, null, null, null},
+			{"14:00-15:00", null, null, null, null, null, null},
+			{"15:00-16:00", null, null, null, null, null, null},
+			{"16:00-17:00", null, null, null, null, null, null},
+			{"17:00-18:00", null, null, null, null, null, null},
+			{"18:00-19:00", null, null, null, null, null, null},
+			{"19:00-20:00", null, null, null, null, null, null},
+			{"20:00-21:00", null, null, null, null, null, null},
+			{"21:00-22:00", null, null, null, null, null, null},
+		};
+	private	String columnNames[]={"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
+	
+	
 	
 	/**
 	 * Create the panel.
@@ -181,44 +207,41 @@ ListSelectionListener, KeyListener {
 		tableLecturermanu.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableLecturermanu.setBackground(SystemColor.inactiveCaption);
 		tableLecturermanu.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableLecturermanu.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"8:00-9:00", null, null, null, null, null, null},
-				{"9:00-10:00", null, null, null, null, null, null},
-				{"10:00-11:00", null, null, null, null, null, null},
-				{"11:00-12:00", null, null, null, null, null, null},
-				{"12:00-13:00", null, null, null, null, null, null},
-				{"13:00-14:00", null, null, null, null, null, null},
-				{"14:00-15:00", null, null, null, null, null, null},
-				{"15:00-16:00", null, null, null, null, null, null},
-				{"16:00-17:00", null, null, null, null, null, null},
-				{"17:00-18:00", null, null, null, null, null, null},
-				{"18:00-19:00", null, null, null, null, null, null},
-				{"19:00-20:00", null, null, null, null, null, null},
-				{"20:00-21:00", null, null, null, null, null, null},
-				{"21:00-22:00", null, null, null, null, null, null},
-			},
-			new String[] {
-				"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
-			}
-		) {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
-			Class[] columnTypes = new Class[] {
-				String.class, Object.class, String.class, Object.class, Object.class, Object.class, Object.class
-			};
-			public Class getColumnClass(int columnIndex) {
-				return columnTypes[columnIndex];
-			}
-			boolean[] columnEditables = new boolean[] {
-				false, true, true, true, true, true, true
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
+	
+		
+		lstModel= new AbstractTableModel() {
+			public String getColumnName(int col) {
+		        return columnNames[col].toString();
+		    }
+		    public int getRowCount() { return tableData.length; }
+		    public int getColumnCount() { return columnNames.length; }
+		    public Object getValueAt(int row, int col) {
+		        return tableData[row][col];
+		    }
+		    public boolean isCellEditable(int row, int col)
+		        {  if ((col < 1 )) 
+		            return false;
+		              else {
+		            return true;
+		         		        
+		        } }
+		    public void setValueAt(Object value, int row, int col) {
+		    	tableData[row][col] = value;
+		        fireTableCellUpdated(row, col);
+		    }
+		    @Override  
+		      public Class getColumnClass(int col) {  
+		        if (col == 1)       //second column accepts only Integer values  
+		            return String.class;  
+		        else return Object.class;  //other columns accept String values  
+		    } 
+		    
+		  
+		};
+		
+		tableLecturermanu.setModel(lstModel);
+		
+	
 		for (int x = 0;x<6;x++) {
 		tableLecturermanu.getColumnModel().getColumn(x).setResizable(false);
 		
@@ -234,14 +257,19 @@ ListSelectionListener, KeyListener {
 		select.addItem("Avoid");
 		select.addItem("prefr");
 		select.addItem("N\\A");
+		
 		select.setEnabled(true);
 		select.setVisible(true);
 		select.setBackground(Color.RED);
 		select.getEditor().getEditorComponent().setBackground(Color.yellow);
 		select.getEditor().getEditorComponent().setForeground(Color.PINK);
+		
+		
+		DefaultCellEditor CmbTableModel=new DefaultCellEditor(select) ;
+		
 		for (int x = 1;x<6;x++) {
 			//tableLecturermanu.getColumnModel().s
-		tableLecturermanu.getColumnModel().getColumn(x).setCellEditor(new DefaultCellEditor(select));
+		tableLecturermanu.getColumnModel().getColumn(x).setCellEditor(CmbTableModel);
         		}
 		return tableLecturermanu;
 	}
@@ -297,10 +325,10 @@ ListSelectionListener, KeyListener {
 
 	public void setLecturers(ArrayList<Lecturer> arrayList) {
 		//ArrayLecturer=arrayList;
-		
+		ArrayLecturer=new HashMap<Integer, Lecturer>();
 		for (int i = 0; i < arrayList.size(); i++) {
 			ArrayLecturer.put(arrayList.get(i).getID(), arrayList.get(i));
-			cmbxlecturer .addItem(ArrayLecturer.get(i).getID() + ":"+ ArrayLecturer.get(i).getName());
+			cmbxlecturer .addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());
 			for (int j=0;j<72;j++){
 				
 				

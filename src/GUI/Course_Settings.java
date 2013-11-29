@@ -137,7 +137,8 @@ ListSelectionListener,FocusListener, KeyListener {
 		{null, null, null},
 		{null, null, null},
 		{null, null, null},
-		{null, null, null},};;
+		{null, null, null},
+		};
 	private TableModel lstModel;
 	private JTableHeader head;
 	private ArrayList<Faculty> arrayFaculty;
