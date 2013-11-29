@@ -90,6 +90,7 @@ import entities.Faculty;
 import entities.Lecturer;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
+import java.awt.event.KeyAdapter;
 /*/JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
 lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
 lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
@@ -233,12 +234,14 @@ ListSelectionListener, KeyListener {
 			        if (col == 1)       //second column accepts only Integer values  
 			            return Integer.class;  
 			        else return Object.class;  //other columns accept String values  
-			    }  
+			    } 
+			    
 			  
 			};
 				
 			
 		table = new JTable(tableData,columnNames);
+	
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
