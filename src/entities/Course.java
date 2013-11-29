@@ -20,7 +20,8 @@ public class Course implements Serializable {
 	private int semester;
 	private int academicHours;
 	private boolean hasadditionalInfo;
-	private int capacity;
+	private int EstimationOfStudentsNum;
+	
 	public Course(int studentNumber, int courseID, String description,
 			int faculty, int semester, int academicHours) {
 		this.studentNumber = studentNumber;
@@ -34,7 +35,22 @@ public class Course implements Serializable {
 		CourseLecturers = new ArrayList<Lecturer>();
 		hasadditionalInfo = false;
 	}
+	
+	public Course(int studentNumber, int courseID, String description,
+			int faculty, int semester, int academicHours, int EstimationOfStudentsNum) {
+		this.studentNumber = studentNumber;
+		this.courseID = courseID;
+		this.description = description;
+		this.faculty = faculty;
+		this.semester = semester;
+		this.setAcademicHours(academicHours);
+		this.EstimationOfStudentsNum = EstimationOfStudentsNum;
 
+		setStudyAids(new ArrayList<StudyAids>());
+		CourseLecturers = new ArrayList<Lecturer>();
+		hasadditionalInfo = false;
+	}
+	
 	public Course() {
 
 		setStudyAids(new ArrayList<StudyAids>());
@@ -158,11 +174,11 @@ public class Course implements Serializable {
 	}
 
 	public int getCapacity() {
-		return capacity;
+		return EstimationOfStudentsNum;
 	}
 
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
+	public void setCapacity(int EstimationOfStudentsNum) {
+		this.EstimationOfStudentsNum = EstimationOfStudentsNum;
 	}
 
 }

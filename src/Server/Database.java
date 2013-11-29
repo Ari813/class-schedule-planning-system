@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Map;
+
 import entities.Building;
 import entities.Campus;
 import entities.Class;
@@ -253,7 +255,7 @@ public class Database {
 		while (qrs.next()) {
 			crs = new Course(qrs.getInt("Capacity"), qrs.getInt("CourseID"),
 					qrs.getString("Description"), qrs.getInt("Faculty"),
-					qrs.getInt("Semester"), qrs.getInt("AcademicHours"));
+					qrs.getInt("Semester"), qrs.getInt("AcademicHours"), qrs.getInt("EstimationOfStudentsNum"));
 			if (additionalInfo) {
 				/* Add study aids */
 				query = new String(
@@ -526,5 +528,11 @@ public class Database {
 
 		}
 		return newClass;
+	}
+
+	public boolean UpdateEstimatedStudentsNumPerClass(Map<Integer, ArrayList<Course>> coursePerFucultyMap) {
+		String query;
+		
+		return false;
 	}
 }
