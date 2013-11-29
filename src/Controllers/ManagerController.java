@@ -6,8 +6,6 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import org.omg.CORBA.INTERNAL;
-
 import entities.Building;
 import entities.Campus;
 import entities.Class;
@@ -38,8 +36,6 @@ public class ManagerController {
 	final public static int EDITCLASSGUI = 20;
 	final public static int EDITCOURSGUI = 21;
 
-	
-	
 	private Lecturer_Preferences LP;
 	private Automatic_Sheduling AS;
 	private Course_Settings CS;
@@ -83,25 +79,11 @@ public class ManagerController {
 	public void Load_Lecturer_Preferences(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
 		LP = new Lecturer_Preferences(null, this);
-		LP.setLecturers(getAvailableLecturers2());
-		
 		manegerMainFrm.add(LP.PNL_Main);
 		// lecturer_Ctrl = new LecturerController(this);
 		manegerMainFrm.repaint();
 	}
 
-	
-	private ArrayList<Lecturer> getAvailableLecturers2() {
-		{
-			GetAllLecturersPack studyAvailableLecturers = new GetAllLecturersPack();
-			studyAvailableLecturers.setAdditionalInfo(getInformation.schedual);
-			client.handleMessageFromClientUI(studyAvailableLecturers);
-			studyAvailableLecturers = (GetAllLecturersPack) client.getMessage();
-		
-			return (studyAvailableLecturers.getAllLecturers());
-			
-		}
-	}
 	public void Load_Automatic_Sheduling(JPanel Panel2Close) {
 
 		manegerMainFrm.remove(Panel2Close);
@@ -117,22 +99,23 @@ public class ManagerController {
 		ECRS = new Edit_Course(this);
 		ECRS.setCourses(getCourse());
 		ECRS.setFaculty(getFaculty());
-		ECRS.setAvailableLecturers(getAvailableLecturers());
+		ECRS.setAvailableLecturers(getAvailableLecturers(getInformation.nothing));
 		ECRS.setStudyAids(GetClassAids());
 		ECRS.setdefault();
 		
 		manegerMainFrm.add(ECRS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
-	
 
+
+
+	private ArrayList<Lecturer> getAvailableLecturers(getInformation additionalInfo) {
+		GetAllLecturersPack AvailableLecturers = new GetAllLecturersPack();
+		AvailableLecturers.setAdditionalInfo(additionalInfo);
+		client.handleMessageFromClientUI(AvailableLecturers);
+		AvailableLecturers = (GetAllLecturersPack) client.getMessage();
 	
-	private ArrayList<Lecturer> getAvailableLecturers() {
-		GetAllLecturersPack studyAvailableLecturers = new GetAllLecturersPack();
-		client.handleMessageFromClientUI(studyAvailableLecturers);
-		studyAvailableLecturers = (GetAllLecturersPack) client.getMessage();
-	
-		return (studyAvailableLecturers.getAllLecturers());
+		return (AvailableLecturers.getAllLecturers());
 		
 	}
 
@@ -170,7 +153,7 @@ public class ManagerController {
 
 		manegerMainFrm.remove(Panel2Close);
 		EL = new Edit_Lecturer(this);
-		EL.setLec(getAvailableLecturers());
+		EL.setLec(getAvailableLecturers(getInformation.courses));
 		EL.setcourse(getCourse());
 		manegerMainFrm.add(EL.PNL_Main);
 		manegerMainFrm.repaint();
