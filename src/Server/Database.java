@@ -321,10 +321,9 @@ public class Database {
 	public ArrayList<Lecturer> getAllLecturers(getInformation additionalInfo)
 			throws SQLException {
 		ResultSet qrs = null;
-	
+
 		ArrayList<Lecturer> LecturerArray = new ArrayList<Lecturer>();
 		Lecturer lec;
-		
 
 		String query = new String("SELECT * FROM `csps-db`.lecturer;");
 		st = conn.createStatement();
@@ -365,15 +364,15 @@ public class Database {
 		st = conn.createStatement();
 
 		SchedualQrs = st.executeQuery(query);
-		while (SchedualQrs.next()) 
-			schedualArray[SchedualQrs.getInt("TimeArrayIndex")]=SchedualQrs.getInt("Pref");
+		while (SchedualQrs.next())
+			schedualArray[SchedualQrs.getInt("TimeArrayIndex")] = SchedualQrs
+					.getInt("Pref");
 		lec.setPreferedSchedualArray(schedualArray);
 		lec.setHasSchedualInfo();
 		return lec;
 	}
 
-	private Lecturer getLecturersCourses(Lecturer lec) throws SQLException
-	{
+	private Lecturer getLecturersCourses(Lecturer lec) throws SQLException {
 		ResultSet CoursesQrs = null;
 		Course crs;
 		String query = new String(
@@ -390,7 +389,7 @@ public class Database {
 		}
 		return lec;
 	}
-	
+
 	public Lecturer newLecturer(Lecturer newLecturer) throws SQLException {
 		String query;
 		query = new String(
@@ -603,6 +602,26 @@ public class Database {
 				st = conn.createStatement();
 				st.executeUpdate(query);
 			}
+		}
+		return true;
+	}
+
+	public boolean UpdateLecturersPreferences(ArrayList<Lecturer> allLecturers)
+			throws SQLException {
+		String query = null;
+		Lecturer lecturer;
+		for (int i = 0; i < allLecturers.size(); i++) {
+			lecturer = allLecturers.get(i);
+			for (int j = 0; j < lecturer.getPreferedSchedualArray().length; j++) {
+				query = new String(
+						"UPDATE `csps-db`.`LecturerPref` SET `Pref`='"
+								+ lecturer.getPreferedSchedualArray()[j]
+								+ "' WHERE `LecturerID`='" + lecturer.getID()
+								+ "' and`TimeArrayIndex`='" + j + "';");
+				st = conn.createStatement();
+				st.executeUpdate(query);
+			}
+
 		}
 		return true;
 	}

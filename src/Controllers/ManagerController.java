@@ -54,22 +54,22 @@ public class ManagerController {
 	private GetAllClassesPack ClassMsg;
 	private GetAllCoursePack CourseMsg;
 	private GetAllFacultyPack FacultyMsg;
+
 	public ManagerController(Main_Frame mainFrm, ChatClient client) {
 		this.client = client;
 		manegerMainFrm = mainFrm;
 		main = new Main_Menu(NOT_MAGI, this);
 		manegerMainFrm.add(main.PNL_Main);
 	}
-/*
-	public void handleManagerGUI(int operation) {
-		switch (operation) {
-		case EXIT:// logout
 
-			break;
-
-		}
-	}
-*/
+	/*
+	 * public void handleManagerGUI(int operation) { switch (operation) { case
+	 * EXIT:// logout
+	 * 
+	 * break;
+	 * 
+	 * } }
+	 */
 	public void BacktoMainMenu(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
 		manegerMainFrm.add(main.PNL_Main);
@@ -94,7 +94,7 @@ public class ManagerController {
 
 	// //////////////
 	public void Load_Edit_Course(JPanel Panel2Close) {
-		
+
 		manegerMainFrm.remove(Panel2Close);
 		ECRS = new Edit_Course(this);
 		ECRS.setCourses(getCourse());
@@ -102,25 +102,24 @@ public class ManagerController {
 		ECRS.setAvailableLecturers(getAvailableLecturers(getInformation.nothing));
 		ECRS.setStudyAids(GetClassAids());
 		ECRS.setdefault();
-		
+
 		manegerMainFrm.add(ECRS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
 
-
-
-	private ArrayList<Lecturer> getAvailableLecturers(getInformation additionalInfo) {
+	private ArrayList<Lecturer> getAvailableLecturers(
+			getInformation additionalInfo) {
 		GetAllLecturersPack AvailableLecturers = new GetAllLecturersPack();
 		AvailableLecturers.setAdditionalInfo(additionalInfo);
 		client.handleMessageFromClientUI(AvailableLecturers);
 		AvailableLecturers = (GetAllLecturersPack) client.getMessage();
-	
+
 		return (AvailableLecturers.getAllLecturers());
-		
+
 	}
 
 	private ArrayList<Faculty> getFaculty() {
-		
+
 		FacultyMsg = new GetAllFacultyPack();
 		client.handleMessageFromClientUI(FacultyMsg);
 		FacultyMsg = (GetAllFacultyPack) client.getMessage();
@@ -128,7 +127,7 @@ public class ManagerController {
 	}
 
 	private ArrayList<Course> getCourse() {
-		
+
 		CourseMsg = new GetAllCoursePack();
 		CourseMsg.setAdditionalInfo();
 		client.handleMessageFromClientUI(CourseMsg);
@@ -140,15 +139,14 @@ public class ManagerController {
 
 		manegerMainFrm.remove(Panel2Close);
 		// /load all we need
-		
+
 		CS = new Course_Settings(this);
 		CS.setFaculty(getFaculty());
 		CS.setCourse(getCourse());
 		manegerMainFrm.add(CS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
-	
-	
+
 	public void Load_Edit_Lecturer(JPanel Panel2Close) {
 
 		manegerMainFrm.remove(Panel2Close);
@@ -158,17 +156,17 @@ public class ManagerController {
 		manegerMainFrm.add(EL.PNL_Main);
 		manegerMainFrm.repaint();
 	}
-	
+
 	public void Load_Edit_Class(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);
 
 		ECLSS.setClasses(GetClasses());
-		
+
 		ECLSS.setClassStudyAids(GetClassAids());
 		ECLSS.setCampus(getCampuses());
 		ECLSS.setBuilding(getBuildings());
-	//	ECLSS.setAidsForExistingClasses(GetAidsForExistingClasses());
+		// ECLSS.setAidsForExistingClasses(GetAidsForExistingClasses());
 		manegerMainFrm.add(ECLSS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
@@ -210,27 +208,25 @@ public class ManagerController {
 		return (BuildingMsg.getAllBuildings());
 	}
 
-	
+	public Course CreateNewCourse(Course newCourse) {
 
-public Course CreateNewCourse(Course newCourse){
-	
-	NewCoursePack NewCourseMsg = new NewCoursePack();
-	NewCourseMsg.setNewCourse(newCourse);
-	client.handleMessageFromClientUI(NewCourseMsg);
-	NewCourseMsg = (NewCoursePack) client.getMessage();
-	
-	return NewCourseMsg.getNewCourse();
-}
+		NewCoursePack NewCourseMsg = new NewCoursePack();
+		NewCourseMsg.setNewCourse(newCourse);
+		client.handleMessageFromClientUI(NewCourseMsg);
+		NewCourseMsg = (NewCoursePack) client.getMessage();
 
-public Course UpdateNewCourse(Course newCourse){
-	
-	UpdateCoursePack updateCourseMsg = new UpdateCoursePack();
-	updateCourseMsg.setNewCourse(newCourse);
-	client.handleMessageFromClientUI(updateCourseMsg);
-	updateCourseMsg = (UpdateCoursePack) client.getMessage();
-	
-	return updateCourseMsg.getNewCourse();
-}
+		return NewCourseMsg.getNewCourse();
+	}
+
+	public Course UpdateNewCourse(Course newCourse) {
+
+		UpdateCoursePack updateCourseMsg = new UpdateCoursePack();
+		updateCourseMsg.setNewCourse(newCourse);
+		client.handleMessageFromClientUI(updateCourseMsg);
+		updateCourseMsg = (UpdateCoursePack) client.getMessage();
+
+		return updateCourseMsg.getNewCourse();
+	}
 
 	public void Load_Manual_Sheduling(JPanel Panel2Close) {
 
@@ -245,18 +241,37 @@ public Course UpdateNewCourse(Course newCourse){
 		manegerMainFrm.handleLogoutGUI();
 
 	}
+
 	public boolean saveCoureSet(Map<Integer, ArrayList<Course>> coursePerFuculty) {
-		//UpdateEstimatedStudentsNumPerClassPack 
+		// UpdateEstimatedStudentsNumPerClassPack
 		System.out.print("aaaaaaaaaaaa");
 		UpdateEstimatedStudentsNumPerClassPack updateMsg = new UpdateEstimatedStudentsNumPerClassPack();
 		updateMsg.setCoursePerFucultyMap(coursePerFuculty);
 		client.handleMessageFromClientUI(updateMsg);
 		System.out.print("bbbbbbbbbbbb");
-		updateMsg = (UpdateEstimatedStudentsNumPerClassPack) client.getMessage();
+		updateMsg = (UpdateEstimatedStudentsNumPerClassPack) client
+				.getMessage();
 		System.out.print("ccccccccccccc");
-		return(updateMsg.isSucceed()) ;
-		
-		
+		return (updateMsg.isSucceed());
+
+	}
+
+	public Lecturer CreateNewLecturer(Lecturer newLecturer) {
+		NewLecturerPack NewLecturerMsg = new NewLecturerPack();
+		NewLecturerMsg.setNewLecturer(newLecturer);
+		client.handleMessageFromClientUI(NewLecturerMsg);
+		NewLecturerMsg = (NewLecturerPack) client.getMessage();
+
+		return NewLecturerMsg.getNewLecturer();
+	}
+
+	public Lecturer UpdateNewLecturer(Lecturer newLecturer) {
+		UpdateLecturerPack NewLecturerMsg = new UpdateLecturerPack();
+		NewLecturerMsg.setNewLecturer(newLecturer);
+		client.handleMessageFromClientUI(NewLecturerMsg);
+		NewLecturerMsg = (UpdateLecturerPack) client.getMessage();
+
+		return NewLecturerMsg.getNewLecturer();
 	}
 
 }

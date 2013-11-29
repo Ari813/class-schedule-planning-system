@@ -124,9 +124,34 @@ public class EchoServer extends AbstractServer {
 		case UpdateEstimatedStudentsNumPerClass:
 			updateEstimatedStudentsNumPerClass(msgpck, client);
 			break;
+			
+		case UpdateLecturersPreferences:
+			UpdateLecturersPreferences(msgpck, client);
+			break;
 		default:
 			break;
 
+		}
+	}
+
+	private void UpdateLecturersPreferences(MessagePack msg,
+			ConnectionToClient client) {
+		UpdateLecturersPreferencesPack lecturersArr = (UpdateLecturersPreferencesPack) msg;
+
+		try {
+			if (db.UpdateLecturersPreferences(lecturersArr.getAllLecturers()))
+				lecturersArr.setSucceed();
+			else
+				lecturersArr.setFailed();
+		} catch (SQLException e1) {
+			lecturersArr.setFailed();
+		}
+
+		try {
+			client.sendToClient(lecturersArr);
+		} catch (IOException e) {
+
+			e.printStackTrace();
 		}
 	}
 

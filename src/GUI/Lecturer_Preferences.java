@@ -227,8 +227,7 @@ ListSelectionListener, KeyListener {
 		        } }
 		    public void setValueAt(Object value, int row, int col) {
 		    	
-		    	
-		    	dfs
+		
 		    	tableData[row][col] = value;
 		       // fireTableCellUpdated(row, col);
 		    }
