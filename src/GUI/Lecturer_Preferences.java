@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.Map;
 
 import javax.swing.Box;
 import javax.swing.DefaultCellEditor;
@@ -34,6 +36,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 
+import entities.Lecturer;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 
@@ -57,6 +60,7 @@ ListSelectionListener, KeyListener {
 	private ManagerController manager;
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
+	private Map<Integer, Lecturer>  ArrayLecturer;
 	
 	/**
 	 * Create the panel.
@@ -251,7 +255,9 @@ ListSelectionListener, KeyListener {
 			{
 			    for(int j = 1 ; j < columns ; j++)
 			    {
+			    	
 			    	TableCellEditor tce = tableLecturermanu.getCellEditor(i, j);
+			    	
 			    	//tableLecturermanu.getSelectedRow(1);
 			    	System.out.println("Default " + i + "-" + j + " Selection: " + tce.getCellEditorValue());
 			    	System.out.println(tableLecturermanu.getModel().getValueAt(i, j));
@@ -288,6 +294,25 @@ ListSelectionListener, KeyListener {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public void setLecturers(ArrayList<Lecturer> arrayList) {
+		//ArrayLecturer=arrayList;
+		
+		for (int i = 0; i < arrayList.size(); i++) {
+			ArrayLecturer.put(arrayList.get(i).getID(), arrayList.get(i));
+			cmbxlecturer .addItem(ArrayLecturer.get(i).getID() + ":"+ ArrayLecturer.get(i).getName());
+			for (int j=0;j<72;j++){
+				
+				
+			}
+		}
+		
+		
+		
+		
+	}
+
+	
 	
 	//int[]because every entry will store {cellX,cellY}	public void something(){
 	

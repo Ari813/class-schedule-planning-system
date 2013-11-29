@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.omg.CORBA.INTERNAL;
+
 import entities.Building;
 import entities.Campus;
 import entities.Class;
@@ -35,6 +37,8 @@ public class ManagerController {
 	final public static int EDITCLASSGUI = 20;
 	final public static int EDITCOURSGUI = 21;
 
+	
+	
 	private Lecturer_Preferences LP;
 	private Automatic_Sheduling AS;
 	private Course_Settings CS;
@@ -78,11 +82,25 @@ public class ManagerController {
 	public void Load_Lecturer_Preferences(JPanel Panel2Close) {
 		manegerMainFrm.remove(Panel2Close);
 		LP = new Lecturer_Preferences(null, this);
+		LP.setLecturers(getAvailableLecturers2());
+		
 		manegerMainFrm.add(LP.PNL_Main);
 		// lecturer_Ctrl = new LecturerController(this);
 		manegerMainFrm.repaint();
 	}
 
+	
+	private ArrayList<Lecturer> getAvailableLecturers2() {
+		{
+			GetAllLecturersPack studyAvailableLecturers = new GetAllLecturersPack();
+			studyAvailableLecturers.setAdditionalInfo();
+			client.handleMessageFromClientUI(studyAvailableLecturers);
+			studyAvailableLecturers = (GetAllLecturersPack) client.getMessage();
+		
+			return (studyAvailableLecturers.getAllLecturers());
+			
+		}
+	}
 	public void Load_Automatic_Sheduling(JPanel Panel2Close) {
 
 		manegerMainFrm.remove(Panel2Close);
@@ -105,9 +123,9 @@ public class ManagerController {
 		manegerMainFrm.add(ECRS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
+	
 
-
-
+	
 	private ArrayList<Lecturer> getAvailableLecturers() {
 		GetAllLecturersPack studyAvailableLecturers = new GetAllLecturersPack();
 		client.handleMessageFromClientUI(studyAvailableLecturers);
