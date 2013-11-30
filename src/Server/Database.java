@@ -222,7 +222,7 @@ public class Database {
 			cls.setClassID(qrs.getInt("ClassID"));
 			cls.setCapcity(qrs.getInt("Capacity"));
 			cls.setCampus(qrs.getInt("Campus"));
-			cls.setAvailable(qrs.getBoolean("Available"));
+			cls.setAvailable(qrs.getInt("Available"));
 			cls.setDescription(qrs.getString("Description"));
 			query = new String(
 					"SELECT * FROM `csps-db`.classaids ca where ca.ClassBuilding = "
@@ -549,7 +549,7 @@ public class Database {
 				+ newClass.getCapcity() + "', `Campus`='"
 				+ newClass.getCampus() + "', `Description`='"
 				+ newClass.getDescription() + "', `Available`='"
-				+ newClass.getAvailable() + "' WHERE `ClassBuilding`='"
+				+ newClass.getAvailableInt() + "' WHERE `ClassBuilding`='"
 				+ newClass.getBuilding() + "' and`ClassID`='"
 				+ newClass.getClassID() + "';");
 
