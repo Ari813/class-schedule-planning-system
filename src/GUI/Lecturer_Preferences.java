@@ -333,25 +333,34 @@ ListSelectionListener, KeyListener {
 	//	ArrayLecturer=new HashMap<Integer, Lecturer>();
 		for (int i = 0; i < arrayList.size(); i++) {
 	//		ArrayLecturer.put(arrayList.get(i).getID(), arrayList.get(i));
-			cmbxlecturer.addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());
-			for (int hour=0;hour<14;hour++){
-				for (int day=1;day<7;day++){
-					int tmp=(day-1)*14+hour;
-					//tableLecturermanu.getModel().setValueAt(arrayList.get(i).getPreferedSchedualArray()[tmp], hour, day);
-					tableLecturermanu.getModel().setValueAt("n/a" , hour, day);
-				}
-				
-				
-			}
-		}
-		
-		
-		
-		
-	}
+			cmbxlecturer.addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());}
+			}		
+	
 
-	
-	
+	public void insertToTable(int i){
+	for (int hour=0;hour<14;hour++){
+		for (int day=1;day<7;day++){
+			int tmp=(day-1)*14+hour;
+			switch(ArrayLecturer.get(i).getPreferedSchedualArray()[tmp]){
+			
+			case 0:
+					
+			tableLecturermanu.getModel().setValueAt("Avoid", hour, day);
+			break;
+			case 1:
+				
+				tableLecturermanu.getModel().setValueAt("prefr", hour, day);
+				break;
+			case 2:
+				
+				tableLecturermanu.getModel().setValueAt("N\\A", hour, day);
+				break;
+			default:
+				
+				
+			}}
 	//int[]because every entry will store {cellX,cellY}	public void something(){
+	
+}}
 	
 }
