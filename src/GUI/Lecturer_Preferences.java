@@ -342,8 +342,8 @@ ListSelectionListener, KeyListener {
 	
 
 	public void insertToTable(int i){
-	for (int hour=0;hour<Settings.weekHours;hour++){
 		for (int day=1;day<Settings.workingDays-1;day++){
+			for (int hour=0;hour<Settings.weekHours;hour++){
 			int tmp=(day-1)*14+hour;
 			switch(ArrayLecturer.get(i).getPreferedSchedualArray()[tmp]){
 			
