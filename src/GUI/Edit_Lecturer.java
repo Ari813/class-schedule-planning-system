@@ -478,7 +478,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 
 		{
 			ArrayLecturer = arrayList;
-
+			cmbxLecturerEditor.removeAll();
 			for (int i = 0; i < arrayList.size(); i++) {
 				cmbxLecturerEditor.addItem(ArrayLecturer.get(i).getID() + ":"
 						+ ArrayLecturer.get(i).getName());
