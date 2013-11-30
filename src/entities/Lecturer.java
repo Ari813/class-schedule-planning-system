@@ -152,6 +152,15 @@ public class Lecturer extends User implements Serializable {
 	public void setPreferedSchedualArray(int[] preferedSchedualArray) {
 		this.preferedSchedualArray = preferedSchedualArray;
 	}
+	
+	public int setPreferedSchedualHour(int index, int selectedPref)
+	{
+		if (selectedPref<0 || selectedPref>3 || preferedSchedualArray == null)
+			return -1;
+		
+		preferedSchedualArray[index]=selectedPref;
+		return 0;
+	}
 
 	/**
 	 * @return the hasSchedualInfo
