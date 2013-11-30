@@ -276,7 +276,7 @@ ListSelectionListener, KeyListener {
 		
 		CmbTableModel=new DefaultCellEditor(select) ;
 		
-		for (int x = 1;x<6;x++) {
+		for (int x = 1;x<=6;x++) {
 			//tableLecturermanu.getColumnModel().s
 		tableLecturermanu.getColumnModel().getColumn(x).setCellEditor(CmbTableModel);
         		}
@@ -287,6 +287,9 @@ ListSelectionListener, KeyListener {
 			
 		if (e.getSource() == cmbxlecturer) {
 		//	if (cmbxlecturer.getSelectedIndex()>0)
+			//Color randomColor = new Color(cmbxlecturer.getSelectedIndex()*4,130+cmbxlecturer.getSelectedIndex()*6, 3*(cmbxlecturer.getSelectedIndex()+50));
+		//	tableLecturermanu.setBackground(randomColor);
+		
 			saveToArray();
 			insertToTable(cmbxlecturer.getSelectedIndex()-1);
 			
@@ -375,10 +378,12 @@ ListSelectionListener, KeyListener {
 			case Settings.selection_available:
 					
 			tableLecturermanu.getModel().setValueAt("available", hour, day);
+			
 			break;
 			case Settings.selection_prefered:
 				
 				tableLecturermanu.getModel().setValueAt("prefr", hour, day);
+				
 				break;
 			case Settings.selection_not_available:
 				
