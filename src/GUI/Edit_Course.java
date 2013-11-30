@@ -535,7 +535,9 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 		if (e.getSource() == btnSave) {
 
+			
 			Course newCourse = new Course();
+			
 			newCourse.setCourseID(Integer.parseInt(txtIdNumber.getText()));
 			newCourse.setDescription(txtCourseName.getText());
 			newCourse.setFaculty(arrayFaculty
@@ -558,7 +560,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 			} else {
 				serverAnsCourse = manager.UpdateNewCourse(newCourse);
 			}
-
+			arrayCourse.set(cmbBxEditCourse.getSelectedIndex()-1, newCourse);
 			if (serverAnsCourse.getCourseID() == newCourse.getCourseID())
 				System.out.println("Success!!!");
 			else {
@@ -566,6 +568,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 			}
 			createNewCourse(false);
 			setdefault();
+			//manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == btnDiscard) {
 			manager.BacktoMainMenu(this.PNL_Main);
