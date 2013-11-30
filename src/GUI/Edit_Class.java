@@ -190,6 +190,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.setBounds(306, 434, 160, 29);
+		btnSaveChanges.setEnabled(false);
 		btnSaveChanges.addActionListener(this);
 		return btnSaveChanges;
 	}
@@ -425,8 +426,17 @@ public class Edit_Class extends JPanel implements ActionListener,
 				serverAns = manager.UpdateNewClass(newClass);
 			}
 
-			if (serverAns.getClassID() ==newClass.getClassID())
+			if (serverAns.getClassID() ==newClass.getClassID()){
+				if (!isNewClass){
+					arrayClasses.set(cmbxEditClass.getSelectedIndex()-1, newClass);}
+					else{
+						arrayClasses.add(newClass);
+						setClasses(arrayClasses);
+					}
+				
+				
 				System.out.println(" Success!!!");
+			}
 			else {
 				System.out.println(" Fail!!!!");
 			}
@@ -440,6 +450,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 		if (e.getSource() == btnAdd) {
 			int index;
+			if (cmbxEditClass.getSelectedIndex()!=0)
+			btnSaveChanges.setEnabled(true);
 			if ((arrayStudyAids != null) && (!arrayStudyAids.isEmpty())) {
 				if (lstClassAids.getSelectedIndex() >= 0) {
 					index = Integer.parseInt(lstClassAidsModel
@@ -452,7 +464,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		}
 		if (e.getSource() == btnRemove) {
 			int index;
-
+			if (cmbxEditClass.getSelectedIndex()!=0)
+			btnSaveChanges.setEnabled(true);
 			if ((arraySelectedStudyAids != null)
 					&& (!arraySelectedStudyAids.isEmpty())) {
 				if (lstSelectedClassaids.getSelectedIndex() >= 0) {
@@ -499,6 +512,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	private void addAids(int index) {
+		
 		arraySelectedStudyAids.put(arrayAvailableStudyAids.get(index),
 				arrayAvailableStudyAids.get(index));
 		arrayAvailableStudyAids.remove(index);
@@ -583,7 +597,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		txtClassSelectedBuildig.setText("class selected buildig");
 		chckbxAvailable.setSelected(true);
 		btnSaveChanges.setEnabled(false);
-
+	
 	}
 
 	@Override
