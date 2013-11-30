@@ -21,6 +21,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -38,9 +39,9 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
+import javax.swing.text.StyledEditorKit.BoldAction;
 
 import common.Settings;
-
 import entities.Lecturer;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
@@ -63,6 +64,7 @@ ListSelectionListener, KeyListener {
 	public JPanel PNL_Main;
 	private LecturerController lec;
 	private ManagerController manager;
+	static private int cmxindex=-1;
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
 	
@@ -184,6 +186,7 @@ ListSelectionListener, KeyListener {
 	  	cmbxlecturer.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	  	cmbxlecturer.setToolTipText("Edit class list");
 	  	cmbxlecturer.setMaximumRowCount(52);
+	  	cmbxlecturer.addActionListener(this);
 		return cmbxlecturer;
 	}
 	private JScrollPane GETscroll() {
@@ -260,7 +263,7 @@ ListSelectionListener, KeyListener {
 	
 	
 		select = new JComboBox();
-		select.addItem("Avoid");
+		select.addItem("available");
 		select.addItem("prefr");
 		select.addItem("N\\A");
 		
@@ -282,22 +285,26 @@ ListSelectionListener, KeyListener {
 
 	public void actionPerformed(ActionEvent e) {
 			
-		if (e.getSource() == btnSaveChanges) {
-			int rows = tableLecturermanu.getRowCount();
-			int columns = tableLecturermanu.getColumnCount();
-			for(int i = 1 ; i < rows ; i++)
-			{
-			    for(int j = 1 ; j < columns ; j++)
-			    {
-			    	
-			    	TableCellEditor tce = tableLecturermanu.getCellEditor(i, j);
-			    	
-			    	//tableLecturermanu.getSelectedRow(1);
-			    	System.out.println("Default " + i + "-" + j + " Selection: " + tce.getCellEditorValue());
-			    	System.out.println(tableLecturermanu.getModel().getValueAt(i, j));
-			    }
-			}
+		if (e.getSource() == cmbxlecturer) {
+		//	if (cmbxlecturer.getSelectedIndex()>0)
+			saveToArray();
+			insertToTable(cmbxlecturer.getSelectedIndex()-1);
 			
+		}
+		
+		
+		
+		if (e.getSource() == btnSaveChanges) {
+			saveToArray();
+			Boolean tmpbool= manager.UpdateTable(ArrayLecturer);
+				
+				if (tmpbool){
+					JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
+					manager.BacktoMainMenu(this.PNL_Main);
+				}else{
+					JOptionPane.showMessageDialog(manager.manegerMainFrm, "update failed please try again");
+				}
+				
 		}
 		if (e.getSource() == btnBackToMainMenu) {
 			if (lec==null){
@@ -308,6 +315,8 @@ ListSelectionListener, KeyListener {
 			}
 		}
 	}
+	
+
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		// TODO Auto-generated method stub
@@ -337,19 +346,35 @@ ListSelectionListener, KeyListener {
 	//		ArrayLecturer.put(arrayList.get(i).getID(), arrayList.get(i));
 			cmbxlecturer.addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());
 			}
-		insertToTable(1);
+		insertToTable(-1);
 			}		
-	
+	private void saveToArray() {
+		if (cmxindex>=0){
+		for (int day=1;day<=Settings.workingDays;day++){
+			for (int hour=0;hour<Settings.dailyHours;hour++){
+			int tmp=(day-1)*14+hour;
+			String tmpstr= (String) tableLecturermanu.getModel().getValueAt(hour, day);
+			if( tmpstr.compareTo("available")==0) ArrayLecturer.get(cmxindex).setPreferedSchedualHour(tmp,Settings.selection_available );
+			if( tmpstr.compareTo("prefr")==0) ArrayLecturer.get(cmxindex).setPreferedSchedualHour(tmp,Settings.selection_prefered );
+			if( tmpstr.compareTo("N\\A")==0) ArrayLecturer.get(cmxindex).setPreferedSchedualHour(tmp,Settings.selection_not_available );
+			
+		//	tableLecturermanu.getModel().setValueAt(tableLecturermanu.getModel().getValueAt(hour, day), hour, day);
+			
+			}}}
+		
+	}
 
 	public void insertToTable(int i){
-		for (int day=1;day<Settings.workingDays-1;day++){
-			for (int hour=0;hour<Settings.weekHours;hour++){
+		cmxindex=i;
+		if (i>=0){
+		for (int day=1;day<=Settings.workingDays;day++){
+			for (int hour=0;hour<Settings.dailyHours;hour++){
 			int tmp=(day-1)*14+hour;
 			switch(ArrayLecturer.get(i).getPreferedSchedualArray()[tmp]){
 			
 			case Settings.selection_available:
 					
-			tableLecturermanu.getModel().setValueAt("Avoid", hour, day);
+			tableLecturermanu.getModel().setValueAt("available", hour, day);
 			break;
 			case Settings.selection_prefered:
 				
@@ -362,9 +387,17 @@ ListSelectionListener, KeyListener {
 			default:
 				
 				
-			}}
-	//int[]because every entry will store {cellX,cellY}	public void something(){
+			}}}
 	
-}}
+}else{
+	for (int day=1;day<=Settings.workingDays;day++){
+		for (int hour=0;hour<Settings.dailyHours;hour++){
+			tableLecturermanu.getModel().setValueAt("", hour, day);
+		
+		
+		}}	
+	
+}
+		}
 	
 }

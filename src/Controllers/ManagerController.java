@@ -275,4 +275,15 @@ public class ManagerController {
 		return NewLecturerMsg.getNewLecturer();
 	}
 
+	public boolean UpdateTable(ArrayList<Lecturer> arrayLecturer) {
+		
+		UpdateLecturersPreferencesPack NewLecturerscScheduleMsg = new UpdateLecturersPreferencesPack();
+		NewLecturerscScheduleMsg.setAllLecturers(arrayLecturer);
+		client.handleMessageFromClientUI(NewLecturerscScheduleMsg);
+		NewLecturerscScheduleMsg = (UpdateLecturersPreferencesPack) client.getMessage();
+
+		return NewLecturerscScheduleMsg.isSucceed();	
+		
+	}
+
 }
