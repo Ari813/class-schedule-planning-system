@@ -20,9 +20,7 @@ public class Lecturer extends User implements Serializable {
 	private boolean hasSchedualInfo;
 	private ArrayList<Course> LecturerCourses;
 	private int[]	preferedSchedualArray;
-	static public final int selection_prefered = 0;
-	static public final int selection_available = 1;
-	static public final int selection_not_available = 2;
+	
 
 	
 	/**

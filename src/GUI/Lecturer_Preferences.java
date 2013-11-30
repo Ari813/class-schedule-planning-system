@@ -39,6 +39,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 
+import common.Settings;
+
 import entities.Lecturer;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
@@ -333,25 +335,27 @@ ListSelectionListener, KeyListener {
 	//	ArrayLecturer=new HashMap<Integer, Lecturer>();
 		for (int i = 0; i < arrayList.size(); i++) {
 	//		ArrayLecturer.put(arrayList.get(i).getID(), arrayList.get(i));
-			cmbxlecturer.addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());}
+			cmbxlecturer.addItem(arrayList.get(i).getID() + ":"+ arrayList.get(i).getName());
+			}
+		insertToTable(1);
 			}		
 	
 
 	public void insertToTable(int i){
-	for (int hour=0;hour<14;hour++){
-		for (int day=1;day<7;day++){
+	for (int hour=0;hour<Settings.weekHours;hour++){
+		for (int day=1;day<Settings.workingDays-1;day++){
 			int tmp=(day-1)*14+hour;
 			switch(ArrayLecturer.get(i).getPreferedSchedualArray()[tmp]){
 			
-			case 0:
+			case Settings.selection_available:
 					
 			tableLecturermanu.getModel().setValueAt("Avoid", hour, day);
 			break;
-			case 1:
+			case Settings.selection_prefered:
 				
 				tableLecturermanu.getModel().setValueAt("prefr", hour, day);
 				break;
-			case 2:
+			case Settings.selection_not_available:
 				
 				tableLecturermanu.getModel().setValueAt("N\\A", hour, day);
 				break;
