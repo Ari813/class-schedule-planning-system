@@ -38,6 +38,7 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
@@ -283,6 +284,10 @@ ListSelectionListener, KeyListener {
 		return tableLecturermanu;
 	}
 
+
+	
+	
+	
 	public void actionPerformed(ActionEvent e) {
 			
 		if (e.getSource() == cmbxlecturer) {

@@ -14,6 +14,7 @@ import java.util.Locale;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
@@ -119,6 +120,7 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
 				null, null, null, null));
 		getContentPane().add(lblTimeTableSchedualing);
+		
 		ChooseAdmin();
 		getContentPane().repaint();
 
@@ -155,7 +157,12 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 			lgnmsg = (LoginPack) client.getMessage();
 			lgnUsr = lgnmsg.getUsr();
 			admin=lgnUsr.getLoginPermissionLevel();
+			if (admin!=-1){
 			handleLogin();
+			}else
+			JOptionPane.showMessageDialog(this, "user already logged in -for more information call  052-8-936661");
+			
+			
 		} catch (IOException exception) {
 			//Perror.pError("Can't setup connection!");
 		}
@@ -173,6 +180,7 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 	}
 
 	private void handleLogin() {
+		
 		getContentPane().remove(loginUserGUI);
 		initialize();
 		
