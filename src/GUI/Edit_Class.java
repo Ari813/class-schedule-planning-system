@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.awt.Color;
 
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -39,7 +40,6 @@ import javax.swing.DefaultComboBoxModel;
 import entities.Building;
 import entities.Campus;
 import entities.Class;
-
 import entities.StudyAids;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
@@ -401,6 +401,9 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSaveChanges) {
+			if (!txtpnCodeNumber.getText().equals("")){
+				
+			
 			Class newClass = new Class();
 			Class serverAns;
 	
@@ -430,7 +433,10 @@ public class Edit_Class extends JPanel implements ActionListener,
 			createNewClass(false);
 			setdefault();
 
-		}
+		}else
+			JOptionPane.showMessageDialog(manager.manegerMainFrm, "ClassID  not enter...");
+			
+			}
 
 		if (e.getSource() == btnAdd) {
 			int index;

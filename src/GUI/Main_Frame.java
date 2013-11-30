@@ -82,6 +82,7 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 	 * Initialize the contents of the frame.
 	 */
 	private void ChooseAdmin() {
+		admin = MANAGER;
 		if (admin == MANAGER) {
 			manger = new ManagerController(this,client);
 		} else if (admin == LECTURER) {
@@ -157,16 +158,20 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 			lgnmsg = (LoginPack) client.getMessage();
 			lgnUsr = lgnmsg.getUsr();
 			admin=lgnUsr.getLoginPermissionLevel();
+		/*/
 			if (admin==-2)
 				JOptionPane.showMessageDialog(this, "user already logged in -for more information call +972 (52) 893-6661");
 			else
 				if (admin==-1)
 			JOptionPane.showMessageDialog(this, "user/password not correct try again ");
-				else handleLogin();
+				else /*/
+				handleLogin();
 			
 		} catch (IOException exception) {
 			//Perror.pError("Can't setup connection!");
 		}
+		
+			
 
 	}
 

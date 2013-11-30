@@ -564,6 +564,12 @@ public class Edit_Course extends JPanel implements ActionListener,
 			if (serverAnsCourse.getCourseID() == newCourse.getCourseID()){
 				if(!isNewCourse)
 				arrayCourse.set(cmbBxEditCourse.getSelectedIndex()-1, newCourse);
+				else{
+					arrayCourse.add(newCourse);
+					setCourses(arrayCourse);
+					
+				
+				}
 				System.out.println("Success!!!");}
 			else {
 				System.out.println("Fail!!!!");
@@ -585,7 +591,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		txtCourseName.setEnabled(bool);
 		txtCourseName.setText("");
 
-		CB_Faculty.getModel().setSelectedItem(1);
+		//CB_Faculty.getModel().setSelectedItem(1);
 		Course_Semester.setValue(1);
 		AcademicHours.setValue(1);
 		MaxStdntPerClass.setValue(1);
@@ -649,7 +655,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	public void setdefault() {
 		txtIdNumber.setText("ID Number");
 		txtCourseName.setText("Course name");
-		CB_Faculty.setVisible(false);
+		//CB_Faculty.setVisible(false);
 		Course_Semester.setValue(0);
 		AcademicHours.setValue(0);
 		MaxStdntPerClass.setValue(0);
