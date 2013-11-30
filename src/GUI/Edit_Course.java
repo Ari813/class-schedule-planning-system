@@ -547,15 +547,10 @@ public class Edit_Course extends JPanel implements ActionListener,
 			Iterator<Integer> itr = arraySelectedLecturers.values().iterator();
 			while (itr.hasNext())
 				newCourse.addLecturer(ArrayLecturers.get(itr.next()));
-			System.out.println("total lecs = "
-					+ newCourse.getCourseLecturers().size());
 
 			itr = CrsSelectedStudyAids.values().iterator();
 			while (itr.hasNext())
 				newCourse.addStudyAids(crsStudyAids.get(itr.next()));
-
-			System.out.println("total aids = "
-					+ newCourse.getStudyAids().size());
 
 			Course serverAnsCourse;
 			if (isNewCourse) {
@@ -605,7 +600,6 @@ public class Edit_Course extends JPanel implements ActionListener,
 	}
 
 	private void addLEC(int index) {
-		System.out.print(index);
 		arraySelectedLecturers.put(ArrayAvailableLecturers.get(index),
 				ArrayAvailableLecturers.get(index));
 		ArrayAvailableLecturers.remove(index);

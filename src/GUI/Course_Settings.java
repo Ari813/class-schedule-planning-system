@@ -255,7 +255,6 @@ ListSelectionListener,FocusListener, KeyListener {
 		table.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
-				System.out.print("ss");
 					table.clearSelection();
 					
 				
@@ -438,7 +437,6 @@ ListSelectionListener,FocusListener, KeyListener {
 	public void setCourse(ArrayList<Course> course) {
 		courseSET=course;
 		ArrayList<Course> tmp=null;
-		//System.out.println(course.size());
 		CoursePerFuculty2=new HashMap<Integer, ArrayList<Course>>();
 		for(int i=0;i<course.size();i++){
 			if(!( CoursePerFuculty2.containsKey(course.get(i).getFaculty()))){
@@ -466,7 +464,7 @@ ListSelectionListener,FocusListener, KeyListener {
         if (data<0){
         	throw new java.lang.NumberFormatException();
         }
-        System.out.println(data);
+
       // tmp2= 
     	 CoursePerFuculty2.get(FacultyIndex).get(row).setCapacity(data);
       // tmp2.get(row).setCapacity(data);

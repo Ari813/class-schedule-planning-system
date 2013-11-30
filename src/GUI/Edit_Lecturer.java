@@ -505,7 +505,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 
 	// arrayCourse
 	public void setcourse(ArrayList<Course> arrayList) {
-		System.out.print(arrayList.size());
+
 		arrayCourse = new HashMap<Integer, Course>();
 		ArrayAvailableCourse = new HashMap<Integer, Integer>();
 		arraySelectedCourse = new HashMap<Integer, Integer>();
@@ -516,7 +516,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 			arrayCourse.put(arrayList.get(i).getCourseID(), arrayList.get(i));
 			lstCourseModel.addElement(arrayList.get(i).getCourseID() + ":"
 					+ arrayList.get(i).getDescription());
-			// System.out.println(lstCourseModel.getElementAt(i));
+		
 			ArrayAvailableCourse.put(arrayList.get(i).getCourseID(), arrayList
 					.get(i).getCourseID());
 		}

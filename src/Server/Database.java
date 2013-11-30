@@ -511,7 +511,7 @@ public class Database {
 					"INSERT INTO `csps-db`.`courselecturers` (`CourseID`, `LecturerID`) VALUES ('"
 							+ newLecturer.getLecturerCourses().get(i).getCourseID() + "', '"
 							+ newLecturer.getID() + "');");
-			System.out.println(query);
+
 
 			st = conn.createStatement();
 			st.executeUpdate(query);
@@ -536,7 +536,7 @@ public class Database {
 						+ "', '"
 						+ newClass.getAvailableInt() + "');");
 
-		System.out.println(query);
+
 		st = conn.createStatement();
 		st.executeUpdate(query);
 		newClass = updateClassInfo(newClass);
@@ -578,7 +578,7 @@ public class Database {
 							+ "', '"
 							+ newClass.getStudyAids().get(i).getAidsID()
 							+ "');");
-			System.out.println(query);
+
 			st = conn.createStatement();
 			st.executeUpdate(query);
 

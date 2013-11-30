@@ -606,11 +606,11 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 		txtCapacityNumber.setText("0");
 
-		cmbxcampus.setSelectedIndex(1);
+		cmbxcampus.setSelectedIndex(0);
 		cmbxcampus.setEnabled(bool);
 		cmbxcampus.setEditable(bool);
 		
-		cmbBxBlding.setSelectedIndex(1);
+		cmbBxBlding.setSelectedIndex(0);
 		cmbBxBlding.setEnabled(bool);
 		cmbBxBlding.setEditable(bool);
 		
