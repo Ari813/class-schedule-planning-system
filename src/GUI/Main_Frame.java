@@ -157,11 +157,12 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 			lgnmsg = (LoginPack) client.getMessage();
 			lgnUsr = lgnmsg.getUsr();
 			admin=lgnUsr.getLoginPermissionLevel();
-			if (admin!=-1){
-			handleLogin();
-			}else
-			JOptionPane.showMessageDialog(this, "user already logged in -for more information call  052-8-936661");
-			
+			if (admin==-2)
+				JOptionPane.showMessageDialog(this, "user already logged in -for more information call +972 (52) 893-6661");
+			else
+				if (admin==-1)
+			JOptionPane.showMessageDialog(this, "user/password not correct try again ");
+				else handleLogin();
 			
 		} catch (IOException exception) {
 			//Perror.pError("Can't setup connection!");
