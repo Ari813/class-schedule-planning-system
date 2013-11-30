@@ -534,8 +534,9 @@ public class Database {
 						+ "', '"
 						+ newClass.getDescription()
 						+ "', '"
-						+ newClass.getAvailable() + "');");
+						+ newClass.getAvailableInt() + "');");
 
+		System.out.println(query);
 		st = conn.createStatement();
 		st.executeUpdate(query);
 		newClass = updateClassInfo(newClass);
@@ -577,7 +578,7 @@ public class Database {
 							+ "', '"
 							+ newClass.getStudyAids().get(i).getAidsID()
 							+ "');");
-
+			System.out.println(query);
 			st = conn.createStatement();
 			st.executeUpdate(query);
 

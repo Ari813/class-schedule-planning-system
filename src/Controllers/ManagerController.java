@@ -275,6 +275,24 @@ public class ManagerController {
 		return NewLecturerMsg.getNewLecturer();
 	}
 
+	public Class CreateNewClass(Class newClass) {
+		NewClassPack newClassMsg = new NewClassPack();
+		newClassMsg.setNewClass(newClass);
+		client.handleMessageFromClientUI(newClassMsg);
+		newClassMsg = (NewClassPack) client.getMessage();
+
+		return newClassMsg.getNewClass();
+	}
+
+	public Class UpdateNewClass(Class newClass) {
+		UpdateClassPack newClassMsg = new UpdateClassPack();
+		newClassMsg.setNewClass(newClass);
+		client.handleMessageFromClientUI(newClassMsg);
+		newClassMsg = (UpdateClassPack) client.getMessage();
+
+		return newClassMsg.getNewClass();
+	}
+
 	public boolean UpdateTable(ArrayList<Lecturer> arrayLecturer) {
 		
 		UpdateLecturersPreferencesPack NewLecturerscScheduleMsg = new UpdateLecturersPreferencesPack();

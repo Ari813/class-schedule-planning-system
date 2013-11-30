@@ -65,7 +65,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private DefaultListModel lstClassAidsModel;
 	private DefaultListModel lstSelectedClassAidsModel;
 
-	private JTextPane txtpnCodeNumber;
+	private JTextField txtpnCodeNumber;
 	private JComboBox cmbBxBlding;
 	private JCheckBox chckbxAvailable;
 
@@ -81,8 +81,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private JLabel lblCampus;
 	private JLabel lblBilding;
 	private JLabel lblCapacity;
-	private JTextPane txtClassSelectedCampus;
-	private JTextPane txtClassSelectedBuildig;
+	private JTextField txtClassSelectedCampus;
+	private JTextField txtClassSelectedBuildig;
 
 	private Component horizontalStrut_1;
 	private Component horizontalStrut_2;
@@ -98,6 +98,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private ArrayList<Building> arrayBuilding;
 	private ArrayList<Class> arrayClasses;
 	public String txtSelectedCampus;
+	boolean isNewClass;
 
 	/**
 	 * Launch the application.
@@ -262,9 +263,10 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	private JTextField GETtxtCapacityNumber() {
 		txtCapacityNumber = new JTextField();
-		txtCapacityNumber.setEditable(false);
+		txtCapacityNumber.setEditable(true);
 		txtCapacityNumber.setText("Capacity number");
 		txtCapacityNumber.setBounds(172, 144, 100, 20);
+		txtCapacityNumber.addKeyListener(this);
 		return txtCapacityNumber;
 	}
 
@@ -283,7 +285,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		horizontalStrut_2.setBounds(0, 75, 774, 5);
 		PNL_Main.add(horizontalStrut_2);
 
-		txtClassSelectedCampus = new JTextPane();
+		txtClassSelectedCampus = new JTextField();
 		txtClassSelectedCampus.setFont(new Font("Tahoma", Font.BOLD, 11));
 		txtSelectedCampus = "class selected campus";
 		txtClassSelectedCampus.setText(txtSelectedCampus);
@@ -294,7 +296,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		txtClassSelectedCampus.setBounds(10, 323, 130, 20);
 		PNL_Main.add(txtClassSelectedCampus);
 
-		txtClassSelectedBuildig = new JTextPane();
+		txtClassSelectedBuildig = new JTextField();
 		txtClassSelectedBuildig.setFont(new Font("Tahoma", Font.BOLD, 11));
 		txtClassSelectedBuildig.setEditable(false);
 		txtClassSelectedBuildig.setToolTipText("class building");
@@ -369,15 +371,16 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return lblCode;
 	}
 
-	private JTextPane GETtxtpnCodeNumber() {
+	private JTextField GETtxtpnCodeNumber() {
 		if (txtpnCodeNumber == null) {
-			txtpnCodeNumber = new JTextPane();
+			txtpnCodeNumber = new JTextField();
 			txtpnCodeNumber.setEnabled(false);
 			txtpnCodeNumber.setEditable(false);
 			// txtpnCodeNumber.setDropMode(DropMode.ON);
 			txtpnCodeNumber.setBackground(Color.WHITE);
 			txtpnCodeNumber.setText("Code Number");
 			txtpnCodeNumber.setBounds(10, 144, 100, 20);
+			txtpnCodeNumber.addKeyListener(this);
 		}
 		return txtpnCodeNumber;
 	}
@@ -398,6 +401,35 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSaveChanges) {
+			Class newClass = new Class();
+			Class serverAns;
+	
+			newClass.setClassID(Integer.parseInt(txtpnCodeNumber.getText()));
+			newClass.setDescription(txtDescriptionText.getText());
+			newClass.setBuilding(arrayBuilding.get(cmbBxBlding.getSelectedIndex()).getBuildingID());
+			newClass.setCampus(arrayCampus.get(cmbxcampus.getSelectedIndex()).getCampusId());
+			newClass.setCapcity(Integer.parseInt(txtCapacityNumber.getText()));
+			newClass.setAvailable(chckbxAvailable.isSelected());
+
+			Iterator<Integer> stdyAidsItr = arraySelectedStudyAids.keySet().iterator();
+			while (stdyAidsItr.hasNext()) {
+				newClass.addStudyAid(arrayStudyAids.get(stdyAidsItr.next().intValue()));
+			}
+
+			if (isNewClass) {
+				serverAns = manager.CreateNewClass(newClass);
+			} else {
+				serverAns = manager.UpdateNewClass(newClass);
+			}
+
+			if (serverAns.getClassID() ==newClass.getClassID())
+				System.out.println(" Success!!!");
+			else {
+				System.out.println(" Fail!!!!");
+			}
+			createNewClass(false);
+			setdefault();
+
 		}
 
 		if (e.getSource() == btnAdd) {
@@ -427,12 +459,23 @@ public class Edit_Class extends JPanel implements ActionListener,
 			}
 		}
 		if (e.getSource() == btnNewClass) {
+			resetLists();
+			createNewClass(true);
+
+			Iterator<StudyAids> stdyaidItr = arrayStudyAids.values().iterator();
+			while (stdyaidItr.hasNext()) {
+				int tempID = stdyaidItr.next().getAidsID();
+				arrayAvailableStudyAids.put(tempID, tempID);
+				lstClassAidsModel.addElement(tempID + ":"
+						+ arrayStudyAids.get(tempID).getAidsName());
+			}
 
 		}
 		if (e.getSource() == btnDiscard) {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == cmbxEditClass) {
+			createNewClass(false);
 			setSelectedClass();
 		}
 
@@ -478,9 +521,12 @@ public class Edit_Class extends JPanel implements ActionListener,
 			txtpnCodeNumber.setText(arrayBuilding.get(
 					arrayClasses.get(index).getBuilding()).getBuildingName()
 					+ arrayClasses.get(index).getClassID());
+			btnSaveChanges.setEnabled(false);
 		}
+		
 		if (index < 0)
 			setdefault();
+		
 
 	}
 
@@ -529,7 +575,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		txtDescriptionText.setText("description text");
 		txtClassSelectedCampus.setText(txtSelectedCampus);
 		txtClassSelectedBuildig.setText("class selected buildig");
-		chckbxAvailable.setSelected(false);
+		chckbxAvailable.setSelected(true);
+		btnSaveChanges.setEnabled(false);
 
 	}
 
@@ -539,10 +586,36 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	}
 
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	public void keyReleased(KeyEvent e) {
+		if ((e.getSource() == txtpnCodeNumber)||(e.getSource() == txtCapacityNumber))
+			if (!Character.isDigit(e.getKeyChar()))
+				((JTextField) e.getSource()).setText("0");
+			else
+				btnSaveChanges.setEnabled(true);
 
+	}
+
+	private void createNewClass(boolean bool) {
+		txtpnCodeNumber.setEditable(bool);
+		txtpnCodeNumber.setEnabled(bool);
+		txtpnCodeNumber.setText("");
+
+		txtDescriptionText.setEditable(bool);
+		txtDescriptionText.setEnabled(bool);
+		txtDescriptionText.setText("");
+
+		txtCapacityNumber.setText("0");
+
+		cmbxcampus.setSelectedIndex(1);
+		cmbxcampus.setEnabled(bool);
+		cmbxcampus.setEditable(bool);
+		
+		cmbBxBlding.setSelectedIndex(1);
+		cmbBxBlding.setEnabled(bool);
+		cmbBxBlding.setEditable(bool);
+		
+
+		isNewClass = bool;
 	}
 
 	@Override
@@ -557,7 +630,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
-		
+
 		arrayStudyAids = new HashMap<Integer, StudyAids>();
 		arrayAvailableStudyAids = new HashMap<Integer, Integer>();
 		arraySelectedStudyAids = new HashMap<Integer, Integer>();
@@ -573,7 +646,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	public void setCampus(ArrayList<Campus> arrayList) {
-		
+
 		arrayCampus = arrayList;
 		for (int i = 0; i < arrayCampus.size(); i++) {
 			cmbxcampus.addItem(arrayCampus.get(i).getCampusId() + ":"

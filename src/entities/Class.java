@@ -28,9 +28,24 @@ public class Class implements Serializable {
 	public Boolean getAvailable() {
 		return available;
 	}
+	
+	public int getAvailableInt() {
+		if (available)
+			return 1;
+		else 
+			return 0;
+	}
 
 	public void setAvailable(Boolean available) {
 		this.available = available;
+	}
+	
+	public void setAvailable(int available) {
+		if (available==1)
+			this.available = true;
+		else 
+			this.available = false;	
+		
 	}
 
 	public ArrayList<StudyAids> getStudyAids() {

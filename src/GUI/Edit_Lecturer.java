@@ -321,7 +321,6 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 			}
 		}
 		if (e.getSource() == btnNewLecturer) {
-			isNewLecturer = true;
 			resetListslec();
 			createNewLecturer(true);
 
