@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
+import common.Settings;
+
 import MsgPackage.GetAllLecturersPack.getInformation;
 import entities.Building;
 import entities.Campus;
@@ -357,7 +359,7 @@ public class Database {
 
 	private Lecturer getLecturersSchedual(Lecturer lec) throws SQLException {
 		ResultSet SchedualQrs = null;
-		int schedualArray[] = new int[72];
+		int schedualArray[] = new int[Settings.weekHours];
 		String query = new String(
 				"SELECT * FROM `csps-db`.LecturerPref where LecturerID="
 						+ lec.getID() + ";");
@@ -408,7 +410,7 @@ public class Database {
 	private Lecturer createNewLecturerPreferences(Lecturer newLecturer)
 			throws SQLException {
 		String query;
-		for (int i = 0; i < 72; i++) {
+		for (int i = 0; i < Settings.weekHours; i++) {
 			query = new String(
 					"INSERT INTO `csps-db`.`LecturerPref` (`LecturerID`, `TimeArrayIndex`, `Pref`) VALUES ('"
 							+ newLecturer.getID() + "', '" + i + "', '0');");

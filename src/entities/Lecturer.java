@@ -9,6 +9,8 @@ package entities;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import common.Settings;
+
 public class Lecturer extends User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -21,6 +23,8 @@ public class Lecturer extends User implements Serializable {
 	static public final int selection_prefered = 0;
 	static public final int selection_available = 1;
 	static public final int selection_not_available = 2;
+
+	
 	/**
 	 * constructor
 	 * 
@@ -41,7 +45,7 @@ public class Lecturer extends User implements Serializable {
 		this.position = position;
 		this.assignmentYear = assignmentYear;
 		LecturerCourses= new ArrayList<Course>();
-		preferedSchedualArray = new int[72];
+		preferedSchedualArray = new int[Settings.weekHours];
 		hasSchedualInfo = false;
 		hasCoursesInfo = false;
 	}
@@ -51,9 +55,10 @@ public class Lecturer extends User implements Serializable {
 	 */
 	public Lecturer() {
 		LecturerCourses= new ArrayList<Course>();
-		preferedSchedualArray = new int[72];
+		preferedSchedualArray = new int[Settings.weekHours];
 		hasCoursesInfo = false;
 		hasSchedualInfo = false;
+
 	}
 
 	
