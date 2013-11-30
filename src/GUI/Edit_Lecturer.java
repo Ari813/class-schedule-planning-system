@@ -156,6 +156,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.setBounds(306, 434, 160, 29);
 		btnSaveChanges.addActionListener(this);
+		btnSaveChanges.setEnabled(false);
 		return btnSaveChanges;
 	}
 
@@ -351,8 +352,14 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 				serverAns = manager.UpdateNewLecturer(newLecturer);
 			}
 
-			if (serverAns.getID().equals(newLecturer.getID()))
-				System.out.println(" Success!!!");
+			if (serverAns.getID().equals(newLecturer.getID())){
+				if(!isNewLecturer)
+					ArrayLecturer.set(cmbxLecturerEditor.getSelectedIndex()-1, newLecturer);
+					else{
+						ArrayLecturer.add(newLecturer);
+						setLec(ArrayLecturer);
+																}
+				System.out.println(" Success!!!");}
 			else {
 				System.out.println(" Fail!!!!");
 			}
