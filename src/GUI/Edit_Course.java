@@ -559,10 +559,12 @@ public class Edit_Course extends JPanel implements ActionListener,
 				serverAnsCourse = manager.CreateNewCourse(newCourse);
 			} else {
 				serverAnsCourse = manager.UpdateNewCourse(newCourse);
+			
 			}
-			arrayCourse.set(cmbBxEditCourse.getSelectedIndex()-1, newCourse);
-			if (serverAnsCourse.getCourseID() == newCourse.getCourseID())
-				System.out.println("Success!!!");
+			if (serverAnsCourse.getCourseID() == newCourse.getCourseID()){
+				if(!isNewCourse)
+				arrayCourse.set(cmbBxEditCourse.getSelectedIndex()-1, newCourse);
+				System.out.println("Success!!!");}
 			else {
 				System.out.println("Fail!!!!");
 			}
