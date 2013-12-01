@@ -431,6 +431,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 					arrayClasses.set(cmbxEditClass.getSelectedIndex()-1, newClass);}
 					else{
 						arrayClasses.add(newClass);
+						cmbxEditClass.removeAllItems();
 						setClasses(arrayClasses);
 					}
 				

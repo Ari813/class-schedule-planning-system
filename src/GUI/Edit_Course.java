@@ -788,7 +788,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void setCourses(ArrayList<Course> arrayList) {
 		arrayCourse = arrayList;
-		cmbBxEditCourse.removeAll();
+		cmbBxEditCourse.removeAllItems();
 		for (int i = 0; i < arrayCourse.size(); i++) {
 			cmbBxEditCourse.addItem(arrayCourse.get(i).getCourseID() + ":"
 					+ arrayCourse.get(i).getDescription());
@@ -798,7 +798,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void setFaculty(ArrayList<Faculty> arrayList) {
 		arrayFaculty = arrayList;
-		CB_Faculty.removeAll();
+		CB_Faculty.removeAllItems();
 		for (int i = 0; i < arrayFaculty.size(); i++) {
 			CB_Faculty.addItem(arrayFaculty.get(i).getFacultyNum() + ":"
 					+ arrayFaculty.get(i).getFaculty());
