@@ -84,8 +84,10 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 	private void ChooseAdmin() {
 		admin = MANAGER;
 		if (admin == MANAGER) {
+		
 			manger = new ManagerController(this,client);
 		} else if (admin == LECTURER) {
+			
 			 lecturer=new LecturerController(this,client);
 		
 		}

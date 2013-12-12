@@ -64,6 +64,29 @@ public class Individual {
 
 					}
 	}
+<<<<<<< .mine
+/*/
+	//?
+public void generateIndividual() {
+	 for (int H = 0; H < weeklyHours; H++) //weeklyHours
+	 	for (int L = 0; L < NumOfLecturers; L++) //NumOfLecturers
+	 		for (int R = 0; R < weeklyHours; R++) //NumOfClasses
+	 			for (int C = 0; C < weeklyHours; C++){ //NumOfCourses
+	 				int gene = (int) Math.round(Math.random());
+	 				if (genes[H][L][R][C].isEditable()){
+	 					if (gene==0)
+	 						genes[H][L][R][C].setGene();
+	 				}
+	 				
+	 				
+	 			}
+	 		}
+	 
+	 /*/
+	
+	
+	/* Getters and setters */
+=======
 
 	/*
 	 * /
@@ -71,6 +94,7 @@ public class Individual {
 	 * 
 	 * /* Getters and setters
 	 */
+>>>>>>> .r321
 	// Use this if you want to create individuals with different gene lengths
 	public static void setDefaultWeekHours(int newWorkingDays, int newDailyHours) {
 		workingDays = newWorkingDays;
