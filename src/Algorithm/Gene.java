@@ -11,6 +11,27 @@ public class Gene {
 	/**
 	 * @return the classID
 	 */
+	
+	public Gene (int classID,int LecturerID,int CourseID,boolean editable,boolean gene)
+	{
+		this.classID = classID;
+		this.LecturerID = LecturerID;
+		this.CourseID = CourseID;
+		
+		this.editable = editable;
+		this.gene = gene;	
+	}
+	
+	public Gene ()
+	{
+		classID = -1;
+		LecturerID = -1;
+		CourseID = -1;
+		
+		editable = true;
+		gene = false;	
+	}
+	
 	public int getClassID() {
 		return classID;
 	}
