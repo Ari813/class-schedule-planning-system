@@ -15,7 +15,7 @@ public class Individual {
 
 	private Gene[][][][] genes;
 	// Cache
-	private int fitness = 0;
+	private double fitness = 0;
 
 	public Individual(int NumOfLecturers, int NumOfClasses, int NumOfCourses) {
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
@@ -155,7 +155,7 @@ public void generateIndividual() {
 		return genes.length;
 	}
 
-	public int getFitness() {
+	public double getFitness() {
 		if (fitness == 0) {
 			fitness = FitnessCalc.getFitness(this);
 		}
