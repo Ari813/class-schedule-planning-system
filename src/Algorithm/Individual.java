@@ -15,14 +15,33 @@ public class Individual {
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
 	}
 
-	// Create a random individual
+	/*/ Create a random individual
 	public void generateIndividual() {
 		for (int i = 0; i < size(); i++) {
 			byte gene = (byte) Math.round(Math.random());
 			genes[i] = gene;
 		}
 	}
-
+/*/
+	//?
+	 public void generateIndividual() {
+	 for (int H = 0; H < weeklyHours; H++) //weeklyHours
+	 	for (int L = 0; L < weeklyHours; L++) //NumOfLecturers
+	 		for (int R = 0; R < weeklyHours; R++) //NumOfClasses
+	 			for (int C = 0; C < weeklyHours; C++){ //NumOfCourses
+	 				int gene = (int) Math.round(Math.random());
+	 				if (genes[H][L][R][C].isEditable()){
+	 					if (gene==0)
+	 						genes[H][L][R][C].setGene();
+	 				}
+	 				
+	 				
+	 			}
+	 		}
+	 
+	 /*/
+	
+	
 	/* Getters and setters */
 	// Use this if you want to create individuals with different gene lengths
 	public static void setDefaultWeekHours(int newWorkingDays, int newDailyHours) {
