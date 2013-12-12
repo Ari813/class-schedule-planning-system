@@ -12,9 +12,12 @@ public class Database {
 	private Map<Integer, Lecturer> Lecturers; // Lecturers;
 	private Map<Integer, Class> Classes; // Classes;
 	
+	private int length;
+	
 	public Database()
 	{
 		//get all database
+		length = Courses.size() * Lecturers.size() * Classes.size() * Individual.weeklyHours;
 	}
 
 	/**
@@ -84,6 +87,28 @@ public class Database {
 	 */
 	public void setClasses(Map<Integer, Class> classes) {
 		Classes = classes;
+	}
+
+	/**
+	 * @return the length
+	 */
+	public int getLength() {
+		return length;
+	}
+	
+	public int getCoursesSize()
+	{
+		return Courses.size();
+	}
+	
+	public int getLecturersSize()
+	{
+		return Lecturers.size();
+	}
+	
+	public int getClassesSize()
+	{
+		return Classes.size();
 	}
 	
 	

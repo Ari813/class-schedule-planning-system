@@ -7,10 +7,16 @@ public class Individual {
     static int weeklyHours = workingDays*dailyHours; // = workingDays*dailyHours
     
     
-    private byte[][][][] genes;
+    
+    private Gene[][][][] genes;
     // Cache
     private int fitness = 0;
 
+    public Individual (int NumOfLecturers, int NumOfClasses, int NumOfCourses)
+    {
+    	genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
+    	
+    }
     // Create a random individual
     public void generateIndividual() {
         for (int i = 0; i < size(); i++) {
