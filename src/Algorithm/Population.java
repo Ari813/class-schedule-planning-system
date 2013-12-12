@@ -2,6 +2,7 @@ package Algorithm;
 
 public class Population {
 
+	Database collageDB;
     Individual[] individuals;
 
     /*
