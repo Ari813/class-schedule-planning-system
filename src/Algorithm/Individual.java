@@ -2,8 +2,12 @@ package Algorithm;
 
 public class Individual {
 
-    static int defaultGeneLength = 64;
-    private byte[] genes = new byte[defaultGeneLength];
+    static int workingDays = 6;
+    static int dailyHours = 14;
+    static int weeklyHours = workingDays*dailyHours; // = workingDays*dailyHours
+    
+    
+    private byte[][][][] genes;
     // Cache
     private int fitness = 0;
 
@@ -17,8 +21,11 @@ public class Individual {
 
     /* Getters and setters */
     // Use this if you want to create individuals with different gene lengths
-    public static void setDefaultGeneLength(int length) {
-        defaultGeneLength = length;
+    public static void setDefaultWeekHours(int newWorkingDays,int newDailyHours) {
+    	workingDays = newWorkingDays;
+    	dailyHours = newDailyHours;
+    	weeklyHours = workingDays*dailyHours;
+    	
     }
     
     public byte getGene(int index) {
