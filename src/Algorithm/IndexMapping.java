@@ -25,16 +25,17 @@ public class IndexMapping {
 		
 	}
 
-	public int getCourseID(int index) {
-		return CoursesMapping.get(index);
+	
+	public int getCourseIndex(int ID) {
+		return CoursesMapping.get(ID);
 	}
 
-	public int getLecturerID(int index) {
-		return LecturersMapping.get(index);
+	public int getLecturerIndex(int ID) {
+		return LecturersMapping.get(ID);
 	}
 
-	public int getClassID(int index) {
-		return ClassesMapping.get(index);
+	public int getClassIndex(int ID) {
+		return ClassesMapping.get(ID);
 	}
 
 	public int getTime(int day, int hour) {
@@ -46,7 +47,7 @@ public class IndexMapping {
 		int i = 0;
 		while (itr.hasNext())
 		{
-			CoursesMapping.put(i, itr.next().intValue());
+			CoursesMapping.put(itr.next().intValue(),i);
 			i++;
 		}
 			
@@ -57,7 +58,7 @@ public class IndexMapping {
 		int i = 0;
 		while (itr.hasNext())
 		{
-			LecturersMapping.put(i, itr.next().intValue());
+			LecturersMapping.put(itr.next().intValue(),i);
 			i++;
 		}
 	}
@@ -67,7 +68,7 @@ public class IndexMapping {
 		int i = 0;
 		while (itr.hasNext())
 		{
-			ClassesMapping.put(i, itr.next().intValue());
+			ClassesMapping.put(itr.next().intValue(),i);
 			i++;
 		}
 	}

@@ -6,6 +6,9 @@ public class Individual {
 	static int dailyHours = 14;
 	static int weeklyHours = workingDays * dailyHours; // =
 														// workingDays*dailyHours
+
+	private IndexMapping mapping;
+
 	static int NumOfLecturers= 0;
 	static int NumOfClasses= 0;
 	static int NumOfCourses= 0;
@@ -16,9 +19,9 @@ public class Individual {
 
 	public Individual(int NumOfLecturers, int NumOfClasses, int NumOfCourses) {
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
-		this.NumOfLecturers=NumOfLecturers;
-		this.NumOfClasses=NumOfClasses;
-		this.NumOfCourses=NumOfCourses;
+		Individual.NumOfLecturers = NumOfLecturers;
+		Individual.NumOfClasses = NumOfClasses;
+		Individual.NumOfCourses = NumOfCourses;
 		
 	}
 
@@ -58,16 +61,43 @@ public class Individual {
 
 	}
 
-	public Gene getGene(int day,int hour,int LecturersID, int ClassesID, int CoursesID) {
+	public Gene getGeneByID(int day,int hour,int LecturerID, int ClassID, int CourseID) {
 		
-		return genes[index];
+		return genes[mapping.getTime(day,hour)][mapping.getLecturerIndex(LecturerID)][mapping.getClassIndex(ClassID)][mapping.getCourseIndex(CourseID)];
 	}
-
+	
+	public Gene getGeneByIndex(int weeklyHour,int LecturerIndex, int ClassIndex, int CourseIndex) {
+		
+		return genes[weeklyHour][LecturerIndex][ClassIndex][CourseIndex];
+	}
+	
+	public void setGeneByID(int day,int hour,int LecturerID, int ClassID, int CourseID) {
+		
+		genes[mapping.getTime(day,hour)][mapping.getLecturerIndex(LecturerID)][mapping.getClassIndex(ClassID)][mapping.getCourseIndex(CourseID)].setGene();
+	}
+	
+	public void setGeneByIndex(int weeklyHour,int LecturerIndex, int ClassIndex, int CourseIndex) {
+		
+		genes[weeklyHour][LecturerIndex][ClassIndex][CourseIndex].setGene();
+	}
+	
+	public void clrGeneByID(int day,int hour,int LecturerID, int ClassID, int CourseID) {
+		
+		genes[mapping.getTime(day,hour)][mapping.getLecturerIndex(LecturerID)][mapping.getClassIndex(ClassID)][mapping.getCourseIndex(CourseID)].clrGene();
+	}
+	
+	public void clrGeneByIndex(int weeklyHour,int LecturerIndex, int ClassIndex, int CourseIndex) {
+		
+		genes[weeklyHour][LecturerIndex][ClassIndex][CourseIndex].clrGene();
+	}
+	
+	/*
 	public void setGene(int index, byte value) {
 		genes[index] = value;
 		fitness = 0;
 	}
-
+*/
+	
 	/* Public methods */
 	public int size() {
 		return genes.length;
