@@ -6,13 +6,20 @@ public class Individual {
 	static int dailyHours = 14;
 	static int weeklyHours = workingDays * dailyHours; // =
 														// workingDays*dailyHours
-
+	static int NumOfLecturers= 0;
+	static int NumOfClasses= 0;
+	static int NumOfCourses= 0;
+	
 	private Gene[][][][] genes;
 	// Cache
 	private int fitness = 0;
 
 	public Individual(int NumOfLecturers, int NumOfClasses, int NumOfCourses) {
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
+		this.NumOfLecturers=NumOfLecturers;
+		this.NumOfClasses=NumOfClasses;
+		this.NumOfCourses=NumOfCourses;
+		
 	}
 
 	/*/ Create a random individual
@@ -26,7 +33,7 @@ public class Individual {
 	//?
 	 public void generateIndividual() {
 	 for (int H = 0; H < weeklyHours; H++) //weeklyHours
-	 	for (int L = 0; L < weeklyHours; L++) //NumOfLecturers
+	 	for (int L = 0; L < NumOfLecturers; L++) //NumOfLecturers
 	 		for (int R = 0; R < weeklyHours; R++) //NumOfClasses
 	 			for (int C = 0; C < weeklyHours; C++){ //NumOfCourses
 	 				int gene = (int) Math.round(Math.random());
