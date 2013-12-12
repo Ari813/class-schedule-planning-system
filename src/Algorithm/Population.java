@@ -15,7 +15,7 @@ public class Population {
         if (initialise) {
             // Loop and create individuals
             for (int i = 0; i < size(); i++) {
-                Individual newIndividual = new Individual();
+                Individual newIndividual = new Individual(collageDB.getLecturersSize(),collageDB.getClassesSize(),collageDB.getCoursesSize());
                 newIndividual.generateIndividual();
                 saveIndividual(i, newIndividual);
             }
