@@ -32,7 +32,8 @@ public class Individual {
 
 	}
 
-	public byte getGene(int index) {
+	public Gene getGene(int day,int hour,int LecturersID, int ClassesID, int CoursesID) {
+		
 		return genes[index];
 	}
 

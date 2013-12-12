@@ -1,6 +1,7 @@
 package Algorithm;
 
 import java.util.Map;
+import java.util.Set;
 
 import entities.Course;
 import entities.Class;
@@ -111,6 +112,19 @@ public class Database {
 		return Classes.size();
 	}
 	
+	public Set<Integer> getClassesKeys()
+	{
+		return Classes.keySet();
+	}
 	
+	public Set<Integer> getCoursesKeys()
+	{
+		return Courses.keySet();
+	}
+	
+	public Set<Integer> getLecturersKeys()
+	{
+		return Lecturers.keySet();
+	}
 	
 }
