@@ -28,8 +28,8 @@ public class Algorithm {
         // Loop over the population size and create new individuals with
         // crossover
         for (int i = elitismOffset; i < pop.size(); i++) {
-            Individual indiv1 = tournamentSelection(pop);
-            Individual indiv2 = tournamentSelection(pop);
+            Individual indiv1 = tournamentSelection(pop); // change to roulette selection
+            Individual indiv2 = tournamentSelection(pop); // change to roulette selection
             Individual newIndiv = crossover(indiv1, indiv2);
             newPopulation.saveIndividual(i, newIndiv);
         }
@@ -46,12 +46,12 @@ public class Algorithm {
     private static Individual crossover(Individual indiv1, Individual indiv2) {
         Individual newSol = new Individual();
         // Loop through genes
-        for (int i = 0; i < indiv1.size(); i++) {
+        for (int i = 0; i < indiv1.size(); i++) { // 4d for run
             // Crossover
             if (Math.random() <= uniformRate) {
-                newSol.setGene(i, indiv1.getGene(i));
+                newSol.setGene(i, indiv1.getGene(i)); // 4d indexing
             } else {
-                newSol.setGene(i, indiv2.getGene(i));
+                newSol.setGene(i, indiv2.getGene(i)); // 4d indexing
             }
         }
         return newSol;
@@ -60,11 +60,12 @@ public class Algorithm {
     // Mutate an individual
     private static void mutate(Individual indiv) {
         // Loop through genes
-        for (int i = 0; i < indiv.size(); i++) {
+        for (int i = 0; i < indiv.size(); i++) { // 4d for run
             if (Math.random() <= mutationRate) {
                 // Create random gene
-                byte gene = (byte) Math.round(Math.random());
-                indiv.setGene(i, gene);
+            	// check if gene can be mutate
+                byte gene = (byte) Math.round(Math.random()); // invert gene
+                indiv.setGene(i, gene); // 4d indexing
             }
         }
     }

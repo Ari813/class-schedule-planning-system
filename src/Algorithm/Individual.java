@@ -19,6 +19,7 @@ public class Individual {
 
 	public Individual() {
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
+		resetIndividual();
 	}
 	
 	public Individual(int NumOfLecturers, int NumOfClasses, int NumOfCourses) {
@@ -26,6 +27,7 @@ public class Individual {
 		Individual.NumOfLecturers = NumOfLecturers;
 		Individual.NumOfClasses = NumOfClasses;
 		Individual.NumOfCourses = NumOfCourses;
+		resetIndividual();
 
 	}
 
@@ -132,7 +134,7 @@ public class Individual {
 
 	/* Public methods */
 	public int size() {
-		return genes.length;
+		return genes.length; // change to get 4d array size
 	}
 
 	public double getFitness() {

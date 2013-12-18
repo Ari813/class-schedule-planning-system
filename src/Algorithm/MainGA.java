@@ -16,6 +16,7 @@ public class MainGA {
             generationCount++;
             System.out.println("Generation: " + generationCount + " Fittest: " + myPop.getFittest().getFitness());
             myPop = Algorithm.evolvePopulation(myPop);
+            // check for valid schdual
         }
         System.out.println("Solution found!");
         System.out.println("Generation: " + generationCount);
