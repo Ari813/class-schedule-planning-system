@@ -17,6 +17,10 @@ public class Individual {
 	// Cache
 	private double fitness = 0;
 
+	public Individual() {
+		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
+	}
+	
 	public Individual(int NumOfLecturers, int NumOfClasses, int NumOfCourses) {
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
 		Individual.NumOfLecturers = NumOfLecturers;
