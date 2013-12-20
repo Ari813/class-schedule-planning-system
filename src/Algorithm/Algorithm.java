@@ -1,5 +1,7 @@
 package Algorithm;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Algorithm {
@@ -8,6 +10,7 @@ public class Algorithm {
 	private static final double uniformRate = 0.5;
 	private static final double mutationRate = 0.015;
 	// private static final int tournamentSize = 5;
+	
 	
 	/* Public methods */
 
@@ -33,12 +36,40 @@ public class Algorithm {
 		for (int i = 0; i < newPopulation.size(); i++) {
 			mutate(newPopulation.getIndividual(i));
 		}
-		Replacement(newPopulation,pop);
-		return newPopulation;
+		Population SavePopulation = new Population(pop.size(), false);
+		SavePopulation=Replacement(newPopulation,pop,SavePopulation);
+		return SavePopulation;
 	}
 	
-	private static void Replacement(Population newPopulation, Population pop) {
-		// TODO Auto-generated method stub
+	public static Population bubbleSort(Population pop) {
+		Individual temp =new Individual();
+		for (int a=1; a<pop.size(); a++) {
+	        for(int b=0; b<pop.size() - a; b++) {
+	            if ((pop.getIndividual(b).getFitness()>pop.getIndividual(b+1).getFitness())){
+	            		//.compareTo((pop.getIndividual(b+1).getFitness())) > 0)
+	                //swap movies[b] with movies[b+1]
+	            	temp = pop.getIndividual(b);
+	            	pop.saveIndividual(b, pop.getIndividual(b+1));
+	            	pop.saveIndividual(b+1, temp);
+	        }
+	    }}
+		return pop;
+	}
+	private static Population Replacement(Population newPopulation, Population pop, Population SavePopulation) {
+		int oldpop=0,newpop=0;
+		pop=bubbleSort(pop);
+		newPopulation=bubbleSort(newPopulation);
+		for (int i =0; i<pop.size() ;i++){
+			if (pop.getIndividual(oldpop).getFitness()>newPopulation.getIndividual(newpop).getFitness()){
+				oldpop++;
+				SavePopulation.saveIndividual(i, pop.getIndividual(oldpop));
+			}else{
+				newpop++;
+				SavePopulation.saveIndividual(i, newPopulation.getIndividual(oldpop));
+			}
+				
+		}
+		return SavePopulation;
 		
 	}
 
