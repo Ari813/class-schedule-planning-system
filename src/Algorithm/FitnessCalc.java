@@ -31,27 +31,52 @@ public class FitnessCalc {
 	private static int calcHardConstraints(Individual individual) {
 		int HardConstraints = 0;
 		int lecID;
-		int timesInSameClassatTheSameHour;
-		Iterator<Integer> LecItr = MainGA.collageDB.getLecturersKeys()
-				.iterator();
+		int classID;
+		int counter;
+		/// check how many times a lecturer teaches in an hour.
+		Iterator<Integer> LecItr = MainGA.collageDB.getLecturersKeys().iterator();
+				
 		while (LecItr.hasNext()) {
 			lecID = LecItr.next().intValue();
 			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(
 					lecID);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++) 
 			{
-				timesInSameClassatTheSameHour = 0;
+				counter = 0;
 				for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++) 
 				{
 					for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++) 
 					{
 						if (individual.getGeneByIndex(Hours, lecturerIndex,	ClassIndex, CourseIndex).isGene()) 
 						{
-							timesInSameClassatTheSameHour++; // 
+							counter++;
 						}
 					}
 				}
-				HardConstraints = timesInSameClassatTheSameHour-1;
+				HardConstraints = counter-1;
+				
+			}
+		}
+		
+		/// check how many times a class is taken in an hour
+		Iterator<Integer> classItr = MainGA.collageDB.getClassesKeys().iterator();
+		while (classItr.hasNext()) {
+			classID = classItr.next().intValue();
+			int classIndex = MainGA.collageDB.getMapping().getClassIndex(classID);
+			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++) 
+			{
+				counter = 0;
+				for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++) 
+				{
+					for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++) 
+					{
+						if (individual.getGeneByIndex(Hours, LecturerIndex,	classIndex, CourseIndex).isGene()) 
+						{
+							counter++;
+						}
+					}
+				}
+				HardConstraints = counter-1;
 				
 			}
 		}
