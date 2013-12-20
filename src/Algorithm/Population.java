@@ -34,12 +34,13 @@ public class Population {
 		
 		Iterator<Integer> iter =MainGA.collageDB.getLecturersKeys().iterator();
 		while (iter.hasNext()){
-			int  Lecturerid=iter.next().intValue();
+			int Lecturerid=iter.next().intValue();
+			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(Lecturerid);
 			for(int Hours=0; Hours<Individual.weeklyHours;Hours++){
 				if  (MainGA.collageDB.getLecturer(Lecturerid).getPreferedSchedualArray()[Hours]==Settings.selection_not_available){
 					for (int ClssIndex=0; ClssIndex<Individual.NumOfClasses;ClssIndex++)
 						for (int CourseIndex=0; CourseIndex<Individual.NumOfCourses;CourseIndex++){
-							JumpStartIndividual.getGeneByIndex( Hours, Lecturerid, ClssIndex, CourseIndex).setUnEditable();
+							JumpStartIndividual.getGeneByIndex( Hours, lecturerIndex, ClssIndex, CourseIndex).setUnEditable();
 							
 						}}
 		

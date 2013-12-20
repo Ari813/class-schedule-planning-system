@@ -2,6 +2,8 @@ package Algorithm;
 
 import java.util.Iterator;
 
+import common.Settings;
+
 public class FitnessCalc {
 
 	// Calculate inidividuals fittness by comparing it to our candidate solution
@@ -33,7 +35,13 @@ public class FitnessCalc {
 		while (LecItr.hasNext())
 		{
 			lecID= LecItr.next().intValue();
-			
+			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(lecID);
+			for(int Hours=0; Hours<Individual.weeklyHours;Hours++)
+					for (int ClssIndex=0; ClssIndex<Individual.NumOfClasses;ClssIndex++)
+						for (int CourseIndex=0; CourseIndex<Individual.NumOfCourses;CourseIndex++){
+						
+							
+						}
 		}
 		return 0;
 	}
