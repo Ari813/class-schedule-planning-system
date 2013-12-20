@@ -9,24 +9,23 @@ public class Algorithm {
 	/* GA parameters */
 	private static final double uniformRate = 0.5;
 	private static final double mutationRate = 0.015;
+
 	// private static final int tournamentSize = 5;
-	
-	
+
 	/* Public methods */
 
 	// Evolve a population
 	public static Population evolvePopulation(Population pop) {
 		Population newPopulation = new Population(pop.size(), false);
-
+		Population SavePopulation;
 		// Keep our best individual
-		
 
 		// Crossover population
-		
+
 		// Loop over the population size and create new individuals with
 		// crossover
 		for (int i = 0; i < pop.size(); i++) {
-			Individual indiv1 = rouletteSelection(pop); 
+			Individual indiv1 = rouletteSelection(pop);
 			Individual indiv2 = rouletteSelection(pop);
 			Individual newIndiv = crossover(indiv1, indiv2);
 			newPopulation.saveIndividual(i, newIndiv);
@@ -36,41 +35,48 @@ public class Algorithm {
 		for (int i = 0; i < newPopulation.size(); i++) {
 			mutate(newPopulation.getIndividual(i));
 		}
-		Population SavePopulation = new Population(pop.size(), false);
-		SavePopulation=Replacement(newPopulation,pop,SavePopulation);
+
+		SavePopulation = Replacement(newPopulation, pop);
 		return SavePopulation;
 	}
-	
+
 	public static Population bubbleSort(Population pop) {
-		Individual temp =new Individual();
-		for (int a=1; a<pop.size(); a++) {
-	        for(int b=0; b<pop.size() - a; b++) {
-	            if ((pop.getIndividual(b).getFitness()>pop.getIndividual(b+1).getFitness())){
-	            		
-	                //swap movies[b] with movies[b+1]
-	            	temp = pop.getIndividual(b);
-	            	pop.saveIndividual(b, pop.getIndividual(b+1));
-	            	pop.saveIndividual(b+1, temp);
-	        }
-	    }}
+		Individual temp = new Individual();
+		for (int a = 1; a < pop.size(); a++) {
+			for (int b = 0; b < pop.size() - a; b++) {
+				if ((pop.getIndividual(b).getFitness() > pop.getIndividual(
+						b + 1).getFitness())) {
+
+					// swap movies[b] with movies[b+1]
+					temp = pop.getIndividual(b);
+					pop.saveIndividual(b, pop.getIndividual(b + 1));
+					pop.saveIndividual(b + 1, temp);
+				}
+			}
+		}
 		return pop;
 	}
-	private static Population Replacement(Population newPopulation, Population pop, Population SavePopulation) {
-		int oldpop=0,newpop=0;
-		pop=bubbleSort(pop);
-		newPopulation=bubbleSort(newPopulation);
-		for (int i =0; i<pop.size() ;i++){
-			if (pop.getIndividual(oldpop).getFitness()>newPopulation.getIndividual(newpop).getFitness()){
+
+	private static Population Replacement(Population newPopulation,
+			Population pop) {
+		int oldpop = 0, newpop = 0;
+		Population SavePopulation = new Population(pop.size(), false);
+		pop = bubbleSort(pop);
+		newPopulation = bubbleSort(newPopulation);
+		for (int i = 0; i < pop.size(); i++) {
+			if (pop.getIndividual(oldpop).getFitness() > newPopulation
+					.getIndividual(newpop).getFitness()) {
 				oldpop++;
 				SavePopulation.saveIndividual(i, pop.getIndividual(oldpop));
-			}else{
+			} else {
 				newpop++;
-				SavePopulation.saveIndividual(i, newPopulation.getIndividual(oldpop));
+				SavePopulation.saveIndividual(i,
+						newPopulation.getIndividual(oldpop));
 			}
-				
+
 		}
 		return SavePopulation;
-		
+
 	}
 
 	private static Individual crossover(Individual indiv1, Individual indiv2) {
@@ -133,9 +139,6 @@ public class Algorithm {
 						}
 					}
 	}
-
-	
-
 
 	private static Individual rouletteSelection(Population pop) {
 		// Calculate the total fitness
