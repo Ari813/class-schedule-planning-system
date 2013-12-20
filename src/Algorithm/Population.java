@@ -41,7 +41,7 @@ public class Population {
 				if  (MainGA.collageDB.getLecturer(Lecturerid).getPreferedSchedualArray()[Hours]==Settings.selection_not_available){
 					for (int ClssIndex=0; ClssIndex<Individual.NumOfClasses;ClssIndex++)
 						for (int CourseIndex=0; CourseIndex<Individual.NumOfCourses;CourseIndex++)
-							JumpStartIndividual.setGeneByIndex( Hours, Lecturerid, ClssIndex, CourseIndex);
+							JumpStartIndividual.getGeneByIndex( Hours, Lecturerid, ClssIndex, CourseIndex).clrGene();
 				}
 		
 			
