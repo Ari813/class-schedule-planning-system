@@ -31,10 +31,8 @@ public class Algorithm {
 		// Loop over the population size and create new individuals with
 		// crossover
 		for (int i = elitismOffset; i < pop.size(); i++) {
-			Individual indiv1 = rouletteSelection(pop); // change to roulette
-														// selection
-			Individual indiv2 = rouletteSelection(pop); // change to roulette
-														// selection
+			Individual indiv1 = rouletteSelection(pop); 
+			Individual indiv2 = rouletteSelection(pop);
 			Individual newIndiv = crossover(indiv1, indiv2);
 			newPopulation.saveIndividual(i, newIndiv);
 		}

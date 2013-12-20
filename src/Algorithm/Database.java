@@ -13,6 +13,8 @@ public class Database {
 	private Map<Integer, Lecturer> Lecturers; // Lecturers;
 	private Map<Integer, Class> Classes; // Classes;
 	
+	private IndexMapping mapping;
+	
 	private int length;
 	
 	public Database()
@@ -126,5 +128,11 @@ public class Database {
 	{
 		return Lecturers.keySet();
 	}
-	
+
+	/**
+	 * @return the mapping
+	 */
+	public IndexMapping getMapping() {
+		return mapping;
+	}
 }

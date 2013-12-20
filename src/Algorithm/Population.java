@@ -2,7 +2,7 @@ package Algorithm;
 
 public class Population {
 
-	Database collageDB;
+	
 	Individual[] individuals;
 
 	/*
@@ -16,8 +16,8 @@ public class Population {
 			// Loop and create individuals
 			for (int i = 0; i < size(); i++) {
 				Individual newIndividual = new Individual(
-						collageDB.getLecturersSize(),
-						collageDB.getClassesSize(), collageDB.getCoursesSize());
+						MainGA.collageDB.getLecturersSize(),
+						MainGA.collageDB.getClassesSize(), MainGA.collageDB.getCoursesSize());
 				newIndividual.generateIndividual();
 				saveIndividual(i, newIndividual);
 			}

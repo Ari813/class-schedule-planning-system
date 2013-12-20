@@ -1,7 +1,8 @@
 package Algorithm;
 
 public class MainGA {
-
+	public static Database collageDB;
+	
 	public static void main(String[] args) {
 
 		// Set a candidate solution

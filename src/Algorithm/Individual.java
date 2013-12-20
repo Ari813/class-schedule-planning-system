@@ -5,10 +5,7 @@ public class Individual {
 	static int workingDays = 6;
 	static int dailyHours = 14;
 	static int weeklyHours = workingDays * dailyHours; // =
-														// workingDays*dailyHours
-
-	private IndexMapping mapping;
-
+	
 	static int NumOfLecturers = 0;
 	static int NumOfClasses = 0;
 	static int NumOfCourses = 0;
@@ -21,6 +18,11 @@ public class Individual {
 	public Individual() {
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
 		resetIndividual();
+	}
+
+	public Individual(Individual indv) {
+		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
+		copyIndividual(indv);
 	}
 
 	public Individual(int NumOfLecturers, int NumOfClasses, int NumOfCourses) {
@@ -55,6 +57,31 @@ public class Individual {
 					}
 	}
 
+	public void copyIndividual(Individual indv) {
+		for (int H = 0; H < weeklyHours; H++)
+			// weeklyHours
+			for (int L = 0; L < NumOfLecturers; L++)
+				// NumOfLecturers
+				for (int R = 0; R < NumOfClasses; R++)
+					// NumOfClasses
+					for (int C = 0; C < NumOfCourses; C++) { // NumOfCourses
+						{
+							if (indv.getGeneByIndex(H, L, R, C).isEditable())
+								genes[H][L][R][C].setEditable();
+							else {
+								genes[H][L][R][C].setUnEditable();
+							}
+							if (indv.getGeneByIndex(H, L, R, C).isGene())
+								genes[H][L][R][C].setGene();
+							else {
+								genes[H][L][R][C].clrGene();
+							}
+
+						}
+
+					}
+	}
+
 	public void generateIndividual() {
 		for (int H = 0; H < weeklyHours; H++)
 			// weeklyHours
@@ -72,12 +99,6 @@ public class Individual {
 					}
 	}
 
-	/*
-	 * /
-	 * 
-	 * 
-	 * /* Getters and setters
-	 */
 	// Use this if you want to create individuals with different gene lengths
 	public static void setDefaultWeekHours(int newWorkingDays, int newDailyHours) {
 		workingDays = newWorkingDays;
@@ -89,8 +110,8 @@ public class Individual {
 	public Gene getGeneByID(int day, int hour, int LecturerID, int ClassID,
 			int CourseID) {
 
-		return genes[mapping.getTime(day, hour)][mapping
-				.getLecturerIndex(LecturerID)][mapping.getClassIndex(ClassID)][mapping
+		return genes[MainGA.collageDB.getMapping().getTime(day, hour)][MainGA.collageDB.getMapping()
+				.getLecturerIndex(LecturerID)][MainGA.collageDB.getMapping().getClassIndex(ClassID)][MainGA.collageDB.getMapping()
 				.getCourseIndex(CourseID)];
 	}
 
@@ -103,8 +124,8 @@ public class Individual {
 	public void setGeneByID(int day, int hour, int LecturerID, int ClassID,
 			int CourseID) {
 
-		genes[mapping.getTime(day, hour)][mapping.getLecturerIndex(LecturerID)][mapping
-				.getClassIndex(ClassID)][mapping.getCourseIndex(CourseID)]
+		genes[MainGA.collageDB.getMapping().getTime(day, hour)][MainGA.collageDB.getMapping().getLecturerIndex(LecturerID)][MainGA.collageDB.getMapping()
+				.getClassIndex(ClassID)][MainGA.collageDB.getMapping().getCourseIndex(CourseID)]
 				.setGene();
 	}
 
@@ -117,8 +138,8 @@ public class Individual {
 	public void clrGeneByID(int day, int hour, int LecturerID, int ClassID,
 			int CourseID) {
 
-		genes[mapping.getTime(day, hour)][mapping.getLecturerIndex(LecturerID)][mapping
-				.getClassIndex(ClassID)][mapping.getCourseIndex(CourseID)]
+		genes[MainGA.collageDB.getMapping().getTime(day, hour)][MainGA.collageDB.getMapping().getLecturerIndex(LecturerID)][MainGA.collageDB.getMapping()
+				.getClassIndex(ClassID)][MainGA.collageDB.getMapping().getCourseIndex(CourseID)]
 				.clrGene();
 	}
 
