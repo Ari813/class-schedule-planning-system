@@ -16,7 +16,8 @@ public class Individual {
 	private Gene[][][][] genes;
 	// Cache
 	private double fitness = 0;
-
+	private double selection=0;
+	
 	public Individual() {
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
 		resetIndividual();
@@ -151,14 +152,14 @@ public class Individual {
 		return fitness;
 	}
 
-	public void SetSelection(double d) {
-		// TODO Auto-generated method stub
+	public void SetSelection(double select) {
+		selection=select;
 		
 	}
 
 	public double getSelection() {
 		
-		return 0;
+		return selection;
 	}
 
 }
