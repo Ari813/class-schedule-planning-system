@@ -151,4 +151,14 @@ public class Individual {
 		return fitness;
 	}
 
+	public void SetSelection(double d) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public double getSelection() {
+		
+		return 0;
+	}
+
 }
