@@ -12,7 +12,7 @@ public class Individual {
 
 	private Gene[][][][] genes;
 	// Cache
-	private double fitness = 0;
+	private double fitness = -1;
 	private double selection = 0;
 
 	public Individual() {
@@ -90,7 +90,7 @@ public class Individual {
 				for (int R = 0; R < NumOfClasses; R++)
 					// NumOfClasses
 					for (int C = 0; C < NumOfCourses; C++) { // NumOfCourses
-						double gene =  Math.round(Math.random());
+						double gene = Math.round(Math.random());
 						if (genes[H][L][R][C].isEditable()) {
 							if (gene > 0.5)
 								genes[H][L][R][C].setGene();
@@ -179,7 +179,7 @@ public class Individual {
 	}
 
 	public double getFitness() {
-		if (fitness == 0) {
+		if (fitness == -1) {
 			fitness = FitnessCalc.getFitness(this);
 		}
 		return fitness;
