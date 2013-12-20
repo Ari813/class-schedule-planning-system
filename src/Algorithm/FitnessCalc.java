@@ -29,21 +29,33 @@ public class FitnessCalc {
 	}
 
 	private static int calcHardConstraints(Individual individual) {
-		double HardConstraints=0;
+		int HardConstraints = 0;
 		int lecID;
-		Iterator<Integer> LecItr = MainGA.collageDB.getLecturersKeys().iterator();
-		while (LecItr.hasNext())
-		{
-			lecID= LecItr.next().intValue();
-			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(lecID);
-			for(int Hours=0; Hours<Individual.weeklyHours;Hours++)
-					for (int ClssIndex=0; ClssIndex<Individual.NumOfClasses;ClssIndex++)
-						for (int CourseIndex=0; CourseIndex<Individual.NumOfCourses;CourseIndex++){
-						
-							
+		int timesInSameClassatTheSameHour;
+		Iterator<Integer> LecItr = MainGA.collageDB.getLecturersKeys()
+				.iterator();
+		while (LecItr.hasNext()) {
+			lecID = LecItr.next().intValue();
+			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(
+					lecID);
+			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++) 
+			{
+				timesInSameClassatTheSameHour = 0;
+				for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++) 
+				{
+					for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++) 
+					{
+						if (individual.getGeneByIndex(Hours, lecturerIndex,	ClassIndex, CourseIndex).isGene()) 
+						{
+							timesInSameClassatTheSameHour++; // 
 						}
+					}
+				}
+				HardConstraints = timesInSameClassatTheSameHour-1;
+				
+			}
 		}
-		return 0;
+		return HardConstraints;
 	}
 
 }
