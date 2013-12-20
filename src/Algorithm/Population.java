@@ -14,6 +14,7 @@ public class Population {
 		// Initialise population
 		if (initialise) {
 			// Loop and create individuals
+			JumpStart();
 			for (int i = 0; i < size(); i++) {
 				Individual newIndividual = new Individual(
 						MainGA.collageDB.getLecturersSize(),
@@ -22,6 +23,11 @@ public class Population {
 				saveIndividual(i, newIndividual);
 			}
 		}
+	}
+
+	private void JumpStart() {
+		// TODO Auto-generated method stub
+		
 	}
 
 	/* Getters */
