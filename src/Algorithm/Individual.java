@@ -90,9 +90,9 @@ public class Individual {
 				for (int R = 0; R < NumOfClasses; R++)
 					// NumOfClasses
 					for (int C = 0; C < NumOfCourses; C++) { // NumOfCourses
-						int gene = (int) Math.round(Math.random());
+						double gene =  Math.round(Math.random());
 						if (genes[H][L][R][C].isEditable()) {
-							if (gene == 0)
+							if (gene > 0.5)
 								genes[H][L][R][C].setGene();
 						}
 

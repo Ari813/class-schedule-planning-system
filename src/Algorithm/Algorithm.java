@@ -8,8 +8,7 @@ public class Algorithm {
 	private static final double uniformRate = 0.5;
 	private static final double mutationRate = 0.015;
 	// private static final int tournamentSize = 5;
-	private static final boolean elitism = true;
-
+	
 	/* Public methods */
 
 	// Evolve a population
@@ -17,20 +16,13 @@ public class Algorithm {
 		Population newPopulation = new Population(pop.size(), false);
 
 		// Keep our best individual
-		if (elitism) {
-			newPopulation.saveIndividual(0, pop.getFittest());
-		}
+		
 
 		// Crossover population
-		int elitismOffset;
-		if (elitism) {
-			elitismOffset = 1;
-		} else {
-			elitismOffset = 0;
-		}
+		
 		// Loop over the population size and create new individuals with
 		// crossover
-		for (int i = elitismOffset; i < pop.size(); i++) {
+		for (int i = 0; i < pop.size(); i++) {
 			Individual indiv1 = rouletteSelection(pop); 
 			Individual indiv2 = rouletteSelection(pop);
 			Individual newIndiv = crossover(indiv1, indiv2);
@@ -38,11 +30,16 @@ public class Algorithm {
 		}
 
 		// Mutate population
-		for (int i = elitismOffset; i < newPopulation.size(); i++) {
+		for (int i = 0; i < newPopulation.size(); i++) {
 			mutate(newPopulation.getIndividual(i));
 		}
-
+		Replacement(newPopulation,pop);
 		return newPopulation;
+	}
+	
+	private static void Replacement(Population newPopulation, Population pop) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private static Individual crossover(Individual indiv1, Individual indiv2) {
@@ -106,29 +103,8 @@ public class Algorithm {
 					}
 	}
 
-	/*
-	 * / Mutate an individual private static void mutate(Individual indiv) { //
-	 * Loop through genes for (int i = 0; i < indiv.size(); i++) { // 4d for run
-	 * if (Math.random() <= mutationRate) { // Create random gene // check if
-	 * gene can be mutate byte gene = (byte) Math.round(Math.random()); //
-	 * invert gene indiv.setGene(i, gene); // 4d indexing } } } /
-	 */
-	// Select individuals for crossover
+	
 
-	/*
-	 * / private Individual rouletteWheelSelection(Population pop){ Random
-	 * m_rand = new Random(); double totalfitness =0; for (int i = 0; i <
-	 * pop.size() ; i++){ totalfitness+= pop.individuals[i].getFitness();}
-	 * double randNum = Math.abs(m_rand.nextDouble() * totalfitness); int idx;
-	 * for (idx=0;idx<pop.size() && randNum>0;++idx){ randNum -=
-	 * Math.abs(pop.individuals[idx].getFitness()); } return
-	 * pop.individuals[pop.size()-idx]; }
-	 * 
-	 * 
-	 * 
-	 * 
-	 * /
-	 */
 
 	private static Individual rouletteSelection(Population pop) {
 		// Calculate the total fitness

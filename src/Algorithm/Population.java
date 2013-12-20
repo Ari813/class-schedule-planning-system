@@ -23,9 +23,7 @@ public class Population {
 					MainGA.collageDB.getClassesSize(), MainGA.collageDB.getCoursesSize());
 			JumpStart();
 			for (int i = 0; i < size(); i++) {
-				Individual newIndividual = new Individual(
-						MainGA.collageDB.getLecturersSize(),
-						MainGA.collageDB.getClassesSize(), MainGA.collageDB.getCoursesSize());
+				Individual newIndividual = new Individual(JumpStartIndividual);
 				newIndividual.generateIndividual();
 				saveIndividual(i, newIndividual);
 			}
@@ -33,16 +31,17 @@ public class Population {
 	}
 
 	private void JumpStart() {
-		// TODO Auto-generated method stub
+		
 		Iterator<Integer> iter =MainGA.collageDB.getLecturersKeys().iterator();
 		while (iter.hasNext()){
 			int  Lecturerid=iter.next().intValue();
 			for(int Hours=0; Hours<Individual.weeklyHours;Hours++){
 				if  (MainGA.collageDB.getLecturer(Lecturerid).getPreferedSchedualArray()[Hours]==Settings.selection_not_available){
 					for (int ClssIndex=0; ClssIndex<Individual.NumOfClasses;ClssIndex++)
-						for (int CourseIndex=0; CourseIndex<Individual.NumOfCourses;CourseIndex++)
-							JumpStartIndividual.getGeneByIndex( Hours, Lecturerid, ClssIndex, CourseIndex).clrGene();
-				}
+						for (int CourseIndex=0; CourseIndex<Individual.NumOfCourses;CourseIndex++){
+							JumpStartIndividual.getGeneByIndex( Hours, Lecturerid, ClssIndex, CourseIndex).setUnEditable();
+							
+						}}
 		
 			
 			}			
