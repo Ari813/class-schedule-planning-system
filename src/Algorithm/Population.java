@@ -1,7 +1,7 @@
 package Algorithm;
 
 public class Population {
-
+	private Individual JumpStartIndividual ;
 	
 	Individual[] individuals;
 
@@ -14,6 +14,9 @@ public class Population {
 		// Initialise population
 		if (initialise) {
 			// Loop and create individuals
+			JumpStartIndividual = new Individual(
+					MainGA.collageDB.getLecturersSize(),
+					MainGA.collageDB.getClassesSize(), MainGA.collageDB.getCoursesSize());
 			JumpStart();
 			for (int i = 0; i < size(); i++) {
 				Individual newIndividual = new Individual(
@@ -27,7 +30,7 @@ public class Population {
 
 	private void JumpStart() {
 		// TODO Auto-generated method stub
-		
+		for ()
 	}
 
 	/* Getters */
