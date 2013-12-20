@@ -1,5 +1,9 @@
 package Algorithm;
 
+import java.util.Iterator;
+
+import common.Settings;
+
 public class Population {
 	private Individual JumpStartIndividual ;
 	
@@ -30,7 +34,19 @@ public class Population {
 
 	private void JumpStart() {
 		// TODO Auto-generated method stub
-		for ()
+		Iterator<Integer> iter =MainGA.collageDB.getLecturersKeys().iterator();
+		while (iter.hasNext()){
+			int  Lecturerid=iter.next().intValue();
+			for(int Hours=0; Hours<Individual.weeklyHours;Hours++){
+				if  (MainGA.collageDB.getLecturer(Lecturerid).getPreferedSchedualArray()[Hours]==Settings.selection_not_available){
+					for (int ClssIndex=0; ClssIndex<Individual.NumOfClasses;ClssIndex++)
+						for (int CourseIndex=0; CourseIndex<Individual.NumOfCourses;CourseIndex++)
+							JumpStartIndividual.setGeneByIndex( Hours, Lecturerid, ClssIndex, CourseIndex);
+				}
+		
+			
+			}			
+		}
 	}
 
 	/* Getters */
