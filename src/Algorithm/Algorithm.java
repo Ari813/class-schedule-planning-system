@@ -46,7 +46,7 @@ public class Algorithm {
 		for (int a=1; a<pop.size(); a++) {
 	        for(int b=0; b<pop.size() - a; b++) {
 	            if ((pop.getIndividual(b).getFitness()>pop.getIndividual(b+1).getFitness())){
-	            		//.compareTo((pop.getIndividual(b+1).getFitness())) > 0)
+	            		
 	                //swap movies[b] with movies[b+1]
 	            	temp = pop.getIndividual(b);
 	            	pop.saveIndividual(b, pop.getIndividual(b+1));
