@@ -43,9 +43,9 @@ public class Individual {
 			// weeklyHours
 			for (int L = 0; L < NumOfLecturers; L++)
 				// NumOfLecturers
-				for (int R = 0; R < weeklyHours; R++)
+				for (int R = 0; R < NumOfClasses; R++)
 					// NumOfClasses
-					for (int C = 0; C < weeklyHours; C++) { // NumOfCourses
+					for (int C = 0; C < NumOfCourses; C++) { // NumOfCourses
 						{
 							genes[H][L][R][C].clrGene();
 							genes[H][L][R][C].setEditable();
@@ -59,9 +59,9 @@ public class Individual {
 			// weeklyHours
 			for (int L = 0; L < NumOfLecturers; L++)
 				// NumOfLecturers
-				for (int R = 0; R < weeklyHours; R++)
+				for (int R = 0; R < NumOfClasses; R++)
 					// NumOfClasses
-					for (int C = 0; C < weeklyHours; C++) { // NumOfCourses
+					for (int C = 0; C < NumOfCourses; C++) { // NumOfCourses
 						int gene = (int) Math.round(Math.random());
 						if (genes[H][L][R][C].isEditable()) {
 							if (gene == 0)
@@ -133,8 +133,15 @@ public class Individual {
 	 */
 
 	/* Public methods */
-	public int size() {
-		return genes.length; // change to get 4d array size
+	public int [] size() {
+		int [] sizeArr = new int [4];
+		
+		sizeArr[0] = weeklyHours;
+		sizeArr[1] = NumOfLecturers;
+		sizeArr[2] = NumOfClasses;
+		sizeArr[3] = NumOfCourses;
+		
+		return sizeArr;
 	}
 
 	public double getFitness() {
