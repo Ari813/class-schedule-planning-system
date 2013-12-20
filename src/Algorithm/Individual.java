@@ -16,13 +16,13 @@ public class Individual {
 	private Gene[][][][] genes;
 	// Cache
 	private double fitness = 0;
-	private double selection=0;
-	
+	private double selection = 0;
+
 	public Individual() {
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
 		resetIndividual();
 	}
-	
+
 	public Individual(int NumOfLecturers, int NumOfClasses, int NumOfCourses) {
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
 		Individual.NumOfLecturers = NumOfLecturers;
@@ -134,14 +134,14 @@ public class Individual {
 	 */
 
 	/* Public methods */
-	public int [] size() {
-		int [] sizeArr = new int [4];
-		
+	public int[] size() {
+		int[] sizeArr = new int[4];
+
 		sizeArr[0] = weeklyHours;
 		sizeArr[1] = NumOfLecturers;
 		sizeArr[2] = NumOfClasses;
 		sizeArr[3] = NumOfCourses;
-		
+
 		return sizeArr;
 	}
 
@@ -153,12 +153,12 @@ public class Individual {
 	}
 
 	public void SetSelection(double select) {
-		selection=select;
-		
+		selection = select;
+
 	}
 
 	public double getSelection() {
-		
+
 		return selection;
 	}
 
