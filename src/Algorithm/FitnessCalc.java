@@ -1,5 +1,7 @@
 package Algorithm;
 
+import java.util.Iterator;
+
 public class FitnessCalc {
 
 	// Calculate inidividuals fittness by comparing it to our candidate solution
@@ -25,7 +27,14 @@ public class FitnessCalc {
 	}
 
 	private static int calcHardConstraints(Individual individual) {
-		// TODO Auto-generated method stub
+		double HardConstraints=0;
+		int lecID;
+		Iterator<Integer> LecItr = MainGA.collageDB.getLecturersKeys().iterator();
+		while (LecItr.hasNext())
+		{
+			lecID= LecItr.next().intValue();
+			
+		}
 		return 0;
 	}
 
