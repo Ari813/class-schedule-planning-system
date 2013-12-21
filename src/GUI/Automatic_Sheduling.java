@@ -142,7 +142,7 @@ private void pnl() {
 		if (btnPreview == null){
 			btnPreview = new JButton("Preview");
 			btnPreview.setBounds(102, 215, 89, 23);
-			btnPreview.addActionListener(this);}
+			}
 		return btnPreview;
 	}
 
@@ -327,7 +327,7 @@ private JComboBox GETcmbBxSemster() {
 			btnBackToMainMenu = new JButton("Discard");
 			btnBackToMainMenu.setBounds(475, 434, 121, 29);
 			btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			btnBackToMainMenu.addActionListener(this) ;
+			
 		}
 		
 		return btnBackToMainMenu;
@@ -341,7 +341,7 @@ private JComboBox GETcmbBxSemster() {
 			btnSaveChanges = new JButton("Save");
 			btnSaveChanges.setBounds(177, 434, 121, 29);
 			btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			btnSaveChanges.addActionListener(this);
+			
 		}
 		return btnSaveChanges;
 	}
@@ -385,6 +385,16 @@ private JComboBox GETcmbBxSemster() {
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void addActions() {
+		btnPreview.addActionListener(this);
+		btnBackToMainMenu.addActionListener(this) ;
+		btnSaveChanges.addActionListener(this);
+		
+		
 		
 	}
 	

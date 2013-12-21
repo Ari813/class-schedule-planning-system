@@ -181,7 +181,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private JButton GETbtnDiscard() {
 		btnDiscard = new JButton("Discard");
 		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnDiscard.addActionListener(this);
+		
 		btnDiscard.setBounds(539, 434, 160, 29);
 		return btnDiscard;
 	}
@@ -191,7 +191,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.setBounds(306, 434, 160, 29);
 		btnSaveChanges.setEnabled(false);
-		btnSaveChanges.addActionListener(this);
+		
 		return btnSaveChanges;
 	}
 
@@ -199,7 +199,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		btnNewClass = new JButton("New class");
 		btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewClass.setBounds(73, 434, 160, 29);
-		btnNewClass.addActionListener(this);
+		
 		return btnNewClass;
 	}
 
@@ -208,7 +208,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		btnRemove.setToolTipText("Remove item from class");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnRemove.setBounds(502, 216, 65, 38);
-		btnRemove.addActionListener(this);
+		
 		return btnRemove;
 	}
 
@@ -216,7 +216,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		btnAdd = new JButton(" -->");
 		btnAdd.setToolTipText("Add item to class");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnAdd.addActionListener(this);
+		
 		btnAdd.setBounds(502, 163, 65, 38);
 		return btnAdd;
 	}
@@ -395,7 +395,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 			cmbxEditClass.setToolTipText("Edit class list");
 			cmbxEditClass.setBounds(10, 53, 754, 20);
 			cmbxEditClass.setMaximumRowCount(52);
-			cmbxEditClass.addActionListener(this);
+			
 		}
 		return cmbxEditClass;
 	}
@@ -690,6 +690,16 @@ public class Edit_Class extends JPanel implements ActionListener,
 			cmbxEditClass.addItem(arrayClasses.get(i).getClassID() + ":"
 					+ arrayClasses.get(i).getDescription());
 		}
+	}
+
+	public void addActions() {
+		// TODO Auto-generated method stub
+		btnDiscard.addActionListener(this);
+		btnSaveChanges.addActionListener(this);
+		btnNewClass.addActionListener(this);
+		btnRemove.addActionListener(this);
+		btnAdd.addActionListener(this);
+		cmbxEditClass.addActionListener(this);
 	}
 
 }

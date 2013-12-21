@@ -127,7 +127,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		btnRemove.setToolTipText("Remove item from class");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnRemove.setBounds(502, 216, 65, 38);
-		btnRemove.addActionListener(this);
+		
 		return btnRemove;
 	}
 
@@ -144,10 +144,10 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 
 	private JButton GETbtnNewLecturer() {
 		btnNewLecturer = new JButton("New Lecturer");
-		btnNewLecturer.addActionListener(this);
+		
 		btnNewLecturer.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewLecturer.setBounds(73, 434, 160, 29);
-		btnNewLecturer.addActionListener(this);
+		
 		return btnNewLecturer;
 	}
 
@@ -155,7 +155,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.setBounds(306, 434, 160, 29);
-		btnSaveChanges.addActionListener(this);
+		
 		btnSaveChanges.setEnabled(false);
 		return btnSaveChanges;
 	}
@@ -163,9 +163,9 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 	private Component GETbtnBackToMainMenu() {
 		btnBackToMainMenu = new JButton("Discard");
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnBackToMainMenu.addActionListener(this);
+		
 		btnBackToMainMenu.setBounds(539, 434, 160, 29);
-		btnBackToMainMenu.addActionListener(this);
+		
 		return btnBackToMainMenu;
 	}
 
@@ -173,7 +173,6 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		btnAdd = new JButton(" -->");
 		btnAdd.setToolTipText("Add item to class");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnAdd.addActionListener(this);
 		btnAdd.setBounds(502, 163, 65, 38);
 		return btnAdd;
 	}
@@ -273,7 +272,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		cmbxLecturerEditor.setToolTipText("Edit class list");
 		cmbxLecturerEditor.setBounds(10, 53, 754, 20);
 		cmbxLecturerEditor.setMaximumRowCount(52);
-		cmbxLecturerEditor.addActionListener(this);
+		
 		return cmbxLecturerEditor;
 	}
 
@@ -535,6 +534,17 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		lstCourseModel.removeAllElements();
 		lstSelectedCourseModel.removeAllElements();
 
+	}
+
+	public void addActions() {
+		// TODO Auto-generated method stub
+		btnRemove.addActionListener(this);
+		btnNewLecturer.addActionListener(this);
+		btnSaveChanges.addActionListener(this);
+		btnBackToMainMenu.addActionListener(this);
+		btnAdd.addActionListener(this);
+		cmbxLecturerEditor.addActionListener(this);
+		
 	}
 
 }

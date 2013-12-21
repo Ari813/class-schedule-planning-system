@@ -91,6 +91,7 @@ public class ManagerController {
 		AS = new Automatic_Sheduling(this);
 		manegerMainFrm.add(AS.PNL_Main);
 		manegerMainFrm.repaint();
+		AS.addActions();
 	}
 
 	// //////////////
@@ -147,6 +148,7 @@ public class ManagerController {
 		CS.setCourse(getCourse());
 		manegerMainFrm.add(CS.PNL_Main);
 		manegerMainFrm.repaint();
+		CS.addActions();
 	}
 
 	public void Load_Edit_Lecturer(JPanel Panel2Close) {
@@ -157,6 +159,7 @@ public class ManagerController {
 		EL.setcourse(getCourse());
 		manegerMainFrm.add(EL.PNL_Main);
 		manegerMainFrm.repaint();
+		EL.addActions();
 	}
 
 	public void Load_Edit_Class(JPanel Panel2Close) {
@@ -170,6 +173,7 @@ public class ManagerController {
 		ECLSS.setBuilding(getBuildings());
 		// ECLSS.setAidsForExistingClasses(GetAidsForExistingClasses());
 		manegerMainFrm.add(ECLSS.PNL_Main);
+		ECLSS.addActions();
 		manegerMainFrm.repaint();
 	}
 
@@ -234,7 +238,9 @@ public class ManagerController {
 
 		manegerMainFrm.remove(Panel2Close);
 		MS = new Manual_Sheduling(this);
+		
 		manegerMainFrm.add(MS.PNL_Main);
+		MS.addActions();
 		manegerMainFrm.repaint();
 	}
 

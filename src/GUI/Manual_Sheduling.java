@@ -142,21 +142,21 @@ pnl();
 	private JButton GETbtnDelete() {
 		btnDelete = new JButton("delete");
 		  btnDelete.setBounds(600, 330, 80, 23);
-		  btnDelete.addActionListener(this);
+		 
 		return btnDelete;
 	}
 
 	private JButton GETbtnClear() {
 		 btnClear = new JButton("Clear");
 		  btnClear.setBounds(600, 300, 80, 23);
-		  btnClear.addActionListener(this);
+		 
 		return btnClear;
 	}
 
 	private JButton GETbtnSet() {
 		btnSet = new JButton("Set");
 		  btnSet.setBounds(600, 270, 80, 23);
-		  btnSet.addActionListener(this);
+		 
 		return btnSet;
 	}
 
@@ -316,7 +316,7 @@ pnl();
 		btnBackToMainMenu = new JButton("Discard");
 		btnBackToMainMenu.setBounds(462, 434, 160, 29);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnBackToMainMenu.addActionListener(this);
+		
 		return btnBackToMainMenu;
 	}
 
@@ -324,7 +324,7 @@ pnl();
 		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setBounds(151, 434, 160, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnSaveChanges.addActionListener(this);
+		
 		return btnSaveChanges;
 	}
 
@@ -388,6 +388,17 @@ pnl();
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void addActions() {
+		// TODO Auto-generated method stub
+		btnBackToMainMenu.addActionListener(this);
+		btnSaveChanges.addActionListener(this);
+		 btnSet.addActionListener(this);		
+		 btnDelete.addActionListener(this);
+		 btnClear.addActionListener(this);
 		
 	}
 	

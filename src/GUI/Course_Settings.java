@@ -200,7 +200,7 @@ ListSelectionListener,FocusListener, KeyListener {
 	  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	  	cmbxFaculty.setToolTipText("Edit class list");
 	  	cmbxFaculty.setMaximumRowCount(52);
-	  	cmbxFaculty.addActionListener(this);
+	  
 		
 		}
 		return cmbxFaculty;
@@ -316,7 +316,7 @@ ListSelectionListener,FocusListener, KeyListener {
 		btnBackToMainMenu = new JButton("Discard");
 		btnBackToMainMenu.setBounds(462, 434, 160, 29);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnBackToMainMenu.addActionListener(this);}
+		}
 		return btnBackToMainMenu;
 	}
 	private JButton GETbtnSaveChanges() {
@@ -324,7 +324,7 @@ ListSelectionListener,FocusListener, KeyListener {
 		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setBounds(151, 434, 160, 29);
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnSaveChanges.addActionListener(this);
+		
 		}
 		return btnSaveChanges;
 	}
@@ -490,15 +490,24 @@ ListSelectionListener,FocusListener, KeyListener {
 
 	@Override
 	public void focusGained(FocusEvent e) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 
 	@Override
 	public void focusLost(FocusEvent e) {
-		// TODO Auto-generated method stub
 		
+		
+	}
+
+
+	public void addActions() {
+		// TODO Auto-generated method stub
+		btnSaveChanges.addActionListener(this);
+		
+		btnBackToMainMenu.addActionListener(this);
+		cmbxFaculty.addActionListener(this);
 	}
 	
 		
