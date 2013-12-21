@@ -33,6 +33,7 @@ import java.awt.SystemColor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JCheckBox;
 
 public class Edit_Course extends JPanel implements ActionListener,
 		ListSelectionListener, KeyListener {
@@ -70,14 +71,13 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private ManagerController manager;
 	private JList AvailableStudyAids;
 	private JComboBox mainCourscomboBox;
-	private JLabel lblMainCourse;
 	/* Lecturers Data */
 	private Map<Integer, Lecturer> ArrayLecturers; // arrayStudyAids;
 	private Map<Integer, Integer> ArrayAvailableLecturers; // arrayAvailableStudyAids;
 	private Map<Integer, Integer> arraySelectedLecturers; // arraySelectedStudyAids;
 	private DefaultListModel lstCLecturersModel;// lstClassAidsModel;
 	private DefaultListModel lstSelectedLecturersModel; // lstSelectedClassAidsModel;
-
+	private JCheckBox chckbxMainCourse;
 	/* general StudyAids */
 	private Map<Integer, StudyAids> crsStudyAids;
 	/* Lecture StudyAids */
@@ -90,6 +90,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private ArrayList<Faculty> arrayFaculty;
 	private ArrayList<Course> arrayCourse;
 
+	private Map<Integer, Integer> indexcourse;
 	/**
 	 * Create the panel.
 	 */
@@ -246,16 +247,15 @@ public class Edit_Course extends JPanel implements ActionListener,
 		PNL_Main.add(getBtnRemveStudyAids());
 		
 		mainCourscomboBox = new JComboBox();
-		mainCourscomboBox.setBounds(10, 122, 125, 20);
+		mainCourscomboBox.setBounds(10, 137, 125, 20);
 		mainCourscomboBox.setVisible(false);
 		mainCourscomboBox.addActionListener(this);
 		PNL_Main.add(mainCourscomboBox);
 		
-		lblMainCourse = new JLabel("main course");
-		lblMainCourse.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblMainCourse.setBounds(10, 97, 101, 14);
-		lblMainCourse.setVisible(false);
-		PNL_Main.add(lblMainCourse);
+		chckbxMainCourse = new JCheckBox("have main course");
+		chckbxMainCourse.setBounds(10, 104, 125, 23);
+		chckbxMainCourse.addActionListener(this);
+		PNL_Main.add(chckbxMainCourse);
 
 		PNL_Main.repaint();
 	}
@@ -460,7 +460,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cmbBxEditCourse) {
 			mainCourscomboBox.setVisible(false);
-			lblMainCourse.setVisible(false);
+			chckbxMainCourse.setVisible(false);
 			createNewCourse(false);
 			setSelectedCourse();
 		}
@@ -494,7 +494,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 		if (e.getSource() == btnNewCourse) {
 			mainCourscomboBox.setVisible(true);
-			lblMainCourse.setVisible(true);
+			chckbxMainCourse.setVisible(true);
 			isNewCourse = true;
 			resetLists();
 			resetListslec();
@@ -552,9 +552,15 @@ public class Edit_Course extends JPanel implements ActionListener,
 		if (e.getSource() == mainCourscomboBox) {
 			
 		}
+		if (e.getSource() == chckbxMainCourse) {
+			if (chckbxMainCourse.isSelected())
+				mainCourscomboBox.setVisible(true);
+			else
+				mainCourscomboBox.setVisible(false);
+		}
 		if (e.getSource() == btnSave) {
 			mainCourscomboBox.setVisible(false);
-			lblMainCourse.setVisible(false);
+			chckbxMainCourse.setVisible(false);
 			
 			Course newCourse = new Course();
 			
@@ -565,11 +571,17 @@ public class Edit_Course extends JPanel implements ActionListener,
 			newCourse.setSemester((int) Course_Semester.getValue());
 			newCourse.setAcademicHours((int) AcademicHours.getValue());
 			newCourse.setStudentNumber((int) MaxStdntPerClass.getValue());
+			if (chckbxMainCourse.isSelected()){
+				newCourse.setCourseRelativeKey(1);
+				arrayCourse.get(indexcourse.get(mainCourscomboBox.getSelectedIndex()));
+				}
+			else
+				newCourse.setCourseRelativeKey(-1);
 			//newCourse
 			Iterator<Integer> itr = arraySelectedLecturers.values().iterator();
 			while (itr.hasNext())
 				newCourse.addLecturer(ArrayLecturers.get(itr.next()));
-
+				
 			itr = CrsSelectedStudyAids.values().iterator();
 			while (itr.hasNext())
 				newCourse.addStudyAids(crsStudyAids.get(itr.next()));
@@ -808,12 +820,21 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void setCourses(ArrayList<Course> arrayList) {
 		arrayCourse = arrayList;
+		indexcourse=new HashMap<>();
+		indexcourse.clear();
 		cmbBxEditCourse.removeAllItems();
+		int key=0;
 		for (int i = 0; i < arrayCourse.size(); i++) {
 			cmbBxEditCourse.addItem(arrayCourse.get(i).getCourseID() + ":"
 					+ arrayCourse.get(i).getDescription());
-			mainCourscomboBox.addItem(arrayCourse.get(i).getCourseID() + ":"
+			if (arrayCourse.get(i).getCourseRelativeKey()!=-1){
+				key++;
+				mainCourscomboBox.addItem(arrayCourse.get(i).getCourseID() + ":"
 					+ arrayCourse.get(i).getDescription());
+				indexcourse.put(key, i);
+			
+			}
+			
 		}
 
 	}
