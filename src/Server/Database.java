@@ -427,7 +427,8 @@ public class Database {
 				+ newCourse.getFaculty() + "', `Semester`='"
 				+ newCourse.getSemester() + "', `Description`='"
 				+ newCourse.getDescription() + "', `AcademicHours`='"
-				+ newCourse.getAcademicHours() + "' WHERE `CourseID`='"
+				+ newCourse.getAcademicHours() + ", `CourseRelatedKey`='"
+				+ newCourse.getCourseRelativeKey() + "' WHERE `CourseID`='"
 				+ newCourse.getCourseID() + "';");
 
 		st = conn.createStatement();
@@ -439,7 +440,7 @@ public class Database {
 	public Course newCourse(Course newCourse) throws SQLException {
 		String query;
 		query = new String(
-				"INSERT INTO `csps-db`.`course` (`CourseID`, `Capacity`, `Faculty`, `Semester`, `Description`, `AcademicHours`) VALUES ('"
+				"INSERT INTO `csps-db`.`course` (`CourseID`, `Capacity`, `Faculty`, `Semester`, `Description`, `AcademicHours`, `CourseRelatedKey`) VALUES ('"
 						+ newCourse.getCourseID()
 						+ "', '"
 						+ newCourse.getStudentNumber()
@@ -450,7 +451,9 @@ public class Database {
 						+ "', '"
 						+ newCourse.getDescription()
 						+ "', '"
-						+ newCourse.getSemester() + "');");
+						+ newCourse.getAcademicHours()
+						+ "', '"
+						+ newCourse.getCourseRelativeKey() + "');");
 
 		st = conn.createStatement();
 		st.executeUpdate(query);
@@ -509,9 +512,9 @@ public class Database {
 		for (int i = 0; i < newLecturer.getLecturerCourses().size(); i++) {
 			query = new String(
 					"INSERT INTO `csps-db`.`courselecturers` (`CourseID`, `LecturerID`) VALUES ('"
-							+ newLecturer.getLecturerCourses().get(i).getCourseID() + "', '"
+							+ newLecturer.getLecturerCourses().get(i)
+									.getCourseID() + "', '"
 							+ newLecturer.getID() + "');");
-
 
 			st = conn.createStatement();
 			st.executeUpdate(query);
@@ -535,7 +538,6 @@ public class Database {
 						+ newClass.getDescription()
 						+ "', '"
 						+ newClass.getAvailableInt() + "');");
-
 
 		st = conn.createStatement();
 		st.executeUpdate(query);

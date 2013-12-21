@@ -21,7 +21,7 @@ public class Course implements Serializable {
 	private int academicHours;
 	private boolean hasadditionalInfo;
 	private int EstimationOfStudentsNum;
-	private int CourseKey; 
+	private int CourseRelativeKey; 
 	
 	public Course(int studentNumber, int courseID, String description,
 			int faculty, int semester, int academicHours) {
@@ -185,15 +185,15 @@ public class Course implements Serializable {
 	/**
 	 * @return the courseKey
 	 */
-	public int getCourseKey() {
-		return CourseKey;
+	public int getCourseRelativeKey() {
+		return CourseRelativeKey;
 	}
 
 	/**
 	 * @param courseKey the courseKey to set
 	 */
-	public void setCourseKey(int courseKey) {
-		CourseKey = courseKey;
+	public void setCourseRelativeKey(int courseKey) {
+		CourseRelativeKey = courseKey;
 	}
 
 }
