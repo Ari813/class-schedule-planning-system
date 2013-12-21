@@ -2,11 +2,9 @@ package Algorithm;
 
 import java.util.Iterator;
 
-import common.Settings;
-
 public class FitnessCalc {
 
-	// Calculate inidividuals fittness by comparing it to our candidate solution
+	// Calculate individuals fitness by comparing it to our candidate solution
 	public static double getFitness(Individual individual) {
 		double fitness = 0;
 		int hard = 0;
