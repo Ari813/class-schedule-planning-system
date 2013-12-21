@@ -596,7 +596,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 			}
 			if (serverAnsCourse.getCourseID() == newCourse.getCourseID()){
 				if(!isNewCourse)
-				arrayCourse.set(cmbBxEditCourse.getSelectedIndex()-1, newCourse);
+				arrayCourse.set(cmbBxEditCourse.getSelectedIndex(), newCourse);
 				else{
 					arrayCourse.add(newCourse);
 					setCourses(arrayCourse);
