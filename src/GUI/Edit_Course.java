@@ -683,7 +683,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 						 chckbxMainCourse.setSelected(false);
 					}
 			
-			mainCourscomboBox.setSelectedIndex(Reverseindexcourse.get(i));
+			mainCourscomboBox.setSelectedIndex(Reverseindexcourse.get(index));
 			CB_Faculty.setSelectedIndex(i);
 			txtIdNumber.setText(Integer.toString(arrayCourse.get(index)
 					.getCourseID()));
@@ -841,8 +841,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void setCourses(ArrayList<Course> arrayList) {
 		arrayCourse = arrayList;
-		indexcourse = new HashMap<>();
-		Reverseindexcourse = new HashMap<>();
+		indexcourse = new HashMap<Integer,Integer>();
+		Reverseindexcourse = new HashMap<Integer,Integer>();
 		Reverseindexcourse.clear();
 		indexcourse.clear();
 		cmbBxEditCourse.removeAllItems();
