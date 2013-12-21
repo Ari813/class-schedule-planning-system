@@ -91,7 +91,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private ArrayList<Course> arrayCourse;
 
 	private Map<Integer, Integer> indexcourse;
-
+	private Map<Integer, Integer> Reverseindexcourse;
 	/**
 	 * Create the panel.
 	 */
@@ -663,10 +663,12 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private void setSelectedCourse() {
 		int i = 0;
 		CB_Faculty.setVisible(true);
+	
 		
 		int index = cmbBxEditCourse.getSelectedIndex() ;
 
 		if ((arrayCourse != null) && (!arrayCourse.isEmpty()) && (index >= 0)) {
+			
 			for (i = 0; i < arrayFaculty.size(); i++) {
 				if (arrayCourse.get(index).getFaculty() == arrayFaculty.get(i)
 						.getFacultyNum())
@@ -681,7 +683,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 						 chckbxMainCourse.setSelected(false);
 					}
 			
-			
+			mainCourscomboBox.setSelectedIndex(Reverseindexcourse.get(i));
 			CB_Faculty.setSelectedIndex(i);
 			txtIdNumber.setText(Integer.toString(arrayCourse.get(index)
 					.getCourseID()));
@@ -840,6 +842,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 	public void setCourses(ArrayList<Course> arrayList) {
 		arrayCourse = arrayList;
 		indexcourse = new HashMap<>();
+		Reverseindexcourse = new HashMap<>();
+		Reverseindexcourse.clear();
 		indexcourse.clear();
 		cmbBxEditCourse.removeAllItems();
 		int key = 0;
@@ -851,6 +855,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 				mainCourscomboBox.addItem(arrayCourse.get(i).getCourseID()
 						+ ":" + arrayCourse.get(i).getDescription());
 				indexcourse.put(key, i);
+				Reverseindexcourse.put(i,key);
 				key++;
 
 			}
