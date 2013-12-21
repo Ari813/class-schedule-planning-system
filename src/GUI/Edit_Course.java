@@ -564,7 +564,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 			// mainCourscomboBox.setVisible(false);
 			// chckbxMainCourse.setVisible(false);
 			chckbxMainCourse.setSelected(false);
-			;
+			
 			Course newCourse = new Course();
 
 			newCourse.setCourseID(Integer.parseInt(txtIdNumber.getText()));
@@ -623,13 +623,15 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private void createNewCourse(boolean bool) {
 		txtIdNumber.setEditable(bool);
 		txtIdNumber.setEnabled(bool);
-		txtIdNumber.setText("");
+		
 		txtCourseName.setEditable(bool);
 		txtCourseName.setEnabled(bool);
-		txtCourseName.setText("");
+
 
 		// CB_Faculty.getModel().setSelectedItem(1);
 		if (bool) {
+			txtIdNumber.setText("");
+			txtCourseName.setText("");
 			Course_Semester.setValue(1);
 			AcademicHours.setValue(1);
 			MaxStdntPerClass.setValue(1);
@@ -819,6 +821,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 		} else {
 			btnSave.setEnabled(true);
 		}
+		if(txtIdNumber.getText().equals(""))
+			btnSave.setEnabled(false);
 	}
 
 	@Override
