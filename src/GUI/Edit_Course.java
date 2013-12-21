@@ -661,8 +661,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private void setSelectedCourse() {
 		int i = 0;
 		CB_Faculty.setVisible(true);
-
-		int index = cmbBxEditCourse.getSelectedIndex() - ManagerController.fix;
+		
+		int index = cmbBxEditCourse.getSelectedIndex() ;
 
 		if ((arrayCourse != null) && (!arrayCourse.isEmpty()) && (index >= 0)) {
 			for (i = 0; i < arrayFaculty.size(); i++) {
@@ -670,7 +670,16 @@ public class Edit_Course extends JPanel implements ActionListener,
 						.getFacultyNum())
 					break;
 			}
-
+				if (arrayCourse.get(index).getCourseRelativeKey()!=-1){
+					 mainCourscomboBox.setVisible(true);
+					 chckbxMainCourse.setSelected(true);
+					}else
+					{
+						 mainCourscomboBox.setVisible(false);
+						 chckbxMainCourse.setSelected(false);
+					}
+			
+			
 			CB_Faculty.setSelectedIndex(i);
 			txtIdNumber.setText(Integer.toString(arrayCourse.get(index)
 					.getCourseID()));
