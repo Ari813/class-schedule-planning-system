@@ -108,7 +108,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnRemveStudyAids = new JButton("Remove");
 		btnRemveStudyAids.setToolTipText("Remove Study aid to course");
 		btnRemveStudyAids.setBounds(651, 237, 89, 23);
-		btnRemveStudyAids.addActionListener(this);
+		
 		return btnRemveStudyAids;
 	}
 
@@ -116,7 +116,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnAddStudyAids = new JButton("Add");
 		btnAddStudyAids.setToolTipText("Add Study aid to course");
 		btnAddStudyAids.setBounds(520, 237, 94, 23);
-		btnAddStudyAids.addActionListener(this);
+		
 		return btnAddStudyAids;
 	}
 
@@ -249,12 +249,12 @@ public class Edit_Course extends JPanel implements ActionListener,
 		mainCourscomboBox = new JComboBox();
 		mainCourscomboBox.setBounds(10, 137, 125, 20);
 		mainCourscomboBox.setVisible(false);
-		mainCourscomboBox.addActionListener(this);
+		
 		PNL_Main.add(mainCourscomboBox);
 		
 		chckbxMainCourse = new JCheckBox("have main course");
-		chckbxMainCourse.setBounds(10, 104, 125, 23);
-		chckbxMainCourse.addActionListener(this);
+		chckbxMainCourse.setBounds(10, 104, 129, 23);
+		
 		PNL_Main.add(chckbxMainCourse);
 
 		PNL_Main.repaint();
@@ -294,7 +294,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnDiscard = new JButton("Discard");
 		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnDiscard.setBounds(539, 440, 160, 29);
-		btnDiscard.addActionListener(this);
+		
 		return btnDiscard;
 	}
 
@@ -320,7 +320,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	private JButton getbtnSave() {
 		btnSave = new JButton("Save");
-		btnSave.addActionListener(this);
+		
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSave.setBounds(306, 440, 160, 29);
 		return btnSave;
@@ -328,7 +328,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	private JButton getbtnNewCourse() {
 		btnNewCourse = new JButton("New Course");
-		btnNewCourse.addActionListener(this);
+		
 		btnNewCourse.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewCourse.setBounds(73, 440, 160, 29);
 		return btnNewCourse;
@@ -349,7 +349,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnRemove.setToolTipText("Remove lecturer from course");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnRemove.setBounds(270, 237, 65, 38);
-		btnRemove.addActionListener(this);
+		
 		return btnRemove;
 	}
 
@@ -358,7 +358,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnAdd.setToolTipText("Add lecturer to course");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnAdd.setBounds(270, 171, 65, 38);
-		btnAdd.addActionListener(this);
+		
 		return btnAdd;
 	}
 
@@ -453,14 +453,14 @@ public class Edit_Course extends JPanel implements ActionListener,
 		cmbBxEditCourse.setModel(new DefaultComboBoxModel(
 				new String[] { "Empty" }));
 		cmbBxEditCourse.setBounds(10, 53, 754, 20);
-		cmbBxEditCourse.addActionListener(this);
+		
 		return cmbBxEditCourse;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cmbBxEditCourse) {
-			mainCourscomboBox.setVisible(false);
-			chckbxMainCourse.setVisible(false);
+			//mainCourscomboBox.setVisible(false);
+			//chckbxMainCourse.setVisible(false);
 			createNewCourse(false);
 			setSelectedCourse();
 		}
@@ -555,6 +555,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		if (e.getSource() == chckbxMainCourse) {
 			if (chckbxMainCourse.isSelected())
 				mainCourscomboBox.setVisible(true);
+			
 			else
 				mainCourscomboBox.setVisible(false);
 		}
@@ -656,7 +657,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		int i = 0;
 		CB_Faculty.setVisible(true);
 
-		int index = cmbBxEditCourse.getSelectedIndex() - 1;
+		int index = cmbBxEditCourse.getSelectedIndex()-ManagerController.fix ;
 
 		if ((arrayCourse != null) && (!arrayCourse.isEmpty()) && (index >= 0)) {
 			for (i = 0; i < arrayFaculty.size(); i++) {
@@ -881,5 +882,18 @@ public class Edit_Course extends JPanel implements ActionListener,
 					.get(i).getAidsID());
 		}
 
+	}
+
+	public void addActions() {
+		btnRemveStudyAids.addActionListener(this);
+		btnAddStudyAids.addActionListener(this);
+		mainCourscomboBox.addActionListener(this);
+		btnDiscard.addActionListener(this);
+		chckbxMainCourse.addActionListener(this);
+		btnSave.addActionListener(this);
+		btnNewCourse.addActionListener(this);
+		btnRemove.addActionListener(this);
+		btnAdd.addActionListener(this);
+		cmbBxEditCourse.addActionListener(this);
 	}
 }

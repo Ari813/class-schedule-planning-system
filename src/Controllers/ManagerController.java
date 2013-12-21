@@ -43,7 +43,7 @@ public class ManagerController {
 	private Edit_Course ECRS;
 	private Edit_Lecturer EL;
 	private Manual_Sheduling MS;
-
+	public static int fix=0;
 	public Edit_Course ed;
 	private Main_Menu main;
 	public Main_Frame manegerMainFrm;
@@ -95,7 +95,7 @@ public class ManagerController {
 
 	// //////////////
 	public void Load_Edit_Course(JPanel Panel2Close) {
-
+		fix =0;
 		manegerMainFrm.remove(Panel2Close);
 		ECRS = new Edit_Course(this);
 		ECRS.setCourses(getCourse());
@@ -103,7 +103,8 @@ public class ManagerController {
 		ECRS.setAvailableLecturers(getAvailableLecturers(getInformation.nothing));
 		ECRS.setStudyAids(GetClassAids());
 		ECRS.setdefault();
-
+		
+		ECRS.addActions();
 		manegerMainFrm.add(ECRS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
