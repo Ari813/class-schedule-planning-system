@@ -5,8 +5,8 @@ import java.util.Iterator;
 import common.Settings;
 
 public class Population {
-	private Individual JumpStartIndividual ;
-	
+	private Individual JumpStartIndividual;
+
 	Individual[] individuals;
 
 	/*
@@ -20,7 +20,8 @@ public class Population {
 			// Loop and create individuals
 			JumpStartIndividual = new Individual(
 					MainGA.collageDB.getLecturersSize(),
-					MainGA.collageDB.getClassesSize(), MainGA.collageDB.getCoursesSize());
+					MainGA.collageDB.getClassesSize(),
+					MainGA.collageDB.getCoursesSize());
 			JumpStart();
 			for (int i = 0; i < size(); i++) {
 				Individual newIndividual = new Individual(JumpStartIndividual);
@@ -31,21 +32,51 @@ public class Population {
 	}
 
 	private void JumpStart() {
-		
-		Iterator<Integer> iter =MainGA.collageDB.getLecturersKeys().iterator();
-		while (iter.hasNext()){
-			int Lecturerid=iter.next().intValue();
-			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(Lecturerid);
-			for(int Hours=0; Hours<Individual.weeklyHours;Hours++){
-				if  (MainGA.collageDB.getLecturer(Lecturerid).getPreferedSchedualArray()[Hours]==Settings.selection_not_available){
-					for (int ClssIndex=0; ClssIndex<Individual.NumOfClasses;ClssIndex++)
-						for (int CourseIndex=0; CourseIndex<Individual.NumOfCourses;CourseIndex++){
-							JumpStartIndividual.getGeneByIndex( Hours, lecturerIndex, ClssIndex, CourseIndex).setUnEditable();
-							
-						}}
-		
-			
-			}			
+
+		Iterator<Integer> Leciter = MainGA.collageDB.getLecturersKeys()
+				.iterator();
+		Iterator<Integer> courseIter;
+		while (Leciter.hasNext()) {
+			int Lecturerid = Leciter.next().intValue();
+			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(
+					Lecturerid);
+			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++) {
+				if (MainGA.collageDB.getLecturer(Lecturerid)
+						.getPreferedSchedualArray()[Hours] == Settings.selection_not_available) {
+					for (int ClssIndex = 0; ClssIndex < Individual.NumOfClasses; ClssIndex++)
+						for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++) {
+							JumpStartIndividual.getGeneByIndex(Hours,
+									lecturerIndex, ClssIndex, CourseIndex)
+									.setUnEditable();
+
+						}
+				}
+			}
+		}
+
+		Leciter = MainGA.collageDB.getLecturersKeys().iterator();
+
+		while (Leciter.hasNext()) {
+			int Lecturerid = Leciter.next().intValue();
+			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(
+					Lecturerid);
+			courseIter = MainGA.collageDB.getCoursesKeys().iterator();
+			while (courseIter.hasNext()) {
+				int courseid = courseIter.next().intValue();
+				int courseIndex = MainGA.collageDB.getMapping().getCourseIndex(
+						courseid);
+
+				if (!MainGA.collageDB.getLecturer(Lecturerid)
+						.getLecturerCourses().contains(courseid)) {
+					for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
+						for (int ClssIndex = 0; ClssIndex < Individual.NumOfClasses; ClssIndex++)
+							JumpStartIndividual.getGeneByIndex(Hours,
+									lecturerIndex, ClssIndex, courseIndex)
+									.setUnEditable();
+
+				}
+
+			}
 		}
 	}
 

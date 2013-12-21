@@ -30,6 +30,11 @@ public class Database {
 		Course crs = Courses.get(courseID);
 		return crs;
 	}
+	
+	public Course getCourseByIndex(int index) {
+		Course crs = Courses.get(mapping.getClassID(index));
+		return crs;
+	}
 
 	/**
 	 * @return the lecturers

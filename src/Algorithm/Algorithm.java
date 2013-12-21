@@ -79,6 +79,7 @@ public class Algorithm {
 
 	private static Individual crossover(Individual indiv1, Individual indiv2) {
 		Individual newSol = new Individual();
+		int i;
 		// Loop through genes
 		for (int H = 0; H < Individual.weeklyHours; H++)
 			// weeklyHours
@@ -89,17 +90,27 @@ public class Algorithm {
 					for (int C = 0; C < Individual.NumOfCourses; C++) { // NumOfCourses
 						// Crossover
 						if (Math.random() <= uniformRate) {
-							if (indiv1.getGeneByIndex(H, L, R, C).isGene())
-								newSol.setGeneByIndex(H, L, R, C);
-							else {
-								newSol.clrGeneByIndex(H, L, R, C);
+							if (indiv1.getGeneByIndex(H, L, R, C).getIndex() == 0) {
+								for (i = 0; i < MainGA.collageDB
+										.getCourseByIndex(C).getAcademicHours(); i++)
+									if (indiv1.getGeneByIndex(H, L, R, C)
+											.isGene()) {
+										newSol.setGeneByIndex(H + i, L, R, C);
+									} else {
+										newSol.clrGeneByIndex(H + i, L, R, C);
+									}
 							}
 
 						} else {
-							if (indiv2.getGeneByIndex(H, L, R, C).isGene())
-								newSol.setGeneByIndex(H, L, R, C);
-							else {
-								newSol.clrGeneByIndex(H, L, R, C);
+							if (indiv2.getGeneByIndex(H, L, R, C).getIndex() == 0) {
+								for (i = 0; i < MainGA.collageDB
+										.getCourseByIndex(C).getAcademicHours(); i++)
+									if (indiv2.getGeneByIndex(H, L, R, C)
+											.isGene()) {
+										newSol.setGeneByIndex(H + i, L, R, C);
+									} else {
+										newSol.clrGeneByIndex(H + i, L, R, C);
+									}
 							}
 						}
 					}
@@ -118,6 +129,7 @@ public class Algorithm {
 	// Mutate an individual
 	private static void mutate(Individual indiv) {
 		// Loop through genes
+		int i;
 		for (int H = 0; H < Individual.weeklyHours; H++)
 			// weeklyHours
 			for (int L = 0; L < Individual.NumOfLecturers; L++)
@@ -129,10 +141,22 @@ public class Algorithm {
 							// Create random gene
 							// check if gene can be mutate
 							if (indiv.getGeneByIndex(H, L, R, C).isEditable())
-								if (indiv.getGeneByIndex(H, L, R, C).isGene())
-									indiv.clrGeneByIndex(H, L, R, C);
-								else {
-									indiv.setGeneByIndex(H, L, R, C);
+								if (Math.random() <= uniformRate) {
+									if (indiv.getGeneByIndex(H, L, R, C)
+											.getIndex() == 0) {
+										for (i = 0; i < MainGA.collageDB
+												.getCourseByIndex(C)
+												.getAcademicHours(); i++)
+											if (indiv
+													.getGeneByIndex(H, L, R, C)
+													.isGene()) {
+												indiv.clrGeneByIndex(H + i, L,
+														R, C);
+											} else {
+												indiv.setGeneByIndex(H + i, L,
+														R, C);
+											}
+									}
 								}
 						}
 					}

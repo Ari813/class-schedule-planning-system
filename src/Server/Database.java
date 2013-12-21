@@ -260,7 +260,7 @@ public class Database {
 			crs = new Course(qrs.getInt("Capacity"), qrs.getInt("CourseID"),
 					qrs.getString("Description"), qrs.getInt("Faculty"),
 					qrs.getInt("Semester"), qrs.getInt("AcademicHours"),
-					qrs.getInt("EstimationOfStudentsNum"));
+					qrs.getInt("EstimationOfStudentsNum"),qrs.getInt("CourseRelatedKey"));
 			if (additionalInfo) {
 				/* Add study aids */
 				query = new String(

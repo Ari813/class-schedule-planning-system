@@ -52,6 +52,22 @@ public class Course implements Serializable {
 		hasadditionalInfo = false;
 	}
 	
+	public Course(int studentNumber, int courseID, String description,
+			int faculty, int semester, int academicHours, int EstimationOfStudentsNum, int CourseRelativeKey) {
+		this.studentNumber = studentNumber;
+		this.courseID = courseID;
+		this.description = description;
+		this.faculty = faculty;
+		this.semester = semester;
+		this.setAcademicHours(academicHours);
+		this.EstimationOfStudentsNum = EstimationOfStudentsNum;
+		this.CourseRelativeKey = CourseRelativeKey;
+
+		setStudyAids(new ArrayList<StudyAids>());
+		CourseLecturers = new ArrayList<Lecturer>();
+		hasadditionalInfo = false;
+	}
+	
 	public Course() {
 
 		setStudyAids(new ArrayList<StudyAids>());
