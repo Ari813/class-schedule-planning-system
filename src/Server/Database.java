@@ -427,10 +427,9 @@ public class Database {
 				+ newCourse.getFaculty() + "', `Semester`='"
 				+ newCourse.getSemester() + "', `Description`='"
 				+ newCourse.getDescription() + "', `AcademicHours`='"
-				+ newCourse.getAcademicHours() + ", `CourseRelatedKey`='"
+				+ newCourse.getAcademicHours() + "', `CourseRelatedKey`='"
 				+ newCourse.getCourseRelativeKey() + "' WHERE `CourseID`='"
 				+ newCourse.getCourseID() + "';");
-
 		st = conn.createStatement();
 		st.executeUpdate(query);
 		newCourse = updateCourseInfoCourse(newCourse);
