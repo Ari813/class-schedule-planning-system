@@ -91,6 +91,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private ArrayList<Course> arrayCourse;
 
 	private Map<Integer, Integer> indexcourse;
+
 	/**
 	 * Create the panel.
 	 */
@@ -108,7 +109,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnRemveStudyAids = new JButton("Remove");
 		btnRemveStudyAids.setToolTipText("Remove Study aid to course");
 		btnRemveStudyAids.setBounds(651, 237, 89, 23);
-		
+
 		return btnRemveStudyAids;
 	}
 
@@ -116,7 +117,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnAddStudyAids = new JButton("Add");
 		btnAddStudyAids.setToolTipText("Add Study aid to course");
 		btnAddStudyAids.setBounds(520, 237, 94, 23);
-		
+
 		return btnAddStudyAids;
 	}
 
@@ -245,16 +246,16 @@ public class Edit_Course extends JPanel implements ActionListener,
 		PNL_Main.add(getBtnAddStudyAids());
 
 		PNL_Main.add(getBtnRemveStudyAids());
-		
+
 		mainCourscomboBox = new JComboBox();
 		mainCourscomboBox.setBounds(10, 137, 125, 20);
 		mainCourscomboBox.setVisible(false);
-		
+
 		PNL_Main.add(mainCourscomboBox);
-		
+
 		chckbxMainCourse = new JCheckBox("have main course");
 		chckbxMainCourse.setBounds(10, 104, 129, 23);
-		
+
 		PNL_Main.add(chckbxMainCourse);
 
 		PNL_Main.repaint();
@@ -294,7 +295,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnDiscard = new JButton("Discard");
 		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnDiscard.setBounds(539, 440, 160, 29);
-		
+
 		return btnDiscard;
 	}
 
@@ -320,7 +321,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	private JButton getbtnSave() {
 		btnSave = new JButton("Save");
-		
+
 		btnSave.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSave.setBounds(306, 440, 160, 29);
 		return btnSave;
@@ -328,7 +329,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	private JButton getbtnNewCourse() {
 		btnNewCourse = new JButton("New Course");
-		
+
 		btnNewCourse.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewCourse.setBounds(73, 440, 160, 29);
 		return btnNewCourse;
@@ -349,7 +350,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnRemove.setToolTipText("Remove lecturer from course");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnRemove.setBounds(270, 237, 65, 38);
-		
+
 		return btnRemove;
 	}
 
@@ -358,7 +359,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnAdd.setToolTipText("Add lecturer to course");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnAdd.setBounds(270, 171, 65, 38);
-		
+
 		return btnAdd;
 	}
 
@@ -453,14 +454,14 @@ public class Edit_Course extends JPanel implements ActionListener,
 		cmbBxEditCourse.setModel(new DefaultComboBoxModel(
 				new String[] { "Empty" }));
 		cmbBxEditCourse.setBounds(10, 53, 754, 20);
-		
+
 		return cmbBxEditCourse;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cmbBxEditCourse) {
-			//mainCourscomboBox.setVisible(false);
-			//chckbxMainCourse.setVisible(false);
+			// mainCourscomboBox.setVisible(false);
+			// chckbxMainCourse.setVisible(false);
 			createNewCourse(false);
 			setSelectedCourse();
 		}
@@ -493,8 +494,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 		}
 
 		if (e.getSource() == btnNewCourse) {
-			//mainCourscomboBox.setVisible(true);
-		//	chckbxMainCourse.setVisible(true);
+			// mainCourscomboBox.setVisible(true);
+			// chckbxMainCourse.setVisible(true);
 			isNewCourse = true;
 			resetLists();
 			resetListslec();
@@ -550,21 +551,22 @@ public class Edit_Course extends JPanel implements ActionListener,
 			}
 		}
 		if (e.getSource() == mainCourscomboBox) {
-			
+
 		}
 		if (e.getSource() == chckbxMainCourse) {
 			if (chckbxMainCourse.isSelected())
 				mainCourscomboBox.setVisible(true);
-			
+
 			else
 				mainCourscomboBox.setVisible(false);
 		}
 		if (e.getSource() == btnSave) {
-			//mainCourscomboBox.setVisible(false);
-			//chckbxMainCourse.setVisible(false);
-			chckbxMainCourse.setSelected(false);;
+			// mainCourscomboBox.setVisible(false);
+			// chckbxMainCourse.setVisible(false);
+			chckbxMainCourse.setSelected(false);
+			;
 			Course newCourse = new Course();
-			
+
 			newCourse.setCourseID(Integer.parseInt(txtIdNumber.getText()));
 			newCourse.setDescription(txtCourseName.getText());
 			newCourse.setFaculty(arrayFaculty
@@ -572,17 +574,18 @@ public class Edit_Course extends JPanel implements ActionListener,
 			newCourse.setSemester((int) Course_Semester.getValue());
 			newCourse.setAcademicHours((int) AcademicHours.getValue());
 			newCourse.setStudentNumber((int) MaxStdntPerClass.getValue());
-			if (chckbxMainCourse.isSelected()){
-				newCourse.setCourseRelativeKey(arrayCourse.get(indexcourse.get(mainCourscomboBox.getSelectedIndex())).getCourseID());
-				
-				}
-			else
+			if (chckbxMainCourse.isSelected()) {
+				newCourse.setCourseRelativeKey(arrayCourse.get(
+						indexcourse.get(mainCourscomboBox.getSelectedIndex()))
+						.getCourseID());
+
+			} else
 				newCourse.setCourseRelativeKey(-1);
-			//newCourse
+			// newCourse
 			Iterator<Integer> itr = arraySelectedLecturers.values().iterator();
 			while (itr.hasNext())
 				newCourse.addLecturer(ArrayLecturers.get(itr.next()));
-				
+
 			itr = CrsSelectedStudyAids.values().iterator();
 			while (itr.hasNext())
 				newCourse.addStudyAids(crsStudyAids.get(itr.next()));
@@ -592,25 +595,25 @@ public class Edit_Course extends JPanel implements ActionListener,
 				serverAnsCourse = manager.CreateNewCourse(newCourse);
 			} else {
 				serverAnsCourse = manager.UpdateNewCourse(newCourse);
-			
+
 			}
-			if (serverAnsCourse.getCourseID() == newCourse.getCourseID()){
-				if(!isNewCourse)
-				arrayCourse.set(cmbBxEditCourse.getSelectedIndex(), newCourse);
-				else{
+			if (serverAnsCourse.getCourseID() == newCourse.getCourseID()) {
+				if (!isNewCourse)
+					arrayCourse.set(cmbBxEditCourse.getSelectedIndex(),
+							newCourse);
+				else {
 					arrayCourse.add(newCourse);
 					setCourses(arrayCourse);
-					
-				
+
 				}
-				System.out.println("Success!!!");}
-			else {
+				System.out.println("Success!!!");
+			} else {
 				System.out.println("Fail!!!!");
 			}
 			if (isNewCourse)
 				setdefault();
 			createNewCourse(false);
-			//manager.BacktoMainMenu(this.PNL_Main);
+			// manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == btnDiscard) {
 			manager.BacktoMainMenu(this.PNL_Main);
@@ -625,11 +628,12 @@ public class Edit_Course extends JPanel implements ActionListener,
 		txtCourseName.setEnabled(bool);
 		txtCourseName.setText("");
 
-		//CB_Faculty.getModel().setSelectedItem(1);
-		Course_Semester.setValue(1);
-		AcademicHours.setValue(1);
-		MaxStdntPerClass.setValue(1);
-
+		// CB_Faculty.getModel().setSelectedItem(1);
+		if (!bool) {
+			Course_Semester.setValue(1);
+			AcademicHours.setValue(1);
+			MaxStdntPerClass.setValue(1);
+		}
 		isNewCourse = bool;
 	}
 
@@ -658,7 +662,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		int i = 0;
 		CB_Faculty.setVisible(true);
 
-		int index = cmbBxEditCourse.getSelectedIndex()-ManagerController.fix ;
+		int index = cmbBxEditCourse.getSelectedIndex() - ManagerController.fix;
 
 		if ((arrayCourse != null) && (!arrayCourse.isEmpty()) && (index >= 0)) {
 			for (i = 0; i < arrayFaculty.size(); i++) {
@@ -689,7 +693,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 	public void setdefault() {
 		txtIdNumber.setText("ID Number");
 		txtCourseName.setText("Course name");
-		//CB_Faculty.setVisible(false);
+		// CB_Faculty.setVisible(false);
 		Course_Semester.setValue(0);
 		AcademicHours.setValue(0);
 		MaxStdntPerClass.setValue(0);
@@ -822,22 +826,22 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void setCourses(ArrayList<Course> arrayList) {
 		arrayCourse = arrayList;
-		indexcourse=new HashMap<>();
+		indexcourse = new HashMap<>();
 		indexcourse.clear();
 		cmbBxEditCourse.removeAllItems();
-		int key=0;
+		int key = 0;
 		for (int i = 0; i < arrayCourse.size(); i++) {
 			cmbBxEditCourse.addItem(arrayCourse.get(i).getCourseID() + ":"
 					+ arrayCourse.get(i).getDescription());
-			if (arrayCourse.get(i).getCourseRelativeKey()==-1){
-				
-				mainCourscomboBox.addItem(arrayCourse.get(i).getCourseID() + ":"
-					+ arrayCourse.get(i).getDescription());
+			if (arrayCourse.get(i).getCourseRelativeKey() == -1) {
+
+				mainCourscomboBox.addItem(arrayCourse.get(i).getCourseID()
+						+ ":" + arrayCourse.get(i).getDescription());
 				indexcourse.put(key, i);
 				key++;
-			
+
 			}
-			
+
 		}
 
 	}
