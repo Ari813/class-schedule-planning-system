@@ -21,6 +21,7 @@ public class Course implements Serializable {
 	private int academicHours;
 	private boolean hasadditionalInfo;
 	private int EstimationOfStudentsNum;
+	private int CourseKey; 
 	
 	public Course(int studentNumber, int courseID, String description,
 			int faculty, int semester, int academicHours) {
@@ -179,6 +180,20 @@ public class Course implements Serializable {
 
 	public void setCapacity(int EstimationOfStudentsNum) {
 		this.EstimationOfStudentsNum = EstimationOfStudentsNum;
+	}
+
+	/**
+	 * @return the courseKey
+	 */
+	public int getCourseKey() {
+		return CourseKey;
+	}
+
+	/**
+	 * @param courseKey the courseKey to set
+	 */
+	public void setCourseKey(int courseKey) {
+		CourseKey = courseKey;
 	}
 
 }

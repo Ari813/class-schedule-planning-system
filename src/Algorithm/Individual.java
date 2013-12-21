@@ -83,20 +83,43 @@ public class Individual {
 	}
 
 	public void generateIndividual() {
-		for (int H = 0; H < weeklyHours; H++)
-			// weeklyHours
-			for (int L = 0; L < NumOfLecturers; L++)
+		boolean geneSet = false;
+		for (int C = 0; C < NumOfCourses; C++) {
+			geneSet = false;
+			// NumOfCourses
+			for (int L = 0; L < NumOfLecturers; L++) {
 				// NumOfLecturers
-				for (int R = 0; R < NumOfClasses; R++)
+				for (int R = 0; R < NumOfClasses; R++) {
 					// NumOfClasses
-					for (int C = 0; C < NumOfCourses; C++) { // NumOfCourses
+					for (int H = 0; H < weeklyHours; H++)
+					// weeklyHours
+					{
 						double gene = Math.round(Math.random());
-						if (genes[H][L][R][C].isEditable()) {
-							if (gene > 0.5)
-								genes[H][L][R][C].setGene();
+						int editableHours = 0;
+						int hoursForCourse = MainGA.collageDB.getCourse(
+								MainGA.collageDB.getMapping().getCourseID(C))
+								.getAcademicHours();
+						if (gene > 0.5) {
+							for (int i = H; i < hoursForCourse; i++)
+								if (genes[i][L][R][C].isEditable())
+									editableHours++;
+							if (editableHours == hoursForCourse)
+								for (int i = H; i < hoursForCourse; i++) {
+									genes[i][L][R][C].setGene();
+									geneSet = true;
+									break;
+								}
+
 						}
 
 					}
+					if (geneSet)
+						break;
+				}
+				if (geneSet)
+					break;
+			}
+		}
 	}
 
 	// Use this if you want to create individuals with different gene lengths
