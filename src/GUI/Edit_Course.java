@@ -607,8 +607,9 @@ public class Edit_Course extends JPanel implements ActionListener,
 			else {
 				System.out.println("Fail!!!!");
 			}
+			if (isNewCourse)
+				setdefault();
 			createNewCourse(false);
-			setdefault();
 			//manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == btnDiscard) {
