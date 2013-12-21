@@ -629,7 +629,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		txtCourseName.setText("");
 
 		// CB_Faculty.getModel().setSelectedItem(1);
-		if (!bool) {
+		if (bool) {
 			Course_Semester.setValue(1);
 			AcademicHours.setValue(1);
 			MaxStdntPerClass.setValue(1);
