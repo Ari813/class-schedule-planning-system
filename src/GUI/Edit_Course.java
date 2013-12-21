@@ -494,7 +494,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 		if (e.getSource() == btnNewCourse) {
 			//mainCourscomboBox.setVisible(true);
-			chckbxMainCourse.setVisible(true);
+		//	chckbxMainCourse.setVisible(true);
 			isNewCourse = true;
 			resetLists();
 			resetListslec();
@@ -560,8 +560,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 				mainCourscomboBox.setVisible(false);
 		}
 		if (e.getSource() == btnSave) {
-			mainCourscomboBox.setVisible(false);
-			chckbxMainCourse.setVisible(false);
+			//mainCourscomboBox.setVisible(false);
+			//chckbxMainCourse.setVisible(false);
 			chckbxMainCourse.setSelected(false);;
 			Course newCourse = new Course();
 			
