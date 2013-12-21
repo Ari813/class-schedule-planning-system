@@ -127,7 +127,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		btnRemove.setToolTipText("Remove item from class");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnRemove.setBounds(502, 216, 65, 38);
-		
+
 		return btnRemove;
 	}
 
@@ -144,10 +144,10 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 
 	private JButton GETbtnNewLecturer() {
 		btnNewLecturer = new JButton("New Lecturer");
-		
+
 		btnNewLecturer.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewLecturer.setBounds(73, 434, 160, 29);
-		
+
 		return btnNewLecturer;
 	}
 
@@ -155,7 +155,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.setBounds(306, 434, 160, 29);
-		
+
 		btnSaveChanges.setEnabled(false);
 		return btnSaveChanges;
 	}
@@ -163,9 +163,9 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 	private Component GETbtnBackToMainMenu() {
 		btnBackToMainMenu = new JButton("Discard");
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
+
 		btnBackToMainMenu.setBounds(539, 434, 160, 29);
-		
+
 		return btnBackToMainMenu;
 	}
 
@@ -272,7 +272,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		cmbxLecturerEditor.setToolTipText("Edit class list");
 		cmbxLecturerEditor.setBounds(10, 53, 754, 20);
 		cmbxLecturerEditor.setMaximumRowCount(52);
-		
+
 		return cmbxLecturerEditor;
 	}
 
@@ -351,19 +351,23 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 				serverAns = manager.UpdateNewLecturer(newLecturer);
 			}
 
-			if (serverAns.getID().equals(newLecturer.getID())){
-				if(!isNewLecturer)
-					ArrayLecturer.set(cmbxLecturerEditor.getSelectedIndex()-1, newLecturer);
-					else{
-						ArrayLecturer.add(newLecturer);
-						setLec(ArrayLecturer);
-																}
-				System.out.println(" Success!!!");}
-			else {
+			if (serverAns.getID().equals(newLecturer.getID())) {
+				if (!isNewLecturer)
+					ArrayLecturer.set(
+							cmbxLecturerEditor.getSelectedIndex() - 1,
+							newLecturer);
+				else {
+					ArrayLecturer.add(newLecturer);
+					setLec(ArrayLecturer);
+				}
+				System.out.println(" Success!!!");
+			} else {
 				System.out.println(" Fail!!!!");
 			}
+
+			if (isNewLecturer)
+				setdefault();
 			createNewLecturer(false);
-			setdefault();
 
 		}
 		if (e.getSource() == btnBackToMainMenu) {
@@ -437,11 +441,14 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 	private void createNewLecturer(boolean bool) {
 		txtpnIDNumber.setEditable(bool);
 		txtpnIDNumber.setEnabled(bool);
-		txtpnIDNumber.setText("");
+
 		txtLecturerNameText.setEditable(bool);
 		txtLecturerNameText.setEnabled(bool);
-		txtLecturerNameText.setText("");
 
+		if (bool) {
+			txtLecturerNameText.setText("");
+			txtpnIDNumber.setText("");
+		}
 		isNewLecturer = bool;
 	}
 
@@ -458,6 +465,9 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 				txtpnIDNumber.setText("");
 			else
 				btnSaveChanges.setEnabled(true);
+		
+		if(txtpnIDNumber.getText().equals(""))
+			btnSaveChanges.setEnabled(false);
 
 	}
 
@@ -477,10 +487,11 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 
 		{
 			ArrayLecturer = arrayList;
-			//cmbxLecturerEditor.removeAll();
+			// cmbxLecturerEditor.removeAll();
 			cmbxLecturerEditor.removeAllItems();
 			for (int i = 0; i < arrayList.size(); i++) {
-				cmbxLecturerEditor.addItem(ArrayLecturer.get(i).getID() + ":"+ ArrayLecturer.get(i).getName());
+				cmbxLecturerEditor.addItem(ArrayLecturer.get(i).getID() + ":"
+						+ ArrayLecturer.get(i).getName());
 
 			}
 
@@ -522,7 +533,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 			arrayCourse.put(arrayList.get(i).getCourseID(), arrayList.get(i));
 			lstCourseModel.addElement(arrayList.get(i).getCourseID() + ":"
 					+ arrayList.get(i).getDescription());
-		
+
 			ArrayAvailableCourse.put(arrayList.get(i).getCourseID(), arrayList
 					.get(i).getCourseID());
 		}
@@ -544,7 +555,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 		btnBackToMainMenu.addActionListener(this);
 		btnAdd.addActionListener(this);
 		cmbxLecturerEditor.addActionListener(this);
-		
+
 	}
 
 }

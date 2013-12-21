@@ -181,7 +181,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private JButton GETbtnDiscard() {
 		btnDiscard = new JButton("Discard");
 		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
+
 		btnDiscard.setBounds(539, 434, 160, 29);
 		return btnDiscard;
 	}
@@ -191,7 +191,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.setBounds(306, 434, 160, 29);
 		btnSaveChanges.setEnabled(false);
-		
+
 		return btnSaveChanges;
 	}
 
@@ -199,7 +199,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		btnNewClass = new JButton("New class");
 		btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewClass.setBounds(73, 434, 160, 29);
-		
+
 		return btnNewClass;
 	}
 
@@ -208,7 +208,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		btnRemove.setToolTipText("Remove item from class");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnRemove.setBounds(502, 216, 65, 38);
-		
+
 		return btnRemove;
 	}
 
@@ -216,7 +216,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		btnAdd = new JButton(" -->");
 		btnAdd.setToolTipText("Add item to class");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
+
 		btnAdd.setBounds(502, 163, 65, 38);
 		return btnAdd;
 	}
@@ -395,64 +395,69 @@ public class Edit_Class extends JPanel implements ActionListener,
 			cmbxEditClass.setToolTipText("Edit class list");
 			cmbxEditClass.setBounds(10, 53, 754, 20);
 			cmbxEditClass.setMaximumRowCount(52);
-			
+
 		}
 		return cmbxEditClass;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSaveChanges) {
-			if (!txtpnCodeNumber.getText().equals("")){
-				
-			
-			Class newClass = new Class();
-			Class serverAns;
-	
-			newClass.setClassID(Integer.parseInt(txtpnCodeNumber.getText()));
-			newClass.setDescription(txtDescriptionText.getText());
-			newClass.setBuilding(arrayBuilding.get(cmbBxBlding.getSelectedIndex()).getBuildingID());
-			newClass.setCampus(arrayCampus.get(cmbxcampus.getSelectedIndex()).getCampusId());
-			newClass.setCapcity(Integer.parseInt(txtCapacityNumber.getText()));
-			newClass.setAvailable(chckbxAvailable.isSelected());
+			if (!txtpnCodeNumber.getText().equals("")) {
 
-			Iterator<Integer> stdyAidsItr = arraySelectedStudyAids.keySet().iterator();
-			while (stdyAidsItr.hasNext()) {
-				newClass.addStudyAid(arrayStudyAids.get(stdyAidsItr.next().intValue()));
-			}
+				Class newClass = new Class();
+				Class serverAns;
 
-			if (isNewClass) {
-				serverAns = manager.CreateNewClass(newClass);
-			} else {
-				serverAns = manager.UpdateNewClass(newClass);
-			}
+				newClass.setClassID(Integer.parseInt(txtpnCodeNumber.getText()));
+				newClass.setDescription(txtDescriptionText.getText());
+				newClass.setBuilding(arrayBuilding.get(
+						cmbBxBlding.getSelectedIndex()).getBuildingID());
+				newClass.setCampus(arrayCampus.get(
+						cmbxcampus.getSelectedIndex()).getCampusId());
+				newClass.setCapcity(Integer.parseInt(txtCapacityNumber
+						.getText()));
+				newClass.setAvailable(chckbxAvailable.isSelected());
 
-			if (serverAns.getClassID() ==newClass.getClassID()){
-				if (!isNewClass){
-					arrayClasses.set(cmbxEditClass.getSelectedIndex()-1, newClass);}
-					else{
+				Iterator<Integer> stdyAidsItr = arraySelectedStudyAids.keySet()
+						.iterator();
+				while (stdyAidsItr.hasNext()) {
+					newClass.addStudyAid(arrayStudyAids.get(stdyAidsItr.next()
+							.intValue()));
+				}
+
+				if (isNewClass) {
+					serverAns = manager.CreateNewClass(newClass);
+				} else {
+					serverAns = manager.UpdateNewClass(newClass);
+				}
+
+				if (serverAns.getClassID() == newClass.getClassID()) {
+					if (!isNewClass) {
+						arrayClasses.set(cmbxEditClass.getSelectedIndex() - 1,
+								newClass);
+					} else {
 						arrayClasses.add(newClass);
 						cmbxEditClass.removeAllItems();
 						setClasses(arrayClasses);
 					}
-				
-				
-				System.out.println(" Success!!!");
-			}
-			else {
-				System.out.println(" Fail!!!!");
-			}
-			createNewClass(false);
-			setdefault();
 
-		}else
-			JOptionPane.showMessageDialog(manager.manegerMainFrm, "ClassID  not enter...");
-			
-			}
+					System.out.println(" Success!!!");
+				} else {
+					System.out.println(" Fail!!!!");
+				}
+				if (isNewClass)
+					setdefault();
+				createNewClass(false);
+
+			} else
+				JOptionPane.showMessageDialog(manager.manegerMainFrm,
+						"ClassID  not enter...");
+
+		}
 
 		if (e.getSource() == btnAdd) {
 			int index;
-			if (cmbxEditClass.getSelectedIndex()!=0)
-			btnSaveChanges.setEnabled(true);
+			if (cmbxEditClass.getSelectedIndex() != 0)
+				btnSaveChanges.setEnabled(true);
 			if ((arrayStudyAids != null) && (!arrayStudyAids.isEmpty())) {
 				if (lstClassAids.getSelectedIndex() >= 0) {
 					index = Integer.parseInt(lstClassAidsModel
@@ -465,8 +470,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		}
 		if (e.getSource() == btnRemove) {
 			int index;
-			if (cmbxEditClass.getSelectedIndex()!=0)
-			btnSaveChanges.setEnabled(true);
+			if (cmbxEditClass.getSelectedIndex() != 0)
+				btnSaveChanges.setEnabled(true);
 			if ((arraySelectedStudyAids != null)
 					&& (!arraySelectedStudyAids.isEmpty())) {
 				if (lstSelectedClassaids.getSelectedIndex() >= 0) {
@@ -513,7 +518,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	private void addAids(int index) {
-		
+
 		arraySelectedStudyAids.put(arrayAvailableStudyAids.get(index),
 				arrayAvailableStudyAids.get(index));
 		arrayAvailableStudyAids.remove(index);
@@ -544,10 +549,9 @@ public class Edit_Class extends JPanel implements ActionListener,
 					+ arrayClasses.get(index).getClassID());
 			btnSaveChanges.setEnabled(false);
 		}
-		
+
 		if (index < 0)
 			setdefault();
-		
 
 	}
 
@@ -598,7 +602,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 		txtClassSelectedBuildig.setText("class selected buildig");
 		chckbxAvailable.setSelected(true);
 		btnSaveChanges.setEnabled(false);
-	
+
 	}
 
 	@Override
@@ -608,33 +612,38 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	public void keyReleased(KeyEvent e) {
-		if ((e.getSource() == txtpnCodeNumber)||(e.getSource() == txtCapacityNumber))
+		if ((e.getSource() == txtpnCodeNumber)
+				|| (e.getSource() == txtCapacityNumber))
 			if (!Character.isDigit(e.getKeyChar()))
 				((JTextField) e.getSource()).setText("0");
 			else
 				btnSaveChanges.setEnabled(true);
+		if (txtpnCodeNumber.getText().equals("")
+				|| txtCapacityNumber.getText().equals(""))
+			btnSaveChanges.setEnabled(false);
 
 	}
 
 	private void createNewClass(boolean bool) {
 		txtpnCodeNumber.setEditable(bool);
 		txtpnCodeNumber.setEnabled(bool);
-		txtpnCodeNumber.setText("");
 
 		txtDescriptionText.setEditable(bool);
 		txtDescriptionText.setEnabled(bool);
-		txtDescriptionText.setText("");
 
-		txtCapacityNumber.setText("0");
-
-		cmbxcampus.setSelectedIndex(0);
 		cmbxcampus.setEnabled(bool);
 		cmbxcampus.setEditable(bool);
-		
-		cmbBxBlding.setSelectedIndex(0);
+
 		cmbBxBlding.setEnabled(bool);
 		cmbBxBlding.setEditable(bool);
-		
+
+		if (bool) {
+			txtDescriptionText.setText("");
+			txtCapacityNumber.setText("0");
+			cmbBxBlding.setSelectedIndex(0);
+			txtpnCodeNumber.setText("");
+			cmbxcampus.setSelectedIndex(0);
+		}
 
 		isNewClass = bool;
 	}
