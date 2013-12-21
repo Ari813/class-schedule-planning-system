@@ -82,6 +82,22 @@ public class Individual {
 					}
 	}
 
+	public void generateIndividual2() {
+		for (int C = 0; C < NumOfCourses; C++) 						// NumOfCourses
+			for (int L = 0; L < NumOfLecturers; L++)				// NumOfLecturers
+				for (int R = 0; R < NumOfClasses; R++)				// NumOfClasses
+					 for (int H = 0; H < weeklyHours; H++){			// weeklyHours
+						double gene = Math.round(Math.random());
+							if (genes[H][L][R][C].isEditable()) {
+								if (gene > 0.5)
+									genes[H][L][R][C].setGene();
+								
+						}
+
+					}
+	}
+	
+	
 	public void generateIndividual() {
 		boolean geneSet = false;
 		for (int C = 0; C < NumOfCourses; C++) {

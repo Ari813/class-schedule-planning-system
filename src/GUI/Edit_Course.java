@@ -69,7 +69,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private JLabel lblMaxsdntClassJ; // Max student per class
 	private ManagerController manager;
 	private JList AvailableStudyAids;
-
+	private JComboBox mainCourscomboBox;
+	private JLabel lblMainCourse;
 	/* Lecturers Data */
 	private Map<Integer, Lecturer> ArrayLecturers; // arrayStudyAids;
 	private Map<Integer, Integer> ArrayAvailableLecturers; // arrayAvailableStudyAids;
@@ -243,6 +244,18 @@ public class Edit_Course extends JPanel implements ActionListener,
 		PNL_Main.add(getBtnAddStudyAids());
 
 		PNL_Main.add(getBtnRemveStudyAids());
+		
+		mainCourscomboBox = new JComboBox();
+		mainCourscomboBox.setBounds(10, 122, 125, 20);
+		mainCourscomboBox.setVisible(false);
+		mainCourscomboBox.addActionListener(this);
+		PNL_Main.add(mainCourscomboBox);
+		
+		lblMainCourse = new JLabel("main course");
+		lblMainCourse.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblMainCourse.setBounds(10, 97, 101, 14);
+		lblMainCourse.setVisible(false);
+		PNL_Main.add(lblMainCourse);
 
 		PNL_Main.repaint();
 	}
@@ -389,7 +402,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	private JComboBox getCB_Faculty() {
 		CB_Faculty = new JComboBox();
-		CB_Faculty.setBounds(10, 272, 105, 21);
+		CB_Faculty.setBounds(10, 329, 105, 21);
 		return CB_Faculty;
 	}
 
@@ -397,7 +410,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		txtCourseName = new JTextField();
 		txtCourseName.setEnabled(false);
 		txtCourseName.setText("course name");
-		txtCourseName.setBounds(10, 207, 105, 20);
+		txtCourseName.setBounds(10, 264, 105, 20);
 		txtCourseName.setColumns(10);
 		return txtCourseName;
 	}
@@ -408,7 +421,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		txtIdNumber.setEnabled(false);
 		txtIdNumber.setEditable(false);
 		txtIdNumber.setText("ID Number");
-		txtIdNumber.setBounds(10, 144, 105, 20);
+		txtIdNumber.setBounds(10, 201, 105, 20);
 		txtIdNumber.setColumns(10);
 		txtIdNumber.addKeyListener(this);
 		return txtIdNumber;
@@ -417,21 +430,21 @@ public class Edit_Course extends JPanel implements ActionListener,
 	private JLabel getlblCoursName() {
 		JLabel lblCoursName = new JLabel("Course Name:");
 		lblCoursName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCoursName.setBounds(10, 179, 125, 20);
+		lblCoursName.setBounds(10, 236, 125, 20);
 		return lblCoursName;
 	}
 
 	private JLabel getlblFaculty() {
 		JLabel lblFaculty = new JLabel("Faculty:");
 		lblFaculty.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblFaculty.setBounds(10, 244, 88, 22);
+		lblFaculty.setBounds(10, 301, 88, 22);
 		return lblFaculty;
 	}
 
 	private JLabel getlblId() {
 		JLabel lblId = new JLabel("ID:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblId.setBounds(10, 114, 50, 20);
+		lblId.setBounds(10, 171, 50, 20);
 		return lblId;
 	}
 
@@ -446,6 +459,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == cmbBxEditCourse) {
+			mainCourscomboBox.setVisible(false);
+			lblMainCourse.setVisible(false);
 			createNewCourse(false);
 			setSelectedCourse();
 		}
@@ -478,6 +493,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 		}
 
 		if (e.getSource() == btnNewCourse) {
+			mainCourscomboBox.setVisible(true);
+			lblMainCourse.setVisible(true);
 			isNewCourse = true;
 			resetLists();
 			resetListslec();
@@ -532,9 +549,12 @@ public class Edit_Course extends JPanel implements ActionListener,
 				}
 			}
 		}
-
+		if (e.getSource() == mainCourscomboBox) {
+			
+		}
 		if (e.getSource() == btnSave) {
-
+			mainCourscomboBox.setVisible(false);
+			lblMainCourse.setVisible(false);
 			
 			Course newCourse = new Course();
 			
@@ -545,7 +565,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 			newCourse.setSemester((int) Course_Semester.getValue());
 			newCourse.setAcademicHours((int) AcademicHours.getValue());
 			newCourse.setStudentNumber((int) MaxStdntPerClass.getValue());
-
+			//newCourse
 			Iterator<Integer> itr = arraySelectedLecturers.values().iterator();
 			while (itr.hasNext())
 				newCourse.addLecturer(ArrayLecturers.get(itr.next()));
@@ -791,6 +811,8 @@ public class Edit_Course extends JPanel implements ActionListener,
 		cmbBxEditCourse.removeAllItems();
 		for (int i = 0; i < arrayCourse.size(); i++) {
 			cmbBxEditCourse.addItem(arrayCourse.get(i).getCourseID() + ":"
+					+ arrayCourse.get(i).getDescription());
+			mainCourscomboBox.addItem(arrayCourse.get(i).getCourseID() + ":"
 					+ arrayCourse.get(i).getDescription());
 		}
 
