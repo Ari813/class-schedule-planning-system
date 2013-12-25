@@ -157,7 +157,8 @@ public class ManagerController {
 		MS = new Manual_Sheduling(this);
 		MS.setFaculty(getFaculty());
 		MS.setClasses(GetClasses());
-		
+		MS.setCourse(getCourse());
+		MS.setLec(getAvailableLecturers(getInformation.all));
 		manegerMainFrm.add(MS.PNL_Main);
 		MS.addActions();
 		manegerMainFrm.repaint();

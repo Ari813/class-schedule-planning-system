@@ -33,13 +33,17 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import entities.Class;
+import entities.Course;
 import entities.Faculty;
+import entities.Lecturer;
 import Controllers.ManagerController;
+
 import javax.swing.JTree;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SpinnerDateModel;
+
 import java.util.Date;
 import java.util.Calendar;
 
@@ -71,13 +75,17 @@ ListSelectionListener, KeyListener {
 	private ManagerController manager;
 	
 	
-	
+	private ArrayList<Class> arrayClasses;
 	private ArrayList<Faculty> ManualArrayFaculty;
 	
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
 	private JLabel lblHour;
 	private JSpinner spinner_2;
+	private ArrayList<Course> arraycourse;
+	private ArrayList<Lecturer> arrayLecturers;
+	private JSpinner spinner;
+	private JSpinner spinner_1;
 	
 	/**
 	 * Create the panel.
@@ -192,7 +200,7 @@ pnl();
 
 	private JComboBox GETcmbBxCourse() {
 		 cmbBxCourse = new JComboBox();
-		  cmbBxCourse.setForeground(SystemColor.info);
+		  cmbBxCourse.setForeground(new Color(0, 0, 0));
 		  cmbBxCourse.setToolTipText("cmbBxCourse");
 		  cmbBxCourse.setBounds(600, 120, 120, 20);
 		return cmbBxCourse;
@@ -301,12 +309,14 @@ pnl();
 			PNL_Main.add(lblHour);
 		}
 		
-		JSpinner spinner = new JSpinner();
+		spinner = new JSpinner();
+		spinner.setToolTipText("???");
+		spinner.setName("omri");
 		spinner.setModel(new SpinnerListModel(new String[] {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday"}));
 		spinner.setBounds(540, 262, 91, 20);
 		PNL_Main.add(spinner);
 		
-		JSpinner spinner_1 = new JSpinner();
+		spinner_1 = new JSpinner();
 		spinner_1.setModel(new SpinnerDateModel(new Date(1387951200000L), new Date(1387951200000L), new Date(1387998000000L), Calendar.HOUR));
 		spinner_1.setBounds(684, 262, 50, 20);
 		PNL_Main.add(spinner_1);
@@ -387,13 +397,32 @@ pnl();
 		if (e.getSource() == btnBackToMainMenu) {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
-		if (e.getSource() == btnSet) {}
-		if (e.getSource() == btnClear) {}
+		if (e.getSource() == cmbxFaculty) {
+			spinner.setValue("sunday");
+			spinner.setVisible(false);
+			spinner.setVisible(true);
+		}
+		
+		if (e.getSource() == btnSet) {
+			
+		}
+		if (e.getSource() == btnClear) {
+			
+			
+			
+		}
 		if (e.getSource() == btnDelete) {}
-		if (e.getSource()== cmbxFaculty){}
+		
+			
+			
+			
+		
 		
 
 	}
+
+	
+
 
 	@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -428,6 +457,7 @@ pnl();
 		 btnDelete.addActionListener(this);
 		 btnClear.addActionListener(this);
 		 start.addActionListener(this);
+		 cmbxFaculty.addActionListener(this);
 		
 	}
 
@@ -444,7 +474,33 @@ pnl();
 
 	public void setClasses(ArrayList<Class> getClasses) {
 		// TODO Auto-generated method stub
-		//arrayClasses = getClasses;
+		arrayClasses = getClasses;
+		cmbBxClass.removeAll();
+		for (int i = 0; i < arrayClasses.size(); i++) {
+			cmbBxClass.addItem(arrayClasses.get(i).getClassID() + ":"
+					+ arrayClasses.get(i).getDescription());
+		}
+	}
+
+
+	public void setCourse(ArrayList<Course> course) {
+		// TODO Auto-generated method stub
+		arraycourse = course;
+		for (int i = 0; i < arraycourse.size(); i++) {
+			cmbBxCourse.addItem(arraycourse.get(i).getCourseID() + ":"
+					+ arraycourse.get(i).getDescription());}
+	}
+
+
+	public void setLec(ArrayList<Lecturer> availableLecturers) {
+		// TODO Auto-generated method stub
+		arrayLecturers = availableLecturers;
+		cmbBxLecturer.removeAllItems();
+		for (int i = 0; i < arrayLecturers.size(); i++) {
+			cmbBxLecturer.addItem(arrayLecturers.get(i).getID() + ":"
+					+ arrayLecturers.get(i).getName());
+			
+		}
 	}
 	}
 
