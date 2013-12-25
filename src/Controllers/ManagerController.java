@@ -86,7 +86,7 @@ public class ManagerController {
 	}
 
 	public void Load_Automatic_Sheduling(JPanel Panel2Close) {
-
+		
 		manegerMainFrm.remove(Panel2Close);
 		AS = new Automatic_Sheduling(this);
 		manegerMainFrm.add(AS.PNL_Main);
@@ -110,33 +110,6 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
-	private ArrayList<Lecturer> getAvailableLecturers(
-			getInformation additionalInfo) {
-		GetAllLecturersPack AvailableLecturers = new GetAllLecturersPack();
-		AvailableLecturers.setAdditionalInfo(additionalInfo);
-		client.handleMessageFromClientUI(AvailableLecturers);
-		AvailableLecturers = (GetAllLecturersPack) client.getMessage();
-
-		return (AvailableLecturers.getAllLecturers());
-
-	}
-
-	private ArrayList<Faculty> getFaculty() {
-
-		FacultyMsg = new GetAllFacultyPack();
-		client.handleMessageFromClientUI(FacultyMsg);
-		FacultyMsg = (GetAllFacultyPack) client.getMessage();
-		return (FacultyMsg.getAllFaculty());
-	}
-
-	private ArrayList<Course> getCourse() {
-
-		CourseMsg = new GetAllCoursePack();
-		CourseMsg.setAdditionalInfo();
-		client.handleMessageFromClientUI(CourseMsg);
-		CourseMsg = (GetAllCoursePack) client.getMessage();
-		return (CourseMsg.getAllclass());
-	}
 
 	public void Load_Course_Settings(JPanel Panel2Close) {
 
@@ -145,6 +118,7 @@ public class ManagerController {
 
 		CS = new Course_Settings(this);
 		CS.setFaculty(getFaculty());
+		
 		CS.setCourse(getCourse());
 		manegerMainFrm.add(CS.PNL_Main);
 		manegerMainFrm.repaint();
@@ -177,6 +151,54 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
+	public void Load_Manual_Sheduling(JPanel Panel2Close) {
+
+		manegerMainFrm.remove(Panel2Close);
+		MS = new Manual_Sheduling(this);
+		MS.setFaculty(getFaculty());
+		MS.setClasses(GetClasses());
+		
+		manegerMainFrm.add(MS.PNL_Main);
+		MS.addActions();
+		manegerMainFrm.repaint();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	private ArrayList<Lecturer> getAvailableLecturers(
+			getInformation additionalInfo) {
+		GetAllLecturersPack AvailableLecturers = new GetAllLecturersPack();
+		AvailableLecturers.setAdditionalInfo(additionalInfo);
+		client.handleMessageFromClientUI(AvailableLecturers);
+		AvailableLecturers = (GetAllLecturersPack) client.getMessage();
+
+		return (AvailableLecturers.getAllLecturers());
+
+	}
+
+	private ArrayList<Faculty> getFaculty() {
+
+		FacultyMsg = new GetAllFacultyPack();
+		client.handleMessageFromClientUI(FacultyMsg);
+		FacultyMsg = (GetAllFacultyPack) client.getMessage();
+		return (FacultyMsg.getAllFaculty());
+	}
+
+	private ArrayList<Course> getCourse() {
+
+		CourseMsg = new GetAllCoursePack();
+		CourseMsg.setAdditionalInfo();
+		client.handleMessageFromClientUI(CourseMsg);
+		CourseMsg = (GetAllCoursePack) client.getMessage();
+		return (CourseMsg.getAllclass());
+	}
+
+	
 	private ArrayList<ClassesAids> GetAidsForExistingClasses() {
 		GetClassAidsPack ClassAidsMessage = new GetClassAidsPack();
 		client.handleMessageFromClientUI(ClassAidsMessage);
@@ -234,15 +256,7 @@ public class ManagerController {
 		return updateCourseMsg.getNewCourse();
 	}
 
-	public void Load_Manual_Sheduling(JPanel Panel2Close) {
 
-		manegerMainFrm.remove(Panel2Close);
-		MS = new Manual_Sheduling(this);
-		
-		manegerMainFrm.add(MS.PNL_Main);
-		MS.addActions();
-		manegerMainFrm.repaint();
-	}
 
 	public void logout() {
 		// TODO Auto-generated method stub

@@ -311,7 +311,7 @@ private JComboBox GETcmbBxSemster() {
 		if (txtLecturerPreferences == null) {
 		txtLecturerPreferences = new JTextField();
 		txtLecturerPreferences.setBounds(0, 4, 774, 40);
-		txtLecturerPreferences.setText("Automatic Sheduling is running");
+		txtLecturerPreferences.setText("Automatic Scheduling is running");
 		txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLecturerPreferences.setFont(new Font("Tahoma", Font.BOLD, 20));
 		txtLecturerPreferences.setColumns(10);

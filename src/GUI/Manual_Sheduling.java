@@ -32,7 +32,16 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
+import entities.Class;
+import entities.Faculty;
 import Controllers.ManagerController;
+import javax.swing.JTree;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerListModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.SpinnerDateModel;
+import java.util.Date;
+import java.util.Calendar;
 
 
 public class Manual_Sheduling extends JPanel implements ActionListener,
@@ -44,10 +53,8 @@ ListSelectionListener, KeyListener {
 	
 	private JComboBox cmbxFaculty;
 	private JComboBox cmbBxCourse;
-	private JComboBox cmbBxType;
-	private JComboBox cmbBxLecturer;
 	private JComboBox cmbBxClass;
-	private JComboBox cmbBxSemster;
+	private JComboBox cmbBxLecturer;
 	
 	private JButton btnSaveChanges;
 	private JButton btnBackToMainMenu;
@@ -57,17 +64,20 @@ ListSelectionListener, KeyListener {
 	private JLabel COURSE;
 	private JLabel lblType;
 	private JLabel lblLecturer ;
-	private JLabel lblClass;
-	private JPanel panel;
 	private JLabel lblFaculty;
 	private   JLabel lblSemester;
-
+	private JButton start;
 	public JPanel PNL_Main;
 	private ManagerController manager;
 	
 	
+	
+	private ArrayList<Faculty> ManualArrayFaculty;
+	
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
+	private JLabel lblHour;
+	private JSpinner spinner_2;
 	
 	/**
 	 * Create the panel.
@@ -84,6 +94,11 @@ ListSelectionListener, KeyListener {
 		private void initialize() {
 pnl();
 		
+		JLabel lblDay = new JLabel("day:");
+		lblDay.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblDay.setBounds(540, 243, 40, 14);
+		PNL_Main.add(lblDay);
+		
 		
 		PNL_Main.add(GETbtnSaveChanges());
 		PNL_Main.add(GETbtnBackToMainMenu());
@@ -96,15 +111,11 @@ pnl();
 		PNL_Main.add(GETcmbBxType());
 		PNL_Main.add(GETlblLecturer());
 		PNL_Main.add(GETcmbBxLecturer());
-		PNL_Main.add(GETcmbBxClass());
-		PNL_Main.add(GETlblClass());
 		PNL_Main.add(GETbtnSet());
 		PNL_Main.add(GETbtnClear());
 		PNL_Main.add(GETbtnDelete());
-		PNL_Main.add(GETpanel());
 		PNL_Main.add(GETlblFaculty());
 		PNL_Main.add(GETlblSemester());
-		PNL_Main.add(GETcmbBxSemster());
 		
 		horizontalStrut();
 		
@@ -117,12 +128,7 @@ pnl();
 		return lblFaculty;
 	}
 
-	private JComboBox GETcmbBxSemster() {
-		 cmbBxSemster = new JComboBox();
-		  cmbBxSemster.setToolTipText("cmbBxSemster");
-		  cmbBxSemster.setBounds(601, 55, 46, 20);
-		return cmbBxSemster;
-	}
+
 
 	private JLabel GETlblSemester() {
 		 lblSemester= new JLabel("semester:");
@@ -131,48 +137,30 @@ pnl();
 		return lblSemester;
 	}
 
-	private JPanel GETpanel() {
-		  panel = new JPanel();
-		  panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		  panel.setBackground(SystemColor.activeCaption);
-		  panel.setBounds(531, 103, 203, 260);
-		return panel;
-	}
+	
 
 	private JButton GETbtnDelete() {
 		btnDelete = new JButton("delete");
-		  btnDelete.setBounds(600, 330, 80, 23);
+		  btnDelete.setBounds(615, 293, 80, 23);
 		 
 		return btnDelete;
 	}
 
 	private JButton GETbtnClear() {
 		 btnClear = new JButton("Clear");
-		  btnClear.setBounds(600, 300, 80, 23);
+		  btnClear.setBounds(615, 366, 80, 23);
 		 
 		return btnClear;
 	}
 
 	private JButton GETbtnSet() {
 		btnSet = new JButton("Set");
-		  btnSet.setBounds(600, 270, 80, 23);
+		  btnSet.setBounds(615, 327, 80, 23);
 		 
 		return btnSet;
 	}
 
-	private JLabel GETlblClass() {
-		lblClass = new JLabel("Class");
-		  lblClass.setFont(new Font("Tahoma", Font.BOLD, 12));
-		  lblClass.setBounds(540, 240, 46, 14);
-		return lblClass;
-	}
 
-	private JComboBox GETcmbBxClass() {
-		cmbBxClass = new JComboBox();
-		  cmbBxClass.setToolTipText("cmbBxLecturer");
-		  cmbBxClass.setBounds(600, 240, 120, 22);
-		return cmbBxClass;
-	}
 
 	private JComboBox GETcmbBxLecturer() {
 		 cmbBxLecturer = new JComboBox();
@@ -189,14 +177,14 @@ pnl();
 	}
 
 	private JComboBox GETcmbBxType() {
-		cmbBxType = new JComboBox();
-		  cmbBxType.setBounds(600, 160, 120, 22);
+		cmbBxClass = new JComboBox();
+		  cmbBxClass.setBounds(600, 160, 120, 22);
 		
-		return cmbBxType;
+		return cmbBxClass;
 	}
 
 	private JLabel GETlblType() {
-		lblType= new JLabel("Type: ");
+		lblType= new JLabel("class");
 		  lblType.setFont(new Font("Tahoma", Font.BOLD, 12));
 		  lblType.setBounds(540, 160, 45, 15);
 		return lblType;
@@ -255,17 +243,20 @@ pnl();
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, true, true, true, true, true, true
+				false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
 		tablemanual.getColumnModel().getColumn(0).setPreferredWidth(65);
+		tablemanual.getColumnModel().getColumn(1).setResizable(false);
 		tablemanual.getColumnModel().getColumn(1).setPreferredWidth(65);
 		tablemanual.getColumnModel().getColumn(1).setMinWidth(25);
+		tablemanual.getColumnModel().getColumn(2).setResizable(false);
 		tablemanual.getColumnModel().getColumn(2).setPreferredWidth(65);
 		tablemanual.getColumnModel().getColumn(2).setMinWidth(25);
+		tablemanual.getColumnModel().getColumn(3).setResizable(false);
 		tablemanual.getColumnModel().getColumn(3).setPreferredWidth(65);
 		tablemanual.getColumnModel().getColumn(3).setMinWidth(25);
 		tablemanual.getColumnModel().getColumn(4).setResizable(false);
@@ -296,6 +287,36 @@ pnl();
 		horizontalStrut_2.setBackground(Color.BLACK);
 		PNL_Main.add(horizontalStrut_2);
 		
+		start = new JButton("start scheduling");
+		start.addActionListener(this); 
+		
+		start.setBackground(new Color(0, 255, 204));
+		start.setFont(new Font("Trajan Pro", Font.BOLD, 11));
+		start.setBounds(10, 391, 285, 23);
+		PNL_Main.add(start);
+		{
+			lblHour = new JLabel("Hour:");
+			lblHour.setFont(new Font("Tahoma", Font.BOLD, 12));
+			lblHour.setBounds(674, 243, 46, 14);
+			PNL_Main.add(lblHour);
+		}
+		
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerListModel(new String[] {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday"}));
+		spinner.setBounds(540, 262, 91, 20);
+		PNL_Main.add(spinner);
+		
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerDateModel(new Date(1387951200000L), new Date(1387951200000L), new Date(1387998000000L), Calendar.HOUR));
+		spinner_1.setBounds(684, 262, 50, 20);
+		PNL_Main.add(spinner_1);
+		{
+			spinner_2 = new JSpinner();
+			spinner_2.setModel(new SpinnerNumberModel(1, 1, 8, 1));
+			spinner_2.setBounds(602, 54, 45, 20);
+			PNL_Main.add(spinner_2);
+		}
+		
 	}
 
 	private JTextField GETtxtLecturerPreferences() {
@@ -303,7 +324,7 @@ pnl();
 		txtLecturerPreferences.setDisabledTextColor(SystemColor.desktop);
 		txtLecturerPreferences.setEnabled(false);
 		txtLecturerPreferences.setBounds(0, 4, 774, 39);
-		txtLecturerPreferences.setText("Manual sheduling");
+		txtLecturerPreferences.setText("Manual scheduling");
 		txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);
 		txtLecturerPreferences.setFont(new Font("Tahoma", Font.BOLD, 20));
 		txtLecturerPreferences.setColumns(10);
@@ -352,10 +373,17 @@ pnl();
 	
 	public void AddFaculty(ArrayList<String> FacultyList	){
 		
+		
 	}
 	public void actionPerformed(ActionEvent e) {
-
-		if (e.getSource() == btnSaveChanges) {}
+		if (e.getSource() == start ){
+			
+			manager.Load_Automatic_Sheduling(this.PNL_Main);
+		}
+		if (e.getSource() == btnSaveChanges) {
+			
+			
+		}
 		if (e.getSource() == btnBackToMainMenu) {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
@@ -399,10 +427,24 @@ pnl();
 		 btnSet.addActionListener(this);		
 		 btnDelete.addActionListener(this);
 		 btnClear.addActionListener(this);
+		 start.addActionListener(this);
 		
 	}
-	
-	
-	
+
+
+	public void setFaculty(ArrayList<Faculty> faculty) {
+		ManualArrayFaculty = faculty;
+		cmbxFaculty.removeAll();
+		for (int i = 0; i < ManualArrayFaculty.size(); i++) {
+			cmbxFaculty.addItem(ManualArrayFaculty.get(i).getFacultyNum() + ":"
+					+ ManualArrayFaculty.get(i).getFaculty());
+		
+	}}
+
+
+	public void setClasses(ArrayList<Class> getClasses) {
+		// TODO Auto-generated method stub
+		//arrayClasses = getClasses;
+	}
 	}
 
