@@ -67,8 +67,6 @@ ListSelectionListener, KeyListener {
 	private JComboBox cmbBxCourse;
 	private JComboBox cmbBxClass;
 	private JComboBox cmbBxLecturer;
-	
-	private JButton btnSaveChanges;
 	private JButton btnBackToMainMenu;
 	private JButton btnSet;
 	private JButton btnClear;
@@ -130,9 +128,6 @@ ListSelectionListener, KeyListener {
 	
 		private void initialize() {
 pnl();
-		
-		
-		PNL_Main.add(GETbtnSaveChanges());
 		PNL_Main.add(GETbtnBackToMainMenu());
 		PNL_Main.add(GETtxtLecturerPreferences());
 	   	PNL_Main.add(GETcmbxFaculty());
@@ -318,7 +313,7 @@ pnl();
 		
 		start.setBackground(new Color(0, 255, 204));
 		start.setFont(new Font("Trajan Pro", Font.BOLD, 11));
-		start.setBounds(10, 391, 285, 23);
+		start.setBounds(73, 434, 285, 28);
 		PNL_Main.add(start);
 		
 		spinner = new JSpinner();
@@ -346,19 +341,13 @@ pnl();
 
 	private JButton GETbtnBackToMainMenu() {
 		btnBackToMainMenu = new JButton("Discard");
-		btnBackToMainMenu.setBounds(462, 434, 160, 29);
+		btnBackToMainMenu.setBounds(453, 434, 169, 29);
 		btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		return btnBackToMainMenu;
 	}
 
-	private JButton GETbtnSaveChanges() {
-		btnSaveChanges = new JButton("Save");
-		btnSaveChanges.setBounds(151, 434, 160, 29);
-		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		
-		return btnSaveChanges;
-	}
+	
 
 	private void pnl() {
 		PNL_Main = new JPanel();
@@ -391,10 +380,7 @@ pnl();
 			
 			manager.Load_Automatic_Sheduling(this.PNL_Main);
 		}
-		if (e.getSource() == btnSaveChanges) {
-			
-			
-		}
+	
 		if (e.getSource() == btnBackToMainMenu) {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
@@ -420,7 +406,7 @@ pnl();
 		}}
 		
 		if (e.getSource() == btnClear) {
-			if (tablemanual.getSelectedColumn()>1){
+			if (tablemanual.getSelectedColumn()>=1){
 				
 			
 			tablemanual.getModel().setValueAt("",tablemanual.getSelectedRow(), tablemanual.getSelectedColumn());
@@ -499,7 +485,7 @@ return i;
 	public void addActions() {
 		// TODO Auto-generated method stub
 		btnBackToMainMenu.addActionListener(this);
-		btnSaveChanges.addActionListener(this);
+		
 		 btnSet.addActionListener(this);		
 		
 		 btnClear.addActionListener(this);
