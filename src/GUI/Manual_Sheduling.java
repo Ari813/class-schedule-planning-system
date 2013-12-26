@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
+import javax.print.DocFlavor.STRING;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -46,9 +47,13 @@ import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SpinnerDateModel;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 import java.awt.Canvas;
 import java.awt.Choice;
 import java.awt.Panel;
@@ -79,12 +84,21 @@ ListSelectionListener, KeyListener {
 	public JPanel PNL_Main;
 	private ManagerController manager;
 	
+	//public idcalsss[][][] ShedulingTable;
+	//public Arrays[][][]arrays=new arr;
+	
 	
 	private ArrayList<Class> arrayClasses;
 	private ArrayList<Faculty> ManualArrayFaculty;
 	
-	public Map<Integer, idcalsss> idList;
+	
 	public idcalsss id_calsss;
+	public ArrayList<idcalsss> array_id_calsss;
+	public Map<Integer, ArrayList<idcalsss>> semesterMap;
+	public Map<String, Map<Integer, ArrayList<idcalsss>>> FacultyMap;
+	public int semid;
+	public int facid;
+	
 	
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
@@ -110,7 +124,7 @@ ListSelectionListener, KeyListener {
 			{"21:00-22:00", null, null, null, null, null, null},
 		};
 	private	String columnNames[]={"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-	private JSpinner spinner;
+	private JSpinner semesterSpinner;
 	
 	
 	
@@ -316,10 +330,10 @@ pnl();
 		start.setBounds(73, 434, 285, 28);
 		PNL_Main.add(start);
 		
-		spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(1, 1, 8, 1));
-		spinner.setBounds(600, 54, 29, 20);
-		PNL_Main.add(spinner);
+		semesterSpinner = new JSpinner();
+		semesterSpinner.setModel(new SpinnerNumberModel(1, 1, 8, 1));
+		semesterSpinner.setBounds(600, 54, 29, 20);
+		PNL_Main.add(semesterSpinner);
 		
 		
 		
@@ -363,7 +377,6 @@ pnl();
 	private JComboBox GETcmbxFaculty() {
 		cmbxFaculty = new JComboBox();
 	  	cmbxFaculty.setBounds(63, 55, 461, 20);
-	  	cmbxFaculty.setModel(new DefaultComboBoxModel(new String[] {"choose Faculty"}));
 	  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	  	cmbxFaculty.setToolTipText("Faculty list");
 	  	cmbxFaculty.setMaximumRowCount(52);
@@ -386,25 +399,85 @@ pnl();
 		}
 		if (e.getSource() == cmbxFaculty) {
 			//spinner.setValue(1);
-			spinner.setVisible(false);
-			spinner.setVisible(true);
+			semesterSpinner.setVisible(false);
+			semesterSpinner.setVisible(true);
 		}
 		
 		if (e.getSource() == btnSet) {
 			int Row=tablemanual.getSelectedRow();
 			int Column=tablemanual.getSelectedColumn();
-			if (Column>1){
+			/*/
+			if (semesterMap==null ){
+				semesterMap=new HashMap<Integer, ArrayList<idcalsss>>();
+			
+			}
+			if ( FacultyMap==null   ){
+				FacultyMap= new HashMap<Integer,Map>();
+			}
+			if (array_id_calsss == null ){
+				array_id_calsss= new ArrayList<idcalsss>();
+						}
+			/*/
+			if (Column>=1){
 			id_calsss=new idcalsss(arrayLecturers.get(cmbBxLecturer.getSelectedIndex()).getID(),arraycourse.get(cmbBxCourse.getSelectedIndex()).getCourseID(),arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID()
 					,Row+Column);
+			
 			tablemanual.getModel().setValueAt(id_calsss,Row,Column );
-			//idList.put((int)spinner.getValue(), id_calsss);
+			
+			//semesterMap.put((int)semesterSpinner.getValue(), id_calsss);
+			//FacultyMap.put(1, semesterMap);
+		
+			FacultyMap= new HashMap<String,Map<Integer, ArrayList<idcalsss>>>();
+			
+				
+			
+			String fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFaculty();
+			int	semester=(int)semesterSpinner.getValue();
+				if (FacultyMap.containsKey(fac)){
+					if (FacultyMap.get(fac).containsKey(semester)){
+						
+						FacultyMap.get(fac).get(semester).add(id_calsss);
+					}else{
+							ArrayList<idcalsss> newGroup =new ArrayList <idcalsss>();
+						     newGroup.add(id_calsss);
+						     semesterMap.put(semid, newGroup);	
+						}
+				}else{
+						
+					Map<Integer, ArrayList<idcalsss>> newmap = new  HashMap<Integer, ArrayList<idcalsss>>();
+					FacultyMap.put(fac, newmap);		
+															
+					}}}
+				
+				
+		
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 		
 		//	lstModel.getValueAt(arg0, arg1)
 			//tablemanual.getSelectedRow();
 		//	tablemanual.getColumnModel().getColumn(1).setCellEditor("111");
 			//tablemanual.getModel().setValueAt(amount, table.getSelectedRow(), 4);		
-		}}
-		
+	
+			
 		if (e.getSource() == btnClear) {
 			if (tablemanual.getSelectedColumn()>=1){
 				
@@ -415,13 +488,7 @@ pnl();
 			}
 			
 		}
-		
-		
-			
-			
-			
-		
-		
+
 
 	}
 
