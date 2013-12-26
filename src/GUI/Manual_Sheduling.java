@@ -90,12 +90,9 @@ ListSelectionListener, KeyListener {
 	
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
-	private JLabel lblHour;
 	
 	private ArrayList<Course> arraycourse;
 	private ArrayList<Lecturer> arrayLecturers;
-	private JSpinner spinner_date;
-	private JSpinner spinner_hour;
 	
 	private TableModel lstModel;
 	private Object[][] tableData={
@@ -133,11 +130,6 @@ ListSelectionListener, KeyListener {
 	
 		private void initialize() {
 pnl();
-		
-		JLabel lblDay = new JLabel("day:");
-		lblDay.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblDay.setBounds(540, 243, 40, 14);
-		PNL_Main.add(lblDay);
 		
 		
 		PNL_Main.add(GETbtnSaveChanges());
@@ -182,14 +174,14 @@ pnl();
 
 	private JButton GETbtnClear() {
 		 btnClear = new JButton("Clear");
-		  btnClear.setBounds(695, 261, 57, 23);
+		  btnClear.setBounds(672, 261, 65, 23);
 		 
 		return btnClear;
 	}
 
 	private JButton GETbtnSet() {
 		btnSet = new JButton("Set");
-		  btnSet.setBounds(540, 308, 160, 23);
+		  btnSet.setBounds(567, 261, 82, 23);
 		 
 		return btnSet;
 	}
@@ -328,24 +320,6 @@ pnl();
 		start.setFont(new Font("Trajan Pro", Font.BOLD, 11));
 		start.setBounds(10, 391, 285, 23);
 		PNL_Main.add(start);
-		{
-			lblHour = new JLabel("Hour:");
-			lblHour.setFont(new Font("Tahoma", Font.BOLD, 12));
-			lblHour.setBounds(635, 243, 46, 14);
-			PNL_Main.add(lblHour);
-		}
-		
-		spinner_date = new JSpinner();
-		spinner_date.setToolTipText("???");
-		spinner_date.setName("omri");
-		spinner_date.setModel(new SpinnerListModel(new String[] {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday"}));
-		spinner_date.setBounds(540, 262, 65, 20);
-		PNL_Main.add(spinner_date);
-		
-		spinner_hour = new JSpinner();
-		spinner_hour.setModel(new SpinnerNumberModel(8, 8, 21, 1));
-		spinner_hour.setBounds(635, 262, 50, 20);
-		PNL_Main.add(spinner_hour);
 		
 		spinner = new JSpinner();
 		spinner.setModel(new SpinnerNumberModel(1, 1, 8, 1));
@@ -425,32 +399,34 @@ pnl();
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == cmbxFaculty) {
-			spinner_date.setValue("sunday");
-			spinner_date.setVisible(false);
-			spinner_date.setVisible(true);
+			//spinner.setValue(1);
+			spinner.setVisible(false);
+			spinner.setVisible(true);
 		}
 		
 		if (e.getSource() == btnSet) {
+			int Row=tablemanual.getSelectedRow();
+			int Column=tablemanual.getSelectedColumn();
+			if (Column>1){
 			id_calsss=new idcalsss(arrayLecturers.get(cmbBxLecturer.getSelectedIndex()).getID(),arraycourse.get(cmbBxCourse.getSelectedIndex()).getCourseID(),arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID()
-					,(int)spinner.getValue());
-			//arrayLecturers.get(cmbBxLecturer.getSelectedIndex()).getID();
-		//	arraycourse.get(cmbBxCourse.getSelectedIndex()).getCourseID();
-			//arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
-			;
-			int i=dateToNum(spinner_date.getValue().toString())
-			;
-			int j=(int) spinner_hour.getValue();
-			
-			idList.put((int)spinner.getValue(), id_calsss);
-			lstModel.getValueAt(arg0, arg1)
-			tablemanual.getSelectedRow();
-			tablemanual.getColumnModel().getColumn(1).setCellEditor("111");
-						
-		}
+					,Row+Column);
+			tablemanual.getModel().setValueAt(id_calsss,Row,Column );
+			//idList.put((int)spinner.getValue(), id_calsss);
+		
+		//	lstModel.getValueAt(arg0, arg1)
+			//tablemanual.getSelectedRow();
+		//	tablemanual.getColumnModel().getColumn(1).setCellEditor("111");
+			//tablemanual.getModel().setValueAt(amount, table.getSelectedRow(), 4);		
+		}}
 		
 		if (e.getSource() == btnClear) {
+			if (tablemanual.getSelectedColumn()>1){
+				
+			
+			tablemanual.getModel().setValueAt("",tablemanual.getSelectedRow(), tablemanual.getSelectedColumn());
 			
 			
+			}
 			
 		}
 		
