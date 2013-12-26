@@ -30,7 +30,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import entities.Class;
 import entities.Course;
@@ -46,6 +48,12 @@ import javax.swing.SpinnerDateModel;
 
 import java.util.Date;
 import java.util.Calendar;
+import java.util.Map;
+import java.awt.Canvas;
+import java.awt.Choice;
+import java.awt.Panel;
+import java.awt.Label;
+import java.awt.List;
 
 
 public class Manual_Sheduling extends JPanel implements ActionListener,
@@ -64,7 +72,6 @@ ListSelectionListener, KeyListener {
 	private JButton btnBackToMainMenu;
 	private JButton btnSet;
 	private JButton btnClear;
-	private JButton btnDelete;
 	private JLabel COURSE;
 	private JLabel lblType;
 	private JLabel lblLecturer ;
@@ -78,14 +85,39 @@ ListSelectionListener, KeyListener {
 	private ArrayList<Class> arrayClasses;
 	private ArrayList<Faculty> ManualArrayFaculty;
 	
+	public Map<Integer, idcalsss> idList;
+	public idcalsss id_calsss;
+	
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
 	private JLabel lblHour;
-	private JSpinner spinner_2;
+	
 	private ArrayList<Course> arraycourse;
 	private ArrayList<Lecturer> arrayLecturers;
+	private JSpinner spinner_date;
+	private JSpinner spinner_hour;
+	
+	private TableModel lstModel;
+	private Object[][] tableData={
+			{"8:00-9:00", null, null, null, null, null, null},
+			{"9:00-10:00", null, null, null, null, null, null},
+			{"10:00-11:00", null, null, null, null, null, null},
+			{"11:00-12:00", null, null, null, null, null, null},
+			{"12:00-13:00", null, null, null, null, null, null},
+			{"13:00-14:00", null, null, null, null, null, null},
+			{"14:00-15:00", null, null, null, null, null, null},
+			{"15:00-16:00", null, null, null, null, null, null},
+			{"16:00-17:00", null, null, null, null, null, null},
+			{"17:00-18:00", null, null, null, null, null, null},
+			{"18:00-19:00", null, null, null, null, null, null},
+			{"19:00-20:00", null, null, null, null, null, null},
+			{"20:00-21:00", null, null, null, null, null, null},
+			{"21:00-22:00", null, null, null, null, null, null},
+		};
+	private	String columnNames[]={"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	private JSpinner spinner;
-	private JSpinner spinner_1;
+	
+	
 	
 	/**
 	 * Create the panel.
@@ -121,7 +153,6 @@ pnl();
 		PNL_Main.add(GETcmbBxLecturer());
 		PNL_Main.add(GETbtnSet());
 		PNL_Main.add(GETbtnClear());
-		PNL_Main.add(GETbtnDelete());
 		PNL_Main.add(GETlblFaculty());
 		PNL_Main.add(GETlblSemester());
 		
@@ -147,23 +178,18 @@ pnl();
 
 	
 
-	private JButton GETbtnDelete() {
-		btnDelete = new JButton("delete");
-		  btnDelete.setBounds(615, 293, 80, 23);
-		 
-		return btnDelete;
-	}
+	
 
 	private JButton GETbtnClear() {
 		 btnClear = new JButton("Clear");
-		  btnClear.setBounds(615, 366, 80, 23);
+		  btnClear.setBounds(695, 261, 57, 23);
 		 
 		return btnClear;
 	}
 
 	private JButton GETbtnSet() {
 		btnSet = new JButton("Set");
-		  btnSet.setBounds(615, 327, 80, 23);
+		  btnSet.setBounds(540, 308, 160, 23);
 		 
 		return btnSet;
 	}
@@ -221,7 +247,31 @@ pnl();
 	}
 
 	private JTable GETtablemanual() {
-		tablemanual = new JTable();
+		
+		
+		lstModel= new AbstractTableModel() {
+			public String getColumnName(int col) {
+		        return columnNames[col].toString();
+		    }
+		    public int getRowCount() { return tableData.length; }
+		    public int getColumnCount() { return columnNames.length; }
+		    public Object getValueAt(int row, int col) {
+		        return tableData[row][col];
+		    }
+		    public boolean isCellEditable(int row, int col)
+		        {             return false;
+		                   		        
+		         }
+		    public void setValueAt(Object value, int row, int col) {
+		    	tableData[row][col] = value;
+		        fireTableCellUpdated(row, col);
+		    }
+		   
+		    
+		  
+		};
+		
+		tablemanual = new JTable(tableData,columnNames);
 		tablemanual.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		tablemanual.setToolTipText("Manual sheduling table ");
 		tablemanual.setFillsViewportHeight(true);
@@ -229,35 +279,10 @@ pnl();
 		tablemanual.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tablemanual.setBackground(SystemColor.inactiveCaption);
 		tablemanual.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tablemanual.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"8:00", null, null, null, null, null, null},
-				{"9:00", null, null, null, null, null, null},
-				{"10:00", null, null, null, null, null, null},
-				{"11:00", null, null, null, null, null, null},
-				{"12:00", null, null, null, null, null, null},
-				{"13:00", null, null, null, null, null, null},
-				{"14:00", null, null, null, null, null, null},
-				{"15:00", null, null, null, null, null, null},
-				{"16:00", null, null, null, null, null, null},
-				{"17:00", null, null, null, null, null, null},
-				{"18:00", null, null, null, null, null, null},
-				{"19:00", null, null, null, null, null, null},
-				{"20:00", null, null, null, null, null, null},
-				{"21:00", null, null, null, null, null, null},
-			},
-			new String[] {
-				"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		tablemanual.getColumnModel().getColumn(0).setPreferredWidth(65);
+	
+		
+		
+		tablemanual.getColumnModel().getColumn(0).setPreferredWidth(80);
 		tablemanual.getColumnModel().getColumn(1).setResizable(false);
 		tablemanual.getColumnModel().getColumn(1).setPreferredWidth(65);
 		tablemanual.getColumnModel().getColumn(1).setMinWidth(25);
@@ -282,6 +307,7 @@ pnl();
 		tablemanual.setColumnSelectionAllowed(true);
 		tablemanual.setCellSelectionEnabled(true);
 		tablemanual.setBounds(35, 127, 600, 224);
+		tablemanual.setModel(lstModel);
 		return tablemanual;
 	}
 
@@ -305,27 +331,28 @@ pnl();
 		{
 			lblHour = new JLabel("Hour:");
 			lblHour.setFont(new Font("Tahoma", Font.BOLD, 12));
-			lblHour.setBounds(674, 243, 46, 14);
+			lblHour.setBounds(635, 243, 46, 14);
 			PNL_Main.add(lblHour);
 		}
 		
+		spinner_date = new JSpinner();
+		spinner_date.setToolTipText("???");
+		spinner_date.setName("omri");
+		spinner_date.setModel(new SpinnerListModel(new String[] {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday"}));
+		spinner_date.setBounds(540, 262, 65, 20);
+		PNL_Main.add(spinner_date);
+		
+		spinner_hour = new JSpinner();
+		spinner_hour.setModel(new SpinnerNumberModel(8, 8, 21, 1));
+		spinner_hour.setBounds(635, 262, 50, 20);
+		PNL_Main.add(spinner_hour);
+		
 		spinner = new JSpinner();
-		spinner.setToolTipText("???");
-		spinner.setName("omri");
-		spinner.setModel(new SpinnerListModel(new String[] {"sunday", "monday", "tuesday", "wednesday", "thursday", "friday"}));
-		spinner.setBounds(540, 262, 91, 20);
+		spinner.setModel(new SpinnerNumberModel(1, 1, 8, 1));
+		spinner.setBounds(600, 54, 29, 20);
 		PNL_Main.add(spinner);
 		
-		spinner_1 = new JSpinner();
-		spinner_1.setModel(new SpinnerDateModel(new Date(1387951200000L), new Date(1387951200000L), new Date(1387998000000L), Calendar.HOUR));
-		spinner_1.setBounds(684, 262, 50, 20);
-		PNL_Main.add(spinner_1);
-		{
-			spinner_2 = new JSpinner();
-			spinner_2.setModel(new SpinnerNumberModel(1, 1, 8, 1));
-			spinner_2.setBounds(602, 54, 45, 20);
-			PNL_Main.add(spinner_2);
-		}
+		
 		
 	}
 
@@ -398,20 +425,35 @@ pnl();
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == cmbxFaculty) {
-			spinner.setValue("sunday");
-			spinner.setVisible(false);
-			spinner.setVisible(true);
+			spinner_date.setValue("sunday");
+			spinner_date.setVisible(false);
+			spinner_date.setVisible(true);
 		}
 		
 		if (e.getSource() == btnSet) {
+			id_calsss=new idcalsss(arrayLecturers.get(cmbBxLecturer.getSelectedIndex()).getID(),arraycourse.get(cmbBxCourse.getSelectedIndex()).getCourseID(),arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID()
+					,(int)spinner.getValue());
+			//arrayLecturers.get(cmbBxLecturer.getSelectedIndex()).getID();
+		//	arraycourse.get(cmbBxCourse.getSelectedIndex()).getCourseID();
+			//arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
+			;
+			int i=dateToNum(spinner_date.getValue().toString())
+			;
+			int j=(int) spinner_hour.getValue();
 			
+			idList.put((int)spinner.getValue(), id_calsss);
+			lstModel.getValueAt(arg0, arg1)
+			tablemanual.getSelectedRow();
+			tablemanual.getColumnModel().getColumn(1).setCellEditor("111");
+						
 		}
+		
 		if (e.getSource() == btnClear) {
 			
 			
 			
 		}
-		if (e.getSource() == btnDelete) {}
+		
 		
 			
 			
@@ -422,6 +464,35 @@ pnl();
 	}
 
 	
+
+
+	private int dateToNum(String value) {
+int i=0;
+switch (value) {
+case "sunday":
+	i=1;
+	break;
+case "Monday":
+	i=2;
+	break;
+case "Tuesday":
+	i=3;
+	break;
+case "Wednesday":
+	i=4;
+	break;
+case "Thursday":
+	i=5;
+	break;
+case "Friday":
+	i=6;
+	break;
+default:
+	break;
+	
+}
+return i;	
+	}
 
 
 	@Override
@@ -454,11 +525,12 @@ pnl();
 		btnBackToMainMenu.addActionListener(this);
 		btnSaveChanges.addActionListener(this);
 		 btnSet.addActionListener(this);		
-		 btnDelete.addActionListener(this);
+		
 		 btnClear.addActionListener(this);
 		 start.addActionListener(this);
 		 cmbxFaculty.addActionListener(this);
-		
+		 cmbBxCourse.addActionListener(this);
+		 cmbBxClass.addActionListener(this);
 	}
 
 

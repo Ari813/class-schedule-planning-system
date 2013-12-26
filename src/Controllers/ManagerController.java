@@ -87,11 +87,14 @@ public class ManagerController {
 
 	public void Load_Automatic_Sheduling(JPanel Panel2Close) {
 		
+		
+		
 		manegerMainFrm.remove(Panel2Close);
 		AS = new Automatic_Sheduling(this);
 		manegerMainFrm.add(AS.PNL_Main);
-		manegerMainFrm.repaint();
 		AS.addActions();
+		manegerMainFrm.repaint();
+		
 	}
 
 	// //////////////
