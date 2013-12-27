@@ -64,6 +64,7 @@ ListSelectionListener, KeyListener {
 	private ManagerController manager;
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
+	private JComboBox comboBoxsemester;
 	
 	/**
 	 * Create the panel.
@@ -108,6 +109,7 @@ ListSelectionListener, KeyListener {
 		PNL_Main.add(GETlblSemester());
 		PNL_Main.add(GETlstTimeTable());
 		PNL_Main.add(GETpanel());
+		PNL_Main.add(getComboBoxsemester());
 		//PNL_Main.add(GETcmbBxSemster());
 		
 	}
@@ -202,7 +204,6 @@ private void pnl() {
 		if (cmbxFaculty == null){
 		cmbxFaculty = new JComboBox();
 	  	cmbxFaculty.setBounds(63, 55, 461, 20);
-	  	cmbxFaculty.setModel(new DefaultComboBoxModel(new String[] {"choose Faculty"}));
 	  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	  	cmbxFaculty.setToolTipText("Faculty list");
 	  	cmbxFaculty.setMaximumRowCount(52);}
@@ -398,6 +399,14 @@ private JComboBox GETcmbBxSemster() {
 		
 	}
 	
+	private JComboBox getComboBoxsemester() {
+		if (comboBoxsemester == null) {
+			comboBoxsemester = new JComboBox();
+			comboBoxsemester.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
+			comboBoxsemester.setBounds(600, 55, 65, 20);
+		}
+		return comboBoxsemester;
+	}
 	}
 
 

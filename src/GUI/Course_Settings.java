@@ -196,9 +196,8 @@ ListSelectionListener,FocusListener, KeyListener {
 		if (cmbxFaculty==null){
 		cmbxFaculty = new JComboBox();
 	  	cmbxFaculty.setBounds(10, 53, 724, 20);
-	  	cmbxFaculty.setModel(new DefaultComboBoxModel(new String[] {"Empty"}));
 	  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	  	cmbxFaculty.setToolTipText("Edit class list");
+	  	cmbxFaculty.setToolTipText("faculty");
 	  	cmbxFaculty.setMaximumRowCount(52);
 	  
 		
