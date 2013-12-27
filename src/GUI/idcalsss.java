@@ -11,6 +11,13 @@ public idcalsss(int cousreid, int lecid, int classid, int id) {
 	this.classid = classid;
 	this.id = id;
 }
+public void setall(idcalsss all){
+	setClassid(all.classid);
+	setCousreid(all.cousreid);
+	setLecid(all.lecid);
+	setId(all.id);
+}
+
 public int getCousreid() {
 	return cousreid;
 }

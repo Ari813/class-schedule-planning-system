@@ -163,8 +163,9 @@ public class ManagerController {
 		MS.setCourse(getCourse());
 		MS.setLec(getAvailableLecturers(getInformation.all));
 		manegerMainFrm.add(MS.PNL_Main);
-		MS.addActions();
+		
 		manegerMainFrm.repaint();
+		MS.addActions();
 	}
 	
 	

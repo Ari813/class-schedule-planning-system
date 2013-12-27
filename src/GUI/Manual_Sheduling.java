@@ -47,6 +47,10 @@ import javax.swing.SpinnerListModel;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SpinnerDateModel;
 
+import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
+
+import common.Settings;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Calendar;
@@ -95,7 +99,7 @@ ListSelectionListener, KeyListener {
 	public idcalsss id_calsss;
 	public ArrayList<idcalsss> array_id_calsss;
 	//public Map<Integer, ArrayList<idcalsss>> semesterMap;
-	public Map<String, Map<Integer, ArrayList<idcalsss>>> FacultyMap;
+	public Map<String, Map<Integer, Map<Integer, idcalsss>>> FacultyMap;
 	public int semid;
 	public int facid;
 	
@@ -398,90 +402,70 @@ pnl();
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == cmbxFaculty) {
-			//spinner.setValue(1);
-			semesterSpinner.setVisible(false);
-			semesterSpinner.setVisible(true);
+			semesterSpinner.setValue(1);
+		
 		}
 		
 		if (e.getSource() == btnSet) {
 			int Row=tablemanual.getSelectedRow();
 			int Column=tablemanual.getSelectedColumn();
-			/*/
-			if (semesterMap==null ){
-				semesterMap=new HashMap<Integer, ArrayList<idcalsss>>();
-			
-			}
-			if ( FacultyMap==null   ){
-				FacultyMap= new HashMap<Integer,Map>();
-			}
-			if (array_id_calsss == null ){
-				array_id_calsss= new ArrayList<idcalsss>();
-						}
-			/*/
+			int ColumnRow=Row+(Column-1)*Settings.dailyHours;
+		
 			if (Column>=1){
 			id_calsss=new idcalsss(arrayLecturers.get(cmbBxLecturer.getSelectedIndex()).getID(),arraycourse.get(cmbBxCourse.getSelectedIndex()).getCourseID(),arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID()
-					,Row+Column);
+					,ColumnRow);
 			
-			tablemanual.getModel().setValueAt(id_calsss,Row,Column );
+			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row,Column );
 			
-			//semesterMap.put((int)semesterSpinner.getValue(), id_calsss);
-			//FacultyMap.put(1, semesterMap);
-		
-			FacultyMap= new HashMap<String,Map<Integer, ArrayList<idcalsss>>>();
 			
-				
-			
+		if (FacultyMap==null)
+			FacultyMap= new HashMap<String,Map<Integer, Map<Integer, idcalsss>>>();
 			String fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFaculty();
 			int	semester=(int)semesterSpinner.getValue();
-				if (FacultyMap.containsKey(fac)){
-					if (FacultyMap.get(fac).containsKey(semester)){
-						
-						FacultyMap.get(fac).get(semester).add(id_calsss);
+			if (FacultyMap.containsKey(fac)){
+				if (FacultyMap.get(fac).containsKey(semester)){
+					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow)){
+						FacultyMap.get(fac).get(semester).get(ColumnRow).setall(id_calsss);
+						System.out.print("overlap");//Only switch
 					}else{
-							ArrayList<idcalsss> newGroup =new ArrayList <idcalsss>();
-						     newGroup.add(id_calsss);
-						     FacultyMap.get(fac).put(semid, newGroup);
-						    	
-						}
-				}else{
-						
-					Map<Integer, ArrayList<idcalsss>> newmap = new  HashMap<Integer, ArrayList<idcalsss>>();
-					FacultyMap.put(fac, newmap);		
-															
-					}}}
-				
-				
-		
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-		
+						FacultyMap.get(fac).get(semester).put(ColumnRow, id_calsss);
+					}				
+					
+				}else
+					{
+						Map<Integer, idcalsss> ColumnRowMap =new HashMap<Integer, idcalsss>();
+						ColumnRowMap.put(ColumnRow,id_calsss);
+						FacultyMap.get(fac).put(semester, ColumnRowMap);
+											
+					}
+			}else{
+							
+				Map<Integer, idcalsss> ColumnRowMap =new HashMap<Integer, idcalsss>();
+				ColumnRowMap.put(ColumnRow,id_calsss);
+				Map<Integer, Map<Integer, idcalsss>> semesterMap =new HashMap<Integer, Map<Integer, idcalsss>>();
+				semesterMap.put(semester, ColumnRowMap);
+				FacultyMap.put(fac, semesterMap);
+			}
+			}
+		}
 		//	lstModel.getValueAt(arg0, arg1)
 			//tablemanual.getSelectedRow();
 		//	tablemanual.getColumnModel().getColumn(1).setCellEditor("111");
 			//tablemanual.getModel().setValueAt(amount, table.getSelectedRow(), 4);		
-	
+			
 			
 		if (e.getSource() == btnClear) {
 			if (tablemanual.getSelectedColumn()>=1){
-				
+				String fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFaculty();
+				int	semester=(int)semesterSpinner.getValue();
+				int Row=tablemanual.getSelectedRow();
+				int Column=tablemanual.getSelectedColumn();
+				int ColumnRow=Row+(Column-1)*Settings.dailyHours;
+				if (FacultyMap!=null){
+					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow))
+					FacultyMap.get(fac).get(semester).remove(ColumnRow);
+							
+				}
 			
 			tablemanual.getModel().setValueAt("",tablemanual.getSelectedRow(), tablemanual.getSelectedColumn());
 			
@@ -561,6 +545,8 @@ return i;
 		 cmbxFaculty.addActionListener(this);
 		 cmbBxCourse.addActionListener(this);
 		 cmbBxClass.addActionListener(this);
+		 semesterSpinner.setVisible(false);
+		 semesterSpinner.setVisible(true);
 	}
 
 
