@@ -94,7 +94,7 @@ ListSelectionListener, KeyListener {
 	
 	public idcalsss id_calsss;
 	public ArrayList<idcalsss> array_id_calsss;
-	public Map<Integer, ArrayList<idcalsss>> semesterMap;
+	//public Map<Integer, ArrayList<idcalsss>> semesterMap;
 	public Map<String, Map<Integer, ArrayList<idcalsss>>> FacultyMap;
 	public int semid;
 	public int facid;
@@ -440,7 +440,8 @@ pnl();
 					}else{
 							ArrayList<idcalsss> newGroup =new ArrayList <idcalsss>();
 						     newGroup.add(id_calsss);
-						     semesterMap.put(semid, newGroup);	
+						     FacultyMap.get(fac).put(semid, newGroup);
+						    	
 						}
 				}else{
 						
