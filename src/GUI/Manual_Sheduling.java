@@ -63,6 +63,8 @@ import java.awt.Choice;
 import java.awt.Panel;
 import java.awt.Label;
 import java.awt.List;
+import java.beans.VetoableChangeListener;
+import java.beans.PropertyChangeEvent;
 
 
 public class Manual_Sheduling extends JPanel implements ActionListener,
@@ -128,7 +130,7 @@ ListSelectionListener, KeyListener {
 			{"21:00-22:00", null, null, null, null, null, null},
 		};
 	private	String columnNames[]={"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
-	private JSpinner semesterSpinner;
+	private JComboBox semesterSpinner;
 	
 	
 	
@@ -286,8 +288,8 @@ pnl();
 		tablemanual.setBorder(new LineBorder(new Color(0, 0, 0)));
 	
 		
-		
-		tablemanual.getColumnModel().getColumn(0).setPreferredWidth(80);
+		tablemanual.setModel(lstModel);
+		tablemanual.getColumnModel().getColumn(0).setPreferredWidth(90);
 		tablemanual.getColumnModel().getColumn(1).setResizable(false);
 		tablemanual.getColumnModel().getColumn(1).setPreferredWidth(65);
 		tablemanual.getColumnModel().getColumn(1).setMinWidth(25);
@@ -312,7 +314,7 @@ pnl();
 		tablemanual.setColumnSelectionAllowed(true);
 		tablemanual.setCellSelectionEnabled(true);
 		tablemanual.setBounds(35, 127, 600, 224);
-		tablemanual.setModel(lstModel);
+	
 		return tablemanual;
 	}
 
@@ -334,9 +336,9 @@ pnl();
 		start.setBounds(73, 434, 285, 28);
 		PNL_Main.add(start);
 		
-		semesterSpinner = new JSpinner();
-		semesterSpinner.setModel(new SpinnerNumberModel(1, 1, 8, 1));
-		semesterSpinner.setBounds(600, 54, 29, 20);
+		semesterSpinner = new JComboBox();
+		semesterSpinner.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
+		semesterSpinner.setBounds(600, 54, 49, 20);
 		PNL_Main.add(semesterSpinner);
 		
 		
@@ -401,11 +403,13 @@ pnl();
 		if (e.getSource() == btnBackToMainMenu) {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
-		if (e.getSource() == cmbxFaculty) {
-			semesterSpinner.setValue(1);
-		
+		if (e.getSource() == cmbxFaculty || e.getSource() == semesterSpinner ) {
+			//semesterSpinner.set;
+			
+			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFaculty(),semesterSpinner.getSelectedIndex());
 		}
 		
+				
 		if (e.getSource() == btnSet) {
 			int Row=tablemanual.getSelectedRow();
 			int Column=tablemanual.getSelectedColumn();
@@ -421,7 +425,7 @@ pnl();
 		if (FacultyMap==null)
 			FacultyMap= new HashMap<String,Map<Integer, Map<Integer, idcalsss>>>();
 			String fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFaculty();
-			int	semester=(int)semesterSpinner.getValue();
+			int	semester	=	semesterSpinner.getSelectedIndex();
 			if (FacultyMap.containsKey(fac)){
 				if (FacultyMap.get(fac).containsKey(semester)){
 					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow)){
@@ -457,7 +461,7 @@ pnl();
 		if (e.getSource() == btnClear) {
 			if (tablemanual.getSelectedColumn()>=1){
 				String fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFaculty();
-				int	semester=(int)semesterSpinner.getValue();
+				int	semester=(int)semesterSpinner.getSelectedIndex();
 				int Row=tablemanual.getSelectedRow();
 				int Column=tablemanual.getSelectedColumn();
 				int ColumnRow=Row+(Column-1)*Settings.dailyHours;
@@ -476,36 +480,25 @@ pnl();
 
 
 	}
-
-	
-
-
-	private int dateToNum(String value) {
-int i=0;
-switch (value) {
-case "sunday":
-	i=1;
-	break;
-case "Monday":
-	i=2;
-	break;
-case "Tuesday":
-	i=3;
-	break;
-case "Wednesday":
-	i=4;
-	break;
-case "Thursday":
-	i=5;
-	break;
-case "Friday":
-	i=6;
-	break;
-default:
-	break;
-	
-}
-return i;	
+private void SetTable(String faculty, int semester) {
+		if( FacultyMap!=null){
+			for (int columnIndex=1;columnIndex<=Settings.workingDays;columnIndex++)
+				for (int rowIndex=0;rowIndex<Settings.dailyHours;rowIndex++){
+					tablemanual.getModel().setValueAt("", rowIndex, columnIndex);
+				}
+		for (int columnIndex=1;columnIndex<=Settings.workingDays;columnIndex++)
+			for (int rowIndex=0;rowIndex<=Settings.dailyHours;rowIndex++){
+				 int ColumnRow=rowIndex+(columnIndex-1)*Settings.dailyHours;
+				 	if (FacultyMap.containsKey(faculty)  )
+					 if (FacultyMap.get(faculty).containsKey(semester))
+							 if (FacultyMap.get(faculty).get(semester).containsKey(ColumnRow)){
+								 //FacultyMap.get(faculty).get(semester).get(ColumnRow).getLecid();
+								 tablemanual.getModel().setValueAt(
+						FacultyMap.get(faculty).get(semester).get(ColumnRow).getCousreid()+ ":" +
+						FacultyMap.get(faculty).get(semester).get(ColumnRow).getClassid()+ ":" +
+						FacultyMap.get(faculty).get(semester).get(ColumnRow).getId()
+						, rowIndex, columnIndex);	}
+		}}
 	}
 
 
@@ -539,14 +532,15 @@ return i;
 		btnBackToMainMenu.addActionListener(this);
 		
 		 btnSet.addActionListener(this);		
-		
+	
 		 btnClear.addActionListener(this);
 		 start.addActionListener(this);
 		 cmbxFaculty.addActionListener(this);
 		 cmbBxCourse.addActionListener(this);
 		 cmbBxClass.addActionListener(this);
-		 semesterSpinner.setVisible(false);
-		 semesterSpinner.setVisible(true);
+		 semesterSpinner.addActionListener(this);
+		 
+		
 	}
 
 
