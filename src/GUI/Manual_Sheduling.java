@@ -99,7 +99,8 @@ ListSelectionListener, KeyListener {
 	
 	
 	//-----------------------
-	public Map<Integer, ArrayList<Course>> CourseMap;
+	public Map<Integer, ArrayList<Course>> CourseMap2;
+	public Map<Integer, Map<Integer, ArrayList<Course>>> CourseMap;
 	public Map<Integer, ArrayList<Faculty>> facMap;
 	public Map<Integer, ArrayList<Lecturer>> LecturerMap;
 	
@@ -616,6 +617,45 @@ public void setLec(ArrayList<Lecturer> availableLecturers) {
 	
 	public void setMapCourse(ArrayList<Course> course) {
 		// TODO Auto-generated method stub
+	 CourseMap=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
+	 
+	 for (int i = 0; i < course.size(); i++) {
+		int facultyID = course.get(i).getFaculty();
+		int Semester=course.get(i).getSemester();
+		 if (CourseMap.containsKey(facultyID)){
+			 if (CourseMap.get(facultyID).containsKey(Semester)){
+				 CourseMap.get(facultyID).get(Semester).add(course.get(i));
+			  }
+			 else{
+				 ArrayList<Course> newcourse=new ArrayList<Course>();
+				 newcourse.add(course.get(i));
+				 CourseMap.get(facultyID).put(Semester, newcourse) ;
+			 }
+				 
+			 }
+		 else{
+			 ArrayList<Course> newcourse=new ArrayList<Course>();
+			 newcourse.add(course.get(i));
+			 
+			 Map<Integer, ArrayList<Course>> courseinMap=new HashMap<Integer, ArrayList<Course>>();
+			 
+			 courseinMap.put(Semester, newcourse);
+			 CourseMap.put(facultyID, courseinMap);
+		 }
+	
+		 
+		 }
+
+	 
+	 	insert_to_corse_combo(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(),semesterSpinner.getSelectedIndex());
+	 	
+
+	}
+	
+	/*/
+	 * old one need  to fix
+	 * public void setMapCourse(ArrayList<Course> course) {
+		// TODO Auto-generated method stub
 	 CourseMap=new HashMap<Integer, ArrayList<Course>>();
 	 for (int i = 0; i < course.size(); i++) {
 		int facultyID = course.get(i).getFaculty();
@@ -635,17 +675,17 @@ public void setLec(ArrayList<Lecturer> availableLecturers) {
 	 	
 
 	}
+	 * 
+	 */
 	
 	
 	
-	
-	
-	private void insert_to_corse_combo(int selectedIndex) {
+	private void insert_to_corse_combo(int selectedIndex,int semestetIndex) {
 	// TODO Auto-generated method stub
 		cmbBxCourse.removeAllItems();
-		for (int i = 0; i < CourseMap.get(selectedIndex).size(); i++) {
-			cmbBxCourse.addItem(CourseMap.get(selectedIndex).get(i).getCourseID() + ":"
-					+ CourseMap.get(selectedIndex).get(i).getDescription());
+		for (int i = 0; i < CourseMap.get(selectedIndex).get(semestetIndex).size(); i++) {
+			cmbBxCourse.addItem(CourseMap.get(selectedIndex).get(semestetIndex).get(i).getCourseID() + ":"
+					+ CourseMap.get(selectedIndex).get(i).get(semestetIndex).getDescription());
 			
 		}
 	
@@ -674,7 +714,7 @@ public void setLec(ArrayList<Lecturer> availableLecturers) {
 		//מפה של קורסים
 		ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 		//cmbBxCourse.getSelectedIndex()
-		insert_to_lec_combo(CourseMap.get(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum()).get(cmbBxCourse.getSelectedIndex()).getCourseID());
+		insert_to_lec_combo(CourseMap.get(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum()).get(semesterSpinner.getSelectedIndex()).get (cmbBxCourse.getSelectedIndex()).getCourseID());
 		
 	}
 		
