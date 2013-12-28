@@ -98,6 +98,18 @@ ListSelectionListener, KeyListener {
 	private ArrayList<Faculty> ManualArrayFaculty;
 	
 	
+	//-----------------------
+	public Map<Integer, ArrayList<Course>> CourseMap;
+	public Map<Integer, ArrayList<Faculty>> facMap;
+	public Map<Integer, ArrayList<Lecturer>> LecturerMap;
+	
+	
+	//-------------------------
+	
+	
+	
+	
+	
 	public idcalsss id_calsss;
 	public ArrayList<idcalsss> array_id_calsss;
 	//public Map<Integer, ArrayList<idcalsss>> semesterMap;
@@ -406,7 +418,7 @@ pnl();
 		if (e.getSource() == cmbxFaculty || e.getSource() == semesterSpinner ) {
 			//semesterSpinner.set;
 			
-			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFaculty(),semesterSpinner.getSelectedIndex());
+			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(),semesterSpinner.getSelectedIndex());
 		}
 		
 				
@@ -480,7 +492,7 @@ pnl();
 
 
 	}
-private void SetTable(String faculty, int semester) {
+private void SetTable(int faculty, int semester) {
 		if( FacultyMap!=null){
 			for (int columnIndex=1;columnIndex<=Settings.workingDays;columnIndex++)
 				for (int rowIndex=0;rowIndex<Settings.dailyHours;rowIndex++){
@@ -573,8 +585,68 @@ private void SetTable(String faculty, int semester) {
 					+ arraycourse.get(i).getDescription());}
 	}
 
-
+//k
+//--------------------------------	
+	public void setMapCourse(ArrayList<Course> course) {
+		// TODO Auto-generated method stub
+	 CourseMap=new HashMap<Integer, ArrayList<Course>>();
+	 for (int i = 0; i < course.size(); i++) {
+		int facultyID = course.get(i).getFaculty();
+		 if (CourseMap.containsKey(facultyID)){
+			 
+			 
+		 }
+		// if (CourseMap.containsKey(CourseID)){
+			 
+		 }
+	 
+		
+		
+	 
+	 
+		arraycourse = course;
+		for (int i = 0; i < arraycourse.size(); i++) {
+			cmbBxCourse.addItem(arraycourse.get(i).getCourseID() + ":"
+					+ arraycourse.get(i).getDescription());}
+	}
+	
+	
+	
+	
+	
+	public void setMapLec(ArrayList<Lecturer> availableLecturers) {
+		
+		//availableLecturers.get(1).getLecturerCourses();
+		LecturerMap =new HashMap<Integer, ArrayList<Lecturer>>();
+		for (int lec_index = 0; lec_index < availableLecturers.size(); lec_index++) {
+			ArrayList<Course> LecturerCourses =  availableLecturers.get(lec_index).getLecturerCourses();
+			for (int Course_index = 0; Course_index < LecturerCourses.size(); Course_index++) {
+				int CourseID=LecturerCourses.get(Course_index).getCourseID();
+				if (LecturerMap.containsKey(CourseID)){
+				(LecturerMap.get(CourseID)).add(availableLecturers.get(lec_index));
+				//availableLecturers.get(i).getID()
+		}
+				else{
+					 ArrayList<Lecturer> insert_lec =new ArrayList<Lecturer>();
+					 insert_lec.add(availableLecturers.get(lec_index));
+					 LecturerMap.put(CourseID, insert_lec);
+					}
+				}
+	}
+		
+		
+	}
+		
+		
+	
+		
+		
+//-----------------------------------	
+	
+	
+	
 	public void setLec(ArrayList<Lecturer> availableLecturers) {
+		setMapLec(availableLecturers);
 		// TODO Auto-generated method stub
 		arrayLecturers = availableLecturers;
 		cmbBxLecturer.removeAllItems();
