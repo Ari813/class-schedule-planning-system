@@ -209,6 +209,8 @@ pnl();
 
 	private JButton GETbtnSet() {
 		btnSet = new JButton("Set");
+		
+		
 		  btnSet.setBounds(567, 261, 82, 23);
 		 
 		return btnSet;
@@ -350,7 +352,7 @@ pnl();
 		PNL_Main.add(start);
 		
 		semesterSpinner = new JComboBox();
-		semesterSpinner.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
+		semesterSpinner.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8"}));
 		semesterSpinner.setBounds(600, 54, 49, 20);
 		PNL_Main.add(semesterSpinner);
 		
@@ -416,17 +418,18 @@ pnl();
 		if (e.getSource() == btnBackToMainMenu) {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
-		if (e.getSource() == cmbxFaculty)  {
-			//semesterSpinner.set;
+		
+		if (e.getSource() == semesterSpinner  || e.getSource() == cmbxFaculty    ){
+			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(),semesterSpinner.getSelectedIndex());
+			insert_to_corse_combo();
+			insert_to_lec_combo();
 			
-			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(),semesterSpinner.getSelectedIndex());
-		}
-		if (e.getSource() == semesterSpinner ){
-			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(),semesterSpinner.getSelectedIndex());
-				
-		}
+			}
 				
 		if (e.getSource() == btnSet) {
+			if ((cmbBxCourse.getItemCount()!=0) && (cmbBxLecturer.getItemCount()!=0)){
+				
+			
 			int Row=tablemanual.getSelectedRow();
 			int Column=tablemanual.getSelectedColumn();
 			int ColumnRow=Row+(Column-1)*Settings.dailyHours;
@@ -438,8 +441,8 @@ pnl();
 			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row,Column );
 			
 			
-		if (FacultyMap==null)
-			FacultyMap= new HashMap<String,Map<Integer, Map<Integer, idcalsss>>>();
+		if (FacultyMap==null){
+			FacultyMap= new HashMap<String,Map<Integer, Map<Integer, idcalsss>>>();}
 			String fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFaculty();
 			int	semester	=	semesterSpinner.getSelectedIndex();
 			if (FacultyMap.containsKey(fac)){
@@ -467,7 +470,7 @@ pnl();
 				FacultyMap.put(fac, semesterMap);
 			}
 			}
-		}
+		}}
 		//	lstModel.getValueAt(arg0, arg1)
 			//tablemanual.getSelectedRow();
 		//	tablemanual.getColumnModel().getColumn(1).setCellEditor("111");
@@ -555,7 +558,7 @@ private void SetTable(int faculty, int semester) {
 		 cmbBxCourse.addActionListener(this);
 		 cmbBxClass.addActionListener(this);
 		 semesterSpinner.addActionListener(this);
-		 
+		
 		
 	}
 
@@ -647,47 +650,32 @@ public void setLec(ArrayList<Lecturer> availableLecturers) {
 		 }
 
 	 
-	 	insert_to_corse_combo(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(),semesterSpinner.getSelectedIndex());
-	 	
+	 	insert_to_corse_combo();
 
 	}
 	
-	/*/
-	 * old one need  to fix
-	 * public void setMapCourse(ArrayList<Course> course) {
-		// TODO Auto-generated method stub
-	 CourseMap=new HashMap<Integer, ArrayList<Course>>();
-	 for (int i = 0; i < course.size(); i++) {
-		int facultyID = course.get(i).getFaculty();
-		 if (CourseMap.containsKey(facultyID)){
-			 CourseMap.get(facultyID).add(course.get(i));
-			  }
-		 else{
-			 ArrayList<Course> insert_course =new ArrayList<Course>();
-			 insert_course.add(course.get(i));
-			 CourseMap.put(facultyID, insert_course);
-		 }
-			 
-		 }
-
-	 
-	 	insert_to_corse_combo(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum());
-	 	
-
-	}
-	 * 
-	 */
 	
 	
 	
-	private void insert_to_corse_combo(int selectedIndex,int semestetIndex) {
+	
+	private void insert_to_corse_combo() {
 	// TODO Auto-generated method stub
+		
+	 	
 		cmbBxCourse.removeAllItems();
-		for (int i = 0; i < CourseMap.get(selectedIndex).get(semestetIndex).size(); i++) {
+		int selectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
+		int semestetIndex=semesterSpinner.getSelectedIndex();
+		
+		
+		if (CourseMap!=null && CourseMap.get(selectedIndex)!=null && CourseMap.get(selectedIndex).get(semestetIndex)!=null ){
+			int size=CourseMap.get(selectedIndex).get(semestetIndex).size();
+		for (int i = 0; i < size; ) {
 			cmbBxCourse.addItem(CourseMap.get(selectedIndex).get(semestetIndex).get(i).getCourseID() + ":"
-					+ CourseMap.get(selectedIndex).get(i).get(semestetIndex).getDescription());
+					+ CourseMap.get(selectedIndex).get(semestetIndex).get(i).getDescription());
+			i++;
+			System.out.print("sss");
 			
-		}
+		}}
 	
 }
 
@@ -714,8 +702,8 @@ public void setLec(ArrayList<Lecturer> availableLecturers) {
 		//מפה של קורסים
 		ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 		//cmbBxCourse.getSelectedIndex()
-		insert_to_lec_combo(CourseMap.get(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum()).get(semesterSpinner.getSelectedIndex()).get (cmbBxCourse.getSelectedIndex()).getCourseID());
-		
+		insert_to_lec_combo();
+			
 	}
 		
 		
@@ -725,15 +713,22 @@ public void setLec(ArrayList<Lecturer> availableLecturers) {
 
 	
 	
-	private void insert_to_lec_combo(int courseID) {
+	private void insert_to_lec_combo() {
 		// TODO Auto-generated method stub
 		cmbBxLecturer.removeAllItems();
-		for (int i = 0; i < LecturerMap.get(courseID).size(); i++) {
-			cmbBxLecturer.addItem(LecturerMap.get(courseID).get(i).getID() + ":"
+		int semestetIndex=semesterSpinner.getSelectedIndex();
+		int selectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
+		
+		if (  CourseMap!=null && CourseMap.get(selectedIndex)!=null && CourseMap.get(selectedIndex).get(semestetIndex)!=null ){
+			int courseID=CourseMap.get(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum()).get(semesterSpinner.getSelectedIndex()).get (cmbBxCourse.getSelectedIndex()).getCourseID();
+		if (	LecturerMap.get(courseID)!=null && LecturerMap!=null){	
+			int size= LecturerMap.get(courseID).size();
+			for (int i = 0; i < size; i++) {
+					cmbBxLecturer.addItem(LecturerMap.get(courseID).get(i).getID() + ":"
 					+ LecturerMap.get(courseID).get(i).getName());
-			
+			}
 		}
-				
+		}	
 		}
 	
 
