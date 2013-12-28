@@ -99,7 +99,7 @@ ListSelectionListener, KeyListener {
 	
 	
 	//-----------------------
-	public Map<Integer, ArrayList<Course>> CourseMap2;
+	//public Map<Integer, ArrayList<Course>> CourseMap2;
 	public Map<Integer, Map<Integer, ArrayList<Course>>> CourseMap;
 	public Map<Integer, ArrayList<Faculty>> facMap;
 	public Map<Integer, ArrayList<Lecturer>> LecturerMap;
@@ -114,7 +114,7 @@ ListSelectionListener, KeyListener {
 	public idcalsss id_calsss;
 	public ArrayList<idcalsss> array_id_calsss;
 	//public Map<Integer, ArrayList<idcalsss>> semesterMap;
-	public Map<String, Map<Integer, Map<Integer, idcalsss>>> FacultyMap;
+	public Map<Integer, Map<Integer, Map<Integer, idcalsss>>> FacultyMap;
 	public int semid;
 	public int facid;
 	
@@ -122,8 +122,8 @@ ListSelectionListener, KeyListener {
 	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
 	static String[] strings = {"Test1", "Test2", "Test3"};
 	
-	private ArrayList<Course> arraycourse;
-	private ArrayList<Lecturer> arrayLecturers;
+	//private ArrayList<Course> arraycourse;
+	//private ArrayList<Lecturer> arrayLecturers;
 	
 	private TableModel lstModel;
 	private Object[][] tableData={
@@ -435,16 +435,21 @@ pnl();
 			int ColumnRow=Row+(Column-1)*Settings.dailyHours;
 		
 			if (Column>=1){
-			id_calsss=new idcalsss(arrayLecturers.get(cmbBxLecturer.getSelectedIndex()).getID(),arraycourse.get(cmbBxCourse.getSelectedIndex()).getCourseID(),arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID()
+				int fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
+				int	semester=semesterSpinner.getSelectedIndex();
+				
+				int courseid= CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseID();
+						
+				int lecid=LecturerMap.get(courseid).get(cmbBxLecturer.getSelectedIndex()).getID();
+			id_calsss=new idcalsss(lecid,courseid,arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID()
 					,ColumnRow);
 			
 			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row,Column );
 			
 			
 		if (FacultyMap==null){
-			FacultyMap= new HashMap<String,Map<Integer, Map<Integer, idcalsss>>>();}
-			String fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFaculty();
-			int	semester	=	semesterSpinner.getSelectedIndex();
+			FacultyMap= new HashMap<Integer,Map<Integer, Map<Integer, idcalsss>>>();}
+		
 			if (FacultyMap.containsKey(fac)){
 				if (FacultyMap.get(fac).containsKey(semester)){
 					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow)){
@@ -479,7 +484,7 @@ pnl();
 			
 		if (e.getSource() == btnClear) {
 			if (tablemanual.getSelectedColumn()>=1){
-				String fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFaculty();
+				int fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 				int	semester=(int)semesterSpinner.getSelectedIndex();
 				int Row=tablemanual.getSelectedRow();
 				int Column=tablemanual.getSelectedColumn();
