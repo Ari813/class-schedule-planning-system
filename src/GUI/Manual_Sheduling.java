@@ -415,12 +415,15 @@ pnl();
 		if (e.getSource() == btnBackToMainMenu) {
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
-		if (e.getSource() == cmbxFaculty || e.getSource() == semesterSpinner ) {
+		if (e.getSource() == cmbxFaculty)  {
 			//semesterSpinner.set;
 			
 			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(),semesterSpinner.getSelectedIndex());
 		}
-		
+		if (e.getSource() == semesterSpinner ){
+			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(),semesterSpinner.getSelectedIndex());
+				
+		}
 				
 		if (e.getSource() == btnSet) {
 			int Row=tablemanual.getSelectedRow();
@@ -578,42 +581,77 @@ private void SetTable(int faculty, int semester) {
 
 
 	public void setCourse(ArrayList<Course> course) {
-		// TODO Auto-generated method stub
+		
+		/*/ TODO Auto-generated method stub
 		arraycourse = course;
 		for (int i = 0; i < arraycourse.size(); i++) {
 			cmbBxCourse.addItem(arraycourse.get(i).getCourseID() + ":"
-					+ arraycourse.get(i).getDescription());}
+					+ arraycourse.get(i).getDescription());
+			}
+			/*/
+		setMapCourse(course);
 	}
 
-//k
+public void setLec(ArrayList<Lecturer> availableLecturers) {
+		
+		/*/ TODO Auto-generated method stub
+		arrayLecturers = availableLecturers;
+		cmbBxLecturer.removeAllItems();
+		for (int i = 0; i < arrayLecturers.size(); i++) {
+			cmbBxLecturer.addItem(arrayLecturers.get(i).getID() + ":"
+					+ arrayLecturers.get(i).getName());
+			
+		}
+		/*/
+		setMapLec(availableLecturers);
+	}
+
 //--------------------------------	
+	
+	
+	
+	
+	
+	
+	
 	public void setMapCourse(ArrayList<Course> course) {
 		// TODO Auto-generated method stub
 	 CourseMap=new HashMap<Integer, ArrayList<Course>>();
 	 for (int i = 0; i < course.size(); i++) {
 		int facultyID = course.get(i).getFaculty();
 		 if (CourseMap.containsKey(facultyID)){
-			 
+			 CourseMap.get(facultyID).add(course.get(i));
+			  }
+		 else{
+			 ArrayList<Course> insert_course =new ArrayList<Course>();
+			 insert_course.add(course.get(i));
+			 CourseMap.put(facultyID, insert_course);
+		 }
 			 
 		 }
-		// if (CourseMap.containsKey(CourseID)){
-			 
-		 }
+
 	 
-		
-		
-	 
-	 
-		arraycourse = course;
-		for (int i = 0; i < arraycourse.size(); i++) {
-			cmbBxCourse.addItem(arraycourse.get(i).getCourseID() + ":"
-					+ arraycourse.get(i).getDescription());}
+	 	insert_to_corse_combo(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum());
+	 	
+
 	}
 	
 	
 	
 	
 	
+	private void insert_to_corse_combo(int selectedIndex) {
+	// TODO Auto-generated method stub
+		cmbBxCourse.removeAllItems();
+		for (int i = 0; i < CourseMap.get(selectedIndex).size(); i++) {
+			cmbBxCourse.addItem(CourseMap.get(selectedIndex).get(i).getCourseID() + ":"
+					+ CourseMap.get(selectedIndex).get(i).getDescription());
+			
+		}
+	
+}
+
+
 	public void setMapLec(ArrayList<Lecturer> availableLecturers) {
 		
 		//availableLecturers.get(1).getLecturerCourses();
@@ -624,7 +662,7 @@ private void SetTable(int faculty, int semester) {
 				int CourseID=LecturerCourses.get(Course_index).getCourseID();
 				if (LecturerMap.containsKey(CourseID)){
 				(LecturerMap.get(CourseID)).add(availableLecturers.get(lec_index));
-				//availableLecturers.get(i).getID()
+				
 		}
 				else{
 					 ArrayList<Lecturer> insert_lec =new ArrayList<Lecturer>();
@@ -633,7 +671,10 @@ private void SetTable(int faculty, int semester) {
 					}
 				}
 	}
-		
+		//מפה של קורסים
+		ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
+		//cmbBxCourse.getSelectedIndex()
+		insert_to_lec_combo(CourseMap.get(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum()).get(cmbBxCourse.getSelectedIndex()).getCourseID());
 		
 	}
 		
@@ -641,20 +682,23 @@ private void SetTable(int faculty, int semester) {
 	
 		
 		
+
+	
+	
+	private void insert_to_lec_combo(int courseID) {
+		// TODO Auto-generated method stub
+		cmbBxLecturer.removeAllItems();
+		for (int i = 0; i < LecturerMap.get(courseID).size(); i++) {
+			cmbBxLecturer.addItem(LecturerMap.get(courseID).get(i).getID() + ":"
+					+ LecturerMap.get(courseID).get(i).getName());
+			
+		}
+				
+		}
+	
+
 //-----------------------------------	
 	
 	
-	
-	public void setLec(ArrayList<Lecturer> availableLecturers) {
-		setMapLec(availableLecturers);
-		// TODO Auto-generated method stub
-		arrayLecturers = availableLecturers;
-		cmbBxLecturer.removeAllItems();
-		for (int i = 0; i < arrayLecturers.size(); i++) {
-			cmbBxLecturer.addItem(arrayLecturers.get(i).getID() + ":"
-					+ arrayLecturers.get(i).getName());
-			
-		}
-	}
 	}
 
