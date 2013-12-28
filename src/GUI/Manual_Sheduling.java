@@ -66,6 +66,7 @@ import java.awt.Label;
 import java.awt.List;
 import java.beans.VetoableChangeListener;
 import java.beans.PropertyChangeEvent;
+import javax.swing.JFormattedTextField;
 
 
 public class Manual_Sheduling extends JPanel implements ActionListener,
@@ -145,6 +146,8 @@ ListSelectionListener, KeyListener {
 		};
 	private	String columnNames[]={"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	private JComboBox semesterSpinner;
+	private JFormattedTextField frmtdtxtfldYouMustEnter;
+	private JFormattedTextField formattedTextField;
 	
 	
 	
@@ -357,6 +360,21 @@ pnl();
 		semesterSpinner.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6", "7", "8"}));
 		semesterSpinner.setBounds(600, 54, 49, 20);
 		PNL_Main.add(semesterSpinner);
+		
+		frmtdtxtfldYouMustEnter = new JFormattedTextField();
+		frmtdtxtfldYouMustEnter.setBackground(Color.RED);
+		frmtdtxtfldYouMustEnter.setText("You must enter all hours of the course to the  system \r\nRemaining hours to insert:");
+		frmtdtxtfldYouMustEnter.setBounds(87, 372, 393, 15);
+		frmtdtxtfldYouMustEnter.setVisible(false);
+		PNL_Main.add(frmtdtxtfldYouMustEnter);
+		
+		formattedTextField = new JFormattedTextField();
+		formattedTextField.setBounds(490, 370, 31, 17);
+		formattedTextField.setValue(5);
+		formattedTextField.setEditable(false);
+		formattedTextField.setVisible(false);
+		PNL_Main.add(formattedTextField);
+		
 		
 		
 		
@@ -760,10 +778,5 @@ public void setLec(ArrayList<Lecturer> availableLecturers) {
 		}
 		}	
 		}
-	
-
-//-----------------------------------	
-	
-	
 	}
 
