@@ -19,6 +19,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -209,6 +210,7 @@ pnl();
 
 	private JButton GETbtnSet() {
 		btnSet = new JButton("Set");
+		
 		
 		
 		  btnSet.setBounds(567, 261, 82, 23);
@@ -437,19 +439,41 @@ pnl();
 			if (Column>=1){
 				int fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 				int	semester=semesterSpinner.getSelectedIndex();
-				
 				int courseid= CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseID();
-						
+				int classRoom=arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
+				
 				int lecid=LecturerMap.get(courseid).get(cmbBxLecturer.getSelectedIndex()).getID();
-			id_calsss=new idcalsss(lecid,courseid,arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID()
-					,ColumnRow);
+			id_calsss=new idcalsss(courseid,lecid,classRoom,ColumnRow);
 			
-			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row,Column );
 			
 			
 		if (FacultyMap==null){
 			FacultyMap= new HashMap<Integer,Map<Integer, Map<Integer, idcalsss>>>();}
 		
+		//JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
+		 boolean flag=true;
+		for (int fac_index=0;fac_index<cmbxFaculty.getItemCount();fac_index++){
+			if (FacultyMap.get(fac_index)!=null){
+			for (int semester_index=1;semester_index<7;semester_index++){
+				if (FacultyMap.get(fac_index).get(semester_index)!=null ){
+					if ( FacultyMap.get(fac_index).get(semester_index).get(ColumnRow)!=null){//.getClassid()==classRoom){
+						int room=FacultyMap.get(fac_index).get(semester_index).get(ColumnRow).getClassid();
+						int lec=FacultyMap.get(fac_index).get(semester_index).get(ColumnRow).getLecid();
+						if (room==classRoom){
+						JOptionPane.showMessageDialog(manager.manegerMainFrm, "room is occupied");
+						flag=false;}
+						if (lec==lecid){
+							JOptionPane.showMessageDialog(manager.manegerMainFrm, "lecturer teaches  in these hours");
+							flag=false;
+						}
+					}
+				}
+			}
+			}
+		}
+		if (flag){
+			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row,Column );
+			
 			if (FacultyMap.containsKey(fac)){
 				if (FacultyMap.get(fac).containsKey(semester)){
 					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow)){
@@ -475,7 +499,7 @@ pnl();
 				FacultyMap.put(fac, semesterMap);
 			}
 			}
-		}}
+		}}}
 		//	lstModel.getValueAt(arg0, arg1)
 			//tablemanual.getSelectedRow();
 		//	tablemanual.getColumnModel().getColumn(1).setCellEditor("111");
@@ -505,6 +529,7 @@ pnl();
 
 	}
 private void SetTable(int faculty, int semester) {
+	//JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
 		if( FacultyMap!=null){
 			for (int columnIndex=1;columnIndex<=Settings.workingDays;columnIndex++)
 				for (int rowIndex=0;rowIndex<Settings.dailyHours;rowIndex++){
