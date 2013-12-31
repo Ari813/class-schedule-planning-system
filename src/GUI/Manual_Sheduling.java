@@ -66,6 +66,7 @@ import java.awt.Label;
 import java.awt.List;
 import java.beans.VetoableChangeListener;
 import java.beans.PropertyChangeEvent;
+
 import javax.swing.JFormattedTextField;
 
 
@@ -146,6 +147,8 @@ ListSelectionListener, KeyListener {
 		};
 	private	String columnNames[]={"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	private JComboBox semesterSpinner;
+	private HashMap<Integer, Map<Integer, ArrayList<Course>>> CourseMapInTable;
+	private JTextField texthours;
 	
 	
 	
@@ -224,20 +227,20 @@ pnl();
 	private JComboBox GETcmbBxLecturer() {
 		 cmbBxLecturer = new JComboBox();
 		  cmbBxLecturer.setToolTipText("cmbBxLecturer");
-		  cmbBxLecturer.setBounds(600, 200, 120, 22);
+		  cmbBxLecturer.setBounds(600, 160, 120, 22);
 		return cmbBxLecturer;
 	}
 
 	private JLabel GETlblLecturer() {
 		 lblLecturer = new JLabel("Lecturer:");
 		  lblLecturer.setFont(new Font("Tahoma", Font.BOLD, 12));
-		  lblLecturer.setBounds(540, 200, 66, 14);
+		  lblLecturer.setBounds(540, 160, 66, 14);
 		return lblLecturer;
 	}
 
 	private JComboBox GETcmbBxType() {
 		cmbBxClass = new JComboBox();
-		  cmbBxClass.setBounds(600, 160, 120, 22);
+		  cmbBxClass.setBounds(600, 200, 120, 22);
 		
 		return cmbBxClass;
 	}
@@ -245,7 +248,7 @@ pnl();
 	private JLabel GETlblType() {
 		lblType= new JLabel("class");
 		  lblType.setFont(new Font("Tahoma", Font.BOLD, 12));
-		  lblType.setBounds(540, 160, 45, 15);
+		  lblType.setBounds(540, 200, 45, 15);
 		return lblType;
 	}
 
@@ -359,6 +362,16 @@ pnl();
 		semesterSpinner.setBounds(600, 54, 49, 20);
 		PNL_Main.add(semesterSpinner);
 		
+		texthours = new JTextField();
+		texthours.setBackground(UIManager.getColor("CheckBox.light"));
+		texthours.setForeground(Color.GREEN);
+		texthours.setFont(new Font("Tekton Pro Ext", Font.PLAIN, 12));
+		texthours.setEnabled(false);
+		texthours.setEditable(false);
+		texthours.setBounds(725, 160, 39, 20);
+		PNL_Main.add(texthours);
+		texthours.setColumns(10);
+		
 		
 		
 		
@@ -429,7 +442,13 @@ pnl();
 			insert_to_lec_combo();
 			
 			}
-				
+		if (e.getSource() == cmbBxLecturer) {
+			
+		}
+		if (e.getSource() == cmbBxCourse) {
+		//	insert_to_lec_combo();
+		}
+		
 		if (e.getSource() == btnSet) {
 			if ((cmbBxCourse.getItemCount()!=0) && (cmbBxLecturer.getItemCount()!=0)){
 				
@@ -437,12 +456,20 @@ pnl();
 			int Row=tablemanual.getSelectedRow();
 			int Column=tablemanual.getSelectedColumn();
 			int ColumnRow=Row+(Column-1)*Settings.dailyHours;
-		
-			if (Column>=1){
-				int fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-				int	semester=semesterSpinner.getSelectedIndex();
-				int courseid= CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseID();
-				int classRoom=arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
+			boolean haveplaceflag=true;
+			int fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
+			int	semester=semesterSpinner.getSelectedIndex();
+			int courseid= CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseID();
+			int classRoom=arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
+			
+			for (int j=0;j<1;j++){
+				
+				
+			}
+			
+			
+			if ((Column>=1) && (haveplaceflag)){
+				
 				
 				int lecid=LecturerMap.get(courseid).get(cmbBxLecturer.getSelectedIndex()).getID();
 			id_calsss=new idcalsss(courseid,lecid,classRoom,ColumnRow);
@@ -590,6 +617,7 @@ private void SetTable(int faculty, int semester) {
 		 cmbBxCourse.addActionListener(this);
 		 cmbBxClass.addActionListener(this);
 		 semesterSpinner.addActionListener(this);
+		 cmbBxLecturer.addActionListener(this);
 		
 		
 	}
@@ -652,8 +680,9 @@ public void setLec(ArrayList<Lecturer> availableLecturers) {
 	
 	public void setMapCourse(ArrayList<Course> course) {
 		// TODO Auto-generated method stub
+		
 	 CourseMap=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
-	 
+	 CourseMapInTable=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
 	 for (int i = 0; i < course.size(); i++) {
 		int facultyID = course.get(i).getFaculty();
 		int Semester=course.get(i).getSemester();
@@ -750,8 +779,9 @@ public void setLec(ArrayList<Lecturer> availableLecturers) {
 		cmbBxLecturer.removeAllItems();
 		int semestetIndex=semesterSpinner.getSelectedIndex();
 		int selectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-		
+	
 		if (  CourseMap!=null && CourseMap.get(selectedIndex)!=null && CourseMap.get(selectedIndex).get(semestetIndex)!=null ){
+			//int cotseindex=CourseMap.get(selectedIndex).get(semestetIndex).get(cmbBxCourse.getSelectedIndex()).getAcademicHours();
 			int courseID=CourseMap.get(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum()).get(semesterSpinner.getSelectedIndex()).get (cmbBxCourse.getSelectedIndex()).getCourseID();
 		if (	LecturerMap.get(courseID)!=null && LecturerMap!=null){	
 			int size= LecturerMap.get(courseID).size();
