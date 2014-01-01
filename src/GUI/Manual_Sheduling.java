@@ -103,7 +103,7 @@ ListSelectionListener, KeyListener {
 	
 	//-----------------------
 	//public Map<Integer, ArrayList<Course>> CourseMap2;
-	public Map<Integer, Map<Integer, ArrayList<Course>>> CourseMapInTable;
+	public Map<Integer, Map<Integer, Map<Integer ,Course>>> CourseMapInTable;
 	public Map<Integer, Map<Integer, ArrayList<Course>>> CourseMap;
 	public Map<Integer, ArrayList<Faculty>> facMap;
 	//public Map<Integer, ArrayList<Lecturer>> LecturerMap;
@@ -582,7 +582,21 @@ pnl();
 			ColumnRow++;
 			}
 			 // ColumnRowMapINTable =new HashMap<Integer, IDclass>();
-			 //CourseMapInTable.get(0).get(0).add(e);
+			 Map<Integer,Map<Integer ,Course>> tmpMap =new HashMap<Integer, Map<Integer,Course>>();
+			Course courseToMove=new Course();
+			courseToMove=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex());
+			
+			 Map<Integer ,Course> tmpcourse =new HashMap<Integer, Course>();
+			 tmpcourse.put(fac, courseToMove);
+			 tmpMap.put(semester, tmpcourse);
+			 CourseMapInTable.put(courseid, tmpMap);
+			 CourseMap.get(fac).get(semester).remove(cmbBxCourse.getSelectedIndex());
+			 insert_to_corse_combo();
+			 	if (cmbBxCourse.getItemCount()>0)
+			 	insert_to_lec_combo();
+			 	else{
+			 		cmbBxLecturer.removeAllItems();
+			 	}
 			 }
 		}}}
 		//	lstModel.getValueAt(arg0, arg1)
@@ -693,7 +707,7 @@ private void SetTable(int faculty, int semester) {
 		
 	 CourseMap=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
 	 
-	 CourseMapInTable=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
+	 CourseMapInTable=new HashMap<Integer, Map<Integer, Map<Integer ,Course>>>();
 	 for (int i = 0; i < course.size(); i++) {
 		int facultyID = course.get(i).getFaculty();
 		int Semester=course.get(i).getSemester();
@@ -839,7 +853,7 @@ private void SetTable(int faculty, int semester) {
 		 btnSet.addActionListener(this);		
 	
 		 btnClear.addActionListener(this);
-		 start.addActionListener(this);
+		
 		 cmbxFaculty.addActionListener(this);
 		 cmbBxCourse.addActionListener(this);
 		 cmbBxClass.addActionListener(this);
