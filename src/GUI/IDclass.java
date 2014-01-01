@@ -2,16 +2,16 @@ package GUI;
 
 import entities.Course;
 
-public class idcalsss {
+public class IDclass {
 
-public idcalsss(int cousreid, int lecid, int classid, int id) {
+public IDclass(int cousreid, int lecid, int classid, int id) {
 	super();
 	this.cousreid = cousreid;
 	this.lecid = lecid;
 	this.classid = classid;
 	this.id = id;
 }
-public void setall(idcalsss all){
+public void setall(IDclass all){
 	setClassid(all.classid);
 	setCousreid(all.cousreid);
 	setLecid(all.lecid);

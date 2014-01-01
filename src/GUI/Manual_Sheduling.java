@@ -93,7 +93,7 @@ ListSelectionListener, KeyListener {
 	public JPanel PNL_Main;
 	private ManagerController manager;
 	
-	//public idcalsss[][][] ShedulingTable;
+	//public IDclass[][][] ShedulingTable;
 	//public Arrays[][][]arrays=new arr;
 	
 	
@@ -105,7 +105,7 @@ ListSelectionListener, KeyListener {
 	//public Map<Integer, ArrayList<Course>> CourseMap2;
 	public Map<Integer, Map<Integer, ArrayList<Course>>> CourseMap;
 	public Map<Integer, ArrayList<Faculty>> facMap;
-	public Map<Integer, ArrayList<Lecturer>> LecturerMap;
+	//public Map<Integer, ArrayList<Lecturer>> LecturerMap;
 	
 	
 	//-------------------------
@@ -114,10 +114,10 @@ ListSelectionListener, KeyListener {
 	
 	
 	
-	public idcalsss id_calsss;
-	public ArrayList<idcalsss> array_id_calsss;
-	//public Map<Integer, ArrayList<idcalsss>> semesterMap;
-	public Map<Integer, Map<Integer, Map<Integer, idcalsss>>> FacultyMap;
+	public IDclass id_calsss;
+	public ArrayList<IDclass> array_id_calsss;
+	//public Map<Integer, ArrayList<IDclass>> semesterMap;
+	public Map<Integer, Map<Integer, Map<Integer, IDclass>>> FacultyMap;
 	public int semid;
 	public int facid;
 	
@@ -468,15 +468,16 @@ pnl();
 			
 			
 			if ((Column>=1) && (haveplaceflag)){
+				//CourseMap.get(selectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getCourseLecturers()
 				
-				
-				int lecid=LecturerMap.get(courseid).get(cmbBxLecturer.getSelectedIndex()).getID();
-			id_calsss=new idcalsss(courseid,lecid,classRoom,ColumnRow);
+				int lecid=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseLecturers().get(cmbBxLecturer.getSelectedIndex()).getID();
+						//LecturerMap.get(courseid).get(cmbBxLecturer.getSelectedIndex()).getID();
+			id_calsss=new IDclass(courseid,lecid,classRoom,ColumnRow);
 			
 			
 			
 		if (FacultyMap==null){
-			FacultyMap= new HashMap<Integer,Map<Integer, Map<Integer, idcalsss>>>();}
+			FacultyMap= new HashMap<Integer,Map<Integer, Map<Integer, IDclass>>>();}
 		
 		//JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
 		 boolean flag=true;
@@ -513,16 +514,16 @@ pnl();
 					
 				}else
 					{
-						Map<Integer, idcalsss> ColumnRowMap =new HashMap<Integer, idcalsss>();
+						Map<Integer, IDclass> ColumnRowMap =new HashMap<Integer, IDclass>();
 						ColumnRowMap.put(ColumnRow,id_calsss);
 						FacultyMap.get(fac).put(semester, ColumnRowMap);
 											
 					}
 			}else{
 							
-				Map<Integer, idcalsss> ColumnRowMap =new HashMap<Integer, idcalsss>();
+				Map<Integer, IDclass> ColumnRowMap =new HashMap<Integer, IDclass>();
 				ColumnRowMap.put(ColumnRow,id_calsss);
-				Map<Integer, Map<Integer, idcalsss>> semesterMap =new HashMap<Integer, Map<Integer, idcalsss>>();
+				Map<Integer, Map<Integer, IDclass>> semesterMap =new HashMap<Integer, Map<Integer, IDclass>>();
 				semesterMap.put(semester, ColumnRowMap);
 				FacultyMap.put(fac, semesterMap);
 			}
@@ -702,7 +703,7 @@ private void SetTable(int faculty, int semester) {
 		}}
 		
 	}}}
-
+/*/
 	public void setMapLec(ArrayList<Lecturer> availableLecturers) {
 		
 		//availableLecturers.get(1).getLecturerCourses();
@@ -734,8 +735,8 @@ private void SetTable(int faculty, int semester) {
 			
 	}
 		
-		
-	
+/*/		
+	/*/	
 	private void insert_to_lec_combo2() {
 		// TODO Auto-generated method stub
 		cmbBxLecturer.removeAllItems();
@@ -755,7 +756,7 @@ private void SetTable(int faculty, int semester) {
 		}	
 		}
 	
-
+/*/
 	public void addActions() {
 		// TODO Auto-generated method stub
 		btnBackToMainMenu.addActionListener(this);
