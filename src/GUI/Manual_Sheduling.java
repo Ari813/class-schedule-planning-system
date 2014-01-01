@@ -257,66 +257,7 @@ pnl();
 		  cmbBxCourse.setForeground(new Color(0, 0, 0));
 		  cmbBxCourse.setToolTipText("cmbBxCourse");
 		  cmbBxCourse.setBounds(600, 120, 120, 20);
-
-
-
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		  
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		return cmbBxCourse;
 	}
 
 	private JLabel GETCOURSELBL() {
@@ -633,7 +574,7 @@ private void SetTable(int faculty, int semester) {
 								 tablemanual.getModel().setValueAt(
 						FacultyMap.get(faculty).get(semester).get(ColumnRow).getCousreid()+ ":" +
 						FacultyMap.get(faculty).get(semester).get(ColumnRow).getClassid()+ ":" +
-						FacultyMap.get(faculty).get(semester).get(ColumnRow).getLecid()
+						FacultyMap.get(faculty).get(semester).get(ColumnRow).getId()
 						, rowIndex, columnIndex);	}
 		}}
 	}
