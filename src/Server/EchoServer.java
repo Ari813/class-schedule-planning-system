@@ -128,10 +128,33 @@ public class EchoServer extends AbstractServer {
 		case UpdateLecturersPreferences:
 			UpdateLecturersPreferences(msgpck, client);
 			break;
+			
+		case GetAllCoursesForSchedualing:
+			allCoursesForSchedualing(msgpck, client);
+			break;
 		default:
 			break;
 
 		}
+	}
+
+	private void allCoursesForSchedualing(MessagePack msg, ConnectionToClient client) {
+		GetAllCoursePack crss = (GetAllCoursePack) msg;
+		try {
+			crss.setAllclass(db.getAllCoursesForSchedualing(crss.isBringAdditionalInfo()));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+
+		}
+		try {
+			client.sendToClient(crss);
+		} catch (IOException e) {
+
+			e.printStackTrace();
+		}
+
 	}
 
 	private void UpdateLecturersPreferences(MessagePack msg,

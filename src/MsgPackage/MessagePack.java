@@ -23,7 +23,7 @@ public class MessagePack implements Serializable {
 	 */
 	public enum OpType {
 
-		Login, Logout, GetClassAids, GetCampusInfo, GetBuildingsInfo, GetStudyAidsInfo, GetAllClasses, GetAllCourses, GetFacultyInfo, GetLecturersInfo, NewClass, UpadteClass, newLectuer, updateLectuer, newCourse, updateCourse, UpdateEstimatedStudentsNumPerClass, UpdateLecturersPreferences
+		Login, Logout, GetClassAids, GetCampusInfo, GetBuildingsInfo, GetStudyAidsInfo, GetAllClasses, GetAllCourses, GetFacultyInfo, GetLecturersInfo, NewClass, UpadteClass, newLectuer, updateLectuer, newCourse, updateCourse, UpdateEstimatedStudentsNumPerClass, UpdateLecturersPreferences, GetAllCoursesForSchedualing
 	};
 
 	/**

@@ -114,7 +114,7 @@ public class FitnessCalc
 					{
 						if (individual.getGeneByIndex(Hours, LecturerIndex, classIndex, CourseIndex).isGene())
 						{
-							if (MainGA.collageDB.getClass(classID).getCapcity() < (MainGA.collageDB.getCourse(MainGA.collageDB.getMapping().getCourseID(CourseIndex)).getCapacity()))
+							if (MainGA.collageDB.getClass(classID).getCapcity() < (MainGA.collageDB.getCourse(MainGA.collageDB.getMapping().getCourseID(CourseIndex)).getStudentNumber()))
 							{
 								SoftConstraints++;
 							}
