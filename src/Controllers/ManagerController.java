@@ -14,6 +14,7 @@ import entities.Course;
 import entities.Faculty;
 import entities.Lecturer;
 import entities.StudyAids;
+import Algorithm.Database;
 import Client.ChatClient;
 import GUI.*;
 import MsgPackage.*;
@@ -86,12 +87,13 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
-	public void Load_Automatic_Sheduling(JPanel Panel2Close) {
+	public void Load_Automatic_Sheduling(JPanel Panel2Close, Database allData) {
 		
 		
 		
 		manegerMainFrm.remove(Panel2Close);
 		AS = new Automatic_Sheduling(this);
+		AS.setData(allData);
 		manegerMainFrm.add(AS.PNL_Main);
 		AS.addActions();
 		manegerMainFrm.repaint();
@@ -162,7 +164,7 @@ public class ManagerController {
 		MS.setFaculty(getFaculty());
 		MS.setClasses(GetClasses());
 		MS.setMapCourse(getCourseForSchedualing());
-		//MS.setMapLec(getAvailableLecturers(getInformation.all));
+		MS.setLec(getAvailableLecturers(getInformation.all));
 		manegerMainFrm.add(MS.PNL_Main);
 		
 		manegerMainFrm.repaint();

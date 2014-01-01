@@ -33,6 +33,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import Algorithm.Database;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 
@@ -65,6 +66,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 	static String[] strings = { "Test1", "Test2", "Test3" };
 	private JComboBox comboBoxsemester;
 
+	private Database allDatabase;
 	/**
 	 * Create the panel.
 	 */
@@ -93,6 +95,9 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 
 	}
 
+	public void setData(Database database){
+		allDatabase=database;
+	}
 	private void initialize()
 	{
 		// TODO Auto-generated method stub

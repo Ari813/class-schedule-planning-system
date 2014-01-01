@@ -40,6 +40,7 @@ import entities.Class;
 import entities.Course;
 import entities.Faculty;
 import entities.Lecturer;
+import Algorithm.Database;
 import Controllers.ManagerController;
 
 import javax.swing.JTree;
@@ -155,6 +156,8 @@ ListSelectionListener, KeyListener {
 	private JFormattedTextField classCapacity;
 	private int classCapacityValue=0;
 	private ArrayList<Course> Allcourses;
+	private Database allData;
+	private ArrayList<Lecturer> arrayLecturers;
 	
 	
 	
@@ -437,8 +440,9 @@ pnl();
 			
 		}
 		if (e.getSource() == start ){
-			
-			manager.Load_Automatic_Sheduling(this.PNL_Main);
+			//Allcourses,arrayClasses
+			allData=new Database(Allcourses, arrayLecturers, arrayClasses);
+			manager.Load_Automatic_Sheduling(this.PNL_Main,allData);
 		}
 	
 		if (e.getSource() == btnBackToMainMenu) {
@@ -622,10 +626,7 @@ pnl();
 			 	}
 			 }
 		}}}
-		//	lstModel.getValueAt(arg0, arg1)
-			//tablemanual.getSelectedRow();
-		//	tablemanual.getColumnModel().getColumn(1).setCellEditor("111");
-			//tablemanual.getModel().setValueAt(amount, table.getSelectedRow(), 4);		
+		
 			
 		}
 		if (e.getSource() == btnClear) {
@@ -946,11 +947,11 @@ private void SetTable(int faculty, int semester) {
 		//setMapCourse(course);
 	//}
 
-//public void setLec(ArrayList<Lecturer> availableLecturers) {
+public void setLec(ArrayList<Lecturer> availableLecturers) {
 		
-		/*/ TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 		arrayLecturers = availableLecturers;
-		cmbBxLecturer.removeAllItems();
+		 /*/cmbBxLecturer.removeAllItems();
 		for (int i = 0; i < arrayLecturers.size(); i++) {
 			cmbBxLecturer.addItem(arrayLecturers.get(i).getID() + ":"
 					+ arrayLecturers.get(i).getName());
@@ -958,6 +959,7 @@ private void SetTable(int faculty, int semester) {
 		}
 		/*/
 		//setMapLec(availableLecturers);
-	//}
+	//
+	}
 	}
 
