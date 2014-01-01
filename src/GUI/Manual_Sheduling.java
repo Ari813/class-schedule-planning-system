@@ -148,9 +148,10 @@ ListSelectionListener, KeyListener {
 	private	String columnNames[]={"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	private JComboBox semesterSpinner;
 	private HashMap<Integer, Map<Integer, ArrayList<Course>>> CourseMapInTable;
-	private JFormattedTextField formattedTextField;
-	private int number=0;
-	private JFormattedTextField formattedTextField_1;
+	private JFormattedTextField courseCapacityHours;
+	private int courseHours=0;
+	private JFormattedTextField classCapacity;
+	private int classCapacityValue=0;
 	
 	
 	
@@ -358,24 +359,24 @@ pnl();
 		semesterSpinner.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
 		semesterSpinner.setBounds(600, 54, 49, 20);
 		PNL_Main.add(semesterSpinner);
-		formattedTextField = new JFormattedTextField();
-		formattedTextField.setFont(new Font("Tahoma", Font.BOLD, 11));
-		formattedTextField.setBackground(SystemColor.window);
-		formattedTextField.setEnabled(false);
-		formattedTextField.setEditable(false);
-		formattedTextField.setBounds(730, 120, 35, 15);
-		PNL_Main.add(formattedTextField);
+		courseCapacityHours = new JFormattedTextField();
+		courseCapacityHours.setFont(new Font("Tahoma", Font.BOLD, 11));
+		courseCapacityHours.setBackground(SystemColor.window);
+		courseCapacityHours.setEnabled(false);
+		courseCapacityHours.setEditable(false);
+		courseCapacityHours.setBounds(730, 120, 35, 15);
+		PNL_Main.add(courseCapacityHours);
 		
 		
-		formattedTextField.setValue(0);
-		{
-			formattedTextField_1 = new JFormattedTextField();
-			formattedTextField_1.setBackground(SystemColor.window);
-			formattedTextField_1.setEditable(false);
-			formattedTextField_1.setEnabled(false);
-			formattedTextField_1.setBounds(730, 200, 35, 15);
-			PNL_Main.add(formattedTextField_1);
-		}
+		courseCapacityHours.setValue(0);
+		
+		classCapacity = new JFormattedTextField();
+		classCapacity.setBackground(SystemColor.window);
+		classCapacity.setEditable(false);
+		classCapacity.setEnabled(false);
+		classCapacity.setBounds(730, 200, 35, 15);
+		PNL_Main.add(classCapacity);
+		
 		
 		
 	}
@@ -427,6 +428,11 @@ pnl();
 	
 	
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == cmbBxClass ){
+			classCapacityValue=arrayClasses.get(cmbBxClass.getSelectedIndex()).getCapcity();
+			classCapacity.setValue(classCapacityValue);
+			
+		}
 		if (e.getSource() == start ){
 			
 			manager.Load_Automatic_Sheduling(this.PNL_Main);
@@ -452,13 +458,13 @@ pnl();
 		if (e.getSource() == cmbBxCourse) {
 		//	CourseMap.get(selectedIndex).get(semesterIndex)
 			//texthours.setText("");
-			number=0;
-			formattedTextField.setValue(0);
+			courseHours=0;
+			courseCapacityHours.setValue(0);
 			if (cmbBxCourse.getItemCount()>0){
 				int facultySelectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 				int semesterIndex=semesterSpinner.getSelectedIndex()+1;
-				number =CourseMap.get(facultySelectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getAcademicHours();
-				formattedTextField.setValue(number);
+				courseHours =CourseMap.get(facultySelectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getAcademicHours();
+				courseCapacityHours.setValue(courseHours);
 			 	insert_to_lec_combo();}
 			 	else{
 			 		cmbBxLecturer.removeAllItems();
@@ -467,6 +473,7 @@ pnl();
 		
 		if (e.getSource() == btnSet) {
 			int tmpRow=0;
+			
 			if ((cmbBxCourse.getItemCount()!=0) && (cmbBxLecturer.getItemCount()!=0)){
 				
 			
@@ -479,7 +486,9 @@ pnl();
 			int courseid= CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseID();
 			int classRoom=arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
 			
-			
+			if (classCapacityValue >CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCapacity())
+				JOptionPane.showMessageDialog(manager.manegerMainFrm, "class dont have enough capacity for this course");
+			else{
 			
 			
 			if ((Column>=1) && (haveplaceflag)){
@@ -496,7 +505,7 @@ pnl();
 		
 		//JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
 		 boolean flag=true;
-		 for (int j=0;j<number;j++){
+		 for (int j=0;j<courseHours;j++){
 				
 				tmpRow=Row+j;
 				if (tmpRow>=Settings.dailyHours){
@@ -533,9 +542,9 @@ pnl();
 		 ColumnRow=Row+(Column-1)*Settings.dailyHours;
 		
 		if (flag){
-			 for (int j=0;j<number;j++){
+			 for (int j=0;j<courseHours;j++){
 				 id_calsss=new IDclass(courseid,lecid,classRoom,ColumnRow);
-				 id_calsss.setSize(number);
+				 id_calsss.setSize(courseHours);
 				 id_calsss.setId(j);
 			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row+j,Column );
 			
@@ -573,6 +582,7 @@ pnl();
 			
 			
 		if (e.getSource() == btnClear) {
+			
 			if (tablemanual.getSelectedColumn()>=1){
 				
 					
@@ -606,7 +616,7 @@ pnl();
 			
 			}
 			
-		}
+		}}
 
 
 	}
