@@ -54,6 +54,7 @@ public class ManagerController {
 	private GetAllClassesPack ClassMsg;
 	private GetAllCoursePack CourseMsg;
 	private GetAllFacultyPack FacultyMsg;
+	private GetAllCoursesForSchedualingPack ForSchedualingCourseMsg;
 
 	public ManagerController(Main_Frame mainFrm, ChatClient client) {
 		this.client = client;
@@ -160,7 +161,7 @@ public class ManagerController {
 		MS = new Manual_Sheduling(this);
 		MS.setFaculty(getFaculty());
 		MS.setClasses(GetClasses());
-		MS.setMapCourse(getCourse());
+		MS.setMapCourse(getCourseForSchedualing());
 		//MS.setMapLec(getAvailableLecturers(getInformation.all));
 		manegerMainFrm.add(MS.PNL_Main);
 		
@@ -194,6 +195,16 @@ public class ManagerController {
 		return (FacultyMsg.getAllFaculty());
 	}
 
+	
+	private ArrayList<Course> getCourseForSchedualing() {
+
+		ForSchedualingCourseMsg = new GetAllCoursesForSchedualingPack();
+		ForSchedualingCourseMsg.setAdditionalInfo();
+		client.handleMessageFromClientUI(ForSchedualingCourseMsg);
+		ForSchedualingCourseMsg = (GetAllCoursesForSchedualingPack) client.getMessage();
+		return (ForSchedualingCourseMsg.getAllclass());
+	}
+	
 	private ArrayList<Course> getCourse() {
 
 		CourseMsg = new GetAllCoursePack();

@@ -103,6 +103,7 @@ ListSelectionListener, KeyListener {
 	
 	//-----------------------
 	//public Map<Integer, ArrayList<Course>> CourseMap2;
+	public Map<Integer, Map<Integer, ArrayList<Course>>> CourseMapInTable;
 	public Map<Integer, Map<Integer, ArrayList<Course>>> CourseMap;
 	public Map<Integer, ArrayList<Faculty>> facMap;
 	//public Map<Integer, ArrayList<Lecturer>> LecturerMap;
@@ -118,6 +119,7 @@ ListSelectionListener, KeyListener {
 	public ArrayList<IDclass> array_id_calsss;
 	//public Map<Integer, ArrayList<IDclass>> semesterMap;
 	public Map<Integer, Map<Integer, Map<Integer, IDclass>>> FacultyMap;
+	
 	public int semid;
 	public int facid;
 	
@@ -147,7 +149,7 @@ ListSelectionListener, KeyListener {
 		};
 	private	String columnNames[]={"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	private JComboBox semesterSpinner;
-	private HashMap<Integer, Map<Integer, ArrayList<Course>>> CourseMapInTable;
+	
 	private JFormattedTextField courseCapacityHours;
 	private int courseHours=0;
 	private JFormattedTextField classCapacity;
@@ -485,8 +487,9 @@ pnl();
 			int	semester=semesterSpinner.getSelectedIndex()+1;
 			int courseid= CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseID();
 			int classRoom=arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
-			
-			if (classCapacityValue >CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCapacity())
+			int cap=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getStudentNumber();
+			System.out.println(cap);
+			if (classCapacityValue <cap)
 				JOptionPane.showMessageDialog(manager.manegerMainFrm, "class dont have enough capacity for this course");
 			else{
 			
@@ -516,7 +519,7 @@ pnl();
 				}
 				
 				
-				
+		if (flag){		
 		for (int fac_index=0;fac_index<cmbxFaculty.getItemCount();fac_index++){
 			if (FacultyMap.get(fac_index)!=null){
 			for (int semester_index=1;semester_index<7;semester_index++){
@@ -537,8 +540,9 @@ pnl();
 				}
 			}
 			}
-			ColumnRow++;
+			
 		}}
+		ColumnRow++;}
 		 ColumnRow=Row+(Column-1)*Settings.dailyHours;
 		
 		if (flag){
@@ -552,7 +556,8 @@ pnl();
 				if (FacultyMap.get(fac).containsKey(semester)){
 					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow)){
 						FacultyMap.get(fac).get(semester).get(ColumnRow).setall(id_calsss);
-						System.out.print("overlap");//Only switch
+						//Map<Integer, Map<Integer, ArrayList<Course>>> CourseMapInTable;
+							System.out.print("overlap");//Only switch
 					}else{
 						FacultyMap.get(fac).get(semester).put(ColumnRow, id_calsss);
 					}				
@@ -567,20 +572,25 @@ pnl();
 			}else{
 							
 				Map<Integer, IDclass> ColumnRowMap =new HashMap<Integer, IDclass>();
+				//
+				
 				ColumnRowMap.put(ColumnRow,id_calsss);
 				Map<Integer, Map<Integer, IDclass>> semesterMap =new HashMap<Integer, Map<Integer, IDclass>>();
 				semesterMap.put(semester, ColumnRowMap);
 				FacultyMap.put(fac, semesterMap);
 			}
 			ColumnRow++;
-			}}
+			}
+			 // ColumnRowMapINTable =new HashMap<Integer, IDclass>();
+			 //CourseMapInTable.get(0).get(0).add(e);
+			 }
 		}}}
 		//	lstModel.getValueAt(arg0, arg1)
 			//tablemanual.getSelectedRow();
 		//	tablemanual.getColumnModel().getColumn(1).setCellEditor("111");
 			//tablemanual.getModel().setValueAt(amount, table.getSelectedRow(), 4);		
 			
-			
+		}
 		if (e.getSource() == btnClear) {
 			
 			
@@ -620,7 +630,7 @@ pnl();
 		}}
 
 
-	}
+	
 private void SetTable(int faculty, int semester) {
 	//JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
 		if( FacultyMap!=null){
@@ -682,7 +692,8 @@ private void SetTable(int faculty, int semester) {
 		
 		
 	 CourseMap=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
-	 //CourseMapInTable=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
+	 
+	 CourseMapInTable=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
 	 for (int i = 0; i < course.size(); i++) {
 		int facultyID = course.get(i).getFaculty();
 		int Semester=course.get(i).getSemester();
