@@ -657,7 +657,7 @@ pnl();
 						CourseMapInTable.get(fac).get(semester).remove(courseid);
 						
 						
-						for (int j=0;j<=QA2;j++){
+						for (int j=0;j<QA2;j++){
 							tablemanual.getModel().setValueAt("",tablemanual.getSelectedRow()+j, tablemanual.getSelectedColumn());
 					FacultyMap.get(fac).get(semester).remove(ColumnRow+j);
 						}
