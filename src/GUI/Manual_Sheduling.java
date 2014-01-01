@@ -344,7 +344,7 @@ pnl();
 		PNL_Main.add(horizontalStrut_2);
 		
 		start = new JButton("start scheduling");
-		start.addActionListener(this); 
+		 
 		
 		start.setBackground(new Color(0, 255, 204));
 		start.setFont(new Font("Trajan Pro", Font.BOLD, 11));
@@ -362,7 +362,7 @@ pnl();
 		texthours.setFont(new Font("Tekton Pro Ext", Font.PLAIN, 12));
 		texthours.setEnabled(false);
 		texthours.setEditable(false);
-		texthours.setBounds(725, 160, 39, 20);
+		texthours.setBounds(730, 120, 39, 20);
 		PNL_Main.add(texthours);
 		texthours.setColumns(10);
 		
@@ -430,14 +430,22 @@ pnl();
 		if (e.getSource() == semesterSpinner  || e.getSource() == cmbxFaculty    ){
 			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(),semesterSpinner.getSelectedIndex()+1);
 			insert_to_corse_combo();
-			insert_to_lec_combo();
+			if (cmbBxCourse.getItemCount()>0)
+			 	insert_to_lec_combo();
+			 	else{
+			 		cmbBxLecturer.removeAllItems();
+			 	}
 			
 			}
 		if (e.getSource() == cmbBxLecturer) {
 			
 		}
 		if (e.getSource() == cmbBxCourse) {
-			insert_to_lec_combo();
+			if (cmbBxCourse.getItemCount()>0)
+			 	insert_to_lec_combo();
+			 	else{
+			 		cmbBxLecturer.removeAllItems();
+			 	}
 		}
 		
 		if (e.getSource() == btnSet) {
@@ -574,10 +582,6 @@ private void SetTable(int faculty, int semester) {
 
 
 
-
-	
-
-
 	public void setFaculty(ArrayList<Faculty> faculty) {
 		ManualArrayFaculty = faculty;
 		cmbxFaculty.removeAll();
@@ -643,7 +647,12 @@ private void SetTable(int faculty, int semester) {
 
 	 
 	 	insert_to_corse_combo();
+	 	if (cmbBxCourse.getItemCount()>0)
 	 	insert_to_lec_combo();
+	 	else{
+	 		cmbBxLecturer.removeAllItems();
+	 	}
+	 		
 
 	}
 	
@@ -657,34 +666,36 @@ private void SetTable(int faculty, int semester) {
 		
 		cmbBxCourse.removeAllItems();//???
 		int selectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-		int semestetIndex=semesterSpinner.getSelectedIndex()+1;
+		int semesterIndex=semesterSpinner.getSelectedIndex()+1;
 		
 		
-		if (CourseMap!=null && CourseMap.get(selectedIndex)!=null && CourseMap.get(selectedIndex).get(semestetIndex)!=null ){
-			int size=CourseMap.get(selectedIndex).get(semestetIndex).size();
+		if (CourseMap!=null && CourseMap.get(selectedIndex)!=null && CourseMap.get(selectedIndex).get(semesterIndex)!=null ){
+			int size=CourseMap.get(selectedIndex).get(semesterIndex).size();
 		for (int i = 0; i < size; ) {
-			cmbBxCourse.addItem(CourseMap.get(selectedIndex).get(semestetIndex).get(i).getCourseID() + ":"
-					+ CourseMap.get(selectedIndex).get(semestetIndex).get(i).getDescription());
+			cmbBxCourse.addItem(CourseMap.get(selectedIndex).get(semesterIndex).get(i).getCourseID() + ":"
+					+ CourseMap.get(selectedIndex).get(semesterIndex).get(i).getDescription());
 			i++;
 			//System.out.print("sss");
 			
 		}}
 	
 }
+	
 	public void insert_to_lec_combo(){
 		cmbBxLecturer.removeAllItems();
 		int selectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-		int semestetIndex=semesterSpinner.getSelectedIndex()+1;
+		int semesterIndex=semesterSpinner.getSelectedIndex()+1;
+		int courseindex=cmbBxCourse.getSelectedIndex();
 		ArrayList<Lecturer> lecturerPerCourse =new ArrayList<Lecturer>() ;
-		if (CourseMap!=null && CourseMap.get(selectedIndex)!=null && CourseMap.get(selectedIndex).get(semestetIndex)!=null ){
+		if (CourseMap!=null && CourseMap.get(selectedIndex)!=null && CourseMap.get(selectedIndex).get(semesterIndex)!=null ){
 			{
-		lecturerPerCourse =CourseMap.get(selectedIndex).get(semestetIndex).get(cmbBxCourse.getSelectedIndex()).getCourseLecturers();
+		lecturerPerCourse =CourseMap.get(selectedIndex).get(semesterIndex).get(courseindex).getCourseLecturers();
 	if (lecturerPerCourse!=null){
-		int size=CourseMap.get(selectedIndex).get(semestetIndex).get(cmbBxCourse.getSelectedIndex()).getCourseLecturers().size();
+		int size=CourseMap.get(selectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getCourseLecturers().size();
 		for (int i = 0; i < size; i++){
 			cmbBxLecturer.addItem(lecturerPerCourse.get(i).getID() + ":" + lecturerPerCourse.get(i).getName());
 
-			//Integer.parseInt(cmbBxCourse.getModel()
+			//course=Integer.parseInt(cmbBxCourse.getModel()
 			//		.getElementAt(cmbBxCourse.getSelectedIndex())
 			//		.toString().split(":")[0]);
 			
@@ -714,7 +725,12 @@ private void SetTable(int faculty, int semester) {
 		//מפה של קורסים
 		ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 		//cmbBxCourse.getSelectedIndex()
-		insert_to_lec_combo();
+		if (cmbBxCourse.getItemCount()>0)
+		 	insert_to_lec_combo();
+		 	else{
+		 		cmbBxLecturer.removeAllItems();
+		 	}
+		
 			
 	}
 		
@@ -723,12 +739,12 @@ private void SetTable(int faculty, int semester) {
 	private void insert_to_lec_combo2() {
 		// TODO Auto-generated method stub
 		cmbBxLecturer.removeAllItems();
-		int semestetIndex=semesterSpinner.getSelectedIndex()+1;
+		int semesterIndex=semesterSpinner.getSelectedIndex()+1;
 		int selectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 	
-		if (  CourseMap!=null && CourseMap.get(selectedIndex)!=null && CourseMap.get(selectedIndex).get(semestetIndex)!=null ){
-			//int cotseindex=CourseMap.get(selectedIndex).get(semestetIndex).get(cmbBxCourse.getSelectedIndex()).getAcademicHours();
-			int courseID=CourseMap.get(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum()).get(semestetIndex).get (cmbBxCourse.getSelectedIndex()).getCourseID();
+		if (  CourseMap!=null && CourseMap.get(selectedIndex)!=null && CourseMap.get(selectedIndex).get(semesterIndex)!=null ){
+			//int cotseindex=CourseMap.get(selectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getAcademicHours();
+			int courseID=CourseMap.get(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum()).get(semesterIndex).get (cmbBxCourse.getSelectedIndex()).getCourseID();
 		if (	LecturerMap.get(courseID)!=null && LecturerMap!=null){	
 			int size= LecturerMap.get(courseID).size();
 			for (int i = 0; i < size; i++) {
@@ -743,7 +759,7 @@ private void SetTable(int faculty, int semester) {
 	public void addActions() {
 		// TODO Auto-generated method stub
 		btnBackToMainMenu.addActionListener(this);
-		
+		start.addActionListener(this);
 		 btnSet.addActionListener(this);		
 	
 		 btnClear.addActionListener(this);
