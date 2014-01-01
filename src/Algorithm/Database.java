@@ -11,22 +11,22 @@ import entities.Course;
 import entities.Class;
 import entities.Lecturer;
 
-
 public class Database {
 	private Map<Integer, Course> Courses;// Courses;
 	private Map<Integer, Lecturer> Lecturers; // Lecturers;
 	private Map<Integer, Class> Classes; // Classes;
-	
+
 	private Map<Integer, ArrayList<Integer>> relatedCoursesMap;
-	
+	private Map<Integer, ArrayList<Integer>> SemesterCoursesMap;
+
 	private IndexMapping mapping;
-	
+
 	private int length;
-	
-	public Database()
-	{
-		//get all database
-		length = Courses.size() * Lecturers.size() * Classes.size() * Individual.weeklyHours;
+
+	public Database() {
+		// get all database
+		length = Courses.size() * Lecturers.size() * Classes.size()
+				* Individual.weeklyHours;
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class Database {
 		Course crs = Courses.get(courseID);
 		return crs;
 	}
-	
+
 	public Course getCourseByIndex(int index) {
 		Course crs = Courses.get(mapping.getClassID(index));
 		return crs;
@@ -50,8 +50,6 @@ public class Database {
 		return lct;
 	}
 
-
-
 	/**
 	 * @return the classes
 	 */
@@ -59,7 +57,6 @@ public class Database {
 		Class cls = Classes.get(ClassID);
 		return cls;
 	}
-
 
 	/**
 	 * @return the courses
@@ -69,7 +66,8 @@ public class Database {
 	}
 
 	/**
-	 * @param courses the courses to set
+	 * @param courses
+	 *            the courses to set
 	 */
 	public void setCourses(Map<Integer, Course> courses) {
 		Courses = courses;
@@ -83,7 +81,8 @@ public class Database {
 	}
 
 	/**
-	 * @param lecturers the lecturers to set
+	 * @param lecturers
+	 *            the lecturers to set
 	 */
 	public void setLecturers(Map<Integer, Lecturer> lecturers) {
 		Lecturers = lecturers;
@@ -97,7 +96,8 @@ public class Database {
 	}
 
 	/**
-	 * @param classes the classes to set
+	 * @param classes
+	 *            the classes to set
 	 */
 	public void setClasses(Map<Integer, Class> classes) {
 		Classes = classes;
@@ -109,34 +109,28 @@ public class Database {
 	public int getLength() {
 		return length;
 	}
-	
-	public int getCoursesSize()
-	{
+
+	public int getCoursesSize() {
 		return Courses.size();
 	}
-	
-	public int getLecturersSize()
-	{
+
+	public int getLecturersSize() {
 		return Lecturers.size();
 	}
-	
-	public int getClassesSize()
-	{
+
+	public int getClassesSize() {
 		return Classes.size();
 	}
-	
-	public Set<Integer> getClassesKeys()
-	{
+
+	public Set<Integer> getClassesKeys() {
 		return Classes.keySet();
 	}
-	
-	public Set<Integer> getCoursesKeys()
-	{
+
+	public Set<Integer> getCoursesKeys() {
 		return Courses.keySet();
 	}
-	
-	public Set<Integer> getLecturersKeys()
-	{
+
+	public Set<Integer> getLecturersKeys() {
 		return Lecturers.keySet();
 	}
 
@@ -151,31 +145,48 @@ public class Database {
 	 * @return the relatedCoursesMap
 	 */
 	public Map<Integer, ArrayList<Integer>> getRelatedCourses() {
-		if (relatedCoursesMap == null || relatedCoursesMap.isEmpty())
-		{
-			Iterator<Integer> courseItr = MainGA.collageDB.getCoursesKeys().iterator();	
+		if (relatedCoursesMap == null || relatedCoursesMap.isEmpty()) {
+			Iterator<Integer> courseItr = MainGA.collageDB.getCoursesKeys()
+					.iterator();
 			Map<Integer, ArrayList<Integer>> relatedCoursesMap = new HashMap<Integer, ArrayList<Integer>>();
-			
+
 			while (courseItr.hasNext()) {
 				int courseID = courseItr.next().intValue();
-				int courseRelatedKey = getCourse(courseID).getCourseRelativeKey();
+				int courseRelatedKey = getCourse(courseID)
+						.getCourseRelativeKey();
 				if (courseRelatedKey != -1) {
 					if (!relatedCoursesMap.containsKey(courseRelatedKey)) {
 						ArrayList<Integer> newGroup = new ArrayList<Integer>();
 						relatedCoursesMap.put(courseRelatedKey, newGroup);
+						relatedCoursesMap.get(courseRelatedKey).add(
+								courseRelatedKey);
 					}
 					relatedCoursesMap.get(courseRelatedKey).add(courseID);
 				}
 			}
 		}
-		
-		
 
-		
 		return relatedCoursesMap;
 	}
 
+	public Map<Integer, ArrayList<Integer>> getCoursesBySemester() {
+		if (SemesterCoursesMap == null || SemesterCoursesMap.isEmpty()) {
+			Iterator<Integer> courseItr = MainGA.collageDB.getCoursesKeys()
+					.iterator();
+			Map<Integer, ArrayList<Integer>> SemesterCoursesMap = new HashMap<Integer, ArrayList<Integer>>();
 
-	
+			while (courseItr.hasNext()) {
+				int courseID = courseItr.next().intValue();
+				int courseSemester = getCourse(courseID).getSemester();
+				if (!SemesterCoursesMap.containsKey(courseSemester)) {
+					ArrayList<Integer> newGroup = new ArrayList<Integer>();
+					SemesterCoursesMap.put(courseSemester, newGroup);
+				}
+				SemesterCoursesMap.get(courseSemester).add(courseID);
+			}
+		}
+
+		return SemesterCoursesMap;
+	}
 
 }

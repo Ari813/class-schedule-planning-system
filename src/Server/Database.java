@@ -277,7 +277,7 @@ public class Database {
 				/* Add Lecturer */
 
 				query = new String(
-						"SELECT * FROM `csps-db`.courselecturers cl where cl.CourseID = "
+						"SELECT cl.CourseID,cl.LecturerID,lec.LecturerName FROM `csps-db`.courselecturers cl, `csps-db`.lecturer lec where lec.LecturerID = cl.LecturerID AND cl.CourseID = "
 								+ crs.getCourseID() + ";");
 				st = conn.createStatement();
 
@@ -285,6 +285,7 @@ public class Database {
 				while (LecturersQrs.next()) {
 					lec = new Lecturer();
 					lec.setID(LecturersQrs.getInt("LecturerID"));
+					lec.setName(LecturersQrs.getString("LecturerName"));
 					crs.addLecturer(lec);
 				}
 				LecturersQrs.close();
