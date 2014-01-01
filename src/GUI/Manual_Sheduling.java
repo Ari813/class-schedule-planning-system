@@ -441,8 +441,14 @@ pnl();
 			
 		}
 		if (e.getSource() == cmbBxCourse) {
-			if (cmbBxCourse.getItemCount()>0)
-			 	insert_to_lec_combo();
+		//	CourseMap.get(selectedIndex).get(semesterIndex)
+			texthours.setText("");
+			if (cmbBxCourse.getItemCount()>0){
+				int facultySelectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
+				int semesterIndex=semesterSpinner.getSelectedIndex()+1;
+				int number =CourseMap.get(facultySelectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getAcademicHours();
+				texthours.setText(Integer.toString(number));
+			 	insert_to_lec_combo();}
 			 	else{
 			 		cmbBxLecturer.removeAllItems();
 			 	}
