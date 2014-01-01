@@ -1,8 +1,12 @@
 package Algorithm;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import MsgPackage.GetAllLecturersPack.getInformation;
 import entities.Course;
 import entities.Class;
 import entities.Lecturer;
@@ -12,6 +16,8 @@ public class Database {
 	private Map<Integer, Course> Courses;// Courses;
 	private Map<Integer, Lecturer> Lecturers; // Lecturers;
 	private Map<Integer, Class> Classes; // Classes;
+	
+	private Map<Integer, ArrayList<Integer>> relatedCoursesMap;
 	
 	private IndexMapping mapping;
 	
@@ -140,4 +146,36 @@ public class Database {
 	public IndexMapping getMapping() {
 		return mapping;
 	}
+
+	/**
+	 * @return the relatedCoursesMap
+	 */
+	public Map<Integer, ArrayList<Integer>> getRelatedCourses() {
+		if (relatedCoursesMap == null || relatedCoursesMap.isEmpty())
+		{
+			Iterator<Integer> courseItr = MainGA.collageDB.getCoursesKeys().iterator();	
+			Map<Integer, ArrayList<Integer>> relatedCoursesMap = new HashMap<Integer, ArrayList<Integer>>();
+			
+			while (courseItr.hasNext()) {
+				int courseID = courseItr.next().intValue();
+				int courseRelatedKey = getCourse(courseID).getCourseRelativeKey();
+				if (courseRelatedKey != -1) {
+					if (!relatedCoursesMap.containsKey(courseRelatedKey)) {
+						ArrayList<Integer> newGroup = new ArrayList<Integer>();
+						relatedCoursesMap.put(courseRelatedKey, newGroup);
+					}
+					relatedCoursesMap.get(courseRelatedKey).add(courseID);
+				}
+			}
+		}
+		
+		
+
+		
+		return relatedCoursesMap;
+	}
+
+
+	
+
 }

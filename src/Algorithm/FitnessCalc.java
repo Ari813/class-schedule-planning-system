@@ -103,24 +103,9 @@ public class FitnessCalc {
 		}
 
 		// / check course, lecture and lab not assign at the same time
-		courseItr = MainGA.collageDB.getCoursesKeys().iterator();
-		Map<Integer, ArrayList<Integer>> relatedCoursesMap = new HashMap<Integer, ArrayList<Integer>>();
 
-		while (courseItr.hasNext()) {
-			courseID = courseItr.next().intValue();
-			int courseRelatedKey = MainGA.collageDB.getCourse(courseID)
-					.getCourseRelativeKey();
-			if (courseRelatedKey != -1) {
-				if (!relatedCoursesMap.containsKey(courseRelatedKey)) {
-					ArrayList<Integer> newGroup = new ArrayList<Integer>();
-					relatedCoursesMap.put(courseRelatedKey, newGroup);
-				}
-
-				relatedCoursesMap.get(courseRelatedKey).add(courseID);
-			}
-		}
-
-		courseItr = relatedCoursesMap.keySet().iterator();
+		Map<Integer, ArrayList<Integer>> relatedCoursesMap = MainGA.collageDB.getRelatedCourses(); 
+		courseItr =  relatedCoursesMap.keySet().iterator();
 
 		while (courseItr.hasNext()) {
 			courseID = courseItr.next().intValue();
