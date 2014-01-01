@@ -41,6 +41,7 @@ import entities.Course;
 import entities.Faculty;
 import entities.Lecturer;
 import Algorithm.Database;
+import Algorithm.Individual;
 import Controllers.ManagerController;
 
 import javax.swing.JTree;
@@ -158,6 +159,7 @@ ListSelectionListener, KeyListener {
 	private ArrayList<Course> Allcourses;
 	private Database allData;
 	private ArrayList<Lecturer> arrayLecturers;
+	private Individual firstIndividual;
 	
 	
 	
@@ -440,8 +442,13 @@ pnl();
 			
 		}
 		if (e.getSource() == start ){
-			//Allcourses,arrayClasses
+			
 			allData=new Database(Allcourses, arrayLecturers, arrayClasses);
+			
+			
+					
+			//	}}
+			
 			manager.Load_Automatic_Sheduling(this.PNL_Main,allData);
 		}
 	
@@ -550,7 +557,9 @@ pnl();
 		ColumnRow++;}
 		 ColumnRow=Row+(Column-1)*Settings.dailyHours;
 		
+		
 		if (flag){
+			firstIndividual.setGeneByID(Column, Row, lecid, classRoom, courseid);
 			 for (int j=0;j<courseHours;j++){
 				 id_calsss=new IDclass(courseid,lecid,classRoom,ColumnRow);
 				 id_calsss.setSize(courseHours);
@@ -644,8 +653,10 @@ pnl();
 				
 				if (FacultyMap!=null){
 					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow)){
-						
-					////TODO 
+						int ClassID=FacultyMap.get(fac).get(semester).get(ColumnRow).getClassid();
+						int LecturerID=FacultyMap.get(fac).get(semester).get(ColumnRow).getLecid();
+						int CourseID=FacultyMap.get(fac).get(semester).get(ColumnRow).getCousreid();
+						firstIndividual.clrGeneByID(Column, Row, LecturerID, ClassID, CourseID);
 						int size=FacultyMap.get(fac).get(semester).get(ColumnRow).getSize();
 						int QA1=FacultyMap.get(fac).get(semester).get(ColumnRow).getId();
 						int QA2=size-QA1;
@@ -689,7 +700,10 @@ pnl();
 		}}
 
 
-	
+public  void setfirstIndividual(){
+	firstIndividual=new Individual();
+}
+
 private void SetTable(int faculty, int semester) {
 	//JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
 		if( FacultyMap!=null){

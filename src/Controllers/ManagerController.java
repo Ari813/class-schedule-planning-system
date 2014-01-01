@@ -165,6 +165,7 @@ public class ManagerController {
 		MS.setClasses(GetClasses());
 		MS.setMapCourse(getCourseForSchedualing());
 		MS.setLec(getAvailableLecturers(getInformation.all));
+		MS.setfirstIndividual();
 		manegerMainFrm.add(MS.PNL_Main);
 		
 		manegerMainFrm.repaint();
