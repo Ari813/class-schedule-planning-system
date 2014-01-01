@@ -148,7 +148,8 @@ ListSelectionListener, KeyListener {
 	private	String columnNames[]={"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"};
 	private JComboBox semesterSpinner;
 	private HashMap<Integer, Map<Integer, ArrayList<Course>>> CourseMapInTable;
-	private JTextField texthours;
+	private JFormattedTextField formattedTextField;
+	private int number=0;
 	
 	
 	
@@ -355,18 +356,16 @@ pnl();
 		semesterSpinner.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
 		semesterSpinner.setBounds(600, 54, 49, 20);
 		PNL_Main.add(semesterSpinner);
-		
-		texthours = new JTextField();
-		texthours.setBackground(UIManager.getColor("CheckBox.light"));
-		texthours.setForeground(Color.GREEN);
-		texthours.setFont(new Font("Tekton Pro Ext", Font.PLAIN, 12));
-		texthours.setEnabled(false);
-		texthours.setEditable(false);
-		texthours.setBounds(730, 120, 39, 20);
-		PNL_Main.add(texthours);
-		texthours.setColumns(10);
+		formattedTextField = new JFormattedTextField();
+		formattedTextField.setFont(new Font("Tahoma", Font.BOLD, 11));
+		formattedTextField.setBackground(SystemColor.window);
+		formattedTextField.setEnabled(false);
+		formattedTextField.setEditable(false);
+		formattedTextField.setBounds(730, 120, 34, 15);
+		PNL_Main.add(formattedTextField);
 		
 		
+		formattedTextField.setValue(0);
 		
 		
 	}
@@ -442,12 +441,14 @@ pnl();
 		}
 		if (e.getSource() == cmbBxCourse) {
 		//	CourseMap.get(selectedIndex).get(semesterIndex)
-			texthours.setText("");
+			//texthours.setText("");
+			number=0;
+			formattedTextField.setValue(0);
 			if (cmbBxCourse.getItemCount()>0){
 				int facultySelectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 				int semesterIndex=semesterSpinner.getSelectedIndex()+1;
-				int number =CourseMap.get(facultySelectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getAcademicHours();
-				texthours.setText(Integer.toString(number));
+				number =CourseMap.get(facultySelectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getAcademicHours();
+				formattedTextField.setValue(number);
 			 	insert_to_lec_combo();}
 			 	else{
 			 		cmbBxLecturer.removeAllItems();
@@ -455,6 +456,7 @@ pnl();
 		}
 		
 		if (e.getSource() == btnSet) {
+			int tmpRow=0;
 			if ((cmbBxCourse.getItemCount()!=0) && (cmbBxLecturer.getItemCount()!=0)){
 				
 			
@@ -467,10 +469,7 @@ pnl();
 			int courseid= CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseID();
 			int classRoom=arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
 			
-			for (int j=0;j<1;j++){
-				
-				
-			}
+			
 			
 			
 			if ((Column>=1) && (haveplaceflag)){
@@ -487,6 +486,18 @@ pnl();
 		
 		//JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
 		 boolean flag=true;
+		 for (int j=0;j<number;j++){
+				
+				tmpRow=Row+j;
+				if (tmpRow>=Settings.dailyHours){
+					System.out.print("overlap");
+					flag=false;
+					JOptionPane.showMessageDialog(manager.manegerMainFrm, "The course needs more consecutive hours ");
+					break;
+				}
+				
+				
+				
 		for (int fac_index=0;fac_index<cmbxFaculty.getItemCount();fac_index++){
 			if (FacultyMap.get(fac_index)!=null){
 			for (int semester_index=1;semester_index<7;semester_index++){
@@ -496,18 +507,26 @@ pnl();
 						int lec=FacultyMap.get(fac_index).get(semester_index).get(ColumnRow).getLecid();
 						if (room==classRoom){
 						JOptionPane.showMessageDialog(manager.manegerMainFrm, "room is occupied");
-						flag=false;}
+						flag=false;
+						break;}
 						if (lec==lecid){
 							JOptionPane.showMessageDialog(manager.manegerMainFrm, "lecturer teaches  in these hours");
 							flag=false;
+							break;
 						}
 					}
 				}
 			}
 			}
-		}
+			ColumnRow++;
+		}}
+		 ColumnRow=Row+(Column-1)*Settings.dailyHours;
+		
 		if (flag){
-			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row,Column );
+			 for (int j=0;j<number;j++){
+				 
+			 
+			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row+j,Column );
 			
 			if (FacultyMap.containsKey(fac)){
 				if (FacultyMap.get(fac).containsKey(semester)){
@@ -533,7 +552,8 @@ pnl();
 				semesterMap.put(semester, ColumnRowMap);
 				FacultyMap.put(fac, semesterMap);
 			}
-			}
+			ColumnRow++;
+			}}
 		}}}
 		//	lstModel.getValueAt(arg0, arg1)
 			//tablemanual.getSelectedRow();
