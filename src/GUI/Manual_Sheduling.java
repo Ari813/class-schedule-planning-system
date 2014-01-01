@@ -675,7 +675,7 @@ private void SetTable(int faculty, int semester) {
 		cmbBxLecturer.removeAllItems();
 		int selectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 		int semestetIndex=semesterSpinner.getSelectedIndex()+1;
-		ArrayList<Lecturer> lecturerPerCourse =null;
+		ArrayList<Lecturer> lecturerPerCourse =new ArrayList<Lecturer>() ;
 		if (CourseMap!=null && CourseMap.get(selectedIndex)!=null && CourseMap.get(selectedIndex).get(semestetIndex)!=null ){
 			{
 		lecturerPerCourse =CourseMap.get(selectedIndex).get(semestetIndex).get(cmbBxCourse.getSelectedIndex()).getCourseLecturers();
