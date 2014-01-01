@@ -1,11 +1,11 @@
 package Algorithm;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import common.Settings;
+import entities.StudyAids;
 
 public class FitnessCalc
 {
@@ -35,7 +35,6 @@ public class FitnessCalc
 	private static double calcSoftConstraints(Individual individual)
 	{
 		int SoftConstraints = 0;
-		int tempCounter = 0;
 		int lecID;
 		int classID;
 		int courseID;
@@ -49,7 +48,6 @@ public class FitnessCalc
 			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(lecID);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 			{
-				counter = 0;
 				for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
 				{
 					for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++)
@@ -57,12 +55,11 @@ public class FitnessCalc
 						if (individual.getGeneByIndex(Hours, lecturerIndex, ClassIndex, CourseIndex).isGene())
 						{
 							if (MainGA.collageDB.getLecturer(lecID).getPreferedSchedualArray()[Hours] == Settings.selection_available)
-								counter++;
+								SoftConstraints++;
 
 						}
 					}
 				}
-				SoftConstraints += counter - 1;
 
 			}
 		}
@@ -76,7 +73,6 @@ public class FitnessCalc
 			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(lecID);
 			for (int Hours = 0; Hours < Individual.weeklyHours - 1; Hours++)
 			{
-				counter = 0;
 				for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
 				{
 					for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++)
@@ -92,19 +88,78 @@ public class FitnessCalc
 										if (MainGA.collageDB.getClass(MainGA.collageDB.getMapping().getClassID(ClassIndex)).getCampus() != MainGA.collageDB.getClass(
 												MainGA.collageDB.getMapping().getClassID(tempClassIndex)).getCampus())
 										{
-											counter++;
+											SoftConstraints++;
 										}
 									}
 								}
 							}
 						}
 					}
-					
 
 				}
-				SoftConstraints += counter;
 			}
 		}
+
+		// check class capacity vs course capacity
+		Iterator<Integer> classItr = MainGA.collageDB.getClassesKeys().iterator();
+		while (classItr.hasNext())
+		{
+			classID = classItr.next().intValue();
+			int classIndex = MainGA.collageDB.getMapping().getClassIndex(classID);
+			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
+			{
+				for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
+				{
+					for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++)
+					{
+						if (individual.getGeneByIndex(Hours, LecturerIndex, classIndex, CourseIndex).isGene())
+						{
+							if (MainGA.collageDB.getClass(classID).getCapcity() < (MainGA.collageDB.getCourse(MainGA.collageDB.getMapping().getCourseID(CourseIndex)).getCapacity()))
+							{
+								SoftConstraints++;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// / check how many times a course has been assigned in an hour
+		Iterator<Integer> courseItr = MainGA.collageDB.getCoursesKeys().iterator();
+		while (courseItr.hasNext())
+		{
+			courseID = courseItr.next().intValue();
+			int courseIndex = MainGA.collageDB.getMapping().getCourseIndex(courseID);
+			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
+			{
+				for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
+				{
+					for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
+					{
+						if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseIndex).isGene())
+						{
+							counter = 0;
+							ArrayList<StudyAids> courseStudyAids = MainGA.collageDB.getCourse(courseID).getStudyAids();
+							ArrayList<StudyAids> classStudyAids = MainGA.collageDB.getClass(MainGA.collageDB.getMapping().getClassID(ClassIndex)).getStudyAids();
+							for (int courseStudyAidIndex = 0; courseStudyAidIndex < courseStudyAids.size(); courseStudyAidIndex++)
+							{
+								for (int classStudyAidIndex = 0; classStudyAidIndex < courseStudyAids.size(); classStudyAidIndex++)
+								{
+									if (courseStudyAids.get(courseStudyAidIndex).getAidsID() == classStudyAids.get(classStudyAidIndex).getAidsID())
+									{
+										counter++;
+										break;
+									}
+								}
+							}
+							if (counter < courseStudyAids.size())
+								SoftConstraints++;
+						}
+					}
+				}
+			}
+		}
+
 		return SoftConstraints;
 	}
 
