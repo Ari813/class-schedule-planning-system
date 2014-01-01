@@ -582,15 +582,37 @@ pnl();
 			ColumnRow++;
 			}
 			 // ColumnRowMapINTable =new HashMap<Integer, IDclass>();
-			 Map<Integer,Map<Integer ,Course>> tmpMap =new HashMap<Integer, Map<Integer,Course>>();
-			Course courseToMove=new Course();
-			courseToMove=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex());
 			
-			 Map<Integer ,Course> tmpcourse =new HashMap<Integer, Course>();
-			 tmpcourse.put(fac, courseToMove);
-			 tmpMap.put(semester, tmpcourse);
-			 CourseMapInTable.put(courseid, tmpMap);
+			 Course courseToMove=new Course();
+			courseToMove=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex());
+			 
+			
+			 if (CourseMapInTable.containsKey(fac)){
+					if (CourseMapInTable.get(fac).containsKey(semester)){
+						CourseMapInTable.get(fac).get(semester).put(courseid, courseToMove);
+						}else
+						{Map<Integer ,Course> tmpcourse =new HashMap<Integer, Course>();
+						 tmpcourse.put(courseid, courseToMove);
+						CourseMapInTable.get(fac).put(semester, tmpcourse);
+																		
+						}
+				}else{
+					Map<Integer ,Course> tmpcourse =new HashMap<Integer, Course>();
+					 tmpcourse.put(courseid, courseToMove);
+					 Map<Integer ,  Map<Integer ,Course> > facMap =new HashMap<Integer, Map<Integer,Course>>();
+					 facMap.put(semester,tmpcourse );
+					 CourseMapInTable.put(fac, facMap);
+								 
+			 
+				}
+			 
+			////////////////////////////////////////		 
+			
+			 //CourseMapInTable.put(courseid, tmpMap);
 			 CourseMap.get(fac).get(semester).remove(cmbBxCourse.getSelectedIndex());
+			// CourseMapInTable
+			 //////////////////////////////////////////////////
+			 
 			 insert_to_corse_combo();
 			 	if (cmbBxCourse.getItemCount()>0)
 			 	insert_to_lec_combo();
@@ -617,12 +639,24 @@ pnl();
 				int Row=tablemanual.getSelectedRow();
 				int Column=tablemanual.getSelectedColumn();
 				int ColumnRow=Row+(Column-1)*Settings.dailyHours;
+				
 				if (FacultyMap!=null){
 					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow)){
+						
 					////TODO 
 						int size=FacultyMap.get(fac).get(semester).get(ColumnRow).getSize();
 						int QA1=FacultyMap.get(fac).get(semester).get(ColumnRow).getId();
 						int QA2=size-QA1;
+						
+						//ss
+						Course courseToMoveBack=new Course();
+						int courseid=FacultyMap.get(fac).get(semester).get(ColumnRow).getCousreid();
+						courseToMoveBack=CourseMapInTable.get(fac).get(semester).get(courseid);
+						CourseMap.get(fac).get(semester).add(courseToMoveBack) ;
+						
+						CourseMapInTable.get(fac).get(semester).remove(courseid);
+						
+						
 						for (int j=0;j<=QA2;j++){
 							tablemanual.getModel().setValueAt("",tablemanual.getSelectedRow()+j, tablemanual.getSelectedColumn());
 					FacultyMap.get(fac).get(semester).remove(ColumnRow+j);
@@ -634,7 +668,16 @@ pnl();
 					tablemanual.getModel().setValueAt("",tablemanual.getSelectedRow()-j, tablemanual.getSelectedColumn());
 						}
 					
-				}}
+				}
+				
+					 insert_to_corse_combo();
+					 	if (cmbBxCourse.getItemCount()>0)
+					 	insert_to_lec_combo();
+					 	else{
+					 		cmbBxLecturer.removeAllItems();
+					 	}
+					
+				}
 			
 			
 			
