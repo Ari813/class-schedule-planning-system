@@ -6,7 +6,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-public class IndexMapping {
+import entities.Class;
+import entities.Course;
+import entities.Lecturer;
+
+public class IndexMapping
+{
 
 	private Map<Integer, Integer> CoursesMappingID;// Courses;
 	private Map<Integer, Integer> LecturersMappingID; // Lecturers;
@@ -16,7 +21,8 @@ public class IndexMapping {
 	private Map<Integer, Integer> LecturersMappingIndex; // Lecturers;
 	private Map<Integer, Integer> ClassesMappingIndex; // Classes;
 
-	public IndexMapping() {
+	public IndexMapping()
+	{
 		CoursesMappingID = new HashMap<Integer, Integer>();// Courses;
 		LecturersMappingID = new HashMap<Integer, Integer>(); // Lecturers;
 		ClassesMappingID = new HashMap<Integer, Integer>(); // Classes;
@@ -26,48 +32,56 @@ public class IndexMapping {
 		ClassesMappingIndex = new HashMap<Integer, Integer>(); // Classes;
 	}
 
-	public IndexMapping(Set<Integer> courses, Set<Integer> Lecturers,
-			Set<Integer> Classes) {
+	public IndexMapping(Map<Integer, Course> courses, Map<Integer, Lecturer> lecturer, Map<Integer, Class> classes)
+	{
 		super();
-		setCoursesMapping(courses);
-		setLecturersMapping(Lecturers);
-		setClassesMapping(Classes);
-
+		setCoursesMapping(courses.keySet());
+		setLecturersMapping(lecturer.keySet());
+		setClassesMapping(classes.keySet());
 	}
 
-	public int getCourseIndex(int ID) {
+	public int getCourseIndex(int ID)
+	{
 		return CoursesMappingID.get(ID);
 	}
 
-	public int getLecturerIndex(int ID) {
+	public int getLecturerIndex(int ID)
+	{
 		return LecturersMappingID.get(ID);
 	}
 
-	public int getClassIndex(int ID) {
+	public int getClassIndex(int ID)
+	{
 		return ClassesMappingID.get(ID);
 	}
 
-	public int getCourseID(int index) {
+	public int getCourseID(int index)
+	{
 		return CoursesMappingIndex.get(index);
 	}
 
-	public int getLecturerID(int index) {
+	public int getLecturerID(int index)
+	{
 		return LecturersMappingIndex.get(index);
 	}
 
-	public int getClassID(int index) {
+	public int getClassID(int index)
+	{
 		return ClassesMappingIndex.get(index);
 	}
 
-	public int getTime(int day, int hour) {
+	public int getTime(int day, int hour)
+	{
 		return (day - 1) * Individual.dailyHours + hour;
 	}
 
-	public void setCoursesMapping(Set<Integer> courses) {
+	public void setCoursesMapping(Set<Integer> courses)
+	{
 		Iterator<Integer> itr = courses.iterator();
 		int i = 0;
 		int courseID;
-		while (itr.hasNext()) {
+		while (itr.hasNext())
+		{
 			courseID = itr.next().intValue();
 			CoursesMappingID.put(courseID, i);
 			CoursesMappingIndex.put(i, courseID);
@@ -76,11 +90,13 @@ public class IndexMapping {
 
 	}
 
-	public void setLecturersMapping(Set<Integer> Lecturers) {
+	public void setLecturersMapping(Set<Integer> Lecturers)
+	{
 		Iterator<Integer> itr = Lecturers.iterator();
 		int i = 0;
 		int lectureID;
-		while (itr.hasNext()) {
+		while (itr.hasNext())
+		{
 			lectureID = itr.next().intValue();
 			LecturersMappingID.put(lectureID, i);
 			LecturersMappingIndex.put(i, lectureID);
@@ -88,11 +104,13 @@ public class IndexMapping {
 		}
 	}
 
-	public void setClassesMapping(Set<Integer> Classes) {
+	public void setClassesMapping(Set<Integer> Classes)
+	{
 		Iterator<Integer> itr = Classes.iterator();
 		int i = 0;
 		int classID;
-		while (itr.hasNext()) {
+		while (itr.hasNext())
+		{
 			classID = itr.next().intValue();
 			ClassesMappingID.put(classID, i);
 			ClassesMappingIndex.put(i, classID);
