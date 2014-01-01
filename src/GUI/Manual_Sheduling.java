@@ -150,6 +150,7 @@ ListSelectionListener, KeyListener {
 	private HashMap<Integer, Map<Integer, ArrayList<Course>>> CourseMapInTable;
 	private JFormattedTextField formattedTextField;
 	private int number=0;
+	private JFormattedTextField formattedTextField_1;
 	
 	
 	
@@ -204,6 +205,7 @@ pnl();
 
 	private JButton GETbtnClear() {
 		 btnClear = new JButton("Clear");
+		
 		  btnClear.setBounds(672, 261, 65, 23);
 		 
 		return btnClear;
@@ -361,11 +363,19 @@ pnl();
 		formattedTextField.setBackground(SystemColor.window);
 		formattedTextField.setEnabled(false);
 		formattedTextField.setEditable(false);
-		formattedTextField.setBounds(730, 120, 34, 15);
+		formattedTextField.setBounds(730, 120, 35, 15);
 		PNL_Main.add(formattedTextField);
 		
 		
 		formattedTextField.setValue(0);
+		{
+			formattedTextField_1 = new JFormattedTextField();
+			formattedTextField_1.setBackground(SystemColor.window);
+			formattedTextField_1.setEditable(false);
+			formattedTextField_1.setEnabled(false);
+			formattedTextField_1.setBounds(730, 200, 35, 15);
+			PNL_Main.add(formattedTextField_1);
+		}
 		
 		
 	}
@@ -524,8 +534,9 @@ pnl();
 		
 		if (flag){
 			 for (int j=0;j<number;j++){
-				 
-			 
+				 id_calsss=new IDclass(courseid,lecid,classRoom,ColumnRow);
+				 id_calsss.setSize(number);
+				 id_calsss.setId(j);
 			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row+j,Column );
 			
 			if (FacultyMap.containsKey(fac)){
@@ -563,18 +574,34 @@ pnl();
 			
 		if (e.getSource() == btnClear) {
 			if (tablemanual.getSelectedColumn()>=1){
+				
+					
+				
 				int fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 				int	semester=(int)semesterSpinner.getSelectedIndex()+1;
 				int Row=tablemanual.getSelectedRow();
 				int Column=tablemanual.getSelectedColumn();
 				int ColumnRow=Row+(Column-1)*Settings.dailyHours;
 				if (FacultyMap!=null){
-					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow))
-					FacultyMap.get(fac).get(semester).remove(ColumnRow);
-							
-				}
+					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow)){
+					////TODO 
+						int size=FacultyMap.get(fac).get(semester).get(ColumnRow).getSize();
+						int QA1=FacultyMap.get(fac).get(semester).get(ColumnRow).getId();
+						int QA2=size-QA1;
+						for (int j=0;j<=QA2;j++){
+							tablemanual.getModel().setValueAt("",tablemanual.getSelectedRow()+j, tablemanual.getSelectedColumn());
+					FacultyMap.get(fac).get(semester).remove(ColumnRow+j);
+						}
+						for (int j=1;
+								j<=QA1
+								;j++){
+					FacultyMap.get(fac).get(semester).remove(ColumnRow-j);
+					tablemanual.getModel().setValueAt("",tablemanual.getSelectedRow()-j, tablemanual.getSelectedColumn());
+						}
+					
+				}}
 			
-			tablemanual.getModel().setValueAt("",tablemanual.getSelectedRow(), tablemanual.getSelectedColumn());
+			
 			
 			
 			}
@@ -641,7 +668,7 @@ private void SetTable(int faculty, int semester) {
 	
 	
 	public void setMapCourse(ArrayList<Course> course) {
-		// TODO Auto-generated method stub
+		
 		
 	 CourseMap=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
 	 //CourseMapInTable=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
@@ -688,7 +715,7 @@ private void SetTable(int faculty, int semester) {
 	
 	
 	private void insert_to_corse_combo() {
-	// TODO Auto-generated method stub
+	
 		
 		
 		cmbBxCourse.removeAllItems();//???
@@ -764,7 +791,7 @@ private void SetTable(int faculty, int semester) {
 /*/		
 	/*/	
 	private void insert_to_lec_combo2() {
-		// TODO Auto-generated method stub
+		
 		cmbBxLecturer.removeAllItems();
 		int semesterIndex=semesterSpinner.getSelectedIndex()+1;
 		int selectedIndex=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
@@ -784,7 +811,7 @@ private void SetTable(int faculty, int semester) {
 	
 /*/
 	public void addActions() {
-		// TODO Auto-generated method stub
+		
 		btnBackToMainMenu.addActionListener(this);
 		start.addActionListener(this);
 		 btnSet.addActionListener(this);		
@@ -809,19 +836,19 @@ private void SetTable(int faculty, int semester) {
 
 	@Override
 	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+	
 		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	

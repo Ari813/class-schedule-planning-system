@@ -10,6 +10,7 @@ public IDclass(int cousreid, int lecid, int classid, int id) {
 	this.lecid = lecid;
 	this.classid = classid;
 	this.id = id;
+	
 }
 public void setall(IDclass all){
 	setClassid(all.classid);
@@ -46,4 +47,11 @@ private int cousreid;
 private int lecid;
 private int classid;
 private int id;
+private int size;
+public int getSize() {
+	return size;
+}
+public void setSize(int size) {
+	this.size = size;
+}
 }
