@@ -6,6 +6,7 @@ import java.util.Map;
 
 import common.Settings;
 import entities.StudyAids;
+import Controllers.*;
 
 public class FitnessCalc
 {
@@ -40,12 +41,12 @@ public class FitnessCalc
 		int courseID;
 		int counter;
 		// / check lecturer's preferences
-		Iterator<Integer> LecItr = MainGA.collageDB.getLecturersKeys().iterator();
+		Iterator<Integer> LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
 
 		while (LecItr.hasNext())
 		{
 			lecID = LecItr.next().intValue();
-			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(lecID);
+			int lecturerIndex = ManagerController.collageDB.getMapping().getLecturerIndex(lecID);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 			{
 				for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
@@ -54,7 +55,7 @@ public class FitnessCalc
 					{
 						if (individual.getGeneByIndex(Hours, lecturerIndex, ClassIndex, CourseIndex).isGene())
 						{
-							if (MainGA.collageDB.getLecturer(lecID).getPreferedSchedualArray()[Hours] == Settings.selection_available)
+							if (ManagerController.collageDB.getLecturer(lecID).getPreferedSchedualArray()[Hours] == Settings.selection_available)
 								SoftConstraints++;
 
 						}
@@ -66,11 +67,11 @@ public class FitnessCalc
 
 		// check a lecturer is not teaching in 2 different campuses in near
 		// hours.
-		LecItr = MainGA.collageDB.getLecturersKeys().iterator();
+		LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
 		while (LecItr.hasNext())
 		{
 			lecID = LecItr.next().intValue();
-			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(lecID);
+			int lecturerIndex = ManagerController.collageDB.getMapping().getLecturerIndex(lecID);
 			for (int Hours = 0; Hours < Individual.weeklyHours - 1; Hours++)
 			{
 				for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
@@ -85,8 +86,8 @@ public class FitnessCalc
 								{
 									if (individual.getGeneByIndex(Hours + 1, lecturerIndex, tempClassIndex, tempCourseIndex).isGene())
 									{
-										if (MainGA.collageDB.getClass(MainGA.collageDB.getMapping().getClassID(ClassIndex)).getCampus() != MainGA.collageDB.getClass(
-												MainGA.collageDB.getMapping().getClassID(tempClassIndex)).getCampus())
+										if (ManagerController.collageDB.getClass(ManagerController.collageDB.getMapping().getClassID(ClassIndex)).getCampus() != ManagerController.collageDB.getClass(
+												ManagerController.collageDB.getMapping().getClassID(tempClassIndex)).getCampus())
 										{
 											SoftConstraints++;
 										}
@@ -101,11 +102,11 @@ public class FitnessCalc
 		}
 
 		// check class capacity vs course capacity
-		Iterator<Integer> classItr = MainGA.collageDB.getClassesKeys().iterator();
+		Iterator<Integer> classItr = ManagerController.collageDB.getClassesKeys().iterator();
 		while (classItr.hasNext())
 		{
 			classID = classItr.next().intValue();
-			int classIndex = MainGA.collageDB.getMapping().getClassIndex(classID);
+			int classIndex = ManagerController.collageDB.getMapping().getClassIndex(classID);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 			{
 				for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
@@ -114,7 +115,7 @@ public class FitnessCalc
 					{
 						if (individual.getGeneByIndex(Hours, LecturerIndex, classIndex, CourseIndex).isGene())
 						{
-							if (MainGA.collageDB.getClass(classID).getCapcity() < (MainGA.collageDB.getCourse(MainGA.collageDB.getMapping().getCourseID(CourseIndex)).getStudentNumber()))
+							if (ManagerController.collageDB.getClass(classID).getCapcity() < (ManagerController.collageDB.getCourse(ManagerController.collageDB.getMapping().getCourseID(CourseIndex)).getStudentNumber()))
 							{
 								SoftConstraints++;
 							}
@@ -125,11 +126,11 @@ public class FitnessCalc
 		}
 
 		// / check how many times a course has been assigned in an hour
-		Iterator<Integer> courseItr = MainGA.collageDB.getCoursesKeys().iterator();
+		Iterator<Integer> courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
 		while (courseItr.hasNext())
 		{
 			courseID = courseItr.next().intValue();
-			int courseIndex = MainGA.collageDB.getMapping().getCourseIndex(courseID);
+			int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseID);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 			{
 				for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
@@ -139,8 +140,8 @@ public class FitnessCalc
 						if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseIndex).isGene())
 						{
 							counter = 0;
-							ArrayList<StudyAids> courseStudyAids = MainGA.collageDB.getCourse(courseID).getStudyAids();
-							ArrayList<StudyAids> classStudyAids = MainGA.collageDB.getClass(MainGA.collageDB.getMapping().getClassID(ClassIndex)).getStudyAids();
+							ArrayList<StudyAids> courseStudyAids = ManagerController.collageDB.getCourse(courseID).getStudyAids();
+							ArrayList<StudyAids> classStudyAids = ManagerController.collageDB.getClass(ManagerController.collageDB.getMapping().getClassID(ClassIndex)).getStudyAids();
 							for (int courseStudyAidIndex = 0; courseStudyAidIndex < courseStudyAids.size(); courseStudyAidIndex++)
 							{
 								for (int classStudyAidIndex = 0; classStudyAidIndex < courseStudyAids.size(); classStudyAidIndex++)
@@ -172,12 +173,12 @@ public class FitnessCalc
 		int courseID;
 		int counter;
 		// / check how many times a lecturer teaches in an hour.
-		Iterator<Integer> LecItr = MainGA.collageDB.getLecturersKeys().iterator();
+		Iterator<Integer> LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
 
 		while (LecItr.hasNext())
 		{
 			lecID = LecItr.next().intValue();
-			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(lecID);
+			int lecturerIndex = ManagerController.collageDB.getMapping().getLecturerIndex(lecID);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 			{
 				counter = 0;
@@ -197,11 +198,11 @@ public class FitnessCalc
 		}
 
 		// / check how many times a class is taken in an hour
-		Iterator<Integer> classItr = MainGA.collageDB.getClassesKeys().iterator();
+		Iterator<Integer> classItr = ManagerController.collageDB.getClassesKeys().iterator();
 		while (classItr.hasNext())
 		{
 			classID = classItr.next().intValue();
-			int classIndex = MainGA.collageDB.getMapping().getClassIndex(classID);
+			int classIndex = ManagerController.collageDB.getMapping().getClassIndex(classID);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 			{
 				counter = 0;
@@ -221,11 +222,11 @@ public class FitnessCalc
 		}
 
 		// / check how many times a course has been assigned in an hour
-		Iterator<Integer> courseItr = MainGA.collageDB.getCoursesKeys().iterator();
+		Iterator<Integer> courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
 		while (courseItr.hasNext())
 		{
 			courseID = courseItr.next().intValue();
-			int courseIndex = MainGA.collageDB.getMapping().getCourseIndex(courseID);
+			int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseID);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 			{
 				counter = 0;
@@ -246,17 +247,17 @@ public class FitnessCalc
 
 		// check course, lecture and lab not assign at the same time
 		tempCounter = 0;
-		Map<Integer, ArrayList<Integer>> relatedCoursesMap = MainGA.collageDB.getRelatedCourses();
+		Map<Integer, ArrayList<Integer>> relatedCoursesMap = ManagerController.collageDB.getRelatedCourses();
 		courseItr = relatedCoursesMap.keySet().iterator();
 
 		while (courseItr.hasNext())
 		{
 			courseID = courseItr.next().intValue();
-			int courseIndex = MainGA.collageDB.getMapping().getCourseIndex(courseID);
+			int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseID);
 			ArrayList<Integer> tempArrayList = relatedCoursesMap.get(courseID);
 			for (int TempCourseIndex = 0; TempCourseIndex < tempArrayList.size(); TempCourseIndex++)
 			{
-				int relatedCourseIndex = MainGA.collageDB.getMapping().getCourseIndex(tempArrayList.get(TempCourseIndex));
+				int relatedCourseIndex = ManagerController.collageDB.getMapping().getCourseIndex(tempArrayList.get(TempCourseIndex));
 				for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 				{
 					counter = 0;
@@ -280,7 +281,7 @@ public class FitnessCalc
 		// check courses of same semester not overlapping.
 		tempCounter = 0;
 
-		Map<Integer, ArrayList<Integer>> semesterCoursesMap = MainGA.collageDB.getCoursesBySemester();
+		Map<Integer, ArrayList<Integer>> semesterCoursesMap = ManagerController.collageDB.getCoursesBySemester();
 		Iterator<Integer> semesterItr = semesterCoursesMap.keySet().iterator();
 
 		while (semesterItr.hasNext())
@@ -289,11 +290,11 @@ public class FitnessCalc
 			ArrayList<Integer> courseArrayList = semesterCoursesMap.get(semsterNum);
 			for (int CourseIndex = 0; CourseIndex < courseArrayList.size(); CourseIndex++)
 			{
-				int courseDBIndex = MainGA.collageDB.getMapping().getCourseIndex(courseArrayList.get(CourseIndex));
+				int courseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(CourseIndex));
 				ArrayList<Integer> tempArrayList = semesterCoursesMap.get(semsterNum);
 				for (int TempCourseIndex = CourseIndex; TempCourseIndex < tempArrayList.size(); TempCourseIndex++)
 				{
-					int tempCourseDBIndex = MainGA.collageDB.getMapping().getCourseIndex(courseArrayList.get(TempCourseIndex));
+					int tempCourseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(TempCourseIndex));
 					for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 					{
 						counter = 0;
@@ -316,18 +317,18 @@ public class FitnessCalc
 		}
 
 		// check total hours a day for 1 lecturer is not above 8 hours.
-		LecItr = MainGA.collageDB.getLecturersKeys().iterator();
+		LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
 
 		while (LecItr.hasNext())
 		{
 			lecID = LecItr.next().intValue();
-			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(lecID);
+			int lecturerIndex = ManagerController.collageDB.getMapping().getLecturerIndex(lecID);
 			for (int days = 0; days < Individual.workingDays; days++)
 			{
 				counter = 0;
 				for (int hours = 0; hours < Individual.dailyHours; hours++)
 				{
-					int Hours = MainGA.collageDB.getMapping().getTime(days, hours);
+					int Hours = ManagerController.collageDB.getMapping().getTime(days, hours);
 
 					for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
 					{

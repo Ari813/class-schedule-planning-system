@@ -1,6 +1,7 @@
 package Algorithm;
 
 import java.util.Random;
+import Controllers.*;
 
 public class Algorithm {
 
@@ -91,7 +92,7 @@ public class Algorithm {
 						// Crossover
 						if (Math.random() <= uniformRate) {
 							if (indiv1.getGeneByIndex(H, L, R, C).getIndex() == 0) {
-								for (i = 0; i < MainGA.collageDB
+								for (i = 0; i < ManagerController.collageDB
 										.getCourseByIndex(C).getAcademicHours(); i++)
 									if (indiv1.getGeneByIndex(H, L, R, C)
 											.isGene()) {
@@ -103,7 +104,7 @@ public class Algorithm {
 
 						} else {
 							if (indiv2.getGeneByIndex(H, L, R, C).getIndex() == 0) {
-								for (i = 0; i < MainGA.collageDB
+								for (i = 0; i < ManagerController.collageDB
 										.getCourseByIndex(C).getAcademicHours(); i++)
 									if (indiv2.getGeneByIndex(H, L, R, C)
 											.isGene()) {
@@ -144,7 +145,7 @@ public class Algorithm {
 								if (Math.random() <= uniformRate) {
 									if (indiv.getGeneByIndex(H, L, R, C)
 											.getIndex() == 0) {
-										for (i = 0; i < MainGA.collageDB
+										for (i = 0; i < ManagerController.collageDB
 												.getCourseByIndex(C)
 												.getAcademicHours(); i++)
 											if (indiv

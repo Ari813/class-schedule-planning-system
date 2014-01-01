@@ -56,6 +56,8 @@ public class ManagerController {
 	private GetAllCoursePack CourseMsg;
 	private GetAllFacultyPack FacultyMsg;
 	private GetAllCoursesForSchedualingPack ForSchedualingCourseMsg;
+	
+	public static Database collageDB;
 
 	public ManagerController(Main_Frame mainFrm, ChatClient client) {
 		this.client = client;

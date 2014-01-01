@@ -1,6 +1,7 @@
 package Algorithm;
 
 import java.util.Iterator;
+import Controllers.*;
 
 import common.Settings;
 
@@ -19,9 +20,9 @@ public class Population {
 		if (initialise) {
 			// Loop and create individuals
 			JumpStartIndividual = new Individual(
-					MainGA.collageDB.getLecturersSize(),
-					MainGA.collageDB.getClassesSize(),
-					MainGA.collageDB.getCoursesSize());
+					ManagerController.collageDB.getLecturersSize(),
+					ManagerController.collageDB.getClassesSize(),
+					ManagerController.collageDB.getCoursesSize());
 			JumpStart();
 			for (int i = 0; i < size(); i++) {
 				Individual newIndividual = new Individual(JumpStartIndividual);
@@ -33,15 +34,15 @@ public class Population {
 
 	private void JumpStart() {
 
-		Iterator<Integer> Leciter = MainGA.collageDB.getLecturersKeys()
+		Iterator<Integer> Leciter = ManagerController.collageDB.getLecturersKeys()
 				.iterator();
 		Iterator<Integer> courseIter;
 		while (Leciter.hasNext()) {
 			int Lecturerid = Leciter.next().intValue();
-			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(
+			int lecturerIndex = ManagerController.collageDB.getMapping().getLecturerIndex(
 					Lecturerid);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++) {
-				if (MainGA.collageDB.getLecturer(Lecturerid)
+				if (ManagerController.collageDB.getLecturer(Lecturerid)
 						.getPreferedSchedualArray()[Hours] == Settings.selection_not_available) {
 					for (int ClssIndex = 0; ClssIndex < Individual.NumOfClasses; ClssIndex++)
 						for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++) {
@@ -54,19 +55,19 @@ public class Population {
 			}
 		}
 
-		Leciter = MainGA.collageDB.getLecturersKeys().iterator();
+		Leciter = ManagerController.collageDB.getLecturersKeys().iterator();
 
 		while (Leciter.hasNext()) {
 			int Lecturerid = Leciter.next().intValue();
-			int lecturerIndex = MainGA.collageDB.getMapping().getLecturerIndex(
+			int lecturerIndex = ManagerController.collageDB.getMapping().getLecturerIndex(
 					Lecturerid);
-			courseIter = MainGA.collageDB.getCoursesKeys().iterator();
+			courseIter = ManagerController.collageDB.getCoursesKeys().iterator();
 			while (courseIter.hasNext()) {
 				int courseid = courseIter.next().intValue();
-				int courseIndex = MainGA.collageDB.getMapping().getCourseIndex(
+				int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(
 						courseid);
 
-				if (!MainGA.collageDB.getLecturer(Lecturerid)
+				if (!ManagerController.collageDB.getLecturer(Lecturerid)
 						.getLecturerCourses().contains(courseid)) {
 					for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 						for (int ClssIndex = 0; ClssIndex < Individual.NumOfClasses; ClssIndex++)

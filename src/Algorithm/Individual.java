@@ -1,5 +1,7 @@
 package Algorithm;
 
+import Controllers.*;
+
 public class Individual {
 
 	static int workingDays = 6;
@@ -100,7 +102,7 @@ public class Individual {
 					{
 						double gene = Math.round(Math.random());
 						int editableHours = 0;
-						int hoursForCourse = MainGA.collageDB.getCourseByIndex(C).getAcademicHours();
+						int hoursForCourse = ManagerController.collageDB.getCourseByIndex(C).getAcademicHours();
 						if (gene > 0.5) {
 							for (i = 0; i < hoursForCourse; i++)
 								if (genes[H+i][L][R][C].isEditable())
@@ -137,19 +139,20 @@ public class Individual {
 	public Gene getGeneByID(int day, int hour, int LecturerID, int ClassID,
 			int CourseID) {
 
-		return genes[MainGA.collageDB.getMapping().getTime(day, hour)][MainGA.collageDB
-				.getMapping().getLecturerIndex(LecturerID)][MainGA.collageDB
-				.getMapping().getClassIndex(ClassID)][MainGA.collageDB
+		return genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB
+				.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB
+				.getMapping().getClassIndex(ClassID)][ManagerController.collageDB
 				.getMapping().getCourseIndex(CourseID)];
 	}
 
 	public Gene getGeneByID(int weekHour, int LecturerID, int ClassID,
 			int CourseID) {
 
-		return genes[weekHour][MainGA.collageDB.getMapping().getLecturerIndex(
-				LecturerID)][MainGA.collageDB.getMapping().getClassIndex(
-				ClassID)][MainGA.collageDB.getMapping()
+		return genes[weekHour][ManagerController.collageDB.getMapping().getLecturerIndex(
+				LecturerID)][ManagerController.collageDB.getMapping().getClassIndex(
+				ClassID)][ManagerController.collageDB.getMapping()
 				.getCourseIndex(CourseID)];
+		
 	}
 
 	public Gene getGeneByIndex(int weeklyHour, int LecturerIndex,
@@ -161,9 +164,9 @@ public class Individual {
 	public void setGeneByID(int day, int hour, int LecturerID, int ClassID,
 			int CourseID) {
 
-		genes[MainGA.collageDB.getMapping().getTime(day, hour)][MainGA.collageDB
-				.getMapping().getLecturerIndex(LecturerID)][MainGA.collageDB
-				.getMapping().getClassIndex(ClassID)][MainGA.collageDB
+		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB
+				.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB
+				.getMapping().getClassIndex(ClassID)][ManagerController.collageDB
 				.getMapping().getCourseIndex(CourseID)].setGene();
 	}
 
@@ -176,9 +179,9 @@ public class Individual {
 	public void clrGeneByID(int day, int hour, int LecturerID, int ClassID,
 			int CourseID) {
 
-		genes[MainGA.collageDB.getMapping().getTime(day, hour)][MainGA.collageDB
-				.getMapping().getLecturerIndex(LecturerID)][MainGA.collageDB
-				.getMapping().getClassIndex(ClassID)][MainGA.collageDB
+		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB
+				.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB
+				.getMapping().getClassIndex(ClassID)][ManagerController.collageDB
 				.getMapping().getCourseIndex(CourseID)].clrGene();
 	}
 

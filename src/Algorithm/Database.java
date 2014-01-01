@@ -9,6 +9,7 @@ import java.util.Set;
 import entities.Class;
 import entities.Course;
 import entities.Lecturer;
+import Controllers.*;
 
 public class Database
 {
@@ -181,7 +182,7 @@ public class Database
 	{
 		if (relatedCoursesMap == null || relatedCoursesMap.isEmpty())
 		{
-			Iterator<Integer> courseItr = MainGA.collageDB.getCoursesKeys().iterator();
+			Iterator<Integer> courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
 			Map<Integer, ArrayList<Integer>> relatedCoursesMap = new HashMap<Integer, ArrayList<Integer>>();
 
 			while (courseItr.hasNext())
@@ -208,7 +209,7 @@ public class Database
 	{
 		if (SemesterCoursesMap == null || SemesterCoursesMap.isEmpty())
 		{
-			Iterator<Integer> courseItr = MainGA.collageDB.getCoursesKeys().iterator();
+			Iterator<Integer> courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
 			Map<Integer, ArrayList<Integer>> SemesterCoursesMap = new HashMap<Integer, ArrayList<Integer>>();
 
 			while (courseItr.hasNext())

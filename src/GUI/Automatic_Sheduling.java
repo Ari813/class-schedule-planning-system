@@ -39,7 +39,6 @@ import Controllers.ManagerController;
 
 public class Automatic_Sheduling extends JPanel implements ActionListener, ListSelectionListener, KeyListener
 {
-
 	private Component horizontalStrut_2;
 	private Component horizontalStrut_1;
 	private static final long serialVersionUID = 1L;
