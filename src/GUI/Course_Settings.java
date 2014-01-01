@@ -302,7 +302,7 @@ ListSelectionListener,FocusListener, KeyListener {
 		txtCourseSttings = new JTextField();
 		txtCourseSttings.setEditable(false);
 		txtCourseSttings.setBounds(0, 4, 774, 40);
-		txtCourseSttings.setText("Course sttings");
+		txtCourseSttings.setText("Course settings");
 		txtCourseSttings.setHorizontalAlignment(SwingConstants.CENTER);
 		txtCourseSttings.setFont(new Font("Tahoma", Font.BOLD, 20));
 		txtCourseSttings.setColumns(10);
@@ -358,12 +358,17 @@ ListSelectionListener,FocusListener, KeyListener {
 		}
 		if (e.getSource() ==cmbxFaculty) {
 			clickflag=false;
-			FacultyIndex =cmbxFaculty.getSelectedIndex();
+			FacultyIndex =  Integer.parseInt(cmbxFaculty.getModel().getElementAt(
+					cmbxFaculty.getSelectedIndex())
+			.toString().split(":")[0]);//cmbxFaculty.getSelectedIndex();
 			 if (table.isEditing()){
 					  table.getCellEditor().stopCellEditing();}
-			GetCourseTable(cmbxFaculty.getSelectedIndex());
+			GetCourseTable(FacultyIndex);
 			//manager.LoadFacultyCourse(cmbxFaculty.getSelectedIndex());
 			
+			 Integer.parseInt(cmbxFaculty.getModel().getElementAt(
+								cmbxFaculty.getSelectedIndex())
+						.toString().split(":")[0]);
 			
 		}	
 	}

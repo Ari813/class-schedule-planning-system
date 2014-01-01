@@ -3,12 +3,16 @@ package entities;
 import java.io.Serializable;
 
 public class ClassesAids implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int classBuildingid;
 	private int clssid;
 	private int aidsid;
 	
 	
-	public ClassesAids() {
+	public ClassesAids(int i) {
 		// TODO Auto-generated constructor stub
 	}
 

@@ -354,7 +354,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 			if (serverAns.getID().equals(newLecturer.getID())) {
 				if (!isNewLecturer)
 					ArrayLecturer.set(
-							cmbxLecturerEditor.getSelectedIndex() - 1,
+							cmbxLecturerEditor.getSelectedIndex() ,
 							newLecturer);
 				else {
 					ArrayLecturer.add(newLecturer);
@@ -382,7 +382,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener,
 	}
 
 	private void setSelectedLec() {
-		int index = cmbxLecturerEditor.getSelectedIndex() - 1;
+		int index = cmbxLecturerEditor.getSelectedIndex() ;
 		if ((ArrayLecturer != null) && (!ArrayLecturer.isEmpty())
 				&& (index >= 0)) {
 			txtpnIDNumber.setText(Integer.toString(ArrayLecturer.get(index)
