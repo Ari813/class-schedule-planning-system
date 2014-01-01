@@ -583,6 +583,7 @@ pnl();
 			
 		if (e.getSource() == btnClear) {
 			
+			
 			if (tablemanual.getSelectedColumn()>=1){
 				
 					
