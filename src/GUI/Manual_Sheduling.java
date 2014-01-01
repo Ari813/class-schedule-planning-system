@@ -446,7 +446,7 @@ pnl();
 			
 		}
 		if (e.getSource() == cmbBxCourse) {
-		//	insert_to_lec_combo();
+			insert_to_lec_combo();
 		}
 		
 		if (e.getSource() == btnSet) {
