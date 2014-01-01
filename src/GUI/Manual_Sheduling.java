@@ -154,6 +154,7 @@ ListSelectionListener, KeyListener {
 	private int courseHours=0;
 	private JFormattedTextField classCapacity;
 	private int classCapacityValue=0;
+	private ArrayList<Course> Allcourses;
 	
 	
 	
@@ -716,6 +717,7 @@ private void SetTable(int faculty, int semester) {
 
 	public void setFaculty(ArrayList<Faculty> faculty) {
 		ManualArrayFaculty = faculty;
+		
 		cmbxFaculty.removeAll();
 		for (int i = 0; i < ManualArrayFaculty.size(); i++) {
 			cmbxFaculty.addItem(ManualArrayFaculty.get(i).getFacultyNum() + ":"
@@ -727,6 +729,7 @@ private void SetTable(int faculty, int semester) {
 	public void setClasses(ArrayList<Class> getClasses) {
 		// TODO Auto-generated method stub
 		arrayClasses = getClasses;
+		
 		cmbBxClass.removeAll();
 		for (int i = 0; i < arrayClasses.size(); i++) {
 			cmbBxClass.addItem(arrayClasses.get(i).getClassID() + ":"
@@ -747,7 +750,7 @@ private void SetTable(int faculty, int semester) {
 	
 	public void setMapCourse(ArrayList<Course> course) {
 		
-		
+		Allcourses=course;
 	 CourseMap=new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
 	 
 	 CourseMapInTable=new HashMap<Integer, Map<Integer, Map<Integer ,Course>>>();
