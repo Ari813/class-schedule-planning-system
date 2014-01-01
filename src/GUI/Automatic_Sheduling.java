@@ -36,9 +36,8 @@ import javax.swing.event.ListSelectionListener;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 
-
-public class Automatic_Sheduling extends JPanel implements ActionListener,
-ListSelectionListener, KeyListener {
+public class Automatic_Sheduling extends JPanel implements ActionListener, ListSelectionListener, KeyListener
+{
 
 	private Component horizontalStrut_2;
 	private Component horizontalStrut_1;
@@ -51,56 +50,58 @@ ListSelectionListener, KeyListener {
 
 	private JComboBox cmbxFaculty;
 	private JComboBox cmbBxSemster;
-	
-	private JList lstTimeTable ;
+
+	private JList lstTimeTable;
 	private JLabel lblOptionalTimeTables;
 	private JButton btnSaveChanges;
-	private JButton btnBackToMainMenu ;
+	private JButton btnBackToMainMenu;
 	private JButton btnPreview;
 	private JPanel panel;
 	private JLabel lblTimeTableSchedualing;
 	private JLabel lblFaculty;
 	private LecturerController lec;
 	private ManagerController manager;
-	static Color[] colors = {Color.BLUE, Color.GRAY, Color.RED};
-	static String[] strings = {"Test1", "Test2", "Test3"};
+	static Color[] colors = { Color.BLUE, Color.GRAY, Color.RED };
+	static String[] strings = { "Test1", "Test2", "Test3" };
 	private JComboBox comboBoxsemester;
-	
+
 	/**
 	 * Create the panel.
 	 */
-	
-	/*/	
-	lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
-	lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
-	lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
-	lblTimeTableSchedualing.setLocation(new Point(50, 0));
-	lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
-	lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
-	lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
-	lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 
-/*/	
-	public Automatic_Sheduling(ManagerController mng) {
-	
+	/*
+	 * / lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
+	 * lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
+	 * lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
+	 * lblTimeTableSchedualing.setLocation(new Point(50, 0));
+	 * lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
+	 * lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
+	 * lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
+	 * lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
+	 * null, null, null, null));
+	 * 
+	 * /
+	 */
+	public Automatic_Sheduling(ManagerController mng)
+	{
+
 		super();
-		this.manager=mng;
+		this.manager = mng;
 		initialize();
-		//manager.loadOptionalTimeTables();
-		//manager.startalgo();
-		
-	
+		// manager.loadOptionalTimeTables();
+		// manager.startalgo();
+
 	}
-	
-	
-		private void initialize() {
+
+	private void initialize()
+	{
 		// TODO Auto-generated method stub
-		
+
 		pnl();
 		PNL_Main.add(GETbtnSaveChanges());
 		PNL_Main.add(GETbtnBackToMainMenu());
 		PNL_Main.add(GETtxtLecturerPreferences());
-			
+
 		PNL_Main.add(horizontalStrut1());
 		PNL_Main.add(horizontalStrut2());
 		PNL_Main.add(GETcmbxFaculty());
@@ -110,303 +111,305 @@ ListSelectionListener, KeyListener {
 		PNL_Main.add(GETlstTimeTable());
 		PNL_Main.add(GETpanel());
 		PNL_Main.add(getComboBoxsemester());
-		//PNL_Main.add(GETcmbBxSemster());
-		
+		// PNL_Main.add(GETcmbBxSemster());
+
 	}
-private void pnl() {
-		
-	PNL_Main = new JPanel();
-	PNL_Main.setBorder(new EmptyBorder(0, 0, 0, 0));
-	PNL_Main.setToolTipText("Edit class list");
-	PNL_Main.setMinimumSize(new Dimension(774, 474));
-	PNL_Main.setMaximumSize(new Dimension(774, 474));
-	PNL_Main.setBounds(10, 85, 774, 474);
-	PNL_Main.setLayout(null);
-		
+
+	private void pnl()
+	{
+
+		PNL_Main = new JPanel();
+		PNL_Main.setBorder(new EmptyBorder(0, 0, 0, 0));
+		PNL_Main.setToolTipText("Edit class list");
+		PNL_Main.setMinimumSize(new Dimension(774, 474));
+		PNL_Main.setMaximumSize(new Dimension(774, 474));
+		PNL_Main.setBounds(10, 85, 774, 474);
+		PNL_Main.setLayout(null);
+
 	}
-	
-	
-	private JPanel GETpanel() {
-		if (panel == null){
-		 panel = new JPanel();
-		  panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		  panel.setBackground(SystemColor.inactiveCaption);
-		  panel.setBounds(540, 103, 201, 249);
-		  panel.setLayout(null);
-		  panel.add(GETlblOptionalTimeTables());
-		  panel.add(GETbtnPreview());}
+
+	private JPanel GETpanel()
+	{
+		if (panel == null)
+		{
+			panel = new JPanel();
+			panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			panel.setBackground(SystemColor.inactiveCaption);
+			panel.setBounds(540, 103, 201, 249);
+			panel.setLayout(null);
+			panel.add(GETlblOptionalTimeTables());
+			panel.add(GETbtnPreview());
+		}
 		return panel;
 	}
 
-
-
-	private JButton GETbtnPreview() {
-		if (btnPreview == null){
+	private JButton GETbtnPreview()
+	{
+		if (btnPreview == null)
+		{
 			btnPreview = new JButton("Preview");
 			btnPreview.setBounds(102, 215, 89, 23);
-			}
+		}
 		return btnPreview;
 	}
 
-
-
-	private JLabel GETlblOptionalTimeTables() {
-		if (lblOptionalTimeTables == null){
+	private JLabel GETlblOptionalTimeTables()
+	{
+		if (lblOptionalTimeTables == null)
+		{
 			lblOptionalTimeTables = new JLabel("Optional time tables :");
 			lblOptionalTimeTables.setBounds(10, 11, 132, 15);
-			 lblOptionalTimeTables.setFont(new Font("Tahoma", Font.BOLD, 12));
-		  }
+			lblOptionalTimeTables.setFont(new Font("Tahoma", Font.BOLD, 12));
+		}
 		return lblOptionalTimeTables;
 	}
 
-
-
-	private JList GETlstTimeTable() {
-		if (lstTimeTable == null){
+	private JList GETlstTimeTable()
+	{
+		if (lstTimeTable == null)
+		{
 			lstTimeTable = new JList();
-		  lstTimeTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		  lstTimeTable.setBackground(SystemColor.activeCaption);
-		  lstTimeTable.setFont(new Font("Tahoma", Font.BOLD, 12));
-		  lstTimeTable.setBounds(560, 149, 165, 159);
-		  }
+			lstTimeTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			lstTimeTable.setBackground(SystemColor.activeCaption);
+			lstTimeTable.setFont(new Font("Tahoma", Font.BOLD, 12));
+			lstTimeTable.setBounds(560, 149, 165, 159);
+		}
 		return lstTimeTable;
 	}
 
-
-
-	
-
-
-
-	private JLabel GETlblSemester() {
-		if (lblSemester == null){
-		lblSemester = new JLabel("semester:");
-		  lblSemester.setFont(new Font("Tahoma", Font.BOLD, 12));
-		  lblSemester.setBounds(534, 55, 71, 14);
-		  }
+	private JLabel GETlblSemester()
+	{
+		if (lblSemester == null)
+		{
+			lblSemester = new JLabel("semester:");
+			lblSemester.setFont(new Font("Tahoma", Font.BOLD, 12));
+			lblSemester.setBounds(534, 55, 71, 14);
+		}
 		return lblSemester;
 	}
 
+	private JLabel GETlblFaculty()
+	{
 
-
-	private JLabel GETlblFaculty() {
-		
-		if (lblFaculty == null){
+		if (lblFaculty == null)
+		{
 			lblFaculty = new JLabel("Faculty:");
 			lblFaculty.setFont(new Font("Tahoma", Font.BOLD, 12));
-			lblFaculty.setBounds(10, 55, 65, 14);}
+			lblFaculty.setBounds(10, 55, 65, 14);
+		}
 		return lblFaculty;
 	}
 
-
-
-	private JComboBox GETcmbxFaculty() {
-		if (cmbxFaculty == null){
-		cmbxFaculty = new JComboBox();
-	  	cmbxFaculty.setBounds(63, 55, 461, 20);
-	  	cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
-	  	cmbxFaculty.setToolTipText("Faculty list");
-	  	cmbxFaculty.setMaximumRowCount(52);}
+	private JComboBox GETcmbxFaculty()
+	{
+		if (cmbxFaculty == null)
+		{
+			cmbxFaculty = new JComboBox();
+			cmbxFaculty.setBounds(63, 55, 461, 20);
+			cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			cmbxFaculty.setToolTipText("Faculty list");
+			cmbxFaculty.setMaximumRowCount(52);
+		}
 		return cmbxFaculty;
 	}
-private JComboBox GETcmbBxSemster() {
-		
-		if (lblSemester == null){
+
+	private JComboBox GETcmbBxSemster()
+	{
+
+		if (lblSemester == null)
+		{
 			cmbBxSemster = new JComboBox();
-		
-		  cmbBxSemster.setToolTipText("cmbBxSemster");
-		  cmbBxSemster.setBounds(601, 55, 46, 20);}
+
+			cmbBxSemster.setToolTipText("cmbBxSemster");
+			cmbBxSemster.setBounds(601, 55, 46, 20);
+		}
 		return cmbBxSemster;
 	}
 
-
-
-	private JScrollPane GETscroll() {
-		if (scroll == null){
+	private JScrollPane GETscroll()
+	{
+		if (scroll == null)
+		{
 			scroll = new JScrollPane(GETtableAutonatic());
 			scroll.setEnabled(false);
-			scroll.setBounds(10, 100, 511, 249);}
+			scroll.setBounds(10, 100, 511, 249);
+		}
 		return scroll;
 	}
 
-	private JTable GETtableAutonatic() {
-		if (tableAutonatic==null){
-		tableAutonatic = new JTable();
-		tableAutonatic.setForeground(Color.BLACK);
-		tableAutonatic.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		tableAutonatic.setToolTipText("Manual auto sheduling table ");
-		tableAutonatic.setFillsViewportHeight(true);
-		tableAutonatic.setSurrendersFocusOnKeystroke(true);
-		tableAutonatic.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableAutonatic.setBackground(SystemColor.inactiveCaption);
-		tableAutonatic.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableAutonatic.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"8:00", null, null, null, null, null, null},
-				{"9:00", null, null, null, null, null, null},
-				{"10:00", null, null, null, null, null, null},
-				{"11:00", null, null, null, null, null, null},
-				{"12:00", null, null, null, null, null, null},
-				{"13:00", null, null, null, null, null, null},
-				{"14:00", null, null, null, null, null, null},
-				{"15:00", null, null, null, null, null, null},
-				{"16:00", null, null, null, null, null, null},
-				{"17:00", null, null, null, null, null, null},
-				{"18:00", null, null, null, null, null, null},
-				{"19:00", null, null, null, null, null, null},
-				{"20:00", null, null, null, null, null, null},
-				{"21:00", null, null, null, null, null, null},
-			},
-			new String[] {
-				"Time", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		tableAutonatic.getColumnModel().getColumn(0).setPreferredWidth(65);
-		tableAutonatic.getColumnModel().getColumn(1).setPreferredWidth(65);
-		tableAutonatic.getColumnModel().getColumn(1).setMinWidth(25);
-		tableAutonatic.getColumnModel().getColumn(2).setPreferredWidth(65);
-		tableAutonatic.getColumnModel().getColumn(2).setMinWidth(25);
-		tableAutonatic.getColumnModel().getColumn(3).setPreferredWidth(65);
-		tableAutonatic.getColumnModel().getColumn(3).setMinWidth(25);
-		tableAutonatic.getColumnModel().getColumn(4).setResizable(false);
-		tableAutonatic.getColumnModel().getColumn(4).setPreferredWidth(65);
-		tableAutonatic.getColumnModel().getColumn(4).setMinWidth(25);
-		tableAutonatic.getColumnModel().getColumn(5).setResizable(false);
-		tableAutonatic.getColumnModel().getColumn(5).setPreferredWidth(65);
-		tableAutonatic.getColumnModel().getColumn(5).setMinWidth(25);
-		tableAutonatic.getColumnModel().getColumn(6).setResizable(false);
-		tableAutonatic.getColumnModel().getColumn(6).setPreferredWidth(65);
-		tableAutonatic.getColumnModel().getColumn(6).setMinWidth(25);
-		
-	
+	private JTable GETtableAutonatic()
+	{
+		if (tableAutonatic == null)
+		{
+			tableAutonatic = new JTable();
+			tableAutonatic.setForeground(Color.BLACK);
+			tableAutonatic.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			tableAutonatic.setToolTipText("Manual auto sheduling table ");
+			tableAutonatic.setFillsViewportHeight(true);
+			tableAutonatic.setSurrendersFocusOnKeystroke(true);
+			tableAutonatic.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			tableAutonatic.setBackground(SystemColor.inactiveCaption);
+			tableAutonatic.setBorder(new LineBorder(new Color(0, 0, 0)));
+			tableAutonatic.setModel(new DefaultTableModel(new Object[][] { { "8:00", null, null, null, null, null, null }, { "9:00", null, null, null, null, null, null },
+					{ "10:00", null, null, null, null, null, null }, { "11:00", null, null, null, null, null, null }, { "12:00", null, null, null, null, null, null },
+					{ "13:00", null, null, null, null, null, null }, { "14:00", null, null, null, null, null, null }, { "15:00", null, null, null, null, null, null },
+					{ "16:00", null, null, null, null, null, null }, { "17:00", null, null, null, null, null, null }, { "18:00", null, null, null, null, null, null },
+					{ "19:00", null, null, null, null, null, null }, { "20:00", null, null, null, null, null, null }, { "21:00", null, null, null, null, null, null }, }, new String[] { "Time",
+					"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" })
+			{
+				boolean[] columnEditables = new boolean[] { false, false, false, false, false, false, false };
 
-		tableAutonatic.setColumnSelectionAllowed(true);
-		tableAutonatic.setCellSelectionEnabled(true);
-		tableAutonatic.setBounds(35, 127, 600, 224);
+				public boolean isCellEditable(int row, int column)
+				{
+					return columnEditables[column];
+				}
+			});
+			tableAutonatic.getColumnModel().getColumn(0).setPreferredWidth(65);
+			tableAutonatic.getColumnModel().getColumn(1).setPreferredWidth(65);
+			tableAutonatic.getColumnModel().getColumn(1).setMinWidth(25);
+			tableAutonatic.getColumnModel().getColumn(2).setPreferredWidth(65);
+			tableAutonatic.getColumnModel().getColumn(2).setMinWidth(25);
+			tableAutonatic.getColumnModel().getColumn(3).setPreferredWidth(65);
+			tableAutonatic.getColumnModel().getColumn(3).setMinWidth(25);
+			tableAutonatic.getColumnModel().getColumn(4).setResizable(false);
+			tableAutonatic.getColumnModel().getColumn(4).setPreferredWidth(65);
+			tableAutonatic.getColumnModel().getColumn(4).setMinWidth(25);
+			tableAutonatic.getColumnModel().getColumn(5).setResizable(false);
+			tableAutonatic.getColumnModel().getColumn(5).setPreferredWidth(65);
+			tableAutonatic.getColumnModel().getColumn(5).setMinWidth(25);
+			tableAutonatic.getColumnModel().getColumn(6).setResizable(false);
+			tableAutonatic.getColumnModel().getColumn(6).setPreferredWidth(65);
+			tableAutonatic.getColumnModel().getColumn(6).setMinWidth(25);
+
+			tableAutonatic.setColumnSelectionAllowed(true);
+			tableAutonatic.setCellSelectionEnabled(true);
+			tableAutonatic.setBounds(35, 127, 600, 224);
 		}
 		return tableAutonatic;
 	}
-///////////////////all class////	
-	private Component horizontalStrut1() {
+
+	// /////////////////all class////
+	private Component horizontalStrut1()
+	{
 		horizontalStrut_1 = Box.createHorizontalStrut(20);
 		horizontalStrut_1.setBounds(0, 80, 774, 12);
 		return horizontalStrut_1;
 	}
-	private Component horizontalStrut2() {
-		 horizontalStrut_2 = Box.createHorizontalStrut(20);
+
+	private Component horizontalStrut2()
+	{
+		horizontalStrut_2 = Box.createHorizontalStrut(20);
 		horizontalStrut_2.setBounds(5, 424, 759, 5);
 		horizontalStrut_2.setBackground(Color.BLACK);
 		return horizontalStrut_2;
 	}
 
-///////////////////////////////////
+	// /////////////////////////////////
 
-	private JTextField GETtxtLecturerPreferences() {
-		if (txtLecturerPreferences == null) {
-		txtLecturerPreferences = new JTextField();
-		txtLecturerPreferences.setBounds(0, 4, 774, 40);
-		txtLecturerPreferences.setText("Automatic Scheduling is running");
-		txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);
-		txtLecturerPreferences.setFont(new Font("Tahoma", Font.BOLD, 20));
-		txtLecturerPreferences.setColumns(10);
-		txtLecturerPreferences.setBorder(UIManager.getBorder("DesktopIcon.border"));
-		txtLecturerPreferences.setBackground(new Color(176, 224, 230));
+	private JTextField GETtxtLecturerPreferences()
+	{
+		if (txtLecturerPreferences == null)
+		{
+			txtLecturerPreferences = new JTextField();
+			txtLecturerPreferences.setBounds(0, 4, 774, 40);
+			txtLecturerPreferences.setText("Automatic Scheduling is running");
+			txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);
+			txtLecturerPreferences.setFont(new Font("Tahoma", Font.BOLD, 20));
+			txtLecturerPreferences.setColumns(10);
+			txtLecturerPreferences.setBorder(UIManager.getBorder("DesktopIcon.border"));
+			txtLecturerPreferences.setBackground(new Color(176, 224, 230));
 		}
 		return txtLecturerPreferences;
 	}
 
-
-	private JButton GETbtnBackToMainMenu() {
-		if (btnBackToMainMenu == null) {
+	private JButton GETbtnBackToMainMenu()
+	{
+		if (btnBackToMainMenu == null)
+		{
 			btnBackToMainMenu = new JButton("Discard");
 			btnBackToMainMenu.setBounds(475, 434, 121, 29);
 			btnBackToMainMenu.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			
+
 		}
-		
+
 		return btnBackToMainMenu;
 	}
-	
 
-
-	private JButton GETbtnSaveChanges() {
+	private JButton GETbtnSaveChanges()
+	{
 		// TODO Auto-generated method stub
-		if (btnSaveChanges == null) {
+		if (btnSaveChanges == null)
+		{
 			btnSaveChanges = new JButton("Save");
 			btnSaveChanges.setBounds(177, 434, 121, 29);
 			btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			
+
 		}
 		return btnSaveChanges;
 	}
 
-
-	
-	
-	
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnSaveChanges) {
-		//	manager.handleManagerGUI()
-		}	
-		if (e.getSource() == btnBackToMainMenu) {
-			//manger.stopalgo();
+	public void actionPerformed(ActionEvent e)
+	{
+		if (e.getSource() == btnSaveChanges)
+		{
+			// manager.handleManagerGUI()
+		}
+		if (e.getSource() == btnBackToMainMenu)
+		{
+			// manger.stopalgo();
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
-		if (e.getSource() == btnPreview) {
-		//	manager.loadPreview();
+		if (e.getSource() == btnPreview)
+		{
+			// manager.loadPreview();
 		}
-		
-		
-	
-		
-		
-	}
-	@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void valueChanged(ListSelectionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
+	@Override
+	public void keyPressed(KeyEvent arg0)
+	{
+		// TODO Auto-generated method stub
 
-	public void addActions() {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	public void addActions()
+	{
 		btnPreview.addActionListener(this);
-		btnBackToMainMenu.addActionListener(this) ;
+		btnBackToMainMenu.addActionListener(this);
 		btnSaveChanges.addActionListener(this);
-		
-		
-		
+
 	}
-	
-	private JComboBox getComboBoxsemester() {
-		if (comboBoxsemester == null) {
+
+	private JComboBox getComboBoxsemester()
+	{
+		if (comboBoxsemester == null)
+		{
 			comboBoxsemester = new JComboBox();
-			comboBoxsemester.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8"}));
+			comboBoxsemester.setModel(new DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
 			comboBoxsemester.setBounds(600, 55, 65, 20);
 		}
 		return comboBoxsemester;
 	}
-	}
-
-
+}

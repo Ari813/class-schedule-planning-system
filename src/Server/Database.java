@@ -616,16 +616,14 @@ public class Database
 			int academicHours = qrs.getInt("AcademicHours");
 			int EstimationOfStudentsNum = qrs.getInt("EstimationOfStudentsNum");
 			int relatedCourseKey = qrs.getInt("CourseRelatedKey");
-			courseID = (courseID * 10);
-
+			int groupID = (courseID * 10);
 			for (int i = EstimationOfStudentsNum; i > 0; i -= capacity)
 			{
-				crs = new Course(capacity, courseID, description, faculty, semester, academicHours, EstimationOfStudentsNum, relatedCourseKey);
-
+				crs = new Course(capacity, groupID, description, faculty, semester, academicHours, EstimationOfStudentsNum, relatedCourseKey);
 				if (bringAdditionalInfo)
 				{
 					/* Add study aids */
-					query = new String("SELECT * FROM `csps-db`.CourseAids ca where ca.CourseID = " + crs.getCourseID() + ";");
+					query = new String("SELECT * FROM `csps-db`.CourseAids ca where ca.CourseID = " + courseID + ";");
 					st = conn.createStatement();
 					AidsQrs = st.executeQuery(query);
 					while (AidsQrs.next())
@@ -639,7 +637,7 @@ public class Database
 
 					query = new String(
 							"SELECT cl.CourseID,cl.LecturerID,lec.LecturerName FROM `csps-db`.courselecturers cl, `csps-db`.lecturer lec where lec.LecturerID = cl.LecturerID AND cl.CourseID = "
-									+ crs.getCourseID() + ";");
+									+ courseID + ";");
 					st = conn.createStatement();
 
 					LecturersQrs = st.executeQuery(query);
@@ -655,7 +653,7 @@ public class Database
 
 					crs.setHasadditionalInfo();
 				}
-				courseID++;
+				groupID++;
 				CourseArray.add(crs);
 			}
 		}

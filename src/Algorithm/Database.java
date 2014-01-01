@@ -6,9 +6,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import MsgPackage.GetAllLecturersPack.getInformation;
-import entities.Course;
 import entities.Class;
+import entities.Course;
 import entities.Lecturer;
 
 public class Database {
@@ -23,8 +22,17 @@ public class Database {
 
 	private int length;
 
-	public Database() {
+	public Database(ArrayList<Course> courses ,ArrayList<Lecturer> lecturers, ArrayList<Class> rooms) {
 		// get all database
+		this.Courses = new HashMap<Integer, Course>();
+		this.Lecturers = new HashMap<Integer, Lecturer>();
+		this.Classes = new HashMap<Integer, Class>();
+		
+		for (int courseIndex=0; courseIndex<courses.size(); courseIndex++)
+		{
+			
+			
+		}
 		length = Courses.size() * Lecturers.size() * Classes.size()
 				* Individual.weeklyHours;
 	}

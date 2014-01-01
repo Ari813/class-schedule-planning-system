@@ -139,7 +139,7 @@ public class EchoServer extends AbstractServer {
 	}
 
 	private void allCoursesForSchedualing(MessagePack msg, ConnectionToClient client) {
-		GetAllCoursePack crss = (GetAllCoursePack) msg;
+		GetAllCoursesForSchedualingPack crss = (GetAllCoursesForSchedualingPack) msg;
 		try {
 			crss.setAllclass(db.getAllCoursesForSchedualing(crss.isBringAdditionalInfo()));
 		} catch (NumberFormatException e) {
