@@ -56,7 +56,7 @@ public class Database
 
 	public Course getCourseByIndex(int index)
 	{
-		Course crs = Courses.get(mapping.getClassID(index));
+		Course crs = Courses.get(mapping.getCourseID(index));
 		return crs;
 	}
 
