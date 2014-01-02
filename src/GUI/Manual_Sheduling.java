@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.print.DocFlavor.STRING;
@@ -30,6 +32,7 @@ import javax.swing.UIManager;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.event.AncestorListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
@@ -70,6 +73,7 @@ import java.beans.VetoableChangeListener;
 import java.beans.PropertyChangeEvent;
 
 import javax.swing.JFormattedTextField;
+import javax.swing.JPopupMenu;
 
 
 public class Manual_Sheduling extends JPanel implements ActionListener,
@@ -443,7 +447,7 @@ pnl();
 		}
 		if (e.getSource() == start ){
 			
-			allData=new Database(Allcourses, arrayLecturers, arrayClasses);
+			//allData=new Database(Allcourses, arrayLecturers, arrayClasses);
 			
 			
 					
@@ -701,6 +705,9 @@ pnl();
 
 public  void setfirstIndividual(){
 	firstIndividual=new Individual();
+	allData=new Database(Allcourses, arrayLecturers, arrayClasses);
+	manager.setDataBase(allData);
+	System.out.println(firstIndividual.getSelection());
 }
 
 private void SetTable(int faculty, int semester) {
@@ -911,7 +918,7 @@ private void SetTable(int faculty, int semester) {
 		btnBackToMainMenu.addActionListener(this);
 		start.addActionListener(this);
 		 btnSet.addActionListener(this);		
-	
+		// tablemanual.addAncestorListener();
 		 btnClear.addActionListener(this);
 		
 		 cmbxFaculty.addActionListener(this);
@@ -920,7 +927,21 @@ private void SetTable(int faculty, int semester) {
 		 semesterSpinner.addActionListener(this);
 		 cmbBxLecturer.addActionListener(this);
 		
-		
+		 tablemanual.addMouseListener(new MouseAdapter() {
+			  public void mouseClicked(MouseEvent e) {
+			    if (e.getClickCount() == 2) {
+			    //  JTable target = (JTable)e.getSource();
+			     
+			    	int row = tablemanual.getSelectedRow();
+			      int column = tablemanual.getSelectedColumn();
+			      // do some action if appropriate column
+			      if (column>1){
+			    	  tablemanual.setToolTipText(column +""+ row);
+			    	  
+			      }
+			    }
+			  }
+			});
 	}
 	
 	
@@ -973,6 +994,23 @@ public void setLec(ArrayList<Lecturer> availableLecturers) {
 		/*/
 		//setMapLec(availableLecturers);
 	//
+	}
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
 	}
 	}
 

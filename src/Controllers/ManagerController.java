@@ -346,4 +346,9 @@ public class ManagerController {
 		
 	}
 
+	public void setDataBase(Database allData) {
+		// TODO Auto-generated method stub
+		collageDB=allData;
+	}
+
 }
