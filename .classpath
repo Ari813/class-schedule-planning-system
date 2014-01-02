@@ -5,18 +5,18 @@
 	<classpathentry kind="lib" path="forms-1.3.0.jar" sourcepath="forms-1.3.0-src.zip"/>
 	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
 	<classpathentry kind="lib" path="trunk/mysql-connector-java-5.1.18-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/poi-3.9-20121203.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/poi-examples-3.9-20121203.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/poi-excelant-3.9-20121203.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/poi-ooxml-3.9-20121203.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/poi-ooxml-schemas-3.9-20121203.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/poi-scratchpad-3.9-20121203.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/ooxml-lib/dom4j-1.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/ooxml-lib/stax-api-1.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/ooxml-lib/xmlbeans-2.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/lib/commons-codec-1.5.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/lib/commons-logging-1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/lib/junit-3.8.1.jar"/>
-	<classpathentry kind="lib" path="C:/Documents and Settings/user/שולחן העבודה/AAA/poi-3.9/lib/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="trunk/commons-codec-1.5.jar"/>
+	<classpathentry kind="lib" path="trunk/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="trunk/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="trunk/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="trunk/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="trunk/poi-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="trunk/poi-examples-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="trunk/poi-excelant-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="trunk/poi-ooxml-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="trunk/poi-ooxml-schemas-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="trunk/poi-scratchpad-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="trunk/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="trunk/xmlbeans-2.3.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

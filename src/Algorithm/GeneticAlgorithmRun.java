@@ -39,7 +39,8 @@ public class GeneticAlgorithmRun extends Thread
 			
 			fittest = collagePop.getFittest().getFitness();
 			//collagePop.printfitness();
-			manager.updateProgressBar(fittest);
+			if (!(loop==0))
+				manager.updateProgressBar(fittest);
 			manager.updatePopCounter(loop++);
 			if (fittest >= 1)
 				printSolution(collagePop.getFittest());
