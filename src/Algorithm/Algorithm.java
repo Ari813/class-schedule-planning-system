@@ -87,6 +87,7 @@ public class Algorithm
 		{
 			if (pop.getIndividual(oldpop).getFitness() > newPopulation.getIndividual(newpop).getFitness())
 			{
+				
 				SavePopulation.saveIndividual(i, pop.getIndividual(oldpop));
 				oldpop--;
 			} else
