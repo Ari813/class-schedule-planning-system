@@ -197,7 +197,6 @@ public class Database
 					{
 						ArrayList<Integer> newGroup = new ArrayList<Integer>();
 						relatedCoursesMap.put(courseRelatedKey, newGroup);
-						relatedCoursesMap.get(courseRelatedKey).add(courseRelatedKey);
 					}
 					relatedCoursesMap.get(courseRelatedKey).add(courseID);
 				}

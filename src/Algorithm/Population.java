@@ -8,7 +8,6 @@ import common.Settings;
 public class Population
 {
 	private Individual JumpStartIndividual;
-	private int popIter;
 	Individual[] individuals;
 
 	/*
@@ -106,7 +105,6 @@ public class Population
 
 		for (int i = 0; i < size(); i++)
 		{
-			System.out.println( "fitTest => " +fittest.getFitness() + " || fitness => " +getIndividual(i).getFitness());
 			if (fittest.getFitness() <= getIndividual(i).getFitness())
 			{
 				fittest = getIndividual(i);
@@ -136,19 +134,4 @@ public class Population
 		}
 	}
 
-	/**
-	 * @return the popIter
-	 */
-	public int getPopIter()
-	{
-		return popIter;
-	}
-
-	/**
-	 * @param popIter the popIter to set
-	 */
-	public void setPopIter(int popIter)
-	{
-		this.popIter = popIter;
-	}
 }

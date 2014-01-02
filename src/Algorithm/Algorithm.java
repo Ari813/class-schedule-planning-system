@@ -53,47 +53,47 @@ public class Algorithm
 			MutateAlgorithmArray[i].join();
 
 		SavePopulation = Replacement(newPopulation, pop);
-		SavePopulation.setPopIter(pop.getPopIter()+1);
 		return SavePopulation;
 	}
 
 	public static Population bubbleSort(Population pop)
 	{
-		Individual temp = new Individual();
+		Individual temp;
 		for (int a = 1; a < pop.size(); a++)
 		{
 			for (int b = 0; b < pop.size() - a; b++)
 			{
 				if ((pop.getIndividual(b).getFitness() > pop.getIndividual(b + 1).getFitness()))
 				{
-
-					// swap movies[b] with movies[b+1]
 					temp = pop.getIndividual(b);
 					pop.saveIndividual(b, pop.getIndividual(b + 1));
 					pop.saveIndividual(b + 1, temp);
 				}
 			}
 		}
+		
 		return pop;
 	}
 
 	private static Population Replacement(Population newPopulation, Population pop)
 	{
-		int oldpop = 0, newpop = 0;
+		int oldpop =  pop.size() -1, newpop = pop.size()-1;
 		Population SavePopulation = new Population(pop.size(), false);
+		
 		pop = bubbleSort(pop);
 		newPopulation = bubbleSort(newPopulation);
+		
 		for (int i = 0; i < pop.size(); i++)
 		{
 			if (pop.getIndividual(oldpop).getFitness() > newPopulation.getIndividual(newpop).getFitness())
 			{
 				SavePopulation.saveIndividual(i, pop.getIndividual(oldpop));
-				oldpop++;
+				oldpop--;
 			} else
 			{
 
 				SavePopulation.saveIndividual(i, newPopulation.getIndividual(newpop));
-				newpop++;
+				newpop--;
 			}
 
 		}

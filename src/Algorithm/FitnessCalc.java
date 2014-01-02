@@ -20,8 +20,6 @@ public class FitnessCalc
 		double soft = 0;
 
 		hard = calcHardConstraints(individual);
-
-		System.out.println("hard => " + hard);
 		if (hard == 0)
 		{
 
@@ -247,7 +245,7 @@ public class FitnessCalc
 
 			}
 		}
-/*
+
 		// / check how many times a class is taken in an hour
 		Iterator<Integer> classItr = ManagerController.collageDB.getClassesKeys().iterator();
 		while (classItr.hasNext())
@@ -331,7 +329,7 @@ public class FitnessCalc
 			}
 		}
 		HardConstraints += tempCounter / 2;
-
+/*
 		// check courses of same semester not overlapping.
 		tempCounter = 0;
 
