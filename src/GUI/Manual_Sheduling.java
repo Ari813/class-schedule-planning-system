@@ -45,6 +45,7 @@ import entities.Course;
 import entities.Faculty;
 import entities.Lecturer;
 import Algorithm.Database;
+import Algorithm.GeneticAlgorithmRun;
 import Algorithm.Individual;
 import Controllers.ManagerController;
 
@@ -447,13 +448,7 @@ pnl();
 			
 		}
 		if (e.getSource() == start ){
-			
-			//allData=new Database(Allcourses, arrayLecturers, arrayClasses);
-			
-			
-					
-			//	}}
-			
+			GeneticAlgorithmRun startalgo=new GeneticAlgorithmRun(firstIndividual,50);
 			manager.Load_Automatic_Sheduling(this.PNL_Main,allData);
 		}
 	
