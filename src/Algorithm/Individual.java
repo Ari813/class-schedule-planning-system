@@ -76,7 +76,7 @@ public class Individual
 								genes[H][L][R][C].setUnEditable();
 							}
 							if (indv.getGeneByIndex(H, L, R, C).isGene())
-								genes[H][L][R][C].setGene();
+								genes[H][L][R][C].setGene(indv.getGeneByIndex(H, L, R, C).getIndex());
 							else
 							{
 								genes[H][L][R][C].clrGene();
@@ -117,7 +117,7 @@ public class Individual
 								if (editableHours == hoursForCourse)
 									for (i = 0; i < hoursForCourse; i++)
 									{
-										genes[H + i][L][R][C].setGene();
+										genes[H + i][L][R][C].setGene(i);
 										geneSet = true;
 
 									}
@@ -167,18 +167,18 @@ public class Individual
 		return genes[weeklyHour][LecturerIndex][ClassIndex][CourseIndex];
 	}
 
-	public void setGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID)
+	public void setGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID,int index)
 	{
 
 		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
-				.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].setGene();
+				.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].setGene(index);
 
 	}
 
-	public void setGeneByIndex(int weeklyHour, int LecturerIndex, int ClassIndex, int CourseIndex)
+	public void setGeneByIndex(int weeklyHour, int LecturerIndex, int ClassIndex, int CourseIndex, int geneIndex)
 	{
 
-		genes[weeklyHour][LecturerIndex][ClassIndex][CourseIndex].setGene();
+		genes[weeklyHour][LecturerIndex][ClassIndex][CourseIndex].setGene(geneIndex);
 	}
 
 	public void clrGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID)

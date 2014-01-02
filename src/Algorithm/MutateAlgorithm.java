@@ -30,10 +30,12 @@ public class MutateAlgorithm implements Runnable
 					{ // NumOfCourses
 						if (Math.random() <= Algorithm.mutationRate)
 						{
-							System.out.println("mutate rate passed");
+
 							// Create random gene
 							// check if gene can be mutate
 							if (indiv.getGeneByIndex(H, L, R, C).isEditable())
+							{
+								
 								if (Math.random() <= Algorithm.uniformRate)
 								{
 									if (indiv.getGeneByIndex(H, L, R, C).getIndex() == 0)
@@ -46,10 +48,11 @@ public class MutateAlgorithm implements Runnable
 											} else
 											{
 												System.out.println("gene mutated (t)");
-												indiv.setGeneByIndex(H + i, L, R, C);
+												indiv.setGeneByIndex(H + i, L, R, C,i);
 											}
 									}
 								}
+							}
 						}
 					}
 		saveIndividual();

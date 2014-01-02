@@ -37,15 +37,14 @@ public class Algorithm
 		// Mutate population
 		for (int i = 0; i < newPopulation.size(); i++)
 		{
+			System.out.println("mutate thread creation...");
 			MutateAlgorithm mutateThread = new MutateAlgorithm(newPopulation, i);
 			Thread t;
-			
-			t = new Thread(mutateThread,"Mutate "+i);
+
+			t = new Thread(mutateThread, "Mutate " + i);
 			t.start();
-			
-			
-			
-			//mutate(newPopulation.getIndividual(i));
+
+			// mutate(newPopulation.getIndividual(i));
 		}
 
 		SavePopulation = Replacement(newPopulation, pop);
@@ -116,7 +115,7 @@ public class Algorithm
 								for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
 									if (indiv1.getGeneByIndex(H, L, R, C).isGene())
 									{
-										newSol.setGeneByIndex(H + i, L, R, C);
+										newSol.setGeneByIndex(H + i, L, R, C, i);
 									} else
 									{
 										newSol.clrGeneByIndex(H + i, L, R, C);
@@ -130,7 +129,7 @@ public class Algorithm
 								for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
 									if (indiv2.getGeneByIndex(H, L, R, C).isGene())
 									{
-										newSol.setGeneByIndex(H + i, L, R, C);
+										newSol.setGeneByIndex(H + i, L, R, C, i);
 									} else
 									{
 										newSol.clrGeneByIndex(H + i, L, R, C);
@@ -179,7 +178,7 @@ public class Algorithm
 												indiv.clrGeneByIndex(H + i, L, R, C);
 											} else
 											{
-												indiv.setGeneByIndex(H + i, L, R, C);
+												indiv.setGeneByIndex(H + i, L, R, C, i);
 											}
 									}
 								}

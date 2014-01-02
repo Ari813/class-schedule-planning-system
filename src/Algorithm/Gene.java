@@ -104,8 +104,9 @@ public class Gene {
 	/**
 	 * @param gene the gene to set
 	 */
-	public void setGene() {
+	public void setGene(int index) {
 		this.gene = true;
+		setIndex(index);
 	}
 	
 	public void clrGene() {
