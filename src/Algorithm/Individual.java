@@ -66,8 +66,9 @@ public class Individual
 					for (int C = 0; C < NumOfCourses; C++)
 					{ // NumOfCourses
 						{
+							genes[H][L][R][C] = new Gene();
 							genes[H][L][R][C].setIndex(indv.getGeneByIndex(H, L, R, C).getIndex());
-							;
+							
 							if (indv.getGeneByIndex(H, L, R, C).isEditable())
 								genes[H][L][R][C].setEditable();
 							else
