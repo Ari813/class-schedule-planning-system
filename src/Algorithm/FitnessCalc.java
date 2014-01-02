@@ -16,19 +16,21 @@ public class FitnessCalc
 	public static double getFitness(Individual individual)
 	{
 		double fitness = 0;
-		int hard = 0;
+		double hard = 0;
 		double soft = 0;
 
 		hard = calcHardConstraints(individual);
+
 		if (hard == 0)
 		{
+
 			soft = calcSoftConstraints(individual);
 			fitness = 1 + (1.0 / (1.0 + soft)); // fitness = (1.0 / (1.0 +
 												// hard)) + (1.0 / (1.0 +
 												// soft));
 		} else
 		{
-			fitness = (1.0 / (1.0 + hard));
+			fitness = (1.0 / (1.0 + (double) hard));
 		}
 
 		return fitness;
@@ -65,7 +67,7 @@ public class FitnessCalc
 
 			}
 		}
-		
+
 		// check a lecturer is not teaching in 2 different campuses in near
 		// hours.
 		LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
@@ -116,7 +118,8 @@ public class FitnessCalc
 					{
 						if (individual.getGeneByIndex(Hours, LecturerIndex, classIndex, CourseIndex).isGene())
 						{
-							if (ManagerController.collageDB.getClass(classID).getCapcity() < (ManagerController.collageDB.getCourse(ManagerController.collageDB.getMapping().getCourseID(CourseIndex)).getStudentNumber()))
+							if (ManagerController.collageDB.getClass(classID).getCapcity() < (ManagerController.collageDB.getCourse(ManagerController.collageDB.getMapping().getCourseID(CourseIndex))
+									.getStudentNumber()))
 							{
 								SoftConstraints++;
 							}
@@ -142,15 +145,15 @@ public class FitnessCalc
 						{
 							counter = 0;
 							ArrayList<StudyAids> courseStudyAids = ManagerController.collageDB.getCourse(courseID).getStudyAids();
-							ArrayList<StudyAids> classStudyAids =ManagerController.collageDB.getClass(ManagerController.collageDB.getMapping().getClassID(ClassIndex)).getStudyAids();
-							
+							ArrayList<StudyAids> classStudyAids = ManagerController.collageDB.getClass(ManagerController.collageDB.getMapping().getClassID(ClassIndex)).getStudyAids();
+
 							for (int courseStudyAidIndex = 0; courseStudyAidIndex < courseStudyAids.size(); courseStudyAidIndex++)
 							{
 								for (int classStudyAidIndex = 0; classStudyAidIndex < classStudyAids.size(); classStudyAidIndex++)
 								{
 									int courseAid = courseStudyAids.get(courseStudyAidIndex).getAidsID();
 									int classAid = classStudyAids.get(classStudyAidIndex).getAidsID();
-									if (courseAid ==classAid )
+									if (courseAid == classAid)
 									{
 										counter++;
 										break;
@@ -168,66 +171,56 @@ public class FitnessCalc
 		return SoftConstraints;
 	}
 
-	private static int calcHardConstraints(Individual individual)
+	private static double calcHardConstraints(Individual individual)
 	{
-		int HardConstraints = 0;
+		double HardConstraints = 0;
 		int tempCounter = 0;
 		int lecID;
 		int classID;
 		int courseID;
 		int counter;
-		
-		
-		
-		
-		//ManagerController.collageDB.getCoursesBySemester();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		int courseCounter=0; 
-		// / check how many times a lecturer teaches in an hour.
-		
-		Iterator<Integer> courseItr1 = ManagerController.collageDB.getCoursesKeys().iterator();
+		boolean found;
 
-		while (courseItr1.hasNext())
+		// check all course are assigned.
+		Iterator<Integer> courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
+
+		while (courseItr.hasNext())
 		{
-			counter = 0;
-			courseID = courseItr1.next().intValue();
+			found = false;
+
+			courseID = courseItr.next().intValue();
 			int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseID);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 			{
-				
+
 				for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
 				{
 					for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
 					{
-						if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseIndex).getCourseID()==courseID)
+						if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseIndex).isGene())
 						{
-							counter=1;
-							break;
+							if (ManagerController.collageDB.getMapping().getCourseID(courseIndex) == courseID)
+							{
+								found = true;
+								break;
+							}
+
 						}
 					}
+					if (found)
+						break;
+
 				}
-					}
-			courseCounter+=counter;
-		
+				if (found)
+					break;
+
+			}
+			if (!found)
+				HardConstraints++;
+
 		}
-		if (courseCounter<Individual.NumOfCourses){
-			HardConstraints +=Individual.NumOfCourses-courseCounter;
-		}
-		
-	
-		
+
+		// check how many times a lecturer teaches in an hour.
 		Iterator<Integer> LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
 
 		while (LecItr.hasNext())
@@ -247,7 +240,8 @@ public class FitnessCalc
 						}
 					}
 				}
-				HardConstraints += counter - 1;
+				if (counter > 0)
+					HardConstraints += counter - 1;
 
 			}
 		}
@@ -271,13 +265,14 @@ public class FitnessCalc
 						}
 					}
 				}
-				HardConstraints += counter - 1;
+				if (counter > 0)
+					HardConstraints += counter - 1;
 
 			}
 		}
 
 		// / check how many times a course has been assigned in an hour
-		Iterator<Integer> courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
+		courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
 		while (courseItr.hasNext())
 		{
 			courseID = courseItr.next().intValue();
@@ -295,7 +290,8 @@ public class FitnessCalc
 						}
 					}
 				}
-				HardConstraints += counter - 1;
+				if (counter > 0)
+					HardConstraints += counter - 1;
 
 			}
 		}
@@ -332,7 +328,8 @@ public class FitnessCalc
 				}
 			}
 		}
-		HardConstraints = tempCounter / 2;
+		HardConstraints += tempCounter / 2;
+
 		// check courses of same semester not overlapping.
 		tempCounter = 0;
 
@@ -364,12 +361,14 @@ public class FitnessCalc
 								}
 							}
 						}
+						tempCounter += counter;
 
 					}
 
 				}
 			}
 		}
+		HardConstraints += tempCounter / 2;
 
 		// check total hours a day for 1 lecturer is not above 8 hours.
 		LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
@@ -401,7 +400,7 @@ public class FitnessCalc
 
 			}
 		}
-
+		System.out.println("hard => " + HardConstraints);
 		return HardConstraints;
 	}
 

@@ -13,13 +13,14 @@ public class MutateAlgorithm implements Runnable
 		indiv = population.getIndividual(i);
 		indivIndex = i;
 		this.population = population;
-		System.out.println("mutate thread created");
+
 	}
 
 	public void run()
 	{
-		System.out.println("mutate thread is running");
+		boolean canMutate;
 		int i;
+		int courseHours;
 		for (int H = 0; H < Individual.weeklyHours; H++)
 			// weeklyHours
 			for (int L = 0; L < Individual.NumOfLecturers; L++)
@@ -35,21 +36,40 @@ public class MutateAlgorithm implements Runnable
 							// check if gene can be mutate
 							if (indiv.getGeneByIndex(H, L, R, C).isEditable())
 							{
-								
+
 								if (Math.random() <= Algorithm.uniformRate)
 								{
+									courseHours = ManagerController.collageDB.getCourseByIndex(C).getAcademicHours();
 									if (indiv.getGeneByIndex(H, L, R, C).getIndex() == 0)
 									{
-										for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
+										
+										for (i = courseHours-1; i >=0; i--)
 											if (indiv.getGeneByIndex(H, L, R, C).isGene())
 											{
-												System.out.println("gene mutated (f)");
 												indiv.clrGeneByIndex(H + i, L, R, C);
 											} else
 											{
-												System.out.println("gene mutated (t)");
-												indiv.setGeneByIndex(H + i, L, R, C,i);
+												
+												indiv.setGeneByIndex(H + i, L, R, C, i);
 											}
+									} else if (indiv.getGeneByIndex(H, L, R, C).getIndex() == -1)
+									{
+										
+										if (courseHours+H < Individual.weeklyHours)
+										{
+											canMutate = true;	
+										
+											for (i = 0; i < courseHours; i++)
+												if (indiv.getGeneByIndex(H+i, L, R, C).isGene())
+													canMutate = false;
+											
+											if (canMutate)
+											{
+												for (i = 0; i < courseHours; i++)
+													indiv.setGeneByIndex(H + i, L, R, C,i);
+											}
+										}
+												
 									}
 								}
 							}

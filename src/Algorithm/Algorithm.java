@@ -37,7 +37,6 @@ public class Algorithm
 		// Mutate population
 		for (int i = 0; i < newPopulation.size(); i++)
 		{
-			System.out.println("mutate thread creation...");
 			MutateAlgorithm mutateThread = new MutateAlgorithm(newPopulation, i);
 			Thread t;
 
@@ -81,12 +80,13 @@ public class Algorithm
 		{
 			if (pop.getIndividual(oldpop).getFitness() > newPopulation.getIndividual(newpop).getFitness())
 			{
-				oldpop++;
 				SavePopulation.saveIndividual(i, pop.getIndividual(oldpop));
+				oldpop++;
 			} else
 			{
+				
+				SavePopulation.saveIndividual(i, newPopulation.getIndividual(newpop));
 				newpop++;
-				SavePopulation.saveIndividual(i, newPopulation.getIndividual(oldpop));
 			}
 
 		}
