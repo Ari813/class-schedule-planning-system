@@ -2,7 +2,8 @@ package Algorithm;
 
 import Controllers.*;
 
-public class Individual {
+public class Individual
+{
 
 	static int workingDays = 6;
 	static int dailyHours = 14;
@@ -17,17 +18,20 @@ public class Individual {
 	private double fitness = -1;
 	private double selection = 0;
 
-	public Individual() {
+	public Individual()
+	{
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
 		resetIndividual();
 	}
 
-	public Individual(Individual indv) {
+	public Individual(Individual indv)
+	{
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
 		copyIndividual(indv);
 	}
 
-	public Individual(int NumOfLecturers, int NumOfClasses, int NumOfCourses) {
+	public Individual(int NumOfLecturers, int NumOfClasses, int NumOfCourses)
+	{
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
 		Individual.NumOfLecturers = NumOfLecturers;
 		Individual.NumOfClasses = NumOfClasses;
@@ -36,49 +40,44 @@ public class Individual {
 
 	}
 
-	/*
-	 * / Create a random individual public void generateIndividual() { for (int
-	 * i = 0; i < size(); i++) { byte gene = (byte) Math.round(Math.random());
-	 * genes[i] = gene; } } /
-	 */
-	// ?
-
-	public void resetIndividual() {
+	public void resetIndividual()
+	{
 		for (int H = 0; H < weeklyHours; H++)
 			// weeklyHours
 			for (int L = 0; L < NumOfLecturers; L++)
 				// NumOfLecturers
 				for (int R = 0; R < NumOfClasses; R++)
 					// NumOfClasses
-					for (int C = 0; C < NumOfCourses; C++) { // NumOfCourses
-						{
-							System.out.println(H +""+L +""+R +""+C );
-							genes[H][L][R][C].clrGene();
-							genes[H][L][R][C].setEditable();
-							genes[H][L][R][C].setIndex(-1);;
-						}
+					for (int C = 0; C < NumOfCourses; C++)
+					{ // NumOfCourses
+						genes[H][L][R][C] = new Gene();
 
 					}
 	}
 
-	public void copyIndividual(Individual indv) {
+	public void copyIndividual(Individual indv)
+	{
 		for (int H = 0; H < weeklyHours; H++)
 			// weeklyHours
 			for (int L = 0; L < NumOfLecturers; L++)
 				// NumOfLecturers
 				for (int R = 0; R < NumOfClasses; R++)
 					// NumOfClasses
-					for (int C = 0; C < NumOfCourses; C++) { // NumOfCourses
+					for (int C = 0; C < NumOfCourses; C++)
+					{ // NumOfCourses
 						{
-							genes[H][L][R][C].setIndex(indv.getGeneByIndex(H, L, R, C).getIndex());;
+							genes[H][L][R][C].setIndex(indv.getGeneByIndex(H, L, R, C).getIndex());
+							;
 							if (indv.getGeneByIndex(H, L, R, C).isEditable())
 								genes[H][L][R][C].setEditable();
-							else {
+							else
+							{
 								genes[H][L][R][C].setUnEditable();
 							}
 							if (indv.getGeneByIndex(H, L, R, C).isGene())
 								genes[H][L][R][C].setGene();
-							else {
+							else
+							{
 								genes[H][L][R][C].clrGene();
 							}
 
@@ -87,15 +86,19 @@ public class Individual {
 					}
 	}
 
-	public void generateIndividual() {
+	public void generateIndividual()
+	{
 		boolean geneSet = false;
 		int i;
-		for (int C = 0; C < NumOfCourses; C++) {
+		for (int C = 0; C < NumOfCourses; C++)
+		{
 			geneSet = false;
 			// NumOfCourses
-			for (int L = 0; L < NumOfLecturers; L++) {
+			for (int L = 0; L < NumOfLecturers; L++)
+			{
 				// NumOfLecturers
-				for (int R = 0; R < NumOfClasses; R++) {
+				for (int R = 0; R < NumOfClasses; R++)
+				{
 					// NumOfClasses
 					for (int H = 0; H < weeklyHours; H++)
 					// weeklyHours
@@ -103,13 +106,15 @@ public class Individual {
 						double gene = Math.round(Math.random());
 						int editableHours = 0;
 						int hoursForCourse = ManagerController.collageDB.getCourseByIndex(C).getAcademicHours();
-						if (gene > 0.5) {
+						if (gene > 0.5)
+						{
 							for (i = 0; i < hoursForCourse; i++)
-								if (genes[H+i][L][R][C].isEditable())
+								if (genes[H + i][L][R][C].isEditable())
 									editableHours++;
 							if (editableHours == hoursForCourse)
-								for (i = 0; i < hoursForCourse; i++) {
-									genes[H+i][L][R][C].setGene();
+								for (i = 0; i < hoursForCourse; i++)
+								{
+									genes[H + i][L][R][C].setGene();
 									geneSet = true;
 
 								}
@@ -129,65 +134,65 @@ public class Individual {
 	}
 
 	// Use this if you want to create individuals with different gene lengths
-	public static void setDefaultWeekHours(int newWorkingDays, int newDailyHours) {
+	public static void setDefaultWeekHours(int newWorkingDays, int newDailyHours)
+	{
 		workingDays = newWorkingDays;
 		dailyHours = newDailyHours;
 		weeklyHours = workingDays * dailyHours;
 
 	}
 
-	public Gene getGeneByID(int day, int hour, int LecturerID, int ClassID,
-			int CourseID) {
+	public Gene getGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID)
+	{
 
-		return genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB
-				.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB
-				.getMapping().getClassIndex(ClassID)][ManagerController.collageDB
+		return genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
+				.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)];
+	}
+
+	public Gene getGeneByID(int weekHour, int LecturerID, int ClassID, int CourseID)
+	{
+
+		return genes[weekHour][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping().getClassIndex(ClassID)][ManagerController.collageDB
 				.getMapping().getCourseIndex(CourseID)];
+
 	}
 
-	public Gene getGeneByID(int weekHour, int LecturerID, int ClassID,
-			int CourseID) {
-
-		return genes[weekHour][ManagerController.collageDB.getMapping().getLecturerIndex(
-				LecturerID)][ManagerController.collageDB.getMapping().getClassIndex(
-				ClassID)][ManagerController.collageDB.getMapping()
-				.getCourseIndex(CourseID)];
-		
-	}
-
-	public Gene getGeneByIndex(int weeklyHour, int LecturerIndex,
-			int ClassIndex, int CourseIndex) {
+	public Gene getGeneByIndex(int weeklyHour, int LecturerIndex, int ClassIndex, int CourseIndex)
+	{
 
 		return genes[weeklyHour][LecturerIndex][ClassIndex][CourseIndex];
 	}
 
-	public void setGeneByID(int day, int hour, int LecturerID, int ClassID,
-			int CourseID) {
+	public void setGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID)
+	{
 
+<<<<<<< .mine
+		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
+				.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].setGene();
+=======
 	
 		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB
 				.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB
 				.getMapping().getClassIndex(ClassID)][ManagerController.collageDB
 				.getMapping().getCourseIndex(CourseID)].setGene();
+>>>>>>> .r421
 	}
 
-	public void setGeneByIndex(int weeklyHour, int LecturerIndex,
-			int ClassIndex, int CourseIndex) {
+	public void setGeneByIndex(int weeklyHour, int LecturerIndex, int ClassIndex, int CourseIndex)
+	{
 
 		genes[weeklyHour][LecturerIndex][ClassIndex][CourseIndex].setGene();
 	}
 
-	public void clrGeneByID(int day, int hour, int LecturerID, int ClassID,
-			int CourseID) {
+	public void clrGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID)
+	{
 
-		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB
-				.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB
-				.getMapping().getClassIndex(ClassID)][ManagerController.collageDB
-				.getMapping().getCourseIndex(CourseID)].clrGene();
+		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
+				.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].clrGene();
 	}
 
-	public void clrGeneByIndex(int weeklyHour, int LecturerIndex,
-			int ClassIndex, int CourseIndex) {
+	public void clrGeneByIndex(int weeklyHour, int LecturerIndex, int ClassIndex, int CourseIndex)
+	{
 
 		genes[weeklyHour][LecturerIndex][ClassIndex][CourseIndex].clrGene();
 	}
@@ -198,7 +203,8 @@ public class Individual {
 	 */
 
 	/* Public methods */
-	public int[] size() {
+	public int[] size()
+	{
 		int[] sizeArr = new int[4];
 
 		sizeArr[0] = weeklyHours;
@@ -209,19 +215,23 @@ public class Individual {
 		return sizeArr;
 	}
 
-	public double getFitness() {
-		if (fitness == -1) {
+	public double getFitness()
+	{
+		if (fitness == -1)
+		{
 			fitness = FitnessCalc.getFitness(this);
 		}
 		return fitness;
 	}
 
-	public void SetSelection(double select) {
+	public void SetSelection(double select)
+	{
 		selection = select;
 
 	}
 
-	public double getSelection() {
+	public double getSelection()
+	{
 
 		return selection;
 	}
