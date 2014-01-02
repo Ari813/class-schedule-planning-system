@@ -704,7 +704,7 @@ pnl();
 
 
 public  void setfirstIndividual(){
-	firstIndividual=new Individual();
+	firstIndividual=new Individual(arrayLecturers.size(), arrayClasses.size(), Allcourses.size());
 	allData=new Database(Allcourses, arrayLecturers, arrayClasses);
 	manager.setDataBase(allData);
 	System.out.println(firstIndividual.getSelection());

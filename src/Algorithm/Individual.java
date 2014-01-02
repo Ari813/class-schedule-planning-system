@@ -52,7 +52,7 @@ public class Individual {
 					// NumOfClasses
 					for (int C = 0; C < NumOfCourses; C++) { // NumOfCourses
 						{
-							
+							System.out.println(H +""+L +""+R +""+C );
 							genes[H][L][R][C].clrGene();
 							genes[H][L][R][C].setEditable();
 							genes[H][L][R][C].setIndex(-1);;
@@ -164,6 +164,7 @@ public class Individual {
 	public void setGeneByID(int day, int hour, int LecturerID, int ClassID,
 			int CourseID) {
 
+	
 		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB
 				.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB
 				.getMapping().getClassIndex(ClassID)][ManagerController.collageDB
