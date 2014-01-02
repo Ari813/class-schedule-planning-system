@@ -1,6 +1,5 @@
 package Algorithm;
 
-import java.io.ObjectOutputStream.PutField;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -34,7 +33,7 @@ public class IndexMapping
 
 	public IndexMapping(Map<Integer, Course> courses, Map<Integer, Lecturer> lecturer, Map<Integer, Class> classes)
 	{
-		super();
+		this();
 		setCoursesMapping(courses.keySet());
 		setLecturersMapping(lecturer.keySet());
 		setClassesMapping(classes.keySet());
