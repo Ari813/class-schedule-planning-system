@@ -65,6 +65,8 @@ public class CrossoverAlgorithm implements Runnable
 									}
 							}
 						}
+						if (!indiv1.getGeneByIndex(H, L, R, C).isEditable())
+							newSol.getGeneByIndex(H, L, R, C).setUnEditable();
 					}
 		newPopulation.saveIndividual(indivNewIndex, newSol);
 	}

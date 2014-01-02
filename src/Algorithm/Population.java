@@ -1,9 +1,11 @@
 package Algorithm;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import Controllers.*;
 import common.Settings;
+import entities.Course;
 
 public class Population
 {
@@ -56,12 +58,13 @@ public class Population
 			int lecturerIndex = ManagerController.collageDB.getMapping().getLecturerIndex(Lecturerid);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 			{
-				if (ManagerController.collageDB.getLecturer(Lecturerid).getPreferedSchedualArray()[Hours] == Settings.selection_not_available)
+				int[] preferedSchedualArray = ManagerController.collageDB.getLecturer(Lecturerid).getPreferedSchedualArray();
+				if (preferedSchedualArray[Hours] == Settings.selection_not_available)
 				{
 					for (int ClssIndex = 0; ClssIndex < Individual.NumOfClasses; ClssIndex++)
 						for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++)
 						{
-							System.out.println("Blocking...|"+Hours+"|"+ClssIndex+"|"+CourseIndex+"|"+lecturerIndex);
+
 							JumpStartIndividual.getGeneByIndex(Hours, lecturerIndex, ClssIndex, CourseIndex).setUnEditable();
 
 						}
@@ -70,18 +73,30 @@ public class Population
 		}
 
 		Leciter = ManagerController.collageDB.getLecturersKeys().iterator();
-
+		boolean found = false;
 		while (Leciter.hasNext())
 		{
 			int Lecturerid = Leciter.next().intValue();
 			int lecturerIndex = ManagerController.collageDB.getMapping().getLecturerIndex(Lecturerid);
+			int relatedCourseKey;
+			ArrayList<Course> LecturerCourses;
 			courseIter = ManagerController.collageDB.getCoursesKeys().iterator();
+
 			while (courseIter.hasNext())
 			{
+				found = false;
 				int courseid = courseIter.next().intValue();
 				int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseid);
+				relatedCourseKey = ManagerController.collageDB.getCourse(courseid).getCourseRelativeKey();
+				LecturerCourses = ManagerController.collageDB.getLecturer(Lecturerid).getLecturerCourses();
+				for (int lecCourseIndex = 0; lecCourseIndex < LecturerCourses.size(); lecCourseIndex++)
+				{
+					if (relatedCourseKey == LecturerCourses.get(lecCourseIndex).getCourseID())
 
-				if (!ManagerController.collageDB.getLecturer(Lecturerid).getLecturerCourses().contains(courseid))
+						found = true;
+
+				}
+				if (!found)
 				{
 					for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 						for (int ClssIndex = 0; ClssIndex < Individual.NumOfClasses; ClssIndex++)
@@ -131,7 +146,7 @@ public class Population
 	{
 		for (int i = 0; i < size(); i++)
 		{
-			System.out.println( "fitness["+i+"] => " +getIndividual(i).getFitness());
+			System.out.println("fitness[" + i + "] => " + getIndividual(i).getFitness());
 		}
 	}
 
