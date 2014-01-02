@@ -1,20 +1,23 @@
 package Algorithm;
 
 import java.util.Random;
+
 import Controllers.*;
 
-public class Algorithm {
+public class Algorithm
+{
 
 	/* GA parameters */
-	private static final double uniformRate = 0.5;
-	private static final double mutationRate = 0.015;
+	static double uniformRate = 0.5;
+	static double mutationRate = 0.015;
 
 	// private static final int tournamentSize = 5;
 
 	/* Public methods */
 
 	// Evolve a population
-	public static Population evolvePopulation(Population pop) {
+	public static Population evolvePopulation(Population pop)
+	{
 		Population newPopulation = new Population(pop.size(), false);
 		Population SavePopulation;
 		// Keep our best individual
@@ -23,7 +26,8 @@ public class Algorithm {
 
 		// Loop over the population size and create new individuals with
 		// crossover
-		for (int i = 0; i < pop.size(); i++) {
+		for (int i = 0; i < pop.size(); i++)
+		{
 			Individual indiv1 = rouletteSelection(pop);
 			Individual indiv2 = rouletteSelection(pop);
 			Individual newIndiv = crossover(indiv1, indiv2);
@@ -31,20 +35,32 @@ public class Algorithm {
 		}
 
 		// Mutate population
-		for (int i = 0; i < newPopulation.size(); i++) {
-			mutate(newPopulation.getIndividual(i));
+		for (int i = 0; i < newPopulation.size(); i++)
+		{
+			MutateAlgorithm mutateThread = new MutateAlgorithm(newPopulation, i);
+			Thread t;
+			
+			t = new Thread(mutateThread,"Mutate "+i);
+			t.start();
+			
+			
+			
+			//mutate(newPopulation.getIndividual(i));
 		}
 
 		SavePopulation = Replacement(newPopulation, pop);
 		return SavePopulation;
 	}
 
-	public static Population bubbleSort(Population pop) {
+	public static Population bubbleSort(Population pop)
+	{
 		Individual temp = new Individual();
-		for (int a = 1; a < pop.size(); a++) {
-			for (int b = 0; b < pop.size() - a; b++) {
-				if ((pop.getIndividual(b).getFitness() > pop.getIndividual(
-						b + 1).getFitness())) {
+		for (int a = 1; a < pop.size(); a++)
+		{
+			for (int b = 0; b < pop.size() - a; b++)
+			{
+				if ((pop.getIndividual(b).getFitness() > pop.getIndividual(b + 1).getFitness()))
+				{
 
 					// swap movies[b] with movies[b+1]
 					temp = pop.getIndividual(b);
@@ -56,21 +72,22 @@ public class Algorithm {
 		return pop;
 	}
 
-	private static Population Replacement(Population newPopulation,
-			Population pop) {
+	private static Population Replacement(Population newPopulation, Population pop)
+	{
 		int oldpop = 0, newpop = 0;
 		Population SavePopulation = new Population(pop.size(), false);
 		pop = bubbleSort(pop);
 		newPopulation = bubbleSort(newPopulation);
-		for (int i = 0; i < pop.size(); i++) {
-			if (pop.getIndividual(oldpop).getFitness() > newPopulation
-					.getIndividual(newpop).getFitness()) {
+		for (int i = 0; i < pop.size(); i++)
+		{
+			if (pop.getIndividual(oldpop).getFitness() > newPopulation.getIndividual(newpop).getFitness())
+			{
 				oldpop++;
 				SavePopulation.saveIndividual(i, pop.getIndividual(oldpop));
-			} else {
+			} else
+			{
 				newpop++;
-				SavePopulation.saveIndividual(i,
-						newPopulation.getIndividual(oldpop));
+				SavePopulation.saveIndividual(i, newPopulation.getIndividual(oldpop));
 			}
 
 		}
@@ -78,7 +95,8 @@ public class Algorithm {
 
 	}
 
-	private static Individual crossover(Individual indiv1, Individual indiv2) {
+	private static Individual crossover(Individual indiv1, Individual indiv2)
+	{
 		Individual newSol = new Individual();
 		int i;
 		// Loop through genes
@@ -88,28 +106,33 @@ public class Algorithm {
 				// NumOfLecturers
 				for (int R = 0; R < Individual.NumOfClasses; R++)
 					// NumOfClasses
-					for (int C = 0; C < Individual.NumOfCourses; C++) { // NumOfCourses
+					for (int C = 0; C < Individual.NumOfCourses; C++)
+					{ // NumOfCourses
 						// Crossover
-						if (Math.random() <= uniformRate) {
-							if (indiv1.getGeneByIndex(H, L, R, C).getIndex() == 0) {
-								for (i = 0; i < ManagerController.collageDB
-										.getCourseByIndex(C).getAcademicHours(); i++)
-									if (indiv1.getGeneByIndex(H, L, R, C)
-											.isGene()) {
+						if (Math.random() <= uniformRate)
+						{
+							if (indiv1.getGeneByIndex(H, L, R, C).getIndex() == 0)
+							{
+								for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
+									if (indiv1.getGeneByIndex(H, L, R, C).isGene())
+									{
 										newSol.setGeneByIndex(H + i, L, R, C);
-									} else {
+									} else
+									{
 										newSol.clrGeneByIndex(H + i, L, R, C);
 									}
 							}
 
-						} else {
-							if (indiv2.getGeneByIndex(H, L, R, C).getIndex() == 0) {
-								for (i = 0; i < ManagerController.collageDB
-										.getCourseByIndex(C).getAcademicHours(); i++)
-									if (indiv2.getGeneByIndex(H, L, R, C)
-											.isGene()) {
+						} else
+						{
+							if (indiv2.getGeneByIndex(H, L, R, C).getIndex() == 0)
+							{
+								for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
+									if (indiv2.getGeneByIndex(H, L, R, C).isGene())
+									{
 										newSol.setGeneByIndex(H + i, L, R, C);
-									} else {
+									} else
+									{
 										newSol.clrGeneByIndex(H + i, L, R, C);
 									}
 							}
@@ -128,7 +151,9 @@ public class Algorithm {
 	 */
 
 	// Mutate an individual
-	private static void mutate(Individual indiv) {
+	@Deprecated
+	private static void mutate(Individual indiv)
+	{
 		// Loop through genes
 		int i;
 		for (int H = 0; H < Individual.weeklyHours; H++)
@@ -137,25 +162,24 @@ public class Algorithm {
 				// NumOfLecturers
 				for (int R = 0; R < Individual.NumOfClasses; R++)
 					// NumOfClasses
-					for (int C = 0; C < Individual.NumOfCourses; C++) { // NumOfCourses
-						if (Math.random() <= mutationRate) {
+					for (int C = 0; C < Individual.NumOfCourses; C++)
+					{ // NumOfCourses
+						if (Math.random() <= mutationRate)
+						{
 							// Create random gene
 							// check if gene can be mutate
 							if (indiv.getGeneByIndex(H, L, R, C).isEditable())
-								if (Math.random() <= uniformRate) {
-									if (indiv.getGeneByIndex(H, L, R, C)
-											.getIndex() == 0) {
-										for (i = 0; i < ManagerController.collageDB
-												.getCourseByIndex(C)
-												.getAcademicHours(); i++)
-											if (indiv
-													.getGeneByIndex(H, L, R, C)
-													.isGene()) {
-												indiv.clrGeneByIndex(H + i, L,
-														R, C);
-											} else {
-												indiv.setGeneByIndex(H + i, L,
-														R, C);
+								if (Math.random() <= uniformRate)
+								{
+									if (indiv.getGeneByIndex(H, L, R, C).getIndex() == 0)
+									{
+										for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
+											if (indiv.getGeneByIndex(H, L, R, C).isGene())
+											{
+												indiv.clrGeneByIndex(H + i, L, R, C);
+											} else
+											{
+												indiv.setGeneByIndex(H + i, L, R, C);
 											}
 									}
 								}
@@ -163,22 +187,26 @@ public class Algorithm {
 					}
 	}
 
-	private static Individual rouletteSelection(Population pop) {
+	private static Individual rouletteSelection(Population pop)
+	{
 		// Calculate the total fitness
 		Random m_rand = new Random();
 
 		double randNum = Math.abs(m_rand.nextDouble());
 		double totalfitness = 0;
-		for (int i = 0; i < pop.size(); i++) {
+		for (int i = 0; i < pop.size(); i++)
+		{
 			totalfitness += pop.individuals[i].getFitness();
 		}
-		for (int i = 0; i < pop.size(); i++) {
+		for (int i = 0; i < pop.size(); i++)
+		{
 			double tmp = pop.individuals[i].getFitness() / (totalfitness);
 			pop.individuals[i].SetSelection(tmp);
 
 		}
 
-		for (int i = 0; i < pop.size(); i++) {
+		for (int i = 0; i < pop.size(); i++)
+		{
 			randNum -= pop.individuals[i].getSelection();
 			if (randNum < 0)
 				return (pop.individuals[i]);
