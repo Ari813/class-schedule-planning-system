@@ -1,4 +1,4 @@
-package Controllers;
+  package Controllers;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -162,6 +162,7 @@ public class ManagerController {
 	public void Load_Manual_Sheduling(JPanel Panel2Close) {
 
 		manegerMainFrm.remove(Panel2Close);
+		if (MS!=null){}
 		MS = new Manual_Sheduling(this);
 		MS.setFaculty(getFaculty());
 		MS.setClasses(GetClasses());

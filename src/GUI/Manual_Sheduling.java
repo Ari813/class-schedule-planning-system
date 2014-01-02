@@ -448,8 +448,9 @@ pnl();
 			
 		}
 		if (e.getSource() == start ){
-			GeneticAlgorithmRun startalgo=new GeneticAlgorithmRun(firstIndividual,50);
+		
 			manager.Load_Automatic_Sheduling(this.PNL_Main,allData);
+			GeneticAlgorithmRun startalgo=new GeneticAlgorithmRun(firstIndividual,50);
 		}
 	
 		if (e.getSource() == btnBackToMainMenu) {

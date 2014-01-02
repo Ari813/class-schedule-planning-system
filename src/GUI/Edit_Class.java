@@ -389,8 +389,6 @@ public class Edit_Class extends JPanel implements ActionListener,
 	private JComboBox GETcmbxEditClass() {
 		if (cmbxEditClass == null) {
 			cmbxEditClass = new JComboBox();
-			cmbxEditClass.setModel(new DefaultComboBoxModel(
-					new String[] { "Empty" }));
 			cmbxEditClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			cmbxEditClass.setToolTipText("Edit class list");
 			cmbxEditClass.setBounds(10, 53, 754, 20);
@@ -402,6 +400,7 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btnSaveChanges) {
+			btnSaveChanges.setEnabled(false);
 			if (!txtpnCodeNumber.getText().equals("")) {
 
 				Class newClass = new Class();
@@ -432,7 +431,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 				if (serverAns.getClassID() == newClass.getClassID()) {
 					if (!isNewClass) {
-						arrayClasses.set(cmbxEditClass.getSelectedIndex() - 1,
+						///// TODO -1
+						arrayClasses.set(cmbxEditClass.getSelectedIndex() ,
 								newClass);
 					} else {
 						arrayClasses.add(newClass);
@@ -456,7 +456,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 		if (e.getSource() == btnAdd) {
 			int index;
-			if (cmbxEditClass.getSelectedIndex() != 0)
+			
+			if( lstClassAids.getSelectedIndex()!=-1)
 				btnSaveChanges.setEnabled(true);
 			if ((arrayStudyAids != null) && (!arrayStudyAids.isEmpty())) {
 				if (lstClassAids.getSelectedIndex() >= 0) {
@@ -469,9 +470,10 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 		}
 		if (e.getSource() == btnRemove) {
+			if( lstSelectedClassaids.getSelectedIndex()!=-1)
+			btnSaveChanges.setEnabled(true);
 			int index;
-			if (cmbxEditClass.getSelectedIndex() != 0)
-				btnSaveChanges.setEnabled(true);
+			
 			if ((arraySelectedStudyAids != null)
 					&& (!arraySelectedStudyAids.isEmpty())) {
 				if (lstSelectedClassaids.getSelectedIndex() >= 0) {
@@ -529,8 +531,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	private void setSelectedClass() {
-
-		int index = cmbxEditClass.getSelectedIndex() - 1;
+	///// TODO -1
+		int index = cmbxEditClass.getSelectedIndex() ;
 		if ((arrayClasses != null) && (!arrayClasses.isEmpty()) && (index >= 0)) {
 			cmbxcampus.setSelectedIndex(arrayClasses.get(index).getCampus());
 			cmbBxBlding.setSelectedIndex(arrayClasses.get(index).getBuilding());
@@ -544,9 +546,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 					.getDescription()));
 			chckbxAvailable.setSelected(arrayClasses.get(index).getAvailable());
 			setClassAids(index);
-			txtpnCodeNumber.setText(arrayBuilding.get(
-					arrayClasses.get(index).getBuilding()).getBuildingName()
-					+ arrayClasses.get(index).getClassID());
+			txtpnCodeNumber.setText(Integer.toString(
+				arrayClasses.get(index).getClassID()));
 			btnSaveChanges.setEnabled(false);
 		}
 
