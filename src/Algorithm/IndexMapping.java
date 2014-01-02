@@ -79,6 +79,8 @@ public class IndexMapping
 		Iterator<Integer> itr = courses.iterator();
 		int i = 0;
 		int courseID;
+	
+
 		while (itr.hasNext())
 		{
 			courseID = itr.next().intValue();
@@ -87,11 +89,13 @@ public class IndexMapping
 			i++;
 		}
 
+
 	}
 
 	public void setLecturersMapping(Set<Integer> Lecturers)
 	{
 		Iterator<Integer> itr = Lecturers.iterator();
+
 		int i = 0;
 		int lectureID;
 		while (itr.hasNext())
@@ -106,6 +110,7 @@ public class IndexMapping
 	public void setClassesMapping(Set<Integer> Classes)
 	{
 		Iterator<Integer> itr = Classes.iterator();
+
 		int i = 0;
 		int classID;
 		while (itr.hasNext())

@@ -13,10 +13,12 @@ public class MutateAlgorithm implements Runnable
 		indiv = population.getIndividual(i);
 		indivIndex = i;
 		this.population = population;
+		System.out.println("mutate thread created");
 	}
 
 	public void run()
 	{
+		System.out.println("mutate thread is running");
 		int i;
 		for (int H = 0; H < Individual.weeklyHours; H++)
 			// weeklyHours
@@ -28,6 +30,7 @@ public class MutateAlgorithm implements Runnable
 					{ // NumOfCourses
 						if (Math.random() <= Algorithm.mutationRate)
 						{
+							System.out.println("mutate rate passed");
 							// Create random gene
 							// check if gene can be mutate
 							if (indiv.getGeneByIndex(H, L, R, C).isEditable())
@@ -38,9 +41,11 @@ public class MutateAlgorithm implements Runnable
 										for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
 											if (indiv.getGeneByIndex(H, L, R, C).isGene())
 											{
+												System.out.println("gene mutated (f)");
 												indiv.clrGeneByIndex(H + i, L, R, C);
 											} else
 											{
+												System.out.println("gene mutated (t)");
 												indiv.setGeneByIndex(H + i, L, R, C);
 											}
 									}

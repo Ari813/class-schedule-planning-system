@@ -28,12 +28,16 @@ public class GeneticAlgorithmRun extends Thread
 
 	private void runAlgorithm()
 	{
+		int loop = 0;
+		
 		while (keepRunning)
 		{
+			System.out.println("running... ("+ loop++ +")");
 			if (collagePop.getFittest().getFitness() > 1)
 				printSolution(collagePop.getFittest());
 
 			collagePop = Algorithm.evolvePopulation(collagePop);
+			
 		}
 		setRunning(false);
 	}

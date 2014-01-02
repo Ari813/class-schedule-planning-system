@@ -141,12 +141,15 @@ public class FitnessCalc
 						{
 							counter = 0;
 							ArrayList<StudyAids> courseStudyAids = ManagerController.collageDB.getCourse(courseID).getStudyAids();
-							ArrayList<StudyAids> classStudyAids = ManagerController.collageDB.getClass(ManagerController.collageDB.getMapping().getClassID(ClassIndex)).getStudyAids();
+							ArrayList<StudyAids> classStudyAids =ManagerController.collageDB.getClass(ManagerController.collageDB.getMapping().getClassID(ClassIndex)).getStudyAids();
+							
 							for (int courseStudyAidIndex = 0; courseStudyAidIndex < courseStudyAids.size(); courseStudyAidIndex++)
 							{
-								for (int classStudyAidIndex = 0; classStudyAidIndex < courseStudyAids.size(); classStudyAidIndex++)
+								for (int classStudyAidIndex = 0; classStudyAidIndex < classStudyAids.size(); classStudyAidIndex++)
 								{
-									if (courseStudyAids.get(courseStudyAidIndex).getAidsID() == classStudyAids.get(classStudyAidIndex).getAidsID())
+									int courseAid = courseStudyAids.get(courseStudyAidIndex).getAidsID();
+									int classAid = classStudyAids.get(classStudyAidIndex).getAidsID();
+									if (courseAid ==classAid )
 									{
 										counter++;
 										break;
@@ -323,7 +326,7 @@ public class FitnessCalc
 		{
 			lecID = LecItr.next().intValue();
 			int lecturerIndex = ManagerController.collageDB.getMapping().getLecturerIndex(lecID);
-			for (int days = 0; days < Individual.workingDays; days++)
+			for (int days = 1; days <= Individual.workingDays; days++)
 			{
 				counter = 0;
 				for (int hours = 0; hours < Individual.dailyHours; hours++)

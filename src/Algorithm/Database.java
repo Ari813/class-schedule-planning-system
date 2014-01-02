@@ -31,6 +31,7 @@ public class Database
 		this.Lecturers = new HashMap<Integer, Lecturer>();
 		this.Classes = new HashMap<Integer, Class>();
 
+		
 		for (int courseIndex = 0; courseIndex < courses.size(); courseIndex++)
 			this.Courses.put(courses.get(courseIndex).getCourseID(), courses.get(courseIndex));
 
@@ -40,9 +41,10 @@ public class Database
 		for (int ClassesIndex = 0; ClassesIndex < rooms.size(); ClassesIndex++)
 			this.Classes.put(rooms.get(ClassesIndex).getClassID(), rooms.get(ClassesIndex));
 
-		mapping = new IndexMapping(Courses, Lecturers, Classes);
+		mapping = new IndexMapping(this.Courses, this.Lecturers, this.Classes);
 
 		length = Courses.size() * Lecturers.size() * Classes.size() * Individual.weeklyHours;
+		System.out.println("database is ready.");
 	}
 
 	/**
@@ -183,7 +185,7 @@ public class Database
 		if (relatedCoursesMap == null || relatedCoursesMap.isEmpty())
 		{
 			Iterator<Integer> courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
-			Map<Integer, ArrayList<Integer>> relatedCoursesMap = new HashMap<Integer, ArrayList<Integer>>();
+			relatedCoursesMap = new HashMap<Integer, ArrayList<Integer>>();
 
 			while (courseItr.hasNext())
 			{
@@ -210,7 +212,7 @@ public class Database
 		if (SemesterCoursesMap == null || SemesterCoursesMap.isEmpty())
 		{
 			Iterator<Integer> courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
-			Map<Integer, ArrayList<Integer>> SemesterCoursesMap = new HashMap<Integer, ArrayList<Integer>>();
+			SemesterCoursesMap = new HashMap<Integer, ArrayList<Integer>>();
 
 			while (courseItr.hasNext())
 			{
@@ -226,6 +228,20 @@ public class Database
 		}
 
 		return SemesterCoursesMap;
+	}
+
+	public Lecturer getLecturerByIndex(int index)
+	{
+
+			Lecturer lec = Lecturers.get(mapping.getLecturerID(index));
+			return lec;
+
+	}
+
+	public Class getClassByIndex(int index)
+	{
+		Class cls = Classes.get(mapping.getClassID(index));
+		return cls;
 	}
 
 }
