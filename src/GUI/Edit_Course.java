@@ -861,14 +861,14 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 	@Override
 	public void keyTyped(KeyEvent arg0)
 	{
-		// TODO Auto-generated method stub
+
 
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0)
 	{
-		// TODO Auto-generated method stub
+
 
 	}
 
