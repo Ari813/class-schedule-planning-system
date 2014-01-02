@@ -744,6 +744,21 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 	public void setfirstIndividual()
 	{
+		int size=Allcourses.size();
+			int fac=0;
+			int sem=0;
+			int courseid;
+	
+			for(int j=0;j<size;j++){
+				fac=Allcourses.get(j).getFaculty();
+				sem=Allcourses.get(j).getSemester();
+				courseid=Allcourses.get(j).getCourseID();
+				if (CourseMapInTable.containsKey(fac))
+					if (CourseMapInTable.get(fac).containsKey(sem))
+						if (CourseMapInTable.get(fac).get(sem).containsKey(courseid))
+							arrayClasses.remove(j);
+			}
+		
 		firstIndividual = new Individual(arrayLecturers.size(), arrayClasses.size(), Allcourses.size());
 		allData = new Database(Allcourses, arrayLecturers, arrayClasses);
 		manager.setDataBase(allData);
