@@ -204,8 +204,8 @@ public class FitnessCalc
 			courseCounter+=counter;
 		
 		}
-		if (courseCounter<ManagerController.collageDB.getClasses().size()){
-			HardConstraints +=ManagerController.collageDB.getClasses().size()-courseCounter;
+		if (courseCounter<Individual.NumOfCourses){
+			HardConstraints +=Individual.NumOfCourses-courseCounter;
 		}
 		
 	/////////////////////////	
