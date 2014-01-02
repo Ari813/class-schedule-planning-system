@@ -178,9 +178,9 @@ public class FitnessCalc
 		int counter;
 		
 		
-		//ManagerController.MS
 		
 		
+		//ManagerController.collageDB.getCoursesBySemester();
 		
 		
 		

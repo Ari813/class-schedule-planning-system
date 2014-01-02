@@ -589,7 +589,8 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 							{
 								id_calsss = new IDclass(courseid, lecid, classRoom, ColumnRow, courseHours, courseDescription, lecname, classRoomDescription);
 								id_calsss.setId(j);
-								firstIndividual.setGeneByID(Column, Row+j, lecid, classRoom, courseid,j);
+								firstIndividual.setGeneByID(Column, Row+j, lecid, classRoom, courseid,j,false);
+								
 								// tablemanual.getModel().setValueAt(id_calsss.getClassid()
 								// + ":" +id_calsss.getCousreid() + ":"
 								// +id_calsss.getLecid() ,Row+j,Column );
@@ -716,13 +717,13 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 						for (int j = 0; j < QA2; j++)
 						{
-							firstIndividual.clrGeneByID(Column, Row+j, LecturerID, ClassID, CourseID);
+							firstIndividual.clrGeneByID(Column, Row+j, LecturerID, ClassID, CourseID,true);
 							tablemanual.getModel().setValueAt("", tablemanual.getSelectedRow() + j, tablemanual.getSelectedColumn());
 							FacultyMap.get(fac).get(semester).remove(ColumnRow + j);
 						}
 						for (int j = 1; j <= QA1; j++)
 						{
-							firstIndividual.clrGeneByID(Column, Row-j, LecturerID, ClassID, CourseID);
+							firstIndividual.clrGeneByID(Column, Row-j, LecturerID, ClassID, CourseID,true);
 							FacultyMap.get(fac).get(semester).remove(ColumnRow - j);
 							tablemanual.getModel().setValueAt("", tablemanual.getSelectedRow() - j, tablemanual.getSelectedColumn());
 						}
