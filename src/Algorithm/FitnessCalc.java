@@ -196,6 +196,7 @@ public class FitnessCalc
 						if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseIndex).getCourseID()==courseID)
 						{
 							counter=1;
+							break;
 						}
 					}
 				}
