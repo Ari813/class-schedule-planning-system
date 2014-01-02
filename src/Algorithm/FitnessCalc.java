@@ -369,7 +369,48 @@ public class FitnessCalc
 			}
 		}
 		HardConstraints += tempCounter / 2;
+/////////////////////
+		// check courses of same semester not overlapping.
+				tempCounter = 0;
 
+				Map<Integer, ArrayList<Integer>> semesterCoursesMap = ManagerController.collageDB.getCoursesBySemester();
+				Iterator<Integer> semesterItr = semesterCoursesMap.keySet().iterator();
+
+				while (semesterItr.hasNext())
+				{
+					int semsterNum = semesterItr.next().intValue();
+					ArrayList<Integer> courseArrayList = semesterCoursesMap.get(semsterNum);
+					for (int CourseIndex = 0; CourseIndex < courseArrayList.size(); CourseIndex++)
+					{
+						int courseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(CourseIndex));
+						ArrayList<Integer> tempArrayList = semesterCoursesMap.get(semsterNum);
+						for (int TempCourseIndex = CourseIndex; TempCourseIndex < tempArrayList.size(); TempCourseIndex++)
+						{
+							int tempCourseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(TempCourseIndex));
+							for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
+							{
+								counter = 0;
+								for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
+								{
+									for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
+									{
+										if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseDBIndex).isGene()
+												&& individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, tempCourseDBIndex).isGene())
+										{
+											counter++;
+										}
+									}
+								}
+								tempCounter += counter;
+
+							}
+
+						}
+					}
+				}
+				HardConstraints += tempCounter / 2;		
+		
+/////////////////////		
 		// check total hours a day for 1 lecturer is not above 8 hours.
 		LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
 

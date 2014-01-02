@@ -19,7 +19,7 @@ public class Database
 
 	private Map<Integer, ArrayList<Integer>> relatedCoursesMap;
 	private Map<Integer, ArrayList<Integer>> SemesterCoursesMap;
-
+	private Map<Integer, ArrayList<Integer>> FacultyCoursesMap;
 	private IndexMapping mapping;
 
 	private int length;
@@ -206,7 +206,30 @@ public class Database
 
 		return relatedCoursesMap;
 	}
+	public Map<Integer, ArrayList<Integer>> getCoursesByFaculty()
+	{ 
+		if (FacultyCoursesMap == null || FacultyCoursesMap.isEmpty())
+		{
+			Iterator<Integer> courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
+			FacultyCoursesMap= new HashMap<Integer, ArrayList<Integer>>();
+			while (courseItr.hasNext())
+			{
+				int courseID = courseItr.next().intValue();
+				int courseFaculty = getCourse(courseID).getFaculty();
+				if (!FacultyCoursesMap.containsKey(courseFaculty))
+				{
+					ArrayList<Integer> newGroup = new ArrayList<Integer>();
+					FacultyCoursesMap.put(courseFaculty, newGroup);
+				}
+				FacultyCoursesMap.get(courseFaculty).add(courseID);
+			}
+			
+		}
+		
+		return FacultyCoursesMap;
+	}
 
+	
 	public Map<Integer, ArrayList<Integer>> getCoursesBySemester()
 	{
 		if (SemesterCoursesMap == null || SemesterCoursesMap.isEmpty())

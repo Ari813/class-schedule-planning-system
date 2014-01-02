@@ -851,7 +851,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 		{
 			cmbBxLecturer.removeAllItems();
 		}
-
+		//manager.
 	}
 
 	private void insert_to_corse_combo()
