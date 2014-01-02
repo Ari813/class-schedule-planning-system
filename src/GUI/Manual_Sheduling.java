@@ -756,7 +756,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 				if (CourseMapInTable.containsKey(fac))
 					if (CourseMapInTable.get(fac).containsKey(sem))
 						if (CourseMapInTable.get(fac).get(sem).containsKey(courseid))
-							arrayClasses.remove(j);
+							Allcourses.remove(j);
 			}
 		
 		firstIndividual = new Individual(arrayLecturers.size(), arrayClasses.size(), Allcourses.size());
