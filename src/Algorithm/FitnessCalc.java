@@ -64,7 +64,7 @@ public class FitnessCalc
 
 			}
 		}
-
+		
 		// check a lecturer is not teaching in 2 different campuses in near
 		// hours.
 		LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
@@ -175,7 +175,44 @@ public class FitnessCalc
 		int classID;
 		int courseID;
 		int counter;
+		
+		int courseCounter=0; 
 		// / check how many times a lecturer teaches in an hour.
+		
+		Iterator<Integer> courseItr1 = ManagerController.collageDB.getCoursesKeys().iterator();
+
+		while (courseItr1.hasNext())
+		{
+			counter = 0;
+			courseID = courseItr1.next().intValue();
+			int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseID);
+			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
+			{
+				
+				for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
+				{
+					for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
+					{
+						if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseIndex).getCourseID()==courseID)
+						{
+							counter=1;
+						}
+					}
+				}
+				
+				
+				//HardConstraints += counter - 1;
+
+			}
+			courseCounter+=counter;
+		
+		}
+		if (courseCounter<ManagerController.collageDB.getClasses().size()){
+			HardConstraints +=ManagerController.collageDB.getClasses().size()-courseCounter;
+		}
+		
+	/////////////////////////	
+		
 		Iterator<Integer> LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
 
 		while (LecItr.hasNext())
