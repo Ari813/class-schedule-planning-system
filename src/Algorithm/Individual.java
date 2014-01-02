@@ -167,11 +167,25 @@ public class Individual
 		return genes[weeklyHour][LecturerIndex][ClassIndex][CourseIndex];
 	}
 
-	public void setGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID,int index)
+	public void setGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID, int index)
 	{
 
 		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
 				.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].setGene(index);
+
+	}
+
+	public void setGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID, int index, boolean isEditable)
+	{
+
+		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
+				.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].setGene(index);
+		if (isEditable)
+			genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
+					.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].setEditable();
+		else
+			genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
+					.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].setUnEditable();
 
 	}
 
@@ -186,6 +200,19 @@ public class Individual
 
 		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
 				.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].clrGene();
+	}
+
+	public void clrGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID, boolean isEditable)
+	{
+
+		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
+				.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].clrGene();
+		if (isEditable)
+			genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
+					.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].setEditable();
+		else
+			genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
+					.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].setUnEditable();
 	}
 
 	public void clrGeneByIndex(int weeklyHour, int LecturerIndex, int ClassIndex, int CourseIndex)
