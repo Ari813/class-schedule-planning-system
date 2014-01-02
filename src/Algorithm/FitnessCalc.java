@@ -21,6 +21,7 @@ public class FitnessCalc
 
 		hard = calcHardConstraints(individual);
 
+		System.out.println("hard => " + hard);
 		if (hard == 0)
 		{
 
@@ -32,7 +33,7 @@ public class FitnessCalc
 		{
 			fitness = (1.0 / (1.0 + (double) hard));
 		}
-
+	
 		return fitness;
 	}
 
@@ -242,10 +243,11 @@ public class FitnessCalc
 				}
 				if (counter > 0)
 					HardConstraints += counter - 1;
+				
 
 			}
 		}
-
+/*
 		// / check how many times a class is taken in an hour
 		Iterator<Integer> classItr = ManagerController.collageDB.getClassesKeys().iterator();
 		while (classItr.hasNext())
@@ -441,7 +443,7 @@ public class FitnessCalc
 
 			}
 		}
-		System.out.println("hard => " + HardConstraints);
+		*/
 		return HardConstraints;
 	}
 

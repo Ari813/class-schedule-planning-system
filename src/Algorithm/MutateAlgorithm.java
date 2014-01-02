@@ -4,9 +4,9 @@ import Controllers.ManagerController;
 
 public class MutateAlgorithm implements Runnable
 {
-	Individual indiv;
-	Population population;
-	int indivIndex;
+	private Individual indiv;
+	private Population population;
+	private int indivIndex;
 
 	public MutateAlgorithm(Population population, int i)
 	{

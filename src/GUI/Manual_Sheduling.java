@@ -448,11 +448,8 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 		if (e.getSource() == start)
 		{
 
-			manager.Load_Automatic_Sheduling(this.PNL_Main, allData);
-			GeneticAlgorithmRun startalgo = new GeneticAlgorithmRun(firstIndividual, 50);
-			System.out.println("population created, ready to start");
-			startalgo.start();
-			System.out.println("GA started!!!");
+			manager.Load_Automatic_Sheduling(this.PNL_Main, allData,firstIndividual);
+
 		}
 
 		if (e.getSource() == btnBackToMainMenu)

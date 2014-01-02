@@ -920,5 +920,6 @@ public class Edit_Course extends JPanel implements ActionListener,
 		btnRemove.addActionListener(this);
 		btnAdd.addActionListener(this);
 		cmbBxEditCourse.addActionListener(this);
+		
 	}
 }

@@ -34,6 +34,8 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import Algorithm.Database;
+import Algorithm.GeneticAlgorithmRun;
+import Algorithm.Individual;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
 
@@ -64,6 +66,8 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 	static Color[] colors = { Color.BLUE, Color.GRAY, Color.RED };
 	static String[] strings = { "Test1", "Test2", "Test3" };
 	private JComboBox comboBoxsemester;
+	
+
 
 	private Database allDatabase;
 	/**
@@ -89,6 +93,10 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		super();
 		this.manager = mng;
 		initialize();
+		
+		
+		
+
 		// manager.loadOptionalTimeTables();
 		// manager.startalgo();
 
@@ -96,6 +104,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 
 	public void setData(Database database){
 		allDatabase=database;
+
 	}
 	private void initialize()
 	{
@@ -361,6 +370,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		if (e.getSource() == btnBackToMainMenu)
 		{
 			// manger.stopalgo();
+			manager.stopAutoSchedualing();
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 		if (e.getSource() == btnPreview)
@@ -403,7 +413,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		btnPreview.addActionListener(this);
 		btnBackToMainMenu.addActionListener(this);
 		btnSaveChanges.addActionListener(this);
-
+		manager.startAutoSchedualing();
 	}
 
 	private JComboBox getComboBoxsemester()

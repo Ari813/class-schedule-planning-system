@@ -245,6 +245,7 @@ public class Individual
 		{
 			fitness = FitnessCalc.getFitness(this);
 		}
+		
 		return fitness;
 	}
 

@@ -9,17 +9,19 @@ public class Algorithm
 
 	/* GA parameters */
 	static double uniformRate = 0.5;
-	static double mutationRate = 0.015;
-
+	static double mutationRate = 0.0015;
+	
 	// private static final int tournamentSize = 5;
 
 	/* Public methods */
 
 	// Evolve a population
-	public static Population evolvePopulation(Population pop)
+	public static Population evolvePopulation(Population pop) throws InterruptedException
 	{
 		Population newPopulation = new Population(pop.size(), false);
 		Population SavePopulation;
+		Thread[] CrossoverAlgorithmArray = new Thread[pop.size()];
+		Thread[] MutateAlgorithmArray = new Thread[pop.size()];
 		// Keep our best individual
 
 		// Crossover population
@@ -28,25 +30,30 @@ public class Algorithm
 		// crossover
 		for (int i = 0; i < pop.size(); i++)
 		{
-			Individual indiv1 = rouletteSelection(pop);
-			Individual indiv2 = rouletteSelection(pop);
-			Individual newIndiv = crossover(indiv1, indiv2);
-			newPopulation.saveIndividual(i, newIndiv);
+
+			CrossoverAlgorithm crossOverThread = new CrossoverAlgorithm(pop,newPopulation, i);
+
+			CrossoverAlgorithmArray[i] = new Thread(crossOverThread, "Crossover " + i);
+			CrossoverAlgorithmArray[i].start();
 		}
+		for (int i = 0; i < pop.size(); i++)
+			CrossoverAlgorithmArray[i].join();
 
 		// Mutate population
 		for (int i = 0; i < newPopulation.size(); i++)
 		{
 			MutateAlgorithm mutateThread = new MutateAlgorithm(newPopulation, i);
-			Thread t;
-
-			t = new Thread(mutateThread, "Mutate " + i);
-			t.start();
+			
+			MutateAlgorithmArray[i] = new Thread(mutateThread, "Mutate " + i);
+			MutateAlgorithmArray[i].start();
 
 			// mutate(newPopulation.getIndividual(i));
 		}
+		for (int i = 0; i < pop.size(); i++)
+			MutateAlgorithmArray[i].join();
 
 		SavePopulation = Replacement(newPopulation, pop);
+		SavePopulation.setPopIter(pop.getPopIter()+1);
 		return SavePopulation;
 	}
 
@@ -84,7 +91,7 @@ public class Algorithm
 				oldpop++;
 			} else
 			{
-				
+
 				SavePopulation.saveIndividual(i, newPopulation.getIndividual(newpop));
 				newpop++;
 			}
@@ -93,7 +100,8 @@ public class Algorithm
 		return SavePopulation;
 
 	}
-
+	
+@Deprecated
 	private static Individual crossover(Individual indiv1, Individual indiv2)
 	{
 		Individual newSol = new Individual();
@@ -112,6 +120,7 @@ public class Algorithm
 						{
 							if (indiv1.getGeneByIndex(H, L, R, C).getIndex() == 0)
 							{
+
 								for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
 									if (indiv1.getGeneByIndex(H, L, R, C).isGene())
 									{
@@ -126,6 +135,7 @@ public class Algorithm
 						{
 							if (indiv2.getGeneByIndex(H, L, R, C).getIndex() == 0)
 							{
+
 								for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
 									if (indiv2.getGeneByIndex(H, L, R, C).isGene())
 									{
@@ -186,6 +196,7 @@ public class Algorithm
 					}
 	}
 
+	@Deprecated
 	private static Individual rouletteSelection(Population pop)
 	{
 		// Calculate the total fitness
@@ -209,6 +220,7 @@ public class Algorithm
 			randNum -= pop.individuals[i].getSelection();
 			if (randNum < 0)
 				return (pop.individuals[i]);
+			
 		}
 		return (pop.individuals[pop.size()]);
 	}

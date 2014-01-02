@@ -15,6 +15,8 @@ import entities.Faculty;
 import entities.Lecturer;
 import entities.StudyAids;
 import Algorithm.Database;
+import Algorithm.GeneticAlgorithmRun;
+import Algorithm.Individual;
 import Client.ChatClient;
 import GUI.*;
 import MsgPackage.*;
@@ -57,6 +59,8 @@ public class ManagerController {
 	private GetAllFacultyPack FacultyMsg;
 	private GetAllCoursesForSchedualingPack ForSchedualingCourseMsg;
 	
+	GeneticAlgorithmRun startalgo;
+	
 	public static Database collageDB;
 
 	public ManagerController(Main_Frame mainFrm, ChatClient client) {
@@ -89,15 +93,15 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
-	public void Load_Automatic_Sheduling(JPanel Panel2Close, Database allData) {
-		
-		
+	public void Load_Automatic_Sheduling(JPanel Panel2Close, Database allData, Individual firstIndividual) {
 		
 		manegerMainFrm.remove(Panel2Close);
 		AS = new Automatic_Sheduling(this);
 		AS.setData(allData);
 		manegerMainFrm.add(AS.PNL_Main);
+		startalgo = new GeneticAlgorithmRun(firstIndividual, 50);
 		AS.addActions();
+		
 		manegerMainFrm.repaint();
 		
 	}
@@ -348,8 +352,18 @@ public class ManagerController {
 	}
 
 	public void setDataBase(Database allData) {
-		// TODO Auto-generated method stub
 		collageDB=allData;
+	}
+
+	public void stopAutoSchedualing()
+	{
+		startalgo.stopRunning();
+		
+	}
+	public void startAutoSchedualing()
+	{
+		startalgo.start();
+		
 	}
 
 }

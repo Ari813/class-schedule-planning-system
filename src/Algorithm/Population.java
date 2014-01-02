@@ -1,14 +1,14 @@
 package Algorithm;
 
 import java.util.Iterator;
-import Controllers.*;
 
+import Controllers.*;
 import common.Settings;
 
 public class Population
 {
 	private Individual JumpStartIndividual;
-
+	private int popIter;
 	Individual[] individuals;
 
 	/*
@@ -103,8 +103,10 @@ public class Population
 	{
 		Individual fittest = individuals[0];
 		// Loop through individuals to find fittest
+
 		for (int i = 0; i < size(); i++)
 		{
+			System.out.println( "fitTest => " +fittest.getFitness() + " || fitness => " +getIndividual(i).getFitness());
 			if (fittest.getFitness() <= getIndividual(i).getFitness())
 			{
 				fittest = getIndividual(i);
@@ -124,5 +126,29 @@ public class Population
 	public void saveIndividual(int index, Individual indiv)
 	{
 		individuals[index] = indiv;
+	}
+
+	public void printfitness()
+	{
+		for (int i = 0; i < size(); i++)
+		{
+			System.out.println( "fitness["+i+"] => " +getIndividual(i).getFitness());
+		}
+	}
+
+	/**
+	 * @return the popIter
+	 */
+	public int getPopIter()
+	{
+		return popIter;
+	}
+
+	/**
+	 * @param popIter the popIter to set
+	 */
+	public void setPopIter(int popIter)
+	{
+		this.popIter = popIter;
 	}
 }

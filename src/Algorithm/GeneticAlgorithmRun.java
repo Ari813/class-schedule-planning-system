@@ -1,5 +1,7 @@
 package Algorithm;
 
+import javax.security.auth.login.FailedLoginException;
+
 public class GeneticAlgorithmRun extends Thread
 {
 	private Population collagePop;
@@ -16,6 +18,7 @@ public class GeneticAlgorithmRun extends Thread
 	public GeneticAlgorithmRun(Individual indv,int popSize)
 	{
 		collagePop = new Population(popSize, indv);
+		collagePop.setPopIter(0);
 		keepRunning = true;
 		setRunning(false);
 	}
@@ -32,11 +35,20 @@ public class GeneticAlgorithmRun extends Thread
 		
 		while (keepRunning)
 		{
-			System.out.println("running... ("+ loop++ +")");
-			if (collagePop.getFittest().getFitness() > 1)
+			
+			System.out.println("running... ("+ loop++ +") popIter ="+collagePop.getPopIter());
+			collagePop.printfitness();
+			if (collagePop.getFittest().getFitness() >= 1)
 				printSolution(collagePop.getFittest());
 
-			collagePop = Algorithm.evolvePopulation(collagePop);
+			try
+			{
+				collagePop = Algorithm.evolvePopulation(collagePop);
+			} catch (InterruptedException e)
+			{
+				setRunning(false);
+				System.out.println("failed to process algorithm!");
+			}
 			
 		}
 		setRunning(false);
