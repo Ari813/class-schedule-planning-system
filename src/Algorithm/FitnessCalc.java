@@ -199,11 +199,7 @@ public class FitnessCalc
 						}
 					}
 				}
-				
-				
-				//HardConstraints += counter - 1;
-
-			}
+					}
 			courseCounter+=counter;
 		
 		}
