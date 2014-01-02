@@ -13,9 +13,9 @@ public class GeneticAlgorithmRun extends Thread
 		setRunning(false);
 	}
 
-	public GeneticAlgorithmRun(Individual indv)
+	public GeneticAlgorithmRun(Individual indv,int popSize)
 	{
-		collagePop = new Population(50, indv);
+		collagePop = new Population(popSize, indv);
 		keepRunning = true;
 		setRunning(false);
 	}
