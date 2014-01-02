@@ -437,8 +437,6 @@ public class Edit_Course extends JPanel implements ActionListener,
 
 	private JComboBox getcmbBxEditCouse() {
 		cmbBxEditCourse = new JComboBox();
-		cmbBxEditCourse.setModel(new DefaultComboBoxModel(
-				new String[] { "Empty" }));
 		cmbBxEditCourse.setBounds(10, 53, 754, 20);
 
 		return cmbBxEditCourse;
