@@ -38,6 +38,7 @@ import Algorithm.GeneticAlgorithmRun;
 import Algorithm.Individual;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
+import javax.swing.JProgressBar;
 
 public class Automatic_Sheduling extends JPanel implements ActionListener, ListSelectionListener, KeyListener
 {
@@ -45,31 +46,22 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 	private Component horizontalStrut_1;
 	private static final long serialVersionUID = 1L;
 	private JTextField txtLecturerPreferences;
-	private JTable tableAutonatic;
 	public JPanel PNL_Main;
-	private JLabel lblSemester;
-	private JScrollPane scroll;
-
-	private JComboBox cmbxFaculty;
 	private JComboBox cmbBxSemster;
-
-	private JList lstTimeTable;
-	private JLabel lblOptionalTimeTables;
 	private JButton btnSaveChanges;
 	private JButton btnBackToMainMenu;
-	private JButton btnPreview;
-	private JPanel panel;
 	private JLabel lblTimeTableSchedualing;
-	private JLabel lblFaculty;
+	private JProgressBar progressBar;
 	private LecturerController lec;
 	private ManagerController manager;
 	static Color[] colors = { Color.BLUE, Color.GRAY, Color.RED };
 	static String[] strings = { "Test1", "Test2", "Test3" };
-	private JComboBox comboBoxsemester;
 	
 
 
 	private Database allDatabase;
+	private JLabel lblPopulationCounter;
+	private JTextField txtLoopCounter;
 	/**
 	 * Create the panel.
 	 */
@@ -117,15 +109,42 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 
 		PNL_Main.add(horizontalStrut1());
 		PNL_Main.add(horizontalStrut2());
-		PNL_Main.add(GETcmbxFaculty());
-		PNL_Main.add(GETscroll());
-		PNL_Main.add(GETlblFaculty());
-		PNL_Main.add(GETlblSemester());
-		PNL_Main.add(GETlstTimeTable());
-		PNL_Main.add(GETpanel());
-		PNL_Main.add(getComboBoxsemester());
+		
+
+		PNL_Main.add(getprogressBar());
+		
+
+		PNL_Main.add(gettxtLoopCounter());
+		txtLoopCounter.setColumns(10);
+		
+		
+		PNL_Main.add(getlblPopulationCounter());
 		// PNL_Main.add(GETcmbBxSemster());
 
+	}
+
+	private Component getlblPopulationCounter()
+	{
+		lblPopulationCounter = new JLabel("Population Counter");
+		lblPopulationCounter.setBounds(10, 103, 121, 14);
+		return lblPopulationCounter;
+	}
+
+	private Component gettxtLoopCounter()
+	{
+		txtLoopCounter = new JTextField();
+		txtLoopCounter.setEditable(false);
+		txtLoopCounter.setBounds(10, 121, 121, 20);
+		txtLoopCounter.setColumns(10);
+		return txtLoopCounter;
+	}
+
+	private Component getprogressBar()
+	{
+		progressBar = new JProgressBar();
+		progressBar.setStringPainted(true);
+		progressBar.setBounds(10, 384, 754, 29);
+		return progressBar;
 	}
 
 	private void pnl()
@@ -141,165 +160,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 
 	}
 
-	private JPanel GETpanel()
-	{
-		if (panel == null)
-		{
-			panel = new JPanel();
-			panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			panel.setBackground(SystemColor.inactiveCaption);
-			panel.setBounds(540, 103, 201, 249);
-			panel.setLayout(null);
-			panel.add(GETlblOptionalTimeTables());
-			panel.add(GETbtnPreview());
-		}
-		return panel;
-	}
-
-	private JButton GETbtnPreview()
-	{
-		if (btnPreview == null)
-		{
-			btnPreview = new JButton("Preview");
-			btnPreview.setBounds(102, 215, 89, 23);
-		}
-		return btnPreview;
-	}
-
-	private JLabel GETlblOptionalTimeTables()
-	{
-		if (lblOptionalTimeTables == null)
-		{
-			lblOptionalTimeTables = new JLabel("Optional time tables :");
-			lblOptionalTimeTables.setBounds(10, 11, 132, 15);
-			lblOptionalTimeTables.setFont(new Font("Tahoma", Font.BOLD, 12));
-		}
-		return lblOptionalTimeTables;
-	}
-
-	private JList GETlstTimeTable()
-	{
-		if (lstTimeTable == null)
-		{
-			lstTimeTable = new JList();
-			lstTimeTable.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			lstTimeTable.setBackground(SystemColor.activeCaption);
-			lstTimeTable.setFont(new Font("Tahoma", Font.BOLD, 12));
-			lstTimeTable.setBounds(560, 149, 165, 159);
-		}
-		return lstTimeTable;
-	}
-
-	private JLabel GETlblSemester()
-	{
-		if (lblSemester == null)
-		{
-			lblSemester = new JLabel("semester:");
-			lblSemester.setFont(new Font("Tahoma", Font.BOLD, 12));
-			lblSemester.setBounds(534, 55, 71, 14);
-		}
-		return lblSemester;
-	}
-
-	private JLabel GETlblFaculty()
-	{
-
-		if (lblFaculty == null)
-		{
-			lblFaculty = new JLabel("Faculty:");
-			lblFaculty.setFont(new Font("Tahoma", Font.BOLD, 12));
-			lblFaculty.setBounds(10, 55, 65, 14);
-		}
-		return lblFaculty;
-	}
-
-	private JComboBox GETcmbxFaculty()
-	{
-		if (cmbxFaculty == null)
-		{
-			cmbxFaculty = new JComboBox();
-			cmbxFaculty.setBounds(63, 55, 461, 20);
-			cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
-			cmbxFaculty.setToolTipText("Faculty list");
-			cmbxFaculty.setMaximumRowCount(52);
-		}
-		return cmbxFaculty;
-	}
-
-	private JComboBox GETcmbBxSemster()
-	{
-
-		if (lblSemester == null)
-		{
-			cmbBxSemster = new JComboBox();
-
-			cmbBxSemster.setToolTipText("cmbBxSemster");
-			cmbBxSemster.setBounds(601, 55, 46, 20);
-		}
-		return cmbBxSemster;
-	}
-
-	private JScrollPane GETscroll()
-	{
-		if (scroll == null)
-		{
-			scroll = new JScrollPane(GETtableAutonatic());
-			scroll.setEnabled(false);
-			scroll.setBounds(10, 100, 511, 249);
-		}
-		return scroll;
-	}
-
-	private JTable GETtableAutonatic()
-	{
-		if (tableAutonatic == null)
-		{
-			tableAutonatic = new JTable();
-			tableAutonatic.setForeground(Color.BLACK);
-			tableAutonatic.setFont(new Font("Tahoma", Font.PLAIN, 15));
-			tableAutonatic.setToolTipText("Manual auto sheduling table ");
-			tableAutonatic.setFillsViewportHeight(true);
-			tableAutonatic.setSurrendersFocusOnKeystroke(true);
-			tableAutonatic.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			tableAutonatic.setBackground(SystemColor.inactiveCaption);
-			tableAutonatic.setBorder(new LineBorder(new Color(0, 0, 0)));
-			tableAutonatic.setModel(new DefaultTableModel(new Object[][] { { "8:00", null, null, null, null, null, null }, { "9:00", null, null, null, null, null, null },
-					{ "10:00", null, null, null, null, null, null }, { "11:00", null, null, null, null, null, null }, { "12:00", null, null, null, null, null, null },
-					{ "13:00", null, null, null, null, null, null }, { "14:00", null, null, null, null, null, null }, { "15:00", null, null, null, null, null, null },
-					{ "16:00", null, null, null, null, null, null }, { "17:00", null, null, null, null, null, null }, { "18:00", null, null, null, null, null, null },
-					{ "19:00", null, null, null, null, null, null }, { "20:00", null, null, null, null, null, null }, { "21:00", null, null, null, null, null, null }, }, new String[] { "Time",
-					"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" })
-			{
-				boolean[] columnEditables = new boolean[] { false, false, false, false, false, false, false };
-
-				public boolean isCellEditable(int row, int column)
-				{
-					return columnEditables[column];
-				}
-			});
-			tableAutonatic.getColumnModel().getColumn(0).setPreferredWidth(65);
-			tableAutonatic.getColumnModel().getColumn(1).setPreferredWidth(65);
-			tableAutonatic.getColumnModel().getColumn(1).setMinWidth(25);
-			tableAutonatic.getColumnModel().getColumn(2).setPreferredWidth(65);
-			tableAutonatic.getColumnModel().getColumn(2).setMinWidth(25);
-			tableAutonatic.getColumnModel().getColumn(3).setPreferredWidth(65);
-			tableAutonatic.getColumnModel().getColumn(3).setMinWidth(25);
-			tableAutonatic.getColumnModel().getColumn(4).setResizable(false);
-			tableAutonatic.getColumnModel().getColumn(4).setPreferredWidth(65);
-			tableAutonatic.getColumnModel().getColumn(4).setMinWidth(25);
-			tableAutonatic.getColumnModel().getColumn(5).setResizable(false);
-			tableAutonatic.getColumnModel().getColumn(5).setPreferredWidth(65);
-			tableAutonatic.getColumnModel().getColumn(5).setMinWidth(25);
-			tableAutonatic.getColumnModel().getColumn(6).setResizable(false);
-			tableAutonatic.getColumnModel().getColumn(6).setPreferredWidth(65);
-			tableAutonatic.getColumnModel().getColumn(6).setMinWidth(25);
-
-			tableAutonatic.setColumnSelectionAllowed(true);
-			tableAutonatic.setCellSelectionEnabled(true);
-			tableAutonatic.setBounds(35, 127, 600, 224);
-		}
-		return tableAutonatic;
-	}
+	
 
 	// /////////////////all class////
 	private Component horizontalStrut1()
@@ -324,6 +185,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		if (txtLecturerPreferences == null)
 		{
 			txtLecturerPreferences = new JTextField();
+			txtLecturerPreferences.setEditable(false);
 			txtLecturerPreferences.setBounds(0, 4, 774, 40);
 			txtLecturerPreferences.setText("Automatic Scheduling is running");
 			txtLecturerPreferences.setHorizontalAlignment(SwingConstants.CENTER);
@@ -354,6 +216,10 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		if (btnSaveChanges == null)
 		{
 			btnSaveChanges = new JButton("Save");
+			btnSaveChanges.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
 			btnSaveChanges.setBounds(177, 434, 121, 29);
 			btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
@@ -373,10 +239,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 			manager.stopAutoSchedualing();
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
-		if (e.getSource() == btnPreview)
-		{
-			// manager.loadPreview();
-		}
+
 
 	}
 
@@ -410,20 +273,18 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 
 	public void addActions()
 	{
-		btnPreview.addActionListener(this);
 		btnBackToMainMenu.addActionListener(this);
 		btnSaveChanges.addActionListener(this);
 		manager.startAutoSchedualing();
 	}
-
-	private JComboBox getComboBoxsemester()
+	
+	public void updateProgressBar(double fitness)
 	{
-		if (comboBoxsemester == null)
-		{
-			comboBoxsemester = new JComboBox();
-			comboBoxsemester.setModel(new DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8" }));
-			comboBoxsemester.setBounds(600, 55, 65, 20);
-		}
-		return comboBoxsemester;
+		progressBar.setValue((int)Math.round(fitness*100));	
+	}
+	
+	public void updatePopCounter(Integer counter)
+	{
+		txtLoopCounter.setText(counter.toString());
 	}
 }

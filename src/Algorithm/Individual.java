@@ -109,7 +109,7 @@ public class Individual
 						int hoursForCourse = ManagerController.collageDB.getCourseByIndex(C).getAcademicHours();
 						if (gene > 0.5)
 						{
-							
+
 							if ((H + hoursForCourse) < Individual.weeklyHours)
 							{
 								for (i = 0; i < hoursForCourse; i++)
@@ -117,7 +117,7 @@ public class Individual
 									if (genes[H + i][L][R][C].isEditable())
 										editableHours++;
 								}
-								
+
 								if (editableHours == hoursForCourse)
 									for (i = 0; i < hoursForCourse; i++)
 									{
@@ -248,8 +248,15 @@ public class Individual
 		{
 			fitness = FitnessCalc.getFitness(this);
 		}
-		
+
 		return fitness;
+	}
+
+	public void setFitness(double fitness)
+	{
+
+		this.fitness = fitness;
+
 	}
 
 	public void SetSelection(double select)

@@ -1,12 +1,13 @@
 package Algorithm;
 
-import javax.security.auth.login.FailedLoginException;
+import Controllers.ManagerController;
 
 public class GeneticAlgorithmRun extends Thread
 {
 	private Population collagePop;
 	private boolean keepRunning;
 	private boolean isRunning;
+	private ManagerController manager;
 
 	public GeneticAlgorithmRun()
 	{
@@ -14,12 +15,13 @@ public class GeneticAlgorithmRun extends Thread
 		keepRunning = true;
 		setRunning(false);
 	}
-
-	public GeneticAlgorithmRun(Individual indv,int popSize)
+	
+	public GeneticAlgorithmRun(Individual indv,int popSize, ManagerController managerController)
 	{
 		collagePop = new Population(popSize, indv);
 		keepRunning = true;
 		setRunning(false);
+		this.manager =managerController;
 	}
 
 	public void run()
@@ -31,13 +33,15 @@ public class GeneticAlgorithmRun extends Thread
 	private void runAlgorithm()
 	{
 		int loop = 0;
-		
+		double fittest;
 		while (keepRunning)
 		{
 			
-			System.out.println("running... ("+ loop++ +")");
-			collagePop.printfitness();
-			if (collagePop.getFittest().getFitness() >= 1)
+			fittest = collagePop.getFittest().getFitness();
+			//collagePop.printfitness();
+			manager.updateProgressBar(fittest);
+			manager.updatePopCounter(loop++);
+			if (fittest >= 1)
 				printSolution(collagePop.getFittest());
 
 			try

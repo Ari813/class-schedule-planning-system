@@ -39,7 +39,7 @@ public class CrossoverAlgorithm implements Runnable
 						{
 							if (indiv1.getGeneByIndex(H, L, R, C).getIndex() == 0)
 							{
-
+	
 								for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
 									if (indiv1.getGeneByIndex(H, L, R, C).isGene())
 									{
@@ -54,7 +54,7 @@ public class CrossoverAlgorithm implements Runnable
 						{
 							if (indiv2.getGeneByIndex(H, L, R, C).getIndex() == 0)
 							{
-
+					
 								for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
 									if (indiv2.getGeneByIndex(H, L, R, C).isGene())
 									{

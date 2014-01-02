@@ -99,7 +99,7 @@ public class ManagerController {
 		AS = new Automatic_Sheduling(this);
 		AS.setData(allData);
 		manegerMainFrm.add(AS.PNL_Main);
-		startalgo = new GeneticAlgorithmRun(firstIndividual, 50);
+		startalgo = new GeneticAlgorithmRun(firstIndividual, 50,this);
 		AS.addActions();
 		
 		manegerMainFrm.repaint();
@@ -365,5 +365,15 @@ public class ManagerController {
 		startalgo.start();
 		
 	}
+	
+	public void updateProgressBar(double fitness)
+	{
+		AS.updateProgressBar(fitness);
+	}
 
+	public void updatePopCounter(int counter)
+	{
+		AS.updatePopCounter(counter);
+	}
+	
 }

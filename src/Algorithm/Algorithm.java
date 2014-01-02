@@ -22,6 +22,7 @@ public class Algorithm
 		Population SavePopulation;
 		Thread[] CrossoverAlgorithmArray = new Thread[pop.size()];
 		Thread[] MutateAlgorithmArray = new Thread[pop.size()];
+		Thread[] FitnessAlgorithmArray = new Thread[pop.size()];
 		// Keep our best individual
 
 		// Crossover population
@@ -52,6 +53,19 @@ public class Algorithm
 		for (int i = 0; i < pop.size(); i++)
 			MutateAlgorithmArray[i].join();
 
+		// calculate fitness for population
+		for (int i = 0; i < newPopulation.size(); i++)
+		{
+			FitnessCalc FitnessThread = new FitnessCalc(newPopulation, i);
+			
+			FitnessAlgorithmArray[i] = new Thread(FitnessThread, "Fitness " + i);
+			FitnessAlgorithmArray[i].start();
+
+			// mutate(newPopulation.getIndividual(i));
+		}
+		for (int i = 0; i < pop.size(); i++)
+			FitnessAlgorithmArray[i].join();
+		
 		SavePopulation = Replacement(newPopulation, pop);
 		return SavePopulation;
 	}
@@ -78,12 +92,13 @@ public class Algorithm
 	private static Population Replacement(Population newPopulation, Population pop)
 	{
 		int oldpop =  pop.size() -1, newpop = pop.size()-1;
+		int replacementSize;
 		Population SavePopulation = new Population(pop.size(), false);
 		
 		pop = bubbleSort(pop);
 		newPopulation = bubbleSort(newPopulation);
-		
-		for (int i = 0; i < pop.size(); i++)
+		replacementSize= (int)(pop.size() * 0.3);
+		for (int i = 0; i < replacementSize; i++)
 		{
 			if (pop.getIndividual(oldpop).getFitness() > newPopulation.getIndividual(newpop).getFitness())
 			{
@@ -96,6 +111,14 @@ public class Algorithm
 				SavePopulation.saveIndividual(i, newPopulation.getIndividual(newpop));
 				newpop--;
 			}
+
+		}
+		
+		for (int i = replacementSize; i < pop.size(); i++)
+		{
+			
+				SavePopulation.saveIndividual(i, newPopulation.getIndividual(newpop));
+				newpop--;
 
 		}
 		return SavePopulation;
