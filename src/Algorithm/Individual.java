@@ -166,16 +166,9 @@ public class Individual
 	public void setGeneByID(int day, int hour, int LecturerID, int ClassID, int CourseID)
 	{
 
-<<<<<<< .mine
 		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB.getMapping()
 				.getClassIndex(ClassID)][ManagerController.collageDB.getMapping().getCourseIndex(CourseID)].setGene();
-=======
-	
-		genes[ManagerController.collageDB.getMapping().getTime(day, hour)][ManagerController.collageDB
-				.getMapping().getLecturerIndex(LecturerID)][ManagerController.collageDB
-				.getMapping().getClassIndex(ClassID)][ManagerController.collageDB
-				.getMapping().getCourseIndex(CourseID)].setGene();
->>>>>>> .r421
+
 	}
 
 	public void setGeneByIndex(int weeklyHour, int LecturerIndex, int ClassIndex, int CourseIndex)
