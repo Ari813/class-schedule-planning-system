@@ -97,4 +97,20 @@ public int getSize() {
 public void setSize(int size) {
 	this.size = size;
 }
+
+public String ToString() {
+	String str=new String(" course ID: "  + cousreid + 
+						"\n Course Description: "  + courseDescription  +
+						"\n Lecturer ID:  "  + lecid +
+						"\n Lecturer Name: "  + lecname +
+						"\n Room ID: "  + classid +
+						"\n Room Description:  "  + classRoomDescription +
+						"\n course size:  "  + size
+				
+			
+			);
+	
+	
+	return str;
+}
 }

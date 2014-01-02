@@ -38,6 +38,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.text.AbstractDocument.BranchElement;
 
 import entities.Class;
 import entities.Course;
@@ -570,14 +571,18 @@ pnl();
 			 for (int j=0;j<courseHours;j++){
 				 id_calsss=new IDclass(courseid,lecid,classRoom,ColumnRow,courseHours,courseDescription,lecname,classRoomDescription);
 				 id_calsss.setId(j);
-			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row+j,Column );
+			//tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row+j,Column );
 			
 			if (FacultyMap.containsKey(fac)){
 				if (FacultyMap.get(fac).containsKey(semester)){
 					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow)){
-						FacultyMap.get(fac).get(semester).get(ColumnRow).setall(id_calsss);
+						
+						JOptionPane.showMessageDialog(manager.manegerMainFrm, "course overlap");
+						flag=false;
+						break;
+						//	FacultyMap.get(fac).get(semester).get(ColumnRow).setall(id_calsss);
 						//Map<Integer, Map<Integer, ArrayList<Course>>> CourseMapInTable;
-							System.out.print("overlap");//Only switch
+							//System.out.print("overlap");//Only switch
 					}else{
 						FacultyMap.get(fac).get(semester).put(ColumnRow, id_calsss);
 					}				
@@ -602,7 +607,10 @@ pnl();
 			ColumnRow++;
 			}
 	
-			
+			 if (flag){
+				 for (int j=0;j<courseHours;j++)
+				 tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row+j,Column );
+					
 			 Course courseToMove=new Course();
 			courseToMove=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex());
 			 
@@ -636,7 +644,7 @@ pnl();
 			 	else{
 			 		cmbBxLecturer.removeAllItems();
 			 	}
-			 }
+			 }}
 		}}}
 		
 			
@@ -929,25 +937,46 @@ private void SetTable(int faculty, int semester) {
 		
 		 tablemanual.addMouseListener(new MouseAdapter() {
 			  public void mouseClicked(MouseEvent e) {
-			    if (e.getClickCount() == 2) {
-			    //  JTable target = (JTable)e.getSource();
-			     
-			    	int row = tablemanual.getSelectedRow();
+				  int row = tablemanual.getSelectedRow();
 			      int column = tablemanual.getSelectedColumn();
+			      int fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
+			      int ColumnRow=row+(column-1)*Settings.dailyHours;
+			      int	semester=semesterSpinner.getSelectedIndex()+1;
+				  if (e.getClickCount() == 2){
+					  if (FacultyMap!=null){
+			    		  if (FacultyMap.containsKey(fac)){
+			  				if (FacultyMap.get(fac).containsKey(semester)){
+			  					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow))
+			  						JOptionPane.showMessageDialog(manager.manegerMainFrm, FacultyMap.get(fac).get(semester).get(ColumnRow).ToString());
+								
+			  				}
+			  				}
+			    		  }
+				  }
+			    if (e.getClickCount() == 1) {
+			    //  JTable target = (JTable)e.getSource();
+			     		    	
 			      // do some action if appropriate column
-			      if (column>1){
-			    	  tablemanual.setToolTipText(column +""+ row);
-			    	  
-			      }
+			      if (column>0){
+			    	  tablemanual.setToolTipText("Manual sheduling table ") ;
+			      
+			    	  if (FacultyMap!=null){
+			    		  if (FacultyMap.containsKey(fac)){
+			  				if (FacultyMap.get(fac).containsKey(semester)){
+			  					if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow))
+			  						tablemanual.setToolTipText(FacultyMap.get(fac).get(semester).get(ColumnRow).ToString());
+			  					}
+			  				}
+			    		  }
 			    }
 			  }
-			});
-	}
+			  }});
+	}// TODO ToStriung
 	
 	
 	@Override
 	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
@@ -971,7 +1000,7 @@ private void SetTable(int faculty, int semester) {
 	
 //	public void setCourse(ArrayList<Course> course) {
 	
-		/*/ TODO Auto-generated method stub
+		/*/ 
 		arraycourse = course;
 		for (int i = 0; i < arraycourse.size(); i++) {
 			cmbBxCourse.addItem(arraycourse.get(i).getCourseID() + ":"
@@ -983,7 +1012,7 @@ private void SetTable(int faculty, int semester) {
 
 public void setLec(ArrayList<Lecturer> availableLecturers) {
 		
-		// TODO Auto-generated method stub
+		
 		arrayLecturers = availableLecturers;
 		 /*/cmbBxLecturer.removeAllItems();
 		for (int i = 0; i < arrayLecturers.size(); i++) {
