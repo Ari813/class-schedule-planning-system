@@ -584,11 +584,12 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 						if (flag)
 						{
-							firstIndividual.setGeneByID(Column, Row, lecid, classRoom, courseid);
+							
 							for (int j = 0; j < courseHours; j++)
 							{
 								id_calsss = new IDclass(courseid, lecid, classRoom, ColumnRow, courseHours, courseDescription, lecname, classRoomDescription);
 								id_calsss.setId(j);
+								firstIndividual.setGeneByID(Column, Row+j, lecid, classRoom, courseid,j);
 								// tablemanual.getModel().setValueAt(id_calsss.getClassid()
 								// + ":" +id_calsss.getCousreid() + ":"
 								// +id_calsss.getLecid() ,Row+j,Column );
@@ -700,7 +701,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 						int ClassID = FacultyMap.get(fac).get(semester).get(ColumnRow).getClassid();
 						int LecturerID = FacultyMap.get(fac).get(semester).get(ColumnRow).getLecid();
 						int CourseID = FacultyMap.get(fac).get(semester).get(ColumnRow).getCousreid();
-						firstIndividual.clrGeneByID(Column, Row, LecturerID, ClassID, CourseID);
+						
 						int size = FacultyMap.get(fac).get(semester).get(ColumnRow).getSize();
 						int QA1 = FacultyMap.get(fac).get(semester).get(ColumnRow).getId();
 						int QA2 = size - QA1;
@@ -715,11 +716,13 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 						for (int j = 0; j < QA2; j++)
 						{
+							firstIndividual.clrGeneByID(Column, Row+j, LecturerID, ClassID, CourseID);
 							tablemanual.getModel().setValueAt("", tablemanual.getSelectedRow() + j, tablemanual.getSelectedColumn());
 							FacultyMap.get(fac).get(semester).remove(ColumnRow + j);
 						}
 						for (int j = 1; j <= QA1; j++)
 						{
+							firstIndividual.clrGeneByID(Column, Row-j, LecturerID, ClassID, CourseID);
 							FacultyMap.get(fac).get(semester).remove(ColumnRow - j);
 							tablemanual.getModel().setValueAt("", tablemanual.getSelectedRow() - j, tablemanual.getSelectedColumn());
 						}
