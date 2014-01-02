@@ -7,6 +7,7 @@ import java.util.Map;
 import common.Settings;
 import entities.StudyAids;
 import Controllers.*;
+import GUI.Manual_Sheduling;
 
 public class FitnessCalc
 {
@@ -176,6 +177,23 @@ public class FitnessCalc
 		int courseID;
 		int counter;
 		
+		
+		//ManagerController.MS
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		int courseCounter=0; 
 		// / check how many times a lecturer teaches in an hour.
 		
@@ -208,7 +226,7 @@ public class FitnessCalc
 			HardConstraints +=Individual.NumOfCourses-courseCounter;
 		}
 		
-	/////////////////////////	
+	
 		
 		Iterator<Integer> LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
 

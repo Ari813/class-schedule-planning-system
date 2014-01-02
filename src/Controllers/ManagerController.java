@@ -43,7 +43,7 @@ public class ManagerController {
 	private Edit_Class ECLSS;
 	private Edit_Course ECRS;
 	private Edit_Lecturer EL;
-	private Manual_Sheduling MS;
+	public Manual_Sheduling MS;
 	public static int fix=0;
 	public Edit_Course ed;
 	private Main_Menu main;
