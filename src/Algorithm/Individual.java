@@ -104,22 +104,25 @@ public class Individual
 					for (int H = 0; H < weeklyHours; H++)
 					// weeklyHours
 					{
-						double gene = Math.round(Math.random());
+						double gene = Math.random();
 						int editableHours = 0;
 						int hoursForCourse = ManagerController.collageDB.getCourseByIndex(C).getAcademicHours();
 						if (gene > 0.5)
 						{
+							
 							if ((H + hoursForCourse) < Individual.weeklyHours)
 							{
 								for (i = 0; i < hoursForCourse; i++)
+								{
 									if (genes[H + i][L][R][C].isEditable())
 										editableHours++;
+								}
+								
 								if (editableHours == hoursForCourse)
 									for (i = 0; i < hoursForCourse; i++)
 									{
 										genes[H + i][L][R][C].setGene(i);
 										geneSet = true;
-
 									}
 							}
 							if (geneSet)

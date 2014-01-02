@@ -61,6 +61,7 @@ public class Population
 					for (int ClssIndex = 0; ClssIndex < Individual.NumOfClasses; ClssIndex++)
 						for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++)
 						{
+							System.out.println("Blocking...|"+Hours+"|"+ClssIndex+"|"+CourseIndex+"|"+lecturerIndex);
 							JumpStartIndividual.getGeneByIndex(Hours, lecturerIndex, ClssIndex, CourseIndex).setUnEditable();
 
 						}

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.annotation.PreDestroy;
+
 import common.Settings;
 import entities.StudyAids;
 import Controllers.*;
@@ -31,7 +33,7 @@ public class FitnessCalc
 		{
 			fitness = (1.0 / (1.0 + (double) hard));
 		}
-	
+
 		return fitness;
 	}
 
@@ -185,7 +187,9 @@ public class FitnessCalc
 
 		while (courseItr.hasNext())
 		{
-			found = false;
+			// found = false;
+
+			counter = 0;
 
 			courseID = courseItr.next().intValue();
 			int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseID);
@@ -200,22 +204,20 @@ public class FitnessCalc
 						{
 							if (ManagerController.collageDB.getMapping().getCourseID(courseIndex) == courseID)
 							{
-								found = true;
-								break;
+								counter++;
 							}
 
 						}
 					}
-					if (found)
-						break;
 
 				}
-				if (found)
-					break;
 
 			}
-			if (!found)
+
+			if (counter == 0)
 				HardConstraints++;
+			else
+				HardConstraints += (counter - 1);
 
 		}
 
@@ -241,12 +243,11 @@ public class FitnessCalc
 				}
 				if (counter > 0)
 					HardConstraints += counter - 1;
-				
 
 			}
 		}
 
-		// / check how many times a class is taken in an hour
+		// check how many times a class is taken in an hour
 		Iterator<Integer> classItr = ManagerController.collageDB.getClassesKeys().iterator();
 		while (classItr.hasNext())
 		{
@@ -296,40 +297,37 @@ public class FitnessCalc
 			}
 		}
 
-		// check course, lecture and lab not assign at the same time
-		tempCounter = 0;
-		Map<Integer, ArrayList<Integer>> relatedCoursesMap = ManagerController.collageDB.getRelatedCourses();
-		courseItr = relatedCoursesMap.keySet().iterator();
+		/*
+		 * // check course, lecture and lab not assign at the same time
+		 * tempCounter = 0; Map<Integer, ArrayList<Integer>> relatedCoursesMap =
+		 * ManagerController.collageDB.getRelatedCourses(); courseItr =
+		 * relatedCoursesMap.keySet().iterator(); int relatedKeyID; while
+		 * (courseItr.hasNext()) { relatedKeyID = courseItr.next().intValue();
+		 * 
+		 * 
+		 * 
+		 * int courseIndex =
+		 * ManagerController.collageDB.getMapping().getCourseIndex(courseID);
+		 * 
+		 * ArrayList<Integer> tempArrayList =
+		 * relatedCoursesMap.get(relatedKeyID);
+		 * 
+		 * for (int TempCourseIndex = 0; TempCourseIndex < tempArrayList.size();
+		 * TempCourseIndex++) { int relatedCourseIndex =
+		 * ManagerController.collageDB
+		 * .getMapping().getCourseIndex(tempArrayList.get(TempCourseIndex)); for
+		 * (int Hours = 0; Hours < Individual.weeklyHours; Hours++) { counter =
+		 * 0; for (int LecturerIndex = 0; LecturerIndex <
+		 * Individual.NumOfLecturers; LecturerIndex++) { for (int ClassIndex =
+		 * 0; ClassIndex < Individual.NumOfClasses; ClassIndex++) { if
+		 * (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex,
+		 * courseIndex).isGene() && individual.getGeneByIndex(Hours,
+		 * LecturerIndex, ClassIndex, relatedCourseIndex).isGene()) { counter++;
+		 * } } } tempCounter += counter;
+		 * 
+		 * } } } HardConstraints += tempCounter / 2;
+		 */
 
-		while (courseItr.hasNext())
-		{
-			courseID = courseItr.next().intValue();
-			int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseID);
-			ArrayList<Integer> tempArrayList = relatedCoursesMap.get(courseID);
-			for (int TempCourseIndex = 0; TempCourseIndex < tempArrayList.size(); TempCourseIndex++)
-			{
-				int relatedCourseIndex = ManagerController.collageDB.getMapping().getCourseIndex(tempArrayList.get(TempCourseIndex));
-				for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
-				{
-					counter = 0;
-					for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
-					{
-						for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
-						{
-							if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseIndex).isGene()
-									&& individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, relatedCourseIndex).isGene())
-							{
-								counter++;
-							}
-						}
-					}
-					tempCounter += counter;
-
-				}
-			}
-		}
-		HardConstraints += tempCounter / 2;
-/*
 		// check courses of same semester not overlapping.
 		tempCounter = 0;
 
@@ -354,8 +352,11 @@ public class FitnessCalc
 						{
 							for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
 							{
-								if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseDBIndex).isGene()
-										&& individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, tempCourseDBIndex).isGene())
+								if ((individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseDBIndex).isGene() && individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex,
+										tempCourseDBIndex).isGene())
+										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getCourseRelativeKey() != ManagerController.collageDB.getCourseByIndex(courseDBIndex)
+												.getCourseRelativeKey())
+										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getFaculty() == ManagerController.collageDB.getCourseByIndex(courseDBIndex).getFaculty()))
 								{
 									counter++;
 								}
@@ -368,80 +369,29 @@ public class FitnessCalc
 				}
 			}
 		}
-		HardConstraints += tempCounter / 2;
+		HardConstraints += tempCounter;
 
-		// check courses of same faculty not overlapping.
-				tempCounter = 0;
-
-				Map<Integer, ArrayList<Integer>> FacultyCoursesMap = ManagerController.collageDB.getCoursesByFaculty();
-				Iterator<Integer> facultyItr = FacultyCoursesMap.keySet().iterator();
-
-				while (facultyItr.hasNext())
-				{
-					int semsterNum = facultyItr.next().intValue();
-					ArrayList<Integer> courseArrayList = FacultyCoursesMap.get(semsterNum);
-					for (int CourseIndex = 0; CourseIndex < courseArrayList.size(); CourseIndex++)
-					{
-						int courseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(CourseIndex));
-						ArrayList<Integer> tempArrayList = FacultyCoursesMap.get(semsterNum);
-						for (int TempCourseIndex = CourseIndex; TempCourseIndex < tempArrayList.size(); TempCourseIndex++)
-						{
-							int tempCourseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(TempCourseIndex));
-							for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
-							{
-								counter = 0;
-								for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
-								{
-									for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
-									{
-										if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseDBIndex).isGene()
-												&& individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, tempCourseDBIndex).isGene())
-										{
-											counter++;
-										}
-									}
-								}
-								tempCounter += counter;
-
-							}
-
-						}
-					}
-				}
-				HardConstraints += tempCounter / 2;	
-		
-		
-		// check total hours a day for 1 lecturer is not above 8 hours.
-		LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
-
-		while (LecItr.hasNext())
-		{
-			lecID = LecItr.next().intValue();
-			int lecturerIndex = ManagerController.collageDB.getMapping().getLecturerIndex(lecID);
-			for (int days = 1; days <= Individual.workingDays; days++)
-			{
-				counter = 0;
-				for (int hours = 0; hours < Individual.dailyHours; hours++)
-				{
-					int Hours = ManagerController.collageDB.getMapping().getTime(days, hours);
-
-					for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
-					{
-						for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++)
-						{
-							if (individual.getGeneByIndex(Hours, lecturerIndex, ClassIndex, CourseIndex).isGene())
-							{
-								counter++;
-							}
-						}
-					}
-				}
-				if (counter > 8)
-					HardConstraints += counter - 8;
-
-			}
-		}
-		*/
+		/*
+		 * // check total hours a day for 1 lecturer is not above 8 hours.
+		 * LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
+		 * 
+		 * while (LecItr.hasNext()) { lecID = LecItr.next().intValue(); int
+		 * lecturerIndex =
+		 * ManagerController.collageDB.getMapping().getLecturerIndex(lecID); for
+		 * (int days = 1; days <= Individual.workingDays; days++) { counter = 0;
+		 * for (int hours = 0; hours < Individual.dailyHours; hours++) { int
+		 * Hours = ManagerController.collageDB.getMapping().getTime(days,
+		 * hours);
+		 * 
+		 * for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses;
+		 * ClassIndex++) { for (int CourseIndex = 0; CourseIndex <
+		 * Individual.NumOfCourses; CourseIndex++) { if
+		 * (individual.getGeneByIndex(Hours, lecturerIndex, ClassIndex,
+		 * CourseIndex).isGene()) { counter++; } } } } if (counter > 8)
+		 * HardConstraints += counter - 8;
+		 * 
+		 * } }
+		 */
 		return HardConstraints;
 	}
 

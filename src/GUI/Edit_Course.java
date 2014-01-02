@@ -70,14 +70,12 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 	private JLabel lblMaxsdntClassJ; // Max student per class
 	private ManagerController manager;
 	private JList AvailableStudyAids;
-	private JComboBox mainCourscomboBox;
 	/* Lecturers Data */
 	private Map<Integer, Lecturer> ArrayLecturers; // arrayStudyAids;
 	private Map<Integer, Integer> ArrayAvailableLecturers; // arrayAvailableStudyAids;
 	private Map<Integer, Integer> arraySelectedLecturers; // arraySelectedStudyAids;
 	private DefaultListModel lstCLecturersModel;// lstClassAidsModel;
 	private DefaultListModel lstSelectedLecturersModel; // lstSelectedClassAidsModel;
-	private JCheckBox chckbxMainCourse;
 	/* general StudyAids */
 	private Map<Integer, StudyAids> crsStudyAids;
 	/* Lecture StudyAids */
@@ -90,9 +88,6 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 	private ArrayList<Faculty> arrayFaculty;
 	private ArrayList<Course> arrayCourse;
 
-	private Map<Integer, Integer> indexcourse;
-
-	// private Map<Integer, Integer> Reverseindexcourse;
 	/**
 	 * Create the panel.
 	 */
@@ -258,17 +253,6 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 		PNL_Main.add(getBtnAddStudyAids());
 
 		PNL_Main.add(getBtnRemveStudyAids());
-
-		mainCourscomboBox = new JComboBox();
-		mainCourscomboBox.setBounds(10, 137, 125, 20);
-		mainCourscomboBox.setVisible(false);
-
-		PNL_Main.add(mainCourscomboBox);
-
-		chckbxMainCourse = new JCheckBox("have main course");
-		chckbxMainCourse.setBounds(10, 104, 129, 23);
-
-		PNL_Main.add(chckbxMainCourse);
 
 		PNL_Main.repaint();
 	}
@@ -440,7 +424,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 		txtCourseName = new JTextField();
 		txtCourseName.setEnabled(false);
 		txtCourseName.setText("course name");
-		txtCourseName.setBounds(10, 264, 105, 20);
+		txtCourseName.setBounds(10, 196, 105, 20);
 		txtCourseName.setColumns(10);
 		return txtCourseName;
 	}
@@ -452,7 +436,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 		txtIdNumber.setEnabled(false);
 		txtIdNumber.setEditable(false);
 		txtIdNumber.setText("ID Number");
-		txtIdNumber.setBounds(10, 201, 105, 20);
+		txtIdNumber.setBounds(10, 133, 105, 20);
 		txtIdNumber.setColumns(10);
 		txtIdNumber.addKeyListener(this);
 		return txtIdNumber;
@@ -462,7 +446,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 	{
 		JLabel lblCoursName = new JLabel("Course Name:");
 		lblCoursName.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblCoursName.setBounds(10, 236, 125, 20);
+		lblCoursName.setBounds(10, 168, 125, 20);
 		return lblCoursName;
 	}
 
@@ -478,7 +462,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 	{
 		JLabel lblId = new JLabel("ID:");
 		lblId.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblId.setBounds(10, 171, 50, 20);
+		lblId.setBounds(10, 103, 50, 20);
 		return lblId;
 	}
 
@@ -583,18 +567,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 				}
 			}
 		}
-		if (e.getSource() == mainCourscomboBox)
-		{
 
-		}
-		if (e.getSource() == chckbxMainCourse)
-		{
-			if (chckbxMainCourse.isSelected())
-				mainCourscomboBox.setVisible(true);
-
-			else
-				mainCourscomboBox.setVisible(false);
-		}
 		if (e.getSource() == btnSave)
 		{
 			// mainCourscomboBox.setVisible(false);
@@ -608,12 +581,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 			newCourse.setSemester((int) Course_Semester.getValue());
 			newCourse.setAcademicHours((int) AcademicHours.getValue());
 			newCourse.setStudentNumber((int) MaxStdntPerClass.getValue());
-			if (chckbxMainCourse.isSelected())
-			{
-				newCourse.setCourseRelativeKey(arrayCourse.get(mainCourscomboBox.getSelectedIndex()).getCourseID());
-
-			} else
-				newCourse.setCourseRelativeKey(-1);
+			newCourse.setCourseRelativeKey(Integer.parseInt(txtIdNumber.getText()));
 			// newCourse
 			Iterator<Integer> itr = arraySelectedLecturers.values().iterator();
 			while (itr.hasNext())
@@ -711,18 +679,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 				if (arrayCourse.get(index).getFaculty() == arrayFaculty.get(i).getFacultyNum())
 					break;
 			}
-			if (arrayCourse.get(index).getCourseRelativeKey() != -1)
-			{
-				mainCourscomboBox.setVisible(true);
-				chckbxMainCourse.setSelected(true);
-			} else
-			{
-				mainCourscomboBox.setVisible(false);
-				chckbxMainCourse.setSelected(false);
-			}
 
-			if (arrayCourse.get(index).getCourseRelativeKey() != -1)
-				mainCourscomboBox.setSelectedIndex(indexcourse.get(arrayCourse.get(index).getCourseRelativeKey()));
 			CB_Faculty.setSelectedIndex(i);
 			txtIdNumber.setText(Integer.toString(arrayCourse.get(index).getCourseID()));
 			txtCourseName.setText((arrayCourse.get(index).getDescription()));
@@ -862,38 +819,23 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 	public void keyTyped(KeyEvent arg0)
 	{
 
-
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0)
 	{
 
-
 	}
 
 	public void setCourses(ArrayList<Course> arrayList)
 	{
 		arrayCourse = arrayList;
-		indexcourse = new HashMap<Integer, Integer>();
-		// Reverseindexcourse = new HashMap<Integer,Integer>();
-		// Reverseindexcourse.clear();
-		indexcourse.clear();
+
 		cmbBxEditCourse.removeAllItems();
 		// int key = 0;
 		for (int i = 0; i < arrayCourse.size(); i++)
 		{
 			cmbBxEditCourse.addItem(arrayCourse.get(i).getCourseID() + ":" + arrayCourse.get(i).getDescription());
-			if (arrayCourse.get(i).getCourseRelativeKey() == arrayCourse.get(i).getCourseID() || arrayCourse.get(i).getCourseRelativeKey() == -1)
-			{
-
-				mainCourscomboBox.addItem(arrayCourse.get(i).getCourseID() + ":" + arrayCourse.get(i).getDescription());
-				indexcourse.put(arrayCourse.get(i).getCourseID(), i);
-				// Reverseindexcourse.put(i,key);
-				// key++;
-
-			}
-
 		}
 
 	}
@@ -946,9 +888,9 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 	{
 		btnRemveStudyAids.addActionListener(this);
 		btnAddStudyAids.addActionListener(this);
-		mainCourscomboBox.addActionListener(this);
+
 		btnDiscard.addActionListener(this);
-		chckbxMainCourse.addActionListener(this);
+
 		btnSave.addActionListener(this);
 		btnNewCourse.addActionListener(this);
 		btnRemove.addActionListener(this);
