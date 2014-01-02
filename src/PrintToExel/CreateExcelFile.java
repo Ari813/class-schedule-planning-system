@@ -119,8 +119,8 @@ public class CreateExcelFile {
             fos=new FileOutputStream(new File("FirstFaculty.xls"));
             HSSFCellStyle hsfstyle=workbook.createCellStyle();
             
-            hsfstyle.setBorderBottom((short) 2);
-            hsfstyle.setFillBackgroundColor((short)225);
+            hsfstyle.setBorderBottom((short) 5);
+            hsfstyle.setFillBackgroundColor((short)125);
             workbook.write(fos);
         } catch (Exception e) {
             e.printStackTrace();
