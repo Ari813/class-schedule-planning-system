@@ -12,6 +12,44 @@ public IDclass(int cousreid, int lecid, int classid, int id) {
 	this.id = id;
 	
 }
+
+public IDclass(int cousreid, int lecid, int classid, int id, int size,
+		String courseDescription, String lecname, String classRoomDescription) {
+	super();
+	this.cousreid = cousreid;
+	this.lecid = lecid;
+	this.classid = classid;
+	this.id = id;
+	this.size = size;
+	this.courseDescription = courseDescription;
+	this.lecname = lecname;
+	this.classRoomDescription = classRoomDescription;
+}
+
+public String getCourseDescription() {
+	return courseDescription;
+}
+
+public void setCourseDescription(String courseDescription) {
+	this.courseDescription = courseDescription;
+}
+
+public String getLecname() {
+	return lecname;
+}
+
+public void setLecname(String lecname) {
+	this.lecname = lecname;
+}
+
+public String getClassRoomDescription() {
+	return classRoomDescription;
+}
+
+public void setClassRoomDescription(String classRoomDescription) {
+	this.classRoomDescription = classRoomDescription;
+}
+
 public void setall(IDclass all){
 	setClassid(all.classid);
 	setCousreid(all.cousreid);
@@ -48,6 +86,11 @@ private int lecid;
 private int classid;
 private int id;
 private int size;
+private String courseDescription;
+private  String lecname;
+private String classRoomDescription;
+
+
 public int getSize() {
 	return size;
 }

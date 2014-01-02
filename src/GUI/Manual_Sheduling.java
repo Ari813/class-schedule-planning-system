@@ -496,9 +496,17 @@ pnl();
 			int ColumnRow=Row+(Column-1)*Settings.dailyHours;
 			boolean haveplaceflag=true;
 			int fac=ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
+			
 			int	semester=semesterSpinner.getSelectedIndex()+1;
 			int courseid= CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseID();
+			String courseDescription=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getDescription(); 
 			int classRoom=arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
+			String classRoomDescription=arrayClasses.get(cmbBxClass.getSelectedIndex()).getDescription();
+			int lecid=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseLecturers().get(cmbBxLecturer.getSelectedIndex()).getID();
+			String lecname=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseLecturers().get(cmbBxLecturer.getSelectedIndex()).getName();
+			
+			
+			
 			int cap=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getStudentNumber();
 			System.out.println(cap);
 			if (classCapacityValue <cap)
@@ -507,18 +515,13 @@ pnl();
 			
 			
 			if ((Column>=1) && (haveplaceflag)){
-				//CourseMap.get(selectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getCourseLecturers()
-				
-				int lecid=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseLecturers().get(cmbBxLecturer.getSelectedIndex()).getID();
-						//LecturerMap.get(courseid).get(cmbBxLecturer.getSelectedIndex()).getID();
-			id_calsss=new IDclass(courseid,lecid,classRoom,ColumnRow);
+				id_calsss=new IDclass(courseid,lecid,classRoom,ColumnRow,0,courseDescription,lecname,classRoomDescription);
 			
 			
 			
 		if (FacultyMap==null){
 			FacultyMap= new HashMap<Integer,Map<Integer, Map<Integer, IDclass>>>();}
 		
-		//JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
 		 boolean flag=true;
 		 for (int j=0;j<courseHours;j++){
 				
@@ -561,8 +564,7 @@ pnl();
 		if (flag){
 			firstIndividual.setGeneByID(Column, Row, lecid, classRoom, courseid);
 			 for (int j=0;j<courseHours;j++){
-				 id_calsss=new IDclass(courseid,lecid,classRoom,ColumnRow);
-				 id_calsss.setSize(courseHours);
+				 id_calsss=new IDclass(courseid,lecid,classRoom,ColumnRow,courseHours,courseDescription,lecname,classRoomDescription);
 				 id_calsss.setId(j);
 			tablemanual.getModel().setValueAt(id_calsss.getClassid() + ":" +id_calsss.getCousreid() + ":" +id_calsss.getLecid() ,Row+j,Column );
 			
@@ -595,7 +597,7 @@ pnl();
 			}
 			ColumnRow++;
 			}
-			 // ColumnRowMapINTable =new HashMap<Integer, IDclass>();
+	
 			
 			 Course courseToMove=new Course();
 			courseToMove=CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex());
@@ -620,12 +622,9 @@ pnl();
 			 
 				}
 			 
-			////////////////////////////////////////		 
-			
-			 //CourseMapInTable.put(courseid, tmpMap);
+				
 			 CourseMap.get(fac).get(semester).remove(cmbBxCourse.getSelectedIndex());
-			// CourseMapInTable
-			 //////////////////////////////////////////////////
+			
 			 
 			 insert_to_corse_combo();
 			 	if (cmbBxCourse.getItemCount()>0)
