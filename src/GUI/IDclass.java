@@ -121,6 +121,13 @@ public String ToString() {
 	
 	return str;
 }
+
+public String getSring() {
+	// TODO Auto-generated method stub
+	String str="hour ="+ getSize()+"| Lecturer = "+getLecname() +"| Class = "+getClassRoomDescription()+"| Course = "+getCourseDescription()+"\n";
+	
+	return str;
+}
 }
 
 /*

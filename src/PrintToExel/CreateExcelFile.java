@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -144,12 +145,63 @@ public class CreateExcelFile {
 	}
 
 	public void WriteToExcelFile(List<List> list1, HSSFSheet mySheet) throws Exception
-	{
-
-		try
+	{try{
+		Map<Integer, ArrayList<IDclass>> mapid=new HashMap<Integer, ArrayList<IDclass>>();
+		int hourid;
+		while (!idclass.isEmpty()){
+			hourid=idclass.get(0).getSize();
+			if( mapid.containsKey(hourid)){
+				mapid.get(hourid).add(idclass.get(0));
+				
+			}else{
+				ArrayList<IDclass> idArray=new ArrayList<IDclass>();
+				idArray.add(idclass.get(0));
+				mapid.put(hourid,idArray);
+			}
+			idclass.remove(0);
+		}
+		
+		Row row;
+		
+		for (int j = 0; j < Settings.dailyHours+1; j++)
 		{
-			Row row;
+			row = mySheet.createRow(j);
 
+			for (int day = 0; day <= 6; day++)
+			{
+				
+				Cell cell = row.createCell(day);
+				cell.getRowIndex();
+				if (j == 0)
+				{
+					cell.setCellValue(headerRow.get(day));
+				} else
+				{if (day == 0)
+					{
+					int tmp=j+7;
+						cell.setCellValue(tmp +"-"+ ++tmp);
+					} else
+					{
+					int key=(j)+(day-1)*Settings.dailyHours;
+					if (mapid.containsKey(key)){
+						String next=new String("");
+						ArrayList<IDclass> idArray=	mapid.get(key);
+						Iterator<IDclass> iter=idArray.iterator();
+						while(iter.hasNext()){
+							next+=iter.next().getSring();
+													}
+						cell.setCellValue(next);
+					}
+					}
+				}
+			}
+			}
+					
+					
+		
+		
+		
+		/*/
 			System.out.println("");
 			for (int j = 0; j < 30; j++)
 			{
@@ -159,6 +211,7 @@ public class CreateExcelFile {
 				{
 					
 					Cell cell = row.createCell(day);
+					cell.getRowIndex();
 					if (j == 0)
 					{
 						cell.setCellValue(headerRow.get(day));
@@ -171,10 +224,10 @@ public class CreateExcelFile {
 						} else
 						{
 							if (!idclass.isEmpty())
-
 							{
 								//System.out.println(idclass.get(0).getId());
-								if ((day + 1) * Settings.dailyHours > idclass.get(0).getSize())
+								
+								if ((day) * Settings.dailyHours > (1+idclass.get(0).getSize()))
 								{
 									String str="hour ="+ idclass.get(0).getSize()+"| Lecturer = "+ idclass.get(0).getLecname() +"| Class = "+ idclass.get(0).getClassRoomDescription()+"| Course = "+ idclass.get(0).getCourseDescription();
 									cell.setCellValue(str);// all
@@ -185,6 +238,8 @@ public class CreateExcelFile {
 								{
 									cell.setCellValue("---");
 								}
+							}else{
+								cell.setCellValue("---");
 							}
 						}
 					}
@@ -193,7 +248,7 @@ public class CreateExcelFile {
 				}
 				rownum++;
 			}
-
+/*/
 		} catch (Exception e)
 		{
 			e.printStackTrace();
