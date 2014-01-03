@@ -109,9 +109,6 @@ public class PrintSolution extends Thread
 	}
 							
 							
-						//	System.out.println("hour = " + H + "| Lecturer = " + ManagerController.collageDB.getLecturerByIndex(L).getName() + "| Class = "
-						//			+ ManagerController.collageDB.getClassByIndex(R).getDescription() + "| Course = " + ManagerController.collageDB.getCourseByIndex(C).getCourseID() + " | "
-						//			+ ManagerController.collageDB.getCourseByIndex(C).getDescription());
 							
 	
 						
