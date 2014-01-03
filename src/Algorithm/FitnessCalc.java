@@ -16,7 +16,7 @@ public class FitnessCalc implements Runnable
 	private Individual indiv;
 	private Population population;
 	private int indivIndex;
-	private static boolean debug = true;
+	private static boolean debug = false;
 
 	public FitnessCalc(Population population, int i)
 	{
@@ -351,10 +351,19 @@ public class FitnessCalc implements Runnable
 								if ((individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseDBIndex).isGene() && individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex,
 										tempCourseDBIndex).isGene())
 										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getCourseRelativeKey() != ManagerController.collageDB.getCourseByIndex(courseDBIndex)
-												.getCourseRelativeKey())
-										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getFaculty() == ManagerController.collageDB.getCourseByIndex(courseDBIndex).getFaculty()))
+												.getCourseRelativeKey()))
 								{
 									counter++;
+									if (debug)
+									{
+										System.out.println("isGene: =>" + individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseDBIndex).isGene() + ":"
+												+ individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, tempCourseDBIndex).isGene());
+										System.out.println("relatedKey: =>" + ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getCourseRelativeKey() + ":"
+												+ ManagerController.collageDB.getCourseByIndex(courseDBIndex).getCourseRelativeKey());
+										System.out.println("Faculty: =>" + ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getFaculty() + ":"
+												+ ManagerController.collageDB.getCourseByIndex(courseDBIndex).getFaculty());
+										System.out.println("counter: =>" + counter);
+									}
 								}
 							}
 						}
