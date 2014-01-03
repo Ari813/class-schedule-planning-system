@@ -809,22 +809,17 @@ public class Edit_Course extends JPanel implements ActionListener,
 		cmbBxEditCourse.removeAllItems();
 
 		//int key = 0;
+		
 		for (int i = 0; i < arrayCourse.size(); i++) {
 			cmbBxEditCourse.addItem(arrayCourse.get(i).getCourseID() + ":"
 					+ arrayCourse.get(i).getDescription());
 			
-			//	Reverseindexcourse.put(i,key);
-			//	key++;
-
+			
 			}
 
 
-		// int key = 0;
-		for (int i = 0; i < arrayCourse.size(); i++)
-		{
-			cmbBxEditCourse.addItem(arrayCourse.get(i).getCourseID() + ":" + arrayCourse.get(i).getDescription());
-
-		}
+	
+		
 
 	}
 

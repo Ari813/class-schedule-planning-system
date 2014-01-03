@@ -52,58 +52,27 @@ public class CreateExcelFile {
  
     public static void addinfo() throws Exception{
     	 List<String> headerRow = new ArrayList<String>();
-         headerRow.add("Time");
-         headerRow.add("sunday");
-         headerRow.add("Monday");
-         headerRow.add("Tuesday");
-         headerRow.add("Wednesday");
-         headerRow.add("Thursday");
-         headerRow.add("Friday");
+         headerRow.add("all info");
+        
       
   
          List<String> Row1 = new ArrayList<String>();
-         Row1.add("8-9"); 
+         Row1.add("day");; 
          List<String> Row2 = new ArrayList<String>();
-         Row2.add("9-10");
+         Row2.add("hour");
          List<String> Row3 = new ArrayList<String>();
-         Row3.add("10-11");
+         Row3.add("course id");
          List<String> Row4 = new ArrayList<String>();
-         Row4.add("11-12");
+         Row4.add("course description");
          List<String> Row5 = new ArrayList<String>();
-         Row5.add("12-13");
+         Row5.add("room number");
          List<String> Row6 = new ArrayList<String>();
-         Row6.add("13-14");
+         Row6.add("lecturer name ");
          List<String> Row7 = new ArrayList<String>();
-         Row7.add("14-15"); 
-         Row7.add("a");
-         List<String> Row8 = new ArrayList<String>();
-         Row8.add("15-16");
-         List<String> Row9 = new ArrayList<String>();
-         Row9.add("16-17");
-         Row9.add("16-17");
-         List<String> Row10 = new ArrayList<String>();
-         Row10.add("17-18")
-         ; Row10.add("17-18");
-         Row10.add("17-18");
-         List<String> Row11 = new ArrayList<String>();
-         Row11.add("18-19");
-         Row11.add("18-19");
-         Row11.add("18-19");
-         List<String> Row12 = new ArrayList<String>();
-         Row12.add("19-20");
-         List<String> Row13 = new ArrayList<String>();
-         Row11.add("20-21");
-         Row11.add("a");
-         Row11.add("20-21");
-         Row11.add("20-21");
-         
-         List<String> Row14 = new ArrayList<String>();
-         Row12.add("21-b22");
-         Row12.add("21-w22");
-         Row12.add("21-g22");
-         Row12.add("21w-22");
-         Row12.add("21-d22");
-         Row12.add("21g-22");
+         Row7.add("lecturer id"); 
+        
+     
+       
      
          
          
@@ -115,13 +84,7 @@ public class CreateExcelFile {
          recordToAdd.add(Row5);
          recordToAdd.add(Row6);
          recordToAdd.add(Row7);
-         recordToAdd.add(Row8);
-         recordToAdd.add(Row9);
-         recordToAdd.add(Row10);
-         recordToAdd.add(Row11);
-         recordToAdd.add(Row12);
-         recordToAdd.add(Row13);
-         recordToAdd.add(Row14);
+   
          
          cls = new CreateExcelFile(recordToAdd);
          cls.createExcelFile();
@@ -135,7 +98,11 @@ public class CreateExcelFile {
             fos=new FileOutputStream(new File("FirstFaculty.xls"));
             HSSFCellStyle hsfstyle=workbook.createCellStyle();
             
-            hsfstyle.setBorderBottom((short) 5);
+            hsfstyle.setBorderBottom((short) 15);
+            hsfstyle.setBorderLeft((short)2);
+            hsfstyle.setBorderRight((short)2);
+            hsfstyle.setBorderBottom((short)2);
+            hsfstyle.setBorderTop((short)2);
             hsfstyle.setFillBackgroundColor((short)125);
             workbook.write(fos);
         } catch (Exception e) {
@@ -156,6 +123,7 @@ public class CreateExcelFile {
                     Cell cell = row.createCell(k);
                     
                     cell.setCellValue(l2.get(k));
+                    
                 }
                 rownum++;
             }
