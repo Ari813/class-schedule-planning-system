@@ -39,11 +39,13 @@ public class PrintSolution extends Thread
 									+ ManagerController.collageDB.getClassByIndex(R).getDescription() + "| Course = " + ManagerController.collageDB.getCourseByIndex(C).getCourseID() + " | "
 									+ ManagerController.collageDB.getCourseByIndex(C).getDescription() + " | " + solution.getGeneByIndex(H, L, R, C).getIndex());
 		System.out.println("found!!!!");
+
 		try
 		{
 			IndividualToMap();
 		} catch (Exception e)
 		{
+
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -92,9 +94,14 @@ public class PrintSolution extends Thread
 								}
 							} else
 							{
-								Map<Integer, ArrayList<IDclass>> tmpsemester = new HashMap<Integer, ArrayList<IDclass>>();
-								ArrayList<IDclass> tmpidcalss = new ArrayList<IDclass>();
+
+								
+								 Map<Integer, ArrayList<IDclass>> tmpsemester = new HashMap<Integer, ArrayList<IDclass>>();
+								ArrayList<IDclass> tmpidcalss = new  ArrayList<IDclass>();
+
+								tmpidcalss.add(idcalss);
 								tmpsemester.put(semester, tmpidcalss);
+								
 								individualMap.put(fac, tmpsemester);
 
 							}

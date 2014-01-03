@@ -274,13 +274,13 @@ public class CreateExcelFile
 						}else{
 							if (!idclass.isEmpty()){
 								System.out.println(idclass.get(0).getId());
-							if (day*Settings.dailyHours <=idclass.get(0).getSize()){
+							if ((day+1)*Settings.dailyHours >idclass.get(0).getSize()){
 								cell.setCellValue(idclass.get(0).getId());	//add all info
 								System.out.print(idclass.get(0).getId());
 								idclass.remove(0);
 							}else
 							{
-							//	cell.setCellValue("---");
+								cell.setCellValue("---");
 							}
 							}	
 						}
