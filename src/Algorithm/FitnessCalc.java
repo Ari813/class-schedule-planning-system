@@ -16,6 +16,7 @@ public class FitnessCalc implements Runnable
 	private Individual indiv;
 	private Population population;
 	private int indivIndex;
+	private static boolean debug = true;
 
 	public FitnessCalc(Population population, int i)
 	{
@@ -186,7 +187,7 @@ public class FitnessCalc implements Runnable
 
 	private static double calcHardConstraints(Individual individual)
 	{
-		boolean debug = false;
+
 		double HardConstraints = 0;
 		int tempCounter = 0;
 		int lecID;
@@ -194,18 +195,14 @@ public class FitnessCalc implements Runnable
 		int courseID;
 		int counter;
 		int courseCounter;
-		
 
 		// check all course are assigned. + check how many times a course has
 		// been assigned in an hour
 		Iterator<Integer> courseItr = ManagerController.collageDB.getCoursesKeys().iterator();
-
+		tempCounter = 0;
 		while (courseItr.hasNext())
 		{
-			// found = false;
-
 			counter = 0;
-			tempCounter = 0;
 			courseID = courseItr.next().intValue();
 			int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseID);
 			for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
@@ -215,34 +212,37 @@ public class FitnessCalc implements Runnable
 				{
 					for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
 					{
-						if (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseIndex).isGene())
+						if ((individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseIndex).isGene())
+								&& (individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseIndex).getIndex() == 0))
 						{
 							// check how many times a course has been assigned
 							// in an hour
 							courseCounter++;
 							if (ManagerController.collageDB.getMapping().getCourseID(courseIndex) == courseID)
 							{
-								// check all course are assigned.
+								// check all course are assigned
 								counter++;
 							}
-
 						}
 					}
-
 				}
-				if (courseCounter > 0)
-					tempCounter += counter - 1;
+				if (courseCounter > 1)
+				{
+					tempCounter += courseCounter;
+				}
 			}
-
 			if (counter == 0)
+			{
 				tempCounter++;
-			else
+			} else
+			{
 				tempCounter += (counter - 1);
-
+			}
 		}
 		HardConstraints += tempCounter;
 		if (debug)
 			System.out.println("check all course are assigned:" + HardConstraints);
+
 		// check how many times a lecturer teaches in an hour.
 		tempCounter = 0;
 		Iterator<Integer> LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
@@ -260,6 +260,7 @@ public class FitnessCalc implements Runnable
 					{
 						if (individual.getGeneByIndex(Hours, lecturerIndex, ClassIndex, CourseIndex).isGene())
 						{
+							// System.out.println("|"+lecID+"|"+Hours+"|"+ClassIndex+"|"+CourseIndex+"|"+counter+"|");
 							counter++;
 						}
 					}
@@ -322,6 +323,7 @@ public class FitnessCalc implements Runnable
 		 * "check how many times a course has been assigned in an hour:" +
 		 * tempCounter);
 		 */
+
 		// check courses of same semester not overlapping.
 		tempCounter = 0;
 
@@ -398,9 +400,18 @@ public class FitnessCalc implements Runnable
 		saveIndividual();
 
 	}
+
 	private synchronized void saveIndividual()
 	{
 		population.saveIndividual(indivIndex, indiv);
 
+	}
+
+	public static double getdebugFitness(Individual individual)
+	{
+		debug = true;
+		double debugFitness = getFitness(individual);
+		debug = false;
+		return debugFitness;
 	}
 }

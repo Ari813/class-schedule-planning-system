@@ -1,11 +1,15 @@
-  package Controllers;
+package Controllers;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import common.TimerUpdater;
 import entities.Building;
 import entities.Campus;
 import entities.Class;
@@ -22,7 +26,8 @@ import GUI.*;
 import MsgPackage.*;
 import MsgPackage.GetAllLecturersPack.getInformation;
 
-public class ManagerController {
+public class ManagerController
+{
 	final public static int EXIT = 11;
 	final public static int MAIN = 2;
 	final public static int AUTO = 3;
@@ -46,7 +51,7 @@ public class ManagerController {
 	private Edit_Course ECRS;
 	private Edit_Lecturer EL;
 	public Manual_Sheduling MS;
-	public static int fix=0;
+	public static int fix = 0;
 	public Edit_Course ed;
 	private Main_Menu main;
 	public Main_Frame manegerMainFrm;
@@ -58,12 +63,15 @@ public class ManagerController {
 	private GetAllCoursePack CourseMsg;
 	private GetAllFacultyPack FacultyMsg;
 	private GetAllCoursesForSchedualingPack ForSchedualingCourseMsg;
-	
+	private TimerUpdater timer;
+	private Date starttime;
+
 	GeneticAlgorithmRun startalgo;
-	
+
 	public static Database collageDB;
 
-	public ManagerController(Main_Frame mainFrm, ChatClient client) {
+	public ManagerController(Main_Frame mainFrm, ChatClient client)
+	{
 		this.client = client;
 		manegerMainFrm = mainFrm;
 		main = new Main_Menu(NOT_MAGI, this);
@@ -78,13 +86,15 @@ public class ManagerController {
 	 * 
 	 * } }
 	 */
-	public void BacktoMainMenu(JPanel Panel2Close) {
+	public void BacktoMainMenu(JPanel Panel2Close)
+	{
 		manegerMainFrm.remove(Panel2Close);
 		manegerMainFrm.add(main.PNL_Main);
 		manegerMainFrm.repaint();
 	}
 
-	public void Load_Lecturer_Preferences(JPanel Panel2Close) {
+	public void Load_Lecturer_Preferences(JPanel Panel2Close)
+	{
 		manegerMainFrm.remove(Panel2Close);
 		LP = new Lecturer_Preferences(null, this);
 		LP.setLecturers(getAvailableLecturers(getInformation.schedual));
@@ -93,22 +103,24 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
-	public void Load_Automatic_Sheduling(JPanel Panel2Close, Database allData, Individual firstIndividual) {
-		
+	public void Load_Automatic_Sheduling(JPanel Panel2Close, Database allData, Individual firstIndividual)
+	{
+
 		manegerMainFrm.remove(Panel2Close);
 		AS = new Automatic_Sheduling(this);
 		AS.setData(allData);
 		manegerMainFrm.add(AS.PNL_Main);
-		startalgo = new GeneticAlgorithmRun(firstIndividual, 50,this);
+		startalgo = new GeneticAlgorithmRun(firstIndividual, 50, this);
 		AS.addActions();
-		
+
 		manegerMainFrm.repaint();
-		
+
 	}
 
 	// //////////////
-	public void Load_Edit_Course(JPanel Panel2Close) {
-		fix =0;
+	public void Load_Edit_Course(JPanel Panel2Close)
+	{
+		fix = 0;
 		manegerMainFrm.remove(Panel2Close);
 		ECRS = new Edit_Course(this);
 		ECRS.setCourses(getCourse());
@@ -116,28 +128,29 @@ public class ManagerController {
 		ECRS.setAvailableLecturers(getAvailableLecturers(getInformation.nothing));
 		ECRS.setStudyAids(GetClassAids());
 		ECRS.setdefault();
-		
+
 		ECRS.addActions();
 		manegerMainFrm.add(ECRS.PNL_Main);
 		manegerMainFrm.repaint();
 	}
 
-
-	public void Load_Course_Settings(JPanel Panel2Close) {
+	public void Load_Course_Settings(JPanel Panel2Close)
+	{
 
 		manegerMainFrm.remove(Panel2Close);
 		// /load all we need
 
 		CS = new Course_Settings(this);
 		CS.setFaculty(getFaculty());
-		
+
 		CS.setCourse(getCourse());
 		manegerMainFrm.add(CS.PNL_Main);
 		manegerMainFrm.repaint();
 		CS.addActions();
 	}
 
-	public void Load_Edit_Lecturer(JPanel Panel2Close) {
+	public void Load_Edit_Lecturer(JPanel Panel2Close)
+	{
 
 		manegerMainFrm.remove(Panel2Close);
 		EL = new Edit_Lecturer(this);
@@ -148,7 +161,8 @@ public class ManagerController {
 		EL.addActions();
 	}
 
-	public void Load_Edit_Class(JPanel Panel2Close) {
+	public void Load_Edit_Class(JPanel Panel2Close)
+	{
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);
 
@@ -163,10 +177,12 @@ public class ManagerController {
 		manegerMainFrm.repaint();
 	}
 
-	public void Load_Manual_Sheduling(JPanel Panel2Close) {
+	public void Load_Manual_Sheduling(JPanel Panel2Close)
+	{
 
 		manegerMainFrm.remove(Panel2Close);
-		if (MS!=null){}
+		if (MS != null)
+		{}
 		MS = new Manual_Sheduling(this);
 		MS.setFaculty(getFaculty());
 		MS.setClasses(GetClasses());
@@ -174,20 +190,13 @@ public class ManagerController {
 		MS.setLec(getAvailableLecturers(getInformation.all));
 		MS.setfirstIndividual();
 		manegerMainFrm.add(MS.PNL_Main);
-		
+
 		manegerMainFrm.repaint();
 		MS.addActions();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	private ArrayList<Lecturer> getAvailableLecturers(
-			getInformation additionalInfo) {
+
+	private ArrayList<Lecturer> getAvailableLecturers(getInformation additionalInfo)
+	{
 		GetAllLecturersPack AvailableLecturers = new GetAllLecturersPack();
 		AvailableLecturers.setAdditionalInfo(additionalInfo);
 		client.handleMessageFromClientUI(AvailableLecturers);
@@ -197,7 +206,8 @@ public class ManagerController {
 
 	}
 
-	private ArrayList<Faculty> getFaculty() {
+	private ArrayList<Faculty> getFaculty()
+	{
 
 		FacultyMsg = new GetAllFacultyPack();
 		client.handleMessageFromClientUI(FacultyMsg);
@@ -205,8 +215,8 @@ public class ManagerController {
 		return (FacultyMsg.getAllFaculty());
 	}
 
-	
-	private ArrayList<Course> getCourseForSchedualing() {
+	private ArrayList<Course> getCourseForSchedualing()
+	{
 
 		ForSchedualingCourseMsg = new GetAllCoursesForSchedualingPack();
 		ForSchedualingCourseMsg.setAdditionalInfo();
@@ -214,8 +224,9 @@ public class ManagerController {
 		ForSchedualingCourseMsg = (GetAllCoursesForSchedualingPack) client.getMessage();
 		return (ForSchedualingCourseMsg.getAllclass());
 	}
-	
-	private ArrayList<Course> getCourse() {
+
+	private ArrayList<Course> getCourse()
+	{
 
 		CourseMsg = new GetAllCoursePack();
 		CourseMsg.setAdditionalInfo();
@@ -224,8 +235,8 @@ public class ManagerController {
 		return (CourseMsg.getAllclass());
 	}
 
-	
-	private ArrayList<ClassesAids> GetAidsForExistingClasses() {
+	private ArrayList<ClassesAids> GetAidsForExistingClasses()
+	{
 		GetClassAidsPack ClassAidsMessage = new GetClassAidsPack();
 		client.handleMessageFromClientUI(ClassAidsMessage);
 		ClassAidsMessage = (GetClassAidsPack) client.getMessage();
@@ -234,35 +245,40 @@ public class ManagerController {
 	}
 
 	// ////
-	private ArrayList<StudyAids> GetClassAids() {
+	private ArrayList<StudyAids> GetClassAids()
+	{
 		GetStudyAidsPack studyAidsMessage = new GetStudyAidsPack();
 		client.handleMessageFromClientUI(studyAidsMessage);
 		studyAidsMessage = (GetStudyAidsPack) client.getMessage();
 		return (studyAidsMessage.getAllStudyAids());
 	}
 
-	public ArrayList<Class> GetClasses() {
+	public ArrayList<Class> GetClasses()
+	{
 		ClassMsg = new GetAllClassesPack();
 		client.handleMessageFromClientUI(ClassMsg);
 		ClassMsg = (GetAllClassesPack) client.getMessage();
 		return (ClassMsg.getAllclass());
 	}
 
-	private ArrayList<Campus> getCampuses() {
+	private ArrayList<Campus> getCampuses()
+	{
 		GetCampusPack CampusMsg = new GetCampusPack();
 		client.handleMessageFromClientUI(CampusMsg);
 		CampusMsg = (GetCampusPack) client.getMessage();
 		return (CampusMsg.getAllCampuses());
 	}
 
-	private ArrayList<Building> getBuildings() {
+	private ArrayList<Building> getBuildings()
+	{
 		GetBuildingsPack BuildingMsg = new GetBuildingsPack();
 		client.handleMessageFromClientUI(BuildingMsg);
 		BuildingMsg = (GetBuildingsPack) client.getMessage();
 		return (BuildingMsg.getAllBuildings());
 	}
 
-	public Course CreateNewCourse(Course newCourse) {
+	public Course CreateNewCourse(Course newCourse)
+	{
 
 		NewCoursePack NewCourseMsg = new NewCoursePack();
 		NewCourseMsg.setNewCourse(newCourse);
@@ -272,7 +288,8 @@ public class ManagerController {
 		return NewCourseMsg.getNewCourse();
 	}
 
-	public Course UpdateNewCourse(Course newCourse) {
+	public Course UpdateNewCourse(Course newCourse)
+	{
 
 		UpdateCoursePack updateCourseMsg = new UpdateCoursePack();
 		updateCourseMsg.setNewCourse(newCourse);
@@ -282,29 +299,29 @@ public class ManagerController {
 		return updateCourseMsg.getNewCourse();
 	}
 
-
-
-	public void logout() {
+	public void logout()
+	{
 		// TODO Auto-generated method stub
 		manegerMainFrm.handleLogoutGUI();
 
 	}
 
-	public boolean saveCoureSet(Map<Integer, ArrayList<Course>> coursePerFuculty) {
+	public boolean saveCoureSet(Map<Integer, ArrayList<Course>> coursePerFuculty)
+	{
 		// UpdateEstimatedStudentsNumPerClassPack
 
 		UpdateEstimatedStudentsNumPerClassPack updateMsg = new UpdateEstimatedStudentsNumPerClassPack();
 		updateMsg.setCoursePerFucultyMap(coursePerFuculty);
 		client.handleMessageFromClientUI(updateMsg);
 
-		updateMsg = (UpdateEstimatedStudentsNumPerClassPack) client
-				.getMessage();
+		updateMsg = (UpdateEstimatedStudentsNumPerClassPack) client.getMessage();
 
 		return (updateMsg.isSucceed());
 
 	}
 
-	public Lecturer CreateNewLecturer(Lecturer newLecturer) {
+	public Lecturer CreateNewLecturer(Lecturer newLecturer)
+	{
 		NewLecturerPack NewLecturerMsg = new NewLecturerPack();
 		NewLecturerMsg.setNewLecturer(newLecturer);
 		client.handleMessageFromClientUI(NewLecturerMsg);
@@ -313,7 +330,8 @@ public class ManagerController {
 		return NewLecturerMsg.getNewLecturer();
 	}
 
-	public Lecturer UpdateNewLecturer(Lecturer newLecturer) {
+	public Lecturer UpdateNewLecturer(Lecturer newLecturer)
+	{
 		UpdateLecturerPack NewLecturerMsg = new UpdateLecturerPack();
 		NewLecturerMsg.setNewLecturer(newLecturer);
 		client.handleMessageFromClientUI(NewLecturerMsg);
@@ -322,7 +340,8 @@ public class ManagerController {
 		return NewLecturerMsg.getNewLecturer();
 	}
 
-	public Class CreateNewClass(Class newClass) {
+	public Class CreateNewClass(Class newClass)
+	{
 		NewClassPack newClassMsg = new NewClassPack();
 		newClassMsg.setNewClass(newClass);
 		client.handleMessageFromClientUI(newClassMsg);
@@ -331,7 +350,8 @@ public class ManagerController {
 		return newClassMsg.getNewClass();
 	}
 
-	public Class UpdateNewClass(Class newClass) {
+	public Class UpdateNewClass(Class newClass)
+	{
 		UpdateClassPack newClassMsg = new UpdateClassPack();
 		newClassMsg.setNewClass(newClass);
 		client.handleMessageFromClientUI(newClassMsg);
@@ -340,32 +360,36 @@ public class ManagerController {
 		return newClassMsg.getNewClass();
 	}
 
-	public boolean UpdateTable(ArrayList<Lecturer> arrayLecturer) {
-		
+	public boolean UpdateTable(ArrayList<Lecturer> arrayLecturer)
+	{
+
 		UpdateLecturersPreferencesPack NewLecturerscScheduleMsg = new UpdateLecturersPreferencesPack();
 		NewLecturerscScheduleMsg.setAllLecturers(arrayLecturer);
 		client.handleMessageFromClientUI(NewLecturerscScheduleMsg);
 		NewLecturerscScheduleMsg = (UpdateLecturersPreferencesPack) client.getMessage();
 
-		return NewLecturerscScheduleMsg.isSucceed();	
-		
+		return NewLecturerscScheduleMsg.isSucceed();
+
 	}
 
-	public void setDataBase(Database allData) {
-		collageDB=allData;
+	public void setDataBase(Database allData)
+	{
+		collageDB = allData;
 	}
 
 	public void stopAutoSchedualing()
 	{
 		startalgo.stopRunning();
-		
+		stopTimer();
+
 	}
+
 	public void startAutoSchedualing()
 	{
 		startalgo.start();
-		
+
 	}
-	
+
 	public void updateProgressBar(double fitness)
 	{
 		AS.updateProgressBar(fitness);
@@ -375,5 +399,31 @@ public class ManagerController {
 	{
 		AS.updatePopCounter(counter);
 	}
-	
+
+	public void startTimer()
+	{
+		starttime = new Date();
+		timer = new TimerUpdater(this);
+		timer.startTimer();
+
+	}
+
+	public void stopTimer()
+	{
+
+		timer.StopTimer();
+
+	}
+
+	public void updateRunTimeDisplay()
+	{
+		long runtime;
+		Date date = new Date();
+		runtime = date.getTime() - starttime.getTime();
+
+		TimeUnit.MILLISECONDS.toDays(runtime);
+		AS.updaterunTime(String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(runtime),
+				TimeUnit.MILLISECONDS.toMinutes(runtime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(runtime)),
+				TimeUnit.MILLISECONDS.toSeconds(runtime) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(runtime))));
+	}
 }

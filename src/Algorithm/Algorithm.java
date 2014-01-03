@@ -9,8 +9,8 @@ public class Algorithm
 
 	/* GA parameters */
 	static double uniformRate = 0.5;
-	static double mutationRate = 0.015;
-	
+	static double mutationRate = 0.0005;
+
 	// private static final int tournamentSize = 5;
 
 	/* Public methods */
@@ -23,6 +23,7 @@ public class Algorithm
 		Thread[] CrossoverAlgorithmArray = new Thread[pop.size()];
 		Thread[] MutateAlgorithmArray = new Thread[pop.size()];
 		Thread[] FitnessAlgorithmArray = new Thread[pop.size()];
+		Thread[] RepairsAlgorithmArray = new Thread[pop.size()];
 		// Keep our best individual
 
 		// Crossover population
@@ -32,7 +33,7 @@ public class Algorithm
 		for (int i = 0; i < pop.size(); i++)
 		{
 
-			CrossoverAlgorithm crossOverThread = new CrossoverAlgorithm(pop,newPopulation, i);
+			CrossoverAlgorithm crossOverThread = new CrossoverAlgorithm(pop, newPopulation, i);
 
 			CrossoverAlgorithmArray[i] = new Thread(crossOverThread, "Crossover " + i);
 			CrossoverAlgorithmArray[i].start();
@@ -44,7 +45,7 @@ public class Algorithm
 		for (int i = 0; i < newPopulation.size(); i++)
 		{
 			MutateAlgorithm mutateThread = new MutateAlgorithm(newPopulation, i);
-			
+
 			MutateAlgorithmArray[i] = new Thread(mutateThread, "Mutate " + i);
 			MutateAlgorithmArray[i].start();
 
@@ -53,11 +54,24 @@ public class Algorithm
 		for (int i = 0; i < pop.size(); i++)
 			MutateAlgorithmArray[i].join();
 
+		// Repair population
+		for (int i = 0; i < newPopulation.size(); i++)
+		{
+			RepairStrategy RepairThread = new RepairStrategy(newPopulation, i);
+
+			RepairsAlgorithmArray[i] = new Thread(RepairThread, "Repair " + i);
+			RepairsAlgorithmArray[i].start();
+
+		}
+		for (int i = 0; i < pop.size(); i++)
+			RepairsAlgorithmArray[i].join();
+
 		// calculate fitness for population
+
 		for (int i = 0; i < newPopulation.size(); i++)
 		{
 			FitnessCalc FitnessThread = new FitnessCalc(newPopulation, i);
-			
+
 			FitnessAlgorithmArray[i] = new Thread(FitnessThread, "Fitness " + i);
 			FitnessAlgorithmArray[i].start();
 
@@ -65,7 +79,7 @@ public class Algorithm
 		}
 		for (int i = 0; i < pop.size(); i++)
 			FitnessAlgorithmArray[i].join();
-		
+
 		SavePopulation = Replacement(newPopulation, pop);
 		return SavePopulation;
 	}
@@ -85,24 +99,24 @@ public class Algorithm
 				}
 			}
 		}
-		
+
 		return pop;
 	}
 
 	private static Population Replacement(Population newPopulation, Population pop)
 	{
-		int oldpop =  pop.size() -1, newpop = pop.size()-1;
+		int oldpop = pop.size() - 1, newpop = pop.size() - 1;
 		int replacementSize;
 		Population SavePopulation = new Population(pop.size(), false);
-		
+
 		pop = bubbleSort(pop);
 		newPopulation = bubbleSort(newPopulation);
-		replacementSize= (int)(pop.size() * 0.3);
+		replacementSize = (int) (pop.size() * 0.3);
 		for (int i = 0; i < replacementSize; i++)
 		{
 			if (pop.getIndividual(oldpop).getFitness() > newPopulation.getIndividual(newpop).getFitness())
 			{
-				
+
 				SavePopulation.saveIndividual(i, pop.getIndividual(oldpop));
 				oldpop--;
 			} else
@@ -113,19 +127,19 @@ public class Algorithm
 			}
 
 		}
-		
+
 		for (int i = replacementSize; i < pop.size(); i++)
 		{
-			
-				SavePopulation.saveIndividual(i, newPopulation.getIndividual(newpop));
-				newpop--;
+
+			SavePopulation.saveIndividual(i, newPopulation.getIndividual(newpop));
+			newpop--;
 
 		}
 		return SavePopulation;
 
 	}
-	
-@Deprecated
+
+	@Deprecated
 	private static Individual crossover(Individual indiv1, Individual indiv2)
 	{
 		Individual newSol = new Individual();
@@ -173,7 +187,6 @@ public class Algorithm
 					}
 		return newSol;
 	}
-
 
 	// Mutate an individual
 	@Deprecated
@@ -236,7 +249,7 @@ public class Algorithm
 			randNum -= pop.individuals[i].getSelection();
 			if (randNum < 0)
 				return (pop.individuals[i]);
-			
+
 		}
 		return (pop.individuals[pop.size()]);
 	}

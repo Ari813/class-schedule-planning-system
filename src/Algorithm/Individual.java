@@ -271,4 +271,9 @@ public class Individual
 		return selection;
 	}
 
+	public double getDegubFitness()
+	{
+		return FitnessCalc.getdebugFitness(this);
+	}
+
 }

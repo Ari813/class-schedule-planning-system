@@ -23,8 +23,7 @@ public class PrintSolution extends Thread
 
 	public void run()
 	{
-		//IndividualToMap();
-		System.out.println("fitness=(" + solution.getFitness() + ")");
+		System.out.println("fitness=(" + solution.getDegubFitness() + ")");
 		for (int H = 0; H < Individual.weeklyHours; H++)
 			// weeklyHours
 			for (int L = 0; L < Individual.NumOfLecturers; L++)
@@ -35,7 +34,8 @@ public class PrintSolution extends Thread
 						if (solution.getGeneByIndex(H, L, R, C).isGene())
 							System.out.println("hour = " + H + "| Lecturer = " + ManagerController.collageDB.getLecturerByIndex(L).getName() + "| Class = "
 									+ ManagerController.collageDB.getClassByIndex(R).getDescription() + "| Course = " + ManagerController.collageDB.getCourseByIndex(C).getCourseID() + " | "
-									+ ManagerController.collageDB.getCourseByIndex(C).getDescription());
+									+ ManagerController.collageDB.getCourseByIndex(C).getDescription()+ " | "
+									+ solution.getGeneByIndex(H, L, R, C).getIndex());
 		System.out.println("found!!!!");
 		try {
 			//IndividualToMap();

@@ -26,47 +26,46 @@ public class CrossoverAlgorithm implements Runnable
 		int i;
 
 		// Loop through genes
-		for (int H = 0; H < Individual.weeklyHours; H++)
-			// weeklyHours
-			for (int L = 0; L < Individual.NumOfLecturers; L++)
-				// NumOfLecturers
-				for (int R = 0; R < Individual.NumOfClasses; R++)
-					// NumOfClasses
-					for (int C = 0; C < Individual.NumOfCourses; C++)
-					{ // NumOfCourses
+
+		for (int L = 0; L < Individual.NumOfLecturers; L++)
+			// NumOfLecturers
+			for (int R = 0; R < Individual.NumOfClasses; R++)
+				// NumOfClasses
+				for (int C = 0; C < Individual.NumOfCourses; C++)
+					// NumOfCourses
+					for (int H = 0; H < Individual.weeklyHours; H++)
+					// weeklyHours
+					{
 						// Crossover
 						if (Math.random() <= Algorithm.uniformRate)
 						{
 							if (indiv1.getGeneByIndex(H, L, R, C).getIndex() == 0)
 							{
-	
+
 								for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
-									if (indiv1.getGeneByIndex(H, L, R, C).isGene())
-									{
-										newSol.setGeneByIndex(H + i, L, R, C, i);
-									} else
-									{
-										newSol.clrGeneByIndex(H + i, L, R, C);
-									}
+								{
+									if (!indiv1.getGeneByIndex(H + i, L, R, C).isEditable())
+										newSol.getGeneByIndex(H + i, L, R, C).setUnEditable();
+									newSol.setGeneByIndex(H + i, L, R, C, i);
+								}
+								H += i;
 							}
 
 						} else
 						{
 							if (indiv2.getGeneByIndex(H, L, R, C).getIndex() == 0)
 							{
-					
 								for (i = 0; i < ManagerController.collageDB.getCourseByIndex(C).getAcademicHours(); i++)
-									if (indiv2.getGeneByIndex(H, L, R, C).isGene())
-									{
-										newSol.setGeneByIndex(H + i, L, R, C, i);
-									} else
-									{
-										newSol.clrGeneByIndex(H + i, L, R, C);
-									}
+								{
+									if (!indiv2.getGeneByIndex(H + i, L, R, C).isEditable())
+										newSol.getGeneByIndex(H + i, L, R, C).setUnEditable();
+									newSol.setGeneByIndex(H + i, L, R, C, i);
+								}
+								H += i;
+
 							}
 						}
-						if (!indiv1.getGeneByIndex(H, L, R, C).isEditable())
-							newSol.getGeneByIndex(H, L, R, C).setUnEditable();
+
 					}
 		newPopulation.saveIndividual(indivNewIndex, newSol);
 	}

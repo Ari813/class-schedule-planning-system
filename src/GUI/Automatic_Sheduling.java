@@ -62,6 +62,8 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 	private Database allDatabase;
 	private JLabel lblPopulationCounter;
 	private JTextField txtLoopCounter;
+	private JTextField txtRunTime;
+	private JLabel lblRunTime;
 	/**
 	 * Create the panel.
 	 */
@@ -119,8 +121,30 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		
 		
 		PNL_Main.add(getlblPopulationCounter());
+		
+
+		PNL_Main.add(gettxtRunTime());
+		
+
+		PNL_Main.add(getlblRunTime());
 		// PNL_Main.add(GETcmbBxSemster());
 
+	}
+
+	private Component getlblRunTime()
+	{
+		lblRunTime = new JLabel("Run time");
+		lblRunTime.setBounds(643, 103, 121, 14);
+		return lblRunTime;
+	}
+
+	private Component gettxtRunTime()
+	{
+		txtRunTime = new JTextField();
+		txtRunTime.setEditable(false);
+		txtRunTime.setColumns(10);
+		txtRunTime.setBounds(643, 121, 121, 20);
+		return txtRunTime;
 	}
 
 	private Component getlblPopulationCounter()
@@ -276,6 +300,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		btnBackToMainMenu.addActionListener(this);
 		btnSaveChanges.addActionListener(this);
 		manager.startAutoSchedualing();
+		manager.startTimer();
 	}
 	
 	public void updateProgressBar(double fitness)
@@ -286,5 +311,10 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 	public void updatePopCounter(Integer counter)
 	{
 		txtLoopCounter.setText(counter.toString());
+	}
+	
+	public void updaterunTime(String time)
+	{
+		txtRunTime.setText(time);
 	}
 }
