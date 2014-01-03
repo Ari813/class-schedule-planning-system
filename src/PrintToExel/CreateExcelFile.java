@@ -75,20 +75,36 @@ public class CreateExcelFile {
          Row6.add("13-14");
          List<String> Row7 = new ArrayList<String>();
          Row7.add("14-15"); 
+         Row7.add("a");
          List<String> Row8 = new ArrayList<String>();
          Row8.add("15-16");
          List<String> Row9 = new ArrayList<String>();
          Row9.add("16-17");
+         Row9.add("16-17");
          List<String> Row10 = new ArrayList<String>();
+         Row10.add("17-18")
+         ; Row10.add("17-18");
          Row10.add("17-18");
          List<String> Row11 = new ArrayList<String>();
+         Row11.add("18-19");
+         Row11.add("18-19");
          Row11.add("18-19");
          List<String> Row12 = new ArrayList<String>();
          Row12.add("19-20");
          List<String> Row13 = new ArrayList<String>();
          Row11.add("20-21");
+         Row11.add("a");
+         Row11.add("20-21");
+         Row11.add("20-21");
+         
          List<String> Row14 = new ArrayList<String>();
-         Row12.add("21-22");
+         Row12.add("21-b22");
+         Row12.add("21-w22");
+         Row12.add("21-g22");
+         Row12.add("21w-22");
+         Row12.add("21-d22");
+         Row12.add("21g-22");
+     
          
          
          List<List> recordToAdd = new ArrayList<List>();
