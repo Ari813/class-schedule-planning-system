@@ -37,6 +37,12 @@ public class PrintSolution extends Thread
 									+ ManagerController.collageDB.getClassByIndex(R).getDescription() + "| Course = " + ManagerController.collageDB.getCourseByIndex(C).getCourseID() + " | "
 									+ ManagerController.collageDB.getCourseByIndex(C).getDescription());
 		System.out.println("found!!!!");
+		try {
+			//IndividualToMap();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void IndividualToMap() throws Exception {
