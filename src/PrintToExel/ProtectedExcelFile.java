@@ -14,7 +14,7 @@ public class ProtectedExcelFile {
 
     public static void main(final String... args) throws Exception {     
 
-        String fname = "C:\\Documents and Settings\\sadutta\\Desktop\\sample.xls";
+        String fname = "C:\\Documents and Settings\\user\\workspace2\\C.S.P.S\\sample.xls";
 
         FileInputStream fileInput = null;       
         BufferedInputStream bufferInput = null;      

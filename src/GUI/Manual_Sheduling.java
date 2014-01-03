@@ -109,6 +109,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 	// -----------------------
 	// public Map<Integer, ArrayList<Course>> CourseMap2;
 	public Map<Integer, Map<Integer, Map<Integer, Course>>> CourseMapInTable;
+	
 	public Map<Integer, Map<Integer, ArrayList<Course>>> CourseMap;
 	public Map<Integer, ArrayList<Faculty>> facMap;
 	// public Map<Integer, ArrayList<Lecturer>> LecturerMap;

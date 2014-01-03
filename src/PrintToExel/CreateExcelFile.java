@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
  
+
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
+
+import GUI.IDclass;
  
 /*
  * Here we will learn how to create Excel file and header for the same.
@@ -87,15 +90,16 @@ public class CreateExcelFile {
    
          
          cls = new CreateExcelFile(recordToAdd);
-         cls.createExcelFile();
+         cls.createExcelFile(1);
     }
     
    
  
-    void createExcelFile(){
+    void createExcelFile(int facnumber){
         FileOutputStream fos = null;
         try {
-            fos=new FileOutputStream(new File("FirstFaculty.xls"));
+        	
+            fos=new FileOutputStream(new File("c://F//facnumber"+facnumber+"//FirstFaculty.xls"));
             HSSFCellStyle hsfstyle=workbook.createCellStyle();
             
             hsfstyle.setBorderBottom((short) 15);
@@ -110,7 +114,8 @@ public class CreateExcelFile {
         }
     }
  
-     CreateExcelFile(List<List> l1) throws Exception {
+    
+    public CreateExcelFile(List<List> l1) throws Exception {
  
         try {
  
@@ -134,7 +139,16 @@ public class CreateExcelFile {
         }
  
     }
-     public static void main(String args[]) throws Exception {
+     
+     public CreateExcelFile(int faculty,int semester,ArrayList<IDclass> idclass)throws Exception {
+		super();
+		faculty=1;
+		
+	}
+
+
+
+	public static void main(String args[]) throws Exception {
     	 
      	addinfo();
          
