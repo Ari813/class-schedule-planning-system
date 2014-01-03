@@ -1,9 +1,10 @@
 package PrintToExel;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
+
 import java.io.File;
 import java.io.FileOutputStream;
-import java.sql.Date;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -17,8 +18,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-import common.Settings;
 import GUI.IDclass;
+import common.Settings;
 
 /*
  * Here we will learn how to create Excel file and header for the same.
@@ -27,13 +28,7 @@ public class CreateExcelFile
 {
 
 	private CreateExcelFile cls;
-	private ArrayList<String> day1;
-	private ArrayList<String> day2;
-	private ArrayList<String> day3;
-	private ArrayList<String> day4;
-	private ArrayList<String> day5;
-	private ArrayList<String> day6;
-	private ArrayList<String> day7;
+
 	private ArrayList<List> recordToAdd;
 	private ArrayList<IDclass> idclass;
 	int rownum = 0;
@@ -67,7 +62,6 @@ public class CreateExcelFile
 		HSSFSheet semester6Sheet = workbook.createSheet("6");
 		HSSFSheet semester7Sheet = workbook.createSheet("7");
 		HSSFSheet semester8Sheet = workbook.createSheet("8");
-	
 
 		allsheet = new ArrayList<HSSFSheet>();
 		allsheet.add(semester0Sheet);
@@ -84,8 +78,6 @@ public class CreateExcelFile
 		headerRow.setHeightInPoints(45);
 	}
 
-	
-
 	public CreateExcelFile(int faculty, Map<Integer, ArrayList<IDclass>> map) throws Exception
 	{
 		faculty = 1;
@@ -96,13 +88,11 @@ public class CreateExcelFile
 			semester = semesteritr.next().intValue();
 			this.idclass = map.get(semester);
 			addinfo();
-			//CreateToExcelFilefirst(allsheet.get(semester));
+			// CreateToExcelFilefirst(allsheet.get(semester));
 			WriteToExcelFile(recordToAdd, allsheet.get(semester));
 		}
 
 	}
-
-
 
 	public void addinfo() throws Exception
 	{
@@ -114,64 +104,6 @@ public class CreateExcelFile
 		headerRow.add("wendesday");
 		headerRow.add("thursday");
 		headerRow.add("friday ");
-		
-		day1 = new ArrayList<String>();
-		day3 = new ArrayList<String>();
-		
-		day4 = new ArrayList<String>();
-	
-		day5 = new ArrayList<String>();
-		
-		day6 = new ArrayList<String>();
-		
-	
-/*
-		for (int i = 0; i < idclass.size(); i++)
-		{
-			int key = idclass.get(i).getSize();
-			if ((key < Settings.dailyHours) && (key > 0))
-			{
-				day1.add("Classid - " + idclass.get(i).getClassid() + "RoomDescription" + idclass.get(i).getClassRoomDescription() + "idclass - " + idclass.get(i).getClassid() + "Lecid - "
-						+ idclass.get(i).getLecid() + "");
-			}
-			if ((key < Settings.dailyHours * 2) && (key > Settings.dailyHours))
-			{
-				day2.add("Classid - " + idclass.get(i).getClassid() + "RoomDescription" + idclass.get(i).getClassRoomDescription() + " idclass - " + idclass.get(i).getClassid() + "Lecid"
-						+ idclass.get(i).getLecid() + "");
-			}
-			if ((key < Settings.dailyHours * 3) && (key > Settings.dailyHours * 2))
-			{
-				day3.add("Classid - " + idclass.get(i).getClassid() + "RoomDescription" + idclass.get(i).getClassRoomDescription() + "idclass - " + idclass.get(i).getClassid() + "Lecid"
-						+ idclass.get(i).getLecid() + "");
-			}
-			if ((key < Settings.dailyHours * 4) && (key > Settings.dailyHours * 3))
-			{
-				day4.add("Classid - " + idclass.get(i).getClassid() + "RoomDescription" + idclass.get(i).getClassRoomDescription() + "idclass - " + idclass.get(i).getClassid() + "Lecid"
-						+ idclass.get(i).getLecid() + "");
-			}
-			if ((key < Settings.dailyHours * 5) && (key > Settings.dailyHours * 4))
-			{
-				day5.add("Classid: - " + idclass.get(i).getClassid() + "RoomDescription - " + idclass.get(i).getClassRoomDescription() + "idclass" + idclass.get(i).getClassid() + "Lecid"
-						+ idclass.get(i).getLecid() + "");
-			}
-			if ((key < Settings.dailyHours * 6) && (key > Settings.dailyHours * 5))
-			{
-				day6.add("Classid - " + idclass.get(i).getClassid() + "RoomDescription - " + idclass.get(i).getClassRoomDescription() + "idclass -" + idclass.get(i).getClassid() + "Lecid"
-						+ idclass.get(i).getLecid() + "");
-			}
-		}
-*/
-//		recordToAdd = new ArrayList<List>();
-//		recordToAdd.add(headerRow);
-//		recordToAdd.add(day1);
-//		recordToAdd.add(day3);
-//		recordToAdd.add(day4);
-//		recordToAdd.add(day5);
-//		recordToAdd.add(day6);
-		
-
-		// cls = new CreateExcelFile(recordToAdd);
-		// cls.createExcelFile(1);
 	}
 
 	public void createExcelFile(int facnumber)
@@ -179,62 +111,18 @@ public class CreateExcelFile
 		FileOutputStream fos = null;
 		try
 		{
-			Calendar d=new Calendar() {
-				
-				@Override
-				public void roll(int field, boolean up) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public int getMinimum(int field) {
-					// TODO Auto-generated method stub
-					return 0;
-				}
-				
-				@Override
-				public int getMaximum(int field) {
-					// TODO Auto-generated method stub
-					return 0;
-				}
-				
-				@Override
-				public int getLeastMaximum(int field) {
-					// TODO Auto-generated method stub
-					return 0;
-				}
-				
-				@Override
-				public int getGreatestMinimum(int field) {
-					// TODO Auto-generated method stub
-					return 0;
-				}
-				
-				@Override
-				protected void computeTime() {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				protected void computeFields() {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void add(int field, int amount) {
-					// TODO Auto-generated method stub
-					
-				}
-			};
-			
-			
-			
-			File dir = new File("c://scheduling");
-			dir.mkdir();
-			fos = new FileOutputStream(new File("c://F//facnumber" + facnumber +"//"+ d.SECOND+""+d.MINUTE+""+"FirstFaculty.xls"));
+			String filePath = new String("c://scheduling/" + Calendar.DAY_OF_YEAR + "_" + Calendar.MONTH + "_" + Calendar.DAY_OF_MONTH + "-" + facnumber + "//");
+			String fileName = new String(Calendar.HOUR_OF_DAY + "_" + Calendar.MINUTE + "_" + Calendar.SECOND + ".xls");
+			String rootPath = new String("c://scheduling");
+
+			File root = new File(rootPath);
+			if (!root.exists())
+				root.mkdir();
+			File subDir = new File(filePath);
+			if (!subDir.exists())
+				subDir.mkdir();
+			fos = new FileOutputStream(new File(filePath + fileName));
+
 			HSSFCellStyle hsfstyle = workbook.createCellStyle();
 
 			hsfstyle.setBorderBottom((short) 15);
@@ -250,43 +138,50 @@ public class CreateExcelFile
 		}
 	}
 
-	
 	public void WriteToExcelFile(List<List> list1, HSSFSheet mySheet) throws Exception
 	{
 
 		try
-		{Row row;
-			
-		System.out.println("");
+		{
+			Row row;
+
+			System.out.println("");
 			for (int j = 0; j < 30; j++)
 			{
 				row = mySheet.createRow(j);
-				
+
 				for (int day = 0; day <= 6; day++)
 				{
-					
+
 					Cell cell = row.createCell(day);
-					if (j==0){
-						cell.setCellValue(headerRow.get(day));	
-					}else{
-						if (day==0){
+					if (j == 0)
+					{
+						cell.setCellValue(headerRow.get(day));
+					} else
+					{
+						if (day == 0)
+						{
 							cell.setCellValue(j);
-						}else{
-							if (!idclass.isEmpty()){
-								System.out.println(idclass.get(0).getId());
-							if ((day+1)*Settings.dailyHours >idclass.get(0).getSize()){
-								cell.setCellValue(idclass.get(0).getId());	//add all info
-								System.out.print(idclass.get(0).getId());
-								idclass.remove(0);
-							}else
+						} else
+						{
+							if (!idclass.isEmpty())
 							{
-								cell.setCellValue("---");
+								System.out.println(idclass.get(0).getId());
+								if ((day + 1) * Settings.dailyHours > idclass.get(0).getSize())
+								{
+									cell.setCellValue(idclass.get(0).getId()); // add
+																				// all
+																				// info
+									System.out.print(idclass.get(0).getId());
+									idclass.remove(0);
+								} else
+								{
+									cell.setCellValue("---");
+								}
 							}
-							}	
 						}
 					}
-					//	allsheet.get(i)
-					
+					// allsheet.get(i)
 
 				}
 				rownum++;
