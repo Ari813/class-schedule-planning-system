@@ -12,7 +12,7 @@ import PrintToExel.CreateExcelFile;
 
 public class PrintSolution extends Thread
 {
-
+	public CreateExcelFile cls;
 	Individual solution;
 	private HashMap<Integer, Map<Integer, ArrayList<IDclass>>> individualMap;
 
@@ -39,7 +39,7 @@ public class PrintSolution extends Thread
 		System.out.println("found!!!!");
 	}
 
-	private void IndividualToMap(CreateExcelFile cls) throws Exception {
+	private void IndividualToMap() throws Exception {
 	individualMap=new HashMap<Integer, Map<Integer,ArrayList<IDclass>>>();
 		int fac;
 		int semester;
@@ -63,7 +63,7 @@ public class PrintSolution extends Thread
 							lecname=ManagerController.collageDB.getLecturerByIndex(C).getName();
 							classid= ManagerController.collageDB.getClassByIndex(C).getClassID();
 							classRoomDescription=ManagerController.collageDB.getClassByIndex(C).getDescription();
-							IDclass idcalss=new IDclass(cousreid, lecid, classid, 0, 0, courseDescription, lecname, classRoomDescription);
+							IDclass idcalss=new IDclass(cousreid, lecid, classid,H, H, courseDescription, lecname, classRoomDescription);
 							
 							if (individualMap.containsKey(fac))
 							{
@@ -89,21 +89,12 @@ public class PrintSolution extends Thread
 							
 						}
 							Iterator<Integer> facItr = individualMap.keySet().iterator();
-							Iterator<Integer> 	semesteritr;
-
+							
 							while (facItr.hasNext())
 							{
 								fac = facItr.next().intValue();
-							semesteritr=individualMap.get(fac).keySet().iterator();
-							while (semesteritr.hasNext())
-							{
-								cls = new CreateExcelFile(fac, semester, individualMap.get(fac).get(semester));
-								semester = semesteritr.next().intValue();
-								
-							
-							
-							
-							}
+								cls = new CreateExcelFile(fac,  individualMap.get(fac));
+								cls.createExcelFile(fac);
 								
 							}
 							
