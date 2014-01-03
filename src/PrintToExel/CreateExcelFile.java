@@ -234,7 +234,7 @@ public class CreateExcelFile
 			
 			File dir = new File("c://scheduling");
 			dir.mkdir();
-			fos = new FileOutputStream(new File("c://F//facnumber" + facnumber +"//"+ d.SECOND+""+d.SECOND+""+"FirstFaculty.xls"));
+			fos = new FileOutputStream(new File("c://F//facnumber" + facnumber +"//"+ d.SECOND+""+d.MINUTE+""+"FirstFaculty.xls"));
 			HSSFCellStyle hsfstyle = workbook.createCellStyle();
 
 			hsfstyle.setBorderBottom((short) 15);
