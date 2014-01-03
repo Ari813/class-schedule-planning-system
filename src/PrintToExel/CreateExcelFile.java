@@ -5,12 +5,15 @@ import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -111,8 +114,15 @@ public class CreateExcelFile
 		FileOutputStream fos = null;
 		try
 		{
-			String filePath = new String("c://scheduling/" + Calendar.DAY_OF_YEAR + "_" + Calendar.MONTH + "_" + Calendar.DAY_OF_MONTH + "-" + facnumber + "//");
-			String fileName = new String(Calendar.HOUR_OF_DAY + "_" + Calendar.MINUTE + "_" + Calendar.SECOND + ".xls");
+
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat timeFormat = new SimpleDateFormat("HH-mm-ss");
+			String dateStr = dateFormat.format(cal.getTime());
+			String timeStr = timeFormat.format(cal.getTime());
+
+			String filePath = new String("c://scheduling/" + dateStr + "-" + facnumber + "//");
+			String fileName = new String(timeStr + ".xls");
 			String rootPath = new String("c://scheduling");
 
 			File root = new File(rootPath);
@@ -166,13 +176,13 @@ public class CreateExcelFile
 						{
 							if (!idclass.isEmpty())
 							{
-								System.out.println(idclass.get(0).getId());
+								//System.out.println(idclass.get(0).getId());
 								if ((day + 1) * Settings.dailyHours > idclass.get(0).getSize())
 								{
 									cell.setCellValue(idclass.get(0).getId()); // add
 																				// all
 																				// info
-									System.out.print(idclass.get(0).getId());
+									//System.out.print(idclass.get(0).getId());
 									idclass.remove(0);
 								} else
 								{
