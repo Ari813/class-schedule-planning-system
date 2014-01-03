@@ -14,7 +14,8 @@ public class PrintSolution extends Thread
 {
 	public CreateExcelFile cls;
 	Individual solution;
-	private HashMap<Integer, Map<Integer, ArrayList<IDclass>>> individualMap;
+	private Map<Integer, Map<Integer, ArrayList<IDclass>>> individualMap;
+	private IDclass idcalss;
 
 	public PrintSolution(Individual solution)
 	{
@@ -49,9 +50,9 @@ public class PrintSolution extends Thread
 
 	private void IndividualToMap() throws Exception {
 	individualMap=new HashMap<Integer, Map<Integer,ArrayList<IDclass>>>();
-		int fac;
-		int semester;
-		int cousreid;
+		int fac=0;
+		int semester=0;
+		int cousreid=0;
 		 String courseDescription,classRoomDescription,lecname;
 		int lecid;
 		int classid;
@@ -61,7 +62,7 @@ public class PrintSolution extends Thread
 				// NumOfLecturers
 				for (int R = 0; R < Individual.NumOfClasses; R++)
 					// NumOfClasses
-					for (int C = 0; C < Individual.NumOfCourses; C++)
+					for (int C = 0; C < Individual.NumOfCourses; C++){
 						if (solution.getGeneByIndex(H, L, R, C).isGene()){
 							fac=ManagerController.collageDB.getCourseByIndex(C).getFaculty();
 							semester=ManagerController.collageDB.getCourseByIndex(C).getSemester();
@@ -71,13 +72,13 @@ public class PrintSolution extends Thread
 							lecname=ManagerController.collageDB.getLecturerByIndex(C).getName();
 							classid= ManagerController.collageDB.getClassByIndex(C).getClassID();
 							classRoomDescription=ManagerController.collageDB.getClassByIndex(C).getDescription();
-							IDclass idcalss=new IDclass(cousreid, lecid, classid,H, H, courseDescription, lecname, classRoomDescription);
+							idcalss=new IDclass(cousreid, lecid, classid,H, H, courseDescription, lecname, classRoomDescription);
 							
 							if (individualMap.containsKey(fac))
 							{
 								if (individualMap.get(fac).containsKey(semester))
 								{
-									individualMap.get(fac).get(semester).add(H, idcalss);
+									individualMap.get(fac).get(semester).add(idcalss);
 								} else
 								{
 									ArrayList<IDclass> tmpidcalss = new  ArrayList<IDclass>();
@@ -96,6 +97,7 @@ public class PrintSolution extends Thread
 							}
 							
 						}
+					}
 							Iterator<Integer> facItr = individualMap.keySet().iterator();
 							
 							while (facItr.hasNext())
