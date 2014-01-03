@@ -1,5 +1,6 @@
 package PrintToExel;
-
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Date;
@@ -229,7 +230,11 @@ public class CreateExcelFile
 				}
 			};
 			
-			fos = new FileOutputStream(new File("c://F//facnumber" + facnumber + d.DAY_OF_MONTH+"//FirstFaculty.xls"));
+			
+			
+			File dir = new File("c://scheduling");
+			dir.mkdir();
+			fos = new FileOutputStream(new File("c://F//facnumber" + facnumber +"//"+ d.SECOND+""+"FirstFaculty.xls"));
 			HSSFCellStyle hsfstyle = workbook.createCellStyle();
 
 			hsfstyle.setBorderBottom((short) 15);
@@ -252,7 +257,7 @@ public class CreateExcelFile
 		try
 		{Row row;
 			
-				
+		System.out.println("");
 			for (int j = 0; j < 30; j++)
 			{
 				row = mySheet.createRow(j);
@@ -271,11 +276,11 @@ public class CreateExcelFile
 								System.out.println(idclass.get(0).getId());
 							if (day*Settings.dailyHours <=idclass.get(0).getSize()){
 								cell.setCellValue(idclass.get(0).getId());	//add all info
-								System.out.println(idclass.get(0).getId());
+								System.out.print(idclass.get(0).getId());
 								idclass.remove(0);
 							}else
 							{
-								cell.setCellValue("---");
+							//	cell.setCellValue("---");
 							}
 							}	
 						}
