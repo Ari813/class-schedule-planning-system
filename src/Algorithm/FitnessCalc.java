@@ -329,15 +329,16 @@ public class FitnessCalc implements Runnable
 
 		Map<Integer, ArrayList<Integer>> semesterCoursesMap = ManagerController.collageDB.getCoursesBySemester();
 		Iterator<Integer> semesterItr = semesterCoursesMap.keySet().iterator();
-
+		ArrayList<Integer> tempArrayList;
+		ArrayList<Integer> courseArrayList;
 		while (semesterItr.hasNext())
 		{
 			int semsterNum = semesterItr.next().intValue();
-			ArrayList<Integer> courseArrayList = semesterCoursesMap.get(semsterNum);
+			courseArrayList = semesterCoursesMap.get(semsterNum);
 			for (int CourseIndex = 0; CourseIndex < courseArrayList.size(); CourseIndex++)
 			{
 				int courseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(CourseIndex));
-				ArrayList<Integer> tempArrayList = semesterCoursesMap.get(semsterNum);
+				tempArrayList = semesterCoursesMap.get(semsterNum);
 				for (int TempCourseIndex = CourseIndex; TempCourseIndex < tempArrayList.size(); TempCourseIndex++)
 				{
 					int tempCourseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(TempCourseIndex));
@@ -375,8 +376,9 @@ public class FitnessCalc implements Runnable
 			}
 		}
 		HardConstraints += tempCounter;
-		if (debug)
-			System.out.println("check courses of same semester not overlapping:" + tempCounter);
+		if (!debug)
+			System.out.println("check courses of same semester not overlapping:" + tempCounter+"-"+HardConstraints);
+		
 		/*
 		 * // check total hours a day for 1 lecturer is not above 8 hours.
 		 * LecItr = ManagerController.collageDB.getLecturersKeys().iterator();

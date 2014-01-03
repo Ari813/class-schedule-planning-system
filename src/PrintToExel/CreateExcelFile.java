@@ -212,7 +212,10 @@ public class CreateExcelFile
 					if (j==0){
 						cell.setCellValue(headerRow.get(day));	
 					}else{
-						if (!idclass.isEmpty()){
+						if (day==0){
+							cell.setCellValue("---");
+						}else{
+							if (!idclass.isEmpty()){
 							if (day*Settings.dailyHours <idclass.get(0).getSize()){
 								cell.setCellValue(idclass.get(0).getId());	//add all info
 								idclass.remove(0);
@@ -220,7 +223,7 @@ public class CreateExcelFile
 							{
 								cell.setCellValue("---");
 							}
-								
+							}	
 						}
 					}
 					//	allsheet.get(i)

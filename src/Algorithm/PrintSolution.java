@@ -68,10 +68,10 @@ public class PrintSolution extends Thread
 							semester=ManagerController.collageDB.getCourseByIndex(C).getSemester();
 							cousreid=ManagerController.collageDB.getCourseByIndex(C).getCourseID();
 							courseDescription=ManagerController.collageDB.getCourseByIndex(C).getDescription();
-							lecid=ManagerController.collageDB.getLecturerByIndex(C).getID();
-							lecname=ManagerController.collageDB.getLecturerByIndex(C).getName();
-							classid= ManagerController.collageDB.getClassByIndex(C).getClassID();
-							classRoomDescription=ManagerController.collageDB.getClassByIndex(C).getDescription();
+							lecid=ManagerController.collageDB.getLecturerByIndex(L).getID();
+							lecname=ManagerController.collageDB.getLecturerByIndex(L).getName();
+							classid= ManagerController.collageDB.getClassByIndex(R).getClassID();
+							classRoomDescription=ManagerController.collageDB.getClassByIndex(R).getDescription();
 							idcalss=new IDclass(cousreid, lecid, classid,H, H, courseDescription, lecname, classRoomDescription);
 							
 							if (individualMap.containsKey(fac))
