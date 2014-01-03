@@ -2,7 +2,9 @@ package PrintToExel;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -176,8 +178,58 @@ public class CreateExcelFile
 		FileOutputStream fos = null;
 		try
 		{
-
-			fos = new FileOutputStream(new File("c://F//facnumber" + facnumber + "//FirstFaculty.xls"));
+			Calendar d=new Calendar() {
+				
+				@Override
+				public void roll(int field, boolean up) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public int getMinimum(int field) {
+					// TODO Auto-generated method stub
+					return 0;
+				}
+				
+				@Override
+				public int getMaximum(int field) {
+					// TODO Auto-generated method stub
+					return 0;
+				}
+				
+				@Override
+				public int getLeastMaximum(int field) {
+					// TODO Auto-generated method stub
+					return 0;
+				}
+				
+				@Override
+				public int getGreatestMinimum(int field) {
+					// TODO Auto-generated method stub
+					return 0;
+				}
+				
+				@Override
+				protected void computeTime() {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				protected void computeFields() {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void add(int field, int amount) {
+					// TODO Auto-generated method stub
+					
+				}
+			};
+			
+			fos = new FileOutputStream(new File("c://F//facnumber" + facnumber + d.DAY_OF_MONTH+"//FirstFaculty.xls"));
 			HSSFCellStyle hsfstyle = workbook.createCellStyle();
 
 			hsfstyle.setBorderBottom((short) 15);
@@ -201,7 +253,7 @@ public class CreateExcelFile
 		{Row row;
 			
 				
-			for (int j = 0; j < 15; j++)
+			for (int j = 0; j < 30; j++)
 			{
 				row = mySheet.createRow(j);
 				
@@ -213,11 +265,13 @@ public class CreateExcelFile
 						cell.setCellValue(headerRow.get(day));	
 					}else{
 						if (day==0){
-							cell.setCellValue("---");
+							cell.setCellValue(j);
 						}else{
 							if (!idclass.isEmpty()){
-							if (day*Settings.dailyHours <idclass.get(0).getSize()){
+								System.out.println(idclass.get(0).getId());
+							if (day*Settings.dailyHours <=idclass.get(0).getSize()){
 								cell.setCellValue(idclass.get(0).getId());	//add all info
+								System.out.println(idclass.get(0).getId());
 								idclass.remove(0);
 							}else
 							{
