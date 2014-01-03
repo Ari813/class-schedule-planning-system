@@ -27,8 +27,7 @@ import common.Settings;
 /*
  * Here we will learn how to create Excel file and header for the same.
  */
-public class CreateExcelFile
-{
+public class CreateExcelFile {
 
 	private CreateExcelFile cls;
 
@@ -81,13 +80,12 @@ public class CreateExcelFile
 		headerRow.setHeightInPoints(45);
 	}
 
-	public CreateExcelFile(int faculty, Map<Integer, ArrayList<IDclass>> map) throws Exception
-	{
+	public CreateExcelFile(int faculty, Map<Integer, ArrayList<IDclass>> map)
+			throws Exception {
 		faculty = 1;
 		Iterator<Integer> semesteritr;
 		semesteritr = map.keySet().iterator();
-		while (semesteritr.hasNext())
-		{
+		while (semesteritr.hasNext()) {
 			semester = semesteritr.next().intValue();
 			this.idclass = map.get(semester);
 			addinfo();
@@ -97,8 +95,7 @@ public class CreateExcelFile
 
 	}
 
-	public void addinfo() throws Exception
-	{
+	public void addinfo() throws Exception {
 		headerRow = new ArrayList<String>();
 		headerRow.add("");
 		headerRow.add("sunday");
@@ -109,11 +106,9 @@ public class CreateExcelFile
 		headerRow.add("friday ");
 	}
 
-	public void createExcelFile(int facnumber)
-	{
+	public void createExcelFile(int facnumber) {
 		FileOutputStream fos = null;
-		try
-		{
+		try {
 
 			Calendar cal = Calendar.getInstance();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -121,7 +116,8 @@ public class CreateExcelFile
 			String dateStr = dateFormat.format(cal.getTime());
 			String timeStr = timeFormat.format(cal.getTime());
 
-			String filePath = new String("c://scheduling/" + dateStr + "-" + facnumber + "//");
+			String filePath = new String("c://scheduling/" + dateStr + "-"
+					+ facnumber + "//");
 			String fileName = new String(timeStr + ".xls");
 			String rootPath = new String("c://scheduling");
 
@@ -142,8 +138,7 @@ public class CreateExcelFile
 			hsfstyle.setBorderTop((short) 2);
 			hsfstyle.setFillBackgroundColor((short) 125);
 			workbook.write(fos);
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -162,7 +157,7 @@ public class CreateExcelFile
 
 				for (int day = 0; day <= 6; day++)
 				{
-
+					
 					Cell cell = row.createCell(day);
 					if (j == 0)
 					{
@@ -172,15 +167,17 @@ public class CreateExcelFile
 						if (day == 0)
 						{
 							cell.setCellValue(j);
+
 						} else
 						{
 							if (!idclass.isEmpty())
+
 							{
 								//System.out.println(idclass.get(0).getId());
 								if ((day + 1) * Settings.dailyHours > idclass.get(0).getSize())
 								{
-									cell.setCellValue(idclass.get(0).getId()); // add
-																				// all
+									String str="hour ="+ idclass.get(0).getSize()+"| Lecturer = "+ idclass.get(0).getLecname() +"| Class = "+ idclass.get(0).getClassRoomDescription()+"| Course = "+ idclass.get(0).getCourseDescription();
+									cell.setCellValue(str);// all
 																				// info
 									//System.out.print(idclass.get(0).getId());
 									idclass.remove(0);
@@ -204,5 +201,4 @@ public class CreateExcelFile
 		{}
 
 	}
-
 }
