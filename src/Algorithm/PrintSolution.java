@@ -1,11 +1,13 @@
 package Algorithm;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import entities.Course;
+
+
 import Controllers.ManagerController;
 import GUI.IDclass;
 import PrintToExel.CreateExcelFile;
@@ -24,9 +26,10 @@ public class PrintSolution extends Thread
 
 	public void run()
 	{
-
+		if (solution.isPrinted())
+			return;
+		solution.setPrinted(true);
 		System.out.println("fitness=(" + solution.getDegubFitness() + ")");
-
 		for (int H = 0; H < Individual.weeklyHours; H++)
 			// weeklyHours
 			for (int L = 0; L < Individual.NumOfLecturers; L++)
@@ -41,7 +44,7 @@ public class PrintSolution extends Thread
 									+ solution.getGeneByIndex(H, L, R, C).getIndex());
 		System.out.println("found!!!!");
 		try {
-			IndividualToMap();
+		//	IndividualToMap();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

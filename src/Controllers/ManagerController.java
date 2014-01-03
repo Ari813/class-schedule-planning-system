@@ -420,7 +420,7 @@ public class ManagerController
 		long runtime;
 		Date date = new Date();
 		runtime = date.getTime() - starttime.getTime();
-
+		
 		TimeUnit.MILLISECONDS.toDays(runtime);
 		AS.updaterunTime(String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(runtime),
 				TimeUnit.MILLISECONDS.toMinutes(runtime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(runtime)),

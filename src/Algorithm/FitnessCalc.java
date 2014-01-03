@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 
-import javax.annotation.PreDestroy;
-
 import common.Settings;
 import entities.StudyAids;
 import Controllers.*;
-import GUI.Manual_Sheduling;
 
 public class FitnessCalc implements Runnable
 {
@@ -260,7 +257,6 @@ public class FitnessCalc implements Runnable
 					{
 						if (individual.getGeneByIndex(Hours, lecturerIndex, ClassIndex, CourseIndex).isGene())
 						{
-							// System.out.println("|"+lecID+"|"+Hours+"|"+ClassIndex+"|"+CourseIndex+"|"+counter+"|");
 							counter++;
 						}
 					}
@@ -272,7 +268,7 @@ public class FitnessCalc implements Runnable
 		}
 		HardConstraints += tempCounter;
 		if (debug)
-			System.out.println("check how many times a lecturer teaches in an hour.:" + HardConstraints);
+			System.out.println("check how many times a lecturer teaches in an hour:" + HardConstraints);
 
 		// check how many times a class is taken in an hour
 		tempCounter = 0;
@@ -352,20 +348,14 @@ public class FitnessCalc implements Runnable
 								if ((individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseDBIndex).isGene() && individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex,
 										tempCourseDBIndex).isGene())
 										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getCourseRelativeKey() != ManagerController.collageDB.getCourseByIndex(courseDBIndex)
-												.getCourseRelativeKey()))
+												.getCourseRelativeKey())
+										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getFaculty() != ManagerController.collageDB.getCourseByIndex(courseDBIndex).getFaculty()))
+								
 								{
 									counter++;
-									if (debug)
-									{
-										System.out.println("isGene: =>" + individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, courseDBIndex).isGene() + ":"
-												+ individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, tempCourseDBIndex).isGene());
-										System.out.println("relatedKey: =>" + ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getCourseRelativeKey() + ":"
-												+ ManagerController.collageDB.getCourseByIndex(courseDBIndex).getCourseRelativeKey());
-										System.out.println("Faculty: =>" + ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getFaculty() + ":"
-												+ ManagerController.collageDB.getCourseByIndex(courseDBIndex).getFaculty());
-										System.out.println("counter: =>" + counter);
-									}
+
 								}
+
 							}
 						}
 						tempCounter += counter;
@@ -376,7 +366,7 @@ public class FitnessCalc implements Runnable
 			}
 		}
 		HardConstraints += tempCounter;
-		if (!debug)
+		if (debug)
 			System.out.println("check courses of same semester not overlapping:" + tempCounter+"-"+HardConstraints);
 		
 		/*

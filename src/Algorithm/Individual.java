@@ -17,11 +17,13 @@ public class Individual
 	// Cache
 	private double fitness = -1;
 	private double selection = 0;
+	private boolean printed;
 
 	public Individual()
 	{
 		genes = new Gene[weeklyHours][NumOfLecturers][NumOfClasses][NumOfCourses];
 		resetIndividual();
+		setPrinted(false);
 	}
 
 	public Individual(Individual indv)
@@ -36,6 +38,7 @@ public class Individual
 		Individual.NumOfLecturers = NumOfLecturers;
 		Individual.NumOfClasses = NumOfClasses;
 		Individual.NumOfCourses = NumOfCourses;
+		setPrinted(false);
 		resetIndividual();
 
 	}
@@ -85,6 +88,7 @@ public class Individual
 						}
 
 					}
+		setPrinted(indv.isPrinted());
 	}
 
 	public void generateIndividual()
@@ -274,6 +278,22 @@ public class Individual
 	public double getDegubFitness()
 	{
 		return FitnessCalc.getdebugFitness(this);
+	}
+
+	/**
+	 * @return the printed
+	 */
+	public boolean isPrinted()
+	{
+		return printed;
+	}
+
+	/**
+	 * @param printed the printed to set
+	 */
+	public void setPrinted(boolean printed)
+	{
+		this.printed = printed;
 	}
 
 }
