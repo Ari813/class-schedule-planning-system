@@ -319,8 +319,64 @@ public class FitnessCalc implements Runnable
 		 * "check how many times a course has been assigned in an hour:" +
 		 * tempCounter);
 		 */
+//------------------------------------------------------------------------------------------------------------------
+		tempCounter = 0;
 
-		// check courses of same semester not overlapping.
+		Map<Integer, ArrayList<Integer>> semesterCoursesMap = ManagerController.collageDB.getCoursesBySemester();
+		Iterator<Integer> semesterItr = semesterCoursesMap.keySet().iterator();
+		//ArrayList<Integer> tempArrayList;
+		ArrayList<Integer> courseArrayList;
+		while (semesterItr.hasNext())
+		{
+			int semsterNum = semesterItr.next().intValue();
+			courseArrayList = semesterCoursesMap.get(semsterNum);
+			int size=courseArrayList.size();
+			for (int CourseIndex = 0; CourseIndex < size; CourseIndex++)
+			{
+				int courseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(CourseIndex));
+				//tempArrayList = semesterCoursesMap.get(semsterNum);//????
+				for (int TempCourseIndex = CourseIndex; TempCourseIndex < size; TempCourseIndex++)
+				{
+					int tempCourseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(TempCourseIndex));
+					for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
+					{
+						//counter = 0;
+						for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
+						{
+							for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
+							{
+								if ((individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex, CourseIndex).isGene() && individual.getGeneByIndex(Hours, LecturerIndex, ClassIndex,
+										tempCourseDBIndex).isGene())
+										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getCourseRelativeKey() != ManagerController.collageDB.getCourseByIndex(courseDBIndex)
+												.getCourseRelativeKey())
+										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getFaculty() == ManagerController.collageDB.getCourseByIndex(courseDBIndex).getFaculty()))
+								
+								{
+								//	counter++;
+									tempCounter ++;
+								}
+
+							}
+						}
+						//tempCounter += counter;
+
+					}
+
+				}
+			}
+		}
+		HardConstraints += tempCounter;
+		if (debug)
+			System.out.println("check courses of same semester not overlapping:" + tempCounter+"-"+HardConstraints);
+//----------------------------------------------------------------------------
+		
+				
+		
+		
+		
+		
+		
+		/*/ check courses of same semester not overlapping.
 		tempCounter = 0;
 
 		Map<Integer, ArrayList<Integer>> semesterCoursesMap = ManagerController.collageDB.getCoursesBySemester();
@@ -369,8 +425,8 @@ public class FitnessCalc implements Runnable
 		if (debug)
 			System.out.println("check courses of same semester not overlapping:" + tempCounter+"-"+HardConstraints);
 		
-		/*
-		 * // check total hours a day for 1 lecturer is not above 8 hours.
+		/*/
+		 /* // check total hours a day for 1 lecturer is not above 8 hours.
 		 * LecItr = ManagerController.collageDB.getLecturersKeys().iterator();
 		 * 
 		 * while (LecItr.hasNext()) { lecID = LecItr.next().intValue(); int
