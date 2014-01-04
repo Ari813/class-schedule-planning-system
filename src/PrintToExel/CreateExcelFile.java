@@ -120,7 +120,7 @@ public class CreateExcelFile {
 			String filePath = new String("c://scheduling/" + dateStr + "-"
 					+ facnumber + "//");
 			String fileName = new String(timeStr + ".xls");
-			String rootPath = new String("c://scheduling");
+			String rootPath = new String("c://scheduling//"+facnumber);
 
 			File root = new File(rootPath);
 			if (!root.exists())

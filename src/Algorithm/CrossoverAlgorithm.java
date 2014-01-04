@@ -48,7 +48,7 @@ public class CrossoverAlgorithm implements Runnable
 										newSol.getGeneByIndex(H + i, L, R, C).setUnEditable();
 									newSol.setGeneByIndex(H + i, L, R, C, i);
 								}
-								H += i;
+								H += (i-1);
 							}
 
 						} else
@@ -61,7 +61,7 @@ public class CrossoverAlgorithm implements Runnable
 										newSol.getGeneByIndex(H + i, L, R, C).setUnEditable();
 									newSol.setGeneByIndex(H + i, L, R, C, i);
 								}
-								H += i;
+								H += (i-1);
 
 							}
 						}
