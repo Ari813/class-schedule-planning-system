@@ -7,7 +7,7 @@ public class Individual
 
 	static int workingDays = 6;
 	static int dailyHours = 14;
-	static int weeklyHours = workingDays * dailyHours; // =
+	public static int weeklyHours = workingDays * dailyHours; // =
 
 	static int NumOfLecturers = 0;
 	static int NumOfClasses = 0;
