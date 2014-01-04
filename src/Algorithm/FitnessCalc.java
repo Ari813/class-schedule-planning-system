@@ -334,13 +334,13 @@ public class FitnessCalc implements Runnable
 			for (int CourseIndex = 0; CourseIndex < courseArrayList.size(); CourseIndex++)
 			{
 				int courseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(CourseIndex));
-				tempArrayList = semesterCoursesMap.get(semsterNum);
+				tempArrayList = semesterCoursesMap.get(semsterNum);//????
 				for (int TempCourseIndex = CourseIndex; TempCourseIndex < tempArrayList.size(); TempCourseIndex++)
 				{
 					int tempCourseDBIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseArrayList.get(TempCourseIndex));
 					for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 					{
-						counter = 0;
+						//counter = 0;
 						for (int LecturerIndex = 0; LecturerIndex < Individual.NumOfLecturers; LecturerIndex++)
 						{
 							for (int ClassIndex = 0; ClassIndex < Individual.NumOfClasses; ClassIndex++)
@@ -349,16 +349,16 @@ public class FitnessCalc implements Runnable
 										tempCourseDBIndex).isGene())
 										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getCourseRelativeKey() != ManagerController.collageDB.getCourseByIndex(courseDBIndex)
 												.getCourseRelativeKey())
-										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getFaculty() != ManagerController.collageDB.getCourseByIndex(courseDBIndex).getFaculty()))
+										&& (ManagerController.collageDB.getCourseByIndex(tempCourseDBIndex).getFaculty() == ManagerController.collageDB.getCourseByIndex(courseDBIndex).getFaculty()))
 								
 								{
-									counter++;
-
+								//	counter++;
+									tempCounter ++;
 								}
 
 							}
 						}
-						tempCounter += counter;
+						//tempCounter += counter;
 
 					}
 
