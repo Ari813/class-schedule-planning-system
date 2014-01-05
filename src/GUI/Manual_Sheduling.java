@@ -819,20 +819,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 							}
 				}}
-			/*/for (int columnIndex = 1; columnIndex <= Settings.workingDays; columnIndex++)
-				for (int rowIndex = 0; rowIndex <= Settings.dailyHours; rowIndex++)
-				{
-					int ColumnRow = rowIndex + (columnIndex - 1) * Settings.dailyHours;
-					if (FacultyMap.containsKey(faculty))
-						if (FacultyMap.get(faculty).containsKey(semester))
-							if (FacultyMap.get(faculty).get(semester).containsKey(ColumnRow))
-							{
-								tablemanual.getModel().setValueAt(
-										FacultyMap.get(faculty).get(semester).get(ColumnRow).getCousreid() + ":" + FacultyMap.get(faculty).get(semester).get(ColumnRow).getClassid() + ":"
-												+ FacultyMap.get(faculty).get(semester).get(ColumnRow).getLecid(), rowIndex, columnIndex);
-
-							}
-				}/*/
+			
 		}
 	}
 
