@@ -2,11 +2,14 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -231,7 +234,17 @@ public class Main_Menu extends JPanel implements ActionListener
 		}
 		if (e.getSource() == btnSettings)
 		{
-			manager.Load_Manual_Sheduling(PNL_Main);
+			File foler = new File("C:\\Application\\settings.ini");
+			Desktop desktop = null;
+			if (Desktop.isDesktopSupported())
+			{
+				desktop = Desktop.getDesktop();
+			}
+			try
+			{
+				desktop.open(foler);
+			} catch (IOException e1)
+			{}
 
 		}
 		if (e.getSource() == btnStartSchdualing)

@@ -15,10 +15,12 @@ public class PrintSolution extends Thread
 	Individual solution;
 	private Map<Integer, Map<Integer, ArrayList<IDclass>>> individualMap;
 	private IDclass idcalss;
+	private static boolean debug = false;
 
 	public PrintSolution(Individual solution)
 	{
 		this.solution = solution;
+
 	}
 
 	public void run()
@@ -26,20 +28,22 @@ public class PrintSolution extends Thread
 		if (solution.isPrinted())
 			return;
 		solution.setPrinted(true);
-		System.out.println("fitness=(" + solution.getFitness() + ")");
-		for (int H = 0; H < Individual.weeklyHours; H++)
-			// weeklyHours
-			for (int L = 0; L < Individual.NumOfLecturers; L++)
-				// NumOfLecturers
-				for (int R = 0; R < Individual.NumOfClasses; R++)
-					// NumOfClasses
-					for (int C = 0; C < Individual.NumOfCourses; C++)
-						if (solution.getGeneByIndex(H, L, R, C).isGene())
-							System.out.println("hour = " + H + "| Lecturer = " + ManagerController.collageDB.getLecturerByIndex(L).getName() + "| Class = "
-									+ ManagerController.collageDB.getClassByIndex(R).getDescription() + "| Course = " + ManagerController.collageDB.getCourseByIndex(C).getCourseID() + " | "
-									+ ManagerController.collageDB.getCourseByIndex(C).getDescription() + " | " + solution.getGeneByIndex(H, L, R, C).getIndex());
-		System.out.println("found!!!!");
-
+		if (debug)
+		{
+			System.out.println("fitness=(" + solution.getFitness() + ")");
+			for (int H = 0; H < Individual.weeklyHours; H++)
+				// weeklyHours
+				for (int L = 0; L < Individual.NumOfLecturers; L++)
+					// NumOfLecturers
+					for (int R = 0; R < Individual.NumOfClasses; R++)
+						// NumOfClasses
+						for (int C = 0; C < Individual.NumOfCourses; C++)
+							if (solution.getGeneByIndex(H, L, R, C).isGene())
+								System.out.println("hour = " + H + "| Lecturer = " + ManagerController.collageDB.getLecturerByIndex(L).getName() + "| Class = "
+										+ ManagerController.collageDB.getClassByIndex(R).getDescription() + "| Course = " + ManagerController.collageDB.getCourseByIndex(C).getCourseID() + " | "
+										+ ManagerController.collageDB.getCourseByIndex(C).getDescription() + " | " + solution.getGeneByIndex(H, L, R, C).getIndex());
+			System.out.println("found!!!!");
+		}
 		try
 		{
 			IndividualToMap();
@@ -70,7 +74,7 @@ public class PrintSolution extends Thread
 						if (solution.getGeneByIndex(H, L, R, C).isGene())
 						{
 							fac = ManagerController.collageDB.getCourseByIndex(C).getFaculty();
-							
+
 							semester = ManagerController.collageDB.getCourseByIndex(C).getSemester();
 							cousreid = ManagerController.collageDB.getCourseByIndex(C).getCourseID();
 							courseDescription = ManagerController.collageDB.getCourseByIndex(C).getDescription();
@@ -112,8 +116,8 @@ public class PrintSolution extends Thread
 		while (facItr.hasNext())
 		{
 			fac = facItr.next().intValue();
-			
-			cls = new CreateExcelFile( individualMap.get(fac));
+
+			cls = new CreateExcelFile(individualMap.get(fac));
 			cls.createExcelFile(fac);
 
 		}

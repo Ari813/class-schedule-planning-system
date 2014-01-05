@@ -110,9 +110,8 @@ public String toString() {
 						"\n Course Description: "  + courseDescription  +
 						"\n Lecturer ID:  "  + lecid +
 						"\n Lecturer Name: "  + lecname +
-						"\n Room ID: "  + classid +
-						"\n Room Description:  "  + classRoomDescription +
-						"\n course size:  "  + size +
+						"\n Room:  "  + classRoomDescription +
+						"\n"+
 						"\n========================================"
 						
 				
