@@ -9,6 +9,7 @@ import java.util.Set;
 
 import entities.Class;
 import entities.Course;
+import entities.Faculty;
 import entities.Lecturer;
 import Controllers.*;
 
@@ -17,6 +18,7 @@ public class Database
 	private Map<Integer, Course> Courses;// Courses;
 	private Map<Integer, Lecturer> Lecturers; // Lecturers;
 	private Map<Integer, Class> Classes; // Classes;
+	private Map<Integer, Faculty> Faculties; // Classes;
 
 	private Map<Integer, ArrayList<Integer>> relatedCoursesMap;
 	private Map<Integer, ArrayList<Integer>> SemesterCoursesMap;
@@ -265,6 +267,24 @@ public class Database
 	{
 		Class cls = Classes.get(mapping.getClassID(index));
 		return cls;
+	}
+
+	/**
+	 * @return the faculties
+	 */
+	public Faculty getFaculties(int index)
+	{
+		return Faculties.get(index);
+	}
+
+	/**
+	 * @param faculties the faculties to set
+	 */
+	public void setFaculties(ArrayList<Faculty> faculties)
+	{
+		Faculties = new HashMap<Integer, Faculty>();
+		for(int i=0; i<faculties.size();i++)
+			Faculties.put(faculties.get(i).getFacultyNum(),faculties.get(i));
 	}
 
 }

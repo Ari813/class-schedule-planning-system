@@ -263,12 +263,12 @@ public class Database
 		Lecturer lec;
 		StudyAids stdyAds;
 		Course crs;
-
 		String query = new String("SELECT * FROM `csps-db`.course;");
 		st = conn.createStatement();
 		qrs = st.executeQuery(query);
 		while (qrs.next())
 		{
+			
 			crs = new Course(qrs.getInt("Capacity"), qrs.getInt("CourseID"), qrs.getString("Description"), qrs.getInt("Faculty"), qrs.getInt("Semester"), qrs.getInt("AcademicHours"),
 					qrs.getInt("EstimationOfStudentsNum"), qrs.getInt("CourseRelatedKey"));
 			if (additionalInfo)

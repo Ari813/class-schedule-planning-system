@@ -22,13 +22,13 @@ public class Course implements Serializable {
 	private boolean hasadditionalInfo;
 	private int EstimationOfStudentsNum;
 	private int CourseRelativeKey; 
-	private Faculty umlfaculty;
+
 	public Course(int studentNumber, int courseID, String description,
 			int faculty, int semester, int academicHours) {
 		this.studentNumber = studentNumber;
 		this.courseID = courseID;
 		this.description = description;
-		this.faculty = faculty;
+		setFaculty(faculty);
 		this.semester = semester;
 		this.setAcademicHours(academicHours);
 
@@ -42,7 +42,7 @@ public class Course implements Serializable {
 		this.studentNumber = studentNumber;
 		this.courseID = courseID;
 		this.description = description;
-		this.faculty = faculty;
+		setFaculty(faculty);
 		this.semester = semester;
 		this.setAcademicHours(academicHours);
 		this.EstimationOfStudentsNum = EstimationOfStudentsNum;
@@ -57,7 +57,7 @@ public class Course implements Serializable {
 		this.studentNumber = studentNumber;
 		this.courseID = courseID;
 		this.description = description;
-		this.faculty = faculty;
+		setFaculty(faculty);
 		this.semester = semester;
 		this.setAcademicHours(academicHours);
 		this.EstimationOfStudentsNum = EstimationOfStudentsNum;
@@ -79,10 +79,10 @@ public class Course implements Serializable {
 		return faculty;
 	}
 
-	public void setFaculty(int i) {
-		this.faculty = i;
+	public void setFaculty(int i) {	
+		this.faculty=i;
 	}
-
+	
 	public int getSemester() {
 		return semester;
 	}
