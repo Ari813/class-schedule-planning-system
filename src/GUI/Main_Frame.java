@@ -14,6 +14,7 @@ import java.util.Locale;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
@@ -22,9 +23,7 @@ import Controllers.LecturerController;
 import Controllers.ManagerController;
 import MsgPackage.LoginPack;
 import MsgPackage.LogoutPack;
-
 import common.ChatIF;
-
 import entities.Login;
 
 public class Main_Frame extends JFrame implements ActionListener, ChatIF
@@ -174,13 +173,14 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF
 			lgnmsg = (LoginPack) client.getMessage();
 			lgnUsr = lgnmsg.getUsr();
 			admin = lgnUsr.getLoginPermissionLevel();
-			/*
-			 * / if (admin==-2) JOptionPane.showMessageDialog(this,
-			 * "user already logged in -for more information call +972 (52) 893-6661"
-			 * ); else if (admin==-1) JOptionPane.showMessageDialog(this,
-			 * "user/password not correct try again "); else /
-			 */
-			handleLogin();
+
+			if (admin == -2)
+				JOptionPane.showMessageDialog(this, "user already logged in -for more information call +972 (52) 893-6661");
+			else if (admin == -1)
+				JOptionPane.showMessageDialog(this, "user/password not correct try again ");
+			else
+
+				handleLogin();
 
 		} catch (IOException exception)
 		{
