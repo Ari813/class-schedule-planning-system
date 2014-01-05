@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.1.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
-  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+<class-diagram version="1.1.4" icons="true" automaticImage="JPEG" always-add-relationships="false" 
+  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="GUI.Lecturer_Preferences" project="C.S.P.S" 
     file="/C.S.P.S/src/GUI/Lecturer_Preferences.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2344" y="847"/>    
+    <position height="-1" width="-1" x="1288" y="655"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="GUI.Edit_Lecturer" project="C.S.P.S" file="/C.S.P.S/src/GUI/Edit_Lecturer.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2000" y="1943"/>    
+    <position height="-1" width="-1" x="944" y="1751"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="GUI.LoginGUI" project="C.S.P.S" file="/C.S.P.S/src/GUI/LoginGUI.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="835" width="208" x="2565" y="458"/>    
+    <position height="835" width="208" x="1509" y="266"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="GUI.Edit_Class" project="C.S.P.S" file="/C.S.P.S/src/GUI/Edit_Class.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1716" y="2143"/>    
+    <position height="-1" width="-1" x="660" y="1951"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="GUI.Course_Settings" project="C.S.P.S" 
     file="/C.S.P.S/src/GUI/Course_Settings.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2014" y="907"/>    
+    <position height="-1" width="-1" x="958" y="715"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="GUI.Main_Menu" project="C.S.P.S" file="/C.S.P.S/src/GUI/Main_Menu.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="657" width="209" x="2804" y="445"/>    
+    <position height="-1" width="-1" x="1852" y="581"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <class id="7" language="java" name="GUI.Edit_Course" project="C.S.P.S" file="/C.S.P.S/src/GUI/Edit_Course.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="1791" width="288" x="3053" y="445"/>    
+    <position height="-1" width="-1" x="2141" y="1148"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="GUI.ServerGUI" project="C.S.P.S" file="/C.S.P.S/src/GUI/ServerGUI.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="819" width="201" x="3381" y="445"/>    
+    <position height="-1" width="-1" x="2425" y="662"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="GUI.Manual_Sheduling" project="C.S.P.S" 
     file="/C.S.P.S/src/GUI/Manual_Sheduling.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3564" y="2080"/>    
+    <position height="-1" width="-1" x="2508" y="1888"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="GUI.Automatic_Sheduling" project="C.S.P.S" 
     file="/C.S.P.S/src/GUI/Automatic_Sheduling.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2993" y="2668"/>    
+    <position height="-1" width="-1" x="1937" y="2476"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="Controllers.ManagerController" project="C.S.P.S" 
     file="/C.S.P.S/src/Controllers/ManagerController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2688" y="2545"/>    
+    <position height="-1" width="-1" x="1632" y="2353"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="GUI.Main_Frame" project="C.S.P.S" file="/C.S.P.S/src/GUI/Main_Frame.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2661" y="1569"/>    
+    <position height="-1" width="-1" x="1605" y="1377"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -110,23 +110,24 @@
     </display>  
   </class>  
   <association id="13">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="14" name="loginUserGUI"/>      
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="14" name="manager"/>      
       <multiplicity id="15" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="16">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="17" name="ECRS"/>      
+    <bendpoint x="1744" y="1113"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="17" name="mainGUI"/>      
       <multiplicity id="18" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="19">    
-    <end type="SOURCE" refId="5" navigable="false">      
+    <end type="SOURCE" refId="2" navigable="false">      
       <attribute id="20" name="manager"/>      
       <multiplicity id="21" minimum="0" maximum="1"/>    
     </end>    
@@ -134,41 +135,39 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="22">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="23" name="manager"/>      
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="23" name="manegerMainFrm"/>      
       <multiplicity id="24" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="25">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="26" name="mainGUI"/>      
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="26" name="LP"/>      
       <multiplicity id="27" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
+    <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="28">    
-    <bendpoint x="2784" y="1856"/>    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="29" name="manegerMainFrm"/>      
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="29" name="manager"/>      
       <multiplicity id="30" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="31">    
-    <bendpoint x="2886" y="1930"/>    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="32" name="manager"/>      
-      <multiplicity id="33" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="31">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="32" name="ECRS"/>      
+      <multiplicity id="33" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="34">    
-    <end type="SOURCE" refId="2" navigable="false">      
+    <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="35" name="manager"/>      
       <multiplicity id="36" minimum="0" maximum="1"/>    
     </end>    
@@ -176,16 +175,14 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="37">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="38" name="LP"/>      
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="38" name="manager"/>      
       <multiplicity id="39" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="1" navigable="true"/>    
+    <end type="TARGET" refId="11" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="40">    
-    <bendpoint x="2864" y="3130"/>    
-    <bendpoint x="3466" y="3130"/>    
     <end type="SOURCE" refId="11" navigable="false">      
       <attribute id="41" name="MS"/>      
       <multiplicity id="42" minimum="0" maximum="1"/>    
@@ -194,13 +191,14 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="43">    
-    <bendpoint x="1716" y="2980"/>    
-    <bendpoint x="2504" y="2992"/>    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="44" name="manager"/>      
+    <bendpoint x="1491" y="1117"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="44" name="loginUserGUI">        
+        <position height="18" width="72" x="1419" y="1107"/>      
+      </attribute>      
       <multiplicity id="45" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
