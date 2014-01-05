@@ -53,12 +53,8 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 	private JLabel lblWelcome;
 	private JButton btnLogin;
 	private JButton btnExit;
-	private JCheckBox chkBoxRememberMe;
-	private JCheckBox chkBoxSaveSrvr;
 	private Main_Frame mainGUI;
 
-	private boolean rememberLogin;
-	private boolean rememberServer;
 	private Ini ini;
 
 	public LoginGUI(Main_Frame mainGUI)
@@ -71,8 +67,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 		setBounds(new Rectangle(100, 100, 880, 600));
 
 		this.mainGUI = mainGUI;
-		rememberLogin = false;
-		rememberServer = false;
 		initialize();
 
 		try
@@ -87,7 +81,11 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 			Settings.dailyHours = tempInt;
 			tempInt = Integer.parseInt(ini.get("WeekConf", "workingDays"));
 			Settings.workingDays = tempInt;
-
+			
+			txtId.setText(ini.get("Login", "UserName"));
+			txtHostName.setText(ini.get("Login", "Server"));
+			txtPort.setText(ini.get("Login", "Port"));
+	
 			/*
 			 * [Algorithm] population_size = 500 uniform_Rate = 0.5;
 			 * mutation_Rate = 0.0005;
@@ -126,24 +124,8 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 		add(getBtnLogin());
 		add(getBtnExit());
 
-		add(getChkBoxRememberMe());
-		add(getChkBoxSaveSrvr());
-
 		enableButtons();
 		this.setVisible(true);
-	}
-
-	private JCheckBox getChkBoxSaveSrvr()
-	{
-		if (chkBoxSaveSrvr == null)
-		{
-			chkBoxSaveSrvr = new JCheckBox("Save");
-			chkBoxSaveSrvr.setFont(new Font("Dialog", Font.PLAIN, 16));
-			chkBoxSaveSrvr.setToolTipText("Remember server connection details");
-			chkBoxSaveSrvr.setBounds(464, 402, 170, 23);
-			chkBoxSaveSrvr.addChangeListener(this);
-		}
-		return chkBoxSaveSrvr;
 	}
 
 	private JLabel getLblWelcome()
@@ -157,19 +139,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 			lblWelcome.setBounds(10, 35, 780, 89);
 		}
 		return lblWelcome;
-	}
-
-	private JCheckBox getChkBoxRememberMe()
-	{
-		if (chkBoxRememberMe == null)
-		{
-			chkBoxRememberMe = new JCheckBox("Remember me");
-			chkBoxRememberMe.setFont(new Font("Dialog", Font.PLAIN, 16));
-			chkBoxRememberMe.setToolTipText("Remember me");
-			chkBoxRememberMe.setBounds(464, 242, 170, 23);
-			chkBoxRememberMe.addChangeListener(this);
-		}
-		return chkBoxRememberMe;
 	}
 
 	// ------------------
@@ -330,8 +299,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 	// ------------------
 	public String getHost()
 	{
-		if (txtHostName.getText().equals("localhost1"))
-			return new String(Amit_HOST);
 		return new String(txtHostName.getText());
 	}
 
@@ -396,16 +363,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 		txtPassword.setEditable(false);
 		txtHostName.setEditable(false);
 		txtPort.setEditable(false);
-		if (!rememberLogin)
-		{
-			txtId.setText("ID");
-			txtPassword.setText("password");
-		}
-		if (!rememberServer)
-		{
-			txtHostName.setText(DEFAULT_HOST);
-			txtPort.setText(DEFAULT_PORT.toString());
-		}
 	}
 
 	@Override
@@ -455,17 +412,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 	@Override
 	public void stateChanged(ChangeEvent e)
 	{
-		if (e.getSource() == chkBoxRememberMe)
-			if (chkBoxRememberMe.isSelected())
-				rememberLogin = true;
-			else
-				rememberLogin = false;
-
-		if (e.getSource() == chkBoxSaveSrvr)
-			if (chkBoxRememberMe.isSelected())
-				rememberServer = true;
-			else
-				rememberServer = false;
 
 	}
 }
