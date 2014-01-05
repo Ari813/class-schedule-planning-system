@@ -272,9 +272,9 @@ public class Database
 	/**
 	 * @return the faculties
 	 */
-	public Faculty getFaculties(int index)
+	public String getFaculties(int index)
 	{
-		return Faculties.get(index);
+		return Faculties.get(index).getFaculty();
 	}
 
 	/**
