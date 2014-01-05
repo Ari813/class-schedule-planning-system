@@ -16,11 +16,10 @@ import Server.*;
 
 import javax.swing.SwingConstants;
 
-import common.*;
-
 import java.awt.Font;
 
-public class ServerGUI extends JFrame implements ActionListener, KeyListener {
+public class ServerGUI extends JFrame implements ActionListener, KeyListener
+{
 
 	/**
 	 * 
@@ -45,7 +44,8 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 	private EchoServer es;
 	public static JFrame mainframe;
 
-	public ServerGUI() {
+	public ServerGUI()
+	{
 		super();
 		// setForeground(SystemColor.activeCaption);
 		mainframe = this;
@@ -54,7 +54,8 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 
 	}
 
-	private void initialize() {
+	private void initialize()
+	{
 		setBackground(SystemColor.activeCaption);
 		setBounds(100, 100, 350, 382);
 		getContentPane().setLayout(null);
@@ -78,8 +79,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		this.setVisible(true);
 	}
 
-	private JLabel getlblServerPort() {
-		if (lblServerPort == null) {
+	private JLabel getlblServerPort()
+	{
+		if (lblServerPort == null)
+		{
 			lblServerPort = new JLabel("server port:");
 			lblServerPort.setBounds(21, 262, 164, 14);
 
@@ -87,8 +90,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		return lblServerPort;
 	}
 
-	private JLabel getlblTitle() {
-		if (lblTitle == null) {
+	private JLabel getlblTitle()
+	{
+		if (lblTitle == null)
+		{
 			lblTitle = new JLabel("Server Login");
 			lblTitle.setFont(new Font("Tahoma", Font.BOLD, 20));
 			lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
@@ -98,8 +103,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		return lblTitle;
 	}
 
-	private JButton getbtnStart() {
-		if (btnStart == null) {
+	private JButton getbtnStart()
+	{
+		if (btnStart == null)
+		{
 			btnStart = new JButton("Start");
 			btnStart.setBounds(21, 310, 89, 23);
 			btnStart.addActionListener(this);
@@ -108,8 +115,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 
 	}
 
-	private JButton getbtnLogout() {
-		if (btnLogout == null) {
+	private JButton getbtnLogout()
+	{
+		if (btnLogout == null)
+		{
 			btnLogout = new JButton("Logout");
 			btnLogout.setBounds(120, 310, 89, 23);
 			btnLogout.addActionListener(this);
@@ -119,8 +128,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 
 	}
 
-	private JButton getbtnExit() {
-		if (btnExit == null) {
+	private JButton getbtnExit()
+	{
+		if (btnExit == null)
+		{
 			btnExit = new JButton("Exit");
 			btnExit.setBounds(222, 310, 89, 23);
 			btnExit.addActionListener(this);
@@ -129,8 +140,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 
 	}
 
-	private JTextField gettxtServerPort() {
-		if (txtServerPort == null) {
+	private JTextField gettxtServerPort()
+	{
+		if (txtServerPort == null)
+		{
 			txtServerPort = new JTextField();
 			txtServerPort.setText("5555");
 			txtServerPort.setBounds(225, 262, 86, 20);
@@ -140,8 +153,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		return txtServerPort;
 	}
 
-	private JPasswordField getpasswordField() {
-		if (passwordField == null) {
+	private JPasswordField getpasswordField()
+	{
+		if (passwordField == null)
+		{
 			passwordField = new JPasswordField();
 			passwordField.setBounds(225, 209, 86, 20);
 			passwordField.setText("Password");
@@ -150,8 +165,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		return passwordField;
 	}
 
-	private JTextField gettxtDBName() {
-		if (txtDBName == null) {
+	private JTextField gettxtDBName()
+	{
+		if (txtDBName == null)
+		{
 
 			txtDBName = new JTextField();
 			txtDBName.setText("csps-db");
@@ -162,24 +179,30 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		return txtDBName;
 	}
 
-	private JLabel getlblSqlServerPswd() {
-		if (lblSqlServerPswd == null) {
+	private JLabel getlblSqlServerPswd()
+	{
+		if (lblSqlServerPswd == null)
+		{
 			lblSqlServerPswd = new JLabel("SQL server password:");
 			lblSqlServerPswd.setBounds(21, 209, 164, 14);
 		}
 		return lblSqlServerPswd;
 	}
 
-	private JLabel getlblSqlServerDb() {
-		if (lblSqlServerDb == null) {
+	private JLabel getlblSqlServerDb()
+	{
+		if (lblSqlServerDb == null)
+		{
 			lblSqlServerDb = new JLabel("SQL server DB NAME:");
 			lblSqlServerDb.setBounds(21, 124, 164, 14);
 		}
 		return lblSqlServerDb;
 	}
 
-	private JTextField GETtxtPort() {
-		if (txtPort == null) {
+	private JTextField GETtxtPort()
+	{
+		if (txtPort == null)
+		{
 			txtPort = new JTextField();
 			txtPort.setText("3306");
 			txtPort.setBounds(225, 93, 86, 20);
@@ -189,8 +212,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		return txtPort;
 	}
 
-	private JTextField GETtxtIp() {
-		if (txtIp == null) {
+	private JTextField GETtxtIp()
+	{
+		if (txtIp == null)
+		{
 			txtIp = new JTextField();
 			txtIp.setText("localhost");
 			txtIp.setBounds(225, 62, 86, 20);
@@ -200,8 +225,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		return txtIp;
 	}
 
-	private JTextField gettxtUser() {
-		if (txtUser == null) {
+	private JTextField gettxtUser()
+	{
+		if (txtUser == null)
+		{
 			txtUser = new JTextField();
 			txtUser.setText("root");
 			txtUser.setBounds(225, 181, 86, 20);
@@ -211,8 +238,10 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		return txtUser;
 	}
 
-	private JLabel getlblPort() {
-		if (lblPort == null) {
+	private JLabel getlblPort()
+	{
+		if (lblPort == null)
+		{
 
 			lblPort = new JLabel("SQL server port:");
 			lblPort.setBounds(21, 93, 164, 14);
@@ -221,16 +250,20 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 		return lblPort;
 	}
 
-	private JLabel getlblSqlServerIp() {
-		if (lblSqlServerIp == null) {
+	private JLabel getlblSqlServerIp()
+	{
+		if (lblSqlServerIp == null)
+		{
 			lblSqlServerIp = new JLabel("SQL server user:");
 			lblSqlServerIp.setBounds(21, 180, 164, 17);
 		}
 		return lblSqlServerIp;
 	}
 
-	private JLabel getlblSqlServerPort() {
-		if (lblSqlServerPort == null) {
+	private JLabel getlblSqlServerPort()
+	{
+		if (lblSqlServerPort == null)
+		{
 			lblSqlServerPort = new JLabel("SQL server ip:");
 			lblSqlServerPort.setBounds(21, 62, 164, 14);
 
@@ -239,14 +272,15 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e)
+	{
 
-		if (e.getSource() == btnStart) {
-			es = new EchoServer(Integer.parseInt(txtServerPort.getText()),
-					txtIp.getText(), Integer.parseInt(txtPort.getText()),
-					txtUser.getText(), txtDBName.getText(), new String(
-							passwordField.getPassword()));
-			try {
+		if (e.getSource() == btnStart)
+		{
+			es = new EchoServer(Integer.parseInt(txtServerPort.getText()), txtIp.getText(), Integer.parseInt(txtPort.getText()), txtUser.getText(), txtDBName.getText(), new String(
+					passwordField.getPassword()));
+			try
+			{
 				es.listen(); // Start listening for connections
 				btnStart.setEnabled(false);
 				txtDBName.setEnabled(false);
@@ -256,13 +290,15 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 				txtUser.setEnabled(false);
 				passwordField.setEnabled(false);
 				btnLogout.setEnabled(true);
-			} catch (Exception ex) {
-				//Perror.sError("Could not listen for clients!");
+			} catch (Exception ex)
+			{
+				// Perror.sError("Could not listen for clients!");
 
 			}
 		}
 
-		if (e.getSource() == btnLogout) {
+		if (e.getSource() == btnLogout)
+		{
 			btnStart.setEnabled(true);
 			txtDBName.setEnabled(true);
 			txtIp.setEnabled(true);
@@ -271,37 +307,41 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 			txtUser.setEnabled(true);
 			passwordField.setEnabled(true);
 			btnLogout.setEnabled(false);
-			if (es.isListening()) {
-				try {
+			if (es.isListening())
+			{
+				try
+				{
 
 					es.close();
-				} catch (Exception ex) {
-					//Perror.sError("Could not close connection.");
+				} catch (Exception ex)
+				{
+					// Perror.sError("Could not close connection.");
 
 				}
 			}
 
 		}
 
-		if (e.getSource() == btnExit) {
+		if (e.getSource() == btnExit)
+		{
 			btnLogout.doClick();
 			System.exit(0);
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)
+	{
 
 		ServerGUI turnOnSrv = new ServerGUI();
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e)
+	{
 		int key = e.getKeyCode();
-		if (key == KeyEvent.VK_ENTER) {
-			if (e.getSource() == txtPort || e.getSource() == passwordField
-					|| e.getSource() == txtIp || e.getSource() == txtUser
-					|| e.getSource() == txtDBName
-					|| e.getSource() == txtServerPort)
+		if (key == KeyEvent.VK_ENTER)
+		{
+			if (e.getSource() == txtPort || e.getSource() == passwordField || e.getSource() == txtIp || e.getSource() == txtUser || e.getSource() == txtDBName || e.getSource() == txtServerPort)
 				btnStart.doClick();
 		}
 		if (key == KeyEvent.VK_ESCAPE)
@@ -309,14 +349,14 @@ public class ServerGUI extends JFrame implements ActionListener, KeyListener {
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		
+	public void keyReleased(KeyEvent e)
+	{
 
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
-		
+	public void keyTyped(KeyEvent e)
+	{
 
 	}
 }

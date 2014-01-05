@@ -1,38 +1,34 @@
 package GUI;
 
-import java.awt.SystemColor;
-
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.border.TitledBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.SwingConstants;
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import org.ini4j.Ini;
-import org.ini4j.InvalidFileFormatException;
-
-import common.Settings;
 
 import Algorithm.Algorithm;
 
-import java.awt.Rectangle;
-import java.awt.Dimension;
-import java.io.File;
-import java.io.IOException;
+import common.Settings;
 
 public class LoginGUI extends JPanel implements ActionListener, KeyListener, FocusListener, ChangeListener
 {

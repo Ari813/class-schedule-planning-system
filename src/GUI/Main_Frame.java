@@ -14,18 +14,21 @@ import java.util.Locale;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 
-import common.ChatIF;
-import Client.*;
-import entities.*;
+import Client.ChatClient;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
-import MsgPackage.*;
+import MsgPackage.LoginPack;
+import MsgPackage.LogoutPack;
 
-public class Main_Frame extends JFrame implements ActionListener, ChatIF {
+import common.ChatIF;
+
+import entities.Login;
+
+public class Main_Frame extends JFrame implements ActionListener, ChatIF
+{
 
 	/**
 	 * 
@@ -36,9 +39,9 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 	public static LoginGUI loginUserGUI;
 	// public JFrame mainFrm;
 	private ManagerController manger;
-	 private LecturerController lecturer;
-	 private Login lgnUsr;
-	 private ChatClient client;
+	private LecturerController lecturer;
+	private Login lgnUsr;
+	private ChatClient client;
 	// private MagiController magi;
 
 	private int admin;
@@ -49,13 +52,18 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
+	public static void main(String[] args)
+	{
+		EventQueue.invokeLater(new Runnable()
+		{
+			public void run()
+			{
+				try
+				{
 					window = new Main_Frame(1);
 					window.setVisible(true);
-				} catch (Exception e) {
+				} catch (Exception e)
+				{
 					e.printStackTrace();
 				}
 			}
@@ -65,41 +73,48 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 	/**
 	 * Create the application.
 	 */
-	public Main_Frame(int admin) {
+	public Main_Frame(int admin)
+	{
 		this.admin = admin;
 		start();
-		
+
 	}
 
-	public void start() {
+	public void start()
+	{
 		loginUserGUI = new LoginGUI(this);
 		setType(Type.UTILITY);
 		setBounds(100, 100, 800, 600);
 		getContentPane().add(loginUserGUI);
 
 	}
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void ChooseAdmin() {
+	private void ChooseAdmin()
+	{
 		admin = MANAGER;
-		if (admin == MANAGER) {
-		
-			manger = new ManagerController(this,client);
-		} else if (admin == LECTURER) {
-			
-			 lecturer=new LecturerController(this,client);
-		
+		if (admin == MANAGER)
+		{
+
+			manger = new ManagerController(this, client);
+		} else if (admin == LECTURER)
+		{
+
+			lecturer = new LecturerController(this, client);
+
 		}
 	}
 
-	private void initialize() {
+	private void initialize()
+	{
 
 		// mainFrm = new JFrame();
 		getContentPane().setBackground(SystemColor.menu);
 		setBackground(SystemColor.inactiveCaptionBorder);
 		setForeground(SystemColor.controlLtHighlight);
-		setLocale(new Locale("en", "IL"));		
+		setLocale(new Locale("en", "IL"));
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setPreferredSize(new Dimension(800, 600));
@@ -111,19 +126,16 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
-		JLabel lblTimeTableSchedualing = new JLabel(
-				"Time Table Schedualing System");
-		lblTimeTableSchedualing
-				.setHorizontalTextPosition(SwingConstants.CENTER);
+		JLabel lblTimeTableSchedualing = new JLabel("Time Table Schedualing System");
+		lblTimeTableSchedualing.setHorizontalTextPosition(SwingConstants.CENTER);
 		lblTimeTableSchedualing.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTimeTableSchedualing.setLocation(new Point(50, 0));
 		lblTimeTableSchedualing.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblTimeTableSchedualing.setFont(new Font("Tahoma", Font.BOLD, 36));
 		lblTimeTableSchedualing.setBounds(new Rectangle(10, 11, 774, 64));
-		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED,
-				null, null, null, null));
+		lblTimeTableSchedualing.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		getContentPane().add(lblTimeTableSchedualing);
-		
+
 		ChooseAdmin();
 		getContentPane().repaint();
 
@@ -149,60 +161,64 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF {
 		 */
 
 	}
-	public void handleLoginGUI() {
 
-		lgnUsr = new Login(loginUserGUI.getHost(), loginUserGUI.getPort(),
-				loginUserGUI.getId(), loginUserGUI.getPass());
+	public void handleLoginGUI()
+	{
+
+		lgnUsr = new Login(loginUserGUI.getHost(), loginUserGUI.getPort(), loginUserGUI.getId(), loginUserGUI.getPass());
 		LoginPack lgnmsg = new LoginPack(lgnUsr);
-		try {
+		try
+		{
 			client = new ChatClient(lgnUsr.getHost(), lgnUsr.getPort(), this);
 			client.handleMessageFromClientUI(lgnmsg);
 			lgnmsg = (LoginPack) client.getMessage();
 			lgnUsr = lgnmsg.getUsr();
-			admin=lgnUsr.getLoginPermissionLevel();
-		/*/
-			if (admin==-2)
-				JOptionPane.showMessageDialog(this, "user already logged in -for more information call +972 (52) 893-6661");
-			else
-				if (admin==-1)
-			JOptionPane.showMessageDialog(this, "user/password not correct try again ");
-				else /*/
-				handleLogin();
-			
-		} catch (IOException exception) {
-			//Perror.pError("Can't setup connection!");
+			admin = lgnUsr.getLoginPermissionLevel();
+			/*
+			 * / if (admin==-2) JOptionPane.showMessageDialog(this,
+			 * "user already logged in -for more information call +972 (52) 893-6661"
+			 * ); else if (admin==-1) JOptionPane.showMessageDialog(this,
+			 * "user/password not correct try again "); else /
+			 */
+			handleLogin();
+
+		} catch (IOException exception)
+		{
+			// Perror.pError("Can't setup connection!");
 		}
-		
-			
 
 	}
 
-	public void handleLogoutGUI() {
+	public void handleLogoutGUI()
+	{
 		LogoutPack lgotmsg = new LogoutPack(lgnUsr);
 		client.handleMessageFromClientUI(lgotmsg);
 		getContentPane().removeAll();
 		setBounds(100, 100, 800, 600);
 		getContentPane().add(loginUserGUI);
 		repaint();
-		
+
 	}
 
-	private void handleLogin() {
-		
+	private void handleLogin()
+	{
+
 		getContentPane().remove(loginUserGUI);
 		initialize();
-		
-		
-		}
-	@Override
-	public void display(Object message) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void display(Object message)
+	{
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0)
+	{
+		// TODO Auto-generated method stub
+
 	}
 }

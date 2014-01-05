@@ -46,8 +46,8 @@ import Controllers.ManagerController;
 
 import java.awt.SystemColor;
 
-public class Edit_Class extends JPanel implements ActionListener,
-		ListSelectionListener, KeyListener {
+public class Edit_Class extends JPanel implements ActionListener, ListSelectionListener, KeyListener
+{
 
 	/**
 	 * 
@@ -111,14 +111,16 @@ public class Edit_Class extends JPanel implements ActionListener,
 	/**
 	 * Create the application.
 	 */
-	public Edit_Class(ManagerController mng) {
+	public Edit_Class(ManagerController mng)
+	{
 
 		super();
 		this.manager = mng;
 		initialize();
 	}
 
-	private void initialize() {
+	private void initialize()
+	{
 
 		pnl();
 
@@ -154,7 +156,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	}
 
-	private void pnl() {
+	private void pnl()
+	{
 
 		PNL_Main = new JPanel();
 		PNL_Main.setToolTipText("Edit class list");
@@ -165,7 +168,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	}
 
-	private JTextField GETtxtClassEditor() {
+	private JTextField GETtxtClassEditor()
+	{
 		txtClassEditor = new JTextField();
 		txtClassEditor.setEditable(false);
 		txtClassEditor.setText("Class editor");
@@ -178,7 +182,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return txtClassEditor;
 	}
 
-	private JButton GETbtnDiscard() {
+	private JButton GETbtnDiscard()
+	{
 		btnDiscard = new JButton("Discard");
 		btnDiscard.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
@@ -186,7 +191,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return btnDiscard;
 	}
 
-	private JButton GETbtnSaveChanges() {
+	private JButton GETbtnSaveChanges()
+	{
 		btnSaveChanges = new JButton("Save");
 		btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSaveChanges.setBounds(306, 434, 160, 29);
@@ -195,7 +201,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return btnSaveChanges;
 	}
 
-	private JButton GETbtnNewClass() {
+	private JButton GETbtnNewClass()
+	{
 		btnNewClass = new JButton("New class");
 		btnNewClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnNewClass.setBounds(73, 434, 160, 29);
@@ -203,7 +210,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return btnNewClass;
 	}
 
-	private JButton GETbtnRemove() {
+	private JButton GETbtnRemove()
+	{
 		btnRemove = new JButton("<--");
 		btnRemove.setToolTipText("Remove item from class");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -212,7 +220,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return btnRemove;
 	}
 
-	private JButton GETbtnAdd() {
+	private JButton GETbtnAdd()
+	{
 		btnAdd = new JButton(" -->");
 		btnAdd.setToolTipText("Add item to class");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -221,14 +230,16 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return btnAdd;
 	}
 
-	private JCheckBox GETchckbxAvailable() {
+	private JCheckBox GETchckbxAvailable()
+	{
 		chckbxAvailable = new JCheckBox("Available");
 		chckbxAvailable.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		chckbxAvailable.setBounds(10, 80, 135, 23);
 		return chckbxAvailable;
 	}
 
-	private JList GETSelectedClassAids() {
+	private JList GETSelectedClassAids()
+	{
 		lstSelectedClassAidsModel = new DefaultListModel();
 
 		lstSelectedClassaids = new JList();
@@ -240,7 +251,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return lstSelectedClassaids;
 	}
 
-	private JList GETlstClassAids() {
+	private JList GETlstClassAids()
+	{
 		lstClassAids = new JList<>();
 		lstClassAids.setToolTipText("class aids options ");
 		lstClassAidsModel = new DefaultListModel();
@@ -255,14 +267,16 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return lstClassAids;
 	}
 
-	private JLabel GETlblClassAids() {
+	private JLabel GETlblClassAids()
+	{
 		lblClassAids = new JLabel("Class aids:");
 		lblClassAids.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblClassAids.setBounds(332, 100, 100, 14);
 		return lblClassAids;
 	}
 
-	private JTextField GETtxtCapacityNumber() {
+	private JTextField GETtxtCapacityNumber()
+	{
 		txtCapacityNumber = new JTextField();
 		txtCapacityNumber.setEditable(true);
 		txtCapacityNumber.setText("Capacity number");
@@ -271,7 +285,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return txtCapacityNumber;
 	}
 
-	private void sethorizontalStrut() {
+	private void sethorizontalStrut()
+	{
 
 		horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(332, 114, 392, 14);
@@ -309,7 +324,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	}
 
-	private JLabel GETlblCapacity() {
+	private JLabel GETlblCapacity()
+	{
 		lblCapacity = new JLabel("Capacity:");
 		lblCapacity.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblCapacity.setVerticalAlignment(SwingConstants.TOP);
@@ -317,7 +333,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return lblCapacity;
 	}
 
-	private JComboBox GETcmbBxBlding() {
+	private JComboBox GETcmbBxBlding()
+	{
 		cmbBxBlding = new JComboBox();
 		cmbBxBlding.setEnabled(false);
 		cmbBxBlding.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -325,21 +342,24 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return cmbBxBlding;
 	}
 
-	private JLabel GETlblBilding() {
+	private JLabel GETlblBilding()
+	{
 		lblBilding = new JLabel("Building:");
 		lblBilding.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblBilding.setBounds(172, 267, 82, 22);
 		return lblBilding;
 	}
 
-	private JLabel GETlblCampus() {
+	private JLabel GETlblCampus()
+	{
 		lblCampus = new JLabel("Campus:");
 		lblCampus.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblCampus.setBounds(10, 267, 90, 14);
 		return lblCampus;
 	}
 
-	private JComboBox GETcmbxcampus() {
+	private JComboBox GETcmbxcampus()
+	{
 		cmbxcampus = new JComboBox();
 		cmbxcampus.setEnabled(false);
 		cmbxcampus.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -348,7 +368,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return cmbxcampus;
 	}
 
-	private JTextField GETtxtDescriptionText() {
+	private JTextField GETtxtDescriptionText()
+	{
 		txtDescriptionText = new JTextField();
 		txtDescriptionText.setToolTipText("class description");
 		txtDescriptionText.setEnabled(false);
@@ -358,22 +379,26 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return txtDescriptionText;
 	}
 
-	private JLabel GETlblDescription() {
+	private JLabel GETlblDescription()
+	{
 		lblDescription = new JLabel("Description:");
 		lblDescription.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblDescription.setBounds(10, 179, 123, 22);
 		return lblDescription;
 	}
 
-	private JLabel GETlblCode() {
+	private JLabel GETlblCode()
+	{
 		lblCode = new JLabel("Code:");
 		lblCode.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblCode.setBounds(10, 114, 90, 21);
 		return lblCode;
 	}
 
-	private JTextField GETtxtpnCodeNumber() {
-		if (txtpnCodeNumber == null) {
+	private JTextField GETtxtpnCodeNumber()
+	{
+		if (txtpnCodeNumber == null)
+		{
 			txtpnCodeNumber = new JTextField();
 			txtpnCodeNumber.setEnabled(false);
 			txtpnCodeNumber.setEditable(false);
@@ -386,8 +411,10 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return txtpnCodeNumber;
 	}
 
-	private JComboBox GETcmbxEditClass() {
-		if (cmbxEditClass == null) {
+	private JComboBox GETcmbxEditClass()
+	{
+		if (cmbxEditClass == null)
+		{
 			cmbxEditClass = new JComboBox();
 			cmbxEditClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			cmbxEditClass.setToolTipText("Edit class list");
@@ -398,50 +425,54 @@ public class Edit_Class extends JPanel implements ActionListener,
 		return cmbxEditClass;
 	}
 
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnSaveChanges) {
+	public void actionPerformed(ActionEvent e)
+	{
+		if (e.getSource() == btnSaveChanges)
+		{
 			btnSaveChanges.setEnabled(false);
-			if (!txtpnCodeNumber.getText().equals("")) {
+			if (!txtpnCodeNumber.getText().equals(""))
+			{
 
 				Class newClass = new Class();
 				Class serverAns;
 
 				newClass.setClassID(Integer.parseInt(txtpnCodeNumber.getText()));
 				newClass.setDescription(txtDescriptionText.getText());
-				newClass.setBuilding(arrayBuilding.get(
-						cmbBxBlding.getSelectedIndex()).getBuildingID());
-				newClass.setCampus(arrayCampus.get(
-						cmbxcampus.getSelectedIndex()).getCampusId());
-				newClass.setCapcity(Integer.parseInt(txtCapacityNumber
-						.getText()));
+				newClass.setBuilding(arrayBuilding.get(cmbBxBlding.getSelectedIndex()).getBuildingID());
+				newClass.setCampus(arrayCampus.get(cmbxcampus.getSelectedIndex()).getCampusId());
+				newClass.setCapcity(Integer.parseInt(txtCapacityNumber.getText()));
 				newClass.setAvailable(chckbxAvailable.isSelected());
 
-				Iterator<Integer> stdyAidsItr = arraySelectedStudyAids.keySet()
-						.iterator();
-				while (stdyAidsItr.hasNext()) {
-					newClass.addStudyAid(arrayStudyAids.get(stdyAidsItr.next()
-							.intValue()));
+				Iterator<Integer> stdyAidsItr = arraySelectedStudyAids.keySet().iterator();
+				while (stdyAidsItr.hasNext())
+				{
+					newClass.addStudyAid(arrayStudyAids.get(stdyAidsItr.next().intValue()));
 				}
 
-				if (isNewClass) {
+				if (isNewClass)
+				{
 					serverAns = manager.CreateNewClass(newClass);
-				} else {
+				} else
+				{
 					serverAns = manager.UpdateNewClass(newClass);
 				}
 
-				if (serverAns.getClassID() == newClass.getClassID()) {
-					if (!isNewClass) {
-						///// TODO -1
-						arrayClasses.set(cmbxEditClass.getSelectedIndex() ,
-								newClass);
-					} else {
+				if (serverAns.getClassID() == newClass.getClassID())
+				{
+					if (!isNewClass)
+					{
+						// /// TODO -1
+						arrayClasses.set(cmbxEditClass.getSelectedIndex(), newClass);
+					} else
+					{
 						arrayClasses.add(newClass);
 						cmbxEditClass.removeAllItems();
 						setClasses(arrayClasses);
 					}
 
 					System.out.println(" Success!!!");
-				} else {
+				} else
+				{
 					System.out.println(" Fail!!!!");
 				}
 				if (isNewClass)
@@ -449,105 +480,101 @@ public class Edit_Class extends JPanel implements ActionListener,
 				createNewClass(false);
 
 			} else
-				JOptionPane.showMessageDialog(manager.manegerMainFrm,
-						"ClassID  not enter...");
+				JOptionPane.showMessageDialog(manager.manegerMainFrm, "ClassID  not enter...");
 
 		}
 
-		if (e.getSource() == btnAdd) {
+		if (e.getSource() == btnAdd)
+		{
 			int index;
-			
-			if( lstClassAids.getSelectedIndex()!=-1)
+
+			if (lstClassAids.getSelectedIndex() != -1)
 				btnSaveChanges.setEnabled(true);
-			if ((arrayStudyAids != null) && (!arrayStudyAids.isEmpty())) {
-				if (lstClassAids.getSelectedIndex() >= 0) {
-					index = Integer.parseInt(lstClassAidsModel
-							.getElementAt(lstClassAids.getSelectedIndex())
-							.toString().split(":")[0]);
+			if ((arrayStudyAids != null) && (!arrayStudyAids.isEmpty()))
+			{
+				if (lstClassAids.getSelectedIndex() >= 0)
+				{
+					index = Integer.parseInt(lstClassAidsModel.getElementAt(lstClassAids.getSelectedIndex()).toString().split(":")[0]);
 					addAids(index);
 				}
 			}
 
 		}
-		if (e.getSource() == btnRemove) {
-			if( lstSelectedClassaids.getSelectedIndex()!=-1)
-			btnSaveChanges.setEnabled(true);
+		if (e.getSource() == btnRemove)
+		{
+			if (lstSelectedClassaids.getSelectedIndex() != -1)
+				btnSaveChanges.setEnabled(true);
 			int index;
-			
-			if ((arraySelectedStudyAids != null)
-					&& (!arraySelectedStudyAids.isEmpty())) {
-				if (lstSelectedClassaids.getSelectedIndex() >= 0) {
-					index = Integer.parseInt(lstSelectedClassAidsModel
-							.getElementAt(
-									lstSelectedClassaids.getSelectedIndex())
-							.toString().split(":")[0]);
+
+			if ((arraySelectedStudyAids != null) && (!arraySelectedStudyAids.isEmpty()))
+			{
+				if (lstSelectedClassaids.getSelectedIndex() >= 0)
+				{
+					index = Integer.parseInt(lstSelectedClassAidsModel.getElementAt(lstSelectedClassaids.getSelectedIndex()).toString().split(":")[0]);
 					removeAids(index);
 				}
 			}
 		}
-		if (e.getSource() == btnNewClass) {
+		if (e.getSource() == btnNewClass)
+		{
 			resetLists();
 			createNewClass(true);
 
 			Iterator<StudyAids> stdyaidItr = arrayStudyAids.values().iterator();
-			while (stdyaidItr.hasNext()) {
+			while (stdyaidItr.hasNext())
+			{
 				int tempID = stdyaidItr.next().getAidsID();
 				arrayAvailableStudyAids.put(tempID, tempID);
-				lstClassAidsModel.addElement(tempID + ":"
-						+ arrayStudyAids.get(tempID).getAidsName());
+				lstClassAidsModel.addElement(tempID + ":" + arrayStudyAids.get(tempID).getAidsName());
 			}
 
 		}
-		if (e.getSource() == btnDiscard) {
+		if (e.getSource() == btnDiscard)
+		{
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
-		if (e.getSource() == cmbxEditClass) {
+		if (e.getSource() == cmbxEditClass)
+		{
 			createNewClass(false);
 			setSelectedClass();
 		}
 
 	}
 
-	private void removeAids(int index) {
+	private void removeAids(int index)
+	{
 
-		arrayAvailableStudyAids.put(arraySelectedStudyAids.get(index),
-				arraySelectedStudyAids.get(index));
+		arrayAvailableStudyAids.put(arraySelectedStudyAids.get(index), arraySelectedStudyAids.get(index));
 		arraySelectedStudyAids.remove(index);
-		lstClassAidsModel.addElement(lstSelectedClassAidsModel
-				.getElementAt(lstSelectedClassaids.getSelectedIndex()));
-		lstSelectedClassAidsModel.remove(lstSelectedClassaids
-				.getSelectedIndex());
+		lstClassAidsModel.addElement(lstSelectedClassAidsModel.getElementAt(lstSelectedClassaids.getSelectedIndex()));
+		lstSelectedClassAidsModel.remove(lstSelectedClassaids.getSelectedIndex());
 	}
 
-	private void addAids(int index) {
+	private void addAids(int index)
+	{
 
-		arraySelectedStudyAids.put(arrayAvailableStudyAids.get(index),
-				arrayAvailableStudyAids.get(index));
+		arraySelectedStudyAids.put(arrayAvailableStudyAids.get(index), arrayAvailableStudyAids.get(index));
 		arrayAvailableStudyAids.remove(index);
-		lstSelectedClassAidsModel.addElement(lstClassAidsModel
-				.getElementAt(lstClassAids.getSelectedIndex()));
+		lstSelectedClassAidsModel.addElement(lstClassAidsModel.getElementAt(lstClassAids.getSelectedIndex()));
 		lstClassAidsModel.remove(lstClassAids.getSelectedIndex());
 
 	}
 
-	private void setSelectedClass() {
-	///// TODO -1
-		int index = cmbxEditClass.getSelectedIndex() ;
-		if ((arrayClasses != null) && (!arrayClasses.isEmpty()) && (index >= 0)) {
+	private void setSelectedClass()
+	{
+		// /// TODO -1
+		int index = cmbxEditClass.getSelectedIndex();
+		if ((arrayClasses != null) && (!arrayClasses.isEmpty()) && (index >= 0))
+		{
 			cmbxcampus.setSelectedIndex(arrayClasses.get(index).getCampus());
 			cmbBxBlding.setSelectedIndex(arrayClasses.get(index).getBuilding());
-			txtClassSelectedCampus.setText(cmbxcampus.getSelectedItem()
-					.toString());
-			txtClassSelectedBuildig.setText(cmbBxBlding.getSelectedItem()
-					.toString());
-			txtCapacityNumber.setText(Integer.toString(arrayClasses.get(index)
-					.getCapcity()));
-			txtDescriptionText.setText((arrayClasses.get(index)
-					.getDescription()));
+			txtClassSelectedCampus.setText(cmbxcampus.getSelectedItem().toString());
+			txtClassSelectedBuildig.setText(cmbBxBlding.getSelectedItem().toString());
+			txtCapacityNumber.setText(Integer.toString(arrayClasses.get(index).getCapcity()));
+			txtDescriptionText.setText((arrayClasses.get(index).getDescription()));
 			chckbxAvailable.setSelected(arrayClasses.get(index).getAvailable());
 			setClassAids(index);
-			txtpnCodeNumber.setText(Integer.toString(
-				arrayClasses.get(index).getClassID()));
+			txtpnCodeNumber.setText(Integer.toString(arrayClasses.get(index).getClassID()));
 			btnSaveChanges.setEnabled(false);
 		}
 
@@ -559,34 +586,31 @@ public class Edit_Class extends JPanel implements ActionListener,
 	/**
 	 * @see need to do: maybe make a set(or map) i didn't finish
 	 */
-	private void setClassAids(int clssIndex) {
+	private void setClassAids(int clssIndex)
+	{
 		resetLists();
 
-		for (int i = 0; i < arrayClasses.get(clssIndex).getStudyAids().size(); i++) {
-			arraySelectedStudyAids.put(arrayClasses.get(clssIndex)
-					.getStudyAids().get(i).getAidsID(),
-					arrayClasses.get(clssIndex).getStudyAids().get(i)
-							.getAidsID());
-			lstSelectedClassAidsModel.addElement(arrayClasses.get(clssIndex)
-					.getStudyAids().get(i).getAidsID()
-					+ ":"
-					+ arrayStudyAids.get(
-							arrayClasses.get(clssIndex).getStudyAids().get(i)
-									.getAidsID()).getAidsName());
+		for (int i = 0; i < arrayClasses.get(clssIndex).getStudyAids().size(); i++)
+		{
+			arraySelectedStudyAids.put(arrayClasses.get(clssIndex).getStudyAids().get(i).getAidsID(), arrayClasses.get(clssIndex).getStudyAids().get(i).getAidsID());
+			lstSelectedClassAidsModel.addElement(arrayClasses.get(clssIndex).getStudyAids().get(i).getAidsID() + ":"
+					+ arrayStudyAids.get(arrayClasses.get(clssIndex).getStudyAids().get(i).getAidsID()).getAidsName());
 		}
 		Iterator<StudyAids> itr = arrayStudyAids.values().iterator();
-		while (itr.hasNext()) {
+		while (itr.hasNext())
+		{
 			int tempID = itr.next().getAidsID();
-			if (!arraySelectedStudyAids.containsKey(tempID)) {
+			if (!arraySelectedStudyAids.containsKey(tempID))
+			{
 				arrayAvailableStudyAids.put(tempID, tempID);
-				lstClassAidsModel.addElement(tempID + ":"
-						+ arrayStudyAids.get(tempID).getAidsName());
+				lstClassAidsModel.addElement(tempID + ":" + arrayStudyAids.get(tempID).getAidsName());
 			}
 
 		}
 	}
 
-	private void resetLists() {
+	private void resetLists()
+	{
 		arraySelectedStudyAids.clear();
 		arrayAvailableStudyAids.clear();
 		lstClassAidsModel.removeAllElements();
@@ -594,7 +618,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 
 	}
 
-	private void setdefault() {
+	private void setdefault()
+	{
 
 		txtpnCodeNumber.setText("Code Number");
 		txtCapacityNumber.setText("Capacity number");
@@ -607,25 +632,26 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	@Override
-	public void keyPressed(KeyEvent arg0) {
+	public void keyPressed(KeyEvent arg0)
+	{
 		// TODO Auto-generated method stub
 
 	}
 
-	public void keyReleased(KeyEvent e) {
-		if ((e.getSource() == txtpnCodeNumber)
-				|| (e.getSource() == txtCapacityNumber))
+	public void keyReleased(KeyEvent e)
+	{
+		if ((e.getSource() == txtpnCodeNumber) || (e.getSource() == txtCapacityNumber))
 			if (!Character.isDigit(e.getKeyChar()))
 				((JTextField) e.getSource()).setText("0");
 			else
 				btnSaveChanges.setEnabled(true);
-		if (txtpnCodeNumber.getText().equals("")
-				|| txtCapacityNumber.getText().equals(""))
+		if (txtpnCodeNumber.getText().equals("") || txtCapacityNumber.getText().equals(""))
 			btnSaveChanges.setEnabled(false);
 
 	}
 
-	private void createNewClass(boolean bool) {
+	private void createNewClass(boolean bool)
+	{
 		txtpnCodeNumber.setEditable(bool);
 		txtpnCodeNumber.setEnabled(bool);
 
@@ -638,7 +664,8 @@ public class Edit_Class extends JPanel implements ActionListener,
 		cmbBxBlding.setEnabled(bool);
 		cmbBxBlding.setEditable(bool);
 
-		if (bool) {
+		if (bool)
+		{
 			txtDescriptionText.setText("");
 			txtCapacityNumber.setText("0");
 			cmbBxBlding.setSelectedIndex(0);
@@ -650,59 +677,65 @@ public class Edit_Class extends JPanel implements ActionListener,
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
+	public void keyTyped(KeyEvent arg0)
+	{
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void valueChanged(ListSelectionEvent arg0) {
+	public void valueChanged(ListSelectionEvent arg0)
+	{
 
 	}
 
-	public void setClassStudyAids(ArrayList<StudyAids> arrayList) {
+	public void setClassStudyAids(ArrayList<StudyAids> arrayList)
+	{
 
 		arrayStudyAids = new HashMap<Integer, StudyAids>();
 		arrayAvailableStudyAids = new HashMap<Integer, Integer>();
 		arraySelectedStudyAids = new HashMap<Integer, Integer>();
 		lstClassAidsModel.removeAllElements();
 		lstSelectedClassAidsModel.removeAllElements();
-		for (int i = 0; i < arrayList.size(); i++) {
+		for (int i = 0; i < arrayList.size(); i++)
+		{
 			arrayStudyAids.put(arrayList.get(i).getAidsID(), arrayList.get(i));
-			lstClassAidsModel.addElement(arrayList.get(i).getAidsID() + ":"
-					+ arrayList.get(i).getAidsName());
-			arrayAvailableStudyAids.put(arrayList.get(i).getAidsID(), arrayList
-					.get(i).getAidsID());
+			lstClassAidsModel.addElement(arrayList.get(i).getAidsID() + ":" + arrayList.get(i).getAidsName());
+			arrayAvailableStudyAids.put(arrayList.get(i).getAidsID(), arrayList.get(i).getAidsID());
 		}
 	}
 
-	public void setCampus(ArrayList<Campus> arrayList) {
+	public void setCampus(ArrayList<Campus> arrayList)
+	{
 
 		arrayCampus = arrayList;
-		for (int i = 0; i < arrayCampus.size(); i++) {
-			cmbxcampus.addItem(arrayCampus.get(i).getCampusId() + ":"
-					+ arrayCampus.get(i).getCampusName());
+		for (int i = 0; i < arrayCampus.size(); i++)
+		{
+			cmbxcampus.addItem(arrayCampus.get(i).getCampusId() + ":" + arrayCampus.get(i).getCampusName());
 		}
 	}
 
-	public void setBuilding(ArrayList<Building> arrayList) {
+	public void setBuilding(ArrayList<Building> arrayList)
+	{
 		arrayBuilding = arrayList;
-		for (int i = 0; i < arrayBuilding.size(); i++) {
-			cmbBxBlding.addItem(arrayBuilding.get(i).getBuildingID() + ":"
-					+ arrayBuilding.get(i).getBuildingName());
+		for (int i = 0; i < arrayBuilding.size(); i++)
+		{
+			cmbBxBlding.addItem(arrayBuilding.get(i).getBuildingID() + ":" + arrayBuilding.get(i).getBuildingName());
 		}
 	}
 
-	public void setClasses(ArrayList<Class> arrayList) {
+	public void setClasses(ArrayList<Class> arrayList)
+	{
 		arrayClasses = arrayList;
 		cmbxEditClass.removeAll();
-		for (int i = 0; i < arrayClasses.size(); i++) {
-			cmbxEditClass.addItem(arrayClasses.get(i).getClassID() + ":"
-					+ arrayClasses.get(i).getDescription());
+		for (int i = 0; i < arrayClasses.size(); i++)
+		{
+			cmbxEditClass.addItem(arrayClasses.get(i).getClassID() + ":" + arrayClasses.get(i).getDescription());
 		}
 	}
 
-	public void addActions() {
+	public void addActions()
+	{
 		// TODO Auto-generated method stub
 		btnDiscard.addActionListener(this);
 		btnSaveChanges.addActionListener(this);

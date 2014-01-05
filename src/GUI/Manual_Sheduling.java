@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +13,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.print.DocFlavor.STRING;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -29,52 +26,25 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.event.AncestorListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import javax.swing.text.AbstractDocument.BranchElement;
-
 import entities.Class;
 import entities.Course;
 import entities.Faculty;
 import entities.IDclass;
 import entities.Lecturer;
 import Algorithm.Database;
-import Algorithm.GeneticAlgorithmRun;
 import Algorithm.Individual;
 import Controllers.ManagerController;
 
-import javax.swing.JTree;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerListModel;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.SpinnerDateModel;
-
-import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
-
 import common.Settings;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-import java.awt.Canvas;
-import java.awt.Choice;
-import java.awt.Panel;
-import java.awt.Label;
-import java.awt.List;
-import java.beans.VetoableChangeListener;
-import java.beans.PropertyChangeEvent;
-
 import javax.swing.JFormattedTextField;
 import javax.swing.JPopupMenu;
 

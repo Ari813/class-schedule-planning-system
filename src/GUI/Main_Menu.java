@@ -4,28 +4,23 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.MatteBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
-import Controllers.LecturerController;
 import Controllers.ManagerController;
-import java.awt.SystemColor;
 
-public class Main_Menu extends JPanel implements ActionListener {
+public class Main_Menu extends JPanel implements ActionListener
+{
 	/**
 	 * 
 	 */
@@ -39,7 +34,7 @@ public class Main_Menu extends JPanel implements ActionListener {
 	private JButton btnEditCourses;
 	private JButton btnEditClasses;
 	private JButton btnEditLecturers;
-//	private JFrame mainfrm;
+	// private JFrame mainfrm;
 	private Component horizontalStrut;
 	private Component horizontalStrut_1;
 	private JLabel lblDatabaseManagment;
@@ -51,16 +46,18 @@ public class Main_Menu extends JPanel implements ActionListener {
 	/**
 	 * Create the panel.
 	 */
-	public Main_Menu(int magi, ManagerController mng) {
+	public Main_Menu(int magi, ManagerController mng)
+	{
 
 		super();
 		this.magi = magi;
 		this.manager = mng;
-		//mainfrm = new JFrame();
+		// mainfrm = new JFrame();
 		initialize();
 	}
 
-	private void initialize() {
+	private void initialize()
+	{
 		pnl();
 
 		PNL_Main.add(GETtxtMainMenu());
@@ -79,14 +76,16 @@ public class Main_Menu extends JPanel implements ActionListener {
 		PNL_Main.add(GETbtnQuit());
 
 		horizontalStrut();
-		if (magi != 0) {
+		if (magi != 0)
+		{
 			PNL_Main.add(GETbtnSettings());
 			PNL_Main.add(GETbtnStartSchdualing());
 		}
 
 	}
 
-	private JButton GETbtnQuit() {
+	private JButton GETbtnQuit()
+	{
 		btnQuit = new JButton("Quit");
 		btnQuit.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnQuit.setBounds(593, 435, 171, 31);
@@ -94,7 +93,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return btnQuit;
 	}
 
-	private JLabel GETlblSemesterManagment() {
+	private JLabel GETlblSemesterManagment()
+	{
 		lblSemesterManagment = new JLabel("Semester Managment");
 		lblSemesterManagment.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSemesterManagment.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -102,7 +102,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return lblSemesterManagment;
 	}
 
-	private JLabel GETlblDatabaseManagment() {
+	private JLabel GETlblDatabaseManagment()
+	{
 		lblDatabaseManagment = new JLabel("Database Managment");
 		lblDatabaseManagment.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatabaseManagment.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -110,7 +111,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return lblDatabaseManagment;
 	}
 
-	private void horizontalStrut() {
+	private void horizontalStrut()
+	{
 		horizontalStrut = Box.createHorizontalStrut(20);
 		horizontalStrut.setBounds(10, 80, 350, 22);
 		PNL_Main.add(horizontalStrut);
@@ -120,7 +122,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 
 	}
 
-	private JButton GETbtnEditLecturers() {
+	private JButton GETbtnEditLecturers()
+	{
 		btnEditLecturers = new JButton("Edit Lecturers");
 		btnEditLecturers.setBounds(414, 191, 350, 31);
 		btnEditLecturers.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -128,7 +131,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return btnEditLecturers;
 	}
 
-	private JButton GETbtnEditClasses() {
+	private JButton GETbtnEditClasses()
+	{
 		btnEditClasses = new JButton("Edit Classes");
 		btnEditClasses.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnEditClasses.setBounds(414, 145, 350, 31);
@@ -136,7 +140,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return btnEditClasses;
 	}
 
-	private JButton GETbtnEditCourses() {
+	private JButton GETbtnEditCourses()
+	{
 		btnEditCourses = new JButton("Edit Courses");
 		btnEditCourses.setBounds(414, 99, 350, 31);
 		btnEditCourses.addActionListener(this);
@@ -144,7 +149,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return btnEditCourses;
 	}
 
-	private JButton GETbtnStartSchdualing() {
+	private JButton GETbtnStartSchdualing()
+	{
 		btnStartSchdualing = new JButton("Start Schdualing");
 		btnStartSchdualing.setBounds(10, 191, 350, 31);
 		btnStartSchdualing.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -152,7 +158,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return btnStartSchdualing;
 	}
 
-	private JButton GETbtnSettings() {
+	private JButton GETbtnSettings()
+	{
 		btnSettings = new JButton("Settings");
 		btnSettings.setBounds(10, 432, 350, 31);
 		btnSettings.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -160,7 +167,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return btnSettings;
 	}
 
-	private JButton GETbtnCourseSettings() {
+	private JButton GETbtnCourseSettings()
+	{
 		btnCourseSettings = new JButton("Course Settings");
 		btnCourseSettings.setBounds(10, 145, 350, 31);
 		btnCourseSettings.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -168,7 +176,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return btnCourseSettings;
 	}
 
-	private JButton GETbtnLecturerPreferences() {
+	private JButton GETbtnLecturerPreferences()
+	{
 		btnLecturerPreferences = new JButton("Lecturer Preferences");
 		btnLecturerPreferences.setBounds(10, 99, 350, 31);
 		btnLecturerPreferences.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -176,7 +185,8 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return btnLecturerPreferences;
 	}
 
-	private JTextField GETtxtMainMenu() {
+	private JTextField GETtxtMainMenu()
+	{
 		txtMainMenu = new JTextField();
 		txtMainMenu.setDisabledTextColor(SystemColor.desktop);
 		txtMainMenu.setForeground(SystemColor.desktop);
@@ -190,57 +200,60 @@ public class Main_Menu extends JPanel implements ActionListener {
 		return txtMainMenu;
 	}
 
-	private void pnl() {
+	private void pnl()
+	{
 		PNL_Main = new JPanel();
 		PNL_Main.setPreferredSize(new Dimension(774, 474));
 		PNL_Main.setName("PNL_MainMenu");
 		PNL_Main.setMaximumSize(new Dimension(774, 474));
 		PNL_Main.setMinimumSize(new Dimension(774, 474));
 		PNL_Main.setBounds(10, 85, 774, 474);
-		PNL_Main.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0,
-				0)));
+		PNL_Main.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		PNL_Main.setLayout(null);
 
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e)
+	{
 		if (e.getSource() == btnLecturerPreferences)
 		{
-			
+
 			manager.Load_Lecturer_Preferences(PNL_Main);
 		}
-		if (e.getSource() == btnQuit) {
+		if (e.getSource() == btnQuit)
+		{
 			manager.logout();
-			//System.exit(0);
+			// System.exit(0);
 		}
-		if (e.getSource() == btnCourseSettings) {
+		if (e.getSource() == btnCourseSettings)
+		{
 			manager.Load_Course_Settings(PNL_Main);
 		}
-		if (e.getSource() == btnSettings) {
+		if (e.getSource() == btnSettings)
+		{
 			manager.Load_Manual_Sheduling(PNL_Main);
-			
+
 		}
-		if (e.getSource() == btnStartSchdualing) {
-		//	manager.Load_Automatic_Sheduling(PNL_Main);
+		if (e.getSource() == btnStartSchdualing)
+		{
+			// manager.Load_Automatic_Sheduling(PNL_Main);
 			manager.Load_Manual_Sheduling(PNL_Main);
 		}
 
-		if (e.getSource() == btnEditCourses) {
+		if (e.getSource() == btnEditCourses)
+		{
 			manager.Load_Edit_Course(PNL_Main);
-			
-			
-			
-			
+
 		}
-		if (e.getSource() == btnEditClasses) {
+		if (e.getSource() == btnEditClasses)
+		{
 			manager.Load_Edit_Class(PNL_Main);
 		}
-		if (e.getSource() == btnEditLecturers) {
+		if (e.getSource() == btnEditLecturers)
+		{
 			manager.Load_Edit_Lecturer(PNL_Main);
 		}
 
 	}
-
-
 
 }

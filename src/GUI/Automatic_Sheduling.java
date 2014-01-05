@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
@@ -11,6 +12,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
@@ -38,6 +41,7 @@ import Algorithm.GeneticAlgorithmRun;
 import Algorithm.Individual;
 import Controllers.LecturerController;
 import Controllers.ManagerController;
+
 import javax.swing.JProgressBar;
 
 public class Automatic_Sheduling extends JPanel implements ActionListener, ListSelectionListener, KeyListener
@@ -48,7 +52,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 	private JTextField txtLecturerPreferences;
 	public JPanel PNL_Main;
 	private JComboBox cmbBxSemster;
-	private JButton btnSaveChanges;
+	private JButton btnOpenFolder;
 	private JButton btnBackToMainMenu;
 	private JLabel lblTimeTableSchedualing;
 	private JProgressBar progressBar;
@@ -56,14 +60,13 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 	private ManagerController manager;
 	static Color[] colors = { Color.BLUE, Color.GRAY, Color.RED };
 	static String[] strings = { "Test1", "Test2", "Test3" };
-	
-
 
 	private Database allDatabase;
 	private JLabel lblPopulationCounter;
 	private JTextField txtLoopCounter;
 	private JTextField txtRunTime;
 	private JLabel lblRunTime;
+
 	/**
 	 * Create the panel.
 	 */
@@ -87,23 +90,20 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		super();
 		this.manager = mng;
 		initialize();
-		
-		
-		
 
 		// manager.loadOptionalTimeTables();
 		// manager.startalgo();
 
 	}
 
-	public void setData(Database database){
-		allDatabase=database;
+	public void setData(Database database)
+	{
+		allDatabase = database;
 
 	}
+
 	private void initialize()
 	{
-		// TODO Auto-generated method stub
-
 		pnl();
 		PNL_Main.add(GETbtnSaveChanges());
 		PNL_Main.add(GETbtnBackToMainMenu());
@@ -111,20 +111,15 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 
 		PNL_Main.add(horizontalStrut1());
 		PNL_Main.add(horizontalStrut2());
-		
 
 		PNL_Main.add(getprogressBar());
-		
 
 		PNL_Main.add(gettxtLoopCounter());
 		txtLoopCounter.setColumns(10);
-		
-		
+
 		PNL_Main.add(getlblPopulationCounter());
-		
 
 		PNL_Main.add(gettxtRunTime());
-		
 
 		PNL_Main.add(getlblRunTime());
 		// PNL_Main.add(GETcmbBxSemster());
@@ -184,8 +179,6 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 
 	}
 
-	
-
 	// /////////////////all class////
 	private Component horizontalStrut1()
 	{
@@ -236,26 +229,41 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 
 	private JButton GETbtnSaveChanges()
 	{
-		// TODO Auto-generated method stub
-		if (btnSaveChanges == null)
+		if (btnOpenFolder == null)
 		{
-			btnSaveChanges = new JButton("Save");
-			btnSaveChanges.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+			btnOpenFolder = new JButton("Open");
+			btnOpenFolder.addActionListener(new ActionListener()
+			{
+				public void actionPerformed(ActionEvent e)
+				{
 				}
 			});
-			btnSaveChanges.setBounds(177, 434, 121, 29);
-			btnSaveChanges.setFont(new Font("Tahoma", Font.PLAIN, 16));
+			btnOpenFolder.setBounds(177, 434, 121, 29);
+			btnOpenFolder.setFont(new Font("Tahoma", Font.PLAIN, 16));
 
 		}
-		return btnSaveChanges;
+		return btnOpenFolder;
 	}
 
 	public void actionPerformed(ActionEvent e)
 	{
-		if (e.getSource() == btnSaveChanges)
+		if (e.getSource() == btnOpenFolder)
 		{
-			// manager.handleManagerGUI()
+			File foler = new File("C:\\scheduling"); // path to the directory to be opened
+			Desktop desktop = null;
+			if (Desktop.isDesktopSupported())
+			{
+				desktop = Desktop.getDesktop();
+			}
+
+			try
+			{
+				desktop.open(foler);
+			} catch (IOException e1)
+			{
+			
+			}
+
 		}
 		if (e.getSource() == btnBackToMainMenu)
 		{
@@ -264,55 +272,52 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
 
-
 	}
 
 	@Override
 	public void keyPressed(KeyEvent arg0)
 	{
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void keyReleased(KeyEvent arg0)
 	{
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public void keyTyped(KeyEvent arg0)
 	{
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0)
 	{
-		// TODO Auto-generated method stub
-
+	
 	}
 
 	public void addActions()
 	{
 		btnBackToMainMenu.addActionListener(this);
-		btnSaveChanges.addActionListener(this);
+		btnOpenFolder.addActionListener(this);
 		manager.startAutoSchedualing();
 		manager.startTimer();
 	}
-	
+
 	public void updateProgressBar(double fitness)
 	{
-		progressBar.setValue((int)Math.round(fitness*100));	
+		progressBar.setValue((int) Math.round(fitness * 100));
 	}
-	
+
 	public void updatePopCounter(Integer counter)
 	{
 		txtLoopCounter.setText(counter.toString());
 	}
-	
+
 	public void updaterunTime(String time)
 	{
 		txtRunTime.setText(time);
