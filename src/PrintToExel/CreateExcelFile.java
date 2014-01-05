@@ -163,7 +163,7 @@ public class CreateExcelFile {
 		
 		Row row;
 		
-		for (int j = 0; j < Settings.dailyHours+1; j++)
+		for (int j = 0; j < Settings.dailyHours; j++)
 		{
 			row = mySheet.createRow(j);
 

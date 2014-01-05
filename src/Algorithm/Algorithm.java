@@ -11,7 +11,7 @@ public class Algorithm
 	/* GA parameters */
 	static double uniformRate = 0.5;
 	static double mutationRate = 0.0005;
-
+	private Population newPopulation2;
 	// private static final int tournamentSize = 5;
 
 	/* Public methods */

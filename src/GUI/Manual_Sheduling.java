@@ -637,7 +637,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 								}
 								ColumnRow++;
 							}
-							//setIndividual(courseid,true);
+							setIndividual(courseid,true);
 
 							if (flag)
 							{
@@ -729,7 +729,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 							FacultyMap.get(fac).get(semester).remove(ColumnRow - j);
 							tablemanual.getModel().setValueAt("", tablemanual.getSelectedRow() - j, tablemanual.getSelectedColumn());
 						}
-						//setIndividual(CourseID,false);
+						setIndividual(CourseID,false);
 					}
 
 					insert_to_corse_combo();
