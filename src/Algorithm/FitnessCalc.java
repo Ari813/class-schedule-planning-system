@@ -1,5 +1,6 @@
 package Algorithm;
 
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
@@ -353,6 +354,7 @@ public class FitnessCalc implements Runnable
 								
 								{
 								//	counter++;
+									HardConstraints ++;
 									tempCounter ++;
 								}
 
@@ -365,7 +367,7 @@ public class FitnessCalc implements Runnable
 				}
 			}
 		}
-		HardConstraints += tempCounter;
+		//HardConstraints += tempCounter;
 		if (debug)
 			System.out.println("check courses of same semester not overlapping:" + tempCounter+"-"+HardConstraints);
 //----------------------------------------------------------------------------

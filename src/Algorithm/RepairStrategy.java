@@ -1,5 +1,6 @@
 package Algorithm;
 
+
 import java.util.Iterator;
 
 import entities.Course;

@@ -1,5 +1,6 @@
 package Algorithm;
 
+
 import Controllers.ManagerController;
 
 public class MutateAlgorithm implements Runnable

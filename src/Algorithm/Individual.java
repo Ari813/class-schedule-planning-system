@@ -1,5 +1,6 @@
 package Algorithm;
 
+
 import Controllers.*;
 
 public class Individual
