@@ -1,6 +1,5 @@
 package Algorithm;
 
-
 import java.util.Random;
 
 import Controllers.*;
@@ -12,6 +11,7 @@ public class Algorithm
 	static double uniformRate = 0.5;
 	static double mutationRate = 0.0005;
 	private Population newPopulation2;
+
 	// private static final int tournamentSize = 5;
 
 	/* Public methods */
@@ -31,56 +31,65 @@ public class Algorithm
 
 		// Loop over the population size and create new individuals with
 		// crossover
-		for (int i = 0; i < pop.size(); i++)
+		for (int j = 0; j <= pop.size() - 50; j += 50)
 		{
+			for (int i = j; i < j + 50; i++)
+			{
+				CrossoverAlgorithm crossOverThread = new CrossoverAlgorithm(pop, newPopulation, i);
 
-			CrossoverAlgorithm crossOverThread = new CrossoverAlgorithm(pop, newPopulation, i);
-
-			CrossoverAlgorithmArray[i] = new Thread(crossOverThread, "Crossover " + i);
-			CrossoverAlgorithmArray[i].start();
+				CrossoverAlgorithmArray[i] = new Thread(crossOverThread, "Crossover " + i);
+				CrossoverAlgorithmArray[i].start();
+			}
+			for (int i = j; i < j + 50; i++)
+				CrossoverAlgorithmArray[i].join();
 		}
-		for (int i = 0; i < pop.size(); i++)
-			CrossoverAlgorithmArray[i].join();
 
 		// Mutate population
-		for (int i = 0; i < newPopulation.size(); i++)
+		for (int j = 0; j <= pop.size() - 50; j += 50)
 		{
-			MutateAlgorithm mutateThread = new MutateAlgorithm(newPopulation, i);
+			for (int i = j; i < j + 50; i++)
+			{
+				MutateAlgorithm mutateThread = new MutateAlgorithm(newPopulation, i);
 
-			MutateAlgorithmArray[i] = new Thread(mutateThread, "Mutate " + i);
-			MutateAlgorithmArray[i].start();
+				MutateAlgorithmArray[i] = new Thread(mutateThread, "Mutate " + i);
+				MutateAlgorithmArray[i].start();
 
-			// mutate(newPopulation.getIndividual(i));
+				// mutate(newPopulation.getIndividual(i));
+			}
+			for (int i = j; i < j + 50; i++)
+				MutateAlgorithmArray[i].join();
 		}
-		for (int i = 0; i < pop.size(); i++)
-			MutateAlgorithmArray[i].join();
 
 		// Repair population
-		for (int i = 0; i < newPopulation.size(); i++)
+		for (int j = 0; j <= pop.size() - 50; j += 50)
 		{
-			RepairStrategy RepairThread = new RepairStrategy(newPopulation, i);
+			for (int i = j; i < j + 50; i++)
+			{
+				RepairStrategy RepairThread = new RepairStrategy(newPopulation, i);
 
-			RepairsAlgorithmArray[i] = new Thread(RepairThread, "Repair " + i);
-			RepairsAlgorithmArray[i].start();
+				RepairsAlgorithmArray[i] = new Thread(RepairThread, "Repair " + i);
+				RepairsAlgorithmArray[i].start();
 
+			}
+			for (int i = j; i < j + 50; i++)
+				RepairsAlgorithmArray[i].join();
 		}
-		for (int i = 0; i < pop.size(); i++)
-			RepairsAlgorithmArray[i].join();
-
 		// calculate fitness for population
 
-		for (int i = 0; i < newPopulation.size(); i++)
+		for (int j = 0; j <= pop.size() - 50; j += 50)
 		{
-			FitnessCalc FitnessThread = new FitnessCalc(newPopulation, i);
+			for (int i = j; i < j + 50; i++)
+			{
+				FitnessCalc FitnessThread = new FitnessCalc(newPopulation, i);
 
-			FitnessAlgorithmArray[i] = new Thread(FitnessThread, "Fitness " + i);
-			FitnessAlgorithmArray[i].start();
+				FitnessAlgorithmArray[i] = new Thread(FitnessThread, "Fitness " + i);
+				FitnessAlgorithmArray[i].start();
 
-			// mutate(newPopulation.getIndividual(i));
+				// mutate(newPopulation.getIndividual(i));
+			}
+			for (int i = j; i < j + 50; i++)
+				FitnessAlgorithmArray[i].join();
 		}
-		for (int i = 0; i < pop.size(); i++)
-			FitnessAlgorithmArray[i].join();
-
 		SavePopulation = Replacement(newPopulation, pop);
 		return SavePopulation;
 	}
@@ -112,7 +121,7 @@ public class Algorithm
 
 		pop = bubbleSort(pop);
 		newPopulation = bubbleSort(newPopulation);
-		replacementSize = (int) (pop.size() * 0.3);
+		replacementSize = (int) (pop.size() * 0.1);
 		for (int i = 0; i < replacementSize; i++)
 		{
 			if (pop.getIndividual(oldpop).getFitness() > newPopulation.getIndividual(newpop).getFitness())
@@ -253,5 +262,17 @@ public class Algorithm
 
 		}
 		return (pop.individuals[pop.size()]);
+	}
+
+	public static void changeUniformRate(String string)
+	{
+		Algorithm.uniformRate = Double.parseDouble(string);
+		
+	}
+
+	public static void changeMutationRate(String string)
+	{
+		Algorithm.mutationRate = Double.parseDouble(string);
+		
 	}
 }

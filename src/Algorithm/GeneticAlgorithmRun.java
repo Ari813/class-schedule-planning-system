@@ -19,7 +19,14 @@ public class GeneticAlgorithmRun extends Thread
 	
 	public GeneticAlgorithmRun(Individual indv,int popSize, ManagerController managerController)
 	{
-		collagePop = new Population(popSize, indv);
+		try
+		{
+			collagePop = new Population(popSize, indv);
+		} catch (InterruptedException e)
+		{
+			setRunning(false);
+			System.out.println("failed to process algorithm!");
+		}
 		keepRunning = true;
 		setRunning(false);
 		this.manager =managerController;

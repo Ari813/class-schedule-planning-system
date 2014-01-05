@@ -1,6 +1,5 @@
 package Algorithm;
 
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -20,7 +19,7 @@ public class Population
 	public Population(int populationSize, boolean initialise)
 	{
 		individuals = new Individual[populationSize];
-		// Initialise population
+		// Initialize population
 		if (initialise)
 		{
 			// Loop and create individuals
@@ -35,16 +34,23 @@ public class Population
 		}
 	}
 
-	public Population(int populationSize, Individual indv)
+	public Population(int populationSize, Individual indv) throws InterruptedException
 	{
 		individuals = new Individual[populationSize];
+		Thread[] GeneratePopulationAlgorithm = new Thread[populationSize];
 		JumpStartIndividual = indv;
 		JumpStart();
-		for (int i = 0; i < size(); i++)
+		for (int j = 0; j <= size() - 50; j += 50)
 		{
-			Individual newIndividual = new Individual(JumpStartIndividual);
-			newIndividual.generateIndividual();
-			saveIndividual(i, newIndividual);
+			for (int i = j; i < j + 50; i++)
+			{
+				GeneratePopulationAlgorithm generateThread = new GeneratePopulationAlgorithm(this, i, JumpStartIndividual);
+
+				GeneratePopulationAlgorithm[i] = new Thread(generateThread, "generate " + i);
+				GeneratePopulationAlgorithm[i].start();
+			}
+			for (int i = j; i < j + 50; i++)
+				GeneratePopulationAlgorithm[i].join();
 		}
 	}
 
@@ -65,9 +71,7 @@ public class Population
 					for (int ClssIndex = 0; ClssIndex < Individual.NumOfClasses; ClssIndex++)
 						for (int CourseIndex = 0; CourseIndex < Individual.NumOfCourses; CourseIndex++)
 						{
-
 							JumpStartIndividual.getGeneByIndex(Hours, lecturerIndex, ClssIndex, CourseIndex).setUnEditable();
-
 						}
 				}
 			}
@@ -145,10 +149,10 @@ public class Population
 
 	public void printfitness()
 	{
-	/*	for (int i = 0; i < size(); i++)
-		{
-			System.out.println("fitness[" + i + "] => " + getIndividual(i).getFitness());
-		}*/
+		/*
+		 * for (int i = 0; i < size(); i++) { System.out.println("fitness[" + i
+		 * + "] => " + getIndividual(i).getFitness()); }
+		 */
 	}
 
 }

@@ -18,5 +18,9 @@
 	<classpathentry kind="lib" path="trunk/poi-scratchpad-3.9-20121203.jar"/>
 	<classpathentry kind="lib" path="trunk/stax-api-1.0.1.jar"/>
 	<classpathentry kind="lib" path="trunk/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="lib" path="trunk/ini4j-0.5.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="trunk/ini4j-0.5.2-jdk14.jar"/>
+	<classpathentry kind="lib" path="trunk/ini4j-0.5.2-sources.jar"/>
+	<classpathentry kind="lib" path="trunk/ini4j-0.5.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

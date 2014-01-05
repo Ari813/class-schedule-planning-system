@@ -11,8 +11,6 @@ import javax.swing.event.ChangeListener;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,11 +21,21 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.SwingConstants;
 import javax.swing.JCheckBox;
+
+import org.ini4j.Ini;
+import org.ini4j.InvalidFileFormatException;
+
+import common.Settings;
+
+import Algorithm.Algorithm;
+
 import java.awt.Rectangle;
 import java.awt.Dimension;
+import java.io.File;
+import java.io.IOException;
 
-public class LoginGUI extends JPanel implements ActionListener, KeyListener,
-		FocusListener, ChangeListener {
+public class LoginGUI extends JPanel implements ActionListener, KeyListener, FocusListener, ChangeListener
+{
 	/**
 	 * 
 	 */
@@ -55,26 +63,53 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 
 	private boolean rememberLogin;
 	private boolean rememberServer;
+	private Ini ini;
 
-	public LoginGUI(Main_Frame mainGUI) {
+	public LoginGUI(Main_Frame mainGUI)
+	{
 		super();
 		setPreferredSize(new Dimension(800, 600));
 		setSize(new Dimension(774, 600));
 		setMinimumSize(new Dimension(800, 600));
 		setMaximumSize(new Dimension(800, 600));
 		setBounds(new Rectangle(100, 100, 880, 600));
-		
+
 		this.mainGUI = mainGUI;
 		rememberLogin = false;
 		rememberServer = false;
 		initialize();
 
+		try
+		{
+			int tempInt;
+			ini = new Ini(new File("C://Application//settings.ini"));
+			Algorithm.changeUniformRate(ini.get("Algorithm", "uniform_Rate"));
+			Algorithm.changeMutationRate(ini.get("Algorithm", "mutation_Rate"));
+			tempInt = Integer.parseInt(ini.get("Algorithm", "population_size"));
+			Settings.populationSize = tempInt;
+			tempInt = Integer.parseInt(ini.get("WeekConf", "dailyHours"));
+			Settings.dailyHours = tempInt;
+			tempInt = Integer.parseInt(ini.get("WeekConf", "workingDays"));
+			Settings.workingDays = tempInt;
+
+			/*
+			 * [Algorithm] population_size = 500 uniform_Rate = 0.5;
+			 * mutation_Rate = 0.0005;
+			 * 
+			 * [WeekConf] weekHours = 84; dailyHours = 14; workingDays = 6;
+			 */
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
-	private void initialize() {
+	private void initialize()
+	{
 
-		setBorder(new TitledBorder(null, "Login",
-				TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		setBorder(new TitledBorder(null, "Login", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		setBackground(SystemColor.activeCaption);
 		setBounds(0, 0, 774, 474);
 		setLayout(null);
@@ -102,8 +137,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		this.setVisible(true);
 	}
 
-	private JCheckBox getChkBoxSaveSrvr() {
-		if (chkBoxSaveSrvr == null) {
+	private JCheckBox getChkBoxSaveSrvr()
+	{
+		if (chkBoxSaveSrvr == null)
+		{
 			chkBoxSaveSrvr = new JCheckBox("Save");
 			chkBoxSaveSrvr.setFont(new Font("Dialog", Font.PLAIN, 16));
 			chkBoxSaveSrvr.setToolTipText("Remember server connection details");
@@ -113,8 +150,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return chkBoxSaveSrvr;
 	}
 
-	private JLabel getLblWelcome() {
-		if (lblWelcome == null) {
+	private JLabel getLblWelcome()
+	{
+		if (lblWelcome == null)
+		{
 			lblWelcome = new JLabel("WELCOME");
 			lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
 			lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -124,8 +163,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return lblWelcome;
 	}
 
-	private JCheckBox getChkBoxRememberMe() {
-		if (chkBoxRememberMe == null) {
+	private JCheckBox getChkBoxRememberMe()
+	{
+		if (chkBoxRememberMe == null)
+		{
 			chkBoxRememberMe = new JCheckBox("Remember me");
 			chkBoxRememberMe.setFont(new Font("Dialog", Font.PLAIN, 16));
 			chkBoxRememberMe.setToolTipText("Remember me");
@@ -138,8 +179,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	// ------------------
 	// Component Getters
 	// ------------------
-	private JLabel getLblId() {
-		if (lblId == null) {
+	private JLabel getLblId()
+	{
+		if (lblId == null)
+		{
 			lblId = new JLabel("ID:");
 			lblId.setFont(new Font("Dialog", Font.PLAIN, 16));
 			lblId.setBounds(165, 190, 145, 14);
@@ -147,8 +190,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return lblId;
 	}
 
-	private JLabel getLblPassword() {
-		if (lblPassword == null) {
+	private JLabel getLblPassword()
+	{
+		if (lblPassword == null)
+		{
 			lblPassword = new JLabel("Password:");
 			lblPassword.setFont(new Font("Dialog", Font.PLAIN, 16));
 			lblPassword.setBounds(165, 215, 145, 14);
@@ -156,8 +201,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return lblPassword;
 	}
 
-	private JLabel getLblHostNameaddress() {
-		if (lblHostNameaddress == null) {
+	private JLabel getLblHostNameaddress()
+	{
+		if (lblHostNameaddress == null)
+		{
 			lblHostNameaddress = new JLabel("Host Name/Address:");
 			lblHostNameaddress.setFont(new Font("Dialog", Font.PLAIN, 16));
 			lblHostNameaddress.setBounds(165, 351, 227, 14);
@@ -165,8 +212,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return lblHostNameaddress;
 	}
 
-	private JLabel getLblPortNumber() {
-		if (lblPortNumber == null) {
+	private JLabel getLblPortNumber()
+	{
+		if (lblPortNumber == null)
+		{
 			lblPortNumber = new JLabel("Port Number:");
 			lblPortNumber.setFont(new Font("Dialog", Font.PLAIN, 16));
 			lblPortNumber.setBounds(165, 376, 145, 14);
@@ -174,8 +223,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return lblPortNumber;
 	}
 
-	private JLabel getLblUser() {
-		if (lblUser == null) {
+	private JLabel getLblUser()
+	{
+		if (lblUser == null)
+		{
 			lblUser = new JLabel("User:");
 			lblUser.setFont(new Font("Dialog", Font.PLAIN, 16));
 			lblUser.setBounds(76, 163, 95, 14);
@@ -183,8 +234,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return lblUser;
 	}
 
-	private JLabel getLblServer() {
-		if (lblServer == null) {
+	private JLabel getLblServer()
+	{
+		if (lblServer == null)
+		{
 			lblServer = new JLabel("Server:");
 			lblServer.setFont(new Font("Dialog", Font.PLAIN, 16));
 			lblServer.setBounds(76, 319, 95, 14);
@@ -192,8 +245,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return lblServer;
 	}
 
-	private JTextField getTxtId() {
-		if (txtId == null) {
+	private JTextField getTxtId()
+	{
+		if (txtId == null)
+		{
 			txtId = new JTextField();
 			txtId.setFont(new Font("Dialog", Font.PLAIN, 16));
 			txtId.setText("ID");
@@ -205,8 +260,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return txtId;
 	}
 
-	private JPasswordField getTxtPassword() {
-		if (txtPassword == null) {
+	private JPasswordField getTxtPassword()
+	{
+		if (txtPassword == null)
+		{
 			txtPassword = new JPasswordField();
 			txtPassword.setFont(new Font("Dialog", Font.PLAIN, 16));
 			txtPassword.setText("password");
@@ -218,8 +275,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return txtPassword;
 	}
 
-	private JTextField getTxtHostName() {
-		if (txtHostName == null) {
+	private JTextField getTxtHostName()
+	{
+		if (txtHostName == null)
+		{
 			txtHostName = new JTextField();
 			txtHostName.setFont(new Font("Dialog", Font.PLAIN, 16));
 			txtHostName.setText(DEFAULT_HOST);
@@ -230,8 +289,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return txtHostName;
 	}
 
-	private JTextField getTxtPort() {
-		if (txtPort == null) {
+	private JTextField getTxtPort()
+	{
+		if (txtPort == null)
+		{
 			txtPort = new JTextField();
 			txtPort.setFont(new Font("Dialog", Font.PLAIN, 16));
 			txtPort.setText(DEFAULT_PORT.toString());
@@ -242,8 +303,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return txtPort;
 	}
 
-	private JButton getBtnLogin() {
-		if (btnLogin == null) {
+	private JButton getBtnLogin()
+	{
+		if (btnLogin == null)
+		{
 			btnLogin = new JButton("Login");
 			btnLogin.setBounds(new Rectangle(0, 0, 160, 29));
 			btnLogin.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -253,8 +316,10 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 		return btnLogin;
 	}
 
-	private JButton getBtnExit() {
-		if (btnExit == null) {
+	private JButton getBtnExit()
+	{
+		if (btnExit == null)
+		{
 			btnExit = new JButton("Exit");
 			btnExit.setBounds(new Rectangle(0, 0, 160, 29));
 			btnExit.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -267,77 +332,93 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	// ------------------
 	// Getters
 	// ------------------
-	public String getHost() {
+	public String getHost()
+	{
 		if (txtHostName.getText().equals("localhost1"))
 			return new String(Amit_HOST);
 		return new String(txtHostName.getText());
 	}
 
-	public int getPort() {
-		try {
+	public int getPort()
+	{
+		try
+		{
 			return Integer.parseInt(txtPort.getText());
-		} catch (Exception exception) {
-		//	common.Perror.pError("Invalid port number!\nconnecting with default port.");
+		} catch (Exception exception)
+		{
+			// common.Perror.pError("Invalid port number!\nconnecting with default port.");
 		}
 		return DEFAULT_PORT;
 	}
 
-	public int getId() {
-		try {
+	public int getId()
+	{
+		try
+		{
 			return Integer.parseInt(txtId.getText());
-		} catch (Exception exception) {
-		//	common.Perror.pError("Invalid ID number!");
+		} catch (Exception exception)
+		{
+			// common.Perror.pError("Invalid ID number!");
 		}
 		return -1;
 	}
 
-	public String getPass() {
+	public String getPass()
+	{
 		return new String(txtPassword.getPassword());
 	}
 
 	// ------------------
 	// ------------------
 
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == btnLogin) {
+	public void actionPerformed(ActionEvent e)
+	{
+		if (e.getSource() == btnLogin)
+		{
 			int ID;
 			if ((ID = getId()) != -1)
 				mainGUI.handleLoginGUI();
 		}
-		if (e.getSource() == btnExit) {
+		if (e.getSource() == btnExit)
+		{
 			System.exit(0);
 		}
 	}
 
-	public void enableButtons() {
+	public void enableButtons()
+	{
 		txtId.setEditable(true);
 		txtPassword.setEditable(true);
 		txtHostName.setEditable(true);
 		txtPort.setEditable(true);
 	}
 
-	public void cleanLoginGUI() {
+	public void cleanLoginGUI()
+	{
 
 		txtId.setEditable(false);
 		txtPassword.setEditable(false);
 		txtHostName.setEditable(false);
 		txtPort.setEditable(false);
-		if (!rememberLogin) {
+		if (!rememberLogin)
+		{
 			txtId.setText("ID");
 			txtPassword.setText("password");
 		}
-		if (!rememberServer) {
+		if (!rememberServer)
+		{
 			txtHostName.setText(DEFAULT_HOST);
 			txtPort.setText(DEFAULT_PORT.toString());
 		}
 	}
 
 	@Override
-	public void keyPressed(KeyEvent e) {
+	public void keyPressed(KeyEvent e)
+	{
 		int key = e.getKeyCode();
-		if (key == KeyEvent.VK_ENTER) {
-			if (e.getSource() == txtId || e.getSource() == txtPassword
-					|| e.getSource() == txtHostName || e.getSource() == txtPort)
+		if (key == KeyEvent.VK_ENTER)
+		{
+			if (e.getSource() == txtId || e.getSource() == txtPassword || e.getSource() == txtHostName || e.getSource() == txtPort)
 				btnLogin.doClick();
 		}
 		if (key == KeyEvent.VK_ESCAPE)
@@ -345,18 +426,21 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	}
 
 	@Override
-	public void keyReleased(KeyEvent e) {
-		if ((!Character.isDigit(e.getKeyChar())) && (e.getSource()==txtId))
+	public void keyReleased(KeyEvent e)
+	{
+		if ((!Character.isDigit(e.getKeyChar())) && (e.getSource() == txtId))
 			txtId.setText("");
 	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
+	public void keyTyped(KeyEvent e)
+	{
 
 	}
 
 	@Override
-	public void focusGained(FocusEvent e) {
+	public void focusGained(FocusEvent e)
+	{
 		if (e.getSource() == txtPassword && getPass().equals("password"))
 			txtPassword.setText("");
 		if (e.getSource() == txtId && txtId.getText().equals("ID"))
@@ -364,7 +448,8 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	}
 
 	@Override
-	public void focusLost(FocusEvent e) {
+	public void focusLost(FocusEvent e)
+	{
 		if (e.getSource() == txtPassword && getPass().equals(""))
 			txtPassword.setText("password");
 		if (e.getSource() == txtId && txtId.getText().equals(""))
@@ -372,19 +457,19 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener,
 	}
 
 	@Override
-	public void stateChanged(ChangeEvent e) {
+	public void stateChanged(ChangeEvent e)
+	{
 		if (e.getSource() == chkBoxRememberMe)
 			if (chkBoxRememberMe.isSelected())
 				rememberLogin = true;
 			else
 				rememberLogin = false;
-			
+
 		if (e.getSource() == chkBoxSaveSrvr)
 			if (chkBoxRememberMe.isSelected())
 				rememberServer = true;
 			else
 				rememberServer = false;
-
 
 	}
 }

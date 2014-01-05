@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>trunk/settings.ini</name>
+			<type>1</type>
+			<location>C:/Application/settings.ini</location>
+		</link>
+	</linkedResources>
 </projectDescription>

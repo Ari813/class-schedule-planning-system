@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import common.Settings;
 import common.TimerUpdater;
 import entities.Building;
 import entities.Campus;
@@ -110,7 +111,7 @@ public class ManagerController
 		AS = new Automatic_Sheduling(this);
 		AS.setData(allData);
 		manegerMainFrm.add(AS.PNL_Main);
-		startalgo = new GeneticAlgorithmRun(firstIndividual, 50, this);
+		startalgo = new GeneticAlgorithmRun(firstIndividual, Settings.populationSize, this);
 		AS.addActions();
 
 		manegerMainFrm.repaint();
