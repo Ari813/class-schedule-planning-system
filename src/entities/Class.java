@@ -15,7 +15,7 @@ public class Class implements Serializable {
 	private int classID;
 	private int building;
 	private String description;
-
+	private Building uml;
 	private int capcity;
 	private Boolean available;
 	private int campus;

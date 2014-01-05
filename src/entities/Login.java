@@ -15,7 +15,7 @@ public class Login implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private User uml;
 	final public static int UserAlreadyLogged = -2;
 	final public static int ERROR = -1;
 	final public static int PRINCIPAL_PRMSSN = 1;

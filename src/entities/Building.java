@@ -9,7 +9,7 @@ public class Building implements Serializable{
 	private static final long serialVersionUID = 1L;
 private int buildingID;
   private String buildingName;
-  
+  private Campus umlCampus;
 	public Building() {
 		// TODO Auto-generated constructor stub
 	}
