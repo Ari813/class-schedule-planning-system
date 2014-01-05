@@ -760,13 +760,13 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 					 if (flag){
 						 
 					
-							//	  TODO block all fields
+							//	  TODO block all fields -V
 					
 					firstIndividual.getGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex).setUnEditable();;
-					//firstIndividual.
+				
 					 }else
 					 {
-						 ////	  TODO UN-block all fields
+						 ////	  TODO UN-block all fields=V
 						 firstIndividual.getGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex).setEditable();
 					 }
 				}
