@@ -110,7 +110,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 	// -----------------------
 	// public Map<Integer, ArrayList<Course>> CourseMap2;
 	public Map<Integer, Map<Integer, Map<Integer, Course>>> CourseMapInTable;
-	
+
 	public Map<Integer, Map<Integer, ArrayList<Course>>> CourseMap;
 	public Map<Integer, ArrayList<Faculty>> facMap;
 	// public Map<Integer, ArrayList<Lecturer>> LecturerMap;
@@ -450,10 +450,8 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 		}
 		if (e.getSource() == start)
 		{
-	 	
-		
-			
-			manager.Load_Automatic_Sheduling(this.PNL_Main, allData,firstIndividual);
+
+			manager.Load_Automatic_Sheduling(this.PNL_Main, allData, firstIndividual);
 
 		}
 
@@ -464,7 +462,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 		if (e.getSource() == semesterSpinner || e.getSource() == cmbxFaculty)
 		{
-			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(), semesterSpinner.getSelectedIndex()+1 );
+			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(), semesterSpinner.getSelectedIndex() + 1);
 			insert_to_corse_combo();
 			if (cmbBxCourse.getItemCount() > 0)
 				insert_to_lec_combo();
@@ -483,11 +481,11 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 			// CourseMap.get(selectedIndex).get(semesterIndex)
 			// texthours.setText("");
 			courseHours = 0;
-			//courseCapacityHours.setValue(0);
+			// courseCapacityHours.setValue(0);
 			if (cmbBxCourse.getItemCount() > 0)
 			{
 				int facultySelectedIndex = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-				int semesterIndex = semesterSpinner.getSelectedIndex()+1 ;
+				int semesterIndex = semesterSpinner.getSelectedIndex() + 1;
 				courseHours = CourseMap.get(facultySelectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getAcademicHours();
 				courseCapacityHours.setValue(courseHours);
 				insert_to_lec_combo();
@@ -501,7 +499,8 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 		{
 			int tmpRow = 0;
 
-			if ((cmbBxCourse.getItemCount() != 0) && (cmbBxLecturer.getItemCount() != 0)&&(cmbBxCourse.getSelectedIndex() != -1)&& (cmbBxLecturer.getSelectedIndex() != -1) &&((int)courseCapacityHours.getValue()!=0))
+			if ((cmbBxCourse.getItemCount() != 0) && (cmbBxLecturer.getItemCount() != 0) && (cmbBxCourse.getSelectedIndex() != -1) && (cmbBxLecturer.getSelectedIndex() != -1)
+					&& ((int) courseCapacityHours.getValue() != 0))
 			{
 
 				int Row = tablemanual.getSelectedRow();
@@ -510,7 +509,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 				boolean haveplaceflag = true;
 				int fac = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 
-				int semester = semesterSpinner.getSelectedIndex()+1;
+				int semester = semesterSpinner.getSelectedIndex() + 1;
 				int courseid = CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseID();
 				String courseDescription = CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getDescription();
 				int classRoom = arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
@@ -586,13 +585,13 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 						if (flag)
 						{
-							
+
 							for (int j = 0; j < courseHours; j++)
 							{
 								id_calsss = new IDclass(courseid, lecid, classRoom, ColumnRow, courseHours, courseDescription, lecname, classRoomDescription);
 								id_calsss.setId(j);
-								firstIndividual.setGeneByID(Column, Row+j, lecid, classRoom, courseid,j,false);
-								
+								firstIndividual.setGeneByID(Column, Row + j, lecid, classRoom, courseid, j, false);
+
 								// tablemanual.getModel().setValueAt(id_calsss.getClassid()
 								// + ":" +id_calsss.getCousreid() + ":"
 								// +id_calsss.getLecid() ,Row+j,Column );
@@ -638,7 +637,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 								}
 								ColumnRow++;
 							}
-							setIndividual(courseid,true);
+							setIndividual(courseid, true);
 
 							if (flag)
 							{
@@ -693,7 +692,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 			{
 
 				int fac = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-				int semester = (int) semesterSpinner.getSelectedIndex()+1 ;
+				int semester = (int) semesterSpinner.getSelectedIndex() + 1;
 				int Row = tablemanual.getSelectedRow();
 				int Column = tablemanual.getSelectedColumn();
 				int ColumnRow = Row + (Column - 1) * Settings.dailyHours;
@@ -705,7 +704,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 						int ClassID = FacultyMap.get(fac).get(semester).get(ColumnRow).getClassid();
 						int LecturerID = FacultyMap.get(fac).get(semester).get(ColumnRow).getLecid();
 						int CourseID = FacultyMap.get(fac).get(semester).get(ColumnRow).getCousreid();
-						
+
 						int size = FacultyMap.get(fac).get(semester).get(ColumnRow).getSize();
 						int QA1 = FacultyMap.get(fac).get(semester).get(ColumnRow).getId();
 						int QA2 = size - QA1;
@@ -720,17 +719,17 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 						for (int j = 0; j < QA2; j++)
 						{
-							firstIndividual.clrGeneByID(Column, Row+j, LecturerID, ClassID, CourseID,true);
+							firstIndividual.clrGeneByID(Column, Row + j, LecturerID, ClassID, CourseID, true);
 							tablemanual.getModel().setValueAt("", tablemanual.getSelectedRow() + j, tablemanual.getSelectedColumn());
 							FacultyMap.get(fac).get(semester).remove(ColumnRow + j);
 						}
 						for (int j = 1; j <= QA1; j++)
 						{
-							firstIndividual.clrGeneByID(Column, Row-j, LecturerID, ClassID, CourseID,true);
+							firstIndividual.clrGeneByID(Column, Row - j, LecturerID, ClassID, CourseID, true);
 							FacultyMap.get(fac).get(semester).remove(ColumnRow - j);
 							tablemanual.getModel().setValueAt("", tablemanual.getSelectedRow() - j, tablemanual.getSelectedColumn());
 						}
-						setIndividual(CourseID,false);
+						setIndividual(CourseID, false);
 					}
 
 					insert_to_corse_combo();
@@ -748,64 +747,62 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 		}
 	}
 
-	private void setIndividual(int courseid,boolean flag) {
-		
+	private void setIndividual(int courseid, boolean flag)
+	{
+
 		int courseIndex = allData.getMapping().getCourseIndex(courseid);
-		
+
 		for (int Hours = 0; Hours < firstIndividual.weeklyHours; Hours++)
 		{
 			for (int LecturerIndex = 0; LecturerIndex < arrayLecturers.size(); LecturerIndex++)
 			{
 				for (int ClassesIndex = 0; ClassesIndex < arrayClasses.size(); ClassesIndex++)
 				{
-					 if (flag){
-						 
-					
-					
-					firstIndividual.getGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex).setUnEditable();;
-				
-					 }else
-					 {
-					
-						 firstIndividual.getGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex).setEditable();
-					 }
+					if (flag)
+					{
+
+						firstIndividual.getGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex).setUnEditable();
+						;
+
+					} else
+					{
+
+						firstIndividual.getGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex).setEditable();
+					}
 				}
 			}
 		}
 	}
 
-
-	
 	public void setfirstIndividual()
 	{
-	
-	//	int size=Allcourses.size();
-			//int fac=0;
-			//int sem=0;
-		//	int courseid;
-	/*
-			for(int j=0;j<size;j++){
-				fac=Allcourses.get(j).getFaculty();
-				sem=Allcourses.get(j).getSemester();
-				courseid=Allcourses.get(j).getCourseID();
-				if (CourseMapInTable.containsKey(fac))
-					if (CourseMapInTable.get(fac).containsKey(sem))
-						if (CourseMapInTable.get(fac).get(sem).containsKey(courseid))
-							Allcourses.remove(j);
-			}
-	*/
+
+		// int size=Allcourses.size();
+		// int fac=0;
+		// int sem=0;
+		// int courseid;
+		/*
+		 * for(int j=0;j<size;j++){ fac=Allcourses.get(j).getFaculty();
+		 * sem=Allcourses.get(j).getSemester();
+		 * courseid=Allcourses.get(j).getCourseID(); if
+		 * (CourseMapInTable.containsKey(fac)) if
+		 * (CourseMapInTable.get(fac).containsKey(sem)) if
+		 * (CourseMapInTable.get(fac).get(sem).containsKey(courseid))
+		 * Allcourses.remove(j); }
+		 */
 		firstIndividual = new Individual(arrayLecturers.size(), arrayClasses.size(), Allcourses.size());
 		allData = new Database(Allcourses, arrayLecturers, arrayClasses);
 		manager.setDataBase(allData);
-		//System.out.println(firstIndividual.getSelection());
+		// System.out.println(firstIndividual.getSelection());
 	}
 
 	private void SetTable(int faculty, int semester)
 	{
-		
+
 		if (FacultyMap != null)
 		{
-			for (int columnIndex = 1; columnIndex <= Settings.workingDays; columnIndex++){
+			for (int columnIndex = 1; columnIndex <= Settings.workingDays; columnIndex++)
+			{
 				for (int rowIndex = 0; rowIndex < Settings.dailyHours; rowIndex++)
 				{
 					tablemanual.getModel().setValueAt("-", rowIndex, columnIndex);
@@ -819,8 +816,9 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 												+ FacultyMap.get(faculty).get(semester).get(ColumnRow).getLecid(), rowIndex, columnIndex);
 
 							}
-				}}
-			
+				}
+			}
+
 		}
 	}
 
@@ -838,7 +836,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 	public void setClasses(ArrayList<Class> getClasses)
 	{
-		
+
 		arrayClasses = getClasses;
 
 		cmbBxClass.removeAll();
@@ -893,7 +891,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 		{
 			cmbBxLecturer.removeAllItems();
 		}
-		
+
 	}
 
 	private void insert_to_corse_combo()
@@ -901,7 +899,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 		cmbBxCourse.removeAllItems();
 		int selectedIndex = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-		int semesterIndex = semesterSpinner.getSelectedIndex() +1;
+		int semesterIndex = semesterSpinner.getSelectedIndex() + 1;
 
 		if (CourseMap != null && CourseMap.get(selectedIndex) != null && CourseMap.get(selectedIndex).get(semesterIndex) != null)
 		{
@@ -921,7 +919,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 	{
 		cmbBxLecturer.removeAllItems();
 		int selectedIndex = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-		int semesterIndex = semesterSpinner.getSelectedIndex()+1 ;
+		int semesterIndex = semesterSpinner.getSelectedIndex() + 1;
 		int courseindex = cmbBxCourse.getSelectedIndex();
 		ArrayList<Lecturer> lecturerPerCourse = new ArrayList<Lecturer>();
 		if (CourseMap != null && CourseMap.get(selectedIndex) != null && CourseMap.get(selectedIndex).get(semesterIndex) != null)
@@ -1018,7 +1016,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 				int column = tablemanual.getSelectedColumn();
 				int fac = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 				int ColumnRow = row + (column - 1) * Settings.dailyHours;
-				int semester = semesterSpinner.getSelectedIndex() +1;
+				int semester = semesterSpinner.getSelectedIndex() + 1;
 				if (e.getClickCount() == 2)
 				{
 					if (FacultyMap != null)

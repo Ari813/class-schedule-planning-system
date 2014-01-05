@@ -79,14 +79,6 @@ public class ManagerController
 		manegerMainFrm.add(main.PNL_Main);
 	}
 
-	/*
-	 * public void handleManagerGUI(int operation) { switch (operation) { case
-	 * EXIT:// logout
-	 * 
-	 * break;
-	 * 
-	 * } }
-	 */
 	public void BacktoMainMenu(JPanel Panel2Close)
 	{
 		manegerMainFrm.remove(Panel2Close);
@@ -421,7 +413,7 @@ public class ManagerController
 		long runtime;
 		Date date = new Date();
 		runtime = date.getTime() - starttime.getTime();
-		
+
 		TimeUnit.MILLISECONDS.toDays(runtime);
 		AS.updaterunTime(String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(runtime),
 				TimeUnit.MILLISECONDS.toMinutes(runtime) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(runtime)),

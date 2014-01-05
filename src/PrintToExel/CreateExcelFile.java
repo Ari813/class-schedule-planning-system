@@ -28,7 +28,8 @@ import entities.IDclass;
 /*
  * Here we will learn how to create Excel file and header for the same.
  */
-public class CreateExcelFile {
+public class CreateExcelFile
+{
 
 	private CreateExcelFile cls;
 
@@ -81,12 +82,13 @@ public class CreateExcelFile {
 		headerRow.setHeightInPoints(45);
 	}
 
-	public CreateExcelFile(int faculty, Map<Integer, ArrayList<IDclass>> map)
-			throws Exception {
+	public CreateExcelFile(int faculty, Map<Integer, ArrayList<IDclass>> map) throws Exception
+	{
 		faculty = 1;
 		Iterator<Integer> semesteritr;
 		semesteritr = map.keySet().iterator();
-		while (semesteritr.hasNext()) {
+		while (semesteritr.hasNext())
+		{
 			semester = semesteritr.next().intValue();
 			this.idclass = map.get(semester);
 			addinfo();
@@ -96,7 +98,8 @@ public class CreateExcelFile {
 
 	}
 
-	public void addinfo() throws Exception {
+	public void addinfo() throws Exception
+	{
 		headerRow = new ArrayList<String>();
 		headerRow.add("");
 		headerRow.add("sunday");
@@ -107,9 +110,11 @@ public class CreateExcelFile {
 		headerRow.add("friday ");
 	}
 
-	public void createExcelFile(int facnumber) {
+	public void createExcelFile(int facnumber)
+	{
 		FileOutputStream fos = null;
-		try {
+		try
+		{
 
 			Calendar cal = Calendar.getInstance();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -117,8 +122,7 @@ public class CreateExcelFile {
 			String dateStr = dateFormat.format(cal.getTime());
 			String timeStr = timeFormat.format(cal.getTime());
 
-			String filePath = new String("c://scheduling/" + dateStr + "-"
-					+ facnumber + "//");
+			String filePath = new String("c://scheduling/" + dateStr + "-" + facnumber + "//");
 			String fileName = new String(timeStr + ".xls");
 			String rootPath = new String("c://scheduling//");
 
@@ -139,77 +143,43 @@ public class CreateExcelFile {
 			hsfstyle.setBorderTop((short) 2);
 			hsfstyle.setFillBackgroundColor((short) 125);
 			workbook.write(fos);
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 	}
 
 	public void WriteToExcelFile(List<List> list1, HSSFSheet mySheet) throws Exception
-	{try{
-		Map<Integer, ArrayList<IDclass>> mapid=new HashMap<Integer, ArrayList<IDclass>>();
-		int hourid;
-		while (!idclass.isEmpty()){
-			hourid=idclass.get(0).getSize();
-			if( mapid.containsKey(hourid)){
-				mapid.get(hourid).add(idclass.get(0));
-				
-			}else{
-				ArrayList<IDclass> idArray=new ArrayList<IDclass>();
-				idArray.add(idclass.get(0));
-				mapid.put(hourid,idArray);
-			}
-			idclass.remove(0);
-		}
-		
-		Row row;
-		
-		for (int j = 0; j <= Settings.dailyHours; j++)
+	{
+		try
 		{
-			row = mySheet.createRow(j);
-
-			for (int day = 0; day <= 6; day++)
+			Map<Integer, ArrayList<IDclass>> mapid = new HashMap<Integer, ArrayList<IDclass>>();
+			int hourid;
+			while (!idclass.isEmpty())
 			{
-				
-				Cell cell = row.createCell(day);
-				cell.getRowIndex();
-				if (j == 0)
+				hourid = idclass.get(0).getSize();
+				if (mapid.containsKey(hourid))
 				{
-					cell.setCellValue(headerRow.get(day));
+					mapid.get(hourid).add(idclass.get(0));
+
 				} else
-				{if (day == 0)
-					{
-					int tmp=j+7;
-						cell.setCellValue(tmp +"-"+ ++tmp);
-					} else
-					{
-					int key=(j-1)+(day-1)*Settings.dailyHours;
-					if (mapid.containsKey(key)){
-						String next=new String("");
-						ArrayList<IDclass> idArray=	mapid.get(key);
-						Iterator<IDclass> iter=idArray.iterator();
-						while(iter.hasNext()){
-							next+=iter.next().toString();//iter.next().getString();
-													}
-						cell.setCellValue(next);
-					}
-					}
+				{
+					ArrayList<IDclass> idArray = new ArrayList<IDclass>();
+					idArray.add(idclass.get(0));
+					mapid.put(hourid, idArray);
 				}
+				idclass.remove(0);
 			}
-			}
-					
-					
-		
-		
-		
-		/*/
-			System.out.println("");
-			for (int j = 0; j < 30; j++)
+
+			Row row;
+
+			for (int j = 0; j <= Settings.dailyHours; j++)
 			{
 				row = mySheet.createRow(j);
 
 				for (int day = 0; day <= 6; day++)
 				{
-					
+
 					Cell cell = row.createCell(day);
 					cell.getRowIndex();
 					if (j == 0)
@@ -219,36 +189,27 @@ public class CreateExcelFile {
 					{
 						if (day == 0)
 						{
-							cell.setCellValue(j);
-
+							int tmp = j + 7;
+							cell.setCellValue(tmp + "-" + ++tmp);
 						} else
 						{
-							if (!idclass.isEmpty())
+							int key = (j - 1) + (day - 1) * Settings.dailyHours;
+							if (mapid.containsKey(key))
 							{
-								//System.out.println(idclass.get(0).getId());
-								
-								if ((day) * Settings.dailyHours > (1+idclass.get(0).getSize()))
+								String next = new String("");
+								ArrayList<IDclass> idArray = mapid.get(key);
+								Iterator<IDclass> iter = idArray.iterator();
+								while (iter.hasNext())
 								{
-									String str="hour ="+ idclass.get(0).getSize()+"| Lecturer = "+ idclass.get(0).getLecname() +"| Class = "+ idclass.get(0).getClassRoomDescription()+"| Course = "+ idclass.get(0).getCourseDescription();
-									cell.setCellValue(str);// all
-																				// info
-									//System.out.print(idclass.get(0).getId());
-									idclass.remove(0);
-								} else
-								{
-									cell.setCellValue("---");
+									next += iter.next().toString();// iter.next().getString();
 								}
-							}else{
-								cell.setCellValue("---");
+								cell.setCellValue(next);
 							}
 						}
 					}
-					// allsheet.get(i)
-
 				}
-				rownum++;
 			}
-/*/
+
 		} catch (Exception e)
 		{
 			e.printStackTrace();

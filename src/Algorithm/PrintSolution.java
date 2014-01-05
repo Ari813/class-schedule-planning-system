@@ -1,6 +1,5 @@
 package Algorithm;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,7 +46,6 @@ public class PrintSolution extends Thread
 		} catch (Exception e)
 		{
 
-		
 			e.printStackTrace();
 		}
 	}
@@ -96,13 +94,12 @@ public class PrintSolution extends Thread
 							} else
 							{
 
-								
-								 Map<Integer, ArrayList<IDclass>> tmpsemester = new HashMap<Integer, ArrayList<IDclass>>();
-								ArrayList<IDclass> tmpidcalss = new  ArrayList<IDclass>();
+								Map<Integer, ArrayList<IDclass>> tmpsemester = new HashMap<Integer, ArrayList<IDclass>>();
+								ArrayList<IDclass> tmpidcalss = new ArrayList<IDclass>();
 
 								tmpidcalss.add(idcalss);
 								tmpsemester.put(semester, tmpidcalss);
-								
+
 								individualMap.put(fac, tmpsemester);
 
 							}
