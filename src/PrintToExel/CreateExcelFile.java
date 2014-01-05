@@ -163,7 +163,7 @@ public class CreateExcelFile {
 		
 		Row row;
 		
-		for (int j = 0; j < Settings.dailyHours; j++)
+		for (int j = 0; j <= Settings.dailyHours; j++)
 		{
 			row = mySheet.createRow(j);
 
@@ -182,7 +182,7 @@ public class CreateExcelFile {
 						cell.setCellValue(tmp +"-"+ ++tmp);
 					} else
 					{
-					int key=(j)+(day-1)*Settings.dailyHours;
+					int key=(j-1)+(day-1)*Settings.dailyHours;
 					if (mapid.containsKey(key)){
 						String next=new String("");
 						ArrayList<IDclass> idArray=	mapid.get(key);
