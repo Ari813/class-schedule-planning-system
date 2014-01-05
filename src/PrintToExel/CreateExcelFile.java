@@ -188,7 +188,7 @@ public class CreateExcelFile {
 						ArrayList<IDclass> idArray=	mapid.get(key);
 						Iterator<IDclass> iter=idArray.iterator();
 						while(iter.hasNext()){
-							next+=iter.next().getSring();
+							next+=iter.next().toString();//iter.next().getString();
 													}
 						cell.setCellValue(next);
 					}

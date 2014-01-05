@@ -105,15 +105,17 @@ public int getSize() {
 public void setSize(int size) {
 	this.size = size;
 }
-
-public String ToString() {
+@Override
+public String toString() {
 	String str=new String(" course ID: "  + cousreid + 
 						"\n Course Description: "  + courseDescription  +
 						"\n Lecturer ID:  "  + lecid +
 						"\n Lecturer Name: "  + lecname +
 						"\n Room ID: "  + classid +
 						"\n Room Description:  "  + classRoomDescription +
-						"\n course size:  "  + size
+						"\n course size:  "  + size +
+						"\n========================================"
+						
 				
 			
 			);
@@ -122,8 +124,7 @@ public String ToString() {
 	return str;
 }
 
-public String getSring() {
-	// TODO Auto-generated method stub
+public String getString() {
 	String str="hour ="+ getSize()+"| Lecturer = "+getLecname() +"| Class = "+getClassRoomDescription()+"| Course = "+getCourseDescription()+"\n";
 	
 	return str;

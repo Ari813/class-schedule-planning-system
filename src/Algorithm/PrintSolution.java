@@ -27,7 +27,7 @@ public class PrintSolution extends Thread
 		if (solution.isPrinted())
 			return;
 		solution.setPrinted(true);
-		System.out.println("fitness=(" + solution.getDegubFitness() + ")");
+		System.out.println("fitness=(" + solution.getFitness() + ")");
 		for (int H = 0; H < Individual.weeklyHours; H++)
 			// weeklyHours
 			for (int L = 0; L < Individual.NumOfLecturers; L++)

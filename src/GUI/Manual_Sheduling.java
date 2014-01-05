@@ -1027,7 +1027,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 							if (FacultyMap.get(fac).containsKey(semester))
 							{
 								if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow))
-									JOptionPane.showMessageDialog(manager.manegerMainFrm, FacultyMap.get(fac).get(semester).get(ColumnRow).ToString());
+									JOptionPane.showMessageDialog(manager.manegerMainFrm, FacultyMap.get(fac).get(semester).get(ColumnRow).toString());
 
 							}
 						}
@@ -1049,7 +1049,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 								if (FacultyMap.get(fac).containsKey(semester))
 								{
 									if (FacultyMap.get(fac).get(semester).containsKey(ColumnRow))
-										tablemanual.setToolTipText(FacultyMap.get(fac).get(semester).get(ColumnRow).ToString());
+										tablemanual.setToolTipText(FacultyMap.get(fac).get(semester).get(ColumnRow).toString());
 								}
 							}
 						}
