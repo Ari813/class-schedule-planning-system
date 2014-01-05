@@ -70,6 +70,7 @@ public class PrintSolution extends Thread
 						if (solution.getGeneByIndex(H, L, R, C).isGene())
 						{
 							fac = ManagerController.collageDB.getCourseByIndex(C).getFaculty();
+							
 							semester = ManagerController.collageDB.getCourseByIndex(C).getSemester();
 							cousreid = ManagerController.collageDB.getCourseByIndex(C).getCourseID();
 							courseDescription = ManagerController.collageDB.getCourseByIndex(C).getDescription();
@@ -111,7 +112,8 @@ public class PrintSolution extends Thread
 		while (facItr.hasNext())
 		{
 			fac = facItr.next().intValue();
-			cls = new CreateExcelFile(fac, individualMap.get(fac));
+			
+			cls = new CreateExcelFile( individualMap.get(fac));
 			cls.createExcelFile(fac);
 
 		}

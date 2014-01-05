@@ -22,6 +22,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
+import Controllers.ManagerController;
 import common.Settings;
 import entities.IDclass;
 
@@ -82,9 +83,11 @@ public class CreateExcelFile
 		headerRow.setHeightInPoints(45);
 	}
 
-	public CreateExcelFile(int faculty, Map<Integer, ArrayList<IDclass>> map) throws Exception
+	public CreateExcelFile( Map<Integer, ArrayList<IDclass>> map) throws Exception
 	{
-		faculty = 1;
+		//faculty = 1;
+		
+		
 		Iterator<Integer> semesteritr;
 		semesteritr = map.keySet().iterator();
 		while (semesteritr.hasNext())
@@ -112,17 +115,18 @@ public class CreateExcelFile
 
 	public void createExcelFile(int facnumber)
 	{
+		
 		FileOutputStream fos = null;
 		try
 		{
-
+			String facnumbersrt=ManagerController.collageDB.getFaculties(facnumber);
 			Calendar cal = Calendar.getInstance();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat timeFormat = new SimpleDateFormat("HH-mm-ss");
 			String dateStr = dateFormat.format(cal.getTime());
 			String timeStr = timeFormat.format(cal.getTime());
 
-			String filePath = new String("c://scheduling/" + dateStr + "-" + facnumber + "//");
+			String filePath = new String("c://scheduling/" + dateStr + "-" + facnumbersrt + "//");
 			String fileName = new String(timeStr + ".xls");
 			String rootPath = new String("c://scheduling//");
 

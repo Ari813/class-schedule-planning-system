@@ -762,6 +762,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 		 */
 		firstIndividual = new Individual(arrayLecturers.size(), arrayClasses.size(), Allcourses.size());
 		allData = new Database(Allcourses, arrayLecturers, arrayClasses);
+		allData.setFaculties(ManualArrayFaculty);
 		manager.setDataBase(allData);
 		// System.out.println(firstIndividual.getSelection());
 	}
