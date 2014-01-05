@@ -106,7 +106,6 @@ public class Population
 					for (int Hours = 0; Hours < Individual.weeklyHours; Hours++)
 						for (int ClssIndex = 0; ClssIndex < Individual.NumOfClasses; ClssIndex++)
 							JumpStartIndividual.getGeneByIndex(Hours, lecturerIndex, ClssIndex, courseIndex).setUnEditable();
-
 				}
 
 			}

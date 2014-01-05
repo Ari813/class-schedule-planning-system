@@ -69,7 +69,7 @@ public class Individual
 					// NumOfClasses
 					for (int C = 0; C < NumOfCourses; C++)
 					{ // NumOfCourses
-						{
+						
 							genes[H][L][R][C] = new Gene();
 							genes[H][L][R][C].setIndex(indv.getGeneByIndex(H, L, R, C).getIndex());
 
@@ -85,10 +85,8 @@ public class Individual
 							{
 								genes[H][L][R][C].clrGene();
 							}
-
-						}
-
 					}
+		
 		setPrinted(indv.isPrinted());
 	}
 

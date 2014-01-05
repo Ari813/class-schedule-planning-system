@@ -51,8 +51,13 @@ public class CrossoverAlgorithm implements Runnable
 								}
 								H += (i-1);
 							}
+							else if (indiv1.getGeneByIndex(H, L, R, C).getIndex() == -1) 
+							{
+								if (!indiv1.getGeneByIndex(H , L, R, C).isEditable())
+									newSol.getGeneByIndex(H, L, R, C).setUnEditable();
+							}
 
-						} else
+						} else 
 						{
 							if (indiv2.getGeneByIndex(H, L, R, C).getIndex() == 0)
 							{
@@ -64,6 +69,11 @@ public class CrossoverAlgorithm implements Runnable
 								}
 								H += (i-1);
 
+							}
+							else if (indiv2.getGeneByIndex(H, L, R, C).getIndex() == -1) 
+							{
+								if (!indiv2.getGeneByIndex(H , L, R, C).isEditable())
+									newSol.getGeneByIndex(H, L, R, C).setUnEditable();
 							}
 						}
 
