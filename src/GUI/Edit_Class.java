@@ -469,10 +469,11 @@ public class Edit_Class extends JPanel implements ActionListener, ListSelectionL
 						cmbxEditClass.removeAllItems();
 						setClasses(arrayClasses);
 					}
-
+					JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
 					System.out.println(" Success!!!");
 				} else
 				{
+					JOptionPane.showMessageDialog(manager.manegerMainFrm, " update Fail try again");
 					System.out.println(" Fail!!!!");
 				}
 				if (isNewClass)

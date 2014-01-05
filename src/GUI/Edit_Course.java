@@ -17,6 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
@@ -33,6 +34,7 @@ import java.awt.SystemColor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.swing.JCheckBox;
 
 public class Edit_Course extends JPanel implements ActionListener, ListSelectionListener, KeyListener
@@ -611,9 +613,11 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 					setCourses(arrayCourse);
 
 				}
+				JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
 				System.out.println("Success!!!");
 			} else
 			{
+				JOptionPane.showMessageDialog(manager.manegerMainFrm, "update Fail try again");
 				System.out.println("Fail!!!!");
 			}
 			if (isNewCourse)

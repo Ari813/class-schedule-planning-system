@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -372,9 +373,11 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 					ArrayLecturer.add(newLecturer);
 					setLec(ArrayLecturer);
 				}
+				JOptionPane.showMessageDialog(manager.manegerMainFrm, "Succeeded update");
 				System.out.println(" Success!!!");
 			} else
 			{
+				JOptionPane.showMessageDialog(manager.manegerMainFrm, "update Fail try again");
 				System.out.println(" Fail!!!!");
 			}
 
