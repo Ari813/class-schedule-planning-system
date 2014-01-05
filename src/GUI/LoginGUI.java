@@ -62,13 +62,16 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 		super();
 		setPreferredSize(new Dimension(800, 600));
 		setSize(new Dimension(774, 600));
+		
 		setMinimumSize(new Dimension(800, 600));
 		setMaximumSize(new Dimension(800, 600));
 		setBounds(new Rectangle(100, 100, 880, 600));
 
 		this.mainGUI = mainGUI;
+		mainGUI.setAlwaysOnTop(true);
+		mainGUI.setResizable(false);
+		
 		initialize();
-
 		try
 		{
 			int tempInt;
@@ -125,7 +128,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 		add(getBtnExit());
 
 		enableButtons();
-		this.setVisible(true);
 	}
 
 	private JLabel getLblWelcome()
@@ -137,6 +139,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 			lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 30));
 			lblWelcome.setBackground(SystemColor.inactiveCaptionBorder);
 			lblWelcome.setBounds(10, 35, 780, 89);
+			
 		}
 		return lblWelcome;
 	}

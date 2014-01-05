@@ -25,6 +25,7 @@ import MsgPackage.LoginPack;
 import MsgPackage.LogoutPack;
 import common.ChatIF;
 import entities.Login;
+import java.awt.Frame;
 
 public class Main_Frame extends JFrame implements ActionListener, ChatIF
 {
@@ -74,6 +75,7 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF
 	 */
 	public Main_Frame(int admin)
 	{
+		setExtendedState(Frame.ICONIFIED);
 		this.admin = admin;
 		start();
 
@@ -82,7 +84,6 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF
 	public void start()
 	{
 		loginUserGUI = new LoginGUI(this);
-		setType(Type.UTILITY);
 		setBounds(100, 100, 800, 600);
 		getContentPane().add(loginUserGUI);
 
@@ -115,7 +116,8 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF
 		setForeground(SystemColor.controlLtHighlight);
 		setLocale(new Locale("en", "IL"));
 		setResizable(false);
-		setAlwaysOnTop(true);
+		setAlwaysOnTop(false);
+		setVisible(true);
 		setPreferredSize(new Dimension(800, 600));
 		setName("Main_Panel");
 		setTitle("Time table schedualing system");
