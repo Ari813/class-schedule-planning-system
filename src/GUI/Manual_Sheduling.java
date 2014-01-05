@@ -749,7 +749,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 	private void setIndividual(int courseid,boolean flag) {
 		
-		int courseIndex = ManagerController.collageDB.getMapping().getCourseIndex(courseid);
+		int courseIndex = allData.getMapping().getCourseIndex(courseid);
 		
 		for (int Hours = 0; Hours < firstIndividual.weeklyHours; Hours++)
 		{
@@ -759,11 +759,15 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 				{
 					 if (flag){
 						 
-					//	  TODO block all fields
-							// firstIndividual.setGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex, i);
+					int i=0;
+							//	  TODO block all fields
+					
+					firstIndividual.getGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex).setUnEditable();;
+					//firstIndividual.
 					 }else
 					 {
 						 ////	  TODO UN-block all fields
+						 firstIndividual.getGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex).setEditable();
 					 }
 				}
 			}
