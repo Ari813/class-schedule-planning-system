@@ -671,7 +671,7 @@ public class Edit_Course extends JPanel implements ActionListener,
 		txtIdNumber.setText("ID Number");
 		txtCourseName.setText("Course name");
 		// CB_Faculty.setVisible(false);
-		Course_Semester.setValue(0);
+		Course_Semester.setValue(1);
 		AcademicHours.setValue(0);
 		MaxStdntPerClass.setValue(0);
 		btnSave.setEnabled(false);

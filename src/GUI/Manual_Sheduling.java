@@ -463,7 +463,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 		if (e.getSource() == semesterSpinner || e.getSource() == cmbxFaculty)
 		{
-			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(), semesterSpinner.getSelectedIndex() + 1);
+			SetTable(ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum(), semesterSpinner.getSelectedIndex()+1 );
 			insert_to_corse_combo();
 			if (cmbBxCourse.getItemCount() > 0)
 				insert_to_lec_combo();
@@ -482,11 +482,11 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 			// CourseMap.get(selectedIndex).get(semesterIndex)
 			// texthours.setText("");
 			courseHours = 0;
-			courseCapacityHours.setValue(0);
+			//courseCapacityHours.setValue(0);
 			if (cmbBxCourse.getItemCount() > 0)
 			{
 				int facultySelectedIndex = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-				int semesterIndex = semesterSpinner.getSelectedIndex() + 1;
+				int semesterIndex = semesterSpinner.getSelectedIndex()+1 ;
 				courseHours = CourseMap.get(facultySelectedIndex).get(semesterIndex).get(cmbBxCourse.getSelectedIndex()).getAcademicHours();
 				courseCapacityHours.setValue(courseHours);
 				insert_to_lec_combo();
@@ -500,7 +500,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 		{
 			int tmpRow = 0;
 
-			if ((cmbBxCourse.getItemCount() != 0) && (cmbBxLecturer.getItemCount() != 0))
+			if ((cmbBxCourse.getItemCount() != 0) && (cmbBxLecturer.getItemCount() != 0)&&(cmbBxCourse.getSelectedIndex() != -1)&& (cmbBxLecturer.getSelectedIndex() != -1) &&((int)courseCapacityHours.getValue()!=0))
 			{
 
 				int Row = tablemanual.getSelectedRow();
@@ -509,7 +509,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 				boolean haveplaceflag = true;
 				int fac = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 
-				int semester = semesterSpinner.getSelectedIndex() + 1;
+				int semester = semesterSpinner.getSelectedIndex()+1;
 				int courseid = CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getCourseID();
 				String courseDescription = CourseMap.get(fac).get(semester).get(cmbBxCourse.getSelectedIndex()).getDescription();
 				int classRoom = arrayClasses.get(cmbBxClass.getSelectedIndex()).getClassID();
@@ -552,7 +552,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 								{
 									if (FacultyMap.get(fac_index) != null)
 									{
-										for (int semester_index = 1; semester_index < 7; semester_index++)
+										for (int semester_index = 1; semester_index <= 8; semester_index++)
 										{
 											if (FacultyMap.get(fac_index).get(semester_index) != null)
 											{
@@ -692,7 +692,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 			{
 
 				int fac = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-				int semester = (int) semesterSpinner.getSelectedIndex() + 1;
+				int semester = (int) semesterSpinner.getSelectedIndex()+1 ;
 				int Row = tablemanual.getSelectedRow();
 				int Column = tablemanual.getSelectedColumn();
 				int ColumnRow = Row + (Column - 1) * Settings.dailyHours;
@@ -760,13 +760,12 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 					 if (flag){
 						 
 					
-							//	  TODO block all fields -V
 					
 					firstIndividual.getGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex).setUnEditable();;
 				
 					 }else
 					 {
-						 ////	  TODO UN-block all fields=V
+					
 						 firstIndividual.getGeneByIndex(Hours, LecturerIndex, ClassesIndex, courseIndex).setEditable();
 					 }
 				}
@@ -904,7 +903,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 
 		cmbBxCourse.removeAllItems();
 		int selectedIndex = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-		int semesterIndex = semesterSpinner.getSelectedIndex() + 1;
+		int semesterIndex = semesterSpinner.getSelectedIndex() +1;
 
 		if (CourseMap != null && CourseMap.get(selectedIndex) != null && CourseMap.get(selectedIndex).get(semesterIndex) != null)
 		{
@@ -924,7 +923,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 	{
 		cmbBxLecturer.removeAllItems();
 		int selectedIndex = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
-		int semesterIndex = semesterSpinner.getSelectedIndex() + 1;
+		int semesterIndex = semesterSpinner.getSelectedIndex()+1 ;
 		int courseindex = cmbBxCourse.getSelectedIndex();
 		ArrayList<Lecturer> lecturerPerCourse = new ArrayList<Lecturer>();
 		if (CourseMap != null && CourseMap.get(selectedIndex) != null && CourseMap.get(selectedIndex).get(semesterIndex) != null)
@@ -1021,7 +1020,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 				int column = tablemanual.getSelectedColumn();
 				int fac = ManualArrayFaculty.get(cmbxFaculty.getSelectedIndex()).getFacultyNum();
 				int ColumnRow = row + (column - 1) * Settings.dailyHours;
-				int semester = semesterSpinner.getSelectedIndex() + 1;
+				int semester = semesterSpinner.getSelectedIndex() +1;
 				if (e.getClickCount() == 2)
 				{
 					if (FacultyMap != null)
