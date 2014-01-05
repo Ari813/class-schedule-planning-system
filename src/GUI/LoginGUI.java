@@ -85,7 +85,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 			txtId.setText(ini.get("Login", "UserName"));
 			txtHostName.setText(ini.get("Login", "Server"));
 			txtPort.setText(ini.get("Login", "Port"));
-	
+			txtPassword.setText(ini.get("Login", "UserName"));
 			/*
 			 * [Algorithm] population_size = 500 uniform_Rate = 0.5;
 			 * mutation_Rate = 0.0005;
