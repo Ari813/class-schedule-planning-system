@@ -822,7 +822,8 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 	public void setMapCourse(ArrayList<Course> course)
 	{
 
-		Allcourses = course;
+		Allcourses =new ArrayList<>();
+		Allcourses=course;
 		CourseMap = new HashMap<Integer, Map<Integer, ArrayList<Course>>>();
 
 		CourseMapInTable = new HashMap<Integer, Map<Integer, Map<Integer, Course>>>();

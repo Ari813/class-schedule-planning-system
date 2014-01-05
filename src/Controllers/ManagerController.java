@@ -101,6 +101,7 @@ public class ManagerController
 
 		manegerMainFrm.remove(Panel2Close);
 		AS = new Automatic_Sheduling(this);
+		//TODO
 		AS.setData(allData);
 		manegerMainFrm.add(AS.PNL_Main);
 		startalgo = new GeneticAlgorithmRun(firstIndividual, Settings.populationSize, this);
