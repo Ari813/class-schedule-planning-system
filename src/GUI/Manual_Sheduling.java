@@ -804,12 +804,22 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 		
 		if (FacultyMap != null)
 		{
-			for (int columnIndex = 1; columnIndex <= Settings.workingDays; columnIndex++)
+			for (int columnIndex = 1; columnIndex <= Settings.workingDays; columnIndex++){
 				for (int rowIndex = 0; rowIndex < Settings.dailyHours; rowIndex++)
 				{
-					tablemanual.getModel().setValueAt("", rowIndex, columnIndex);
-				}
-			for (int columnIndex = 1; columnIndex <= Settings.workingDays; columnIndex++)
+					tablemanual.getModel().setValueAt("-", rowIndex, columnIndex);
+					int ColumnRow = rowIndex + (columnIndex - 1) * Settings.dailyHours;
+					if (FacultyMap.containsKey(faculty))
+						if (FacultyMap.get(faculty).containsKey(semester))
+							if (FacultyMap.get(faculty).get(semester).containsKey(ColumnRow))
+							{
+								tablemanual.getModel().setValueAt(
+										FacultyMap.get(faculty).get(semester).get(ColumnRow).getCousreid() + ":" + FacultyMap.get(faculty).get(semester).get(ColumnRow).getClassid() + ":"
+												+ FacultyMap.get(faculty).get(semester).get(ColumnRow).getLecid(), rowIndex, columnIndex);
+
+							}
+				}}
+			/*/for (int columnIndex = 1; columnIndex <= Settings.workingDays; columnIndex++)
 				for (int rowIndex = 0; rowIndex <= Settings.dailyHours; rowIndex++)
 				{
 					int ColumnRow = rowIndex + (columnIndex - 1) * Settings.dailyHours;
@@ -822,7 +832,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 												+ FacultyMap.get(faculty).get(semester).get(ColumnRow).getLecid(), rowIndex, columnIndex);
 
 							}
-				}
+				}/*/
 		}
 	}
 
