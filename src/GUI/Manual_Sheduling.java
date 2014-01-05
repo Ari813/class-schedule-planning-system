@@ -43,6 +43,7 @@ import javax.swing.text.AbstractDocument.BranchElement;
 import entities.Class;
 import entities.Course;
 import entities.Faculty;
+import entities.IDclass;
 import entities.Lecturer;
 import Algorithm.Database;
 import Algorithm.GeneticAlgorithmRun;

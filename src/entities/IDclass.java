@@ -1,4 +1,4 @@
-package GUI;
+package entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,7 +8,6 @@ import java.util.Map;
 import Algorithm.Individual;
 import Controllers.ManagerController;
 import PrintToExel.CreateExcelFile;
-import entities.Course;
 
 public class IDclass {
 

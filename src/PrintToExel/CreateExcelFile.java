@@ -22,8 +22,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 
-import GUI.IDclass;
 import common.Settings;
+import entities.IDclass;
 
 /*
  * Here we will learn how to create Excel file and header for the same.

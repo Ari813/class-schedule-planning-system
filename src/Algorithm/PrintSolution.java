@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import entities.IDclass;
 import Controllers.ManagerController;
-import GUI.IDclass;
 import PrintToExel.CreateExcelFile;
 
 public class PrintSolution extends Thread
