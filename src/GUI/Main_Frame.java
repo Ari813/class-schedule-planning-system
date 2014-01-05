@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.SystemColor;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -26,6 +27,7 @@ import MsgPackage.LoginPack;
 import MsgPackage.LogoutPack;
 import common.ChatIF;
 import entities.Login;
+
 import java.awt.Frame;
 
 public class Main_Frame extends JFrame implements ActionListener, ChatIF
@@ -120,6 +122,7 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF
 		setAlwaysOnTop(false);
 		setVisible(true);
 		setPreferredSize(new Dimension(800, 600));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ICON.JPG")));
 		setName("Main_Panel");
 		setTitle("Time table schedualing system");
 		setMinimumSize(new Dimension(800, 600));
