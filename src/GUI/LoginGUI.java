@@ -29,6 +29,7 @@ import org.ini4j.Ini;
 import Algorithm.Algorithm;
 
 import common.Settings;
+import javax.swing.ImageIcon;
 
 public class LoginGUI extends JPanel implements ActionListener, KeyListener, FocusListener, ChangeListener
 {
@@ -50,12 +51,12 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 	private JLabel lblPortNumber;
 	private JLabel lblUser;
 	private JLabel lblServer;
-	private JLabel lblWelcome;
 	private JButton btnLogin;
 	private JButton btnExit;
 	private Main_Frame mainGUI;
 
 	private Ini ini;
+	private JLabel label;
 
 	public LoginGUI(Main_Frame mainGUI)
 	{
@@ -88,6 +89,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 			txtId.setText(ini.get("Login", "UserName"));
 			txtHostName.setText(ini.get("Login", "Server"));
 			txtPort.setText(ini.get("Login", "Port"));
+			add(getLabel());
 			
 			/*
 			 * [Algorithm] population_size = 500 uniform_Rate = 0.5;
@@ -117,7 +119,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 		add(getLblPortNumber());
 		add(getLblUser());
 		add(getLblServer());
-		add(getLblWelcome());
 
 		add(getTxtId());
 		add(getTxtPassword());
@@ -128,20 +129,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 		add(getBtnExit());
 
 		enableButtons();
-	}
-
-	private JLabel getLblWelcome()
-	{
-		if (lblWelcome == null)
-		{
-			lblWelcome = new JLabel("WELCOME");
-			lblWelcome.setHorizontalAlignment(SwingConstants.CENTER);
-			lblWelcome.setFont(new Font("Tahoma", Font.PLAIN, 30));
-			lblWelcome.setBackground(SystemColor.inactiveCaptionBorder);
-			lblWelcome.setBounds(10, 35, 780, 89);
-			
-		}
-		return lblWelcome;
 	}
 
 	// ------------------
@@ -416,5 +403,13 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 	public void stateChanged(ChangeEvent e)
 	{
 
+	}
+	private JLabel getLabel() {
+		if (label == null) {
+			label = new JLabel("");
+			label.setIcon(new ImageIcon(LoginGUI.class.getResource("/GUI/AUTO.jpg")));
+			label.setBounds(263, 53, 234, 57);
+		}
+		return label;
 	}
 }

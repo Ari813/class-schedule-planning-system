@@ -183,8 +183,9 @@ public class CreateExcelFile
 
 				for (int day = 0; day <= 6; day++)
 				{
-
+					
 					Cell cell = row.createCell(day);
+					
 					cell.getRowIndex();
 					if (j == 0)
 					{
