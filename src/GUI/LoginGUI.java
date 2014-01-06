@@ -56,7 +56,6 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 	private Main_Frame mainGUI;
 
 	private Ini ini;
-	private JLabel label;
 
 	public LoginGUI(Main_Frame mainGUI)
 	{
@@ -89,7 +88,11 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 			txtId.setText(ini.get("Login", "UserName"));
 			txtHostName.setText(ini.get("Login", "Server"));
 			txtPort.setText(ini.get("Login", "Port"));
-			add(getLabel());
+			
+			JLabel lblNewLabel = new JLabel("");
+			lblNewLabel.setIcon(new ImageIcon(LoginGUI.class.getResource("/UML/LOGO.jpg")));
+			lblNewLabel.setBounds(10, 45, 780, 110);
+			add(lblNewLabel);
 			
 			/*
 			 * [Algorithm] population_size = 500 uniform_Rate = 0.5;
@@ -403,13 +406,5 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 	public void stateChanged(ChangeEvent e)
 	{
 
-	}
-	private JLabel getLabel() {
-		if (label == null) {
-			label = new JLabel("");
-			label.setIcon(new ImageIcon(LoginGUI.class.getResource("/GUI/AUTO.jpg")));
-			label.setBounds(263, 53, 234, 57);
-		}
-		return label;
 	}
 }

@@ -122,7 +122,6 @@ public class Main_Frame extends JFrame implements ActionListener, ChatIF
 		setAlwaysOnTop(false);
 		setVisible(true);
 		setPreferredSize(new Dimension(800, 600));
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("ICON.JPG")));
 		setName("Main_Panel");
 		setTitle("Time table schedualing system");
 		setMinimumSize(new Dimension(800, 600));

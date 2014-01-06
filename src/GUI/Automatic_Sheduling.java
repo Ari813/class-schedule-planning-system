@@ -131,16 +131,11 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		BufferedImage myPicture;
 		try {
 			myPicture = ImageIO.read(new File("C:\\Application\\ICON.JPG"));
-			panel_pic = new JLabel(new ImageIcon(myPicture));
 			//add(panel_pic);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		panel_pic.setBounds(79, 121, 660, 252);
-		PNL_Main.add(panel_pic);
 		// PNL_Main.add(GETcmbBxSemster());
 
 	}
@@ -329,7 +324,12 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 
 	public void updateProgressBar(double fitness)
 	{
-		progressBar.setValue((int) Math.round(fitness * 100));
+		int Progress = (int) Math.round(fitness * 150);
+		if (Progress<100)
+			progressBar.setValue(Progress);
+		else {
+			progressBar.setValue(100);
+		}
 	}
 
 	public void updatePopCounter(Integer counter)
