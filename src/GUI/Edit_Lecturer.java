@@ -305,11 +305,12 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 	{
 		cmbxLecturerEditor = new JComboBox();
 		cmbxLecturerEditor.setModel(new DefaultComboBoxModel(new String[] { "Empty" }));
-		cmbxLecturerEditor.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		cmbxLecturerEditor.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		cmbxLecturerEditor.setToolTipText("Edit class list");
-		cmbxLecturerEditor.setBounds(10, 53, 754, 20);
-		cmbxLecturerEditor.setMaximumRowCount(52);
-
+		cmbxLecturerEditor.setBounds(10, 53, 731, 20);
+		cmbxLecturerEditor.setMaximumRowCount(10);
+		//cmbxLecturerEditor.setEditable(true);
+		
 		return cmbxLecturerEditor;
 	}
 

@@ -525,6 +525,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 	private JComboBox getcmbBxEditCouse()
 	{
 		cmbBxEditCourse = new JComboBox();
+		cmbBxEditCourse.setMaximumRowCount(10);
 		cmbBxEditCourse.setBounds(10, 53, 754, 20);
 
 		return cmbBxEditCourse;

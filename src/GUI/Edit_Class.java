@@ -420,7 +420,7 @@ public class Edit_Class extends JPanel implements ActionListener, ListSelectionL
 			cmbxEditClass.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			cmbxEditClass.setToolTipText("Edit class list");
 			cmbxEditClass.setBounds(10, 53, 754, 20);
-			cmbxEditClass.setMaximumRowCount(52);
+			cmbxEditClass.setMaximumRowCount(10);
 
 		}
 		return cmbxEditClass;

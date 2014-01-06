@@ -185,7 +185,7 @@ public class Course_Settings extends JPanel implements ActionListener, TableMode
 			cmbxFaculty.setBounds(10, 53, 724, 20);
 			cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
 			cmbxFaculty.setToolTipText("faculty");
-			cmbxFaculty.setMaximumRowCount(52);
+			cmbxFaculty.setMaximumRowCount(10);
 
 		}
 		return cmbxFaculty;

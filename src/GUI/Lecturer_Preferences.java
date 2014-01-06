@@ -172,7 +172,7 @@ public class Lecturer_Preferences extends JPanel implements ActionListener, List
 		cmbxlecturer.setModel(new DefaultComboBoxModel(new String[] { "Empty" }));
 		cmbxlecturer.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		cmbxlecturer.setToolTipText("Edit class list");
-		cmbxlecturer.setMaximumRowCount(52);
+		cmbxlecturer.setMaximumRowCount(10);
 		cmbxlecturer.addActionListener(this);
 		return cmbxlecturer;
 	}

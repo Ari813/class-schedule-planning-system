@@ -406,7 +406,7 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 		cmbxFaculty.setBounds(63, 55, 461, 20);
 		cmbxFaculty.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		cmbxFaculty.setToolTipText("Faculty list");
-		cmbxFaculty.setMaximumRowCount(52);
+		cmbxFaculty.setMaximumRowCount(10);
 		return cmbxFaculty;
 	}
 
