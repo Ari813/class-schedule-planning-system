@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
@@ -89,6 +90,10 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 
 	private ArrayList<Faculty> arrayFaculty;
 	private ArrayList<Course> arrayCourse;
+	private JScrollPane scroll;
+	private JScrollPane scroll2;
+	private JScrollPane scrollAvailableStudyAids;
+	private JScrollPane scrollSelectedStudyAids;
 
 	/**
 	 * Create the panel.
@@ -214,14 +219,14 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 
 		PNL_Main.add(getlblAvailableLecturers());
 
-		PNL_Main.add(getlstAvailableLecturers());
-
+		//PNL_Main.add(getlstAvailableLecturers());
+		PNL_Main.add(GETscroll1lstAvailableLecturers());
 		PNL_Main.add(getbtnAdd());
-
+		
 		PNL_Main.add(getbtnRemove());
 
-		PNL_Main.add(getlstChoosenLecturers());
-
+		//PNL_Main.add(getlstChoosenLecturers());
+		PNL_Main.add(GETscrollChoosenLecturers());
 		PNL_Main.add(getbtnNewCourse());
 
 		PNL_Main.add(getbtnSave());
@@ -246,9 +251,9 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 
 		PNL_Main.add(getlblStudyAids());
 
-		PNL_Main.add(getSelectedStudyAids());
-
-		PNL_Main.add(getAvailableStudyAids());
+	//	PNL_Main.add(getSelectedStudyAids());
+		PNL_Main.add(GETscrolSelectedStudyAids());
+		PNL_Main.add(GETscrolAvailableStudyAids());
 
 		PNL_Main.add(getHorizontalStrut());
 
@@ -384,6 +389,53 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 		lstAvailableLecturers.setBounds(145, 137, 115, 221);
 		return lstAvailableLecturers;
 	}
+	
+	private JScrollPane GETscrolAvailableStudyAids()
+	{
+		if (scrollAvailableStudyAids == null)
+		{
+			scrollAvailableStudyAids = new JScrollPane();
+			
+			scrollAvailableStudyAids.setViewportView(getAvailableStudyAids());
+			scrollAvailableStudyAids.setBounds(510, 142, 243, 85);
+		}
+		return scrollAvailableStudyAids;
+	}
+	private JScrollPane GETscrolSelectedStudyAids()
+	{
+		if (scrollSelectedStudyAids == null)
+		{
+			scrollSelectedStudyAids = new JScrollPane();
+			scrollSelectedStudyAids.setViewportView(getSelectedStudyAids());
+			scrollSelectedStudyAids.setBounds(2,2,2,2);
+		}
+		return scrollSelectedStudyAids;
+	}
+	
+	
+	private JScrollPane GETscroll1lstAvailableLecturers()
+	{
+		if (scroll == null)
+		{
+			scroll = new JScrollPane();
+			scroll.setViewportView(getlstAvailableLecturers());
+			scroll.setBounds(145, 137, 115, 221);
+		}
+		return scroll;
+	}
+	//TODO
+	private JScrollPane GETscrollChoosenLecturers()
+	{
+		if (scroll2 == null)
+		{
+				
+			scroll2 = new JScrollPane();//getlstChoosenLecturers()
+			scroll2.setViewportView(getlstChoosenLecturers());
+			scroll2.setBounds(345, 141, 115, 217);
+		}
+		return scroll2;
+	}
+	
 
 	private JLabel getlblAvailableLecturers()
 	{

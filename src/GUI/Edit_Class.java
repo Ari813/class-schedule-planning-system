@@ -18,6 +18,7 @@ import java.util.Map;
 import java.awt.Color;
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
 import javax.swing.UIManager;
 import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
@@ -139,7 +140,7 @@ public class Edit_Class extends JPanel implements ActionListener, ListSelectionL
 		PNL_Main.add(GETtxtCapacityNumber());
 		PNL_Main.add(GETtxtDescriptionText());
 		PNL_Main.add(GETtxtClassEditor());
-
+		//TODO  JScrollBar 
 		PNL_Main.add(GETlstClassAids());
 
 		PNL_Main.add(GETchckbxAvailable());
