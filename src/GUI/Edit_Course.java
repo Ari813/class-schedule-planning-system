@@ -454,6 +454,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 
 		Course_Semester.setModel(new SpinnerNumberModel(1, 1, 8, 1));
 		Course_Semester.setBounds(11, 400, 79, 20);
+		
 		return Course_Semester;
 
 	}
@@ -535,6 +536,8 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 		{
 			// mainCourscomboBox.setVisible(false);
 			// chckbxMainCourse.setVisible(false);
+			Course_Semester.setVisible(false);
+			Course_Semester.setVisible(true);
 			createNewCourse(false);
 			setSelectedCourse();
 		}
@@ -957,5 +960,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 		btnRemove.addActionListener(this);
 		btnAdd.addActionListener(this);
 		cmbBxEditCourse.addActionListener(this);
+		
+		
 	}
 }
