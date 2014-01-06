@@ -3,79 +3,79 @@
   generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
   <class id="1" language="java" name="entities.User" project="C.S.P.S" file="/C.S.P.S/src/entities/User.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="236" y="132"/>    
+    <position height="-1" width="-1" x="572" y="408"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+      <attributes public="true" package="true" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
   <class id="2" language="java" name="entities.StudyAids" project="C.S.P.S" file="/C.S.P.S/src/entities/StudyAids.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1133" y="113"/>    
+    <position height="-1" width="-1" x="1083" y="202"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+      <attributes public="true" package="true" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
   <class id="3" language="java" name="entities.Lecturer" project="C.S.P.S" file="/C.S.P.S/src/entities/Lecturer.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="498" y="206"/>    
+    <position height="-1" width="-1" x="578" y="202"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+      <attributes public="true" package="true" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
   <class id="4" language="java" name="entities.Class" project="C.S.P.S" file="/C.S.P.S/src/entities/Class.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1137" y="566"/>    
+    <position height="-1" width="-1" x="1070" y="405"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+      <attributes public="true" package="true" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
   <class id="5" language="java" name="entities.Building" project="C.S.P.S" file="/C.S.P.S/src/entities/Building.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1383" y="465"/>    
+    <position height="-1" width="-1" x="1065" y="681"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+      <attributes public="true" package="true" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
   <class id="6" language="java" name="entities.Campus" project="C.S.P.S" file="/C.S.P.S/src/entities/Campus.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1332" y="135"/>    
+    <position height="-1" width="-1" x="844" y="679"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+      <operations public="false" package="false" protected="false" private="false" static="false"/>    
     </display>  
   </class>  
   <class id="7" language="java" name="entities.Course" project="C.S.P.S" file="/C.S.P.S/src/entities/Course.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="857" y="341"/>    
+    <position height="-1" width="-1" x="825" y="211"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+      <attributes public="true" package="true" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="entities.Faculty" project="C.S.P.S" file="/C.S.P.S/src/entities/Faculty.java" 
+  <class id="8" language="java" name="entities.Login" project="C.S.P.S" file="/C.S.P.S/src/entities/Login.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="429" y="580"/>    
+    <position height="-1" width="-1" x="574" y="629"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+      <attributes public="true" package="true" protected="true" private="true" static="false"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="entities.Login" project="C.S.P.S" file="/C.S.P.S/src/entities/Login.java" 
+  <class id="9" language="java" name="entities.Faculty" project="C.S.P.S" file="/C.S.P.S/src/entities/Faculty.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="226" y="601"/>    
+    <position height="-1" width="-1" x="824" y="497"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -83,78 +83,78 @@
     </display>  
   </class>  
   <association id="10">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="11" name="LecturerCourses">        
-        <position height="18" width="90" x="638" y="341"/>      
-      </attribute>      
-      <multiplicity id="12" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="13">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="1"/>  
-  </generalization>  
-  <association id="14">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="15" name="umlCampus"/>      
-      <multiplicity id="16" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="17">    
-    <bendpoint x="604" y="572"/>    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="18" name="umlfaculty"/>      
-      <multiplicity id="19" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="20">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="21" name="CourseLecturers">        
-        <position height="18" width="90" x="640" y="243"/>      
-      </attribute>      
-      <multiplicity id="22" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="23">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="24" name="uml"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="11" name="uml"/>      
+      <multiplicity id="12" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="26">    
+  <association id="13">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="27" name="uml"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="29">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="30" name="studyAids">        
-        <position height="18" width="57" x="1143" y="283"/>      
+      <attribute id="14" name="studyAids">        
+        <position height="18" width="57" x="1022" y="271"/>      
       </attribute>      
-      <multiplicity id="31" minimum="0" maximum="2147483647"/>    
+      <multiplicity id="15" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="32">    
-    <bendpoint x="1053" y="260"/>    
+  <association id="16">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="17" name="uml"/>      
+      <multiplicity id="18" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="19">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="1"/>  
+  </generalization>  
+  <association id="20">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="21" name="umlCampus"/>      
+      <multiplicity id="22" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="23">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="24" name="LecturerCourses">        
+        <position height="18" width="90" x="652" y="177"/>      
+      </attribute>      
+      <multiplicity id="25" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="26">    
     <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="33" name="StudyAids"/>      
+      <attribute id="27" name="facu"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="30" name="CourseLecturers">        
+        <position height="18" width="90" x="662" y="240"/>      
+      </attribute>      
+      <multiplicity id="31" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="33" name="StudyAids">        
+        <position height="18" width="58" x="925" y="136"/>      
+      </attribute>      
       <multiplicity id="34" minimum="0" maximum="2147483647">        
-        <position height="16" width="21" x="1033" y="223"/>      
+        <position height="16" width="21" x="983" y="312"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    

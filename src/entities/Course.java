@@ -22,7 +22,7 @@ public class Course implements Serializable {
 	private boolean hasadditionalInfo;
 	private int EstimationOfStudentsNum;
 	private int CourseRelativeKey; 
-
+	private Faculty facu;
 	public Course(int studentNumber, int courseID, String description,
 			int faculty, int semester, int academicHours) {
 		this.studentNumber = studentNumber;
