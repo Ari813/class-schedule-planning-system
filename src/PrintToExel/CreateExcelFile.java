@@ -105,12 +105,12 @@ public class CreateExcelFile
 	{
 		headerRow = new ArrayList<String>();
 		headerRow.add("");
-		headerRow.add("sunday");
-		headerRow.add("monday");
-		headerRow.add("tuesday");
-		headerRow.add("wendesday");
-		headerRow.add("thursday");
-		headerRow.add("friday ");
+		headerRow.add("Sunday");
+		headerRow.add("Monday");
+		headerRow.add("Tuesday");
+		headerRow.add("Wendesday");
+		headerRow.add("Thursday");
+		headerRow.add("Friday ");
 	}
 
 	public void createExcelFile(int facnumber)
