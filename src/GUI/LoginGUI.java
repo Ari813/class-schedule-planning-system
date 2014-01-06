@@ -88,7 +88,7 @@ public class LoginGUI extends JPanel implements ActionListener, KeyListener, Foc
 			txtId.setText(ini.get("Login", "UserName"));
 			txtHostName.setText(ini.get("Login", "Server"));
 			txtPort.setText(ini.get("Login", "Port"));
-			
+			txtPassword.setText(ini.get("Login", "UserName"));
 			JLabel lblNewLabel = new JLabel("");
 			lblNewLabel.setIcon(new ImageIcon(LoginGUI.class.getResource("/UML/LOGO.jpg")));
 			lblNewLabel.setBounds(10, 45, 780, 110);

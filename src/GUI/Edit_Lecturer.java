@@ -119,6 +119,9 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 		horizontalStrut();
 	}
 
+	
+	
+	
 	private Component GETbtnRemove()
 	{
 		btnRemove = new JButton("<--");

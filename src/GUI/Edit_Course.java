@@ -250,9 +250,10 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 		PNL_Main.add(getMaxStdntPerClass());
 
 		PNL_Main.add(getlblStudyAids());
-
+		
 	//	PNL_Main.add(getSelectedStudyAids());
 		PNL_Main.add(GETscrolSelectedStudyAids());
+		
 		PNL_Main.add(GETscrolAvailableStudyAids());
 
 		PNL_Main.add(getHorizontalStrut());
@@ -407,7 +408,7 @@ public class Edit_Course extends JPanel implements ActionListener, ListSelection
 		{
 			scrollSelectedStudyAids = new JScrollPane();
 			scrollSelectedStudyAids.setViewportView(getSelectedStudyAids());
-			scrollSelectedStudyAids.setBounds(2,2,2,2);
+			scrollSelectedStudyAids.setBounds(510, 268, 243, 90);
 		}
 		return scrollSelectedStudyAids;
 	}
