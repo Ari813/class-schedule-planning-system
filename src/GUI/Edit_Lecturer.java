@@ -132,7 +132,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 		btnRemove = new JButton("<--");
 		btnRemove.setToolTipText("Remove item from class");
 		btnRemove.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnRemove.setBounds(502, 216, 65, 38);
+		btnRemove.setBounds(480, 271, 65, 38);
 
 		return btnRemove;
 	}
@@ -145,7 +145,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 		lstSelectedCourses.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lstSelectedCourses.setBackground(new Color(169, 169, 169));
 		lstSelectedCourses.setForeground(new Color(255, 255, 255));
-		lstSelectedCourses.setBounds(586, 130, 138, 283);
+		lstSelectedCourses.setBounds(556, 130, 168, 283);
 		return lstSelectedCourses;
 	}
 	private JScrollPane GETscrollSelectedCourses()
@@ -154,7 +154,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 		{
 			scrollSelectedCourses = new JScrollPane();
 			scrollSelectedCourses.setViewportView(GETlstSelectedCourses());
-			scrollSelectedCourses.setBounds(586, 130, 138, 283);
+			scrollSelectedCourses.setBounds(556, 130, 168, 283);
 		}
 		return scrollSelectedCourses;
 	}
@@ -194,7 +194,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 		btnAdd = new JButton(" -->");
 		btnAdd.setToolTipText("Add item to class");
 		btnAdd.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		btnAdd.setBounds(502, 163, 65, 38);
+		btnAdd.setBounds(480, 222, 65, 38);
 		return btnAdd;
 	}
 
@@ -210,7 +210,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 		lstAvailableCourses.setSelectedIndices(new int[] { 2 });
 		lstAvailableCourses.setBackground(new Color(169, 169, 169));
 
-		lstAvailableCourses.setBounds(332, 130, 138, 283);
+		lstAvailableCourses.setBounds(302, 130, 168, 283);
 		return lstAvailableCourses;
 	}
 	private JScrollPane GETscrollAvailableCourses()
@@ -219,7 +219,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 		{
 			scrollAvailableCourses = new JScrollPane();
 			scrollAvailableCourses.setViewportView(GETlstAvailableCourses());
-			scrollAvailableCourses.setBounds(332, 130, 138, 283);
+			scrollAvailableCourses.setBounds(302, 130, 168, 283);
 		}
 		return scrollAvailableCourses;
 	}
@@ -241,7 +241,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 	{
 		lblAvailableCourses = new JLabel("Available courses");
 		lblAvailableCourses.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblAvailableCourses.setBounds(332, 100, 157, 14);
+		lblAvailableCourses.setBounds(313, 91, 157, 14);
 		return lblAvailableCourses;
 	}
 
@@ -275,7 +275,7 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 	private void horizontalStrut()
 	{
 		horizontalStrut = Box.createHorizontalStrut(20);
-		horizontalStrut.setBounds(332, 114, 392, 14);
+		horizontalStrut.setBounds(277, 114, 447, 14);
 		PNL_Main.add(horizontalStrut);
 
 		horizontalStrut_1 = Box.createHorizontalStrut(20);
