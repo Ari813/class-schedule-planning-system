@@ -139,7 +139,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		}
 		
 		
-		panel_pic.setBounds(79, 176, 660, 151);
+		panel_pic.setBounds(79, 121, 660, 252);
 		PNL_Main.add(panel_pic);
 		// PNL_Main.add(GETcmbBxSemster());
 
