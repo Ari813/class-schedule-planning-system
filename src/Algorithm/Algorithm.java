@@ -10,7 +10,12 @@ public class Algorithm
 	/* GA parameters */
 	static double uniformRate = 0.5;
 	static double mutationRate = 0.0005;
-
+	Population newPopulation2;
+	CrossoverAlgorithm crossOverThread2;
+	MutateAlgorithm mutateThread2;
+	FitnessCalc FitnessThread2;
+	RepairStrategy RepairThread2;
+	
 	// private static final int tournamentSize = 5;
 
 	/* Public methods */

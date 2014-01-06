@@ -10,7 +10,7 @@ import entities.Course;
 public class Population
 {
 	private Individual JumpStartIndividual;
-	Individual[] individuals;
+	public Individual[] individuals;
 
 	/*
 	 * Constructors
