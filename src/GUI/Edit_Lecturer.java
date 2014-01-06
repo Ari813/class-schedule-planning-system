@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -75,6 +76,8 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 	private DefaultListModel lstSelectedCourseModel;// lstSelectedLecturersModel;
 
 	private ManagerController manager;
+	private JScrollPane scrollAvailableCourses;
+	private JScrollPane scrollSelectedCourses;
 
 	/*
 	 * / JLabel lblTimeTableSchedualing = new
@@ -107,10 +110,12 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 		PNL_Main.add(GETlblLecturer_Name());
 		PNL_Main.add(GETtxLecturerNameText());
 		PNL_Main.add(GETlblAvailableCourses());
-		PNL_Main.add(GETlstAvailableCourses());
+		//PNL_Main.add(GETlstAvailableCourses());
+		PNL_Main.add(GETscrollAvailableCourses());
 		PNL_Main.add(GETbtnAdd());
 		PNL_Main.add(GETbtnRemove());
-		PNL_Main.add(GETlstSelectedCourses());
+		//PNL_Main.add(GETlstSelectedCourses());
+		PNL_Main.add(GETscrollSelectedCourses());
 		PNL_Main.add(GETbtnNewLecturer());
 		PNL_Main.add(GETbtnSaveChanges());
 		PNL_Main.add(GETbtnBackToMainMenu());
@@ -142,6 +147,16 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 		lstSelectedCourses.setForeground(new Color(255, 255, 255));
 		lstSelectedCourses.setBounds(586, 130, 138, 283);
 		return lstSelectedCourses;
+	}
+	private JScrollPane GETscrollSelectedCourses()
+	{
+		if (scrollSelectedCourses == null)
+		{
+			scrollSelectedCourses = new JScrollPane();
+			scrollSelectedCourses.setViewportView(GETlstSelectedCourses());
+			scrollSelectedCourses.setBounds(586, 130, 138, 283);
+		}
+		return scrollSelectedCourses;
 	}
 
 	private JButton GETbtnNewLecturer()
@@ -198,7 +213,16 @@ public class Edit_Lecturer extends JPanel implements ActionListener, ListSelecti
 		lstAvailableCourses.setBounds(332, 130, 138, 283);
 		return lstAvailableCourses;
 	}
-
+	private JScrollPane GETscrollAvailableCourses()
+	{
+		if (scrollAvailableCourses == null)
+		{
+			scrollAvailableCourses = new JScrollPane();
+			scrollAvailableCourses.setViewportView(GETlstAvailableCourses());
+			scrollAvailableCourses.setBounds(332, 130, 138, 283);
+		}
+		return scrollAvailableCourses;
+	}
 	private JTextField GETtxtLecturerEditor()
 	{
 		txtLecturerEditor = new JTextField();
