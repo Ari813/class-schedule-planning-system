@@ -12,11 +12,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -66,6 +69,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 	private JTextField txtLoopCounter;
 	private JTextField txtRunTime;
 	private JLabel lblRunTime;
+	private JLabel panel_pic;
 
 	/**
 	 * Create the panel.
@@ -122,6 +126,21 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		PNL_Main.add(gettxtRunTime());
 
 		PNL_Main.add(getlblRunTime());
+		
+		panel_pic = new JLabel();
+		BufferedImage myPicture;
+		try {
+			myPicture = ImageIO.read(new File("C:\\Application\\ICON.JPG"));
+			panel_pic = new JLabel(new ImageIcon(myPicture));
+			//add(panel_pic);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		panel_pic.setBounds(79, 176, 660, 151);
+		PNL_Main.add(panel_pic);
 		// PNL_Main.add(GETcmbBxSemster());
 
 	}
