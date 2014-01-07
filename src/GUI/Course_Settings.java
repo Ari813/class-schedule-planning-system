@@ -122,8 +122,8 @@ public class Course_Settings extends JPanel implements ActionListener, TableMode
 	public JPanel PNL_Main;
 	private LecturerController lec;
 	private ManagerController manager;
-	private Object[][] tableData = { { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
-			{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, };
+	private Object[][] tableData ;// { { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null },
+			//{ null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, { null, null, null }, };
 	private TableModel lstModel;
 	private JTableHeader head;
 	private ArrayList<Faculty> arrayFaculty;
@@ -260,7 +260,7 @@ public class Course_Settings extends JPanel implements ActionListener, TableMode
 			};
 
 			lstModel.addTableModelListener(this);
-
+			tableData=new Object[60][3];
 			table = new JTable(tableData, columnNames);
 			table.addFocusListener(new FocusAdapter()
 			{
