@@ -90,7 +90,7 @@ public class ManagerController
 	{
 		manegerMainFrm.remove(Panel2Close);
 		LP = new Lecturer_Preferences(null, this);
-		LP.setLecturers(getAvailableLecturers(getInformation.schedual,false));
+		LP.setLecturers(getAvailableLecturers(getInformation.schedual, false));
 		manegerMainFrm.add(LP.PNL_Main);
 		// lecturer_Ctrl = new LecturerController(this);
 		manegerMainFrm.repaint();
@@ -101,7 +101,7 @@ public class ManagerController
 
 		manegerMainFrm.remove(Panel2Close);
 		AS = new Automatic_Sheduling(this);
-		//TODO
+		// TODO
 		AS.setData(allData);
 		manegerMainFrm.add(AS.PNL_Main);
 		startalgo = new GeneticAlgorithmRun(firstIndividual, Settings.populationSize, this);
@@ -119,7 +119,7 @@ public class ManagerController
 		ECRS = new Edit_Course(this);
 		ECRS.setCourses(getCourse());
 		ECRS.setFaculty(getFaculty());
-		ECRS.setAvailableLecturers(getAvailableLecturers(getInformation.nothing,false));
+		ECRS.setAvailableLecturers(getAvailableLecturers(getInformation.nothing, false));
 		ECRS.setStudyAids(GetClassAids());
 		ECRS.setdefault();
 
@@ -148,7 +148,7 @@ public class ManagerController
 
 		manegerMainFrm.remove(Panel2Close);
 		EL = new Edit_Lecturer(this);
-		EL.setLec(getAvailableLecturers(getInformation.courses,false));
+		EL.setLec(getAvailableLecturers(getInformation.courses, false));
 		EL.setcourse(getCourse());
 		manegerMainFrm.add(EL.PNL_Main);
 		manegerMainFrm.repaint();
@@ -175,13 +175,14 @@ public class ManagerController
 	{
 
 		manegerMainFrm.remove(Panel2Close);
-		if (MS != null)
-		{}
-		MS = new Manual_Sheduling(this);
+		if (MS == null)
+		{
+			MS = new Manual_Sheduling(this);
+		}
 		MS.setFaculty(getFaculty());
 		MS.setClasses(GetClasses(false));
 		MS.setMapCourse(getCourseForSchedualing());
-		MS.setLec(getAvailableLecturers(getInformation.all,true));
+		MS.setLec(getAvailableLecturers(getInformation.all, true));
 		MS.setfirstIndividual();
 		manegerMainFrm.add(MS.PNL_Main);
 

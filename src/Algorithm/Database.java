@@ -43,6 +43,7 @@ public class Database
 
 		for (int ClassesIndex = 0; ClassesIndex < rooms.size(); ClassesIndex++)
 			this.Classes.put(rooms.get(ClassesIndex).getClassID(), rooms.get(ClassesIndex));
+	
 
 		mapping = new IndexMapping(this.Courses, this.Lecturers, this.Classes);
 

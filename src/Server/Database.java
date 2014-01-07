@@ -237,7 +237,7 @@ public class Database
 		{
 			cls = new Class();
 			cls.setBuilding(qrs.getInt("ClassBuilding"));
-			cls.setClassID(qrs.getInt("ClassID"));
+			cls.setClassID(qrs.getInt("ClassBuilding")*10000+qrs.getInt("ClassID"));
 			cls.setCapcity(qrs.getInt("Capacity"));
 			cls.setCampus(qrs.getInt("Campus"));
 			cls.setAvailable(qrs.getInt("Available"));
