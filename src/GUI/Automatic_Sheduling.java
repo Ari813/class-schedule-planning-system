@@ -127,16 +127,7 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 
 		PNL_Main.add(getlblRunTime());
 		
-		panel_pic = new JLabel();
-		BufferedImage myPicture;
-		try {
-			myPicture = ImageIO.read(new File("C:\\Application\\ICON.JPG"));
-			//add(panel_pic);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// PNL_Main.add(GETcmbBxSemster());
+		
 
 	}
 
