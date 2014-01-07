@@ -140,10 +140,9 @@ public class CreateExcelFile
 
 			HSSFCellStyle hsfstyle = workbook.createCellStyle();
 
-			hsfstyle.setBorderBottom((short) 15);
+			hsfstyle.setBorderBottom((short) 110);
 			hsfstyle.setBorderLeft((short) 2);
-			hsfstyle.setBorderRight((short) 2);
-			hsfstyle.setBorderBottom((short) 2);
+			hsfstyle.setBorderRight((short) 28);
 			hsfstyle.setBorderTop((short) 2);
 			hsfstyle.setFillBackgroundColor((short) 125);
 			workbook.write(fos);

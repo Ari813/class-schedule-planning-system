@@ -118,7 +118,6 @@ public class Manual_Sheduling extends JPanel implements ActionListener, ListSele
 	private Database allData;
 	private ArrayList<Lecturer> arrayLecturers;
 	private Individual firstIndividual;
-	private Individual IndividualToAlgo;
 
 	/**
 	 * Create the panel.

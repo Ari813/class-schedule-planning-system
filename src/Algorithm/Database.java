@@ -48,7 +48,6 @@ public class Database
 		mapping = new IndexMapping(this.Courses, this.Lecturers, this.Classes);
 
 		length = Courses.size() * Lecturers.size() * Classes.size() * Individual.weeklyHours;
-		System.out.println("database is ready.");
 	}
 
 	/**

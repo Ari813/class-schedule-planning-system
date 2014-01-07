@@ -101,11 +101,13 @@ public class ManagerController
 
 		manegerMainFrm.remove(Panel2Close);
 		AS = new Automatic_Sheduling(this);
-		// TODO
+		System.out.println("got me");
 		AS.setData(allData);
 		manegerMainFrm.add(AS.PNL_Main);
 		startalgo = new GeneticAlgorithmRun(firstIndividual, Settings.populationSize, this);
 		AS.addActions();
+		startTimer();
+		startAutoSchedualing();
 
 		manegerMainFrm.repaint();
 
@@ -175,10 +177,7 @@ public class ManagerController
 	{
 
 		manegerMainFrm.remove(Panel2Close);
-		if (MS == null)
-		{
-			MS = new Manual_Sheduling(this);
-		}
+		MS = new Manual_Sheduling(this);
 		MS.setFaculty(getFaculty());
 		MS.setClasses(GetClasses(false));
 		MS.setMapCourse(getCourseForSchedualing());
@@ -300,15 +299,12 @@ public class ManagerController
 
 	public void logout()
 	{
-		// TODO Auto-generated method stub
 		manegerMainFrm.handleLogoutGUI();
 
 	}
 
 	public boolean saveCoureSet(Map<Integer, ArrayList<Course>> coursePerFuculty)
 	{
-		// UpdateEstimatedStudentsNumPerClassPack
-
 		UpdateEstimatedStudentsNumPerClassPack updateMsg = new UpdateEstimatedStudentsNumPerClassPack();
 		updateMsg.setCoursePerFucultyMap(coursePerFuculty);
 		client.handleMessageFromClientUI(updateMsg);
@@ -379,6 +375,13 @@ public class ManagerController
 	public void stopAutoSchedualing()
 	{
 		startalgo.stopRunning();
+		try
+		{
+			startalgo.join();
+		} catch (InterruptedException e)
+		{
+			System.out.println("can't join!!");
+		}
 		stopTimer();
 
 	}

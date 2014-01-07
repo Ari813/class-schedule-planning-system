@@ -119,7 +119,7 @@ public class IndexMapping
 			classID = itr.next().intValue();
 			ClassesMappingID.put(classID, i);
 			ClassesMappingIndex.put(i, classID);
-			System.out.println(i + ":" +classID);
+		
 			i++;
 		}
 	}

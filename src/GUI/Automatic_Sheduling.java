@@ -86,7 +86,9 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 	public void setData(Database database)
 	{
 		allDatabase = database;
-
+		progressBar.setValue(0);
+		txtLoopCounter.setText("0");
+		txtRunTime.setText("");
 	}
 
 	private void initialize()
@@ -255,7 +257,6 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 		}
 		if (e.getSource() == btnBackToMainMenu)
 		{
-			// manger.stopalgo();
 			manager.stopAutoSchedualing();
 			manager.BacktoMainMenu(this.PNL_Main);
 		}
@@ -292,17 +293,18 @@ public class Automatic_Sheduling extends JPanel implements ActionListener, ListS
 	{
 		btnBackToMainMenu.addActionListener(this);
 		btnOpenFolder.addActionListener(this);
-		manager.startAutoSchedualing();
-		manager.startTimer();
 	}
 
 	public void updateProgressBar(double fitness)
 	{
 		int Progress = (int) Math.round(fitness * 150);
-		if (Progress<100)
+		if (Progress<100){
 			progressBar.setValue(Progress);
+			btnOpenFolder.setEnabled(false);
+		}
 		else {
 			progressBar.setValue(100);
+			btnOpenFolder.setEnabled(true);
 		}
 	}
 

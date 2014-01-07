@@ -35,11 +35,6 @@ public class GeneticAlgorithmRun extends Thread
 	public void run()
 	{
 		setRunning(true);
-		runAlgorithm();
-	}
-
-	private void runAlgorithm()
-	{
 		int loop = 0;
 		double fittest;
 		while (keepRunning)

@@ -350,7 +350,7 @@ public class Database
 			query = new String("SELECT * FROM `csps-db`.lecturer;");
 		else
 			query = new String(
-					"SELECT lec.LecturerID,lec.LecturerName FROM `csps-db`.lecturer lec, `csps-db`.course crs, `csps-db`.courselecturers crslec where lec.LecturerID = crslec.LecturerID AND crslec.CourseID = crs.CourseID AND crs.EstimationOfStudentsNum >0;");
+					"SELECT DISTINCT lec.LecturerID,lec.LecturerName FROM `csps-db`.lecturer lec, `csps-db`.course crs, `csps-db`.courselecturers crslec where lec.LecturerID = crslec.LecturerID AND crslec.CourseID = crs.CourseID AND crs.EstimationOfStudentsNum >0;");
 		st = conn.createStatement();
 		qrs = st.executeQuery(query);
 		while (qrs.next())
