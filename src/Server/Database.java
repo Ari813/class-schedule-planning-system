@@ -217,15 +217,20 @@ public class Database
 		return campusessArray;
 	}
 
-	public ArrayList<Class> getAllClasses() throws SQLException
+	public ArrayList<Class> getAllClasses(boolean getOnlyAvailable) throws SQLException
 	{
 		ResultSet qrs = null;
 		ResultSet classAidsQrs = null;
 		ArrayList<Class> ClassesArray = new ArrayList<Class>();
 		StudyAids stdyAds;
 		Class cls;
-
-		String query = new String("SELECT * FROM `csps-db`.class;");
+		String query;
+		if (!getOnlyAvailable)
+			query = new String("SELECT * FROM `csps-db`.class;");
+		else
+		{
+			query = new String("SELECT * FROM `csps-db`.class cls where cls.Available = 1;");
+		}
 		st = conn.createStatement();
 		qrs = st.executeQuery(query);
 		while (qrs.next())
@@ -268,7 +273,7 @@ public class Database
 		qrs = st.executeQuery(query);
 		while (qrs.next())
 		{
-			
+
 			crs = new Course(qrs.getInt("Capacity"), qrs.getInt("CourseID"), qrs.getString("Description"), qrs.getInt("Faculty"), qrs.getInt("Semester"), qrs.getInt("AcademicHours"),
 					qrs.getInt("EstimationOfStudentsNum"), qrs.getInt("CourseRelatedKey"));
 			if (additionalInfo)
@@ -334,14 +339,18 @@ public class Database
 		return FacultyArray;
 	}
 
-	public ArrayList<Lecturer> getAllLecturers(getInformation additionalInfo) throws SQLException
+	public ArrayList<Lecturer> getAllLecturers(getInformation additionalInfo, boolean getOnlyAvialable) throws SQLException
 	{
 		ResultSet qrs = null;
 
 		ArrayList<Lecturer> LecturerArray = new ArrayList<Lecturer>();
 		Lecturer lec;
-
-		String query = new String("SELECT * FROM `csps-db`.lecturer;");
+		String query;
+		if (!getOnlyAvialable)
+			query = new String("SELECT * FROM `csps-db`.lecturer;");
+		else
+			query = new String(
+					"SELECT lec.LecturerID,lec.LecturerName FROM `csps-db`.lecturer lec, `csps-db`.course crs, `csps-db`.courselecturers crslec where lec.LecturerID = crslec.LecturerID AND crslec.CourseID = crs.CourseID AND crs.EstimationOfStudentsNum >0;");
 		st = conn.createStatement();
 		qrs = st.executeQuery(query);
 		while (qrs.next())

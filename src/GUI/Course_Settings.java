@@ -152,7 +152,6 @@ public class Course_Settings extends JPanel implements ActionListener, TableMode
 	{
 
 		pnl();
-
 		PNL_Main.add(GETbtnSaveChanges());
 		PNL_Main.add(GETbtnBackToMainMenu());
 		PNL_Main.add(GETtxtCourseSttings());

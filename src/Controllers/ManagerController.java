@@ -90,7 +90,7 @@ public class ManagerController
 	{
 		manegerMainFrm.remove(Panel2Close);
 		LP = new Lecturer_Preferences(null, this);
-		LP.setLecturers(getAvailableLecturers(getInformation.schedual));
+		LP.setLecturers(getAvailableLecturers(getInformation.schedual,false));
 		manegerMainFrm.add(LP.PNL_Main);
 		// lecturer_Ctrl = new LecturerController(this);
 		manegerMainFrm.repaint();
@@ -119,7 +119,7 @@ public class ManagerController
 		ECRS = new Edit_Course(this);
 		ECRS.setCourses(getCourse());
 		ECRS.setFaculty(getFaculty());
-		ECRS.setAvailableLecturers(getAvailableLecturers(getInformation.nothing));
+		ECRS.setAvailableLecturers(getAvailableLecturers(getInformation.nothing,false));
 		ECRS.setStudyAids(GetClassAids());
 		ECRS.setdefault();
 
@@ -148,7 +148,7 @@ public class ManagerController
 
 		manegerMainFrm.remove(Panel2Close);
 		EL = new Edit_Lecturer(this);
-		EL.setLec(getAvailableLecturers(getInformation.courses));
+		EL.setLec(getAvailableLecturers(getInformation.courses,false));
 		EL.setcourse(getCourse());
 		manegerMainFrm.add(EL.PNL_Main);
 		manegerMainFrm.repaint();
@@ -160,7 +160,7 @@ public class ManagerController
 		manegerMainFrm.remove(Panel2Close);
 		ECLSS = new Edit_Class(this);
 
-		ECLSS.setClasses(GetClasses());
+		ECLSS.setClasses(GetClasses(true));
 
 		ECLSS.setClassStudyAids(GetClassAids());
 		ECLSS.setCampus(getCampuses());
@@ -179,9 +179,9 @@ public class ManagerController
 		{}
 		MS = new Manual_Sheduling(this);
 		MS.setFaculty(getFaculty());
-		MS.setClasses(GetClasses());
+		MS.setClasses(GetClasses(false));
 		MS.setMapCourse(getCourseForSchedualing());
-		MS.setLec(getAvailableLecturers(getInformation.all));
+		MS.setLec(getAvailableLecturers(getInformation.all,true));
 		MS.setfirstIndividual();
 		manegerMainFrm.add(MS.PNL_Main);
 
@@ -189,10 +189,12 @@ public class ManagerController
 		MS.addActions();
 	}
 
-	private ArrayList<Lecturer> getAvailableLecturers(getInformation additionalInfo)
+	private ArrayList<Lecturer> getAvailableLecturers(getInformation additionalInfo, boolean getOnlyAvialable)
 	{
 		GetAllLecturersPack AvailableLecturers = new GetAllLecturersPack();
 		AvailableLecturers.setAdditionalInfo(additionalInfo);
+		if (getOnlyAvialable)
+			AvailableLecturers.setGetOnlyAvialable();
 		client.handleMessageFromClientUI(AvailableLecturers);
 		AvailableLecturers = (GetAllLecturersPack) client.getMessage();
 
@@ -247,9 +249,11 @@ public class ManagerController
 		return (studyAidsMessage.getAllStudyAids());
 	}
 
-	public ArrayList<Class> GetClasses()
+	public ArrayList<Class> GetClasses(boolean getAllClasses)
 	{
 		ClassMsg = new GetAllClassesPack();
+		if (!getAllClasses)
+			ClassMsg.setOnlyAvailable();
 		client.handleMessageFromClientUI(ClassMsg);
 		ClassMsg = (GetAllClassesPack) client.getMessage();
 		return (ClassMsg.getAllclass());

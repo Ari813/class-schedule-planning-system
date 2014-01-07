@@ -305,7 +305,7 @@ public class EchoServer extends AbstractServer {
 
 		try {
 			lecpck.setAllLecturers(db.getAllLecturers(lecpck
-					.isBringAdditionalInfo()));
+					.isBringAdditionalInfo(),lecpck.getOnlyAvialable()));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -397,7 +397,7 @@ public class EchoServer extends AbstractServer {
 
 		try {
 
-			clss.setAllclass(db.getAllClasses());
+			clss.setAllclass(db.getAllClasses(clss.getOnlyAvailable()));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

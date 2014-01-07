@@ -17,6 +17,7 @@ public class GetAllLecturersPack extends MessagePack {
 
 		all, courses, schedual, nothing
 	};
+	private boolean getOnlyAvialable;
 
 	private getInformation additionalInfo;
 	private ArrayList<Lecturer> allLecturers;
@@ -33,6 +34,7 @@ public class GetAllLecturersPack extends MessagePack {
 		super();
 		this.op = OpType.GetLecturersInfo;
 		additionalInfo = getInformation.nothing;
+		getOnlyAvialable = false;
 	}
 
 	/**
@@ -52,6 +54,27 @@ public class GetAllLecturersPack extends MessagePack {
 
 	public void clrAdditionalInfo() {
 		this.additionalInfo = getInformation.nothing;
+	}
+
+	/**
+	 * @return the getOnlyAvialable
+	 */
+	public boolean getOnlyAvialable()
+	{
+		return getOnlyAvialable;
+	}
+
+	/**
+	 * @param getOnlyAvialable the getOnlyAvialable to set
+	 */
+	public void setGetOnlyAvialable()
+	{
+		this.getOnlyAvialable = true;
+	}
+	
+	public void clrGetOnlyAvialable()
+	{
+		this.getOnlyAvialable = false;
 	}
 
 }
